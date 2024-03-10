@@ -28,9 +28,7 @@ public class PlayerGroundState : PlayerState
     {
         base.UpdateState();
         if (!player.IsGroundDetected())
-        {
             stateMachine.ChangeState(PlayerStateEnum.Fall);
-        }
     }
 
 

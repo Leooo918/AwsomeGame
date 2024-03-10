@@ -16,6 +16,7 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected Transform groundChecker;
     [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGroundAndWall;
+    [SerializeField] protected LayerMask whatIsProbs;
     [SerializeField] protected Transform wallChecker;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float groundCheckBoxWidth;
@@ -104,6 +105,18 @@ public abstract class Entity : MonoBehaviour
         Physics2D.BoxCast(wallChecker.position,
             new Vector2(0.05f, wallCheckBoxHeight), 0,
             Vector2.right * FacingDir, wallCheckDistance, whatIsGroundAndWall);
+
+    public virtual void CheckObjectOnFoot()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(groundChecker.position,
+            new Vector2(groundCheckBoxWidth, 0.05f), 0,
+            Vector2.down, groundCheckDistance, whatIsProbs);
+
+        if(hit.collider != null && hit.collider.TryGetComponent<Probs>(out Probs p))
+        {
+            p.Interact(this);
+        }
+    }
 
     #endregion
 

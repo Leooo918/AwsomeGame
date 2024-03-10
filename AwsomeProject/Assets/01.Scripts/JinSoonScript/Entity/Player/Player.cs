@@ -50,9 +50,8 @@ public class Player : Entity
     protected override void Update()
     {
         StateMachine.CurrentState.UpdateState();
+        CheckObjectOnFoot();
     }
-
-
 
     public override void Attack()
     {

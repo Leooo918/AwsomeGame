@@ -10,8 +10,9 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     #region input event
 
     public event Action JumpEvent;
-    public event Action Interact;
     public event Action DashEvent;
+    public event Action InteractPress;
+    public event Action InteractRelease;
 
     #endregion
 
@@ -53,7 +54,10 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)
-            Interact?.Invoke();
+            InteractPress?.Invoke();
+
+        if (context.canceled)
+            InteractRelease?.Invoke();
     }
 
     public void OnDash(InputAction.CallbackContext context)
