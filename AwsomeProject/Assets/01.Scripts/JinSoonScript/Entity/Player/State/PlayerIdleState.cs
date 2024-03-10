@@ -22,8 +22,8 @@ public class PlayerIdleState : PlayerGroundState
         float xInput = player.PlayerInput.XInput;
 
         //이동방향과 벽방향이 같다면 return
-        //if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected())
-        //    return;
+        if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected())
+            return;
 
         if (Mathf.Abs(xInput) > 0.05f)
             stateMachine.ChangeState(PlayerStateEnum.Move);
