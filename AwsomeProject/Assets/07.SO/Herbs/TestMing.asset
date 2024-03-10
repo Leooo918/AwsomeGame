@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8e6c72292c29a4f93e3a09fe739877, type: 3}
   m_Name: TestMing
   m_EditorClassIdentifier: 
-  hurb: 0
-  gatheringTime: 5
+  herb: 0
+  gatheringTime: 10
