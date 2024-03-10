@@ -9,6 +9,7 @@ public class Herbs : MonoBehaviour
     [SerializeField] private GameObject interact;
     private Transform pivot;
     private TextMeshPro timerTxt;
+    private Player player;
 
     [SerializeField] private HerbSO herb;
     private HerbEnum herbEnum;
@@ -48,6 +49,7 @@ public class Herbs : MonoBehaviour
             if (gatherTime <= gatherTimeDown)
             {
                 Debug.Log("นึ");
+                player.StateMachine.ChangeState(PlayerStateEnum.Idle);
                 interact.SetActive(false);
                 herbGathered = true;
             }
@@ -78,12 +80,14 @@ public class Herbs : MonoBehaviour
 
     private void GatherHerb()
     {
+        player.StateMachine.ChangeState(PlayerStateEnum.Gathering);
         gatherStart = true;
         gatherEnd = false;
     }
 
     private void CancleGathering()
     {
+        player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         gatherEnd = true;
         gatherStart = false;
     }
@@ -91,11 +95,11 @@ public class Herbs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out Player p))
+        if (collision.TryGetComponent<Player>(out player))
         {
             interact.SetActive(true);
-            p.PlayerInput.InteractPress += GatherHerb;
-            p.PlayerInput.InteractRelease += CancleGathering;
+            player.PlayerInput.InteractPress += GatherHerb;
+            player.PlayerInput.InteractRelease += CancleGathering;
 
             isTriggered = true;
             gatherStart = false;
@@ -105,11 +109,11 @@ public class Herbs : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out Player p))
+        if (collision.TryGetComponent<Player>(out player))
         {
             CancleGathering();
-            p.PlayerInput.InteractPress -= GatherHerb;
-            p.PlayerInput.InteractRelease -= CancleGathering;
+            player.PlayerInput.InteractPress -= GatherHerb;
+            player.PlayerInput.InteractRelease -= CancleGathering;
 
             isTriggered = false;
         }
