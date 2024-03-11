@@ -121,7 +121,10 @@ public abstract class Entity : MonoBehaviour
     #endregion
 
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+
+    }
 
 
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임

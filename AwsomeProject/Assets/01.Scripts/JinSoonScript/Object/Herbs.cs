@@ -80,6 +80,8 @@ public class Herbs : MonoBehaviour
 
     private void GatherHerb()
     {
+        if (herbGathered) return;
+
         player.StateMachine.ChangeState(PlayerStateEnum.Gathering);
         gatherStart = true;
         gatherEnd = false;
@@ -95,7 +97,7 @@ public class Herbs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out player))
+        if (collision.TryGetComponent<Player>(out player) && herbGathered == false)
         {
             interact.SetActive(true);
             player.PlayerInput.InteractPress += GatherHerb;
@@ -109,7 +111,7 @@ public class Herbs : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out player))
+        if (collision.TryGetComponent<Player>(out player) && herbGathered == false)
         {
             CancleGathering();
             player.PlayerInput.InteractPress -= GatherHerb;
