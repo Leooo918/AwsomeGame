@@ -2,15 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerStateEnum
-{
-    Idle,
-    Move,
-    Jump,
-    Fall,
-    Dash,
-    Gathering
-}
+
 
 public class PlayerStateMachine 
 {

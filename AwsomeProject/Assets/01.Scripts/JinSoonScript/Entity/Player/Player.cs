@@ -1,12 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+public enum PlayerStateEnum
+{
+    Idle,
+    Move,
+    Jump,
+    Fall,
+    Dash,
+    Gathering
+}
+
 
 public class Player : Entity
 {
     #region PlayerState
 
+    //이거 나중에 SO로 빼고
+    [Header("PlayerStat")]
     public float moveSpeed = 7f;
     public float jumpForce = 5f;
     public float dashTime = 0.3f;
