@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemSO : MonoBehaviour
+public enum ItemType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Matarial = 0,
+    Posion = 1
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[CreateAssetMenu(menuName = "SO/ItemSO")]
+public class ItemSO : ScriptableObject
+{
+    public int id;
+    public string itemName;
+    public ItemType itemType;
+    public int maxCarryAmountPerSlot;
+
+    public GameObject prefab;
 }

@@ -6,11 +6,12 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
+    public ItemSetSO ItemSet;
     private Inventory inventory;
     public Item curMovingItem { get; private set; }
     public InventorySlot curCheckingSlot { get; private set; }
 
-    [SerializeField] private Transform itemParent;
+    public Transform itemParent;
 
     private void Awake()
     {

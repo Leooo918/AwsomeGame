@@ -4,35 +4,37 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private RectTransform rect;
-    private Image itemImage;
-    private Item assignedItem;
+    public Item assignedItem { get; private set; }
 
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
-        itemImage = transform.Find("ItemVisual").GetComponent<Image>();
     }
 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         rect.localScale = new Vector3(1.05f, 1.05f, 1f);
+        InventoryManager.Instance.CheckSlot(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         rect.localScale = new Vector3(1f, 1f, 1f);
-    }
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
+        InventoryManager.Instance.CheckSlot(null);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void InsertItem(Item item)
     {
+        assignedItem = item;
+        item.GetComponent<RectTransform>().localPosition = rect.localPosition - new Vector3(-370f, -88f);
+    }
 
+    public void DeleteItem(Item item)
+    {
+        assignedItem = null;
     }
 }
