@@ -15,6 +15,8 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public ItemType itemType;
     public int maxCarryAmountPerSlot;
+    public string itemExplain;
 
+    public Sprite itemImage;
     public GameObject prefab;
 }

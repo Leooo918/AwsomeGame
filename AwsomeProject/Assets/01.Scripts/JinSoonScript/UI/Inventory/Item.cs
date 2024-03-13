@@ -11,6 +11,7 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
     private RectTransform rect;
     private Image visual;
     private InventorySlot assignedSlot;
+    private InventorySlot lastSlot;
 
     private Vector2 offset;
     public int itemAmount { get; private set; } = 0;
@@ -40,6 +41,8 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
             assignedSlot.DeleteItem(this);
 
         offset = eventData.position - new Vector2(Screen.width / 2, Screen.height / 2) - rect.anchoredPosition;
+
+
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -59,7 +62,20 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
             return;
         }
 
+        lastSlot = assignedSlot;
         assignedSlot = InventoryManager.Instance.curCheckingSlot;
         assignedSlot.InsertItem(this);
+
+
+        assignedSlot.Select();
+
+        InventoryManager.Instance.SetExplain(itemSO);
+    }
+
+
+    public void Init(int amount, InventorySlot slot)
+    {
+        itemAmount = amount;
+        assignedSlot = slot;
     }
 }

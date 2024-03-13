@@ -1,28 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InventorySlot[,] inventory = new InventorySlot[6, 5];
+    public InventorySlot[,] inventory = new InventorySlot[5, 4];
+    public InventorySlot[] quickSlot = new InventorySlot[5];
     private string path = "";
     [SerializeField] private Transform slotParent;
+    [SerializeField] private Transform quickSlotParent;
 
     private void Awake()
     {
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
-    }
 
-    private void Start()
-    {
         for (int i = 0; i < inventory.GetLength(1); i++)
         {
             for (int j = 0; j < inventory.GetLength(0); j++)
             {
-                inventory[j, i] = slotParent.GetChild(i * 6 + j).GetComponent<InventorySlot>();
+                inventory[j, i] = slotParent.GetChild(i * 5 + j).GetComponent<InventorySlot>();
+                inventory[j, i].Init(this);
             }
         }
 
-        Load();
+        for (int i = 0; i < 5; i++)
+        {
+            quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<InventorySlot>();
+            quickSlot[i].Init(this);
+        }
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DelayLoad());
     }
 
     private void Update()
@@ -31,6 +42,17 @@ public class Inventory : MonoBehaviour
         {
             Save();
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Load();
+        }
+    }
+
+    IEnumerator DelayLoad()
+    {
+        yield return null;
+        Load();
     }
 
     /// <summary>
@@ -104,6 +126,22 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
+    public void UnSelectAllSlot()
+    {
+        for (int i = 0; i < inventory.GetLength(0); i++)
+        {
+            for (int j = 0; j < inventory.GetLength(1); j++)
+            {
+                inventory[i, j].UnSelect();
+            }
+        }
+
+        for (int i = 0; i < quickSlot.Length; i++)
+        {
+            quickSlot[i].UnSelect();
+        }
+    }
+
     public void Save()
     {
         InventorySaveData saveData = new InventorySaveData();
@@ -114,17 +152,27 @@ public class Inventory : MonoBehaviour
             {
                 if (inventory[i, j].assignedItem != null)
                 {
-                    saveData.inventory[i, j].amount =
-                        inventory[i, j].assignedItem.itemAmount;
+                    ItemStruct itemS = new ItemStruct();
+                    itemS.amount = inventory[i, j].assignedItem.itemAmount;
+                    itemS.id = inventory[i, j].assignedItem.itemSO.id;
+                    itemS.posX = i;
+                    itemS.posY = j;
 
-                    saveData.inventory[i, j].id =
-                        inventory[i, j].assignedItem.itemSO.id;
+                    saveData.inventory.Add(itemS);
                 }
-                else
-                {
-                    saveData.inventory[i, j].amount = -1;
-                    saveData.inventory[i, j].id = -1;
-                }
+            }
+        }
+
+        for (int i = 0; i < quickSlot.Length; i++)
+        {
+            if (quickSlot[i].assignedItem != null)
+            {
+                ItemStruct itemS = new ItemStruct();
+                itemS.amount = quickSlot[i].assignedItem.itemAmount;
+                itemS.id = quickSlot[i].assignedItem.itemSO.id;
+                itemS.posX = i;
+
+                saveData.quickSlot.Add(itemS);
             }
         }
 
@@ -146,39 +194,69 @@ public class Inventory : MonoBehaviour
         string json = File.ReadAllText(path);
         saveData = JsonUtility.FromJson<InventorySaveData>(json);
 
-        for (int i = 0; i < saveData.inventory.GetLength(0); i++)
+        for (int i = 0; i < saveData.inventory.Count; i++)
         {
-            for (int j = 0; j < saveData.inventory.GetLength(1); j++)
+            ItemStruct itemStruct = saveData.inventory[i];
+            int id = itemStruct.id;
+
+            ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
+            GameObject itemPf;
+            if (id == -1) continue;
+
+            for (int k = 0; k < itemSet.itemset.Count; k++)
             {
-                int id = saveData.inventory[i, j].id;
-                ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
-                GameObject itemPf;
-                if (id == -1) continue;
-
-                for (int k = 0; k < itemSet.itemset.Count; k++)
+                if (itemSet.itemset[k].id == id)
                 {
-                    if (itemSet.itemset[k].id == id)
-                    {
-                        itemPf = itemSet.itemset[k].prefab;
-                        Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
+                    itemPf = itemSet.itemset[k].prefab;
+                    Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
 
-                        inventory[i, j].InsertItem(it);
-                        Debug.Log($"{j} {i} : {it}");
-                    }
+                    Debug.Log(itemStruct);
+                    it.Init(itemStruct.amount, inventory[itemStruct.posX, itemStruct.posY]);
+
+                    inventory[itemStruct.posX, itemStruct.posY].InsertItem(it);
                 }
+            }
+        }
 
+        for (int i = 0; i < saveData.quickSlot.Count; i++)
+        {
+            ItemStruct itemStruct = saveData.quickSlot[i];
+            int id = itemStruct.id;
+
+            ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
+            GameObject itemPf;
+            if (id == -1) continue;
+
+            for (int k = 0; k < itemSet.itemset.Count; k++)
+            {
+                if (itemSet.itemset[k].id == id)
+                {
+                    itemPf = itemSet.itemset[k].prefab;
+                    Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
+
+                    Debug.Log(itemStruct);
+                    it.Init(itemStruct.amount, quickSlot[itemStruct.posX]);
+
+                    quickSlot[itemStruct.posX].InsertItem(it);
+                }
             }
         }
     }
-}
 
-public class InventorySaveData
-{
-    public ItemStruct[,] inventory = new ItemStruct[6, 5];
-}
 
-public struct ItemStruct
-{
-    public int id;
-    public int amount;
+
+    public class InventorySaveData
+    {
+        public List<ItemStruct> quickSlot = new List<ItemStruct>();
+        public List<ItemStruct> inventory = new List<ItemStruct>();
+    }
+
+    [System.Serializable]
+    public struct ItemStruct
+    {
+        public int id;
+        public int amount;
+        public int posX;
+        public int posY;
+    }
 }
