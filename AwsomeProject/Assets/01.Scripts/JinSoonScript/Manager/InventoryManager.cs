@@ -16,6 +16,8 @@ public class InventoryManager : MonoBehaviour
     public Transform itemParent;
     public Transform explainparent;
 
+    [SerializeField] private InputReader inputReader;
+
     private TextMeshProUGUI explainName;
     private TextMeshProUGUI explainTxt;
     private Image explainImage;
@@ -33,6 +35,16 @@ public class InventoryManager : MonoBehaviour
         explainName = explainparent.Find("Name").GetComponent<TextMeshProUGUI>();
         explainTxt = explainparent.Find("Explain").GetComponent<TextMeshProUGUI>();
         explainImage = explainparent.Find("Image").GetComponent<Image>();
+    }
+
+    private void OnEnable()
+    {
+        inputReader.PressTabEvent += OnPressTab;
+    }
+
+    private void OnDisable()
+    {
+        inputReader.PressTabEvent -= OnPressTab;
     }
 
     public void MoveItem(Item item) => curMovingItem = item;

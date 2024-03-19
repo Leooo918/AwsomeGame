@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
 
     private void Update()
     {
+        //디버그용 코드들 
         if (Input.GetKeyDown(KeyCode.P))
         {
             Save();
@@ -49,11 +50,6 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Load();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            InventoryManager.Instance.OnPressTab();
         }
 
         if (Input.GetKeyDown(KeyCode.O))

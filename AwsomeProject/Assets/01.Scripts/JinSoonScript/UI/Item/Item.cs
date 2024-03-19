@@ -1,22 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+
+public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public ItemSO itemSO;
 
-    private RectTransform rect;
-    private Image visual;
-    private InventorySlot assignedSlot;
-    private InventorySlot lastSlot;
-    private TextMeshProUGUI amountTxt;
+    #region Propertieis
+
+    public int itemId { get; protected set; }
+    public string itemName { get; protected set; }
+    public ItemType itemType { get; protected set; }
+    public int maxCarryAmountPerSlot { get; protected set; }
+    public string itemExplain { get; protected set; }
+
+    public Sprite itemImage { get; protected set; }
+    public GameObject prefab { get; protected set; }
+
+    #endregion
+
+    protected RectTransform rect;
+    protected Image visual;
+    protected InventorySlot assignedSlot;
+    protected InventorySlot lastSlot;
+    protected TextMeshProUGUI amountTxt;
 
     private Vector2 offset;
-    public int itemAmount { get; private set; } = 0;
+    public int itemAmount { get; protected set; } = 0;
 
     private void Awake()
     {
@@ -45,8 +57,6 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
             assignedSlot.DeleteItem(this);
 
         offset = eventData.position - new Vector2(Screen.width / 2, Screen.height / 2) - rect.anchoredPosition;
-
-
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -76,11 +86,18 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
         InventoryManager.Instance.SetExplain(itemSO);
     }
 
-
     public void Init(int amount, InventorySlot slot)
     {
         itemAmount = amount;
         assignedSlot = slot;
         amountTxt.SetText(itemAmount.ToString());
+
+        itemId = itemSO.id;
+        itemName = itemSO.name;
+        itemType = itemSO.itemType;
+        maxCarryAmountPerSlot = itemSO.maxCarryAmountPerSlot;
+        itemExplain = itemSO.itemExplain;
+        itemImage = itemSO.itemImage;
+        prefab = itemSO.prefab;
     }
 }

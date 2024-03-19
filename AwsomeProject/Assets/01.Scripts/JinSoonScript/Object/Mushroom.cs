@@ -19,7 +19,7 @@ public class Mushroom : Probs
 
     public override void Interact(Entity entity)
     {
-        if (isActive) return;
+        if (isActive || entity.rigidbodyCompo.velocity.y > 0) return;
 
         StartCoroutine("DelayActive");
         animator.SetTrigger(animHash);

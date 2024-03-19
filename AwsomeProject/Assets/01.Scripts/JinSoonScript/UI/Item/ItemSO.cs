@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ItemType
 {
-    Matarial = 0,
+    Ingredient = 0,
     Posion = 1
 }
 
-[CreateAssetMenu(menuName = "SO/ItemSO")]
 public class ItemSO : ScriptableObject
 {
     public int id;

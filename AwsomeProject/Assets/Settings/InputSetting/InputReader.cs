@@ -13,6 +13,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action DashEvent;
     public event Action InteractPress;
     public event Action InteractRelease;
+    public event Action PressTabEvent;
 
     #endregion
 
@@ -24,6 +25,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     #endregion
 
     private Controlls controlls;
+    public Controlls Controlls => controlls;
 
     private void OnEnable()
     {
@@ -64,5 +66,11 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     {
         if(context.performed)
             DashEvent?.Invoke();
+    }
+
+    public void OnPressTab(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            PressTabEvent?.Invoke();
     }
 }

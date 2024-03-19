@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum PlayerStateEnum
 {
@@ -31,6 +32,8 @@ public class Player : Entity
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
 
+    private bool isInventoryOpen = false;
+
 
     protected override void Awake()
     {
@@ -53,6 +56,16 @@ public class Player : Entity
                 Debug.LogError(ex);
             }
         }
+    }
+
+    private void OnEnable()
+    {
+        _inputReader.PressTabEvent += InventoryOpen;
+    }
+
+    private void OnDisable()
+    {
+        _inputReader.PressTabEvent -= InventoryOpen;
     }
 
     protected override void Start()
@@ -79,5 +92,21 @@ public class Player : Entity
     public override void Attack()
     {
 
+    }
+
+    private void InventoryOpen()
+    {
+        if (isInventoryOpen == false)
+        {
+            _inputReader.Controlls.asset.FindAction("XMovement").Disable();
+            _inputReader.Controlls.asset.FindAction("YMovement").Disable();
+            isInventoryOpen = true;
+        }
+        else
+        {
+            _inputReader.Controlls.asset.FindAction("XMovement").Enable();
+            _inputReader.Controlls.asset.FindAction("YMovement").Enable();
+            isInventoryOpen = false;
+        }
     }
 }
