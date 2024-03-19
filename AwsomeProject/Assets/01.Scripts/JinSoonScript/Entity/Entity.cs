@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Video;
 
 public abstract class Entity : MonoBehaviour
 {
@@ -22,6 +24,19 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float wallCheckBoxHeight;
 
+    [Header("KnockBackInfo")]
+    [SerializeField] protected float knockbackDuration;
+    protected Coroutine knockbackCoroutine;
+    [HideInInspector] public bool isKnockbacked;
+
+    [Header("Stun info")]
+    public float stunDuration;
+    public Vector2 stunPower;
+    protected bool canBeStun;
+
+    [Space]
+    [Header("FeedBack info")]
+    public UnityEvent HitEvent;
 
 
     public Action<int> OnFlip;
@@ -72,7 +87,6 @@ public abstract class Entity : MonoBehaviour
 
     #endregion
 
-
     #region FlipSection
 
     public virtual void Flip()
@@ -91,7 +105,6 @@ public abstract class Entity : MonoBehaviour
     }
 
     #endregion
-
 
     #region CheckCollisionSection
 
@@ -120,12 +133,9 @@ public abstract class Entity : MonoBehaviour
 
     #endregion
 
+    public virtual void Attack() { }
 
-    public virtual void Attack()
-    {
-
-    }
-
+    public virtual void Stun(Vector2 stunPower, float duration) { }
 
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임
     public Coroutine StartDelayCallBack(float delay, Action callBack)

@@ -3,20 +3,8 @@
     "inventory": [
         {
             "id": 1,
-            "amount": 0,
+            "amount": 1,
             "posX": 0,
-            "posY": 0
-        },
-        {
-            "id": 1,
-            "amount": 0,
-            "posX": 1,
-            "posY": 0
-        },
-        {
-            "id": 1,
-            "amount": 0,
-            "posX": 2,
             "posY": 0
         }
     ]
