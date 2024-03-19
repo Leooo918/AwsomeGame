@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
     private Image visual;
     private InventorySlot assignedSlot;
     private InventorySlot lastSlot;
+    private TextMeshProUGUI amountTxt;
 
     private Vector2 offset;
     public int itemAmount { get; private set; } = 0;
@@ -20,13 +22,15 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
     {
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
+        amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
     }
 
     public bool AddItem(int amount)
     {
-        if (itemAmount + amount < itemSO.maxCarryAmountPerSlot)
+        if (itemAmount + amount <= itemSO.maxCarryAmountPerSlot)
         {
             itemAmount += amount;
+            amountTxt.SetText(itemAmount.ToString());
             return true;
         }
         return false;
@@ -77,5 +81,6 @@ public class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDrag
     {
         itemAmount = amount;
         assignedSlot = slot;
+        amountTxt.SetText(itemAmount.ToString());
     }
 }

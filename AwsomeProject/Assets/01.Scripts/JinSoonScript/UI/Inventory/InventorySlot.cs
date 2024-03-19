@@ -48,11 +48,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         Vector3 position = Vector3.zero;
         foreach(var r in transform.GetComponentsInParent<RectTransform>())
         {
-            if (r.GetComponent<Canvas>() != null) continue;
+            if (r.GetComponent<Canvas>() != null || r.name == "InventoryBackground") break;
             position += r.localPosition;
-            Debug.Log($"{r}:{r.localPosition}");
         }
+
         item.GetComponent<RectTransform>().localPosition = position;
+        item.Init(item.itemAmount, this);
     }
 
     public void DeleteItem(Item item)

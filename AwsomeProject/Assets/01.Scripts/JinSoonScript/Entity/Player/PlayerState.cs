@@ -23,7 +23,6 @@ public class PlayerState
     //상태에 진입했을 때 실행할 함수
     public virtual void Enter()
     {
-        Debug.Log(this);
         player.animatorCompo.SetBool(_animBoolHash, true);
         _triggerCall = false; //애니메이션이 다 끝났을때 실행될 불리언 값
     }

@@ -8,7 +8,9 @@ public enum PlayerStateEnum
     Jump,
     Fall,
     Dash,
-    Gathering
+    Gathering,
+    Stun,
+    Attack
 }
 
 
@@ -62,6 +64,16 @@ public class Player : Entity
     {
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
+    }
+
+    public override void Stun(Vector2 stunPower, float duration)
+    {
+        //if (canBeStun == false) return;
+
+        this.stunPower = stunPower;
+        this.stunDuration = duration;
+
+        StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 
     public override void Attack()

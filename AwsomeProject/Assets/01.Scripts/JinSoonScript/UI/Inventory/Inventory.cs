@@ -11,6 +11,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform slotParent;
     [SerializeField] private Transform quickSlotParent;
 
+
+    [SerializeField] private ItemSO testItem;
+
     private void Awake()
     {
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
@@ -47,6 +50,24 @@ public class Inventory : MonoBehaviour
         {
             Load();
         }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            InventoryManager.Instance.OnPressTab();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+             ititi = Instantiate(testItem.prefab, GameObject.Find("Items").transform).GetComponent<Item>();
+            ititi.Init(1, null);
+            StartCoroutine("DelayInsert");
+        }
+    }
+    Item ititi;
+    IEnumerator DelayInsert()
+    {
+        yield return null;
+            TryInsertItem(ititi);
     }
 
     IEnumerator DelayLoad()
@@ -61,10 +82,10 @@ public class Inventory : MonoBehaviour
     /// <param name="item">인벤토리에 쑤셔넣을 아이템</param>
     /// <returns>아이템을 얻을 때 return값이 true면 필드의 item 인스턴스 지워주면 되고
     /// return값이 false면 필드의 item 인스턴스를 지우지 않으면 됨</returns>
-    public bool TryInsertItem(Item item, int amount)
+    public bool TryInsertItem(Item item)
     {
         int id = item.itemSO.id;
-        int remainItem = amount;
+        int remainItem = item.itemAmount;
 
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
@@ -74,30 +95,40 @@ public class Inventory : MonoBehaviour
                 //같은 아이템이 있다면 그 아이템의 한칸 최대 수량보다 적을동안아이템을
                 //그 칸에 넣어주기
                 Item it = inventory[i, j].assignedItem;
-                if (it != null && it.itemSO.id == id && it.itemAmount > amount)
+                if (it != null && it.itemSO.id == id)
                 {
-                    amount -= (it.itemSO.maxCarryAmountPerSlot - it.itemAmount);
-                    it.AddItem(amount);
-                    if (amount <= 0)
+                    int remainSpace = it.itemSO.maxCarryAmountPerSlot - it.itemAmount;
+
+                    Debug.Log(remainSpace + " " + remainItem);
+
+                    if (remainSpace - remainItem < 0)
                     {
-                        Destroy(item);
+                        remainItem = remainItem - remainSpace;
+                        it.AddItem(remainItem - remainSpace);
+                    }
+                    else
+                    {
+                        it.AddItem(remainItem);
+
+                        Destroy(item.gameObject);
                         return true;
                     }
+
                 }
             }
         }
 
+        Debug.Log("밍");
 
-
-        for (int i = 0; i < inventory.GetLength(0); i++)
+        for (int i = 0; i < inventory.GetLength(1); i++)
         {
-            for (int j = 0; j < inventory.GetLength(1); j++)
+            for (int j = 0; j < inventory.GetLength(0); j++)
             {
                 //저 위에서 들어가지 않고 남은 아이템은 여기서 Null인 칸을 찾아 들어가 줌
-                Item it = inventory[i, j].assignedItem;
+                Item it = inventory[j, i].assignedItem;
                 if (it == null)
                 {
-                    inventory[i, j].InsertItem(it);
+                    inventory[j, i].InsertItem(item);
                     return true;
                 }
             }
