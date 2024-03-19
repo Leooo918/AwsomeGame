@@ -14,6 +14,9 @@ public class SettingPanel : MonoBehaviour
 
     private Sequence seq;
 
+    [SerializeField] private bool settingPanelState = false;
+    [SerializeField] private bool inventoryPanelState = false;
+
     private void Awake()
     {
         seq = DOTween.Sequence();
@@ -23,51 +26,54 @@ public class SettingPanel : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (setPanelInstance == null)
+            if (setPanelInstance == null && inventoryPanelState == false)
             {
-                Time.timeScale = 0;
                 setPanelInstance = Instantiate(uiPrefab[0]) as GameObject;
                 setPanelInstance.transform.SetParent(canvas.transform, false);
                 rectTransform = setPanelInstance.GetComponent<RectTransform>();
-                rectTransform.localPosition = new Vector3(1000, -12, 0);
-                //rectTransform.sizeDelta = new Vector2(200, 200);
-                Debug.Log(setPanelInstance);
+                seq.Append(rectTransform.DOMove(new Vector3(2000, 450, 0), 1).SetEase(Ease.OutBack));
+                //rectTransform.localPosition = new Vector3(1000, -12, 0);
+                settingPanelState = true;
+                Time.timeScale = 0;
+                //Debug.Log(setPanelInstance);
             }
-            else
+            else 
             {
-                Time.timeScale = 1;
-                Destroy(setPanelInstance);
+                UIOff(setPanelInstance);
+                settingPanelState = false;
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (inventoryInstance == null)
+            if (inventoryInstance == null && settingPanelState == false)
             {
-                Time.timeScale = 0;
                 inventoryInstance = Instantiate(uiPrefab[1]) as GameObject;
                 inventoryInstance.transform.SetParent(canvas.transform, false);
                 rectTransform = inventoryInstance.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(1600,800);
-                Debug.Log(inventoryInstance);
+                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800,950), 1).SetEase(Ease.OutBack));
+                Debug.Log(seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 1).SetEase(Ease.OutBack)));
+                inventoryPanelState = true;
+                Time.timeScale = 0;
+                //rectTransform.sizeDelta = new Vector2(1600,800);
             }
             else
             {
-                Time.timeScale = 1;
-                Destroy(inventoryInstance);
+                UIOff(inventoryInstance);
+                inventoryPanelState = false;
             }
         }
     }
 
     /*private void UIOn(GameObject ui, GameObject[] prefab, int array)
     {
-
-
-    }
+        
+    } 일단 살려놓음*/
 
     private void UIOff(GameObject ui)
     {
-
+        Destroy(ui);
+        //state = false;
+        Time.timeScale = 1;
     }
-    일단 살려놓음*/
 }
