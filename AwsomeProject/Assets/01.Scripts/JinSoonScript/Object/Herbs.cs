@@ -11,8 +11,7 @@ public class Herbs : MonoBehaviour
     private TextMeshPro timerTxt;
     private Player player;
 
-    [SerializeField] private HerbSO herb;
-    private HerbEnum herbEnum;
+    [SerializeField] private IngredientItemSO item; 
     private float gatherTime = 0;
 
     private float gatherTimeDown = 0;
@@ -28,10 +27,9 @@ public class Herbs : MonoBehaviour
         pivot = interact.transform.Find("Pivot");
         timerTxt = interact.transform.Find("Timer").GetComponent<TextMeshPro>();
 
-        if (herb == null) return;
+        if (item == null) return;
 
-        herbEnum = herb.herb;
-        gatherTime = herb.gatheringTime;
+        gatherTime = item.gatheringTime;
     }
 
 
@@ -47,12 +45,7 @@ public class Herbs : MonoBehaviour
             pivot.localScale = new Vector3(progress, 1, 1);
 
             if (gatherTime <= gatherTimeDown)
-            {
-                Debug.Log("นึ");
-                player.StateMachine.ChangeState(PlayerStateEnum.Idle);
-                interact.SetActive(false);
-                herbGathered = true;
-            }
+                GetHurb();
         }
 
         if (gatherEnd)
@@ -64,19 +57,30 @@ public class Herbs : MonoBehaviour
             pivot.localScale = new Vector3(progress, 1, 1);
 
             if (0 >= gatherTimeDown)
-            {
-                if(isTriggered == false)
-                    interact.SetActive(false);
-
-                gatherTimeDown = 0;
-                gatherStart = false;
-                gatherEnd = false;
-            }
+                CancelGathering();
         }
-
-
     }
 
+    private void GetHurb()
+    {
+        if (herbGathered) return;
+        player.StateMachine.ChangeState(PlayerStateEnum.Idle);
+        interact.SetActive(false);
+        herbGathered = true;
+        IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.itemParent).GetComponent<IngredientItem>();
+        iItem.SetItemAmount(1);
+        InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+    }
+
+    private void CancelGathering()
+    {
+        if (isTriggered == false)
+            interact.SetActive(false);
+
+        gatherTimeDown = 0;
+        gatherStart = false;
+        gatherEnd = false;
+    }
 
     private void GatherHerb()
     {

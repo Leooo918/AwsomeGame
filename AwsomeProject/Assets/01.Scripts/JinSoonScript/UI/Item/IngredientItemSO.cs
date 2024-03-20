@@ -14,6 +14,7 @@ public class IngredientItemSO : ItemSO
 {
     [Space(20)]
     public IngredientType ingredientType;
+    public int gatheringTime;
 
     private void Awake()
     {

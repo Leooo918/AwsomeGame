@@ -34,6 +34,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
+        amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
     }
 
     public bool AddItem(int amount)
@@ -45,6 +46,12 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
             return true;
         }
         return false;
+    }
+
+    public void SetItemAmount(int amount)
+    {
+        itemAmount = amount;
+        amountTxt.SetText(itemAmount.ToString());
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -89,7 +96,6 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         itemAmount = amount;
         assignedSlot = slot;
-        amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
         amountTxt.SetText(itemAmount.ToString());
 
         itemId = itemSO.id;

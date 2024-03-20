@@ -8,7 +8,8 @@ public class InventoryManager : MonoBehaviour
     public static InventoryManager Instance;
 
     public ItemSetSO ItemSet;
-    [SerializeField] private Inventory inventory;
+    [SerializeField] private Inventory playerInventory;
+    public Inventory PlayerInventory => playerInventory;
     public Item curMovingItem { get; private set; }
     public InventorySlot curCheckingSlot { get; private set; }
 

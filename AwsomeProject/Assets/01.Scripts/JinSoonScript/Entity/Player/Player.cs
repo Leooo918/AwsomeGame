@@ -28,6 +28,11 @@ public class Player : Entity
 
     #endregion
 
+    [SerializeField] private float coyoteTime = 0.3f; 
+    public float CoyoteTime => coyoteTime;
+    [HideInInspector]
+    public bool canJump = false;
+
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;

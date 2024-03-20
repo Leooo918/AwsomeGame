@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerGroundState : PlayerState
 {
-    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) {}
+    private float coyoteTimer;
+    private bool timerStart = false;
 
-
+    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     public override void Enter()
     {
@@ -27,17 +28,33 @@ public class PlayerGroundState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
-        if (!player.IsGroundDetected())
+
+        if (player.IsGroundDetected() == false)
+            player.StartDelayCallBack(player.CoyoteTime, () => player.canJump = false);
+        else
+            player.canJump = true;
+
+
+
+        if (player.canJump == false && !player.IsGroundDetected())
+        {
+            Debug.Log("¹Ö¹Ö¹Ö");
+            player.canJump = false;
             stateMachine.ChangeState(PlayerStateEnum.Fall);
+        }
     }
+
 
 
     #region HandleEventSection
 
     private void HandleJumpEvent()
     {
-        if (player.IsGroundDetected())
+        if (player.canJump)
+        {
             stateMachine.ChangeState(PlayerStateEnum.Jump);
+            player.canJump = false;
+        }
     }
 
     private void HandleDashEvent()
