@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class IngredientItem : Item
 {
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         itemType = ItemType.Ingredient;
     }
 }

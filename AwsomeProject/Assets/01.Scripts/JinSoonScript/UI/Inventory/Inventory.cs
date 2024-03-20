@@ -49,7 +49,7 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            Load();
+           Load();
         }
 
         if (Input.GetKeyDown(KeyCode.O))

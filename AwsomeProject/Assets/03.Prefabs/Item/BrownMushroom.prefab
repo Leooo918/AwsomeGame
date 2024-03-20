@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 267918655651322837}
   - component: {fileID: 7189593635475201567}
   - component: {fileID: 8959519642044216649}
-  - component: {fileID: 4734799178346529931}
+  - component: {fileID: 5836964758740588742}
   m_Layer: 5
   m_Name: BrownMushroom
   m_TagString: Untagged
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4734799178346529931
+--- !u!114 &5836964758740588742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6910422564161804073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7105469bde5195f43a95bb82e04d47f4, type: 3}
+  m_Script: {fileID: 11500000, guid: ba19f8fe40f927c49a08258fefe01375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: 9dc7c34dc43f19748a34507ac86b031b, type: 2}
+  itemSO: {fileID: 11400000, guid: 937425841f1e3b848b695167aad7136b, type: 2}

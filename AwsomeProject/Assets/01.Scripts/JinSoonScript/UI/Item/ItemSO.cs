@@ -10,10 +10,12 @@ public class ItemSO : ScriptableObject
 {
     public int id;
     public string itemName;
-    public ItemType itemType;
+    [HideInInspector]public ItemType itemType;
     public int maxCarryAmountPerSlot;
+    [TextArea(3,20)]
     public string itemExplain;
 
+    [Space(20)]
     public Sprite itemImage;
     public GameObject prefab;
 }

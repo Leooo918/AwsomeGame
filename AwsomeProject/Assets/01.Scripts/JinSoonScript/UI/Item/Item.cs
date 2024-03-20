@@ -30,11 +30,10 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private Vector2 offset;
     public int itemAmount { get; protected set; } = 0;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
-        amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
     }
 
     public bool AddItem(int amount)
@@ -90,6 +89,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         itemAmount = amount;
         assignedSlot = slot;
+        amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
         amountTxt.SetText(itemAmount.ToString());
 
         itemId = itemSO.id;

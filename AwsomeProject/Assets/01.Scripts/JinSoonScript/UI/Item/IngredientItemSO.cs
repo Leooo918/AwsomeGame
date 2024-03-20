@@ -12,5 +12,11 @@ public enum IngredientType
 [CreateAssetMenu(menuName = "SO/IngredientSO")]
 public class IngredientItemSO : ItemSO
 {
+    [Space(20)]
     public IngredientType ingredientType;
+
+    private void Awake()
+    {
+        itemType = ItemType.Ingredient;
+    }
 }
