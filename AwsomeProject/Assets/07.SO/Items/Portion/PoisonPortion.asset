@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
+  m_Name: PoisonPortion
+  m_EditorClassIdentifier: 
+  id: 101
+  itemName: "\uB3C5\uD3EC\uC158"
+  itemType: 1
+  maxCarryAmountPerSlot: 5
+  itemExplain: "\uB9CE\uC774 \uBD88\uAE38\uD574 \uBCF4\uC774\uB294 \uD3EC\uC158 \uB9C8\uC2DC\uACE0
+    \uC2F6\uC9C0\uB294 \uC54A\uB2E4(\uCD08\uB2F9 \uB370\uBBF8\uC9C0 2, 10\uCD08\uAC04)"
+  itemImage: {fileID: 0}
+  prefab: {fileID: 0}
+  portionType: 0
+  effect: {fileID: 0}

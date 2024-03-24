@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -49,12 +50,12 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-           Load();
+            Load();
         }
 
         if (Input.GetKeyDown(KeyCode.O))
         {
-             ititi = Instantiate(testItem.prefab, GameObject.Find("Items").transform).GetComponent<Item>();
+            ititi = Instantiate(testItem.prefab, GameObject.Find("Items").transform).GetComponent<Item>();
             ititi.Init(1, null);
             StartCoroutine("DelayInsert");
         }
@@ -63,7 +64,7 @@ public class Inventory : MonoBehaviour
     IEnumerator DelayInsert()
     {
         yield return null;
-            TryInsertItem(ititi);
+        TryInsertItem(ititi);
     }
 
     IEnumerator DelayLoad()
@@ -136,8 +137,9 @@ public class Inventory : MonoBehaviour
 
     //뭐 id값을 받은 이름으로 받든 어찌저찌해서 inventory에서 아이템을 return 해줌
 
-    public Item GetItem(int id)
+    public bool GetItem(int id, int amount, out Item item)
     {
+        item = null;
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
             for (int j = 0; j < inventory.GetLength(1); j++)
@@ -145,12 +147,14 @@ public class Inventory : MonoBehaviour
                 Item it = inventory[i, j].assignedItem;
                 if (it != null && it.itemSO.id == id)
                 {
-                    return it;
+                    item = it;
+                    amount -= it.itemAmount;
+
+                    if(amount <= 0) return true;
                 }
             }
         }
-
-        return null;
+        return amount <= 0;
     }
 
     public void UnSelectAllSlot()

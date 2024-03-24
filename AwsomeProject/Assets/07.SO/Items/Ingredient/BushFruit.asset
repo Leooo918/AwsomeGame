@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fb526b5322c41f418007a861e92484b, type: 3}
-  m_Name: RedFruit
+  m_Name: BushFruit
   m_EditorClassIdentifier: 
-  id: 2
-  itemName: "\uBE68\uAC04\uC5F4\uB9E4"
+  id: 6
+  itemName: "\uB364\uBD88\uC5F4\uB9E4"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uBE68\uAC04\uC0C9 \uC5F4\uB9E4\uB2E4\n\uB3C5\uC740 \uC5C6\uB294
-    \uB4EF\uD558\uB2E4"
-  itemImage: {fileID: -1790349488, guid: 304b67974f39be1439057c2fa5147f82, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: c9befb66ad19a6f4ebc96dd0b1037ed8, type: 3}
+  itemExplain: "\uC544\uC9C1\uB3C4 \uBBF8\uC9C0\uC758 \uB300\uC0C1. \uD559\uC790\uB4E4\uB3C4
+    \uC544\uC9C1 \uC6D0\uC778\uC744 \uBC1D\uD600\uB0B4\uC9C4 \uBABB\uD588\uB2E4.
+    \uC138\uC0C1\uC744 \uBC18\uC804\uC2DC\uD0A8\uB2E4\uB294 \uB0AD\uC124\uC774 \uC788\uB2E4"
+  itemImage: {fileID: 0}
+  prefab: {fileID: 0}
   ingredientType: 2
-  gatheringTime: 5
+  gatheringTime: 6

@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: ItemSet
   m_EditorClassIdentifier: 
   itemset:
-  - {fileID: 11400000, guid: 937425841f1e3b848b695167aad7136b, type: 2}
-  - {fileID: 11400000, guid: 9dc601bb5279cb544ad3b297fba0a7da, type: 2}
+  - {fileID: 11400000, guid: 46d47d35f64213d41b43a0233ffac4b8, type: 2}
+  - {fileID: 11400000, guid: 2e0528eed05fa0f40bd8b869eac897b2, type: 2}
+  - {fileID: 11400000, guid: 72661b9ce8789634e88564b600f4d846, type: 2}
+  - {fileID: 11400000, guid: 8e96342930dca054a8b919b3ded769ae, type: 2}
+  - {fileID: 11400000, guid: 585cbcbfee24ed547ba9e23b20268791, type: 2}
+  - {fileID: 11400000, guid: 189187d3ba87e2546ae460a63b71b9e5, type: 2}
+  - {fileID: 11400000, guid: b840561abf926654dae490db1913ec8e, type: 2}
+  - {fileID: 11400000, guid: 8afbaafdb0f7827419c75022eb99ad4e, type: 2}
+  - {fileID: 11400000, guid: a86bfcbe84c59e947bf54eabb8019800, type: 2}
+  - {fileID: 11400000, guid: bf71d70053fb9c748a29391bd105e760, type: 2}
+  - {fileID: 11400000, guid: 07696ec79c2af85498888d58070e8920, type: 2}
+  - {fileID: 11400000, guid: df2928aeff4ee1f4ba06cfa9d1a312ad, type: 2}

@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -32,9 +33,26 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     protected virtual void Awake()
     {
+        Debug.Log("นึ");
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
         amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
+    }
+
+    public bool RemoveItem(int amount)
+    {
+        if (itemAmount < amount) return false;
+
+        itemAmount -= amount;
+        amountTxt.SetText(itemAmount.ToString());
+
+        if(itemAmount <= 0)
+        {
+            assignedSlot.assignedItem = null;
+            Destroy(gameObject);
+        }
+
+        return true;
     }
 
     public bool AddItem(int amount)
@@ -50,6 +68,9 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void SetItemAmount(int amount)
     {
+        if(amountTxt == null)
+            amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
+
         itemAmount = amount;
         amountTxt.SetText(itemAmount.ToString());
     }

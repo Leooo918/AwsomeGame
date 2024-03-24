@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb526b5322c41f418007a861e92484b, type: 3}
+  m_Name: Yesword'sHorn
+  m_EditorClassIdentifier: 
+  id: 8
+  itemName: "\uC608\uC18C\uB4DC\uC758 \uBFD4"
+  itemType: 0
+  maxCarryAmountPerSlot: 5
+  itemExplain: "\uBFD4\uB85C \uC790\uC2E0\uB4E4\uC758 \uAC1C\uC131\uC744 \uB098\uD0C0\uB0B4\uB294
+    \uC608\uC18C\uB4DC\uB4E4\uC744 \uCC98\uB9AC\uD558\uBA74 \uB098\uD0C0\uC0DD\uC131\uB418\uB294
+    \uC544\uC774\uD15C. \uADF8\uB4E4\uB9CC\uC758 \uAC1C\uC131\uC744 \uB098\uD0C0\uB0B4\uAE30\uC5D0
+    \uCC2C\uB780\uD558\uBA70 \uC644\uBCBD\uD558\uB2E4"
+  itemImage: {fileID: 0}
+  prefab: {fileID: 0}
+  ingredientType: 3
+  gatheringTime: 8

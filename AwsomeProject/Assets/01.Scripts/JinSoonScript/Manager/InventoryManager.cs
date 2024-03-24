@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -88,5 +89,14 @@ public class InventoryManager : MonoBehaviour
     {
         tween = inventoryRect.DOAnchorPosY(-1100, 0.3f).SetEase(Ease.Linear);
         inventoryOpen = false;
+    }
+
+    public Item MakeItemInstanceByItemSO(ItemSO itemSO, int amount = 1)
+    {
+        Item item = Instantiate(itemSO.prefab, itemParent).GetComponent<Item>();
+        
+        item.SetItemAmount(amount);
+
+        return item;
     }
 }

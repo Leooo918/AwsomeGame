@@ -10,7 +10,7 @@ using UnityEditor;
 
 namespace DialogSystem
 {
-    [CreateAssetMenu(menuName = "SO/Dialog")]
+    [CreateAssetMenu(menuName = "SO/Dialog/Dialog")]
     public class DialogSO : ScriptableObject
     {
         public List<ScriptSO> scriptList = new List<ScriptSO>();

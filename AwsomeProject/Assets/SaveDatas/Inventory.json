@@ -6,6 +6,12 @@
             "amount": 1,
             "posX": 0,
             "posY": 0
+        },
+        {
+            "id": 2,
+            "amount": 2,
+            "posX": 1,
+            "posY": 0
         }
     ]
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public enum ItemType
 {
     Ingredient = 0,
-    Posion = 1
+    Portion = 1
 }
 
 public class ItemSO : ScriptableObject

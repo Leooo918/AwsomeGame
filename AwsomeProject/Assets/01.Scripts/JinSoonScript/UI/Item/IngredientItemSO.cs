@@ -6,10 +6,11 @@ public enum IngredientType
 {
     Mushroom,
     Grass,
-    Fruit
+    Fruit,
+    Booty
 }
 
-[CreateAssetMenu(menuName = "SO/IngredientSO")]
+[CreateAssetMenu(menuName = "SO/Item/IngredientSO")]
 public class IngredientItemSO : ItemSO
 {
     [Space(20)]

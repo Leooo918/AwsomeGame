@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace DialogSystem
 {
-    [CreateAssetMenu(menuName = "SO/NormalScript")]
     public class NormalScriptSO : ScriptSO
     {
         public Character character;

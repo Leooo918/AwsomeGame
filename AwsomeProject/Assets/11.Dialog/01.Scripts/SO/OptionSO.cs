@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace DialogSystem
 {
-    [CreateAssetMenu(menuName = "SO/Option")]
     public class OptionSO : ScriptSO
     {
         public GameObject optionPf;

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private RectTransform rect;
-    public Item assignedItem { get; private set; }
+    public Item assignedItem;
 
     private Inventory inventory;
     private  GameObject selectUI;

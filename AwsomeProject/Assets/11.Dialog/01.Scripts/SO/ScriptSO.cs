@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace DialogSystem
 {
-    [CreateAssetMenu(menuName = "SO/Script")]
     public abstract class ScriptSO : ScriptableObject
     {
         [Header("Camera")]
