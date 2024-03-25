@@ -21,6 +21,6 @@ MonoBehaviour:
     \uBF08\uC758 \uC794\uD574\uB4E4\uACFC \uC11E\uC5B4 \uC0DD\uC131\uB41C\uB2E4.
     \uB9CE\uC740 \uC0DD\uAE30\uB97C \uD488\uACE0\uC788\uB2E4"
   itemImage: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 3
   gatheringTime: 7

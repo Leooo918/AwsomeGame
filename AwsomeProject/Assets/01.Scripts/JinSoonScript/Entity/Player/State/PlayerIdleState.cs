@@ -15,6 +15,11 @@ public class PlayerIdleState : PlayerGroundState
         player.StopImmediately(false);
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();

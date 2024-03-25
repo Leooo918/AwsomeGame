@@ -20,6 +20,6 @@ MonoBehaviour:
     \uADF9\uB300\uD654\uB41C \uC2DD\uBB3C, \uADF8\uB0E5 \uCC44\uC9D1\uD558\uBA74
     \uC880 \uB530\uB054\uD560\uAC70 \uAC19\uB2E4"
   itemImage: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 2
   gatheringTime: 5

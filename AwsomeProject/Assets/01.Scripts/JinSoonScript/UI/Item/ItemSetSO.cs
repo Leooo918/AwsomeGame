@@ -18,6 +18,7 @@ public class ItemSetSO : ScriptableObject
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(this);
-#endif
+#endif  
+
     }
 }

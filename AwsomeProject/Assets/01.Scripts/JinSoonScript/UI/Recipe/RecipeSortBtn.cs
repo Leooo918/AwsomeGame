@@ -9,7 +9,7 @@ public class RecipeSortBtn : MonoBehaviour, IPointerClickHandler
 {
     private RecipeSortChanger sortChanger;
     private RectTransform rect;
-    private TextMeshProUGUI txt;
+    private RectTransform sort;
 
     public bool isSelected = false;
     public bool isAscending = true;
@@ -20,15 +20,10 @@ public class RecipeSortBtn : MonoBehaviour, IPointerClickHandler
     {
         sortChanger = GetComponentInParent<RecipeSortChanger>();
         rect = GetComponent<RectTransform>();
-        txt = transform.Find("Text").GetComponent<TextMeshProUGUI>();
-
-        if (isAscending)
-            txt.SetText($"{sortMode} : asc");
-        else
-            txt.SetText($"{sortMode} : dsc");
+        sort = transform.Find("Sort").GetComponent<RectTransform>();
 
         if(isSelected)
-            rect.localScale = new Vector3(1f, 1.2f, 1f);
+            rect.localScale = new Vector3(1.1f,1.1f, 1f);
     }
 
     public void OnClick()
@@ -39,17 +34,17 @@ public class RecipeSortBtn : MonoBehaviour, IPointerClickHandler
 
         sortChanger.ChangeSortMode(sortMode, isAscending);
         if (isAscending)
-            txt.SetText($"{sortMode} : asc");
+            sort.rotation = Quaternion.identity;
         else
-            txt.SetText($"{sortMode} : dsc");
+            sort.rotation = Quaternion.Euler(0,0,180);
     }
 
     public void OnClickOtherSortModeBtn()
     {
         isSelected = false;
         isAscending = true;
-        rect.localScale = Vector3.one; 
-        txt.SetText($"{sortMode} : asc");
+        rect.localScale = Vector3.one;
+        sort.rotation = Quaternion.identity;
     }
 
     public void OnPointerClick(PointerEventData eventData)
