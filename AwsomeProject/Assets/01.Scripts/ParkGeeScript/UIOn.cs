@@ -14,16 +14,17 @@ public class UIOn : MonoBehaviour
 
     [SerializeField] private bool isESC = false;
     [SerializeField] private bool isInven = false;
-    [SerializeField] private bool isState = false;
+    [SerializeField] private bool isSet = false;
+    //[SerializeField] private bool isOnOff = false;
 
-    Vector3 asd, ming;
+    Vector3 escPanelPos, invenScale;
 
     private void Awake()
     {
         ui[0].SetActive(false);
         ui[1].SetActive(false);
-        asd = ui[0].transform.position;
-        ming = ui[1].transform.localScale;
+        escPanelPos = ui[0].transform.position;
+        invenScale = ui[1].transform.localScale;
     }
 
     private void Update()
@@ -33,16 +34,22 @@ public class UIOn : MonoBehaviour
             isESC = !isESC;
             if (isESC)
             {
+                if (seq != null && seq.IsActive()) seq.Kill();
+                seq = DOTween.Sequence();
                 ShowUI(isESC, ui, 0);
-                seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.OutBack));
+                rectTransform.position = escPanelPos;
+                seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
             }
             else
             {
-                ui[0].transform.position = asd;
+                ui[0].transform.position = escPanelPos;
                 ui[0].SetActive(false);
             }
 
-            
+            if (isInven)
+            {
+                ui[0].SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -51,11 +58,19 @@ public class UIOn : MonoBehaviour
             if(isInven)
             {
                 ShowUI(isInven, ui, 1);
-                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 1).SetEase(Ease.OutBack));
+                if (seq != null && seq.IsActive()) seq.Kill();
+                seq = DOTween.Sequence();
+                rectTransform.sizeDelta = new Vector2(100, 50);
+                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 1).SetEase(Ease.Linear));
             }
             else
             {
-                ui[1].transform.localPosition = ming;
+                ui[1].transform.localPosition = invenScale;
+                ui[1].SetActive(false);
+            }
+
+            if (isESC)
+            {
                 ui[1].SetActive(false);
             }
         }
@@ -66,5 +81,22 @@ public class UIOn : MonoBehaviour
         isState = true;
         ui[arr].SetActive(true);
         rectTransform = ui[arr].GetComponent<RectTransform>();
+    }
+
+    public void SetPanelOn()
+    {
+        ShowUI(isSet, ui, 2);
+        if (seq != null && seq.IsActive()) seq.Kill();
+        seq = DOTween.Sequence();
+        rectTransform.position = escPanelPos;
+        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
+    }
+
+    public void Continue()
+    {
+        for (int i = 0; i < ui.Length; i++)
+        {
+            ui[i].SetActive(false);
+        }
     }
 }
