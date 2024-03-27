@@ -5,7 +5,7 @@ using UnityEngine;
 public class PortionItem : Item
 {
     public Portion posionType { get; protected set; }
-    public PortionEffect posionEffect { get; protected set; }
+    public Effect posionEffect { get; protected set; }
 
     protected override  void Awake()
     {

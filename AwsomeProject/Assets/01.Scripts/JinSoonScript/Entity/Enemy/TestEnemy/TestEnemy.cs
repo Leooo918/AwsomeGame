@@ -35,12 +35,12 @@ public class TestEnemy : Enemy {
     }
 
 
-    protected override void Start()
+    protected void Start()
     {
         StateMachine.Initialize(TestEnemyEnum.Idle, this);
     }
 
-    protected override void Update()
+    protected void Update()
     {
         StateMachine.CurrentState.UpdateState();
     }

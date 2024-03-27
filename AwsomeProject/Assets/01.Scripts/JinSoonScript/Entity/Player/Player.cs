@@ -17,10 +17,11 @@ public enum PlayerStateEnum
 
 public class Player : Entity
 {
-    #region PlayerState
+    #region PlayerStat
 
     //이거 나중에 SO로 빼고
     [Header("PlayerStat")]
+    public PlayerStatusSO playerStatus;
     public float moveSpeed = 7f;
     public float jumpForce = 5f;
     public float dashTime = 0.3f;
@@ -28,11 +29,12 @@ public class Player : Entity
 
     #endregion
 
-    [SerializeField] private float coyoteTime = 0.3f; 
+    [SerializeField] private float coyoteTime = 0.3f;
     public float CoyoteTime => coyoteTime;
     [HideInInspector]
     public bool canJump = false;
 
+    public Health playerHealth { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
@@ -61,42 +63,40 @@ public class Player : Entity
                 Debug.LogError(ex);
             }
         }
+
+        playerHealth = GetComponent<Health>();
+        playerHealth.Init(playerStatus);
     }
 
     private void OnEnable()
     {
         _inputReader.PressTabEvent += InventoryOpen;
+        playerHealth.onKnockBack += KnockBack;
     }
 
     private void OnDisable()
     {
         _inputReader.PressTabEvent -= InventoryOpen;
+        playerHealth.onKnockBack -= KnockBack;
     }
 
-    protected override void Start()
+    protected void Start()
     {
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
-    protected override void Update()
+    protected void Update()
     {
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
     }
 
-    public override void Stun(Vector2 stunPower, float duration)
+    public override void Stun(float duration)
     {
         //if (canBeStun == false) return;
-
-        this.stunPower = stunPower;
         this.stunDuration = duration;
 
         StateMachine.ChangeState(PlayerStateEnum.Stun);
-    }
-
-    public override void Attack()
-    {
-
     }
 
     private void InventoryOpen()

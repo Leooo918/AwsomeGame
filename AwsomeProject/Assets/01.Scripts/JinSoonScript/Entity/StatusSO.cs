@@ -2,14 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CommonStatType
+public enum StatType
 {
-    MaxHealth,
-    Attack,
-    AttackSpeed,
-    MoveSpeed,
-    GatheringSpeed,
-    Defence
+    
 }
 
 public abstract class StatusSO : ScriptableObject
@@ -18,13 +13,11 @@ public abstract class StatusSO : ScriptableObject
     public Stat MaxHealth;
     public Stat Attack;
     public Stat AttackSpeed;
-    public Stat MoveSpeed;
-    public Stat GatheringSpeed;
+    public Stat CriticalPercent;
     public Stat Defence;
+    public Stat MoveSpeed;
 
     protected Entity owner;
-
-    public Dictionary<CommonStatType, Stack> statDic;
 
     public virtual void SetOwner(Enemy owner)
     {
@@ -33,7 +26,7 @@ public abstract class StatusSO : ScriptableObject
 
     public void IncreaseStatBy(int value, float time, Stat stat)
     {
-        owner.StartCoroutine(DelayReturnOriginValue(value, time, stat));                                                                                                                                                                                                                                   
+        owner.StartCoroutine(DelayReturnOriginValue(value, time, stat));
     }
 
     private IEnumerator DelayReturnOriginValue(int value, float time, Stat stat)
@@ -48,6 +41,8 @@ public abstract class StatusSO : ScriptableObject
     {
         Defence.GetValue();
         //방어력 연산을 이쪽에 써주면 됨
+
+        if (Random.Range(0, 100) > CriticalPercent.GetValue()) value = (int)(value * 1.5f);
     }
 
 }

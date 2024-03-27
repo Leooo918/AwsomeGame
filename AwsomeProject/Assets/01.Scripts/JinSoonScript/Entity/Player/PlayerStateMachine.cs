@@ -20,7 +20,7 @@ public class PlayerStateMachine
     {
         _player = player;
         CurrentState = stateDictionary[startState];
-        CurrentState.Enter();
+        CurrentState.Enter();   
     }
 
     public void ChangeState(PlayerStateEnum newState)

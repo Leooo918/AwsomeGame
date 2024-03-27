@@ -13,7 +13,7 @@ public class PortionItemSO : ItemSO
 {
     [Space(20)]
     public Portion portionType;
-    public PortionEffect effect;
+    public Effect effect;
 
     private void Awake()
     {

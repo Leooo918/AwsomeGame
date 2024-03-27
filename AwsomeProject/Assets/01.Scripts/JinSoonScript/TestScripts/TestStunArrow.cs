@@ -15,7 +15,8 @@ public class TestStunArrow : MonoBehaviour
         if( collision.TryGetComponent<Player>(out Player p ))
         {
             Vector2 stunPower = new Vector2((p.transform.position - transform.position).normalized.x, 1f) * 5;
-            p.Stun(stunPower, stunTime);
+            p.HitEvent?.Invoke();
+            p.Stun(stunTime);
             Destroy(gameObject);
         }
     }

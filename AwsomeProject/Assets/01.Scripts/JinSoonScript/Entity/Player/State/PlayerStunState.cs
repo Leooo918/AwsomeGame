@@ -10,8 +10,6 @@ public class PlayerStunState : PlayerState
     {
         base.Enter();
         stunTime = Time.time;
-        player.SetVelocity(player.stunPower.x, player.stunPower.y, true);
-        Debug.Log(player.stunPower);
     }
 
     public override void UpdateState()
@@ -19,7 +17,6 @@ public class PlayerStunState : PlayerState
         base.UpdateState();
 
         Debug.Log("±âÀý ¹Ö");
-
         if (Time.time - stunTime >= player.stunDuration)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
