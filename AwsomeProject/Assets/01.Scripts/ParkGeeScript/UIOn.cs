@@ -38,7 +38,7 @@ public class UIOn : MonoBehaviour
                 seq = DOTween.Sequence();
                 ShowUI(isESC, ui, 0);
                 rectTransform.position = escPanelPos;
-                seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
+                seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 0.5f).SetEase(Ease.Linear));
             }
             else
             {
@@ -61,7 +61,7 @@ public class UIOn : MonoBehaviour
                 if (seq != null && seq.IsActive()) seq.Kill();
                 seq = DOTween.Sequence();
                 rectTransform.sizeDelta = new Vector2(100, 50);
-                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 1).SetEase(Ease.Linear));
+                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 0.5f).SetEase(Ease.Linear));
             }
             else
             {
@@ -89,7 +89,7 @@ public class UIOn : MonoBehaviour
         if (seq != null && seq.IsActive()) seq.Kill();
         seq = DOTween.Sequence();
         rectTransform.position = escPanelPos;
-        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
+        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 0.5f).SetEase(Ease.Linear));
     }
 
     public void Continue()

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7147aeeca6981474d8f3456ed83b6331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: be short of ingredients
+  message: Be short of ingredients
   text: {fileID: 499447970}
 --- !u!1 &220944250
 GameObject:
