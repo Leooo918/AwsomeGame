@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5aa5aef2c06a9ec438cec1cfc8220421, type: 3}
-  m_Name: PlayerStatus
+  m_Script: {fileID: 11500000, guid: 171439bee9551c947adc7e16dbbfb9c8, type: 3}
+  m_Name: GreenSlimeStatus
   m_EditorClassIdentifier: 
   MaxHealth:
-    baseValue: 100
+    baseValue: 150
     modifiers: 
     percentModifiers: 
   Attack:
@@ -25,7 +25,7 @@ MonoBehaviour:
     modifiers: 
     percentModifiers: 
   CriticalPercent:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
     percentModifiers: 
   Defence:
@@ -33,8 +33,11 @@ MonoBehaviour:
     modifiers: 
     percentModifiers: 
   MoveSpeed:
-    baseValue: 7
+    baseValue: 2
     modifiers: 
     percentModifiers: 
+  PatrolTime: 3
+  PatrolDelay: 1
+  DetectingDistance: 10
   skills:
-  - {fileID: 11400000, guid: 78d262003cee857468add90ad725cfa1, type: 2}
+  - {fileID: 11400000, guid: 275732811b0928b4695174404266a235, type: 2}

@@ -2,30 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
-
-public enum StatEnum
-{
-    MaxHealth,
-    Attack,
-    AttackSpeed,
-    CriticalPercent,
-    MoveSpeed,
-    GatheringSpeed,
-    Defence
-}
-
-public enum PlayerSkill
-{
-    Dash
-}
-
-[CreateAssetMenu(menuName = "SO/Status/PlayerStatus")]
-public class PlayerStatusSO : StatusSO
+public class EnemyStatusSO<T> : StatusSO where T : Enum
 {
     public Dictionary<StatEnum, Stat> statDic = new Dictionary<StatEnum, Stat>();
-    public Dictionary<PlayerSkill, SkillSO> skillDic = new Dictionary<PlayerSkill, SkillSO>();
+    public Dictionary<T, SkillSO> skillDic = new Dictionary<T, SkillSO>();
 
-    [Header("PlayerSkillSetting")]
+    [Header("TheseWillNotChange")]
+    public float PatrolTime;
+    public float PatrolDelay;
+    public float DetectingDistance;
+
+    [Header("Skills")]
     public List<SkillSO> skills;
 
     protected void OnEnable()
@@ -51,7 +38,7 @@ public class PlayerStatusSO : StatusSO
             }
         }
 
-        foreach (PlayerSkill skillType in Enum.GetValues(typeof(PlayerSkill)))
+        foreach (T skillType in Enum.GetValues(typeof(T)))
         {
             foreach (var item in skills)
             {
@@ -68,7 +55,7 @@ public class PlayerStatusSO : StatusSO
         return statDic[playerStat];
     }
 
-    public SkillSO GetSkillByEnum(PlayerSkill skillType)
+    public SkillSO GetSkillByEnum(T skillType)
     {
         return skillDic[skillType];
     }

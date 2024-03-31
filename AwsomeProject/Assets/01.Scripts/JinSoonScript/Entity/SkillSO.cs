@@ -5,7 +5,9 @@ public abstract class SkillSO : ScriptableObject
 {
     public int id;
 
-    public Skill Skill;
-    public Stat SkillCoolTime;
-    public PlayerSkill skillType;
+    [HideInInspector]
+    public Skill skill;
+    public Stat skillCoolTime;
+    public Stat attackDistance;
+    public string skillName;
 }

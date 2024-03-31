@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3854071556c4d846b0e87443c261cd7, type: 3}
+  m_Name: PlayerDashSkill
+  m_EditorClassIdentifier: 
+  id: 0
+  skill: {fileID: 0}
+  skillCoolTime:
+    baseValue: 2
+    modifiers: 
+    percentModifiers: 
+  skillName: Dash
+  dashPower:
+    baseValue: 20
+    modifiers: 
+    percentModifiers: 
+  dashTime:
+    baseValue: 2
+    modifiers: 
+    percentModifiers: 
+  canUseSkill: 1
+  isInvincibleWhileDash: 0
+  isAttackWhileDash: 0

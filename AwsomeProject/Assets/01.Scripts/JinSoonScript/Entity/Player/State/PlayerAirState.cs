@@ -10,13 +10,13 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.PlayerInput.DashEvent += HandleDashEvent;
+        player.PlayerInput.DashEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.PlayerInput.DashEvent -= HandleDashEvent;
+        player.PlayerInput.DashEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
     }
 
 
@@ -30,11 +30,5 @@ public class PlayerAirState : PlayerState
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected()) return;
 
         player.SetVelocity(player.moveSpeed * xInput, rigidbody.velocity.y);
-    }
-
-
-    private void HandleDashEvent()
-    {
-        player.StateMachine.ChangeState(PlayerStateEnum.Dash);
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public enum PlayerStateEnum
 {
@@ -17,15 +16,18 @@ public enum PlayerStateEnum
 
 public class Player : Entity
 {
-    #region PlayerStat
-
-    //이거 나중에 SO로 빼고
     [Header("PlayerStat")]
     public PlayerStatusSO playerStatus;
+
     public float moveSpeed = 7f;
     public float jumpForce = 5f;
-    public float dashTime = 0.3f;
-    public float dashPower = 10f;
+
+    #region DashInfo
+
+    public float dashTime;
+    public float dashPower;
+    public bool isInvincibleWhileDash;
+    public bool isAttackWhileDash;
 
     #endregion
 
@@ -64,6 +66,9 @@ public class Player : Entity
             }
         }
 
+        foreach (var item in playerStatus.skillDic)
+            item.Value.skill.SetOwner(this);
+
         playerHealth = GetComponent<Health>();
         playerHealth.Init(playerStatus);
     }
@@ -87,6 +92,12 @@ public class Player : Entity
 
     protected void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerDashSkill d = playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill as PlayerDashSkill;
+            d.canUseSkill = true;
+        }
+
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
     }

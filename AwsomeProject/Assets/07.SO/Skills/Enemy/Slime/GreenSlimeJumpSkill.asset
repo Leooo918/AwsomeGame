@@ -9,20 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3854071556c4d846b0e87443c261cd7, type: 3}
-  m_Name: PlayerDashSkill
+  m_Script: {fileID: 11500000, guid: 594e0e4b9a60f904da682fb5934097b3, type: 3}
+  m_Name: GreenSlimeJumpSkill
   m_EditorClassIdentifier: 
-  id: 0
-  Skill: {fileID: 0}
+  id: 1
+  skill: {fileID: 0}
   skillCoolTime:
-    baseValue: 0
+    baseValue: 5
     modifiers: 
     percentModifiers: 
-  dashPower:
-    baseValue: 0
+  attackDistance:
+    baseValue: 3
     modifiers: 
     percentModifiers: 
-  dashTime:
+  skillName: JumpAttack
+  jumpPower:
+    baseValue: 10
+    modifiers: 
+    percentModifiers: 
+  damage:
     baseValue: 0
     modifiers: 
     percentModifiers: 
