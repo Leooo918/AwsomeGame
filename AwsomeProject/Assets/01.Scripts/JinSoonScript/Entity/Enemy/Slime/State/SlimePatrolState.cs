@@ -47,7 +47,7 @@ public class SlimePatrolState : EnemyState<SlimeEnum>
             return;
         }
 
-        Collider2D player = enemy.IsPlayerDetected();
+        Player player = enemy.IsPlayerDetected();
 
         float dist = 0;
         if (player != null) dist = Vector3.Distance(player.transform.position + Vector3.up, enemy.transform.position);

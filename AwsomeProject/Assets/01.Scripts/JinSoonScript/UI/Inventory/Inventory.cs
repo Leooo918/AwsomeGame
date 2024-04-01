@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
-    public InventorySlot[] quickSlot = new InventorySlot[5];
+    public QuickSlot[] quickSlot = new QuickSlot[5];
     private string path = "";
     [SerializeField] private Transform slotParent;
     [SerializeField] private Transform quickSlotParent;
@@ -30,7 +30,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<InventorySlot>();
+            quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<QuickSlot>();
             quickSlot[i].Init(this);
         }
     }
@@ -273,7 +273,6 @@ public class Inventory : MonoBehaviour
             }
         }
     }
-
 
 
     public class InventorySaveData

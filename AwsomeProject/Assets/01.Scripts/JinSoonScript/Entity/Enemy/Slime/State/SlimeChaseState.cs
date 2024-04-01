@@ -48,7 +48,10 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
         float dist = Vector3.Distance(playerTrm.position, enemy.transform.position);
 
         if (dist > enemy.detectingDistance + 5)
+        {
+            enemy.MissPlayer();
             enemyStateMachine.ChangeState(SlimeEnum.Return);
+        }
 
         if (dist <= enemy.attackDistance)
         {

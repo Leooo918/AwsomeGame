@@ -32,7 +32,7 @@ public class Health : MonoBehaviour
 
         curHp -= damage;
 
-        AfterHitFeedback(knockPower);
+        AfterHitFeedback(knockPower, true);
     }
 
     private void AfterHitFeedback(Vector2 knockPower, bool withFeedBack = true)

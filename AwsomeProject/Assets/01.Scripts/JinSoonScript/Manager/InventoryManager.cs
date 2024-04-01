@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -10,7 +9,9 @@ public class InventoryManager : MonoBehaviour
 
     public ItemSetSO ItemSet;
     [SerializeField] private Inventory playerInventory;
+    [SerializeField] private QuickSlotVisualizer quickslot;
     public Inventory PlayerInventory => playerInventory;
+    public QuickSlotVisualizer QuickSlot => quickslot;
     public Item curMovingItem { get; private set; }
     public InventorySlot curCheckingSlot { get; private set; }
 

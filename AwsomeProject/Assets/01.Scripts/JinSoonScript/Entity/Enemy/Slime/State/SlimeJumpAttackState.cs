@@ -1,9 +1,12 @@
+using Spine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SlimeJumpAttackState : EnemyState<SlimeEnum>
 {
+    private float playerDir;
+
     public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
@@ -12,24 +15,27 @@ public class SlimeJumpAttackState : EnemyState<SlimeEnum>
     {
         base.Enter();
         enemy.SetVelocity(0, 5);
+        playerDir = Mathf.Sign((PlayerManager.instance.playerTrm.position - enemy.transform.position).x);
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        Debug.Log(enemy.IsGroundDetected() );
+        enemy.SetVelocity(playerDir * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y);
+
         if (enemy.IsGroundDetected() && enemy.rigidbodyCompo.velocity.y < 0)
         {
             Player player = enemy.DetectEnemyPos(1);
-            Debug.Log(player);
             if (player != null)
             {
                 Vector2 knockPower = (Vector2)(player.transform.position - enemy.transform.position).normalized + Vector2.up;
+                knockPower *= 10f;
                 player.playerHealth.TakeDamage(5, knockPower, enemy);
             }
 
-            enemyStateMachine.ChangeState(SlimeEnum.Idle);
+            //망할 Idle로 전환하니까 등뒤에 있으면 Patrol로 감
+            enemyStateMachine.ChangeState(SlimeEnum.Chase);
         }
     }
 }

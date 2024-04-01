@@ -22,7 +22,7 @@ public class SlimeIdleState : EnemyState<SlimeEnum>
     {
         base.UpdateState();
 
-        Collider2D player = enemy.IsPlayerDetected();
+        Player player = enemy.IsPlayerDetected();
 
         if (player != null && enemy.IsObstacleInLine(enemy.runAwayDistance) == false)
             enemy.FindPlayerEvt(() => enemyStateMachine.ChangeState(SlimeEnum.Chase));

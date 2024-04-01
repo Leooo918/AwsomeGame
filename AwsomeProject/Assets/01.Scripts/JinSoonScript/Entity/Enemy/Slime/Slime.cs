@@ -90,7 +90,6 @@ public class Slime : Enemy
             var item = notReady[i];
             if (item.Item2 + item.Item1.skillCoolTime.GetValue() < Time.time)
             {
-                Debug.Log("owo");
                 notReady.Remove(item);
                 if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
                 readySkill.Push(item.Item1);

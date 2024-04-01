@@ -7,16 +7,17 @@ public abstract class Enemy : Entity
 {
     #region EnemyStat
     public float moveSpeed { get; protected set; }
+    public float PatrolTime { get; protected set; }
     public float PatrolDelay { get; protected set; }
     public float detectingDistance { get; protected set; }
     public float attackDistance {  get; protected set; }
 
     #endregion
+
     #region Settings
 
     [SerializeField] private Transform findPlayerMark;
 
-    [Header("Common Settings")]
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private LayerMask whatIsObstacle;
 
@@ -40,7 +41,10 @@ public abstract class Enemy : Entity
         defaultMoveSpeed = moveSpeed;
     }
 
-    public virtual Collider2D IsPlayerDetected()
+
+    #region DetectRegion
+
+    public virtual Player IsPlayerDetected()
     {
         Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
 
@@ -49,7 +53,7 @@ public abstract class Enemy : Entity
 
         float dir = player.transform.position.x - transform.position.x;
 
-        if (dir > 0 == (FacingDir > 0)) return player;
+        if (dir > 0 == (FacingDir > 0)) return player.GetComponent<Player>();
         else return null;
     }
 
@@ -60,9 +64,25 @@ public abstract class Enemy : Entity
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
     }
 
+    public Player DetectEnemyPos(float radius)
+    {
+        Collider2D coll = Physics2D.OverlapCircle(transform.position, radius, whatIsPlayer);
+
+        if(coll == null) return null;
+
+        return coll.GetComponent<Player>();
+    }
+
+    #endregion
+
+
     public virtual void FindPlayerEvt(Action action)
     {
-        if (playerDetected == true) return;
+        if (playerDetected == true)
+        {
+            action?.Invoke();
+            return;
+        }
 
         SpriteRenderer sr = findPlayerMark.GetComponent<SpriteRenderer>();
         sr.color = new Color(1, 1, 1, 1);
@@ -78,13 +98,4 @@ public abstract class Enemy : Entity
     }
 
     public void MissPlayer() => playerDetected = false;
-
-    public Player DetectEnemyPos(float radius)
-    {
-        Collider2D coll = Physics2D.OverlapCircle(transform.position, radius, whatIsPlayer);
-
-        if(coll == null) return null;
-
-        return coll.GetComponent<Player>();
-    }
 }
