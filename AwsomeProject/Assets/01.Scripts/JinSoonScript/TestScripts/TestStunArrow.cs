@@ -11,11 +11,10 @@ public class TestStunArrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
-        if( collision.TryGetComponent<Player>(out Player p ))
+        if( collision.TryGetComponent<Player>(out Player p))
         {
             Vector2 stunPower = new Vector2((p.transform.position - transform.position).normalized.x, 1f) * 5;
-            p.HitEvent?.Invoke();
+            p.playerHealth.TakeDamage(2, stunPower, new Player());
             p.Stun(stunTime);
             Destroy(gameObject);
         }

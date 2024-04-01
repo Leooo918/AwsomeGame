@@ -48,7 +48,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if(itemAmount <= 0)
         {
-            assignedSlot.assignedItem = null;
+            assignedSlot.DeleteItem();;
             Destroy(gameObject);
         }
 
@@ -81,7 +81,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         InventoryManager.Instance.MoveItem(this);
 
         if (assignedSlot != null)
-            assignedSlot.DeleteItem(this);
+            assignedSlot.DeleteItem();
 
         offset = eventData.position - new Vector2(Screen.width / 2, Screen.height / 2) - rect.anchoredPosition;
     }

@@ -7,13 +7,17 @@ public class PlayerDashState : PlayerState
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     private float dashTime;
-    float xInput;
+    private float xInput;
 
     public override void Enter()
     {
         base.Enter();
 
-        xInput = player.PlayerInput.XInput;
+        if (player.isInvincibleWhileDash == true) player.colliderCompo.enabled = false;
+
+        if (player.isAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
+
+            xInput = player.PlayerInput.XInput;
 
         if (xInput == 0) xInput = player.FacingDir * -0.5f;
 
@@ -35,6 +39,10 @@ public class PlayerDashState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        if (player.isInvincibleWhileDash == true) player.colliderCompo.enabled = true;
+
+        if (player.isAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
+
         player.StopImmediately(false);
     }
 

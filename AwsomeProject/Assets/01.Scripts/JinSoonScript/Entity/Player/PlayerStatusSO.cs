@@ -1,10 +1,9 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public enum PlayerStat
+public enum StatEnum
 {
     MaxHealth,
     Attack,
@@ -12,8 +11,7 @@ public enum PlayerStat
     CriticalPercent,
     MoveSpeed,
     GatheringSpeed,
-    Defence,
-    DashCoolTime
+    Defence
 }
 
 public enum PlayerSkill
@@ -24,19 +22,19 @@ public enum PlayerSkill
 [CreateAssetMenu(menuName = "SO/Status/PlayerStatus")]
 public class PlayerStatusSO : StatusSO
 {
-    public Dictionary<PlayerStat, Stat> statDic;
-    public Dictionary<PlayerSkill, SkillSO> skillDic;
+    public Dictionary<StatEnum, Stat> statDic = new Dictionary<StatEnum, Stat>();
+    public Dictionary<PlayerSkill, SkillSO> skillDic = new Dictionary<PlayerSkill, SkillSO>();
 
     [Header("PlayerSkillSetting")]
     public List<SkillSO> skills;
 
     protected void OnEnable()
     {
-        statDic = new Dictionary<PlayerStat, Stat>();
+        statDic = new Dictionary<StatEnum, Stat>();
 
-        Type playerStatType = typeof(PlayerStat);
+        Type playerStatType = typeof(StatEnum);
 
-        foreach (PlayerStat statType in Enum.GetValues(typeof(PlayerStat)))
+        foreach (StatEnum statType in Enum.GetValues(typeof(StatEnum)))
         {
             string fieldName = statType.ToString();
 
@@ -52,15 +50,12 @@ public class PlayerStatusSO : StatusSO
                 Debug.LogError($"There are no stat field in player: {fieldName}, msg:{ex.Message}");
             }
         }
-    }
 
-    protected void Start()
-    {
         foreach (PlayerSkill skillType in Enum.GetValues(typeof(PlayerSkill)))
         {
             foreach (var item in skills)
             {
-                if (item.skillType == skillType)
+                if (item.skillName == skillType.ToString())
                 {
                     skillDic[skillType] = item;
                 }
@@ -68,8 +63,13 @@ public class PlayerStatusSO : StatusSO
         }
     }
 
-    public Stat GetStatByEnum(PlayerStat playerStat)
+    public Stat GetStatByEnum(StatEnum playerStat)
     {
         return statDic[playerStat];
+    }
+
+    public SkillSO GetSkillByEnum(PlayerSkill skillType)
+    {
+        return skillDic[skillType];
     }
 }

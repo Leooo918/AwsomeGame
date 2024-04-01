@@ -12,14 +12,14 @@ public class PlayerDashSkillSO : SkillSO
     [Space(16)]
 
     [Header("SpecialAbility")]
+    public bool canUseSkill = false;
     public bool isInvincibleWhileDash = false;
     public bool isAttackWhileDash = false;
 
     private void OnEnable()
     {
-        Skill = new PlayerDashSkill();
-        PlayerDashSkill dash = Skill as PlayerDashSkill;
-        dash.Init(dashPower.GetValue(), dashTime.GetValue());
-        skillType = PlayerSkill.Dash;
+        skill = new PlayerDashSkill();
+        PlayerDashSkill dash = skill as PlayerDashSkill;
+        dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash);
     }
 }

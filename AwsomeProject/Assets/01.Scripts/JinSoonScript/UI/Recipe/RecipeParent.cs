@@ -52,7 +52,6 @@ public class RecipeParent : MonoBehaviour
 
     public void ChangeSortMode(SortMode sortMode, bool isAscending)
     {
-        Debug.Log($"{sortMode} {isAscending}");
         curSortMode = sortMode;
         this.isAscending = isAscending;
         SortChild();
@@ -69,31 +68,25 @@ public class RecipeParent : MonoBehaviour
                 RecipeUI comp = transform.GetChild(j).GetComponent<RecipeUI>();
                 bool changeParent = false;
 
-                Debug.Log(curSortMode);
                 switch (curSortMode)
                 {
                     case SortMode.ById:
-                        Debug.Log($"{i} : {j} {recipeUI.recipe.id} {comp.recipe.id}");
                         changeParent =
                             (comp.recipe.id < recipeUI.recipe.id);
                         break;
                     case SortMode.ByString:
-                        Debug.Log($"{comp.recipe.portion.itemName} {recipeUI.recipe.portion.itemName}");
                         //왼쪽게 더 먼저 나온다면임 ㅇㅋ?
                         changeParent =
                             (string.Compare(comp.recipe.portion.itemName, recipeUI.recipe.portion.itemName) == -1);
                         break;
                     case SortMode.ByIngredientsNum:
-                        Debug.Log($"{comp.recipe.ingredients.Length} {recipeUI.recipe.ingredients.Length}");
                         changeParent =
                             (comp.recipe.ingredients.Length < recipeUI.recipe.ingredients.Length);
                         break;
                 }
 
-                Debug.Log($"{changeParent} {isAscending}");
                 if (changeParent == isAscending)
                 {
-                    Debug.Log("MING");
                     ChangeParent(recipeUI.transform, comp.transform, i, j);
                     recipeUI = transform.GetChild(i).GetComponent<RecipeUI>();
                 }
@@ -103,7 +96,6 @@ public class RecipeParent : MonoBehaviour
 
     public void ChangeParent(Transform a, Transform b, int f, int s)
     {
-        Debug.Log($"{f} {s}");
         a.SetSiblingIndex(s);
         b.SetSiblingIndex(f);
     }

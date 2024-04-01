@@ -25,16 +25,14 @@ public class Health : MonoBehaviour
 
     #region HealthRegion
 
-    public void TakeDamage(int damage, Vector2 attackDir, Vector2 knockPower, Entity dealer)
+    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
         //방어력 계산해주셈
         //damage = owners.
 
         curHp -= damage;
 
-        knockPower.x *= attackDir.x;
-
-        AfterHitFeedback(knockPower);
+        AfterHitFeedback(knockPower, true);
     }
 
     private void AfterHitFeedback(Vector2 knockPower, bool withFeedBack = true)
@@ -70,7 +68,7 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TakeDamage(10, new Vector2(-3, 3), new Vector2(-3, 3), owner);
+            TakeDamage(10, new Vector2(-3, 3), owner);
         }
 
         foreach (var effect in effects)

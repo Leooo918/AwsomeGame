@@ -13,14 +13,14 @@ public class PlayerGroundState : PlayerState
     {
         base.Enter();
         player.PlayerInput.JumpEvent += HandleJumpEvent;
-        player.PlayerInput.DashEvent += HandleDashEvent;
+        player.PlayerInput.DashEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
     }
 
 
     public override void Exit()
     {
         player.PlayerInput.JumpEvent -= HandleJumpEvent;
-        player.PlayerInput.DashEvent -= HandleDashEvent;
+        player.PlayerInput.DashEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
         base.Exit();
     }
 

@@ -2156,10 +2156,19 @@ MonoBehaviour:
   wallCheckDistance: 0.1
   groundCheckBoxWidth: 0.75
   wallCheckBoxHeight: 1.75
+  knockbackDuration: 0
+  isKnockbacked: 0
+  stunDuration: 0
+  HitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  playerStatus: {fileID: 0}
   moveSpeed: 7
   jumpForce: 10
   dashTime: 0.2
   dashPower: 20
+  coyoteTime: 0.3
+  canJump: 0
   _inputReader: {fileID: 11400000, guid: cb0bb2fffe9f919478ba42328d7bb8c4, type: 2}
 --- !u!4 &1199669017
 Transform:
@@ -6622,11 +6631,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4671406944067481720, guid: 043546c732aa7404c894ee0445303dc0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.367945
+      value: 24.08
       objectReference: {fileID: 0}
     - target: {fileID: 4671406944067481720, guid: 043546c732aa7404c894ee0445303dc0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3215065
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 4671406944067481720, guid: 043546c732aa7404c894ee0445303dc0, type: 3}
       propertyPath: m_LocalPosition.z
