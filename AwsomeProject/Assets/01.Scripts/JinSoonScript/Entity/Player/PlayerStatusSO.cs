@@ -16,7 +16,8 @@ public enum StatEnum
 
 public enum PlayerSkill
 {
-    Dash
+    Dash,
+    NormalAttack
 }
 
 [CreateAssetMenu(menuName = "SO/Status/PlayerStatus")]

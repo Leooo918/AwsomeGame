@@ -23,14 +23,12 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float wallCheckBoxHeight;
 
-    [Header("KnockBackInfo")]
-    [SerializeField] protected float knockbackDuration;
+    protected float knockbackDuration = 0.5f;
     protected Coroutine knockbackCoroutine;
-    [HideInInspector] public bool isKnockbacked;
+    public bool isKnockbacked { get; protected set; }
 
-    [Header("Stun info")]
-    public float stunDuration;
-    protected bool canBeStun;
+    public float stunDuration { get; protected set; }
+    public bool canBeStun { get; protected set; }
 
     [Space]
     [Header("FeedBack info")]
@@ -57,10 +55,10 @@ public abstract class Entity : MonoBehaviour
 
     public void SetVelocity(float x, float y, bool doNotFlip = false, bool isKnock = false)
     {
-        if (isKnockbacked && isKnock == false) return;
+        if (isKnockbacked == true && isKnock == false) return;
 
         rigidbodyCompo.velocity = new Vector2(x, y);
-        if (!doNotFlip)
+        if (doNotFlip == false)
             FlipController(x);
     }
 
@@ -131,6 +129,7 @@ public abstract class Entity : MonoBehaviour
         StopImmediately(true);
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 
+        Debug.Log(power);
         isKnockbacked = true;
         SetVelocity(power.x, power.y, true, true);
         knockbackCoroutine = StartDelayCallBack(

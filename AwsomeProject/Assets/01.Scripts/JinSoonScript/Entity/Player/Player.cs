@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerStateEnum
 {
@@ -10,7 +12,7 @@ public enum PlayerStateEnum
     Dash,
     Gathering,
     Stun,
-    Attack
+    NormalAttack
 }
 
 
@@ -19,30 +21,50 @@ public class Player : Entity
     [Header("PlayerStat")]
     public PlayerStatusSO playerStatus;
 
-    public float moveSpeed = 7f;
-    public float jumpForce = 5f;
+    #region Status
+
+    public Slider hpSlider;
+
+    public float moveSpeed { get; protected set; } = 7f;
+    public float jumpForce { get; protected set; } = 10f;
+
+    #endregion
 
     #region DashInfo
 
-    public float dashTime;
-    public float dashPower;
-    public bool isInvincibleWhileDash;
-    public bool isAttackWhileDash;
+    public float dashTime { get; private set; }
+    public float dashPower { get; private set; }
+    public bool isInvincibleWhileDash { get; private set; }
+    public bool isAttackWhileDash { get; private set; }
 
     #endregion
+
+    #region CoyoteTime
 
     [SerializeField] private float coyoteTime = 0.3f;
     public float CoyoteTime => coyoteTime;
     [HideInInspector]
     public bool canJump = false;
 
+    #endregion
+
+    #region ComponentRegion
+
     public Health playerHealth { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
 
-    private bool isInventoryOpen = false;
+    #endregion
 
+    #region Attack
+
+    public int ComboCounter = 0;
+    public float lastAttackTime;
+
+    #endregion
+
+    private bool isInventoryOpen = false;
 
     protected override void Awake()
     {
@@ -90,6 +112,7 @@ public class Player : Entity
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
+
     protected void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
@@ -97,6 +120,8 @@ public class Player : Entity
             PlayerDashSkill d = playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill as PlayerDashSkill;
             d.canUseSkill = true;
         }
+
+        SetHpSlider();
 
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
@@ -108,6 +133,22 @@ public class Player : Entity
         this.stunDuration = duration;
 
         StateMachine.ChangeState(PlayerStateEnum.Stun);
+    }
+
+    public void Dash(float dashTime, float dashPower, bool isInvincibleWhileDash = false, bool isAttackWhileDash = false)
+    {
+        this.dashTime = dashTime;
+        this.dashPower = dashPower;
+        this.isInvincibleWhileDash = isInvincibleWhileDash;
+        this.isAttackWhileDash = isAttackWhileDash;
+
+        StateMachine.ChangeState(PlayerStateEnum.Dash);
+    }
+
+    public void SetHpSlider()
+    {
+        hpSlider.maxValue = playerHealth.maxHp.GetValue();
+        hpSlider.value = playerHealth.curHp;
     }
 
     private void InventoryOpen()
@@ -124,5 +165,11 @@ public class Player : Entity
             _inputReader.Controlls.asset.FindAction("YMovement").Enable();
             isInventoryOpen = false;
         }
+    }
+
+    public void AnimationFinishTrigger()
+    {
+        Debug.Log(StateMachine.CurrentState);
+        StateMachine.CurrentState.AnimationFinishTrigger();
     }
 }

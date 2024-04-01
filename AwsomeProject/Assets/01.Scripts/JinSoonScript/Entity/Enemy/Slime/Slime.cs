@@ -112,7 +112,6 @@ public class Slime : Enemy
 
     public void Attack()
     {
-        Debug.Log("공격");
         //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
         SkillSO skill = readySkill.Peek();
         if (skill == null)

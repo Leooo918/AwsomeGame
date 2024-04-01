@@ -38,3 +38,4 @@ MonoBehaviour:
     percentModifiers: 
   skills:
   - {fileID: 11400000, guid: 78d262003cee857468add90ad725cfa1, type: 2}
+  - {fileID: 11400000, guid: 38700b1d7c64d634384493caf5662ba7, type: 2}

@@ -14,6 +14,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action InteractPress;
     public event Action InteractRelease;
     public event Action PressTabEvent;
+    public event Action AttackEvent;
 
     #endregion
 
@@ -72,5 +73,11 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     {
         if(context.performed)
             PressTabEvent?.Invoke();
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            AttackEvent?.Invoke();
     }
 }

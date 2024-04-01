@@ -241,7 +241,6 @@ public class Inventory : MonoBehaviour
                     itemPf = itemSet.itemset[k].prefab;
                     Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
 
-                    Debug.Log(itemStruct);
                     it.Init(itemStruct.amount, inventory[itemStruct.posX, itemStruct.posY]);
 
                     inventory[itemStruct.posX, itemStruct.posY].InsertItem(it);

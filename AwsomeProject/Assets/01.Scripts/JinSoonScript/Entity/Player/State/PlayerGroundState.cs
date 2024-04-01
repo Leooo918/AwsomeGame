@@ -14,6 +14,7 @@ public class PlayerGroundState : PlayerState
         base.Enter();
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
     }
 
 
@@ -21,6 +22,7 @@ public class PlayerGroundState : PlayerState
     {
         player.PlayerInput.JumpEvent -= HandleJumpEvent;
         player.PlayerInput.DashEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
         base.Exit();
     }
 
@@ -38,7 +40,6 @@ public class PlayerGroundState : PlayerState
 
         if (player.canJump == false && !player.IsGroundDetected())
         {
-            Debug.Log("¹Ö¹Ö¹Ö");
             player.canJump = false;
             stateMachine.ChangeState(PlayerStateEnum.Fall);
         }

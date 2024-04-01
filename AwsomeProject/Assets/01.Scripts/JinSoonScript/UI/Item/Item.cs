@@ -33,7 +33,6 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     protected virtual void Awake()
     {
-        Debug.Log("นึ");
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
         amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();

@@ -15,12 +15,7 @@ public class PlayerDashSkill : Skill
         if (canUseSkill == false) return;
 
         Player player = owner as Player;
-        player.dashPower = dashPower;
-        player.dashTime = dashTime / 10f;
-        player.isInvincibleWhileDash = isInvincibleWhileDash;
-        player.isAttackWhileDash = isAttackWhileDash;
-
-        player.StateMachine.ChangeState(PlayerStateEnum.Dash);
+        player.Dash(dashTime / 10f, dashPower, isInvincibleWhileDash, isAttackWhileDash);
     }
 
     public void Init(float dashPower, float dashTime, bool canUseSkill, bool isInvincibleWhileDash, bool isAttackWhileDash)
