@@ -34,11 +34,7 @@ public class UIOn : MonoBehaviour
             isESC = !isESC;
             if (isESC)
             {
-                if (seq != null && seq.IsActive()) seq.Kill();
-                seq = DOTween.Sequence();
-                ShowUI(isESC, ui, 0);
-                rectTransform.position = escPanelPos;
-                seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
+                ShowSetting();
             }
             else
             {
@@ -57,15 +53,11 @@ public class UIOn : MonoBehaviour
             isInven = !isInven;
             if(isInven)
             {
-                ShowUI(isInven, ui, 1);
-                if (seq != null && seq.IsActive()) seq.Kill();
-                seq = DOTween.Sequence();
-                rectTransform.sizeDelta = new Vector2(100, 50);
-                seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 1).SetEase(Ease.Linear));
+                ShowInven();
             }
             else
             {
-                ui[1].transform.localPosition = invenScale;
+                ui[1].transform.localScale = invenScale;
                 ui[1].SetActive(false);
             }
 
@@ -76,20 +68,37 @@ public class UIOn : MonoBehaviour
         }
     }
 
-    private void ShowUI(bool isState, GameObject[] ui, int arr)
+    public void ShowSetting()
     {
-        isState = true;
-        ui[arr].SetActive(true);
-        rectTransform = ui[arr].GetComponent<RectTransform>();
+        isESC = true;
+        ui[0].SetActive(true);
+        rectTransform = ui[0].GetComponent<RectTransform>();
+        if (seq != null && seq.IsActive()) seq.Kill();
+        seq = DOTween.Sequence();
+        rectTransform.position = escPanelPos;
+        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 0.5f).SetEase(Ease.Linear));
+    }
+
+    public void ShowInven()
+    {
+        isInven = true;
+        ui[1].SetActive(true);
+        rectTransform = ui[1].GetComponent<RectTransform>();
+        if (seq != null && seq.IsActive()) seq.Kill();
+        seq = DOTween.Sequence();
+        rectTransform.sizeDelta = new Vector2(100, 50);
+        seq.Append(rectTransform.DOSizeDelta(new Vector2(1800, 950), 0.5f).SetEase(Ease.Linear));
     }
 
     public void SetPanelOn()
     {
-        ShowUI(isSet, ui, 2);
+        isSet = true;
+        ui[2].SetActive(true);
+        rectTransform = ui[2].GetComponent<RectTransform>();
         if (seq != null && seq.IsActive()) seq.Kill();
         seq = DOTween.Sequence();
         rectTransform.position = escPanelPos;
-        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 1).SetEase(Ease.Linear));
+        seq.Append(rectTransform.DOMove(new Vector2(2000, 450), 0.5f).SetEase(Ease.Linear));
     }
 
     public void Continue()
