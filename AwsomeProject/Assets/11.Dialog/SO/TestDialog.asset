@@ -20,6 +20,26 @@ MonoBehaviour:
     imgPrefab: {fileID: 4498595012265136987, guid: 10cd22292f42b8d4aad329797a71dd1f, type: 3}
     talkDetails: "\uBC0D\uC774"
   nextScript: {fileID: 0}
+--- !u!114 &-8564969199170680143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: d6424da9f5b90aa42ad0ad4027f29251
+  position: {x: 1166.4, y: -12}
+  character:
+    name: "\u3141\u3134\u3147"
+    imgPrefab: {fileID: 0}
+    talkDetails: "\uB098\uB3C4 \uBBF8\uC789 \u3160\u3160"
+  nextScript: {fileID: 0}
 --- !u!114 &-8128654180560542770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 7e144a334d5df7442a81d73cc2e9e11f
-  position: {x: 567.2, y: -12.000014}
+  position: {x: 567.19995, y: -12}
   character:
     name: "\uB3D4e"
     imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
@@ -115,8 +135,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 215327d7354174147982a54bec177df5
-  position: {x: 45.200012, y: -12}
+  position: {x: 47.200012, y: -12}
   nextScript: {fileID: 8436935865822086952}
+--- !u!114 &-3735469508667432896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e387c4f654141d409b58ef3192fbd5f, type: 3}
+  m_Name: OptionSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 3227f9a6ee4a77a4d81483aa4ecc2fe8
+  position: {x: 901.5999, y: -12.00001}
+  optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
+  options:
+  - detail: "\uBBF8\uC789"
+    nextScript: {fileID: -8564969199170680143}
+  - detail: "\uCD94\uC6CC\n"
+    nextScript: {fileID: -3387548180517706480}
+--- !u!114 &-3387548180517706480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 16ecb56acff7fee4bb1e2f52c0bf8531
+  position: {x: 1166.4, y: 100}
+  character:
+    name: "\u3141\u3134\u3147"
+    imgPrefab: {fileID: 0}
+    talkDetails: "\uB098\uB3C4 \uCD94\uC6E1 \u3160\u3160"
+  nextScript: {fileID: 0}
 --- !u!114 &-137566849265068799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +219,10 @@ MonoBehaviour:
   - {fileID: 8471492680065308937}
   - {fileID: -6071567444459136749}
   - {fileID: -8995253401864707312}
+  - {fileID: -3735469508667432896}
+  - {fileID: 5538120473580913986}
+  - {fileID: -8564969199170680143}
+  - {fileID: -3387548180517706480}
   dialogBackground: {fileID: 5728600992528880802, guid: e4ad8285e5daf6e4f94b8296a446041b, type: 3}
 --- !u!114 &787830345525562618
 MonoBehaviour:
@@ -209,6 +274,26 @@ MonoBehaviour:
     imgPrefab: {fileID: 0}
     talkDetails: 
   nextScript: {fileID: 0}
+--- !u!114 &5538120473580913986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 4f4a0343f5116a74aaa78168627890e0
+  position: {x: 567.19995, y: 222.39996}
+  character:
+    name: "\u3141\u3134\u3147"
+    imgPrefab: {fileID: 0}
+    talkDetails: "\uC88B\uC740!"
+  nextScript: {fileID: 0}
 --- !u!114 &6834922688728197588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,13 +325,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 7c8b26877bd9d8f4c91410f08745a946
-  position: {x: 396.79996, y: -12}
+  position: {x: 368, y: -12}
   optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
   options:
   - detail: "\uBC0D\uB41C"
     nextScript: {fileID: -6212396644611281335}
   - detail: "\uBC0D\uBC0D\uB41C"
     nextScript: {fileID: -6071567444459136749}
+  - detail: "\uC57D\uCD08\uB97C \uCC3E\uC73C\uB7EC \uAC00\uB294!"
+    nextScript: {fileID: 5538120473580913986}
 --- !u!114 &7692830312871079913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,9 +385,9 @@ MonoBehaviour:
   guid: 77533c2671a7b3f408367b6aaeeac528
   position: {x: 229.59998, y: -12.000004}
   character:
-    name: "\uBC0D\uBC0D\uC774"
+    name: "\uC8FC\uC778\uACF5"
     imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
-    talkDetails: "\uBC0D\uBC0D\uBC0D\uBC0D\uBC0D"
+    talkDetails: "\uBAA8\uC2DC\uAE7D\uBAA8\uC2DC\uAE7D\uBC0D\uBC0D\uBC0D"
   nextScript: {fileID: 7165964797233723107}
 --- !u!114 &8471492680065308937
 MonoBehaviour:
@@ -321,4 +408,4 @@ MonoBehaviour:
     name: "\u3141\u3134\uC6B0\uD30C\u3163\u314A\u314B\u314C"
     imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
     talkDetails: "\uBBF8\uB2C8\uC2A4\uD14C\uB808\uC624"
-  nextScript: {fileID: 0}
+  nextScript: {fileID: -3735469508667432896}
