@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -115,9 +114,7 @@ public abstract class Entity : MonoBehaviour
             Vector2.down, groundCheckDistance, whatIsProbs);
 
         if (hit.collider != null && hit.collider.TryGetComponent<Probs>(out Probs p))
-        {
             p.Interact(this);
-        }
     }
 
     #endregion

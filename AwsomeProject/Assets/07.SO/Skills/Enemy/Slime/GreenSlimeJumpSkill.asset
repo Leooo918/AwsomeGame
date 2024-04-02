@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GreenSlimeJumpSkill
   m_EditorClassIdentifier: 
   id: 1
+  skillName: JumpAttack
   skill: {fileID: 0}
   skillCoolTime:
     baseValue: 5
@@ -22,7 +23,6 @@ MonoBehaviour:
     baseValue: 3
     modifiers: 
     percentModifiers: 
-  skillName: JumpAttack
   jumpPower:
     baseValue: 10
     modifiers: 

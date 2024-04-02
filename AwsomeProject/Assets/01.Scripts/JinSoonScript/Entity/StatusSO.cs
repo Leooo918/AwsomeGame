@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -11,8 +10,8 @@ public abstract class StatusSO : ScriptableObject
     public Stat Attack;
     public Stat AttackSpeed;
     public Stat CriticalPercent;
-    public Stat Defence;
     public Stat MoveSpeed;
+    public Stat Defence;
 
     protected Entity owner;
 

@@ -23,6 +23,8 @@ public enum PlayerSkill
 [CreateAssetMenu(menuName = "SO/Status/PlayerStatus")]
 public class PlayerStatusSO : StatusSO
 {
+    public Stat GatheringSpeed;
+
     public Dictionary<StatEnum, Stat> statDic = new Dictionary<StatEnum, Stat>();
     public Dictionary<PlayerSkill, SkillSO> skillDic = new Dictionary<PlayerSkill, SkillSO>();
 
@@ -33,11 +35,11 @@ public class PlayerStatusSO : StatusSO
     {
         statDic = new Dictionary<StatEnum, Stat>();
 
-        Type playerStatType = typeof(StatEnum);
-
+        Type playerStatType = typeof(PlayerStatusSO);
         foreach (StatEnum statType in Enum.GetValues(typeof(StatEnum)))
         {
             string fieldName = statType.ToString();
+            Debug.Log(fieldName);
 
             try
             {
@@ -45,6 +47,7 @@ public class PlayerStatusSO : StatusSO
                 Stat stat = playerStatField.GetValue(this) as Stat;
 
                 statDic.Add(statType, stat);
+                Debug.Log(stat.GetValue());
             }
             catch (Exception ex)
             {

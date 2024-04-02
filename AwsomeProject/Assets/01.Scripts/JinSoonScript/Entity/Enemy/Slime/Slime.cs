@@ -21,7 +21,7 @@ public enum SlimeSkillEnum
 
 public class Slime : Enemy
 {
-    public SlimeStatusSO enemyStatus;
+    public SlimeStatusSO slimeStatus { get; protected set; }
     public EnemyStateMachine<SlimeEnum> StateMachine { get; private set; }
 
     #region SkillSection
@@ -31,14 +31,20 @@ public class Slime : Enemy
 
     #endregion
 
-    public Health Health { get; private set; }
+    [HideInInspector] public bool moveAnim = false;
+    [HideInInspector] public bool readyFlip = false;
 
-    public bool moveAnim = false;
-    public bool readyFlip = false;
+    #region HpBar
+
+    [SerializeField] private Transform hpBar;
+    private Transform pivot;
+
+    #endregion
 
     protected override void Awake()
     {
         base.Awake();
+        slimeStatus = enemyStatus as SlimeStatusSO;
         StateMachine = new EnemyStateMachine<SlimeEnum>();
 
         foreach (SlimeEnum stateEnum in Enum.GetValues(typeof(SlimeEnum)))
@@ -57,20 +63,34 @@ public class Slime : Enemy
             }
         }
 
-        foreach (var item in enemyStatus.skillDic)
+        foreach (var item in slimeStatus.skillDic)
         {
             item.Value.skill.SetOwner(this);
             Type type = item.Value.skill.GetType();
             gameObject.AddComponent(type);
         }
 
-        moveSpeed = enemyStatus.MoveSpeed.GetValue();
-        PatrolDelay = enemyStatus.PatrolDelay;
-        PatrolTime = enemyStatus.PatrolTime;
-        detectingDistance = enemyStatus.DetectingDistance;
 
-        Health = GetComponent<Health>();
-        Health.Init(enemyStatus);
+        moveSpeed = slimeStatus.MoveSpeed.GetValue();
+        PatrolDelay = slimeStatus.PatrolDelay;
+        PatrolTime = slimeStatus.PatrolTime;
+        detectingDistance = slimeStatus.DetectingDistance;
+
+        pivot = hpBar.Find("Pivot");
+    }
+
+    private void OnEnable()
+    {
+        enemyHealth.onKnockBack += KnockBack;
+        enemyHealth.onHit += () => HitEvent?.Invoke();
+        enemyHealth.onHit += () => StateMachine.ChangeState(SlimeEnum.Chase);
+    }
+
+    private void OnDisable()
+    {
+        enemyHealth.onKnockBack -= KnockBack;
+        enemyHealth.onHit -= () => HitEvent?.Invoke();
+        enemyHealth.onHit -= () => StateMachine.ChangeState(SlimeEnum.Chase);
     }
 
     protected void Start()
@@ -96,6 +116,25 @@ public class Slime : Enemy
                 --i;
             }
         }
+
+        float hpPercentage = enemyHealth.curHp / enemyHealth.maxHp.GetValue();
+        pivot.localScale = new Vector3(hpPercentage, 1, 1);
+    }
+
+    public override void KnockBack(Vector2 power)
+    {
+        StopImmediately(true);
+        if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
+
+        Debug.Log(power);
+        isKnockbacked = true;
+        SetVelocity(power.x, power.y, true, true);
+        knockbackCoroutine = StartDelayCallBack(
+            knockbackDuration, () =>
+            {
+                isKnockbacked = false;
+                StopImmediately(false);
+            });
     }
 
     public override void Stun(float duration)
@@ -129,11 +168,11 @@ public class Slime : Enemy
 
     private void ShuffleSkillStack()
     {
-        List<SkillSO> skills = enemyStatus.skills;
+        List<SkillSO> skills = slimeStatus.skills;
         for (int i = 0; i < 10; i++)
         {
-            int a = UnityEngine.Random.Range(0, enemyStatus.skills.Count);
-            int b = UnityEngine.Random.Range(0, enemyStatus.skills.Count);
+            int a = UnityEngine.Random.Range(0, slimeStatus.skills.Count);
+            int b = UnityEngine.Random.Range(0, slimeStatus.skills.Count);
 
             SkillSO temp = skills[a];
             skills[a] = skills[b];
@@ -143,7 +182,7 @@ public class Slime : Enemy
         //우선 공격스택을 다 비우고
         readySkill.Clear();
         for (int i = 0; i < skills.Count; i++)
-        {   
+        {
             //쿨타임중이면 공격스택에 넣지말고
             if (readySkill.Contains(skills[i])) continue;
 

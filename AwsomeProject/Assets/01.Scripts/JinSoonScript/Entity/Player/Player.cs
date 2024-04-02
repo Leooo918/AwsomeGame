@@ -59,8 +59,8 @@ public class Player : Entity
 
     #region Attack
 
-    public int ComboCounter = 0;
-    public float lastAttackTime;
+    [HideInInspector]public int ComboCounter = 0;
+    [HideInInspector] public float lastAttackTime;
 
     #endregion
 
@@ -98,12 +98,14 @@ public class Player : Entity
     private void OnEnable()
     {
         _inputReader.PressTabEvent += InventoryOpen;
+        playerHealth.onHit += () => HitEvent?.Invoke();
         playerHealth.onKnockBack += KnockBack;
     }
 
     private void OnDisable()
     {
         _inputReader.PressTabEvent -= InventoryOpen;
+        playerHealth.onHit -= () => HitEvent?.Invoke();
         playerHealth.onKnockBack -= KnockBack;
     }
 
@@ -169,7 +171,6 @@ public class Player : Entity
 
     public void AnimationFinishTrigger()
     {
-        Debug.Log(StateMachine.CurrentState);
         StateMachine.CurrentState.AnimationFinishTrigger();
     }
 }

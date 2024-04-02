@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     public StatusSO Status { get; private set; }
     public Entity owner { get; private set; }
     public Stat maxHp { get; private set; }
+
     public int curHp { get; private set; }
 
     //효과, 지속시간, 시작된 시간
@@ -31,7 +32,6 @@ public class Health : MonoBehaviour
         //damage = owners.
 
         curHp -= damage;
-
         AfterHitFeedback(knockPower, true);
     }
 
@@ -66,11 +66,6 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TakeDamage(10, new Vector2(-3, 3), owner);
-        }
-
         foreach (var effect in effects)
         {
             effect.Item1.UpdateEffort();

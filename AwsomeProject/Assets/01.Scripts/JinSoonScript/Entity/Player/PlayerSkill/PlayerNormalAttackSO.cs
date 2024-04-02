@@ -7,14 +7,21 @@ using UnityEngine;
 public class PlayerNormalAttackSO : SkillSO
 {
     [Header("AttackInfos")]
-    public Stat FirstAttackMultiplier;
+    public AttackInfo firstAttackInfo;
+    public AttackInfo secondAttackInfo;
     public float attackComboDragTime;
-    public Stat SecondAttackMultiplier;
 
     private void OnEnable()
     {
         skill = new PlayerNormalAttack();
-        PlayerNormalAttack attack = skill as PlayerNormalAttack;
-        attack.Init(FirstAttackMultiplier, SecondAttackMultiplier);
     }
+}
+
+[System.Serializable]
+public struct AttackInfo
+{
+    public Stat attackMultiplier;
+    public Vector2 offset;
+    public Vector2 knockBackPower;
+    public float radius;
 }

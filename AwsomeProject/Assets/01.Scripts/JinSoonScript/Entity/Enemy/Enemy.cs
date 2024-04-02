@@ -1,10 +1,11 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-
 public abstract class Enemy : Entity
 {
+    public StatusSO enemyStatus;
+    public Health enemyHealth {  get; protected set; }
+
     #region EnemyStat
     public float moveSpeed { get; protected set; }
     public float PatrolTime { get; protected set; }
@@ -20,6 +21,8 @@ public abstract class Enemy : Entity
 
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private LayerMask whatIsObstacle;
+
+    public Transform patrolOriginPos;
 
     [Header("Attack Settings")]
     public float runAwayDistance;
@@ -39,6 +42,8 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
+        enemyHealth = GetComponent<Health>();
+        enemyHealth.Init(enemyStatus);
     }
 
 

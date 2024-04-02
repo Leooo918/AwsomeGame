@@ -6,15 +6,19 @@ using UnityEngine;
 public class SlimeJumpAttackState : EnemyState<SlimeEnum>
 {
     private float playerDir;
+    SlimeJumpSkillSO jumpSkill;
+    private Slime slime;
 
     public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
+        slime = enemy as Slime;
+        jumpSkill = slime.slimeStatus.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.SetVelocity(0, 5);
+        enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
         playerDir = Mathf.Sign((PlayerManager.instance.playerTrm.position - enemy.transform.position).x);
     }
 

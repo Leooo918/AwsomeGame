@@ -36,6 +36,7 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
         if (slime.IsGroundDetected() == false)
         {
             slime.Flip();
+            enemyStateMachine.ChangeState(SlimeEnum.Idle);
             return;
         }
 
