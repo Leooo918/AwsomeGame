@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class TitleMenuUI : MonoBehaviour
 {
+    [SerializeField] private GameObject[] panel;
+
     public void NewGame()
     {
-        //SceneManager.LoadScene("어디로 가야하오");
-        Debug.Log("어디론거는 가겠지");
+        SceneManager.LoadScene(1);
+        Debug.Log("어디론가는 가겠지");
     }
 
     public void LoadGame()
     {
-        //SceneManager.LoadScene("어디로 가야하오2");
         Debug.Log("저장한곳으로 이동");
     }
 
@@ -21,5 +22,10 @@ public class TitleMenuUI : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Exit");
+    }
+
+    public void ShowSetting()
+    {
+        panel[0].SetActive(true);
     }
 }
