@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +10,8 @@ public abstract class Entity : MonoBehaviour
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
     public Rigidbody2D rigidbodyCompo { get; protected set; }
+
+    public Health healthCompo { get; protected set; }
     #endregion
 
     [Header("Collision info")]
@@ -23,14 +24,12 @@ public abstract class Entity : MonoBehaviour
     [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float wallCheckBoxHeight;
 
-    [Header("KnockBackInfo")]
-    [SerializeField] protected float knockbackDuration;
+    protected float knockbackDuration = 0.5f;
     protected Coroutine knockbackCoroutine;
-    [HideInInspector] public bool isKnockbacked;
+    public bool isKnockbacked { get; protected set; }
 
-    [Header("Stun info")]
-    public float stunDuration;
-    protected bool canBeStun;
+    public float stunDuration { get; protected set; }
+    public bool canBeStun { get; protected set; }
 
     [Space]
     [Header("FeedBack info")]
@@ -50,6 +49,7 @@ public abstract class Entity : MonoBehaviour
         spriteRendererCompo = visualTrm.GetComponent<SpriteRenderer>();
         rigidbodyCompo = GetComponent<Rigidbody2D>();
         colliderCompo = GetComponent<Collider2D>();
+        healthCompo = GetComponent<Health>();
     }
 
 
@@ -57,10 +57,10 @@ public abstract class Entity : MonoBehaviour
 
     public void SetVelocity(float x, float y, bool doNotFlip = false, bool isKnock = false)
     {
-        if (isKnockbacked && isKnock == false) return;
+        if (isKnockbacked == true && isKnock == false) return;
 
         rigidbodyCompo.velocity = new Vector2(x, y);
-        if (!doNotFlip)
+        if (doNotFlip == false)
             FlipController(x);
     }
 
@@ -117,9 +117,7 @@ public abstract class Entity : MonoBehaviour
             Vector2.down, groundCheckDistance, whatIsProbs);
 
         if (hit.collider != null && hit.collider.TryGetComponent<Probs>(out Probs p))
-        {
             p.Interact(this);
-        }
     }
 
     #endregion

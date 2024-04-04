@@ -11,12 +11,14 @@ public class PlayerAirState : PlayerState
     {
         base.Enter();
         player.PlayerInput.DashEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
     }
 
     public override void Exit()
     {
         base.Exit();
         player.PlayerInput.DashEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
     }
 
 

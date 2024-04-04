@@ -15,6 +15,9 @@ public class EnemyStatusSO<T> : StatusSO where T : Enum
     [Header("Skills")]
     public List<SkillSO> skills;
 
+    [Header("DropItems")]
+    public List<DropItemStruct> dropItems;
+
     protected void OnEnable()
     {
         statDic = new Dictionary<StatEnum, Stat>();
@@ -59,4 +62,12 @@ public class EnemyStatusSO<T> : StatusSO where T : Enum
     {
         return skillDic[skillType];
     }
+}
+
+[Serializable]
+public struct DropItemStruct
+{
+    public GameObject dropItemPf;
+    [Header("DevideByOneHundread")]
+    public float perecentage;
 }

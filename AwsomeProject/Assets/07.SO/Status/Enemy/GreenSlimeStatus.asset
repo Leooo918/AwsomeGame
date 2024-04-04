@@ -28,12 +28,12 @@ MonoBehaviour:
     baseValue: 5
     modifiers: 
     percentModifiers: 
-  Defence:
-    baseValue: 5
-    modifiers: 
-    percentModifiers: 
   MoveSpeed:
     baseValue: 2
+    modifiers: 
+    percentModifiers: 
+  Defence:
+    baseValue: 5
     modifiers: 
     percentModifiers: 
   PatrolTime: 3
@@ -41,3 +41,6 @@ MonoBehaviour:
   DetectingDistance: 10
   skills:
   - {fileID: 11400000, guid: 275732811b0928b4695174404266a235, type: 2}
+  dropItems:
+  - dropItemPf: {fileID: 5735242685594573682, guid: b311c695f13c5bc4e840f61c5c95f459, type: 3}
+    perecentage: 50

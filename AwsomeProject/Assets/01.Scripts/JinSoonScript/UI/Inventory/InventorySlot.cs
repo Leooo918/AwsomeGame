@@ -54,10 +54,19 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         item.GetComponent<RectTransform>().localPosition = position;
         item.Init(item.itemAmount, this);
+        InventoryManager.Instance.QuickSlot.SetQuickSlot();
     }
 
     public void DeleteItem()
     {
+        assignedItem = null;
+    }
+
+    public void UseItem()
+    {
+        Debug.Log("¹Ö¹Ö");
+        if (assignedItem != null)
+            Destroy(assignedItem.gameObject);
         assignedItem = null;
     }
 

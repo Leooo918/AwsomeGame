@@ -1,17 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class Herbs : MonoBehaviour
 {
     [SerializeField] private GameObject interact;
+    [SerializeField] private IngredientItemSO item;
+    [SerializeField] private Sprite gatheredImage;
+
+    private SpriteRenderer spriteRenderer;
     private Transform pivot;
     private TextMeshPro timerTxt;
     private Player player;
 
-    [SerializeField] private IngredientItemSO item; 
     private float gatherTime = 0;
 
     private float gatherTimeDown = 0;
@@ -24,11 +25,11 @@ public class Herbs : MonoBehaviour
 
     private void Awake()
     {
+        spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         pivot = interact.transform.Find("Pivot");
         timerTxt = interact.transform.Find("Timer").GetComponent<TextMeshPro>();
 
         if (item == null) return;
-
         gatherTime = item.gatheringTime;
     }
 
@@ -64,12 +65,15 @@ public class Herbs : MonoBehaviour
     private void GetHurb()
     {
         if (herbGathered) return;
+
         player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         interact.SetActive(false);
         herbGathered = true;
+
         IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.itemParent).GetComponent<IngredientItem>();
         iItem.SetItemAmount(1);
         InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+        spriteRenderer.sprite = gatheredImage;
     }
 
     private void CancelGathering()

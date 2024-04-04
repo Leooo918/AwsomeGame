@@ -14,6 +14,19 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action InteractPress;
     public event Action InteractRelease;
     public event Action PressTabEvent;
+    public event Action AttackEvent;
+
+    #region QuickSlot
+
+    public event Action FirstQuickSlot;
+    public event Action SecondQuickSlot;
+    public event Action ThirdQuickSlot;
+    public event Action ForthQuickSlot;
+    public event Action FifthQuickSlot;
+
+    public event Action OnUseQuickSlot;
+
+    #endregion
 
     #endregion
 
@@ -73,4 +86,50 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
         if(context.performed)
             PressTabEvent?.Invoke();
     }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            AttackEvent?.Invoke();
+    }
+
+    #region QuickSlots
+
+    public void OnQuickSlotFirst(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            FirstQuickSlot?.Invoke();
+    }
+
+    public void OnQuickSlotSecond(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            SecondQuickSlot?.Invoke();
+    }
+
+    public void OnQuickSlotThird(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            ThirdQuickSlot?.Invoke();
+    }
+
+    public void OnQuickSlotForth(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            ForthQuickSlot?.Invoke();
+    }
+
+    public void OnQuickSlotFifth(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            FifthQuickSlot?.Invoke();
+    }
+
+    public void OnUsePortion(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnUseQuickSlot?.Invoke();
+    }
+
+    #endregion
 }

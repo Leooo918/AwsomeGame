@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ProjectWindowCallback;
 using UnityEngine;
 
 public class SlimeChaseState : EnemyState<SlimeEnum>
@@ -36,11 +33,15 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
         base.UpdateState();
 
         if (chaseStart == false) return;
+        if (slime.IsGroundDetected() == false)
+        {
+            slime.Flip();
+            enemyStateMachine.ChangeState(SlimeEnum.Idle);
+            return;
+        }
 
         Vector2 dir = (playerTrm.position - enemy.transform.position).normalized;
-
-        if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir))
-            enemy.Flip();
+        if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
 
         if (slime.moveAnim == true)
             enemy.SetVelocity(dir.x * enemy.moveSpeed, 0);

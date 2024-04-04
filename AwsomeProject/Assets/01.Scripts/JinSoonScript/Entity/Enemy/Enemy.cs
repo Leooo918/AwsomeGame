@@ -1,10 +1,10 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
-
 public abstract class Enemy : Entity
 {
+    public StatusSO enemyStatus;
+
     #region EnemyStat
     public float moveSpeed { get; protected set; }
     public float PatrolTime { get; protected set; }
@@ -20,6 +20,8 @@ public abstract class Enemy : Entity
 
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private LayerMask whatIsObstacle;
+
+    public Transform patrolOriginPos;
 
     [Header("Attack Settings")]
     public float runAwayDistance;
@@ -39,6 +41,7 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
+        healthCompo.Init(enemyStatus);
     }
 
 
@@ -98,4 +101,15 @@ public abstract class Enemy : Entity
     }
 
     public void MissPlayer() => playerDetected = false;
+
+    public void OnCompletelyDie()
+    {
+        //풀링 하면 여기에다가 추가해주면 도미
+        Destroy(gameObject);
+    }
+
+    public void DropItem()
+    {
+        //'0'
+    }
 }

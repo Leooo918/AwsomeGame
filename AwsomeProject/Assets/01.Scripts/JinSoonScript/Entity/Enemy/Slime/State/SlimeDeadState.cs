@@ -8,5 +8,24 @@ public class SlimeDeadState : EnemyState<SlimeEnum>
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+    }
 
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+    }
+
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+        enemy.OnCompletelyDie();
+    }
 }

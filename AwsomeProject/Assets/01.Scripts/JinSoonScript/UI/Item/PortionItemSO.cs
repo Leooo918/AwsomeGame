@@ -8,14 +8,17 @@ public enum Portion
     PortionForMyself
 }
 
-[CreateAssetMenu(menuName = "SO/Item/PosionSO")]
+[CreateAssetMenu(menuName = "SO/Item/Portion")]
 public class PortionItemSO : ItemSO
 {
     [Space(20)]
     public Portion portionType;
     public Effect effect;
+    public float duration;
+    public bool isInfinite;
 
-    private void Awake()
+
+    private void OnEnable()
     {
         itemType = ItemType.Portion;
     }

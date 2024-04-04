@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,19 +6,17 @@ public class IngameQuickSlot : MonoBehaviour
     public PortionItemSO assignedItem { get; private set; }
     private PortionItem portion;
     private GameObject itemObj;
-    private Player player;
 
-    private void Start()
-    {
-        player = PlayerManager.instance.player;
-    }
-
-    public void SetItem(ItemSO item, int amount)
+    public void SetItem(ItemSO item, int amount, bool isSelected)
     {
         if (assignedItem != null) return;
 
         assignedItem = item as PortionItemSO;
-        itemObj = Instantiate(item.prefab,transform);
+        
+        itemObj = Instantiate(item.prefab, transform);
+        if (isSelected == true)
+            itemObj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 45f);
+
         portion = itemObj.GetComponent<PortionItem>();
         itemObj.GetComponent<Image>().raycastTarget = false;
         portion.Init(amount, null);
@@ -34,6 +30,7 @@ public class IngameQuickSlot : MonoBehaviour
 
     public void UseItem()
     {
-        player.playerHealth.GetEffort(portion.posionEffect, portion.posionEffect.duration);
+        portion.RemoveItem(1);
+        PlayerManager.instance.player.healthCompo.GetEffort(portion.posionEffect, portion.posionEffect.duration);
     }
 }
