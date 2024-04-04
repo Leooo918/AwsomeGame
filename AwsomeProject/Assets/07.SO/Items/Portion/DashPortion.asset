@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
+  m_Name: DashPortion
+  m_EditorClassIdentifier: 
+  id: 101
+  itemName: "\uB300\uC26C\uD3EC\uC158"
+  itemType: 1
+  maxCarryAmountPerSlot: 1
+  itemExplain: "\uBE60\uB978 \uBC1C\uC744 \uB9CC\uB4E4\uB54C \uC720\uC6A9\uD55C \uD3EC\uC158
+    \uB9C8\uCE58 \uBC14\uB78C\uACFC\uB3C4 \uAC19\uC774 \uB0A0\uB77C\uB2E4\uB2D0 \uC218
+    \uC788\uB2E4."
+  itemImage: {fileID: -1138880884, guid: 962fc7e764847ca4ca30b5af67efc7b9, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: f4ac773c0e85b0e40ba7520ed5cf5b9f, type: 3}
+  portionType: 1
+  effect: {fileID: 8182594585880090357, guid: 9f3d7c42fda73e647b0d79fdf351c6e9, type: 3}
+  duration: 0
+  isInfinite: 1

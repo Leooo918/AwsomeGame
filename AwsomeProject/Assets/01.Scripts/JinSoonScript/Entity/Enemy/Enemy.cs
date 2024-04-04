@@ -4,7 +4,6 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     public StatusSO enemyStatus;
-    public Health enemyHealth {  get; protected set; }
 
     #region EnemyStat
     public float moveSpeed { get; protected set; }
@@ -42,8 +41,7 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
-        enemyHealth = GetComponent<Health>();
-        enemyHealth.Init(enemyStatus);
+        healthCompo.Init(enemyStatus);
     }
 
 
@@ -103,4 +101,15 @@ public abstract class Enemy : Entity
     }
 
     public void MissPlayer() => playerDetected = false;
+
+    public void OnCompletelyDie()
+    {
+        //풀링 하면 여기에다가 추가해주면 도미
+        Destroy(gameObject);
+    }
+
+    public void DropItem()
+    {
+        //'0'
+    }
 }

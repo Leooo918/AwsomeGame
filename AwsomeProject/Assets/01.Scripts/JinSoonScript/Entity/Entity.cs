@@ -10,6 +10,8 @@ public abstract class Entity : MonoBehaviour
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
     public Rigidbody2D rigidbodyCompo { get; protected set; }
+
+    public Health healthCompo { get; protected set; }
     #endregion
 
     [Header("Collision info")]
@@ -47,6 +49,7 @@ public abstract class Entity : MonoBehaviour
         spriteRendererCompo = visualTrm.GetComponent<SpriteRenderer>();
         rigidbodyCompo = GetComponent<Rigidbody2D>();
         colliderCompo = GetComponent<Collider2D>();
+        healthCompo = GetComponent<Health>();
     }
 
 
@@ -126,7 +129,6 @@ public abstract class Entity : MonoBehaviour
         StopImmediately(true);
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 
-        Debug.Log(power);
         isKnockbacked = true;
         SetVelocity(power.x, power.y, true, true);
         knockbackCoroutine = StartDelayCallBack(

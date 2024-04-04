@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerGroundState : PlayerState
 {
-    private float coyoteTimer;
-    private bool timerStart = false;
-
     public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     public override void Enter()

@@ -12,14 +12,51 @@ public class PlayerDashSkillSO : SkillSO
     [Space(16)]
 
     [Header("SpecialAbility")]
-    public bool canUseSkill = false;
-    public bool isInvincibleWhileDash = false;
-    public bool isAttackWhileDash = false;
+    [SerializeField] private bool canUseSkill = false;
+    [SerializeField] private bool isInvincibleWhileDash = false;
+    [SerializeField] private bool isAttackWhileDash = false;
+
+    public bool CanUseSkill
+    {
+        get { return canUseSkill; }
+        set
+        {
+            canUseSkill = value;
+            PlayerDashSkill dash = skill as PlayerDashSkill;
+            dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash, skillCoolTime.GetValue());
+        }
+    }
+    public bool IsInvincibleWhileDash
+    {
+        get
+        {
+            return isInvincibleWhileDash;
+        }
+        set
+        {
+            isInvincibleWhileDash = value;
+            PlayerDashSkill dash = skill as PlayerDashSkill;
+            dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash, skillCoolTime.GetValue());
+        }
+    }
+    public bool IsAttackWhileDash
+    {
+        get
+        {
+            return isAttackWhileDash;
+        }
+        set
+        {
+            isAttackWhileDash = value;
+            PlayerDashSkill dash = skill as PlayerDashSkill;
+            dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash, skillCoolTime.GetValue());
+        }
+    }
 
     private void OnEnable()
     {
         skill = new PlayerDashSkill();
         PlayerDashSkill dash = skill as PlayerDashSkill;
-        dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash);
+        dash.Init(dashPower.GetValue(), dashTime.GetValue(), canUseSkill, isInvincibleWhileDash, isAttackWhileDash, skillCoolTime.GetValue());
     }
 }

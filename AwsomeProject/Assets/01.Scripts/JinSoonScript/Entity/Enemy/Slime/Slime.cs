@@ -81,16 +81,16 @@ public class Slime : Enemy
 
     private void OnEnable()
     {
-        enemyHealth.onKnockBack += KnockBack;
-        enemyHealth.onHit += () => HitEvent?.Invoke();
-        enemyHealth.onHit += () => StateMachine.ChangeState(SlimeEnum.Chase);
+        healthCompo.onKnockBack += KnockBack;
+        healthCompo.onHit += OnHit;
+        healthCompo.onDie += OnDie;
     }
 
     private void OnDisable()
     {
-        enemyHealth.onKnockBack -= KnockBack;
-        enemyHealth.onHit -= () => HitEvent?.Invoke();
-        enemyHealth.onHit -= () => StateMachine.ChangeState(SlimeEnum.Chase);
+        healthCompo.onKnockBack -= KnockBack;
+        healthCompo.onHit -= OnHit;
+        healthCompo.onDie -= OnDie;
     }
 
     protected void Start()
@@ -117,16 +117,18 @@ public class Slime : Enemy
             }
         }
 
-        float hpPercentage = enemyHealth.curHp / enemyHealth.maxHp.GetValue();
+        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
+        hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
         pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
+
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     public override void KnockBack(Vector2 power)
     {
         StopImmediately(true);
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 
-        Debug.Log(power);
         isKnockbacked = true;
         SetVelocity(power.x, power.y, true, true);
         knockbackCoroutine = StartDelayCallBack(
@@ -192,5 +194,28 @@ public class Slime : Enemy
         if (readySkill.Peek() == null) return;
 
         attackDistance = readySkill.Peek().attackDistance.GetValue();
+    }
+
+    private void OnHit()
+    {
+        HitEvent?.Invoke();
+        StateMachine.ChangeState(SlimeEnum.Chase);
+    }
+
+    private void OnDie(Vector2 dir)
+    {
+        isDead = true;
+        for (int i = 0; i < slimeStatus.dropItems.Count; i++)
+        {
+            if(UnityEngine.Random.Range(0, 101) < slimeStatus.dropItems[i].perecentage)
+            {
+                DropItem dropItem = Instantiate(slimeStatus.dropItems[i].dropItemPf).GetComponent<DropItem>();
+                dropItem.transform.position = transform.position + Vector3.up;
+                dropItem.SpawnItem(dir);
+            }
+        }
+
+
+        StateMachine.ChangeState(SlimeEnum.Dead);
     }
 }

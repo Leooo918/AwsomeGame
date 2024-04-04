@@ -11,6 +11,11 @@ public class SlimeAnimationTrigger : MonoBehaviour
         slime = transform.parent.GetComponent<Slime>();
     }
 
+    public void AnimationFinishTrigger()
+    {
+        slime.AnimationFinishTrigger();
+    }
+
     public void MoveStart()
     {
         slime.moveAnim = true;

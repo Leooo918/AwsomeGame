@@ -28,9 +28,9 @@ MonoBehaviour:
       baseValue: 1
       modifiers: 
       percentModifiers: 
-    offset: {x: 1.05, y: 0.94}
+    offset: {x: 0.5, y: 1}
     knockBackPower: {x: 4, y: 4}
-    radius: 0.89
+    radius: 1.7
   secondAttackInfo:
     attackMultiplier:
       baseValue: 2

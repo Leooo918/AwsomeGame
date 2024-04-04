@@ -21,7 +21,11 @@ public class SlimeDeadState : EnemyState<SlimeEnum>
     public override void UpdateState()
     {
         base.UpdateState();
+    }
 
-
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+        enemy.OnCompletelyDie();
     }
 }

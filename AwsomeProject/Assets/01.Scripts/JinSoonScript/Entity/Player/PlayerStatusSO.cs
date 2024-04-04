@@ -39,7 +39,6 @@ public class PlayerStatusSO : StatusSO
         foreach (StatEnum statType in Enum.GetValues(typeof(StatEnum)))
         {
             string fieldName = statType.ToString();
-            Debug.Log(fieldName);
 
             try
             {
@@ -47,7 +46,6 @@ public class PlayerStatusSO : StatusSO
                 Stat stat = playerStatField.GetValue(this) as Stat;
 
                 statDic.Add(statType, stat);
-                Debug.Log(stat.GetValue());
             }
             catch (Exception ex)
             {

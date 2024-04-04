@@ -56,6 +56,7 @@ Material:
     m_Floats:
     - _DissolveWidth: 0.01
     - _Fade: 1
+    - _IsWhite: 0
     - _NoiseScale: 60
     - _White: 0
     m_Colors:

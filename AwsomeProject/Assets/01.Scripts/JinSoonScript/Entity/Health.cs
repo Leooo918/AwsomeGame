@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -17,6 +18,11 @@ public class Health : MonoBehaviour
     public Action<Vector2> onKnockBack;
     public Action<Vector2> onDie;
 
+    private void Awake()
+    {
+        owner = GetComponent<Entity>();
+    }
+
     public void Init(StatusSO status)
     {
         this.Status = status;
@@ -28,11 +34,15 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
+        if(owner.isDead) return;
         //방어력 계산해주셈
         //damage = owners.
 
         curHp -= damage;
-        AfterHitFeedback(knockPower, true);
+        curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
+
+        if (curHp <= 0) onDie?.Invoke(knockPower);
+        else AfterHitFeedback(knockPower, true);
     }
 
     private void AfterHitFeedback(Vector2 knockPower, bool withFeedBack = true)
@@ -66,8 +76,10 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        foreach (var effect in effects)
+
+        for (int i = 0; i < effects.Count; i++)
         {
+            Tuple<Effect, float, float> effect = effects[i];
             effect.Item1.UpdateEffort();
 
             if (effect.Item3 + effect.Item2 < Time.time)
@@ -81,7 +93,6 @@ public class Health : MonoBehaviour
 
     public virtual void GetEffort(Effect effect, float duration, bool isInfiniteEffect = false)
     {
-
         for (int i = 0; i < effects.Count; i++)
         {
             var item = effects[i];

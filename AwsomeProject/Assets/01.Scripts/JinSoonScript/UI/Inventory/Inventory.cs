@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
     /// 인벤토리에 아이템을 쑤셔넣을 때 사용할 함수임ㅇㅇ
     /// </summary>
     /// <param name="item">인벤토리에 쑤셔넣을 아이템</param>
-    /// <returns>아이템을 얻을 때 return값이 true면 필드의 item 인스턴스 지워주면 되고
+    /// <returns>아이템을 넣을 때 return값이 true면 필드의 item 인스턴스 지워주면 되고
     /// return값이 false면 필드의 item 인스턴스를 지우지 않으면 됨</returns>
     public bool TryInsertItem(Item item)
     {
@@ -95,9 +95,6 @@ public class Inventory : MonoBehaviour
                 if (it != null && it.itemSO.id == id)
                 {
                     int remainSpace = it.itemSO.maxCarryAmountPerSlot - it.itemAmount;
-
-                    Debug.Log(remainSpace + " " + remainItem);
-
                     if (remainSpace - remainItem < 0)
                     {
                         remainItem = remainItem - remainSpace;
@@ -115,7 +112,6 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        Debug.Log("밍");
 
         for (int i = 0; i < inventory.GetLength(1); i++)
         {

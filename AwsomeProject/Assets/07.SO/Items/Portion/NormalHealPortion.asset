@@ -20,4 +20,6 @@ MonoBehaviour:
   itemImage: {fileID: 21300000, guid: cb6cbdd7b0756cd49896ada3c51d54a3, type: 3}
   prefab: {fileID: 6910422564161804073, guid: b885ad8c0fc80064ca19afd40104f64a, type: 3}
   portionType: 1
-  effect: {fileID: 0}
+  effect: {fileID: 3604502662181877630, guid: 9099ee5bf7a08e540b30dbe3e1356032, type: 3}
+  duration: 0
+  isInfinite: 0

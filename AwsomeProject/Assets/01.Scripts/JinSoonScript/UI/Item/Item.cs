@@ -45,9 +45,10 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         itemAmount -= amount;
         amountTxt.SetText(itemAmount.ToString());
 
-        if(itemAmount <= 0)
+        if (itemAmount <= 0)
         {
-            assignedSlot.DeleteItem();;
+            if (assignedSlot != null)
+                assignedSlot.DeleteItem();
             Destroy(gameObject);
         }
 
@@ -67,7 +68,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void SetItemAmount(int amount)
     {
-        if(amountTxt == null)
+        if (amountTxt == null)
             amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
 
         itemAmount = amount;

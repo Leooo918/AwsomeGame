@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayeriVisual : MonoBehaviour
+public class EntityVisual : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Material playerMat;
+    [SerializeField] private float whiteTime = 0.15f; 
 
     private void Awake()
     {
@@ -29,7 +30,7 @@ public class PlayeriVisual : MonoBehaviour
     private IEnumerator HitRoutine()
     {
         playerMat.SetFloat("_IsWhite", 1);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(whiteTime);
         playerMat.SetFloat("_IsWhite", 0);
     }
 }

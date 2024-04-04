@@ -12,7 +12,8 @@ public enum PlayerStateEnum
     Dash,
     Gathering,
     Stun,
-    NormalAttack
+    NormalAttack,
+    Dead
 }
 
 
@@ -50,7 +51,6 @@ public class Player : Entity
 
     #region ComponentRegion
 
-    public Health playerHealth { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
@@ -63,6 +63,8 @@ public class Player : Entity
     [HideInInspector] public float lastAttackTime;
 
     #endregion
+
+    public GameObject stunEffect { get; private set; }
 
     private bool isInventoryOpen = false;
 
@@ -91,22 +93,26 @@ public class Player : Entity
         foreach (var item in playerStatus.skillDic)
             item.Value.skill.SetOwner(this);
 
-        playerHealth = GetComponent<Health>();
-        playerHealth.Init(playerStatus);
+        healthCompo.Init(playerStatus);
+
+        stunEffect = transform.Find("StunEffect").gameObject;
+        stunEffect.SetActive(false);
     }
 
     private void OnEnable()
     {
         _inputReader.PressTabEvent += InventoryOpen;
-        playerHealth.onHit += () => HitEvent?.Invoke();
-        playerHealth.onKnockBack += KnockBack;
+        healthCompo.onKnockBack += KnockBack;
+        healthCompo.onDie += OnDie;
+        healthCompo.onHit += OnHit;
     }
 
     private void OnDisable()
     {
         _inputReader.PressTabEvent -= InventoryOpen;
-        playerHealth.onHit -= () => HitEvent?.Invoke();
-        playerHealth.onKnockBack -= KnockBack;
+        healthCompo.onKnockBack -= KnockBack;
+        healthCompo.onDie -= OnDie;
+        healthCompo.onHit -= OnHit;
     }
 
     protected void Start()
@@ -149,8 +155,8 @@ public class Player : Entity
 
     public void SetHpSlider()
     {
-        hpSlider.maxValue = playerHealth.maxHp.GetValue();
-        hpSlider.value = playerHealth.curHp;
+        hpSlider.maxValue = healthCompo.maxHp.GetValue();
+        hpSlider.value = healthCompo.curHp;
     }
 
     private void InventoryOpen()
@@ -172,5 +178,13 @@ public class Player : Entity
     public void AnimationFinishTrigger()
     {
         StateMachine.CurrentState.AnimationFinishTrigger();
+    }
+
+    public void OnHit() => HitEvent?.Invoke();
+
+    public void OnDie(Vector2 hitDir)
+    {
+        isDead = true;
+        StateMachine.ChangeState(PlayerStateEnum.Dead);
     }
 }

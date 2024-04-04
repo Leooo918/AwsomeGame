@@ -18,7 +18,7 @@ public class EnemyContactHit : MonoBehaviour
         {
             Vector2 knockPower = (Vector2)(player.transform.position - transform.position).normalized + Vector2.up;
             knockPower *= 8;
-            player.playerHealth.TakeDamage(damage, knockPower, owner);
+            player.healthCompo.TakeDamage(damage, knockPower, owner);
         }
     }
 }
