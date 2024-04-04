@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 3cb13d026e16d124aa2f9419f25fb883
-  position: {x: 884, y: 100}
+  position: {x: 934.4, y: 176.79999}
   character:
-    name: "\uBC0D\uBC0D\uB41C\uBC0D\uBC0D\uC774"
-    imgPrefab: {fileID: 4498595012265136987, guid: 10cd22292f42b8d4aad329797a71dd1f, type: 3}
-    talkDetails: "\uBC0D\uC774"
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uADF8\uB798!"
   nextScript: {fileID: 0}
 --- !u!114 &-8128654180560542770
 MonoBehaviour:
@@ -58,11 +58,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 7e144a334d5df7442a81d73cc2e9e11f
-  position: {x: 567.2, y: -12.000014}
+  position: {x: 567.2, y: -12.000007}
   character:
-    name: "\uB3D4e"
-    imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
-    talkDetails: "\uBC0D\uB428"
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uADF8\uB798? \uC751\uC6D0\uD560\uAC8C \uC870\uC2EC\uD788 \uB2E4\uB140\uC640!"
   nextScript: {fileID: 8471492680065308937}
 --- !u!114 &-6071567444459136749
 MonoBehaviour:
@@ -78,11 +78,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 99385576666462941851d1a80ae1174c
-  position: {x: 567.1999, y: 99.99999}
+  position: {x: 567.2, y: 99.99999}
   character:
-    name: "\u3141\u3141\u3141"
-    imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
-    talkDetails: "\uBB9D\uC719"
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uADF8\uB798? \uC54C\uC558\uC5B4 \uAC00\uAC8C\uB418\uBA74 \uAF2D
+      \uC5F0\uB77D\uD558\uACE0 \uAC00\uC57C\uD55C\uB2E4!!!"
   nextScript: {fileID: 7692830312871079913}
 --- !u!114 &-5074330590955738312
 MonoBehaviour:
@@ -115,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 215327d7354174147982a54bec177df5
-  position: {x: 45.200012, y: -12}
+  position: {x: 47.200012, y: -12}
   nextScript: {fileID: 8436935865822086952}
 --- !u!114 &-137566849265068799
 MonoBehaviour:
@@ -158,6 +159,8 @@ MonoBehaviour:
   - {fileID: 8471492680065308937}
   - {fileID: -6071567444459136749}
   - {fileID: -8995253401864707312}
+  - {fileID: 5538120473580913986}
+  - {fileID: 2228893259399481106}
   dialogBackground: {fileID: 5728600992528880802, guid: e4ad8285e5daf6e4f94b8296a446041b, type: 3}
 --- !u!114 &787830345525562618
 MonoBehaviour:
@@ -189,6 +192,26 @@ MonoBehaviour:
   scriptType: 3
   position: {x: -48, y: 2.3999786}
   nextScript: {fileID: 6834922688728197588}
+--- !u!114 &2228893259399481106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 07e2f7b10fb9c1a4481002e280c8d661
+  position: {x: 934.4, y: 264}
+  character:
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uBC0D\uBC0D\uBC0D \u3160\u3160"
+  nextScript: {fileID: 0}
 --- !u!114 &3120230464846732203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +232,26 @@ MonoBehaviour:
     imgPrefab: {fileID: 0}
     talkDetails: 
   nextScript: {fileID: 0}
+--- !u!114 &5538120473580913986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 4f4a0343f5116a74aaa78168627890e0
+  position: {x: 567.19995, y: 222.39996}
+  character:
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uC88B\uB124... \uC751\uC6D0\uD560\uAC8C \uC870\uC2EC\uD788 \uB2E4\uB140\uC640\uC57C\uD574!"
+  nextScript: {fileID: 8471492680065308937}
 --- !u!114 &6834922688728197588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,13 +283,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 7c8b26877bd9d8f4c91410f08745a946
-  position: {x: 396.79996, y: -12}
+  position: {x: 368, y: -12}
   optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
   options:
-  - detail: "\uBC0D\uB41C"
+  - detail: "\uC0AC\uC2E4\uC774\uC57C"
     nextScript: {fileID: -6212396644611281335}
-  - detail: "\uBC0D\uBC0D\uB41C"
+  - detail: "\uC544\uC9C1\uC740 \uACE0\uBBFC\uC911\uC774\uC57C(\uAC70\uC9D3\uB9D0\uC784)"
     nextScript: {fileID: -6071567444459136749}
+  - detail: "\uB2F9\uC5F0\uD558\uC9C0! \uB09C \uCD5C\uAC15\uC758 \uC5F0\uAE08\uC220\uC0AC\uAC00
+      \uB420\uAEBC\uB2C8\uAE4C!"
+    nextScript: {fileID: 5538120473580913986}
 --- !u!114 &7692830312871079913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,11 +307,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: d7951d7188363e646a7a998c72c5ee92
-  position: {x: 745.6, y: 99.99999}
+  position: {x: 745.6, y: 163.20001}
   optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
   options:
-  - detail: "\uBC0D\uBC0D\uB428"
+  - detail: "\uC54C\uACA0\uC5B4"
     nextScript: {fileID: -8995253401864707312}
+  - detail: "\uC2EB\uC740\uB370 \u314B"
+    nextScript: {fileID: 2228893259399481106}
 --- !u!114 &8436935865822086952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,11 +344,12 @@ MonoBehaviour:
     panDistance: 20
     panTime: 1
   guid: 77533c2671a7b3f408367b6aaeeac528
-  position: {x: 229.59998, y: -12.000004}
+  position: {x: 216.90396, y: -12.000009}
   character:
-    name: "\uBC0D\uBC0D\uC774"
-    imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
-    talkDetails: "\uBC0D\uBC0D\uBC0D\uBC0D\uBC0D"
+    name: "\uC544\uBCF4\uCE74\uB974\uB4DC"
+    imgPrefab: {fileID: 7014216131420541693, guid: ecae4058f121ed94a83d8d3b75eedc52, type: 3}
+    talkDetails: "\uB108! \uC2DC\uB4E4\uC9C0 \uC54A\uB294\uB2E4\uB294 \uC57D\uCD08\uB97C
+      \uCC3E\uC73C\uB7EC \uAC04\uB2E4\uB294\uAC83\uC774 \uC0AC\uC2E4\uC774\uC57C?"
   nextScript: {fileID: 7165964797233723107}
 --- !u!114 &8471492680065308937
 MonoBehaviour:
@@ -316,9 +365,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSettings: []
   guid: 4e8556ccca2510c48af5a10c95b3330b
-  position: {x: 745.6, y: -12.000015}
+  position: {x: 745.6, y: 35.99997}
   character:
-    name: "\u3141\u3134\uC6B0\uD30C\u3163\u314A\u314B\u314C"
-    imgPrefab: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
-    talkDetails: "\uBBF8\uB2C8\uC2A4\uD14C\uB808\uC624"
+    name: "\uC8FC\uC778\uACF5"
+    imgPrefab: {fileID: 2973941007459794553, guid: 789a8b0853dbd944489c6a91c4e3c23b, type: 3}
+    talkDetails: "\u3147\u314B \uC54C\uC558\uC73C"
   nextScript: {fileID: 0}

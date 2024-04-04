@@ -40,6 +40,7 @@ public class UIOn : MonoBehaviour
             {
                 ui[0].transform.position = escPanelPos;
                 ui[0].SetActive(false);
+                ui[2].SetActive(false);
             }
 
             if (isInven)
