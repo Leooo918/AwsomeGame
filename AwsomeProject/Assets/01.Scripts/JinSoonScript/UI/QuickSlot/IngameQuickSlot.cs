@@ -30,7 +30,8 @@ public class IngameQuickSlot : MonoBehaviour
 
     public void UseItem()
     {
+        Debug.Log(portion.posionEffect);
         portion.RemoveItem(1);
-        PlayerManager.instance.player.healthCompo.GetEffort(portion.posionEffect, portion.posionEffect.duration);
+        PlayerManager.Instance.player.healthCompo.GetEffort(portion.posionEffect, portion.posionEffect.duration);
     }
 }

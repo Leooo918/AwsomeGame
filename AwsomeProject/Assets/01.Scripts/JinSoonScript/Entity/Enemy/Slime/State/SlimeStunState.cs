@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class SlimeStunState : EnemyState<SlimeEnum>
 {
-    public SlimeStunState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
-    {
-    }
-
+    public SlimeStunState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName) { }
 }

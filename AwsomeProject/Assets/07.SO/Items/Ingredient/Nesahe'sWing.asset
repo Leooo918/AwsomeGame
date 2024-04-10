@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 0
   maxCarryAmountPerSlot: 5
   itemExplain: "\uBC0D"
+  dotImage: {fileID: 0}
   itemImage: {fileID: 0}
   prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 3

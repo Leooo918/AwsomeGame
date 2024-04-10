@@ -15,13 +15,13 @@ public abstract class Entity : MonoBehaviour
     #endregion
 
     [Header("Collision info")]
-    [SerializeField] protected Transform groundChecker;
-    [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGroundAndWall;
     [SerializeField] protected LayerMask whatIsProbs;
+    [SerializeField] protected Transform groundChecker;
+    [SerializeField] protected float groundCheckBoxWidth;
+    [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallChecker;
     [SerializeField] protected float wallCheckDistance;
-    [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float wallCheckBoxHeight;
 
     protected float knockbackDuration = 0.5f;
@@ -100,7 +100,7 @@ public abstract class Entity : MonoBehaviour
     #region CheckCollisionSection
 
     public virtual bool IsGroundDetected() =>
-         Physics2D.BoxCast(groundChecker.position,
+        Physics2D.BoxCast(groundChecker.position,
             new Vector2(groundCheckBoxWidth, 0.05f), 0,
             Vector2.down, groundCheckDistance, whatIsGroundAndWall);
 

@@ -10,6 +10,8 @@ public class Health : MonoBehaviour
     public Stat maxHp { get; private set; }
 
     public int curHp { get; private set; }
+    public int lastAttackDamage { get; private set; }
+    public bool isLastAttackCritical { get; private set; }  
 
     //효과, 지속시간, 시작된 시간
     protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
@@ -17,6 +19,7 @@ public class Health : MonoBehaviour
     public Action onHit;
     public Action<Vector2> onKnockBack;
     public Action<Vector2> onDie;
+
 
     private void Awake()
     {
@@ -35,14 +38,16 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
         if(owner.isDead) return;
-        //방어력 계산해주셈
+        //방어력 계산, 크리티컬 확인
         //damage = owners.
 
+        isLastAttackCritical = false;
+        lastAttackDamage = damage;
         curHp -= damage;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
 
         if (curHp <= 0) onDie?.Invoke(knockPower);
-        else AfterHitFeedback(knockPower, true);
+        AfterHitFeedback(knockPower, true);
     }
 
     private void AfterHitFeedback(Vector2 knockPower, bool withFeedBack = true)

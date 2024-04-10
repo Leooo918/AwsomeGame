@@ -5,10 +5,8 @@ using Cinemachine;
 using System.Linq;
 using DG.Tweening;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : Singleton<CameraManager>
 {
-    public static CameraManager Instance;
-
     [SerializeField] private List<CinemachineVirtualCamera> cameraSet;
     [SerializeField] private PlayerFollowObj follow;            //플레이어 따라가는 뇨속
 
@@ -27,11 +25,6 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-            Destroy(Instance);
-
-        Instance = this;
-
         if (cameraSet.Count > 0)
             ChangeCam(cameraSet[0]);
     }

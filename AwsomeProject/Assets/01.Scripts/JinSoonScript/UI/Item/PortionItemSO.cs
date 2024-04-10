@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public enum Portion
@@ -12,10 +11,11 @@ public enum Portion
 public class PortionItemSO : ItemSO
 {
     [Space(20)]
-    public Portion portionType;
+    [HideInInspector] public Portion portionType;
     public Effect effect;
-    public float duration;
-    public bool isInfinite;
+    [HideInInspector] public float usingTime;
+    [HideInInspector] public float duration;
+    [HideInInspector] public bool isInfinite;
 
 
     private void OnEnable()

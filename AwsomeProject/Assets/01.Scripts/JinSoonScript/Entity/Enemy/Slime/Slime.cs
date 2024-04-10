@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public enum SlimeEnum
@@ -157,7 +156,6 @@ public class Slime : Enemy
         SkillSO skill = readySkill.Peek();
         if (skill == null)
         {
-            Debug.Log("¾ø");
             StateMachine.ChangeState(SlimeEnum.Idle);
             return;
         }
@@ -166,6 +164,11 @@ public class Slime : Enemy
         notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
         readySkill.Pop();
         attackDistance = 0;
+    }
+
+    public void Jump()
+    {
+
     }
 
     private void ShuffleSkillStack()
@@ -207,7 +210,7 @@ public class Slime : Enemy
         isDead = true;
         for (int i = 0; i < slimeStatus.dropItems.Count; i++)
         {
-            if(UnityEngine.Random.Range(0, 101) < slimeStatus.dropItems[i].perecentage)
+            if (UnityEngine.Random.Range(0, 101) < slimeStatus.dropItems[i].perecentage)
             {
                 DropItem dropItem = Instantiate(slimeStatus.dropItems[i].dropItemPf).GetComponent<DropItem>();
                 dropItem.transform.position = transform.position + Vector3.up;

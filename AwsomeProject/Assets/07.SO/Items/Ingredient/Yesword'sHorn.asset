@@ -20,6 +20,7 @@ MonoBehaviour:
     \uC608\uC18C\uB4DC\uB4E4\uC744 \uCC98\uB9AC\uD558\uBA74 \uB098\uD0C0\uC0DD\uC131\uB418\uB294
     \uC544\uC774\uD15C. \uADF8\uB4E4\uB9CC\uC758 \uAC1C\uC131\uC744 \uB098\uD0C0\uB0B4\uAE30\uC5D0
     \uCC2C\uB780\uD558\uBA70 \uC644\uBCBD\uD558\uB2E4"
+  dotImage: {fileID: 0}
   itemImage: {fileID: 0}
   prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 3

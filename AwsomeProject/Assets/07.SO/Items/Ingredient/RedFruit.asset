@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: "\uBE68\uAC31\uC5F4\uB9E4"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "2\uCC0D\uC774\uAC00 \uC544\uB2CC \uBE68\uAC08\uBFD0\uC778 \uBE68\uAC04\uBC84\uC12F"
+  itemExplain: "\uC544\uC8FC \uC0C8\uBE68\uAC04 \uC5F4\uB9E4\uB2E4"
   itemImage: {fileID: -1790349488, guid: 304b67974f39be1439057c2fa5147f82, type: 3}
   prefab: {fileID: 6910422564161804073, guid: c9befb66ad19a6f4ebc96dd0b1037ed8, type: 3}
   ingredientType: 2

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class Effect :MonoBehaviour
+[System.Serializable]
+public abstract class Effect : MonoBehaviour
 {
     protected Entity target;
 

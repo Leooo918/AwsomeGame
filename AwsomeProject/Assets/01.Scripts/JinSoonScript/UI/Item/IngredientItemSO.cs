@@ -14,8 +14,8 @@ public enum IngredientType
 public class IngredientItemSO : ItemSO
 {
     [Space(20)]
-    public IngredientType ingredientType;
-    public int gatheringTime;
+    [HideInInspector] public IngredientType ingredientType;
+    [HideInInspector] public int gatheringTime;
 
     private void Awake()
     {

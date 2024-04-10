@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuickSlotManager : MonoBehaviour
 {
-    public static QuickSlotManager Instance;
+    [HideInInspector]public static QuickSlotManager Instance;
 
     public IngameQuickSlot curSelectingPortion;
 

@@ -18,6 +18,7 @@ MonoBehaviour:
   maxCarryAmountPerSlot: 5
   itemExplain: "\uC5B4\uB9B0\uD1B5\uD1B5\uBC84\uC12F, \uC791\uC544\uC11C \uBC1F\uACE0
     \uC62C\uB77C\uAC08 \uC21C \uC5C6\uC9C0\uB9CC \uC5B4\uB518\uAC00 \uC4F8\uB9CC\uD574\uBCF4\uC778\uB2E4"
+  dotImage: {fileID: 0}
   itemImage: {fileID: 0}
   prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 0

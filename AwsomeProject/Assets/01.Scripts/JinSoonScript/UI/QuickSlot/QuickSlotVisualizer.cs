@@ -7,7 +7,7 @@ public class QuickSlotVisualizer : MonoBehaviour
     private IngameQuickSlot[] slots = new IngameQuickSlot[5];
     private Sequence seq;
 
-    private int selectedSlot = 0;
+    private int selectedSlot = -1;
 
     private void Awake()
     {
@@ -19,25 +19,24 @@ public class QuickSlotVisualizer : MonoBehaviour
 
     private void Start()
     {
-        SelectOneSlot(selectedSlot);
-        PlayerManager.instance.player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
-        PlayerManager.instance.player.PlayerInput.SecondQuickSlot += () => SelectOneSlot(1);
-        PlayerManager.instance.player.PlayerInput.ThirdQuickSlot += () => SelectOneSlot(2);
-        PlayerManager.instance.player.PlayerInput.ForthQuickSlot += () => SelectOneSlot(3);
-        PlayerManager.instance.player.PlayerInput.FifthQuickSlot += () => SelectOneSlot(4);
+        PlayerManager.Instance.player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
+        PlayerManager.Instance.player.PlayerInput.SecondQuickSlot += () => SelectOneSlot(1);
+        PlayerManager.Instance.player.PlayerInput.ThirdQuickSlot += () => SelectOneSlot(2);
+        PlayerManager.Instance.player.PlayerInput.ForthQuickSlot += () => SelectOneSlot(3);
+        PlayerManager.Instance.player.PlayerInput.FifthQuickSlot += () => SelectOneSlot(4);
 
-        PlayerManager.instance.player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
+        PlayerManager.Instance.player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
     }
 
     private void OnDisable()
     {
-        PlayerManager.instance.player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
-        PlayerManager.instance.player.PlayerInput.SecondQuickSlot -= () => SelectOneSlot(1);
-        PlayerManager.instance.player.PlayerInput.ThirdQuickSlot -= () => SelectOneSlot(2);
-        PlayerManager.instance.player.PlayerInput.ForthQuickSlot -= () => SelectOneSlot(3);
-        PlayerManager.instance.player.PlayerInput.FifthQuickSlot -= () => SelectOneSlot(4);
+        PlayerManager.Instance.player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
+        PlayerManager.Instance.player.PlayerInput.SecondQuickSlot -= () => SelectOneSlot(1);
+        PlayerManager.Instance.player.PlayerInput.ThirdQuickSlot -= () => SelectOneSlot(2);
+        PlayerManager.Instance.player.PlayerInput.ForthQuickSlot -= () => SelectOneSlot(3);
+        PlayerManager.Instance.player.PlayerInput.FifthQuickSlot -= () => SelectOneSlot(4);
 
-        PlayerManager.instance.player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
+        PlayerManager.Instance.player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
     }
 
     public void SetQuickSlot()
@@ -87,7 +86,7 @@ public class QuickSlotVisualizer : MonoBehaviour
 
     public void UseQuickSlot()
     {
-        if (QuickSlotManager.Instance.curSelectingPortion.assignedItem == null) return;
+        if (QuickSlotManager.Instance.curSelectingPortion == null || QuickSlotManager.Instance.curSelectingPortion.assignedItem == null) return;
 
         QuickSlotManager.Instance.curSelectingPortion.UseItem();
         for (int i = 0; i < 5; i++)

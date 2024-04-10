@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
-    public static InventoryManager Instance;
-
     public ItemSetSO ItemSet;
     [SerializeField] private Inventory playerInventory;
     [SerializeField] private QuickSlotVisualizer quickslot;
@@ -30,11 +28,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-            Destroy(Instance);
-
-        Instance = this;
-
         explainName = explainparent.Find("Name").GetComponent<TextMeshProUGUI>();
         explainTxt = explainparent.Find("Explain").GetComponent<TextMeshProUGUI>();
         explainImage = explainparent.Find("Image").GetComponent<Image>();

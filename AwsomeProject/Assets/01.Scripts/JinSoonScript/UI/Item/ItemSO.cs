@@ -8,14 +8,15 @@ public enum ItemType
 
 public class ItemSO : ScriptableObject
 {
-    public int id;
-    public string itemName;
+    [HideInInspector]public int id;
+    [HideInInspector] public string itemName;
     [HideInInspector]public ItemType itemType;
-    public int maxCarryAmountPerSlot;
+    [HideInInspector] public int maxCarryAmountPerSlot;
     [TextArea(3,20)]
-    public string itemExplain;
+    [HideInInspector] public string itemExplain;
 
     [Space(20)]
+    public Sprite dotImage;
     public Sprite itemImage;
     public GameObject prefab;
 }

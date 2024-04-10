@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [HideInInspector] public List<SkillSO> skills = new List<SkillSO>();
     [SerializeField] private Player player;
 
     [SerializeField] private int maxDetectingEnemyNum;
@@ -22,6 +21,9 @@ public class PlayerAttack : MonoBehaviour
         player = GetComponent<Player>();
     }
 
+    /// <summary>
+    /// Use With Function SetCurrentAttackInfo
+    /// </summary>
     public void Attack()
     {
         int detected = Physics2D.OverlapCircleNonAlloc(transform.position + new Vector3(attackOffset.x * player.FacingDir, attackOffset.y, 0), attackRange, colls, whatIsEnemy);

@@ -260,7 +260,6 @@ public class Inventory : MonoBehaviour
                     itemPf = itemSet.itemset[k].prefab;
                     Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
 
-                    Debug.Log(itemStruct);
                     it.Init(itemStruct.amount, quickSlot[itemStruct.posX]);
 
                     quickSlot[itemStruct.posX].InsertItem(it);
