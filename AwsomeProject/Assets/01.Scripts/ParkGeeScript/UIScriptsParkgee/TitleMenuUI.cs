@@ -28,4 +28,9 @@ public class TitleMenuUI : MonoBehaviour
     {
         panel[0].SetActive(true);
     }
+
+    public void OffSetting()
+    {
+        panel[0].SetActive(false);
+    }
 }
