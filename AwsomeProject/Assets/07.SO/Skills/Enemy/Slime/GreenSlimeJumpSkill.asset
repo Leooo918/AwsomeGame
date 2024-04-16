@@ -23,6 +23,12 @@ MonoBehaviour:
     baseValue: 3
     modifiers: 
     percentModifiers: 
+  AttackInfo:
+    attackMultiplier: 2
+    offset: {x: 0, y: 0}
+    knockBackPower: {x: 7, y: 3}
+    radius: 1.5
+    damage: 0
   jumpPower:
     baseValue: 10
     modifiers: 

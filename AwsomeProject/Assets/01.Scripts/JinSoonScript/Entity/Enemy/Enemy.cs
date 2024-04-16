@@ -3,8 +3,6 @@ using System;
 using UnityEngine;
 public abstract class Enemy : Entity
 {
-    public StatusSO enemyStatus;
-
     #region EnemyStat
     public float moveSpeed { get; protected set; }
     public float PatrolTime { get; protected set; }
@@ -41,7 +39,6 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
-        healthCompo.Init(enemyStatus);
     }
 
     #region DetectRegion
@@ -69,15 +66,6 @@ public abstract class Enemy : Entity
         Vector2 dir = ((PlayerManager.Instance.playerTrm.position + Vector3.up) - transform.position).normalized;
 
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
-    }
-
-    public Player DetectEnemyPos(float radius)
-    {
-        Collider2D coll = Physics2D.OverlapCircle(transform.position, radius, whatIsPlayer);
-
-        if(coll == null) return null;
-
-        return coll.GetComponent<Player>();
     }
 
     public bool CheckFront() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);

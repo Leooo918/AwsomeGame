@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 2230550602945823284}
   - component: {fileID: 7091172245489614391}
   - component: {fileID: 1712952610965200572}
+  - component: {fileID: 7802415424790199053}
   - component: {fileID: 5825832491732314658}
   - component: {fileID: 7266504766220132557}
-  - component: {fileID: 7802415424790199053}
+  - component: {fileID: 1783503049519455004}
   m_Layer: 8
   m_Name: Slime
   m_TagString: Untagged
@@ -54,18 +55,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a208ec3cb7176469f5d590425b7075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundChecker: {fileID: 8260824802176911901}
-  groundCheckDistance: 0.2
+  stat: {fileID: 11400000, guid: 603c9b007c718104cae6ca7cd3f8c360, type: 2}
   whatIsGroundAndWall:
     serializedVersion: 2
     m_Bits: 64
   whatIsProbs:
     serializedVersion: 2
     m_Bits: 0
+  groundChecker: {fileID: 8260824802176911901}
+  groundCheckBoxWidth: 1
+  groundCheckDistance: 0.08
   wallChecker: {fileID: 5100150202577803377}
-  wallCheckDistance: 0.1
-  groundCheckBoxWidth: 0.5
-  wallCheckBoxHeight: 0.73
+  wallCheckDistance: 0.04
+  wallCheckBoxHeight: 0.5
   HitEvent:
     m_PersistentCalls:
       m_Calls:
@@ -81,8 +83,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4020197159393589968}
-        m_TargetAssemblyTypeName: EntityVisual, Assembly-CSharp
+      - m_Target: {fileID: 7802415424790199053}
+        m_TargetAssemblyTypeName: HitFeedBack, Assembly-CSharp
         m_MethodName: Hit
         m_Mode: 1
         m_Arguments:
@@ -121,6 +123,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56631dcfe4948ed40afb37cb4c5dc9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7802415424790199053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445387511067698906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1cc7747d275c674782a21186c83c1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 1295092065723550041, guid: d7bfca2be8abcb4429210aee9fd12e8a, type: 3}
+  criticalFontSize: 12
+  normalHitFontSize: 7
+  criticalColor: {r: 0.98490566, g: 0.8932875, b: 0.34750444, a: 1}
+  normalHitColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!70 &5825832491732314658
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -183,7 +202,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7802415424790199053
+--- !u!114 &1783503049519455004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,9 +211,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 445387511067698906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1cc7747d275c674782a21186c83c1b1, type: 3}
+  m_Script: {fileID: 11500000, guid: f68f0ef4040852d4da2dfd859f551e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity: {fileID: 7091172245489614391}
+  maxDetectingEnemyNum: 1
+  attackRange: 0
+  attackOffset: {x: 0, y: 0}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &2343937239717856217
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8760831436546034775}
   - component: {fileID: 6566779323771677465}
+  - component: {fileID: 4032568705160380648}
   m_Layer: 8
   m_Name: HpBar
   m_TagString: Untagged
@@ -364,6 +391,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4032568705160380648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631783551229007073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8feac72ebc7396742a457804dfcf13e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
 --- !u!1 &3106025716526386835
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5100150202577803377}
   m_Layer: 8
-  m_Name: WallCheecker
+  m_Name: WallChecker
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -687,7 +727,7 @@ Transform:
   m_GameObject: {fileID: 7603626212198480491}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.623, y: 0.297, z: 0}
+  m_LocalPosition: {x: 0.652, y: 0.297, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -750,7 +790,7 @@ Transform:
   m_GameObject: {fileID: 9217574301596507382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.738, y: -0.199, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1766, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

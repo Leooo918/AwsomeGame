@@ -6,37 +6,41 @@ public class QuickSlotVisualizer : MonoBehaviour
 {
     private IngameQuickSlot[] slots = new IngameQuickSlot[5];
     private Sequence seq;
+    private RectTransform rect; 
+    [SerializeField] private Player player;
+
+    private Tween tween;
 
     private int selectedSlot = -1;
 
     private void Awake()
     {
         for (int i = 0; i < 5; i++)
-        {
             slots[i] = transform.GetChild(i).GetComponent<IngameQuickSlot>();
-        }
+
+        rect = transform.parent.GetComponent<RectTransform>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        PlayerManager.Instance.player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
-        PlayerManager.Instance.player.PlayerInput.SecondQuickSlot += () => SelectOneSlot(1);
-        PlayerManager.Instance.player.PlayerInput.ThirdQuickSlot += () => SelectOneSlot(2);
-        PlayerManager.Instance.player.PlayerInput.ForthQuickSlot += () => SelectOneSlot(3);
-        PlayerManager.Instance.player.PlayerInput.FifthQuickSlot += () => SelectOneSlot(4);
+        player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
+        player.PlayerInput.SecondQuickSlot += () => SelectOneSlot(1);
+        player.PlayerInput.ThirdQuickSlot += () => SelectOneSlot(2);
+        player.PlayerInput.ForthQuickSlot += () => SelectOneSlot(3);
+        player.PlayerInput.FifthQuickSlot += () => SelectOneSlot(4);
 
-        PlayerManager.Instance.player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
+        player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
-        PlayerManager.Instance.player.PlayerInput.SecondQuickSlot -= () => SelectOneSlot(1);
-        PlayerManager.Instance.player.PlayerInput.ThirdQuickSlot -= () => SelectOneSlot(2);
-        PlayerManager.Instance.player.PlayerInput.ForthQuickSlot -= () => SelectOneSlot(3);
-        PlayerManager.Instance.player.PlayerInput.FifthQuickSlot -= () => SelectOneSlot(4);
+        player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
+        player.PlayerInput.SecondQuickSlot -= () => SelectOneSlot(1);
+        player.PlayerInput.ThirdQuickSlot -= () => SelectOneSlot(2);
+        player.PlayerInput.ForthQuickSlot -= () => SelectOneSlot(3);
+        player.PlayerInput.FifthQuickSlot -= () => SelectOneSlot(4);
 
-        PlayerManager.Instance.player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
+        player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
     }
 
     public void SetQuickSlot()
@@ -94,5 +98,21 @@ public class QuickSlotVisualizer : MonoBehaviour
             if(QuickSlotManager.Instance.curSelectingPortion == slots[i])
                 InventoryManager.Instance.PlayerInventory.quickSlot[i].UseItem();
         }
+    }
+
+    public void EnableQuickSlot()
+    {
+        if(tween!= null && tween.active == true)
+            tween.Kill();
+
+        tween = rect.DOAnchorPosY(-200f, 0.5f);
+    }
+
+    public void DisableQuickSlot()
+    {
+        if (tween != null && tween.active == true)
+            tween.Kill();
+
+        tween = rect.DOAnchorPosY(0f, 0.5f);
     }
 }

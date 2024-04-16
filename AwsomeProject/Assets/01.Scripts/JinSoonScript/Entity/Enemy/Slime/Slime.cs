@@ -20,7 +20,8 @@ public enum SlimeSkillEnum
 
 public class Slime : Enemy
 {
-    public SlimeStatusSO slimeStatus { get; protected set; }
+    public EntitySkill<SlimeSkillEnum> SkillSO { get; private set; }
+
     public EnemyStateMachine<SlimeEnum> StateMachine { get; private set; }
 
     #region SkillSection
@@ -43,13 +44,16 @@ public class Slime : Enemy
     protected override void Awake()
     {
         base.Awake();
-        slimeStatus = enemyStatus as SlimeStatusSO;
-        StateMachine = new EnemyStateMachine<SlimeEnum>();
 
+        SkillSO = new EntitySkill<SlimeSkillEnum>();
+        SkillSO.Init(EntitySkillSO);
+        
+        StateMachine = new EnemyStateMachine<SlimeEnum>();
         foreach (SlimeEnum stateEnum in Enum.GetValues(typeof(SlimeEnum)))
         {
             string typeName = stateEnum.ToString();
             Type t = Type.GetType($"Slime{typeName}State");
+
             try
             {
                 var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<SlimeEnum>;
@@ -62,18 +66,18 @@ public class Slime : Enemy
             }
         }
 
-        foreach (var item in slimeStatus.skillDic)
+        foreach (var item in EntitySkillSO.skills)
         {
-            item.Value.skill.SetOwner(this);
-            Type type = item.Value.skill.GetType();
+            item.skill.SetOwner(this);
+            Type type = item.skill.GetType();
             gameObject.AddComponent(type);
         }
 
-
-        moveSpeed = slimeStatus.MoveSpeed.GetValue();
-        PatrolDelay = slimeStatus.PatrolDelay;
-        PatrolTime = slimeStatus.PatrolTime;
-        detectingDistance = slimeStatus.DetectingDistance;
+        Debug.Log("여기 고쳐요!!!");
+        //moveSpeed = Stat.MoveSpeed.GetValue();
+        //PatrolDelay = Stat.PatrolDelay;
+        //PatrolTime = Stat.PatrolTime;
+        //detectingDistance = Stat.DetectingDistance;
 
         pivot = hpBar.Find("Pivot");
     }
@@ -173,11 +177,11 @@ public class Slime : Enemy
 
     private void ShuffleSkillStack()
     {
-        List<SkillSO> skills = slimeStatus.skills;
+        List<SkillSO> skills = EntitySkillSO.skills;
         for (int i = 0; i < 10; i++)
         {
-            int a = UnityEngine.Random.Range(0, slimeStatus.skills.Count);
-            int b = UnityEngine.Random.Range(0, slimeStatus.skills.Count);
+            int a = UnityEngine.Random.Range(0, skills.Count);
+            int b = UnityEngine.Random.Range(0, skills.Count);
 
             SkillSO temp = skills[a];
             skills[a] = skills[b];
@@ -208,11 +212,11 @@ public class Slime : Enemy
     private void OnDie(Vector2 dir)
     {
         isDead = true;
-        for (int i = 0; i < slimeStatus.dropItems.Count; i++)
+        for (int i = 0; i < Stat.dropItems.Count; i++)
         {
-            if (UnityEngine.Random.Range(0, 101) < slimeStatus.dropItems[i].perecentage)
+            if (UnityEngine.Random.Range(0, 101) < Stat.dropItems[i].appearChance)
             {
-                DropItem dropItem = Instantiate(slimeStatus.dropItems[i].dropItemPf).GetComponent<DropItem>();
+                DropItem dropItem = Instantiate(Stat.dropItems[i].dropItem).GetComponent<DropItem>();
                 dropItem.transform.position = transform.position + Vector3.up;
                 dropItem.SpawnItem(dir);
             }

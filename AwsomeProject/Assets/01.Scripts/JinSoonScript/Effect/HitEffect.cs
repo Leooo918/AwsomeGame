@@ -12,15 +12,6 @@ public class HitEffect : MonoBehaviour
         txt = GetComponent<TextMeshPro>();
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.F7))
-        {
-            Init(14, 12, Color.yellow, Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            DoEffect();
-        }
-    }
-
     public void DoEffect()
     {
         if (tween != null && tween.active)
@@ -38,7 +29,7 @@ public class HitEffect : MonoBehaviour
                         .OnComplete(() => Destroy(gameObject));
     }
 
-    public void Init(int damage, float fontSize,Color color, Vector2 position)
+    public void Init(float damage, float fontSize,Color color, Vector2 position)
     {
         transform.position = position;
         txt.SetText(damage.ToString());

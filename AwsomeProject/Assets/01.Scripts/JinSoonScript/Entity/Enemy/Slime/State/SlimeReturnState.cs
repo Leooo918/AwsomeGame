@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SlimeReturnState : EnemyState<SlimeEnum>
@@ -11,7 +9,7 @@ public class SlimeReturnState : EnemyState<SlimeEnum>
     public SlimeReturnState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.slimeStatus.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+        jumpSkill = slime.SkillSO.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     private Vector2 dir;

@@ -1,0 +1,233 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6617475846486225976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: "\uAE40\uB3D9\uB960"
+  talkingDetails: "\uD3D0\uB3C4"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: a8a796719aa597c4885861bbbf27a985
+  scriptType: 0
+  position: {x: 118.400024, y: 62.399994}
+  nextSO: {fileID: -6430898481636442758}
+--- !u!114 &-6430898481636442758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: "\uCD5C\uC601\uD658"
+  talkingDetails: "\uAC8C\uC774"
+  image: {fileID: 4498595012265136987, guid: 10cd22292f42b8d4aad329797a71dd1f, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 1722407936882304489, guid: d7a6f229de4fd774a952df27d8476bcd, type: 3}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: 74dd75793fc4f5b418887160a961dc28
+  scriptType: 0
+  position: {x: 310.40002, y: 62.399994}
+  nextSO: {fileID: 8649571271993426533}
+--- !u!114 &-6424367439879662304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: "\uBA54\uB871"
+  talkingDetails: "\uC624\uB2F5\uC774\uC694"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: 2704c1c0e7927fe41be57acadf102c38
+  scriptType: 0
+  position: {x: 652.8, y: 164.79999}
+  nextSO: {fileID: 0}
+--- !u!114 &-945157582245730974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: "\uC2EC\uC7A5\uD6C8"
+  talkingDetails: "\uBE61\uBE61\uC774"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: bf4ed8b7460118e4b98ca74136e3800c
+  scriptType: 0
+  position: {x: -61.88794, y: 62.399998}
+  nextSO: {fileID: -6617475846486225976}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732824df00c0acd4b9a15629c7ca57c7, type: 3}
+  m_Name: Dialog-1
+  m_EditorClassIdentifier: 
+  scripts:
+  - {fileID: -945157582245730974}
+  - {fileID: -6617475846486225976}
+  - {fileID: -6430898481636442758}
+  - {fileID: 8649571271993426533}
+  - {fileID: 2390855496097210142}
+  - {fileID: -6424367439879662304}
+  - {fileID: 8317552946830873961}
+  - {fileID: 2978753593053273798}
+--- !u!114 &2390855496097210142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a9a31f1704dbd4da4042a261314d5a, type: 3}
+  m_Name: ImageSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: 
+  talkingDetails: 
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: fbe44588453a75042b0c8287360058fa
+  scriptType: 3
+  position: {x: 652.8, y: 62.399994}
+  nextScript: {fileID: 2978753593053273798}
+--- !u!114 &2978753593053273798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: 
+  talkingDetails: "\uC815\uB2F5\uC785\uB2C8\uB2E4~"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: 5423061d44a1e7e4c8d77a6ed0bd8e99
+  scriptType: 0
+  position: {x: 806.4, y: 62.399963}
+  nextSO: {fileID: 0}
+--- !u!114 &8317552946830873961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: 
+  talkingDetails: "\uC815\uB2F5\uC785\uB2C8\uB2E4~"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: ce33b42a262a4d246b5fe938216c851a
+  scriptType: 0
+  position: {x: 643.2, y: -51.999985}
+  nextSO: {fileID: 0}
+--- !u!114 &8649571271993426533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e387c4f654141d409b58ef3192fbd5f, type: 3}
+  m_Name: OptionSO
+  m_EditorClassIdentifier: 
+  talkingPeopleName: "\uB3D9\uB960"
+  talkingDetails: "\uB098\uB294"
+  image: {fileID: 4743923020798816808, guid: a8b4e60dd716b294d93423a8e7372a2e, type: 3}
+  background: {fileID: 21300000, guid: 11e53ab4637467349b91c7ee503263b6, type: 3}
+  anim: {fileID: 0}
+  effectSound: {fileID: 0}
+  onComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  guid: 016231e64a3478d429013b967cc29bb2
+  scriptType: 2
+  position: {x: 488, y: 40}
+  options:
+  - "\uD3D0\uB3C4"
+  - "\uC18C\uC544 \uC131\uC560\uC790"
+  - "\uD37C\uB9AC"
+  optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
+  doTimer: 0
+  selectTime: 5
+  nextScriptsByOption:
+  - {fileID: 8317552946830873961}
+  - {fileID: 2390855496097210142}
+  - {fileID: -6424367439879662304}

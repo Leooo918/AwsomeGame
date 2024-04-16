@@ -16,11 +16,15 @@ public enum PlayerStateEnum
     Dead
 }
 
+public enum PlayerSkillEnum
+{
+    Dash, 
+    NormalAttack
+}
 
 public class Player : Entity
 {
-    [Header("PlayerStat")]
-    public PlayerStatusSO playerStatus;
+    public EntitySkill<PlayerSkillEnum> SkillSO { get; private set; }
 
     #region Status
 
@@ -71,8 +75,11 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        StateMachine = new PlayerStateMachine();
 
+        SkillSO = new EntitySkill<PlayerSkillEnum>();
+        SkillSO.Init(EntitySkillSO);
+
+        StateMachine = new PlayerStateMachine();
         foreach (PlayerStateEnum stateEnum in Enum.GetValues(typeof(PlayerStateEnum)))
         {
             string typeName = stateEnum.ToString();
@@ -90,10 +97,8 @@ public class Player : Entity
             }
         }
 
-        foreach (var item in playerStatus.skillDic)
-            item.Value.skill.SetOwner(this);
-
-        healthCompo.Init(playerStatus);
+        foreach (var item in EntitySkillSO.skills)
+            item.skill.SetOwner(this);
 
         stunEffect = transform.Find("StunEffect").gameObject;
         stunEffect.SetActive(false);
@@ -125,7 +130,7 @@ public class Player : Entity
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            PlayerDashSkill d = playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill as PlayerDashSkill;
+            DashSkill d = SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill as DashSkill;
             d.canUseSkill = true;
         }
 

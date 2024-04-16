@@ -10,16 +10,16 @@ public class PlayerGroundState : PlayerState
     {
         base.Enter();
         player.PlayerInput.JumpEvent += HandleJumpEvent;
-        player.PlayerInput.DashEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
-        player.PlayerInput.AttackEvent += player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
+        player.PlayerInput.DashEvent += player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent += player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill;
     }
 
 
     public override void Exit()
     {
         player.PlayerInput.JumpEvent -= HandleJumpEvent;
-        player.PlayerInput.DashEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill.UseSkill;
-        player.PlayerInput.AttackEvent -= player.playerStatus.GetSkillByEnum(PlayerSkill.NormalAttack).skill.UseSkill;
+        player.PlayerInput.DashEvent -= player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill;
+        player.PlayerInput.AttackEvent -= player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill;
         base.Exit();
     }
 

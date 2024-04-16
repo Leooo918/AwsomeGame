@@ -3025,6 +3025,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curSelectingPortion: {fileID: 0}
+  visualizer: {fileID: 1496122039}
 --- !u!1 &363442979
 GameObject:
   m_ObjectHideFlags: 0
@@ -8045,7 +8046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -8}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 930, y: 180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &954494009
@@ -8651,17 +8652,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1039357484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-  m_PrefabInstance: {fileID: 4015281052983591548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1cc7747d275c674782a21186c83c1b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1045313408
 GameObject:
   m_ObjectHideFlags: 0
@@ -9371,6 +9361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4682d0f620db2f14c91452eea68d7168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stat: {fileID: 11400000, guid: 375a91ae3d897984c8e593be0be87084, type: 2}
+  entitySkillSO: {fileID: 11400000, guid: 6eb6124a661e7694db7667b76c39d801, type: 2}
   whatIsGroundAndWall:
     serializedVersion: 2
     m_Bits: 64
@@ -9398,7 +9390,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  playerStatus: {fileID: 11400000, guid: 60ecaec96ed8d3e49b28c377b35d9623, type: 2}
   hpSlider: {fileID: 1491667785}
   coyoteTime: 0.08
   canJump: 0
@@ -9477,13 +9468,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1199669013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9580f11e9d723704ca9a180a8190289b, type: 3}
+  m_Script: {fileID: 11500000, guid: f68f0ef4040852d4da2dfd859f551e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1199669016}
+  entity: {fileID: 1199669016}
   maxDetectingEnemyNum: 5
-  attackRange: 1.7
-  attackOffset: {x: 0.5, y: 1}
+  attackRange: 0
+  attackOffset: {x: 0, y: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
@@ -11501,6 +11492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15ba16656ea0d4499d7c2f8a5bc8996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1199669016}
 --- !u!1 &1514762102
 GameObject:
   m_ObjectHideFlags: 0
@@ -19919,86 +19911,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5100150202577803377, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.652
-      objectReference: {fileID: 0}
+    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
+      propertyPath: entitySkillSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 6eb6124a661e7694db7667b76c39d801, type: 2}
     - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: patrolOriginPos
       value: 
       objectReference: {fileID: 1176832068}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: wallCheckDistance
-      value: 0.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: wallCheckBoxHeight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: groundCheckBoxWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: groundCheckDistance
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: HitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 1039357484}
-    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: HitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: HitFeedBack, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7603626212198480491, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: m_Name
-      value: WallChecker
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: hitEffect
-      value: 
-      objectReference: {fileID: 1295092065723550041, guid: d7bfca2be8abcb4429210aee9fd12e8a, type: 3}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: criticalColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: criticalColor.b
-      value: 0.34750444
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: criticalColor.g
-      value: 0.8932875
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: criticalColor.r
-      value: 0.98490566
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: normalHitColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: normalHitColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: normalHitColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802415424790199053, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: normalHitColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8260824802176911901, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8260824802176911901, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.1766
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

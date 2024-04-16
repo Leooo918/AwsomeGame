@@ -12,7 +12,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeEnum>
     public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.slimeStatus.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+        jumpSkill = slime.SkillSO.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     public override void Enter()
@@ -30,13 +30,8 @@ public class SlimeJumpAttackState : EnemyState<SlimeEnum>
 
         if (enemy.IsGroundDetected() && enemy.rigidbodyCompo.velocity.y < 0)
         {
-            Player player = enemy.DetectEnemyPos(1);
-            if (player != null)
-            {
-                Vector2 knockPower = (Vector2)(player.transform.position - enemy.transform.position).normalized + Vector2.up;
-                knockPower *= 10f;
-                player.healthCompo.TakeDamage(5, knockPower, enemy);
-            }
+            enemy.entityAttack.SetCurrentAttackInfo(jumpSkill.AttackInfo);
+            enemy.entityAttack.Attack();
 
             //망할 Idle로 전환하니까 등뒤에 있으면 Patrol로 감
             enemyStateMachine.ChangeState(SlimeEnum.Chase);

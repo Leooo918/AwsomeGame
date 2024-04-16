@@ -9,7 +9,7 @@ public class DashEffect : Effect
     {
         player = target as Player;
 
-        PlayerDashSkillSO dashSkillSO = player.playerStatus.GetSkillByEnum(PlayerSkill.Dash) as PlayerDashSkillSO;
+        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = true;
     }
 }

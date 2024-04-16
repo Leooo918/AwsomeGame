@@ -6,10 +6,17 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour
 {
     #region ComponentRegion
+    [SerializeField] private EntityStat stat;
+    [SerializeField] private EntitySkillSO entitySkillSO;
+    public EntityStat Stat => stat;
+    public EntitySkillSO EntitySkillSO => entitySkillSO;
+
     public Animator animatorCompo { get; protected set; }
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
     public Rigidbody2D rigidbodyCompo { get; protected set; }
+
+    public EntityAttack entityAttack { get; protected set; }
 
     public Health healthCompo { get; protected set; }
     #endregion
@@ -50,6 +57,7 @@ public abstract class Entity : MonoBehaviour
         rigidbodyCompo = GetComponent<Rigidbody2D>();
         colliderCompo = GetComponent<Collider2D>();
         healthCompo = GetComponent<Health>();
+        entityAttack = GetComponent<EntityAttack>();
     }
 
 

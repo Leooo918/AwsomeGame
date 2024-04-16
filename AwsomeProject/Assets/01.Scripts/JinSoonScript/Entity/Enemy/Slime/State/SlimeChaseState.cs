@@ -11,7 +11,7 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
     public SlimeChaseState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.slimeStatus.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+        jumpSkill = slime.SkillSO.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     public override void Enter()
@@ -58,7 +58,6 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
 
         //벽이 가로막고 있으면 점프
         canJump = slime.IsGroundDetected();
-        Debug.Log(slime.IsWallDetected() + " " + canJump);
         if (slime.IsWallDetected() == true && canJump == true) Jump();
 
         //계속 쫒아가게 해주고
