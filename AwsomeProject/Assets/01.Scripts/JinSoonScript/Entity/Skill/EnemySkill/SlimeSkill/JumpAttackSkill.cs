@@ -9,6 +9,6 @@ public class JumpAttackSkill : Skill
     public override void UseSkill()
     {
         if (slime == null) slime = owner as Slime;
-        slime.StateMachine.ChangeState(SlimeEnum.JumpAttack);
+        slime.StateMachine.ChangeState(SlimeStateEnum.JumpAttack);
     }
 }

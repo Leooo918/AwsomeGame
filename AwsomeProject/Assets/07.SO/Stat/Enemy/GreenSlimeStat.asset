@@ -24,6 +24,10 @@ MonoBehaviour:
     baseValue: 10
     modifiers: []
     percentModifiers: []
+  moveSpeed:
+    baseValue: 5
+    modifiers: []
+    percentModifiers: []
   criticalChance:
     baseValue: 0
     modifiers: []

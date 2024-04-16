@@ -1,13 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SlimeEnum
+public enum SlimeStateEnum
 {
     Idle,
     Patrol,
-    Return,
     Chase,
+    Return,
     JumpAttack,
     Stun,
     Dead
@@ -20,9 +21,9 @@ public enum SlimeSkillEnum
 
 public class Slime : Enemy
 {
-    public EntitySkill<SlimeSkillEnum> SkillSO { get; private set; }
+    public SlimeSkill Skills { get; private set; }
 
-    public EnemyStateMachine<SlimeEnum> StateMachine { get; private set; }
+    public EnemyStateMachine<SlimeStateEnum> StateMachine { get; private set; }
 
     #region SkillSection
 
@@ -45,18 +46,18 @@ public class Slime : Enemy
     {
         base.Awake();
 
-        SkillSO = new EntitySkill<SlimeSkillEnum>();
-        SkillSO.Init(EntitySkillSO);
-        
-        StateMachine = new EnemyStateMachine<SlimeEnum>();
-        foreach (SlimeEnum stateEnum in Enum.GetValues(typeof(SlimeEnum)))
+        Skills = gameObject.AddComponent<SlimeSkill>();
+        Skills.Init(EntitySkillSO);
+
+        StateMachine = new EnemyStateMachine<SlimeStateEnum>();
+        foreach (SlimeStateEnum stateEnum in Enum.GetValues(typeof(SlimeStateEnum)))
         {
             string typeName = stateEnum.ToString();
             Type t = Type.GetType($"Slime{typeName}State");
 
             try
             {
-                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<SlimeEnum>;
+                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<SlimeStateEnum>;
                 StateMachine.AddState(stateEnum, enemyState);
             }
             catch (Exception e)
@@ -73,11 +74,10 @@ public class Slime : Enemy
             gameObject.AddComponent(type);
         }
 
-        Debug.Log("여기 고쳐요!!!");
-        //moveSpeed = Stat.MoveSpeed.GetValue();
-        //PatrolDelay = Stat.PatrolDelay;
-        //PatrolTime = Stat.PatrolTime;
-        //detectingDistance = Stat.DetectingDistance;
+        moveSpeed = Stat.moveSpeed.GetValue();
+        PatrolTime = EnemyStat.patrolTime.GetValue();
+        PatrolDelay = EnemyStat.patrolDelay.GetValue();
+        detectingDistance = EnemyStat.detectingDistance.GetValue();
 
         pivot = hpBar.Find("Pivot");
     }
@@ -98,7 +98,7 @@ public class Slime : Enemy
 
     protected void Start()
     {
-        StateMachine.Initialize(SlimeEnum.Idle, this);
+        StateMachine.Initialize(SlimeStateEnum.Idle, this);
         patrolEndTime = Time.time;
 
         ShuffleSkillStack();
@@ -146,7 +146,7 @@ public class Slime : Enemy
     {
         if (isDead) return;
         stunDuration = duration;
-        StateMachine.ChangeState(SlimeEnum.Stun);
+        StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
     public override void Dead(Vector2 dir)
@@ -160,7 +160,7 @@ public class Slime : Enemy
         SkillSO skill = readySkill.Peek();
         if (skill == null)
         {
-            StateMachine.ChangeState(SlimeEnum.Idle);
+            StateMachine.ChangeState(SlimeStateEnum.Idle);
             return;
         }
 
@@ -206,23 +206,23 @@ public class Slime : Enemy
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(SlimeEnum.Chase);
+        StateMachine.ChangeState(SlimeStateEnum.Chase);
     }
 
     private void OnDie(Vector2 dir)
     {
         isDead = true;
-        for (int i = 0; i < Stat.dropItems.Count; i++)
+        for (int i = 0; i < EnemyStat.dropItems.Count; i++)
         {
-            if (UnityEngine.Random.Range(0, 101) < Stat.dropItems[i].appearChance)
+            if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
             {
-                DropItem dropItem = Instantiate(Stat.dropItems[i].dropItem).GetComponent<DropItem>();
+                DropItem dropItem = Instantiate(EnemyStat.dropItems[i].dropItem).GetComponent<DropItem>();
                 dropItem.transform.position = transform.position + Vector3.up;
                 dropItem.SpawnItem(dir);
             }
         }
 
 
-        StateMachine.ChangeState(SlimeEnum.Dead);
+        StateMachine.ChangeState(SlimeStateEnum.Dead);
     }
 }

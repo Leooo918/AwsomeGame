@@ -3,6 +3,9 @@ using System;
 using UnityEngine;
 public abstract class Enemy : Entity
 {
+    [SerializeField] private EnemyStatSO enemyStat;
+    public EnemyStatSO EnemyStat => enemyStat;
+
     #region EnemyStat
     public float moveSpeed { get; protected set; }
     public float PatrolTime { get; protected set; }
@@ -39,6 +42,7 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
+        enemyStat = Instantiate(enemyStat);
     }
 
     #region DetectRegion

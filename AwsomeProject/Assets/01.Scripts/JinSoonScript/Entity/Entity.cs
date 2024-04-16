@@ -58,6 +58,9 @@ public abstract class Entity : MonoBehaviour
         colliderCompo = GetComponent<Collider2D>();
         healthCompo = GetComponent<Health>();
         entityAttack = GetComponent<EntityAttack>();
+
+        stat = Instantiate(stat);
+        entitySkillSO = Instantiate(entitySkillSO);
     }
 
 

@@ -19912,9 +19912,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
+      propertyPath: enemyStat
+      value: 
+      objectReference: {fileID: 11400000, guid: 0757cf61334436d4ab1107800e70e04a, type: 2}
+    - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: entitySkillSO
       value: 
-      objectReference: {fileID: 11400000, guid: 6eb6124a661e7694db7667b76c39d801, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e583722eed0be74ca41d666594aad99, type: 2}
     - target: {fileID: 7091172245489614391, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: patrolOriginPos
       value: 

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeDeadState : EnemyState<SlimeEnum>
+public class SlimeDeadState : EnemyState<SlimeStateEnum>
 {
-    public SlimeDeadState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeDeadState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
 

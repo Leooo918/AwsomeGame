@@ -18,9 +18,10 @@ public class PlayerStunState : PlayerState
     {
         base.UpdateState();
 
-        Debug.Log("±âÀý ¹Ö");
+
         if (Time.time - stunTime >= player.stunDuration)
         {
+            player.CanStateChangeable = true;
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
     }

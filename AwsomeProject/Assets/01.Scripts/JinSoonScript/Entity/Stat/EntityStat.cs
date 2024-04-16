@@ -11,10 +11,10 @@ public class EntityStat : ScriptableObject
     public Stat maxHp;
     public Stat armor;
     public Stat damage;
+    public Stat moveSpeed;
+    public Stat jumpForce;
     [Tooltip("Percentage-2ndDecimalPlace")]public Stat criticalChance;
     [Tooltip("Percentage-2ndDecimalPlace")]public Stat criticalDamage;
-
-    public List<DropItemStruct> dropItems;
 
     protected Entity owner;
     protected Dictionary<StatType, Stat> statDic;
@@ -86,6 +86,7 @@ public class EntityStat : ScriptableObject
     private string LowerFirstChar(string input) => $"{char.ToLower(input[0])}{input.Substring(1)}";
 }
 
+[Serializable]
 public struct DropItemStruct
 {
     public GameObject dropItem;
@@ -98,6 +99,8 @@ public enum StatType
     Armor,
     CriticalChance,
     CriticalDamage,
-    Damage
+    Damage,
+    MoveSpeed,
+    JumpForce
 }
 

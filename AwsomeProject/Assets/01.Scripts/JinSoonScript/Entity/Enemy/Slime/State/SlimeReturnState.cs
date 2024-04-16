@@ -1,15 +1,14 @@
 using UnityEngine;
 
-public class SlimeReturnState : EnemyState<SlimeEnum>
+public class SlimeReturnState : EnemyState<SlimeStateEnum>
 {
     private Slime slime;
     private SlimeJumpSkillSO jumpSkill;
     private bool isJumping = false;
 
-    public SlimeReturnState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeReturnState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.SkillSO.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     private Vector2 dir;
@@ -22,7 +21,7 @@ public class SlimeReturnState : EnemyState<SlimeEnum>
         {
             enemy.transform.position = enemy.patrolOriginPos.position;
             enemy.patrolEndTime = Time.time;
-            enemyStateMachine.ChangeState(SlimeEnum.Idle);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
         }
     }
 
@@ -35,7 +34,7 @@ public class SlimeReturnState : EnemyState<SlimeEnum>
         {
             Debug.Log("밍 돌아온");
             enemy.patrolEndTime = Time.time;
-            enemyStateMachine.ChangeState(SlimeEnum.Idle);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
         }
 
         dir = (enemy.patrolOriginPos.position - enemy.transform.position).normalized * enemy.moveSpeed;
@@ -53,6 +52,9 @@ public class SlimeReturnState : EnemyState<SlimeEnum>
 
     private void Jump()
     {
+        if(jumpSkill == null)
+            jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+
         enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
         isJumping = true;
     }

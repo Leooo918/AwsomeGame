@@ -24,7 +24,7 @@ public enum PlayerSkillEnum
 
 public class Player : Entity
 {
-    public EntitySkill<PlayerSkillEnum> SkillSO { get; private set; }
+    public PlayerSkill SkillSO { get; private set; }
 
     #region Status
 
@@ -76,7 +76,11 @@ public class Player : Entity
     {
         base.Awake();
 
-        SkillSO = new EntitySkill<PlayerSkillEnum>();
+        moveSpeed = Stat.moveSpeed.GetValue();
+        jumpForce = Stat.jumpForce.GetValue();
+
+
+        SkillSO = gameObject.AddComponent<PlayerSkill>();
         SkillSO.Init(EntitySkillSO);
 
         StateMachine = new PlayerStateMachine();

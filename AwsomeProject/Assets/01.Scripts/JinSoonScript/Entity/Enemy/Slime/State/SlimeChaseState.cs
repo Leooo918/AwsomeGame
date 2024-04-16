@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlimeChaseState : EnemyState<SlimeEnum>
+public class SlimeChaseState : EnemyState<SlimeStateEnum>
 {
     private Slime slime;
     private SlimeJumpSkillSO jumpSkill;
@@ -8,10 +8,9 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
     private Transform playerTrm;
     private bool chaseStart = false;
 
-    public SlimeChaseState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeChaseState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.SkillSO.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     public override void Enter()
@@ -47,7 +46,7 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
         if (dist > enemy.detectingDistance + 5)
         {
             enemy.MissPlayer();
-            enemyStateMachine.ChangeState(SlimeEnum.Return);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Return);
         }
 
         //공격 범위내에 들어오면 공격!
@@ -71,6 +70,12 @@ public class SlimeChaseState : EnemyState<SlimeEnum>
     private void Jump()
     {
         Debug.Log("점프");
+        if (jumpSkill == null)
+            jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+
+        Debug.Log(slime.Skills);
+        Debug.Log(jumpSkill);
+
         enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
     }
 }
