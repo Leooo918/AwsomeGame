@@ -32,7 +32,6 @@ public class EntitySkill<T> : MonoBehaviour where T : Enum
 
     public SkillSO GetSkillByEnum(T skillEnum)
     {
-        Debug.Log(skillDic.Count);
         if (skillDic.TryGetValue(skillEnum, out SkillSO value))
             return value;
 

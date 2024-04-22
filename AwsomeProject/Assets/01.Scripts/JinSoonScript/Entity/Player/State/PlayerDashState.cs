@@ -13,24 +13,24 @@ public class PlayerDashState : PlayerState
     {
         base.Enter();
 
-        if (player.isInvincibleWhileDash == true) player.colliderCompo.enabled = false;
+        if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = false;
 
-        if (player.isAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
+        if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
 
             xInput = player.PlayerInput.XInput;
 
         if (xInput == 0) xInput = player.FacingDir * -0.5f;
 
-        player.SetVelocity(player.dashPower * xInput, 0, true);
+        player.SetVelocity(player.DashPower * xInput, 0, true);
         dashTime = Time.time;
     }
     public override void UpdateState()
     {
         base.UpdateState();
 
-        player.SetVelocity(player.dashPower * xInput, 0, true);
+        player.SetVelocity(player.DashPower * xInput, 0, true);
 
-        if (Time.time - dashTime > player.dashTime)
+        if (Time.time - dashTime > player.DashTime)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
@@ -39,9 +39,9 @@ public class PlayerDashState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        if (player.isInvincibleWhileDash == true) player.colliderCompo.enabled = true;
+        if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = true;
 
-        if (player.isAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
+        if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
 
         player.StopImmediately(false);
     }

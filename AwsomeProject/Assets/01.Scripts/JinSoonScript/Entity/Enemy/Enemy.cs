@@ -67,7 +67,7 @@ public abstract class Enemy : Entity
 
     public virtual bool IsObstacleInLine(float distance)
     {
-        Vector2 dir = ((PlayerManager.Instance.playerTrm.position + Vector3.up) - transform.position).normalized;
+        Vector2 dir = ((PlayerManager.Instance.PlayerTrm.position + Vector3.up) - transform.position).normalized;
 
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
     }

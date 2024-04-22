@@ -241,14 +241,17 @@ public class SpreadSheetLoader : EditorWindow
             if (File.Exists(path) == false)
             {
                 string code = string.Format(CodeFormat.EffectScriptFormat, $"{fileName}Effect");
-                Debug.Log(code);
                 File.WriteAllText($"{path}", code);
-                Effect effect = AssetDatabase.LoadAssetAtPath($"Assets{effectPath}", typeof(Effect)) as Effect;
+
+                Type t = Type.GetType($"{fileName}Effect");
+                Effect effect = Activator.CreateInstance(t) as Effect;
+
                 asset.effect = effect;
             }
             else
             {
-                Effect effect = AssetDatabase.LoadAssetAtPath($"Assets{effectPath}", typeof(Effect)) as Effect;
+                Type t = Type.GetType($"{fileName}Effect");
+                Effect effect = Activator.CreateInstance(t) as Effect;
                 asset.effect = effect;
             }
 
@@ -273,25 +276,26 @@ public class SpreadSheetLoader : EditorWindow
             if (File.Exists(path) == false)
             {
                 string code = string.Format(CodeFormat.EffectScriptFormat, $"{fileName}Effect");
-                Debug.Log(code);
                 File.WriteAllText($"{path}", code);
-                Effect effect = AssetDatabase.LoadAssetAtPath($"Assets{effectPath}", typeof(Effect)) as Effect;
+                Type t = Type.GetType($"{fileName}Effect");
+                Effect effect = Activator.CreateInstance(t) as Effect;
                 asset.effect = effect;
             }
             else
             {
-                Effect effect = AssetDatabase.LoadAssetAtPath($"Assets{effectPath}", typeof(Effect)) as Effect;
+                Type t = Type.GetType($"{fileName}Effect");
+                Effect effect = Activator.CreateInstance(t) as Effect;
                 asset.effect = effect;
             }
         }
 
-            EditorUtility.SetDirty(asset);
-        }
-    
+        EditorUtility.SetDirty(asset);
+    }
+
     private void CreateSO(string fileName, int id, int[] ingredientsId, int portionId)
     {
-        List<IngredientItemSO> items = new List<IngredientItemSO>();
-        PortionItemSO portion = new PortionItemSO();
+        List<IngredientItemSO> items = new();
+        PortionItemSO portion = new();
 
         for (int i = 0; i < ItemSetSO.itemset.Count; i++)
         {

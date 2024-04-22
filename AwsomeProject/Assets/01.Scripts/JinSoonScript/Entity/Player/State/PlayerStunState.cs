@@ -10,7 +10,7 @@ public class PlayerStunState : PlayerState
     {
         base.Enter();
         player.CanStateChangeable = false;
-        player.stunEffect.SetActive(true);
+        player.StunEffect.SetActive(true);
         stunTime = Time.time;
     }
 
@@ -28,7 +28,7 @@ public class PlayerStunState : PlayerState
 
     public override void Exit()
     {
-        player.stunEffect.SetActive(false);
+        player.StunEffect.SetActive(false);
         player.CanStateChangeable = true;
         base.Exit();
     }

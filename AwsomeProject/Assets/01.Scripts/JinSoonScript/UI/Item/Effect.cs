@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public abstract class Effect : MonoBehaviour
+public abstract class Effect
 {
     protected Entity target;
 

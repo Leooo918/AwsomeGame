@@ -4,12 +4,38 @@ using UnityEngine;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public Player player { get; private set; }
-    public Transform playerTrm {  get; private set; }
+    private Player player;
+    private Transform playerTrm;
 
-    private void Awake()
+    public Player Player 
     {
-        player = FindObjectOfType<Player>();
-        playerTrm = player.transform;
+        get
+        {
+            if(player == null)
+                player = FindObjectOfType<Player>();
+
+            if (player == null)
+                Debug.LogError($"Player is not exist in this scene but still trying to excess it");
+
+            return player;
+        } 
+        private set
+        {
+            player = value;
+        }
+    }
+    public Transform PlayerTrm
+    {
+        get
+        {
+            if (playerTrm == null)
+                playerTrm = player.transform;
+
+            return playerTrm;
+        }
+        private set
+        {
+            playerTrm = value;
+        }
     }
 }

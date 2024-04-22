@@ -31,6 +31,6 @@ public class PlayerAirState : PlayerState
 
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected()) return;
 
-        player.SetVelocity(player.moveSpeed * xInput, rigidbody.velocity.y);
+        player.SetVelocity(player.MoveSpeed * xInput, rigidbody.velocity.y);
     }
 }

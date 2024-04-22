@@ -21,7 +21,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
             jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
 
         enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
-        playerDir = Mathf.Sign((PlayerManager.Instance.playerTrm.position - enemy.transform.position).x);
+        playerDir = Mathf.Sign((PlayerManager.Instance.PlayerTrm.position - enemy.transform.position).x);
     }
 
     public override void UpdateState()

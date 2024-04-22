@@ -17,7 +17,7 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
     {
         base.Enter();
 
-        playerTrm = PlayerManager.Instance.playerTrm;
+        playerTrm = PlayerManager.Instance.PlayerTrm;
         enemy.animatorCompo.SetBool(animBoolHash, false);
 
         enemy.FindPlayerEvt(() =>
