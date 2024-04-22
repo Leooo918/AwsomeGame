@@ -173,6 +173,7 @@ public class RecipeManager : MonoBehaviour
         if (seq.IsActive() == true)
             seq.Kill();
 
+        //QuickSlotManager.Instance.EnableQuickSlot();
         seq = DOTween.Sequence();
 
         isRecipeBarOpen = true;
@@ -186,6 +187,7 @@ public class RecipeManager : MonoBehaviour
         if (seq.IsActive() == true)
             seq.Kill();
 
+        //QuickSlotManager.Instance.DisableQuickSlot();
         seq = DOTween.Sequence();
 
         isRecipeBarOpen = false;

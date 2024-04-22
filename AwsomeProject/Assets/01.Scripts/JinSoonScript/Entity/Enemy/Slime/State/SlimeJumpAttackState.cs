@@ -3,23 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeJumpAttackState : EnemyState<SlimeEnum>
+public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
 {
     private float playerDir;
-    SlimeJumpSkillSO jumpSkill;
+    private SlimeJumpSkillSO jumpSkill;
     private Slime slime;
 
-    public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
-        jumpSkill = slime.slimeStatus.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
     }
 
     public override void Enter()
     {
         base.Enter();
+        if(jumpSkill == null)
+            jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
+
         enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
-        playerDir = Mathf.Sign((PlayerManager.instance.playerTrm.position - enemy.transform.position).x);
+        playerDir = Mathf.Sign((PlayerManager.Instance.PlayerTrm.position - enemy.transform.position).x);
     }
 
     public override void UpdateState()
@@ -30,16 +32,11 @@ public class SlimeJumpAttackState : EnemyState<SlimeEnum>
 
         if (enemy.IsGroundDetected() && enemy.rigidbodyCompo.velocity.y < 0)
         {
-            Player player = enemy.DetectEnemyPos(1);
-            if (player != null)
-            {
-                Vector2 knockPower = (Vector2)(player.transform.position - enemy.transform.position).normalized + Vector2.up;
-                knockPower *= 10f;
-                player.healthCompo.TakeDamage(5, knockPower, enemy);
-            }
+            enemy.entityAttack.SetCurrentAttackInfo(jumpSkill.AttackInfo);
+            enemy.entityAttack.Attack();
 
             //망할 Idle로 전환하니까 등뒤에 있으면 Patrol로 감
-            enemyStateMachine.ChangeState(SlimeEnum.Chase);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
         }
     }
 }

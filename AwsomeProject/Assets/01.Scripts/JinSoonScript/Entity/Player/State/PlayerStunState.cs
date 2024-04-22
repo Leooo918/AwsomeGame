@@ -9,7 +9,8 @@ public class PlayerStunState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.stunEffect.SetActive(true);
+        player.CanStateChangeable = false;
+        player.StunEffect.SetActive(true);
         stunTime = Time.time;
     }
 
@@ -17,16 +18,18 @@ public class PlayerStunState : PlayerState
     {
         base.UpdateState();
 
-        Debug.Log("±âÀý ¹Ö");
+
         if (Time.time - stunTime >= player.stunDuration)
         {
+            player.CanStateChangeable = true;
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
     }
 
     public override void Exit()
     {
+        player.StunEffect.SetActive(false);
+        player.CanStateChangeable = true;
         base.Exit();
-        player.stunEffect.SetActive(false);
     }
 }

@@ -6,22 +6,29 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour
 {
     #region ComponentRegion
+    [SerializeField] private EntityStat stat;
+    [SerializeField] private EntitySkillSO entitySkillSO;
+    public EntityStat Stat => stat;
+    public EntitySkillSO EntitySkillSO => entitySkillSO;
+
     public Animator animatorCompo { get; protected set; }
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
     public Rigidbody2D rigidbodyCompo { get; protected set; }
 
+    public EntityAttack entityAttack { get; protected set; }
+
     public Health healthCompo { get; protected set; }
     #endregion
 
     [Header("Collision info")]
-    [SerializeField] protected Transform groundChecker;
-    [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected LayerMask whatIsGroundAndWall;
     [SerializeField] protected LayerMask whatIsProbs;
+    [SerializeField] protected Transform groundChecker;
+    [SerializeField] protected float groundCheckBoxWidth;
+    [SerializeField] protected float groundCheckDistance;
     [SerializeField] protected Transform wallChecker;
     [SerializeField] protected float wallCheckDistance;
-    [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float wallCheckBoxHeight;
 
     protected float knockbackDuration = 0.5f;
@@ -50,6 +57,10 @@ public abstract class Entity : MonoBehaviour
         rigidbodyCompo = GetComponent<Rigidbody2D>();
         colliderCompo = GetComponent<Collider2D>();
         healthCompo = GetComponent<Health>();
+        entityAttack = GetComponent<EntityAttack>();
+
+        stat = Instantiate(stat);
+        entitySkillSO = Instantiate(entitySkillSO);
     }
 
 
@@ -100,7 +111,7 @@ public abstract class Entity : MonoBehaviour
     #region CheckCollisionSection
 
     public virtual bool IsGroundDetected() =>
-         Physics2D.BoxCast(groundChecker.position,
+        Physics2D.BoxCast(groundChecker.position,
             new Vector2(groundCheckBoxWidth, 0.05f), 0,
             Vector2.down, groundCheckDistance, whatIsGroundAndWall);
 

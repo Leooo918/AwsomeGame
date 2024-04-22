@@ -1,12 +1,15 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Herbs : MonoBehaviour
 {
     [SerializeField] private GameObject interact;
     [SerializeField] private IngredientItemSO item;
     [SerializeField] private Sprite gatheredImage;
+
+    public UnityEvent<float> OnGatheringHerb;
 
     private SpriteRenderer spriteRenderer;
     private Transform pivot;
@@ -41,6 +44,7 @@ public class Herbs : MonoBehaviour
         if (gatherStart)
         {
             gatherTimeDown += Time.deltaTime;
+            OnGatheringHerb?.Invoke(gatherTimeDown);
             float progress = gatherTimeDown / gatherTime;
             progress = Mathf.Clamp01(progress);
             pivot.localScale = new Vector3(progress, 1, 1);
@@ -100,6 +104,15 @@ public class Herbs : MonoBehaviour
         player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         gatherEnd = true;
         gatherStart = false;
+    }
+
+    public void ReduceTime(float value)
+    {
+        gatherTimeDown -= value;
+        gatherTimeDown = Mathf.Clamp(gatherTimeDown, 0, gatherTime);
+
+        if (gatherTime <= 0) CancelGathering();
+
     }
 
 

@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private Player player;
-    private PlayerAttack playerAttack;
+    private EntityAttack entityAttack;
 
     private void Awake()
     {
-        playerAttack = transform.parent.GetComponent<PlayerAttack>();
+        entityAttack = transform.parent.GetComponent<EntityAttack>();
         player = transform.parent.GetComponent<Player>();
     }
 
@@ -20,6 +20,6 @@ public class PlayerAnimationTrigger : MonoBehaviour
 
     public void AttackTrigger()
     {
-        playerAttack.Attack();
+        entityAttack.Attack();
     }
 }

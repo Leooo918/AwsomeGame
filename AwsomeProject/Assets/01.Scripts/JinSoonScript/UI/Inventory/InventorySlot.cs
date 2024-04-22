@@ -13,7 +13,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Item assignedItem { get; private set; }
     public bool isSelectedNow { get; private set; } = false;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         rect = GetComponent<RectTransform>();
         selectUI = transform.Find("SelectedUI").gameObject;
@@ -54,7 +54,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         item.GetComponent<RectTransform>().localPosition = position;
         item.Init(item.itemAmount, this);
-        InventoryManager.Instance.QuickSlot.SetQuickSlot();
     }
 
     public void DeleteItem()
@@ -64,7 +63,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void UseItem()
     {
-        Debug.Log("¹Ö¹Ö");
         if (assignedItem != null)
             Destroy(assignedItem.gameObject);
         assignedItem = null;
@@ -72,7 +70,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void Select()
     {
-        inventory.UnSelectAllSlot();
+        if (inventory != null)
+            inventory.UnSelectAllSlot();
+
         selectUI.SetActive(true);
     }
 

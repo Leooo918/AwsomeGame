@@ -17,20 +17,20 @@ MonoBehaviour:
   skill: {fileID: 0}
   skillCoolTime:
     baseValue: 2
-    modifiers: 
-    percentModifiers: 
+    modifiers: []
+    percentModifiers: []
   attackDistance:
     baseValue: 0
-    modifiers: 
-    percentModifiers: 
+    modifiers: []
+    percentModifiers: []
   dashPower:
     baseValue: 20
-    modifiers: 
-    percentModifiers: 
+    modifiers: []
+    percentModifiers: []
   dashTime:
     baseValue: 2
-    modifiers: 
-    percentModifiers: 
+    modifiers: []
+    percentModifiers: []
   canUseSkill: 0
   isInvincibleWhileDash: 0
   isAttackWhileDash: 0

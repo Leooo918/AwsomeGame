@@ -3,7 +3,8 @@ using System;
 using UnityEngine;
 public abstract class Enemy : Entity
 {
-    public StatusSO enemyStatus;
+    [SerializeField] private EnemyStatSO enemyStat;
+    public EnemyStatSO EnemyStat => enemyStat;
 
     #region EnemyStat
     public float moveSpeed { get; protected set; }
@@ -41,9 +42,8 @@ public abstract class Enemy : Entity
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
-        healthCompo.Init(enemyStatus);
+        enemyStat = Instantiate(enemyStat);
     }
-
 
     #region DetectRegion
 
@@ -54,44 +54,44 @@ public abstract class Enemy : Entity
         if (player == null)
             return null;
 
+        Player playerCompo = player.GetComponent<Player>();
+        float dist = Vector2.Distance(player.transform.position, transform.position);
+
+        if (dist < 2.5f) return playerCompo;
+
         float dir = player.transform.position.x - transform.position.x;
 
-        if (dir > 0 == (FacingDir > 0)) return player.GetComponent<Player>();
+        if (dir > 0 == (FacingDir > 0)) return playerCompo;
         else return null;
     }
 
     public virtual bool IsObstacleInLine(float distance)
     {
-        Vector2 dir = ((PlayerManager.instance.playerTrm.position + Vector3.up) - transform.position).normalized;
+        Vector2 dir = ((PlayerManager.Instance.PlayerTrm.position + Vector3.up) - transform.position).normalized;
 
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
     }
 
-    public Player DetectEnemyPos(float radius)
-    {
-        Collider2D coll = Physics2D.OverlapCircle(transform.position, radius, whatIsPlayer);
-
-        if(coll == null) return null;
-
-        return coll.GetComponent<Player>();
-    }
-
+    public bool CheckFront() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);
     #endregion
-
 
     public virtual void FindPlayerEvt(Action action)
     {
+        //이미 감지됬었다면 걍 액션 인보크 시켜주고 리턴
         if (playerDetected == true)
         {
             action?.Invoke();
             return;
         }
 
+        
         SpriteRenderer sr = findPlayerMark.GetComponent<SpriteRenderer>();
         sr.color = new Color(1, 1, 1, 1);
         findPlayerMark.localScale = Vector3.one;
 
+        //대충 느낌표로 찾았다 어필해주고 움직이기 시작
         findPlayerMark.DOScaleY(1, 0.5f)
+            .SetDelay(0.3f)
             .OnComplete(() =>
             {
                 action?.Invoke();
@@ -108,8 +108,4 @@ public abstract class Enemy : Entity
         Destroy(gameObject);
     }
 
-    public void DropItem()
-    {
-        //'0'
-    }
 }

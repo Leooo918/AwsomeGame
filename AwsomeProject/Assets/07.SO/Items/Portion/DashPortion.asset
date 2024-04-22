@@ -19,9 +19,11 @@ MonoBehaviour:
   itemExplain: "\uBE60\uB978 \uBC1C\uC744 \uB9CC\uB4E4\uB54C \uC720\uC6A9\uD55C \uD3EC\uC158
     \uB9C8\uCE58 \uBC14\uB78C\uACFC\uB3C4 \uAC19\uC774 \uB0A0\uB77C\uB2E4\uB2D0 \uC218
     \uC788\uB2E4."
+  dotImage: {fileID: 0}
   itemImage: {fileID: -1138880884, guid: 962fc7e764847ca4ca30b5af67efc7b9, type: 3}
   prefab: {fileID: 6910422564161804073, guid: f4ac773c0e85b0e40ba7520ed5cf5b9f, type: 3}
   portionType: 1
   effect: {fileID: 8182594585880090357, guid: 9f3d7c42fda73e647b0d79fdf351c6e9, type: 3}
+  usingTime: 3
   duration: 0
   isInfinite: 1

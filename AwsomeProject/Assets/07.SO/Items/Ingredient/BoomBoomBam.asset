@@ -19,6 +19,7 @@ MonoBehaviour:
   itemExplain: "\uC57C\uC0DD\uC5D0\uC11C \uC0B4\uC544\uB0A8\uAE30 \uC704\uD574 \uBE44\uC0C1\uC2DD\uC801\uC73C\uB85C
     \uB0A0\uCE74\uB85C\uC6CC\uC9C4 \uD480, \uC0DD\uAC01\uBCF4\uB2E8 \uC5F4\uC5D0
     \uC57D\uD558\uB2E4"
+  dotImage: {fileID: 0}
   itemImage: {fileID: 0}
   prefab: {fileID: 6910422564161804073, guid: 9a5066ac3e17da344ba654b280ca0270, type: 3}
   ingredientType: 1

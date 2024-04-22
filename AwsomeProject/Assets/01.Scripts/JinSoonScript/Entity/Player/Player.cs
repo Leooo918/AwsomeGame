@@ -16,27 +16,31 @@ public enum PlayerStateEnum
     Dead
 }
 
+public enum PlayerSkillEnum
+{
+    Dash, 
+    NormalAttack
+}
 
 public class Player : Entity
 {
-    [Header("PlayerStat")]
-    public PlayerStatusSO playerStatus;
+    public PlayerSkill SkillSO { get; private set; }
 
     #region Status
 
     public Slider hpSlider;
 
-    public float moveSpeed { get; protected set; } = 7f;
-    public float jumpForce { get; protected set; } = 10f;
+    public float MoveSpeed { get; protected set; } = 7f;
+    public float JumpForce { get; protected set; } = 10f;
 
     #endregion
 
     #region DashInfo
 
-    public float dashTime { get; private set; }
-    public float dashPower { get; private set; }
-    public bool isInvincibleWhileDash { get; private set; }
-    public bool isAttackWhileDash { get; private set; }
+    public float DashTime { get; private set; }
+    public float DashPower { get; private set; }
+    public bool IsInvincibleWhileDash { get; private set; }
+    public bool IsAttackWhileDash { get; private set; }
 
     #endregion
 
@@ -64,15 +68,22 @@ public class Player : Entity
 
     #endregion
 
-    public GameObject stunEffect { get; private set; }
+    public GameObject StunEffect { get; private set; }
 
     private bool isInventoryOpen = false;
 
     protected override void Awake()
     {
         base.Awake();
-        StateMachine = new PlayerStateMachine();
 
+        MoveSpeed = Stat.moveSpeed.GetValue();
+        JumpForce = Stat.jumpForce.GetValue();
+
+
+        SkillSO = gameObject.AddComponent<PlayerSkill>();
+        SkillSO.Init(EntitySkillSO);
+
+        StateMachine = new PlayerStateMachine();
         foreach (PlayerStateEnum stateEnum in Enum.GetValues(typeof(PlayerStateEnum)))
         {
             string typeName = stateEnum.ToString();
@@ -90,13 +101,11 @@ public class Player : Entity
             }
         }
 
-        foreach (var item in playerStatus.skillDic)
-            item.Value.skill.SetOwner(this);
+        foreach (var item in EntitySkillSO.skills)
+            item.skill.SetOwner(this);
 
-        healthCompo.Init(playerStatus);
-
-        stunEffect = transform.Find("StunEffect").gameObject;
-        stunEffect.SetActive(false);
+        StunEffect = transform.Find("StunEffect").gameObject;
+        StunEffect.SetActive(false);
     }
 
     private void OnEnable()
@@ -125,7 +134,7 @@ public class Player : Entity
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            PlayerDashSkill d = playerStatus.GetSkillByEnum(PlayerSkill.Dash).skill as PlayerDashSkill;
+            DashSkill d = SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill as DashSkill;
             d.canUseSkill = true;
         }
 
@@ -145,10 +154,10 @@ public class Player : Entity
 
     public void Dash(float dashTime, float dashPower, bool isInvincibleWhileDash = false, bool isAttackWhileDash = false)
     {
-        this.dashTime = dashTime;
-        this.dashPower = dashPower;
-        this.isInvincibleWhileDash = isInvincibleWhileDash;
-        this.isAttackWhileDash = isAttackWhileDash;
+        this.DashTime = dashTime;
+        this.DashPower = dashPower;
+        this.IsInvincibleWhileDash = isInvincibleWhileDash;
+        this.IsAttackWhileDash = isAttackWhileDash;
 
         StateMachine.ChangeState(PlayerStateEnum.Dash);
     }

@@ -7,7 +7,6 @@ using static UnityEditor.Progress;
 public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
-    public QuickSlot[] quickSlot = new QuickSlot[5];
     private string path = "";
     [SerializeField] private Transform slotParent;
     [SerializeField] private Transform quickSlotParent;
@@ -28,11 +27,11 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 5; i++)
-        {
-            quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<QuickSlot>();
-            quickSlot[i].Init(this);
-        }
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<QuickSlotInserter>();
+        //    quickSlot[i].Init(this);
+        //}
     }
 
     private void Start()
@@ -57,7 +56,7 @@ public class Inventory : MonoBehaviour
         {
             ititi = Instantiate(testItem.prefab, GameObject.Find("Items").transform).GetComponent<Item>();
             ititi.Init(1, null);
-            StartCoroutine("DelayInsert");
+            StartCoroutine(DelayInsert());
         }
     }
     Item ititi;
@@ -97,7 +96,7 @@ public class Inventory : MonoBehaviour
                     int remainSpace = it.itemSO.maxCarryAmountPerSlot - it.itemAmount;
                     if (remainSpace - remainItem < 0)
                     {
-                        remainItem = remainItem - remainSpace;
+                        remainItem -= remainSpace;
                         it.AddItem(remainItem - remainSpace);
                     }
                     else
@@ -146,7 +145,7 @@ public class Inventory : MonoBehaviour
                     item = it;
                     amount -= it.itemAmount;
 
-                    if(amount <= 0) return true;
+                    if (amount <= 0) return true;
                 }
             }
         }
@@ -163,15 +162,15 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < quickSlot.Length; i++)
-        {
-            quickSlot[i].UnSelect();
-        }
+        //for (int i = 0; i < quickSlot.Length; i++)
+        //{
+        //    quickSlot[i].UnSelect();
+        //}
     }
 
     public void Save()
     {
-        InventorySaveData saveData = new InventorySaveData();
+        InventorySaveData saveData = new();
 
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
@@ -179,7 +178,7 @@ public class Inventory : MonoBehaviour
             {
                 if (inventory[i, j].assignedItem != null)
                 {
-                    ItemStruct itemS = new ItemStruct();
+                    ItemStruct itemS;
                     itemS.amount = inventory[i, j].assignedItem.itemAmount;
                     itemS.id = inventory[i, j].assignedItem.itemSO.id;
                     itemS.posX = i;
@@ -190,18 +189,18 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < quickSlot.Length; i++)
-        {
-            if (quickSlot[i].assignedItem != null)
-            {
-                ItemStruct itemS = new ItemStruct();
-                itemS.amount = quickSlot[i].assignedItem.itemAmount;
-                itemS.id = quickSlot[i].assignedItem.itemSO.id;
-                itemS.posX = i;
+        //for (int i = 0; i < quickSlot.Length; i++)
+        //{
+        //    if (quickSlot[i].AssignedPortion != null)
+        //    {
+        //        ItemStruct itemS = new ItemStruct();
+        //        itemS.amount = quickSlot[i].AssignedPortion.itemAmount;
+        //        itemS.id = quickSlot[i].AssignedPortion.itemSO.id;
+        //        itemS.posX = i;
 
-                saveData.quickSlot.Add(itemS);
-            }
-        }
+        //        saveData.quickSlot.Add(itemS);
+        //    }
+        //}
 
         string json = JsonUtility.ToJson(saveData, true);
 
@@ -210,7 +209,7 @@ public class Inventory : MonoBehaviour
 
     public void Load()
     {
-        InventorySaveData saveData = new InventorySaveData();
+        InventorySaveData saveData;
 
         if (!File.Exists(path))
         {
@@ -244,36 +243,34 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < saveData.quickSlot.Count; i++)
-        {
-            ItemStruct itemStruct = saveData.quickSlot[i];
-            int id = itemStruct.id;
+        //for (int i = 0; i < saveData.quickSlot.Count; i++)
+        //{
+        //    ItemStruct itemStruct = saveData.quickSlot[i];
+        //    int id = itemStruct.id;
 
-            ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
-            GameObject itemPf;
-            if (id == -1) continue;
+        //    ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
+        //    GameObject itemPf;
+        //    if (id == -1) continue;
 
-            for (int k = 0; k < itemSet.itemset.Count; k++)
-            {
-                if (itemSet.itemset[k].id == id)
-                {
-                    itemPf = itemSet.itemset[k].prefab;
-                    Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
+        //    for (int k = 0; k < itemSet.itemset.Count; k++)
+        //    {
+        //        if (itemSet.itemset[k].id == id)
+        //        {
+        //            itemPf = itemSet.itemset[k].prefab;
+        //            Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
 
-                    Debug.Log(itemStruct);
-                    it.Init(itemStruct.amount, quickSlot[itemStruct.posX]);
+        //            it.Init(itemStruct.amount, quickSlot[itemStruct.posX]);
 
-                    quickSlot[itemStruct.posX].InsertItem(it);
-                }
-            }
-        }
+        //            quickSlot[itemStruct.posX].InsertItem(it);
+        //        }
+        //    }
+        //}
     }
-
 
     public class InventorySaveData
     {
-        public List<ItemStruct> quickSlot = new List<ItemStruct>();
-        public List<ItemStruct> inventory = new List<ItemStruct>();
+        public List<ItemStruct> quickSlot = new();
+        public List<ItemStruct> inventory = new();
     }
 
     [System.Serializable]
