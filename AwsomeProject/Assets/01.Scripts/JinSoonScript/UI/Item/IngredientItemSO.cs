@@ -13,14 +13,13 @@ public enum IngredientType
 [CreateAssetMenu(menuName = "SO/Item/IngredientSO")]
 public class IngredientItemSO : ItemSO
 {
-    [Space(20)]
-    public List<GoodCompatibilityItem> goodCompatibilityItems = new List<GoodCompatibilityItem>();
-    public List<BadCompatibilityItem> badCompatibilityItems = new List<BadCompatibilityItem>();
+     public IngredientType ingredientType;
+     public int gatheringTime;
 
-    [HideInInspector] public IngredientType ingredientType;
-    [HideInInspector] public int gatheringTime;
+    public EffectEnum effectType;
+    public int effectPoint;
 
-    private void Awake()
+    private void OnEnable()
     {
         itemType = ItemType.Ingredient;
     }

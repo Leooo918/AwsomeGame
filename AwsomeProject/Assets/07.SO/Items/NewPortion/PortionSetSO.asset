@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a585fdbe8a2b72449ae7405455ee824, type: 3}
-  m_Name: ItemSet
+  m_Script: {fileID: 11500000, guid: b68e0b86609ce3d4dbc9df411ee2b802, type: 3}
+  m_Name: PortionSetSO
   m_EditorClassIdentifier: 
-  itemset:
-  - {fileID: 11400000, guid: fe98627ef1aaf20448d82d104b8e48c4, type: 2}
-  - {fileID: 11400000, guid: d3d7039be2bc2374aa79334f3490889d, type: 2}
-  - {fileID: 11400000, guid: 91730ec99d0ce844c97ecffd5b06a914, type: 2}
-  - {fileID: 11400000, guid: 5c94a6dc3b21eb946a458de94fb94577, type: 2}
+  portions:
   - {fileID: 11400000, guid: b4af58aa33d56fb4c9ddb4308ab251d0, type: 2}
   - {fileID: 11400000, guid: f2d5d3cc3b6e2a342bc14373d434bdba, type: 2}

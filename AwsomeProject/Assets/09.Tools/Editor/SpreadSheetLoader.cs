@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Unity.EditorCoroutines.Editor;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -135,6 +136,9 @@ public class SpreadSheetLoader : EditorWindow
     private void HandleSpreadSheetNum(ChangeEvent<string> evt)
     {
         spreadSheetNum = evt.newValue;
+
+        Dictionary<int, string> a = new Dictionary<int, string>();
+
     }
     #endregion
 
@@ -156,40 +160,41 @@ public class SpreadSheetLoader : EditorWindow
                         maxCarryAmountPerSlot: int.Parse(dataArr[3]),
                         itemExplain: dataArr[4],
                         ingredientType: Enum.Parse<IngredientType>(dataArr[5]),
-                        gatheringTime: int.Parse(dataArr[6]));
+                        effectType: Enum.Parse<EffectEnum>(dataArr[6]),
+                        point: int.Parse(dataArr[7]),
+                        gatheringTime: int.Parse(dataArr[8]));
                     break;
                 case SOType.PortionItemSO:
+                    EffectInfo[] effects = new EffectInfo[int.Parse(dataArr[6])];
+
+                    for (int i = 0; i < int.Parse(dataArr[6]); i++)
+                    {
+                        effects[i].effect = Enum.Parse<EffectEnum>(dataArr[7 + i * 2]);
+                        effects[i].requirePoint = int.Parse(dataArr[8 + i * 2]);
+                        Debug.Log(effects[i].effect);
+                        Debug.Log(effects[i].requirePoint);
+                    }
+
                     CreateSO(
                         fileName: dataArr[0],
                         id: int.Parse(dataArr[1]),
                         itemName: dataArr[2],
                         maxCarryAmountPerSlot: int.Parse(dataArr[3]),
                         itemExplain: dataArr[4],
-                        portionType: Enum.Parse<Portion>(dataArr[5]),
-                        usingTime: float.Parse(dataArr[6]),
-                        duration: float.Parse(dataArr[7]),
-                        isInfinite: bool.Parse(dataArr[8]));
-                    break;
-                case SOType.RecipeSO:
-
-                    string[] s = dataArr[2].Split(',');
-                    int[] numbers = new int[s.Length];
-                    for (int i = 0; i < s.Length; i++)
-                        numbers[i] = int.Parse(s[i]);
-
-                    CreateSO(
-                        fileName: dataArr[0],
-                        id: int.Parse(dataArr[1]),
-                        ingredientsId: numbers,
-                        portionId: int.Parse(dataArr[3]));
+                        portionEffect: Enum.Parse<EffectEnum>(dataArr[5]),
+                        requireEffects: effects);
+                    Debug.Log("밍");
+                    //portionType: Enum.Parse<Portion>(dataArr[5])
                     break;
             }
         }), this);                                                          //이거 건드리시고
     }
 
-    private void CreateSO(string fileName, int id, string itemName, int maxCarryAmountPerSlot, string itemExplain, IngredientType ingredientType, int gatheringTime)       //이거 인수 바꾸고 SO만드는 거도 바꿔
+    private void CreateSO(string fileName, int id, string itemName, int maxCarryAmountPerSlot, string itemExplain, IngredientType ingredientType, EffectEnum effectType, int point, int gatheringTime)       //이거 인수 바꾸고 SO만드는 거도 바꿔
     {
-        string filePath = $"Assets/07.SO/Items/Ingredient/{fileName}.asset";                  //경로 조금 바꾸셈
+        Debug.Log("밍");
+
+        string filePath = $"Assets/07.SO/Items/NewIngredient/{fileName}.asset";                  //경로 조금 바꾸셈
         IngredientItemSO asset = AssetDatabase.LoadAssetAtPath<IngredientItemSO>(filePath);
 
         if (asset == null)
@@ -200,6 +205,8 @@ public class SpreadSheetLoader : EditorWindow
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
             asset.ingredientType = ingredientType;
+            asset.effectType = effectType;
+            asset.effectPoint = point;
             asset.gatheringTime = gatheringTime;
 
             string filename = AssetDatabase.GenerateUniqueAssetPath(filePath);
@@ -213,14 +220,16 @@ public class SpreadSheetLoader : EditorWindow
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
             asset.ingredientType = ingredientType;
+            asset.effectType = effectType;
+            asset.effectPoint = point;
             asset.gatheringTime = gatheringTime;
             EditorUtility.SetDirty(asset);
         }
     }
 
-    private void CreateSO(string fileName, int id, string itemName, int maxCarryAmountPerSlot, string itemExplain, Portion portionType, float usingTime, float duration, bool isInfinite)
+    private void CreateSO(string fileName, int id, string itemName, int maxCarryAmountPerSlot, string itemExplain, EffectEnum portionEffect, EffectInfo[] requireEffects)
     {
-        string filePath = $"Assets/07.SO/Items/Portion/{fileName}.asset";                  //경로 조금 바꾸셈
+        string filePath = $"Assets/07.SO/Items/NewPortion/{fileName}.asset";                  //경로 조금 바꾸셈
         PortionItemSO asset = AssetDatabase.LoadAssetAtPath<PortionItemSO>(filePath);
 
         if (asset == null)
@@ -230,30 +239,8 @@ public class SpreadSheetLoader : EditorWindow
             asset.itemName = itemName;
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
-            asset.portionType = portionType;
-            asset.usingTime = usingTime;
-            asset.duration = duration;
-            asset.isInfinite = isInfinite;
-
-            string effectPath = $"/01.Scripts/JinSoonScript/PortionEffect/{fileName}Effect.cs";
-
-            string path = $"{Application.dataPath}{effectPath}";
-            if (File.Exists(path) == false)
-            {
-                string code = string.Format(CodeFormat.EffectScriptFormat, $"{fileName}Effect");
-                File.WriteAllText($"{path}", code);
-
-                Type t = Type.GetType($"{fileName}Effect");
-                Effect effect = Activator.CreateInstance(t) as Effect;
-
-                asset.effect = effect;
-            }
-            else
-            {
-                Type t = Type.GetType($"{fileName}Effect");
-                Effect effect = Activator.CreateInstance(t) as Effect;
-                asset.effect = effect;
-            }
+            asset.effect = portionEffect;
+            asset.reqireEffects = requireEffects.ToList();
 
             string filename = AssetDatabase.GenerateUniqueAssetPath(filePath);
             AssetDatabase.CreateAsset(asset, filename);
@@ -265,73 +252,17 @@ public class SpreadSheetLoader : EditorWindow
             asset.itemName = itemName;
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
-            asset.portionType = portionType;
-            asset.usingTime = usingTime;
-            asset.duration = duration;
-            asset.isInfinite = isInfinite;
+            asset.effect = portionEffect;
+            asset.reqireEffects = requireEffects.ToList();
 
-            string effectPath = $"/01.Scripts/JinSoonScript/PortionEffect/{fileName}Effect.cs";
-
-            string path = $"{Application.dataPath}{effectPath}";
-            if (File.Exists(path) == false)
-            {
-                string code = string.Format(CodeFormat.EffectScriptFormat, $"{fileName}Effect");
-                File.WriteAllText($"{path}", code);
-                Type t = Type.GetType($"{fileName}Effect");
-                Effect effect = Activator.CreateInstance(t) as Effect;
-                asset.effect = effect;
-            }
-            else
-            {
-                Type t = Type.GetType($"{fileName}Effect");
-                Effect effect = Activator.CreateInstance(t) as Effect;
-                asset.effect = effect;
-            }
-        }
-
-        EditorUtility.SetDirty(asset);
-    }
-
-    private void CreateSO(string fileName, int id, int[] ingredientsId, int portionId)
-    {
-        List<IngredientItemSO> items = new();
-        PortionItemSO portion = new();
-
-        for (int i = 0; i < ItemSetSO.itemset.Count; i++)
-        {
-            Debug.Log(ItemSetSO.itemset[i]);
-            for (int j = 0; j < ingredientsId.Length; j++)
-            {
-                Debug.Log(ingredientsId[j]);
-                if (ingredientsId[j] == ItemSetSO.itemset[i].id)
-                    items.Add(ItemSetSO.itemset[i] as IngredientItemSO);
-            }
-
-            if (portionId == ItemSetSO.itemset[i].id)
-                portion = ItemSetSO.itemset[i] as PortionItemSO;
-        }
-
-        string filePath = $"Assets/07.SO/Recipe/{fileName}.asset";                  //경로 조금 바꾸셈
-        RecipeSO asset = AssetDatabase.LoadAssetAtPath<RecipeSO>(filePath);
-
-        if (asset == null)
-        {
-            asset = ScriptableObject.CreateInstance<RecipeSO>();
-            asset.id = id;
-            asset.ingredients = items.ToArray();
-            asset.portion = portion;
-
-            string filename = AssetDatabase.GenerateUniqueAssetPath(filePath);
-            AssetDatabase.CreateAsset(asset, filename);
-            RecipeSetSO.AddItem(asset);
-        }
-        else
-        {
-            asset.id = id;
-            asset.ingredients = items.ToArray();
-            asset.portion = portion;
             EditorUtility.SetDirty(asset);
         }
     }
     #endregion
+}
+
+public struct EffectPoint
+{
+    public EffectEnum effect;
+    public int point;
 }

@@ -33,8 +33,3 @@ public class EffectManager : Singleton<EffectManager>
 
     public Effect GetEffect(EffectEnum effect) => effectDic[effect];
 }
-
-public enum EffectEnum
-{
-    Heal
-}

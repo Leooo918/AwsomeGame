@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class PlayerGroundState : PlayerState
 {
-    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
+    private Skill dashSkill;
+    private Skill normalAttackSkill;
+
+    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) 
+    {
+        dashSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill;
+        normalAttackSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill;
+    }
 
     public override void Enter()
     {
@@ -57,12 +64,12 @@ public class PlayerGroundState : PlayerState
 
     private void HandleDashEvent()
     {
-        player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill();
+        dashSkill.UseSkill();
     }
 
     private void HandleAttackEvent()
     {
-        player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill();
+        normalAttackSkill.UseSkill();
     }
 
     #endregion

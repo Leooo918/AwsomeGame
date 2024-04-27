@@ -25,6 +25,7 @@ public class HitFeedBack : MonoBehaviour
         float fontSize = health.isLastAttackCritical ? criticalFontSize : normalHitFontSize;
         Color color = health.isLastAttackCritical ? criticalColor : normalHitColor;
         Vector2 position = (Vector2)transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(0.5f, 1.5f));
+
         effect.Init(health.lastAttackDamage, fontSize, color, position);
         effect.DoEffect();
     }
