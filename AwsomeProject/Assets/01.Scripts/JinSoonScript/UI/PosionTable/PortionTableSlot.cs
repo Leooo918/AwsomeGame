@@ -24,7 +24,7 @@ public class PortionTableSlot : InventorySlot
 
     public void RemoveItem()
     {
-
+        //EffectEnum
     }
 
     public override void OnPointerClick(PointerEventData eventData)
