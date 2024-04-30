@@ -12,7 +12,7 @@ public class VolumeSlider : MonoBehaviour
     public void AudioControl()
     {
         float sound = audioSlider.value;
-
+        
         if (sound == -40f) 
             masterMixer.SetFloat("BGM", -80);
         else 
