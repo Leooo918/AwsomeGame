@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WildBoarRushSkill
   m_EditorClassIdentifier: 
   id: 0
-  skillName: 
+  skillName: Rush
   skill: {fileID: 0}
   skillCoolTime:
     baseValue: 0
