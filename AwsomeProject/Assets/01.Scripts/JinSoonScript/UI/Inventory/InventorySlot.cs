@@ -10,11 +10,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private Inventory inventory;
     private GameObject selectUI;
+    private RectTransform[] parents;
     public Item assignedItem { get; private set; }
     public bool isSelectedNow { get; private set; } = false;
 
     protected virtual void Awake()
     {
+        parents = transform.GetComponentsInParent<RectTransform>();
         rect = GetComponent<RectTransform>();
         selectUI = transform.Find("SelectedUI").gameObject;
         selectUI.SetActive(false);
@@ -46,7 +48,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         assignedItem = item;
         Vector3 position = Vector3.zero;
-        foreach (var r in transform.GetComponentsInParent<RectTransform>())
+        foreach (var r in parents)
         {
             if (r.GetComponent<Canvas>() != null || r.name == "InventoryBackground") break;
             position += r.localPosition;

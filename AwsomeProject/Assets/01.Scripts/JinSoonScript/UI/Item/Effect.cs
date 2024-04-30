@@ -11,7 +11,10 @@ public abstract class Effect
     public float duration { get; protected set; } = 1f;
     public bool isInfiniteEffect { get; protected set; } = false;
 
-    public abstract void EnterEffort(Entity target);
+    public virtual void EnterEffort(Entity target)
+    {
+
+    }
 
     public virtual void UpdateEffort()
     {

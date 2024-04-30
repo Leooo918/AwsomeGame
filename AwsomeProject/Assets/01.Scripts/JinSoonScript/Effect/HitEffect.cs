@@ -19,7 +19,7 @@ public class HitEffect : MonoBehaviour
 
         Vector3 endPos = transform.position + new Vector3(0, Random.Range(0.5f, 1.5f));
         float jumpPower = Random.Range(1f,3f);
-        float duration = 0.25f;
+        float duration = 0.4f;
         Color endColor = new Color(txt.color.r, txt.color.g, txt.color.b, 0);
 
         //여기 OnComplete에서 풀링 하면 바꿔주기로

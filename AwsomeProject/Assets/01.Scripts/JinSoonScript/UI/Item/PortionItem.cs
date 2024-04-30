@@ -15,6 +15,6 @@ public class PortionItem : Item
 
         PortionItemSO p = itemSO as PortionItemSO;
         posionType = p.portionType;
-        posionEffect = p.effect as Effect;
+        //posionEffect = EffectManager.Instance.GetEffect(p.effect);
     }
 }

@@ -8,12 +8,12 @@ public enum ItemType
 
 public class ItemSO : ScriptableObject
 {
-    [HideInInspector]public int id;
-    [HideInInspector] public string itemName;
-    [HideInInspector]public ItemType itemType;
-    [HideInInspector] public int maxCarryAmountPerSlot;
-    [TextArea(3,20)]
-    [HideInInspector] public string itemExplain;
+    public int id;
+    public string itemName;
+    public ItemType itemType;
+    public int maxCarryAmountPerSlot;
+    [TextArea(3, 20)]
+    public string itemExplain;
 
     [Space(20)]
     public Sprite dotImage;

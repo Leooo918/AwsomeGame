@@ -12,7 +12,6 @@ public class RecipeManager : MonoBehaviour
 
     public RecipeSetSO recipeSet;
     public List<RecipeSO> curRecipe;// { get; private set; }
-    public List<int> recipeEverUsed;
 
     [SerializeField] private RectTransform sideBar;
     [SerializeField] private RectTransform selectedRecipe;
@@ -46,102 +45,24 @@ public class RecipeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 재료들을 받아서 만들 포션을 주고 포션을 만들수 있는지 확인해줘
+    /// 재료들을 받아서 포션을 만들 수 있는지 확인하고 포션을 만들어서 out에 할당해주는
     /// </summary>
     /// <param name="ingredients"></param>
     /// <param name="posionToMake"></param>
     /// <returns></returns>
     public bool TryMakePosion(IngredientItemSO[] ingredients, out PortionItemSO posionToMake)
     {
-        for (int i = 0; i < curRecipe.Count; ++i)
-        {
-            //현재 이 물약의 레시피를 가지고 있는지 확인해줘
-            bool isThisRecipe = true;
-            for (int j = 0; j < curRecipe[i].ingredients.Length; ++j)
-            {
-                if (ingredients.Length <= j || ingredients[j] != curRecipe[i].ingredients[j])
-                {
-                    isThisRecipe = false;
-                    break;
-                }
-            }
-
-            if (isThisRecipe == false) break;
-
-            //아이템 id랑 개수를 리스트에 채워줄거임
-            List<Tuple<int, int>> items = new List<Tuple<int, int>>();
-
-            for (int k = 0; k < ingredients.Length; ++k)
-            {
-                bool itemExist = false;
-                for (int j = 0; j < items.Count; ++j)
-                {
-                    //현재 리스트에 이미 아이템이 있다면
-                    if (items[j].Item1 == ingredients[k].id)
-                    {
-                        //앞에 리스트에 개수에 추가해줄거임
-                        items[j] = new Tuple<int, int>(items[j].Item1, (items[j].Item2 + 1));
-                        itemExist = true;
-                        Debug.Log($"id = {items[j].Item1}, Amount = {items[j].Item2}");
-                        continue;
-                    }
-                }
-
-                if (itemExist)
-                    continue;
-
-                //재료를 items리스트에 넣어줘 id랑 개수 순으로
-                Debug.Log($"id = {ingredients[k].id}, Amount = {1}");
-                items.Add(new Tuple<int, int>(ingredients[k].id, 1));
-            }
-
-            Inventory myInventory = InventoryManager.Instance.PlayerInventory;
-            List<Item> ingredientItems = new List<Item>();
-            bool isPossesIngredients = true;
-
-            //현재 인벤토리에 재료들이 전부 있는지 확인
-            for (int j = 0; j < items.Count; ++j)
-            {
-                isPossesIngredients = myInventory.GetItem(items[j].Item1, items[j].Item2, out Item ingredient);
-
-                if (isPossesIngredients == false)
-                {
-                    posionToMake = curRecipe[i].portion;
-                    return false;
-                }
-
-                //재료들은 전부 요 리스트에 넣어주고
-                ingredientItems.Add(ingredient);
-            }
-
-            //재료가 될 아이템들을 리스트를 돌면서 제거해줘
-            for (int j = 0; j < ingredientItems.Count; ++j)
-            {
-                ingredientItems[j].RemoveItem(items[j].Item2);
-                Debug.Log($"제거 : {ingredientItems[j].itemAmount} {items[j].Item2}");
-            }
-
-
-            posionToMake = curRecipe[i].portion;
-            return true;
-        }
-
-        //현재 가지고 있는 레시피가 아니라면 null 주고 return false해줘
-        posionToMake = null;
-        return false;
+        posionToMake = new PortionItemSO();
+        return true;
     }
 
     /// <summary>
     /// id로 레시피 추가 해줘
     /// </summary>
     /// <param name="id">레시피의 id</param>
-    public void AddRecipe(int id)
+    public void AddRecipe()
     {
-        for (int j = 0; j < recipeSet.recipes.Count; j++)
-        {
-            if (recipeSet.recipes[j].id == id && curRecipe.Contains(recipeSet.recipes[j]) == false)
-                curRecipe.Add(recipeSet.recipes[j]);
-        }
+
     }
 
 
@@ -151,8 +72,8 @@ public class RecipeManager : MonoBehaviour
     /// <param name="recipe"></param>
     public void AddRecipe(RecipeSO recipe)
     {
-        if (curRecipe.Contains(recipe) == false)
-            curRecipe.Add(recipe);
+        //if (curRecipe.Contains(recipe) == false)
+        //    curRecipe.Add(recipe);
 
         Save();
     }
@@ -164,7 +85,6 @@ public class RecipeManager : MonoBehaviour
     public void ResetRecipeData()
     {
         curRecipe.Clear();
-        recipeEverUsed.Clear();
         Save();
     }
 
@@ -203,9 +123,6 @@ public class RecipeManager : MonoBehaviour
     /// <returns></returns>
     public bool IsEverUseRecipe(RecipeSO recipe)
     {
-        if(recipeEverUsed.Contains(recipe.id) == true) return false;
-
-        recipeEverUsed.Add(recipe.id);
         Save();
         return true;
     }
@@ -219,8 +136,6 @@ public class RecipeManager : MonoBehaviour
         {
             saves.ids.Add(curRecipe[i].id);
         }
-
-        saves.recipeOnceUsed = recipeEverUsed;
 
         string json = JsonUtility.ToJson(saves, true);
         File.WriteAllText(path, json);
@@ -239,8 +154,6 @@ public class RecipeManager : MonoBehaviour
                     curRecipe.Add(recipeSet.recipes[j]);
             }
         }
-
-        recipeEverUsed = saves.recipeOnceUsed;
     }
 }
 
