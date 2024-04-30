@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: WildBoarStatus
+  m_EditorClassIdentifier: Assembly-CSharp::WildBoarStatusSO
+  MaxHealth:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  Attack:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  AttackSpeed:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  CriticalPercent:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  MoveSpeed:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  Defence:
+    baseValue: 0
+    modifiers: 
+    percentModifiers: 
+  PatrolTime: 0
+  PatrolDelay: 0
+  DetectingDistance: 10
+  skills:
+  - {fileID: 0}
+  dropItems: []
