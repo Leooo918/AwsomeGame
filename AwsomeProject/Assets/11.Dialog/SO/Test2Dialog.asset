@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732824df00c0acd4b9a15629c7ca57c7, type: 3}
+  m_Name: Test2Dialog
+  m_EditorClassIdentifier: 
+  scriptList:
+  - {fileID: 9154444068899692611}
+  - {fileID: 463536891695417077}
+  dialogBackground: {fileID: 5728600992528880802, guid: e4ad8285e5daf6e4f94b8296a446041b, type: 3}
+--- !u!114 &463536891695417077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e387c4f654141d409b58ef3192fbd5f, type: 3}
+  m_Name: OptionSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: d4be151abbe0ac640bb635a29124b5c9
+  position: {x: 262.40002, y: 0}
+  optionPf: {fileID: 1748593612290805991, guid: bb752a0a65bde2447af8bd2d80b30281, type: 3}
+  options:
+  - detail: "\uD558\uC774"
+    nextScript: {fileID: 0}
+  - detail: "\uBC14\uC774"
+    nextScript: {fileID: 0}
+--- !u!114 &9154444068899692611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33134f00ca4b504bab097a154bd5b3f, type: 3}
+  m_Name: NormalScriptSO
+  m_EditorClassIdentifier: 
+  cameraSettings: []
+  guid: 2d60b984c33588f4faddceb5777a4001
+  position: {x: 49.712006, y: 0}
+  character:
+    name: "\uB9C8\uB354"
+    imgPrefab: {fileID: 7140167969192229839, guid: ca71b88ef29bb4f439b7b6ca213e8aaf, type: 3}
+    talkDetails: "\uD558\uC774"
+  nextScript: {fileID: 463536891695417077}

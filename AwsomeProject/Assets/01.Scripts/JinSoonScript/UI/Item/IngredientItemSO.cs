@@ -24,14 +24,3 @@ public class IngredientItemSO : ItemSO
         itemType = ItemType.Ingredient;
     }
 }
-
-public struct GoodCompatibilityItem
-{
-    public int itemId;
-    public float effectMultiple;
-}
-
-public struct BadCompatibilityItem
-{
-    public int itemId;
-}

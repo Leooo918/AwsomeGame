@@ -7,6 +7,7 @@ public class Parallax : MonoBehaviour
 {
     private float length, startPos;
     private GameObject cam;
+    public bool isFastenY;
     public float parallaxEffect;
 
     private void Awake()
@@ -21,7 +22,18 @@ public class Parallax : MonoBehaviour
         float temp = (cam.transform.position.x * (1 - parallaxEffect));
         float dist = (cam.transform.position.x * parallaxEffect);
 
-        transform.position = new Vector3(startPos + dist, cam.transform.position.y, transform.position.z);
+        Vector3 targetPos = new Vector3(startPos + dist, 0, transform.position.z);
+
+        if(isFastenY)
+        {
+            targetPos.y = cam.transform.position.y;
+        }
+        else
+        {
+            targetPos.y = transform.position.y;
+        }
+
+        transform.position = targetPos;
 
         if (temp > startPos + length) startPos += length;
         else if(temp < startPos - length) startPos -= length;

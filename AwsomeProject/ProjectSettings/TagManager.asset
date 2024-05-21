@@ -17,7 +17,7 @@ TagManager:
   - Item
   - Object
   - WorkSpace
-  - 
+  - Spine
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Item
     uniqueID: 950916033
+    locked: 0
+  - name: Spine
+    uniqueID: 764107117
     locked: 0

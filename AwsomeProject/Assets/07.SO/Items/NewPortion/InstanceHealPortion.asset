@@ -24,7 +24,7 @@ MonoBehaviour:
   effect: 0
   reqireEffects:
   - effect: 0
-    requirePoint: 5
+    requirePoint: 3
   effecLv: 0
   duration: 0
   usingTime: 0.5

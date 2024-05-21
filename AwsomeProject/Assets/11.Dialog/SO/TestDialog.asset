@@ -293,6 +293,9 @@ MonoBehaviour:
   - detail: "\uB2F9\uC5F0\uD558\uC9C0! \uB09C \uCD5C\uAC15\uC758 \uC5F0\uAE08\uC220\uC0AC\uAC00
       \uB420\uAEBC\uB2C8\uAE4C!"
     nextScript: {fileID: 5538120473580913986}
+  - detail: "\uB2F9\uC5F0\uD558\uC9C0! \uB09C \uCD5C\uAC15\uC758 \uC5F0\uAE08\uC220\uC0AC\uAC00
+      \uB420\uAEBC\uB2C8\uAE4C!"
+    nextScript: {fileID: 5538120473580913986}
 --- !u!114 &7692830312871079913
 MonoBehaviour:
   m_ObjectHideFlags: 0

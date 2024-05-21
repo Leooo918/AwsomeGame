@@ -1,18 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
     private string path = "";
+    public Action<ItemSO> OnSelectItem;
+
     [SerializeField] private Transform slotParent;
-    [SerializeField] private Transform quickSlotParent;
+    [SerializeField] private Transform itemParent;
+    [SerializeField] private InventorySlot slotPf;
 
-
-    [SerializeField] private ItemSO testItem;
+    [SerializeField] private bool indicateIngredient = false;
+    [SerializeField] private bool indicatePortion = false;
 
     private void Awake()
     {
@@ -22,16 +25,10 @@ public class Inventory : MonoBehaviour
         {
             for (int j = 0; j < inventory.GetLength(0); j++)
             {
-                inventory[j, i] = slotParent.GetChild(i * 5 + j).GetComponent<InventorySlot>();
+                inventory[j, i] = Instantiate(slotPf, slotParent);
                 inventory[j, i].Init(this);
             }
         }
-
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    quickSlot[i] = quickSlotParent.GetChild(i).GetComponent<QuickSlotInserter>();
-        //    quickSlot[i].Init(this);
-        //}
     }
 
     private void Start()
@@ -51,19 +48,6 @@ public class Inventory : MonoBehaviour
         {
             Load();
         }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ititi = Instantiate(testItem.prefab, GameObject.Find("Items").transform).GetComponent<Item>();
-            ititi.Init(1, null);
-            StartCoroutine(DelayInsert());
-        }
-    }
-    Item ititi;
-    IEnumerator DelayInsert()
-    {
-        yield return null;
-        TryInsertItem(ititi);
     }
 
     IEnumerator DelayLoad()
@@ -104,6 +88,7 @@ public class Inventory : MonoBehaviour
                         it.AddItem(remainItem);
 
                         Destroy(item.gameObject);
+                        Save();
                         return true;
                     }
 
@@ -121,12 +106,14 @@ public class Inventory : MonoBehaviour
                 if (it == null)
                 {
                     inventory[j, i].InsertItem(item);
+                    Save();
                     return true;
                 }
             }
         }
 
         //만약 인벤토리에 빈 곳이 없다면 return false
+        Save();
         return false;
     }
 
@@ -161,11 +148,6 @@ public class Inventory : MonoBehaviour
                 inventory[i, j].UnSelect();
             }
         }
-
-        //for (int i = 0; i < quickSlot.Length; i++)
-        //{
-        //    quickSlot[i].UnSelect();
-        //}
     }
 
     public void Save()
@@ -189,21 +171,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        //for (int i = 0; i < quickSlot.Length; i++)
-        //{
-        //    if (quickSlot[i].AssignedPortion != null)
-        //    {
-        //        ItemStruct itemS = new ItemStruct();
-        //        itemS.amount = quickSlot[i].AssignedPortion.itemAmount;
-        //        itemS.id = quickSlot[i].AssignedPortion.itemSO.id;
-        //        itemS.posX = i;
-
-        //        saveData.quickSlot.Add(itemS);
-        //    }
-        //}
-
         string json = JsonUtility.ToJson(saveData, true);
-
         File.WriteAllText(path, json);
     }
 
@@ -220,6 +188,16 @@ public class Inventory : MonoBehaviour
         string json = File.ReadAllText(path);
         saveData = JsonUtility.FromJson<InventorySaveData>(json);
 
+        //지금 있는거 다 지우고
+        for (int i = 0; i < inventory.GetLength(1); i++)
+        {
+            for (int j = 0; j < inventory.GetLength(0); j++)
+            {
+                if (inventory[j, i].assignedItem != null)
+                    Destroy(inventory[j, i].assignedItem.gameObject);
+            }
+        }
+
         for (int i = 0; i < saveData.inventory.Count; i++)
         {
             ItemStruct itemStruct = saveData.inventory[i];
@@ -231,40 +209,17 @@ public class Inventory : MonoBehaviour
 
             for (int k = 0; k < itemSet.itemset.Count; k++)
             {
-                if (itemSet.itemset[k].id == id)
-                {
-                    itemPf = itemSet.itemset[k].prefab;
-                    Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
+                if (itemSet.itemset[k].id != id) continue;
+                if (itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) continue;
+                if (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false) continue;
 
-                    it.Init(itemStruct.amount, inventory[itemStruct.posX, itemStruct.posY]);
+                itemPf = itemSet.itemset[k].prefab;
+                Item it = Instantiate(itemPf, itemParent).GetComponent<Item>();
 
-                    inventory[itemStruct.posX, itemStruct.posY].InsertItem(it);
-                }
+                it.Init(itemStruct.amount, inventory[itemStruct.posX, itemStruct.posY]);
+                inventory[itemStruct.posX, itemStruct.posY].InsertItem(it);
             }
         }
-
-        //for (int i = 0; i < saveData.quickSlot.Count; i++)
-        //{
-        //    ItemStruct itemStruct = saveData.quickSlot[i];
-        //    int id = itemStruct.id;
-
-        //    ItemSetSO itemSet = InventoryManager.Instance.ItemSet;
-        //    GameObject itemPf;
-        //    if (id == -1) continue;
-
-        //    for (int k = 0; k < itemSet.itemset.Count; k++)
-        //    {
-        //        if (itemSet.itemset[k].id == id)
-        //        {
-        //            itemPf = itemSet.itemset[k].prefab;
-        //            Item it = Instantiate(itemPf, InventoryManager.Instance.itemParent).GetComponent<Item>();
-
-        //            it.Init(itemStruct.amount, quickSlot[itemStruct.posX]);
-
-        //            quickSlot[itemStruct.posX].InsertItem(it);
-        //        }
-        //    }
-        //}
     }
 
     public class InventorySaveData
