@@ -19,7 +19,7 @@ public enum WildBoarSkillEnum
 
 public class WildBoar : Enemy
 {
-    public WildBoarStatusSO wildBoarStatus { get; protected set; }
+    //public WildBoarStatusSO wildBoarStatus { get; protected set; }
     public EnemyStateMachine<WildBoarEnum> StateMachine { get; private set; }
 
     public Stack<SkillSO> readySkill = new Stack<SkillSO>();
@@ -34,7 +34,6 @@ public class WildBoar : Enemy
     protected override void Awake()
     {
         base.Awake();
-        wildBoarStatus = enemyStatus as WildBoarStatusSO;
         StateMachine = new EnemyStateMachine<WildBoarEnum>();
 
         foreach(WildBoarEnum stateEnum in Enum.GetValues(typeof(WildBoarEnum)))
@@ -54,15 +53,15 @@ public class WildBoar : Enemy
             }
         }
 
-        foreach (var item in wildBoarStatus.skillDic)
+        foreach (var item in EntitySkillSO.skills)
         {
-            item.Value.skill.SetOwner(this);
-            Type type = item.Value.skill.GetType();
+            item.skill.SetOwner(this);
+            Type type = item.skill.GetType();
             gameObject.AddComponent(type);
         }
 
-        moveSpeed = wildBoarStatus.MoveSpeed.GetValue();
-        detectingDistance = wildBoarStatus.DetectingDistance;
+        moveSpeed = Stat.moveSpeed.GetValue();
+        detectingDistance = EnemyStat.detectingDistance.GetValue();
 
         pivot = hpBar.Find("Pivot");
     }
@@ -136,11 +135,11 @@ public class WildBoar : Enemy
     private void OnDie(Vector2 dir)
     {
         isDead = true;
-        for(int i = 0; i<wildBoarStatus.dropItems.Count; i++)
+        for(int i = 0; i< EnemyStat.dropItems.Count; i++)
         {
-            if (UnityEngine.Random.Range(0, 101) < wildBoarStatus.dropItems[i].perecentage)
+            if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
             {
-                DropItem dropItem = Instantiate(wildBoarStatus.dropItems[i].dropItemPf).GetComponent<DropItem>();
+                DropItem dropItem = Instantiate(EnemyStat.dropItems[i].dropItemPf).GetComponent<DropItem>();
                 dropItem.transform.position = transform.position + Vector3.up;
                 dropItem.SpawnItem(dir);
             }

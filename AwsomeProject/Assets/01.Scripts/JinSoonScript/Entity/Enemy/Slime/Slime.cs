@@ -216,7 +216,7 @@ public class Slime : Enemy
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
             {
-                DropItem dropItem = Instantiate(EnemyStat.dropItems[i].dropItem).GetComponent<DropItem>();
+                DropItem dropItem = Instantiate(EnemyStat.dropItems[i].dropItemPf).GetComponent<DropItem>();
                 dropItem.transform.position = transform.position + Vector3.up;
                 dropItem.SpawnItem(dir);
             }

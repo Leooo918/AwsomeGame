@@ -88,7 +88,7 @@ public class EntityStat : ScriptableObject
 [Serializable]
 public struct DropItemStruct
 {
-    public GameObject dropItem;
+    public GameObject dropItemPf;
     public float appearChance;
 }
 

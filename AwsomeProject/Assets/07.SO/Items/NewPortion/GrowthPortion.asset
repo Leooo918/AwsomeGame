@@ -17,9 +17,9 @@ MonoBehaviour:
   itemType: 1
   maxCarryAmountPerSlot: 3
   itemExplain: "\uCB49\uCB49 \uC131\uC7A5 \uD558\uB294 \uCB49~"
-  dotImage: {fileID: 0}
-  itemImage: {fileID: 0}
-  prefab: {fileID: 0}
+  dotImage: {fileID: -1659575403, guid: b98a81d5e851c0c46912008bb82fac62, type: 3}
+  itemImage: {fileID: -1659575403, guid: b98a81d5e851c0c46912008bb82fac62, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: f43960d83ab5e1d43b723418f710e42d, type: 3}
   portionType: 0
   effect: 4
   reqireEffects:
