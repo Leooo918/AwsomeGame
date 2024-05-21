@@ -73,7 +73,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void Select()
     {
         if (inventory != null)
+        {
             inventory.UnSelectAllSlot();
+            if (assignedItem != null)
+                inventory.OnSelectItem?.Invoke(assignedItem.itemSO);
+            else
+                inventory.OnSelectItem?.Invoke(null);
+        }
 
         selectUI.SetActive(true);
     }

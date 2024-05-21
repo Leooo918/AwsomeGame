@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -113,7 +111,7 @@ public class ItemImageInserter : EditorWindow
         }
     }
 
-    
+
 
     private void DrawPortion()
     {
@@ -164,37 +162,12 @@ public class ItemImageInserter : EditorWindow
                     editorScrollPosition = EditorGUILayout.BeginScrollView(editorScrollPosition);
                     {
                         EditorGUILayout.Space(2f);
-                        Editor.CreateCachedEditor(selectedItem[ItemType.Portion], null, ref cachedEditor);
+                        Editor.CreateCachedEditor(
+                            selectedItem[ItemType.Portion], null, ref cachedEditor);
                         cachedEditor.OnInspectorGUI();
                     }
                     EditorGUILayout.EndScrollView();
                 }
-
-                EditorGUILayout.BeginHorizontal();
-                {
-                    if (selectedItem[ItemType.Portion] != null)
-                    {
-                        PortionItemSO portion =
-                            selectedItem[ItemType.Portion] as PortionItemSO;
-
-                        EditorGUILayout.BeginVertical();
-                        {
-                            EditorGUILayout.LabelField("DotImage");
-                            if (portion.dotImage != null)
-                                GUILayout.Box(portion.dotImage.texture);
-                        }
-                        EditorGUILayout.EndVertical();
-
-                        EditorGUILayout.BeginVertical();
-                        {
-                            EditorGUILayout.LabelField("ItemImage");
-                            if (portion.itemImage != null)
-                                GUILayout.Box(portion.itemImage.texture);
-                        }
-                        EditorGUILayout.EndVertical();
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndVertical();
         }
@@ -255,32 +228,6 @@ public class ItemImageInserter : EditorWindow
                     }
                     EditorGUILayout.EndScrollView();
                 }
-
-                EditorGUILayout.BeginHorizontal();
-                {
-                    if (selectedItem[ItemType.Ingredient] != null)
-                    {
-                        IngredientItemSO ingredients =
-                            selectedItem[ItemType.Ingredient] as IngredientItemSO;
-
-                        EditorGUILayout.BeginVertical();
-                        {
-                            EditorGUILayout.LabelField("DotImage");
-                            if (ingredients.dotImage != null)
-                                GUILayout.Box(ingredients.dotImage.texture);
-                        }
-                        EditorGUILayout.EndVertical();
-
-                        EditorGUILayout.BeginVertical();
-                        {
-                            EditorGUILayout.LabelField("ItemImage");
-                            if (ingredients.itemImage != null)
-                                GUILayout.Box(ingredients.itemImage.texture);
-                        }
-                        EditorGUILayout.EndVertical();
-                    }
-                }
-                EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndVertical();
         }

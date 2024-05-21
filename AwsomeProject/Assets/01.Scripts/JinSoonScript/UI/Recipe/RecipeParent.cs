@@ -71,7 +71,7 @@ public class RecipeParent : MonoBehaviour
                 switch (curSortMode)
                 {
                     case SortMode.ById:
-                        changeParent =
+                        changeParent = 
                             (comp.recipe.id < recipeUI.recipe.id);
                         break;
                     case SortMode.ByString:
