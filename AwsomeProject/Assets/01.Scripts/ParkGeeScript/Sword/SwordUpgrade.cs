@@ -1,22 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SwordUpgrade : MonoBehaviour
 {
-    private Player player;
-    [SerializeField] private ParticleSystem upgradeParticle;
+    private EntityStat entityStat;
+    private Stat stat;
+    //private ParticleSystem upgradeParticle;
+    private Enum enumState;
 
     private void Awake()
     {
-        
+        entityStat = FindAnyObjectByType<EntityStat>();
+        Debug.Log(entityStat);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            upgradeParticle.Play();
+            //upgradeParticle.Play();
+
+            enumState = EffectEnum.Freeze;
+
+            switch (enumState)
+            {
+                case EffectEnum.Freeze:
+                    Debug.Log("asdf");
+                    entityStat.GetDamage();
+                    break;
+                case EffectEnum.FreezePrevent:
+                    Debug.Log("asdasd");
+                    entityStat.GetDamage();
+                    break;
+            }
         }
     }
 }

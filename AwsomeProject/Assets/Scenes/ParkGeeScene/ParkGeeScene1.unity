@@ -563,6 +563,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 356977025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &261126383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 261126385}
+  - component: {fileID: 261126384}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &261126384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261126383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc81e8401e0b454c8b1968f343f758f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &261126385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261126383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &266334221
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,22 +969,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4682d0f620db2f14c91452eea68d7168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundChecker: {fileID: 220944251}
-  groundCheckDistance: 0.1
+  stat: {fileID: 0}
+  entitySkillSO: {fileID: 0}
   whatIsGroundAndWall:
     serializedVersion: 2
     m_Bits: 64
   whatIsProbs:
     serializedVersion: 2
     m_Bits: 1024
+  groundChecker: {fileID: 220944251}
+  groundCheckBoxWidth: 0.75
+  groundCheckDistance: 0.1
   wallChecker: {fileID: 767241107}
   wallCheckDistance: 0.1
-  groundCheckBoxWidth: 0.75
   wallCheckBoxHeight: 1.75
   HitEvent:
     m_PersistentCalls:
       m_Calls: []
-  playerStatus: {fileID: 11400000, guid: 60ecaec96ed8d3e49b28c377b35d9623, type: 2}
   hpSlider: {fileID: 0}
   coyoteTime: 0.3
   canJump: 0
@@ -2481,7 +2526,7 @@ Transform:
   m_GameObject: {fileID: 951254748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.2222223, y: 2, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4311,7 +4356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1489924959
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12040,7 +12085,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 60d327ad4056edf4db46e0d9c2fb85c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb6cbdd7b0756cd49896ada3c51d54a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12603,7 +12648,7 @@ MonoBehaviour:
   _selectedItemOn: {fileID: 1136452331}
   _priceTxt: {fileID: 1423529923}
   _descriptTxt: {fileID: 1390458558}
-  _menual: "\uB77C\uBA74 the goat"
+  _menual: "\uBB34\uC2A8 \uBB34\uC2A8 \uB2A5\uB825\uC744 \uAC00\uC9C4 \uD3EC\uC158\uC774\uB2E4."
   _price: 423
 --- !u!222 &8903730947199448044
 CanvasRenderer:
@@ -12721,3 +12766,4 @@ SceneRoots:
   - {fileID: 1398294051}
   - {fileID: 153789606}
   - {fileID: 536000006}
+  - {fileID: 261126385}

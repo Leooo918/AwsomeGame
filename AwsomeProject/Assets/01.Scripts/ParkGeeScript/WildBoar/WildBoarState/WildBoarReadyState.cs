@@ -17,7 +17,7 @@ public class WildBoarReadyState : EnemyState<WildBoarEnum>
     {
         base.Enter();
 
-        playerTrm = PlayerManager.instance.playerTrm;
+        playerTrm = PlayerManager.Instance.PlayerTrm;
 
         enemy.FindPlayerEvt(() =>
         {
