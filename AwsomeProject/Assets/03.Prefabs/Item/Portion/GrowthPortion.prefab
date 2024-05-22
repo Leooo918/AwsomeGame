@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 267918655651322837}
   - component: {fileID: 7189593635475201567}
   - component: {fileID: 8959519642044216649}
-  - component: {fileID: 5836964758740588742}
+  - component: {fileID: 6576363195722449821}
   m_Layer: 5
   m_Name: GrowthPortion
   m_TagString: Untagged
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5836964758740588742
+--- !u!114 &6576363195722449821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6910422564161804073}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba19f8fe40f927c49a08258fefe01375, type: 3}
+  m_Script: {fileID: 11500000, guid: 20fee592a29457b49a53f2cba5973e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemSO: {fileID: 11400000, guid: 5be58368ccbe102408418a0f7ec940c8, type: 2}

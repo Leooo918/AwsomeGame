@@ -22,9 +22,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   portionType: 0
   effect: 0
-  reqireEffects:
-  - effect: 0
-    requirePoint: 3
+  requireEffects: []
   effecLv: 0
   duration: 0
   usingTime: 0.5

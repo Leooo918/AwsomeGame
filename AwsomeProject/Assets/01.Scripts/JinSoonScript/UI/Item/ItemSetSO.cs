@@ -18,7 +18,18 @@ public class ItemSetSO : ScriptableObject
 
 #if UNITY_EDITOR
         EditorUtility.SetDirty(this);
-#endif  
+#endif
+    }
 
+    public ItemSO FindItem(int id)
+    {
+        for(int i = 0; i < itemset.Count; i++)
+        {
+            if (itemset[i].id == id)
+            {
+                return itemset[i];
+            }
+        }
+        return null;
     }
 }

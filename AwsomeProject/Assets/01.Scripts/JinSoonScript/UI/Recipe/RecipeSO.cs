@@ -6,6 +6,6 @@ using UnityEngine;
 public class RecipeSO : ScriptableObject
 {
     public int id;
-    public IngredientItemSO[] ingredients = new IngredientItemSO[3];
+    public IngredientItemSO[] ingredients;
     public PortionItemSO portion;
 }

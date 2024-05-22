@@ -80,6 +80,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         visual.raycastTarget = false;
         InventoryManager.Instance.MoveItem(this);
 
+        //아이템을 선택했을때 슬롯에서 그 아이템은 더이상 할당되있지 않은 상태인
         if (assignedSlot != null)
             assignedSlot.DeleteItem();
 
@@ -96,10 +97,12 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         visual.raycastTarget = true;
         InventoryManager.Instance.MoveItem(null);
 
+        //선택중인 슬롯이 없을 때
         if (InventoryManager.Instance.curCheckingSlot == null)
         {
             if (assignedSlot != null)
                 assignedSlot.InsertItem(this);
+
             return;
         }
 
@@ -111,6 +114,11 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         assignedSlot.Select();
 
         InventoryManager.Instance.SetExplain(itemSO);
+    }
+
+    public void ReturnToLastSlot()
+    {
+        lastSlot.InsertItem(this);
     }
 
     public void Init(int amount, InventorySlot slot)

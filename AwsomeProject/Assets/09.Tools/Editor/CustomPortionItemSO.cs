@@ -1,6 +1,8 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 [CustomEditor(typeof(PortionItemSO))]
@@ -16,7 +18,7 @@ public class CustomPortionItemSO : Editor
     private SerializedProperty _prefab;
     private SerializedProperty _portionType;
     private SerializedProperty _effect;
-    private SerializedProperty _reqireEffects;
+    private ReorderableList _reqireEffects;
     private SerializedProperty _effecLv;
     private SerializedProperty _duration;
     private SerializedProperty _usingTime;
@@ -38,11 +40,22 @@ public class CustomPortionItemSO : Editor
         _prefab = serializedObject.FindProperty("prefab");
         _portionType = serializedObject.FindProperty("portionType");
         _effect = serializedObject.FindProperty("effect");
-        _reqireEffects = serializedObject.FindProperty("reqireEffects");
+        _reqireEffects = new ReorderableList(
+            serializedObject,
+            serializedObject.FindProperty("reqireEffects"),
+            true,
+            true,
+            true,
+            true);
         _effecLv = serializedObject.FindProperty("effecLv");
         _duration = serializedObject.FindProperty("duration");
         _usingTime = serializedObject.FindProperty("usingTime");
         _isInfinite = serializedObject.FindProperty("isInfinite");
+
+        _reqireEffects.drawHeaderCallback = rect =>
+        {
+            EditorGUI.LabelField(rect, "ReqireEffects");
+        };
     }
 
     private void StyleSetUp()
@@ -54,65 +67,63 @@ public class CustomPortionItemSO : Editor
         }
     }
 
-    public override void OnInspectorGUI()
-    {
-        StyleSetUp();
-        //시작할때 해줄 일
-        serializedObject.Update();
+    //public override void OnInspectorGUI()
+    //{
+    //    StyleSetUp();
+    //    //시작할때 해줄 일
+    //    serializedObject.Update();
 
-        EditorGUILayout.Space(10f);
-        EditorGUILayout.BeginHorizontal("HelpBox");
-        {
-            EditorGUILayout.BeginVertical();
-            {
-                EditorGUILayout.LabelField("DotImage");
-                _dotImage.objectReferenceValue = EditorGUILayout.ObjectField(GUIContent.none,
-                    _dotImage.objectReferenceValue,
-                    typeof(Sprite),
-                    false,
-                    GUILayout.Width(65));
+    //    EditorGUILayout.Space(10f);
+    //    EditorGUILayout.BeginHorizontal("HelpBox");
+    //    {
+    //        EditorGUILayout.BeginVertical();
+    //        {
+    //            EditorGUILayout.LabelField("DotImage");
+    //            _dotImage.objectReferenceValue = EditorGUILayout.ObjectField(GUIContent.none,
+    //                _dotImage.objectReferenceValue,
+    //                typeof(Sprite),
+    //                false,
+    //                GUILayout.Width(65));
 
-                EditorGUILayout.LabelField("IllustImage");
-                _itemImage.objectReferenceValue = EditorGUILayout.ObjectField(GUIContent.none,
-                _itemImage.objectReferenceValue,
-                typeof(Sprite),
-                false,
-                GUILayout.Width(65));
+    //            EditorGUILayout.LabelField("IllustImage");
+    //            _itemImage.objectReferenceValue = EditorGUILayout.ObjectField(GUIContent.none,
+    //            _itemImage.objectReferenceValue,
+    //            typeof(Sprite),
+    //            false,
+    //            GUILayout.Width(65));
+    //        }
+    //        EditorGUILayout.EndVertical();
 
-            }
-            EditorGUILayout.EndVertical();
+    //        EditorGUILayout.BeginVertical();
+    //        {
+    //            EditorGUILayout.PropertyField(_id);
 
-            EditorGUILayout.BeginVertical();
-            {
-                EditorGUILayout.IntField("id", _id.intValue);
+    //            EditorGUILayout.BeginHorizontal();
+    //            {
+    //                EditorGUILayout.TextField("Name", _itemName.stringValue);
+    //            }
+    //            EditorGUILayout.EndHorizontal();
 
-                EditorGUILayout.BeginHorizontal();
-                {
-                    EditorGUILayout.TextField("Name", _itemName.stringValue);
-                }
-                EditorGUILayout.EndHorizontal();
+    //            //GUIStyle style = GUIStyle.none;
+    //            EditorGUILayout.TextField("ItemExplain", _itemExplain.stringValue);
+    //            EditorGUILayout.PropertyField(_prefab);
+    //            EditorGUILayout.PropertyField(_itemType);
+    //            EditorGUILayout.PropertyField(_maxCarryAmountPerSlot);
+    //        }
+    //        EditorGUILayout.EndVertical();
+    //    }
+    //    EditorGUILayout.EndHorizontal();
 
-                //GUIStyle style = GUIStyle.none;
-                EditorGUILayout.TextField("ItemExplain",_itemExplain.stringValue);
-                EditorGUILayout.PropertyField(_prefab);
-                EditorGUILayout.PropertyField(_itemType);
-                EditorGUILayout.IntField("MaxCarryAmountPerSlot",_maxCarryAmountPerSlot.intValue);
-            }
-            EditorGUILayout.EndVertical();
-        }
-
-        EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.PropertyField(_portionType);
-        EditorGUILayout.PropertyField(_effect);
-        EditorGUILayout.PropertyField(_reqireEffects);
-        EditorGUILayout.IntField("EffectLv",_effecLv.intValue);
-        EditorGUILayout.FloatField("Duration", _duration.floatValue);
-        EditorGUILayout.FloatField("UsingTime", _usingTime.floatValue);
-        EditorGUILayout.Toggle("isInfinite", _isInfinite.boolValue);
+    //    EditorGUILayout.PropertyField(_portionType);
+    //    EditorGUILayout.PropertyField(_effect); 
+    //    _reqireEffects.DoLayoutList();
+    //    EditorGUILayout.PropertyField(_effecLv);
+    //    EditorGUILayout.PropertyField(_duration);
+    //    EditorGUILayout.PropertyField(_usingTime);
+    //    EditorGUILayout.PropertyField(_isInfinite);
 
 
-        //끝날 때 해줄일 
-        serializedObject.ApplyModifiedProperties();
-    }
+    //    //끝날 때 해줄일 
+    //    serializedObject.ApplyModifiedProperties();
+    //}
 }

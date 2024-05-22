@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/PortionSet")]
@@ -41,11 +42,18 @@ public class PortionSetSO : ScriptableObject
             }
         }
 
+        for(int i = 0; i < infos.Count; i++)
+        {
+            Debug.Log(infos[i].effect.ToString() + " " + infos[i].requirePoint);
+        }
+
         for (int i = 0; i < portions.Count; i++)
         {
             if (portions[i].CheckCanMakePortion(infos))
             {
-                portion = portions[i];
+                Debug.Log(portions[i].itemName);
+                portion = CreateInstance("PortionItemSO") as PortionItemSO;
+                portion.Init(portions[i]);
                 return true;
             }
         }

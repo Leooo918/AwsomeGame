@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: PortionSetSO
   m_EditorClassIdentifier: 
   portions:
+  - {fileID: 11400000, guid: 5be58368ccbe102408418a0f7ec940c8, type: 2}
   - {fileID: 11400000, guid: b4af58aa33d56fb4c9ddb4308ab251d0, type: 2}
   - {fileID: 11400000, guid: f2d5d3cc3b6e2a342bc14373d434bdba, type: 2}

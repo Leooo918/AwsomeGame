@@ -18,8 +18,6 @@ public class PortionTableSlot : InventorySlot
     {
         if (item.itemSO.itemType != ItemType.Ingredient) return;
         base.InsertItem(item);
-
-        portionTable.AddItem(number, assignedItem.itemSO as IngredientItemSO);
     }
 
     public void RemoveItem()

@@ -1,8 +1,6 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// 얘는 3가지 상태가 있다고 생각하면 됨

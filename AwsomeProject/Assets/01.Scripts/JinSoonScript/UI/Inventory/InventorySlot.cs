@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    private RectTransform rect;
+    protected RectTransform rect;
 
-    private Inventory inventory;
-    private GameObject selectUI;
-    private RectTransform[] parents;
-    public Item assignedItem { get; private set; }
-    public bool isSelectedNow { get; private set; } = false;
+    protected Inventory inventory;
+    protected GameObject selectUI;
+    protected RectTransform[] parents;
+    public Item assignedItem { get; protected set; }
+    public bool isSelectedNow { get; protected set; } = false;
 
     protected virtual void Awake()
     {

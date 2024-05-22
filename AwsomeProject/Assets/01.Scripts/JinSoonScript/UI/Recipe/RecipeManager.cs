@@ -32,6 +32,11 @@ public class RecipeManager : MonoBehaviour
         seq = DOTween.Sequence();
     }
 
+    private void Start()
+    {
+        Load();
+    }
+
     private void Update()
     {
         //디버그용 코드임
@@ -45,38 +50,19 @@ public class RecipeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 재료들을 받아서 포션을 만들 수 있는지 확인하고 포션을 만들어서 out에 할당해주는
-    /// </summary>
-    /// <param name="ingredients"></param>
-    /// <param name="posionToMake"></param>
-    /// <returns></returns>
-    public bool TryMakePosion(IngredientItemSO[] ingredients, out PortionItemSO posionToMake)
-    {
-        posionToMake = new PortionItemSO();
-        return true;
-    }
-
-    /// <summary>
     /// id로 레시피 추가 해줘
     /// </summary>
-    /// <param name="id">레시피의 id</param>
-    public void AddRecipe()
+    /// <param name="ingredients">size must be 5</param>
+    public void AddRecipe(IngredientItemSO[] ingredients, PortionItemSO portion)
     {
-
-    }
-
-
-    /// <summary>
-    /// RecipeSO로 레시피를 추가해줘
-    /// </summary>
-    /// <param name="recipe"></param>
-    public void AddRecipe(RecipeSO recipe)
-    {
-        //if (curRecipe.Contains(recipe) == false)
-        //    curRecipe.Add(recipe);
+        
+        RecipeSO recipe = ScriptableObject.CreateInstance("RecipeSO") as RecipeSO;
+        recipe.ingredients = ingredients;
+        recipe.portion = portion;
 
         Save();
     }
+
 
 
     /// <summary>
@@ -116,25 +102,26 @@ public class RecipeManager : MonoBehaviour
         .Join(selectedRecipe.DOAnchorPosY(660f, 0.5f));
     }
 
-    /// <summary>
-    /// 레시피를 사용할 때 이 레시피를 전에 쓴 적이 있는지 확인해주는 뇨속
-    /// </summary>
-    /// <param name="recipe"></param>
-    /// <returns></returns>
-    public bool IsEverUseRecipe(RecipeSO recipe)
-    {
-        Save();
-        return true;
-    }
-
     public void Save()
     {
         RecipeSave saves = new RecipeSave();
-        saves.ids = new List<int>();
+        saves.recipes = new List<Recipe>();
 
         for (int i = 0; i < curRecipe.Count; i++)
         {
-            saves.ids.Add(curRecipe[i].id);
+            Recipe recipe = new Recipe();
+            recipe.ingredientsId = new List<int>();
+
+            for (int j = 0; j < curRecipe[i].ingredients.Length; j++)
+            {
+                recipe.ingredientsId.Add(curRecipe[i].ingredients[j].id);
+                Debug.Log(curRecipe[i].ingredients[j].id);
+            }
+
+            recipe.portionId = curRecipe[i].portion.id;
+            Debug.Log(recipe.portionId);
+
+            saves.recipes.Add(recipe);
         }
 
         string json = JsonUtility.ToJson(saves, true);
@@ -146,20 +133,30 @@ public class RecipeManager : MonoBehaviour
         string json = File.ReadAllText(path);
         RecipeSave saves = JsonUtility.FromJson<RecipeSave>(json);
 
-        for (int i = 0; i < saves.ids.Count; i++)
+        for (int i = 0; i < saves.recipes.Count; i++)
         {
-            for (int j = 0; j < recipeSet.recipes.Count; j++)
-            {
-                if (recipeSet.recipes[j].id == saves.ids[i] && curRecipe.Contains(recipeSet.recipes[j]) == false)
-                    curRecipe.Add(recipeSet.recipes[j]);
-            }
+            List<IngredientItemSO> ingredients = new List<IngredientItemSO>();
+
+            for (int j = 0; j < saves.recipes[i].ingredientsId.Count; j++)
+                ingredients.Add(InventoryManager.Instance.ItemSet.FindItem(saves.recipes[i].ingredientsId[j]) as IngredientItemSO);
+
+            PortionItemSO portion = InventoryManager.Instance.ItemSet.FindItem(saves.recipes[i].portionId) as PortionItemSO;
+
+            AddRecipe(ingredients.ToArray(), portion);
         }
     }
 }
 
+[System.Serializable]
 public class RecipeSave
 {
-    public List<int> ids;
+    public List<Recipe> recipes = new List<Recipe>();
+}
 
-    public List<int> recipeOnceUsed;
+
+[System.Serializable]
+public struct Recipe
+{
+    public int portionId;
+    public List<int> ingredientsId;
 }

@@ -238,7 +238,7 @@ public class SpreadSheetLoader : EditorWindow
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
             asset.effect = portionEffect;
-            asset.reqireEffects = requireEffects.ToList();
+            asset.requireEffects = requireEffects.ToList();
 
             string filename = AssetDatabase.GenerateUniqueAssetPath(filePath);
             AssetDatabase.CreateAsset(asset, filename);
@@ -251,7 +251,7 @@ public class SpreadSheetLoader : EditorWindow
             asset.maxCarryAmountPerSlot = maxCarryAmountPerSlot;
             asset.itemExplain = itemExplain;
             asset.effect = portionEffect;
-            asset.reqireEffects = requireEffects.ToList();
+            asset.requireEffects = requireEffects.ToList();
 
             EditorUtility.SetDirty(asset);
         }
