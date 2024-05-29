@@ -6,6 +6,7 @@ using UnityEngine;
 public class WildBoarRushSkillSO : SkillSO
 {
     [Header("WildBoarInfo")]
+    public AttackInfo AttackInfo;
     public Stat rushSpeed;
     public Stat damage;
 
