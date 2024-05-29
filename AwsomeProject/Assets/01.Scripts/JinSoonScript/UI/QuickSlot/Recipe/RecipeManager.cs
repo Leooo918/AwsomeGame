@@ -55,10 +55,26 @@ public class RecipeManager : MonoBehaviour
     /// <param name="ingredients">size must be 5</param>
     public void AddRecipe(IngredientItemSO[] ingredients, PortionItemSO portion)
     {
-        
         RecipeSO recipe = ScriptableObject.CreateInstance("RecipeSO") as RecipeSO;
+
+        //Ascending Sort
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            for (int j = i + 1; j < ingredients.Length; j++)
+            {
+                if (ingredients[i].id > ingredients[j].id)
+                {
+                    IngredientItemSO temp = ingredients[i];
+                    ingredients[i] = ingredients[j];
+                    ingredients[j] = temp;
+                }
+            }
+        }
+
+
         recipe.ingredients = ingredients;
         recipe.portion = portion;
+        curRecipe.Add(recipe);
 
         Save();
     }
@@ -110,18 +126,21 @@ public class RecipeManager : MonoBehaviour
         for (int i = 0; i < curRecipe.Count; i++)
         {
             Recipe recipe = new Recipe();
+            RecipeSO temp = curRecipe[i];
             recipe.ingredientsId = new List<int>();
 
-            for (int j = 0; j < curRecipe[i].ingredients.Length; j++)
-            {
-                recipe.ingredientsId.Add(curRecipe[i].ingredients[j].id);
-                Debug.Log(curRecipe[i].ingredients[j].id);
-            }
+            //for (int j = 0; j < temp.ingredients.Length; j++)
+            //{
+            //    recipe.ingredientsId.Add(temp.ingredients[j].id);
+            //    Debug.Log(recipe.ingredientsId[j]);
+            //}
 
-            recipe.portionId = curRecipe[i].portion.id;
+            recipe.portionId = temp.portion.id;
             Debug.Log(recipe.portionId);
 
-            saves.recipes.Add(recipe);
+            Load();
+            if (curRecipe.Contains(temp) == false)
+                saves.recipes.Add(recipe);
         }
 
         string json = JsonUtility.ToJson(saves, true);
@@ -132,6 +151,7 @@ public class RecipeManager : MonoBehaviour
     {
         string json = File.ReadAllText(path);
         RecipeSave saves = JsonUtility.FromJson<RecipeSave>(json);
+        curRecipe.Clear();
 
         for (int i = 0; i < saves.recipes.Count; i++)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Health : MonoBehaviour, IDamageable
+public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 {
     public Entity owner { get; private set; }
 
@@ -95,21 +95,20 @@ public class Health : MonoBehaviour, IDamageable
     }
 
 
-    public virtual void GetEffort(Effect effect, float duration, bool isInfiniteEffect = false)
+    public virtual void GetEffort(Effect effect)
     {
         for (int i = 0; i < effects.Count; i++)
         {
             var item = effects[i];
-            if (item.Item1 == effect && item.Item1.isInfiniteEffect == false)
+            if (item.Item1 == effect)
             {
                 float remainDuration = item.Item2;
-                effects[i] = new Tuple<Effect, float, float>(item.Item1, remainDuration + duration, item.Item3);
+                effects[i] = new Tuple<Effect, float, float>(item.Item1, remainDuration + effect.duration, item.Item3);
                 return;
             }
         }
 
-        effect.Init(duration, isInfiniteEffect);
-        effects.Add(new Tuple<Effect, float, float>(effect, duration, Time.time));
+        effects.Add(new Tuple<Effect, float, float>(effect, effect.duration, Time.time));
         effect.EnterEffort(owner);
     }
 

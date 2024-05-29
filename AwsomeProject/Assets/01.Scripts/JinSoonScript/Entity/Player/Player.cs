@@ -18,7 +18,7 @@ public enum PlayerStateEnum
 
 public enum PlayerSkillEnum
 {
-    Dash, 
+    Dash,
     NormalAttack
 }
 
@@ -63,14 +63,15 @@ public class Player : Entity
 
     #region Attack
 
-    [HideInInspector]public int ComboCounter = 0;
+    [HideInInspector] public int ComboCounter = 0;
     [HideInInspector] public float lastAttackTime;
 
     #endregion
 
     public GameObject StunEffect { get; private set; }
-
     private bool isInventoryOpen = false;
+
+    [SerializeField] private GameObject thowingPortionPf;
 
     protected override void Awake()
     {
@@ -152,6 +153,13 @@ public class Player : Entity
         StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 
+    /// <summary>
+    /// 대쉬하는
+    /// </summary>
+    /// <param name="dashTime">대쉬하는 시간</param>
+    /// <param name="dashPower">대쉬하는 속도</param>
+    /// <param name="isInvincibleWhileDash">대쉬하는 동안 무적인가</param>
+    /// <param name="isAttackWhileDash">대쉬공격하는가</param>
     public void Dash(float dashTime, float dashPower, bool isInvincibleWhileDash = false, bool isAttackWhileDash = false)
     {
         this.DashTime = dashTime;
@@ -168,6 +176,10 @@ public class Player : Entity
         hpSlider.value = healthCompo.curHp;
     }
 
+    /// <summary>
+    /// 인벤토리 열때
+    /// 움직이는거 다 빼뒀다가 나중에 다시 넣어주
+    /// </summary>
     private void InventoryOpen()
     {
         if (isInventoryOpen == false)
@@ -184,16 +196,27 @@ public class Player : Entity
         }
     }
 
-    public void AnimationFinishTrigger()
-    {
-        StateMachine.CurrentState.AnimationFinishTrigger();
-    }
-
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     public void OnHit() => HitEvent?.Invoke();
 
     public void OnDie(Vector2 hitDir)
     {
         isDead = true;
         StateMachine.ChangeState(PlayerStateEnum.Dead);
+    }
+
+    internal void ThrowPortion(PortionItem portion)
+    {
+        Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+        ThrowingPortion throwingPortion =
+            Instantiate(thowingPortionPf, spawnPosition, Quaternion.identity)
+            .GetComponent<ThrowingPortion>();
+
+        throwingPortion.Init(portion);
+    }
+
+    internal void WeaponEnchant(PortionItem portion)
+    {
+
     }
 }

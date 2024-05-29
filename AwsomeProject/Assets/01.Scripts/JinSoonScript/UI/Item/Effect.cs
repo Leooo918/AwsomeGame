@@ -8,8 +8,8 @@ public abstract class Effect
 {
     protected Entity target;
 
+    public int portionLevel { get; protected set; } = 1;
     public float duration { get; protected set; } = 1f;
-    public bool isInfiniteEffect { get; protected set; } = false;
 
     public virtual void EnterEffort(Entity target)
     {
@@ -26,9 +26,9 @@ public abstract class Effect
 
     }
 
-    public void Init(float duration, bool isInfiniteEffect)
+    public void Init(int level, float duration)
     {
+        portionLevel = level;
         this.duration = duration;
-        this.isInfiniteEffect = isInfiniteEffect;
     }
 }

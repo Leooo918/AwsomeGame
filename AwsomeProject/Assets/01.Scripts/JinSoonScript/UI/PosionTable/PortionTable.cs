@@ -45,7 +45,10 @@ public class PortionTable : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 if (ingredientsSlot[i].assignedItem != null)
+                {
                     ingredients.Add(ingredientsSlot[i].assignedItem.itemSO as IngredientItemSO);
+                    Destroy(ingredientsSlot[i].assignedItem.gameObject);
+                }
             }
 
             RecipeManager.Instance.AddRecipe(ingredients.ToArray(), portion);

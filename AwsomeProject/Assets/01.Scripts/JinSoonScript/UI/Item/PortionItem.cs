@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class PortionItem : Item
 {
-    public Portion posionType { get; protected set; }
-    public Effect posionEffect { get; protected set; }
+    public Portion portionType { get; protected set; }
+    public Effect portionEffect { get; protected set; }
+    public Sprite portionSprite { get; protected set; }
 
     protected override void Awake()
     {
@@ -14,7 +15,8 @@ public class PortionItem : Item
         itemType = ItemType.Portion;
 
         PortionItemSO p = itemSO as PortionItemSO;
-        posionType = p.portionType;
-        //posionEffect = EffectManager.Instance.GetEffect(p.effect);
+        portionType = p.portionType;
+        portionSprite = p.dotImage;
+        portionEffect = EffectManager.Instance.GetEffect(p.effect);
     }
 }
