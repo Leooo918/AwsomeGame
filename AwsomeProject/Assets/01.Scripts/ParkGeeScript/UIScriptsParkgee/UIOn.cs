@@ -67,6 +67,11 @@ public class UIOn : MonoBehaviour
                 ui[1].SetActive(false);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            UIManager.Instance.Open(Window.Shop);
+        }
     }
 
     public void ShowSetting()

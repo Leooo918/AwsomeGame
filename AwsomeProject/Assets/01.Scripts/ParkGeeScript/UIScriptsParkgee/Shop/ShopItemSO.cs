@@ -8,6 +8,12 @@ using UnityEngine.UI;
 public class ShopItemSO : ScriptableObject
 {
     public Sprite itemImg;
+    public string itemName;
     [TextArea] public string itemMenual;
     public int itemPrice;
+
+    public bool CheckSelect()
+    {
+        return true;
+    }
 }
