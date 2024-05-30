@@ -8,7 +8,7 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
     private Slime slime;
     private bool readyChangeState = false;
 
-    public SlimePatrolState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimePatrolState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
     }

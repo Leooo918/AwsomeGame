@@ -9,7 +9,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
     private SlimeJumpSkillSO jumpSkill;
     private Slime slime;
 
-    public SlimeJumpAttackState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeJumpAttackState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimeDeadState : EnemyState<SlimeStateEnum>
 {
-    public SlimeDeadState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeDeadState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
 

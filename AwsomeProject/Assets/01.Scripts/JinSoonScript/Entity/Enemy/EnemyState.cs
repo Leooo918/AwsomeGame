@@ -6,13 +6,13 @@ using UnityEngine;
 public class EnemyState<T> where T : Enum
 {
     protected EnemyStateMachine<T> enemyStateMachine;
-    protected Enemy enemy;
+    protected Enemy<T> enemy;
     protected Rigidbody2D rigidbody;
 
     protected int animBoolHash;
     protected bool triggerCall;
 
-    public EnemyState(Enemy enemy, EnemyStateMachine<T> enemyStateMachine, string animBoolName)
+    public EnemyState(Enemy<T> enemy, EnemyStateMachine<T> enemyStateMachine, string animBoolName)
     {
         this.enemy = enemy;
         this.enemyStateMachine = enemyStateMachine;

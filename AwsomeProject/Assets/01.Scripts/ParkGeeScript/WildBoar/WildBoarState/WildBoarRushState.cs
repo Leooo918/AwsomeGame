@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WildBoarRushState : EnemyState<WildBoarEnum>
 {
-    public WildBoarRushState(Enemy enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) 
+    public WildBoarRushState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) 
         : base(enemy, enemyStateMachine, animBoolName)
     {
     }

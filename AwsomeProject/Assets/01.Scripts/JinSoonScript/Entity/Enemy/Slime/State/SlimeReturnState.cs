@@ -6,7 +6,7 @@ public class SlimeReturnState : EnemyState<SlimeStateEnum>
     private SlimeJumpSkillSO jumpSkill;
     private bool isJumping = false;
 
-    public SlimeReturnState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeReturnState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
     }

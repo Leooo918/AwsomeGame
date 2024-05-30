@@ -19,11 +19,10 @@ public enum SlimeSkillEnum
     JumpAttack
 }
 
-public class Slime : Enemy
+public class Slime : Enemy<SlimeStateEnum>
 {
     public SlimeSkill Skills { get; private set; }
 
-    public EnemyStateMachine<SlimeStateEnum> StateMachine { get; private set; }
 
     #region SkillSection
 
@@ -48,24 +47,6 @@ public class Slime : Enemy
 
         Skills = gameObject.AddComponent<SlimeSkill>();
         Skills.Init(EntitySkillSO);
-
-        StateMachine = new EnemyStateMachine<SlimeStateEnum>();
-        foreach (SlimeStateEnum stateEnum in Enum.GetValues(typeof(SlimeStateEnum)))
-        {
-            string typeName = stateEnum.ToString();
-            Type t = Type.GetType($"Slime{typeName}State");
-
-            try
-            {
-                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<SlimeStateEnum>;
-                StateMachine.AddState(stateEnum, enemyState);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Enemy Slime : no state [ {typeName} ]");
-                Debug.LogError(e);
-            }
-        }
 
         foreach (var item in EntitySkillSO.skills)
         {
@@ -127,21 +108,6 @@ public class Slime : Enemy
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-    public override void KnockBack(Vector2 power)
-    {
-        StopImmediately(true);
-        if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
-
-        isKnockbacked = true;
-        SetVelocity(power.x, power.y, true, true);
-        knockbackCoroutine = StartDelayCallBack(
-            knockbackDuration, () =>
-            {
-                isKnockbacked = false;
-                StopImmediately(false);
-            });
-    }
-
     public override void Stun(float duration)
     {
         if (isDead) return;
@@ -169,12 +135,6 @@ public class Slime : Enemy
         readySkill.Pop();
         attackDistance = 0;
     }
-
-    public void Jump()
-    {
-
-    }
-
     private void ShuffleSkillStack()
     {
         List<SkillSO> skills = EntitySkillSO.skills;

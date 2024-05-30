@@ -1,9 +1,10 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-public abstract class Enemy : Entity
+public abstract class Enemy<T> : Entity where T : Enum
 {
     [SerializeField] private EnemyStatSO enemyStat;
+    public EnemyStateMachine<T> StateMachine { get; private set; }
     public EnemyStatSO EnemyStat => enemyStat;
 
     #region EnemyStat
@@ -43,6 +44,25 @@ public abstract class Enemy : Entity
         base.Awake();
         defaultMoveSpeed = moveSpeed;
         enemyStat = Instantiate(enemyStat);
+
+        StateMachine = new EnemyStateMachine<T>();
+        foreach (T stateEnum in Enum.GetValues(typeof(T)))
+        {
+            string typeName = stateEnum.ToString();
+            string scriptName = this.GetType().ToString();
+            Type t = Type.GetType($"{scriptName}{typeName}State");
+
+            try
+            {
+                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<T>;
+                StateMachine.AddState(stateEnum, enemyState);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Enemy Slime : no state [ {typeName} ]");
+                Debug.LogError(e);
+            }
+        }
     }
 
     #region DetectRegion

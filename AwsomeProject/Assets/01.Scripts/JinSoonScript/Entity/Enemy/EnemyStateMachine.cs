@@ -7,14 +7,14 @@ public class EnemyStateMachine<T> where T : Enum
     public EnemyState<T> CurrentState;
     public Dictionary<T, EnemyState<T>> stateDictionary;
 
-    private Enemy enemy;
+    private Enemy<T> enemy;
 
     public EnemyStateMachine()
     {
         stateDictionary = new Dictionary<T, EnemyState<T>>();
     }
 
-    public void Initialize(T startState, Enemy enemy)
+    public void Initialize(T startState, Enemy<T> enemy)
     {
         this.enemy = enemy;
         CurrentState = stateDictionary[startState];

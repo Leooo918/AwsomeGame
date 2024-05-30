@@ -17,7 +17,7 @@ public enum WildBoarSkillEnum
     Rush
 }
 
-public class WildBoar : Enemy
+public class WildBoar : Enemy<WildBoarEnum>
 {
     //public WildBoarStatusSO wildBoarStatus { get; protected set; }
     public EnemyStateMachine<WildBoarEnum> StateMachine { get; private set; }

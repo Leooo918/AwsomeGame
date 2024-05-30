@@ -8,7 +8,7 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
     private Transform playerTrm;
     private bool chaseStart = false;
 
-    public SlimeChaseState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
+    public SlimeChaseState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         slime = enemy as Slime;
     }

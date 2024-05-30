@@ -3,7 +3,7 @@
     "inventory": [
         {
             "id": 1,
-            "amount": 3,
+            "amount": 4,
             "posX": 0,
             "posY": 0
         },
@@ -68,8 +68,8 @@
             "posY": 2
         },
         {
-            "id": 102,
-            "amount": 1,
+            "id": 2,
+            "amount": 2,
             "posX": 2,
             "posY": 3
         },
@@ -87,7 +87,7 @@
         },
         {
             "id": 2,
-            "amount": 3,
+            "amount": 5,
             "posX": 3,
             "posY": 2
         },

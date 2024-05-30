@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SlimeIdleState : EnemyState<SlimeStateEnum>
 {
-    public SlimeIdleState(Enemy enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName) { }
+    public SlimeIdleState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName) { }
 
     public override void UpdateState()
     {

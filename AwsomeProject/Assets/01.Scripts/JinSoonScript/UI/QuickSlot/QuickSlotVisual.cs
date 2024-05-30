@@ -48,7 +48,6 @@ public class QuickSlotVisual : MonoBehaviour
         }
         else if(portion.portionType == Portion.PortionForThrow)
         {
-            Debug.Log("밍 안된다!");
             PlayerManager.Instance.Player.ThrowPortion(portion);
         }
         else

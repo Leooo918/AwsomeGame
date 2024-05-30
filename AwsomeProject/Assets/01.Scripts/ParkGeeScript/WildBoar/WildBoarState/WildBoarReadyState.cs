@@ -8,7 +8,7 @@ public class WildBoarReadyState : EnemyState<WildBoarEnum>
     private Transform playerTrm;
     private bool isReady = false;
 
-    public WildBoarReadyState(Enemy enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) 
+    public WildBoarReadyState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) 
         : base(enemy, enemyStateMachine, animBoolName)
     {
     }

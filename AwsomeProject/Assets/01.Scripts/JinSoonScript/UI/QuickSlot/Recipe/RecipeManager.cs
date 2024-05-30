@@ -53,7 +53,7 @@ public class RecipeManager : MonoBehaviour
     /// id로 레시피 추가 해줘
     /// </summary>
     /// <param name="ingredients">size must be 5</param>
-    public void AddRecipe(IngredientItemSO[] ingredients, PortionItemSO portion)
+    public void AddRecipe(IngredientItemSO[] ingredients, PortionItemSO portion, bool loading = false)
     {
         RecipeSO recipe = ScriptableObject.CreateInstance("RecipeSO") as RecipeSO;
 
@@ -76,7 +76,8 @@ public class RecipeManager : MonoBehaviour
         recipe.portion = portion;
         curRecipe.Add(recipe);
 
-        Save();
+        if (loading == false)
+            Save();
     }
 
 
@@ -129,14 +130,10 @@ public class RecipeManager : MonoBehaviour
             RecipeSO temp = curRecipe[i];
             recipe.ingredientsId = new List<int>();
 
-            //for (int j = 0; j < temp.ingredients.Length; j++)
-            //{
-            //    recipe.ingredientsId.Add(temp.ingredients[j].id);
-            //    Debug.Log(recipe.ingredientsId[j]);
-            //}
+            for (int j = 0; j < temp.ingredients.Length; j++)
+                recipe.ingredientsId.Add(temp.ingredients[j].id);
 
             recipe.portionId = temp.portion.id;
-            Debug.Log(recipe.portionId);
 
             Load();
             if (curRecipe.Contains(temp) == false)
@@ -162,7 +159,7 @@ public class RecipeManager : MonoBehaviour
 
             PortionItemSO portion = InventoryManager.Instance.ItemSet.FindItem(saves.recipes[i].portionId) as PortionItemSO;
 
-            AddRecipe(ingredients.ToArray(), portion);
+            AddRecipe(ingredients.ToArray(), portion, true);
         }
     }
 }
