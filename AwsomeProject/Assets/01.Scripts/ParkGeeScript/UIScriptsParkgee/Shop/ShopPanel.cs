@@ -10,9 +10,10 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
     [SerializeField] private float _offYPos;
     [SerializeField] private RectTransform _rectTrm;
 
-    [SerializeField] private ShopItemUI[] _shopItem;
+    [SerializeField] private Transform _shopItemParent;
     [SerializeField] private ShopItemTableSO _shopItemTables;
 
+    private ShopItemUI[] _shopItem;
     private bool _isPlay;
 
     public void Open()
@@ -23,7 +24,7 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
         _isPlay = true;
 
         _rectTrm.DOAnchorPosY(_onYPos, 0.3f)
-            .SetEase(Ease.Flash)
+            .SetEase(Ease.InOutFlash)
             .SetUpdate(true)
             .OnComplete(() => _isPlay = false);
     }
@@ -36,12 +37,13 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
         if (soArr.Length < 9)
         {
             //혹시나 멍청이 이슈방지용 사실상 필요없는 코드
-            Debug.LogError("Error! : Must hav 9 item at least");
+            Debug.LogError("Error! : Must hav 6 item at least");
             return;
         }
 
-        //ShopItemTableSO 안에 있는 SO에서 중복이 되지 않게 랜덤으로 아이템 9개를 셔플로 뽑는다.
-        for (int i = 0; i < 9; i++)
+        //ShopItemTableSO 안에 있는 SO에서 중복이 되지 않게 랜덤으로 아이템 _shopItem.Length개를 셔플로 뽑는다.
+        _shopItem = _shopItemParent.GetComponentsInChildren<ShopItemUI>();
+        for (int i = 0; i < _shopItem.Length; i++)
         {
             int index = Random.Range(0, soArr.Length - i);
 

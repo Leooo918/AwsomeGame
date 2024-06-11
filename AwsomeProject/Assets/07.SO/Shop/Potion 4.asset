@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed216a4346143244b6f1d228b016b2c, type: 3}
   m_Name: Potion 4
   m_EditorClassIdentifier: 
-  itemImg: {fileID: 1303115496, guid: e593ea785ae4b8d448dc4bf4a9fa05f9, type: 3}
-  itemName: efsz
-  itemMenual: "\uC774\uB7F0\uC7AC\uB8CC"
-  itemPrice: 100
+  itemImg: {fileID: 21300000, guid: 0cb4078174c5bf840901716201159ed2, type: 3}
+  itemName: "\uBC18\uC9DD\uBC88\uCA4D\uC5F4\uB9E4"
+  itemMenual: "\uC2DD\uBB3C\uC5D0 \uD750\uB974\uB358 \uC804\uAE30\uC2E0\uD638\uAC00
+    \uADF9\uB300\uD654\uB41C \uC2DD\uBB3C\uC774\uB2E4."
+  itemPrice: 500

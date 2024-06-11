@@ -10,7 +10,7 @@ public class ShopItemSO : ScriptableObject
     public Sprite itemImg;
     public string itemName;
     [TextArea] public string itemMenual;
-    public int itemPrice;
+    public string itemPrice;
 
     public bool CheckSelect()
     {

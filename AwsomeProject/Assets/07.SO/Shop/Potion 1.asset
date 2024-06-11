@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed216a4346143244b6f1d228b016b2c, type: 3}
   m_Name: Potion 1
   m_EditorClassIdentifier: 
-  itemImg: {fileID: -1192932147, guid: 347a0ac2e40dcf342b5332bfe0bec0f3, type: 3}
-  itemName: vads
-  itemMenual: "\uC774\uB7F0\uC7AC\uB8CC"
-  itemPrice: 100
+  itemImg: {fileID: 21300000, guid: 9139e73f755cef141be1dc062cb0abce, type: 3}
+  itemName: "\uD1B5\uD1B5\uBC84\uC12F"
+  itemMenual: "\uC791\uC544\uC11C \uBC1D\uACE0 \uC62C\uB77C\uAC00\uB294 \uAC83\uC740
+    \uBABB \uD558\uC9C0\uB9CC \uC4F8\uBAA8\uB294 \uC788\uC5B4\uBCF4\uC778\uB2E4.\n\uACF5\uACA9\uD3EC\uC778\uD2B8\uB97C
+    \uAC00\uC9C0\uACE0\uC788\uB2E4."
+  itemPrice: 200

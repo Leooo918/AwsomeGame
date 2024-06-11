@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ed216a4346143244b6f1d228b016b2c, type: 3}
   m_Name: Potion 7
   m_EditorClassIdentifier: 
-  itemImg: {fileID: 1622705268, guid: 347a0ac2e40dcf342b5332bfe0bec0f3, type: 3}
-  itemName: vexcve
-  itemMenual: "\uC774\uB7F0\uC7AC\uB8CC"
-  itemPrice: 100
+  itemImg: {fileID: 21300000, guid: 5f096fe7f03d27e4fbff3fe3ba473b0c, type: 3}
+  itemName: "\uBE68\uAC04\uBC84\uC12F"
+  itemMenual: "\uC815\uB9D0\uB85C \uC0C8\uBE68\uAC04 \uBC84\uC12F\uC774\uB2E4."
+  itemPrice: 200

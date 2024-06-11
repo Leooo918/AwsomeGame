@@ -6,14 +6,15 @@ using UnityEngine.UI;
 
 public class ShopItemUI : MonoBehaviour
 {
-    [SerializeField] private ShopItemSO _shopItemSO;
-    [SerializeField] private TextMeshProUGUI _nameText, _descriptionText;
+    [SerializeField] private TextMeshProUGUI _costTxt;
     [SerializeField] private Image _iconImage;
     [SerializeField] private Button _selectBtn;
 
+    public ShopItemSO ShopItemSO { get; private set; }
+
     private void OnValidate()
     {
-        if(_shopItemSO != null)
+        if(ShopItemSO != null)
         {
             SelectItemVisual();
         }
@@ -26,19 +27,16 @@ public class ShopItemUI : MonoBehaviour
 
     public void SetItemData(ShopItemSO data)
     {
-        _shopItemSO = data;
+        ShopItemSO = data;
         SelectItemVisual();
     }
 
     private void SelectItemVisual()
     {
-        if(_nameText != null)
-            _nameText.text = _shopItemSO.itemName;
-        if (_descriptionText != null)
-            _descriptionText.text = _shopItemSO.itemMenual;
+        if(_costTxt != null)
+            _costTxt.text = ShopItemSO.itemPrice;
         if (_iconImage != null)
-            _iconImage.sprite = _shopItemSO.itemImg;
-        
+            _iconImage.sprite = ShopItemSO.itemImg;
     }
 
     private void SelectItem()
