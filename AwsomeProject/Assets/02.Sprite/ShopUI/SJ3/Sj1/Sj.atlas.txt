@@ -1,0 +1,146 @@
+
+Sj.png
+size: 4824,5249
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+눈
+  rotate: false
+  xy: 3174, 1923
+  size: 1176, 431
+  orig: 1179, 434
+  offset: 2, 1
+  index: -1
+눈가리게 옆머리1
+  rotate: true
+  xy: 1617, 2753
+  size: 156, 389
+  orig: 156, 389
+  offset: 0, 0
+  index: -1
+눈가리게 옆머리2
+  rotate: false
+  xy: 4709, 5083
+  size: 75, 164
+  orig: 75, 164
+  offset: 0, 0
+  index: -1
+눈가리게 옵션2
+  rotate: false
+  xy: 1612, 88
+  size: 96, 101
+  orig: 97, 101
+  offset: 0, 0
+  index: -1
+눈갈리게 옵션
+  rotate: false
+  xy: 3174, 2582
+  size: 120, 127
+  orig: 120, 127
+  offset: 0, 0
+  index: -1
+눈섭 L
+  rotate: false
+  xy: 4352, 2273
+  size: 147, 81
+  orig: 149, 83
+  offset: 1, 1
+  index: -1
+눈섭R
+  rotate: true
+  xy: 3689, 3856
+  size: 195, 129
+  orig: 199, 132
+  offset: 2, 2
+  index: -1
+뒷머리1
+  rotate: true
+  xy: 1617, 1698
+  size: 1011, 1555
+  orig: 1011, 1555
+  offset: 0, 0
+  index: -1
+뒷머리2
+  rotate: false
+  xy: 3870, 3593
+  size: 837, 1654
+  orig: 837, 1654
+  offset: 0, 0
+  index: -1
+뒷머리3
+  rotate: false
+  xy: 2039, 4053
+  size: 1829, 1194
+  orig: 1830, 1194
+  offset: 1, 0
+  index: -1
+머리
+  rotate: true
+  xy: 2039, 2711
+  size: 1340, 1648
+  orig: 1341, 1648
+  offset: 1, 0
+  index: -1
+몸
+  rotate: false
+  xy: 2, 2911
+  size: 2035, 2336
+  orig: 2035, 2336
+  offset: 0, 0
+  index: -1
+앞머리
+  rotate: true
+  xy: 3244, 29
+  size: 427, 1117
+  orig: 427, 1117
+  offset: 0, 0
+  index: -1
+옆머리1
+  rotate: true
+  xy: 3244, 458
+  size: 671, 1521
+  orig: 671, 1521
+  offset: 0, 0
+  index: -1
+옆머리2
+  rotate: true
+  xy: 1617, 913
+  size: 783, 1565
+  orig: 783, 1565
+  offset: 0, 0
+  index: -1
+오른팔1
+  rotate: false
+  xy: 2, 1404
+  size: 1613, 1505
+  orig: 1613, 1505
+  offset: 0, 0
+  index: -1
+오른팔2
+  rotate: true
+  xy: 3184, 1131
+  size: 790, 1273
+  orig: 790, 1273
+  offset: 0, 0
+  index: -1
+옵션
+  rotate: true
+  xy: 3689, 2356
+  size: 1235, 1133
+  orig: 1235, 1149
+  offset: 0, 16
+  index: -1
+왼팔1
+  rotate: false
+  xy: 2, 2
+  size: 1608, 1400
+  orig: 1608, 1401
+  offset: 0, 0
+  index: -1
+왼팔2
+  rotate: true
+  xy: 1612, 191
+  size: 720, 1630
+  orig: 720, 1630
+  offset: 0, 0
+  index: -1

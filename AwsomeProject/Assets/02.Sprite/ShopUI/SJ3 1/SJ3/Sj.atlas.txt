@@ -1,0 +1,166 @@
+
+Sj.png
+size: 5611,6127
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+눈
+  rotate: false
+  xy: 2256, 5694
+  size: 1176, 431
+  orig: 1179, 434
+  offset: 2, 1
+  index: -1
+눈가리게 옆머리1
+  rotate: true
+  xy: 746, 5969
+  size: 156, 389
+  orig: 156, 389
+  offset: 0, 0
+  index: -1
+눈가리게 옆머리2
+  rotate: true
+  xy: 2, 6050
+  size: 75, 164
+  orig: 75, 164
+  offset: 0, 0
+  index: -1
+눈가리게 옵션2
+  rotate: true
+  xy: 317, 6029
+  size: 96, 101
+  orig: 97, 101
+  offset: 0, 0
+  index: -1
+눈갈리게 옵션
+  rotate: true
+  xy: 420, 6005
+  size: 120, 127
+  orig: 120, 127
+  offset: 0, 0
+  index: -1
+눈섭 L
+  rotate: false
+  xy: 168, 6044
+  size: 147, 81
+  orig: 149, 83
+  offset: 1, 1
+  index: -1
+눈섭R
+  rotate: false
+  xy: 549, 5996
+  size: 195, 129
+  orig: 199, 132
+  offset: 2, 2
+  index: -1
+뒷머리1
+  rotate: true
+  xy: 1658, 3649
+  size: 1011, 1555
+  orig: 1011, 1555
+  offset: 0, 0
+  index: -1
+뒷머리2
+  rotate: true
+  xy: 2, 4070
+  size: 837, 1654
+  orig: 837, 1654
+  offset: 0, 0
+  index: -1
+뒷머리3
+  rotate: false
+  xy: 3215, 3021
+  size: 1829, 1194
+  orig: 1830, 1194
+  offset: 1, 0
+  index: -1
+머리
+  rotate: true
+  xy: 2, 2728
+  size: 1340, 1648
+  orig: 1341, 1648
+  offset: 1, 0
+  index: -1
+몸
+  rotate: true
+  xy: 2, 2
+  size: 2035, 2336
+  orig: 2035, 2336
+  offset: 0, 0
+  index: -1
+앞머리
+  rotate: true
+  xy: 1137, 5698
+  size: 427, 1117
+  orig: 427, 1117
+  offset: 0, 0
+  index: -1
+옆머리1
+  rotate: true
+  xy: 3434, 5454
+  size: 671, 1521
+  orig: 671, 1521
+  offset: 0, 0
+  index: -1
+옆머리2
+  rotate: true
+  xy: 1634, 4909
+  size: 783, 1565
+  orig: 783, 1565
+  offset: 0, 0
+  index: -1
+오른팔1
+  rotate: false
+  xy: 3054, 1514
+  size: 1613, 1505
+  orig: 1613, 1505
+  offset: 0, 0
+  index: -1
+오른팔2
+  rotate: true
+  xy: 3201, 4662
+  size: 790, 1273
+  orig: 790, 1273
+  offset: 0, 0
+  index: -1
+옵션
+  rotate: true
+  xy: 4476, 4217
+  size: 1235, 1133
+  orig: 1235, 1149
+  offset: 0, 16
+  index: -1
+왼팔1
+  rotate: true
+  xy: 1652, 2039
+  size: 1608, 1400
+  orig: 1608, 1401
+  offset: 0, 0
+  index: -1
+왼팔2
+  rotate: true
+  xy: 2, 4976
+  size: 720, 1630
+  orig: 720, 1630
+  offset: 0, 0
+  index: -1
+
+Sj2.png
+size: 5651,7692
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+레이어 54
+  rotate: true
+  xy: 2, 10
+  size: 7680, 4320
+  orig: 7682, 4322
+  offset: 1, 1
+  index: -1
+레이어 60
+  rotate: true
+  xy: 4324, 2
+  size: 7688, 1325
+  orig: 7690, 1417
+  offset: 1, 1
+  index: -1

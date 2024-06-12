@@ -19,7 +19,7 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
     public void Open()
     {
         if (_isPlay) return;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         SettingRandomItem();
         _isPlay = true;
 
@@ -55,7 +55,7 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
     public void Close()
     {
         if (_isPlay) return;
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         _isPlay = true;
 
         _rectTrm.DOAnchorPosY(_offYPos, 0.3f)

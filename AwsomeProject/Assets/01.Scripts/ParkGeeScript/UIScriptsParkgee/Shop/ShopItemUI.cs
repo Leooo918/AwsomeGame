@@ -8,7 +8,7 @@ public class ShopItemUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _costTxt;
     [SerializeField] private Image _iconImage;
-    [SerializeField] private Button _selectBtn;
+    //[SerializeField] private Button _selectBtn;
 
     public ShopItemSO ShopItemSO { get; private set; }
 
@@ -22,7 +22,7 @@ public class ShopItemUI : MonoBehaviour
 
     private void Awake()
     {
-        _selectBtn.onClick.AddListener(SelectItem);
+        //_selectBtn.onClick.AddListener(SelectItem);
     }
 
     public void SetItemData(ShopItemSO data)
