@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,10 @@ using UnityEngine;
 public class PortionTable : MonoBehaviour
 {
     private PortionCraftingIngredientSlot[] ingredientsSlot = new PortionCraftingIngredientSlot[5];
+    private Portion portionType = Portion.PortionForThrow;
+    [SerializeField] private RectTransform portionTrm;
+    [SerializeField] private RectTransform portionTableTrm;
+    [SerializeField] private GameObject portionResult;
 
     private void Awake()
     {
@@ -53,5 +58,20 @@ public class PortionTable : MonoBehaviour
 
             RecipeManager.Instance.AddRecipe(ingredients.ToArray(), portion);
         }
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(portionTableTrm.DOAnchorPosY(-1080, 0.2f))
+            .Append(portionResult.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBounce));
+    }
+
+    public void ChangePortionType(bool down)
+    {
+        if (down) portionType--;
+        else portionType++;
+
+        portionType = (Portion)Mathf.Clamp((int)portionType, 0, 3);
+
+        portionTrm.DOAnchorPosX((int)portionType * 150f, 0.5f);
     }
 }

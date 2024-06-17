@@ -72,6 +72,7 @@ public class Player : Entity
     private bool isInventoryOpen = false;
 
     [SerializeField] private GameObject thowingPortionPf;
+    [SerializeField] private HpBar hpBar;
 
     protected override void Awake()
     {
@@ -115,6 +116,7 @@ public class Player : Entity
         healthCompo.onKnockBack += KnockBack;
         healthCompo.onDie += OnDie;
         healthCompo.onHit += OnHit;
+        healthCompo.onHit += () => hpBar.TakeDamage();
     }
 
     private void OnDisable()
@@ -123,6 +125,7 @@ public class Player : Entity
         healthCompo.onKnockBack -= KnockBack;
         healthCompo.onDie -= OnDie;
         healthCompo.onHit -= OnHit;
+        healthCompo.onHit -= () => hpBar.TakeDamage();
     }
 
     protected void Start()

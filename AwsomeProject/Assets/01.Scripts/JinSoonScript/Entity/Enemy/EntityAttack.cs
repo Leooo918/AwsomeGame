@@ -27,6 +27,7 @@ public class EntityAttack : MonoBehaviour
     public void Attack()
     {
         int detected = Physics2D.OverlapCircleNonAlloc(transform.position + new Vector3(attackOffset.x * entity.FacingDir, attackOffset.y, 0), attackRange, colls, whatIsEnemy);
+        bool isCameraShaked = false;
 
         for (int i = 0; i < detected; i++)
         {
@@ -34,6 +35,12 @@ public class EntityAttack : MonoBehaviour
             {
                 knockBackPower.x *= Mathf.Sign(e.transform.position.x - transform.position.x);
                 e.healthCompo.TakeDamage(damage, knockBackPower, entity);
+
+                if(!isCameraShaked)
+                {
+                    CameraManager.Instance.ShakeCam(1f, 1f, 0.05f);
+                    isCameraShaked = true;
+                }
             }
         }
     }

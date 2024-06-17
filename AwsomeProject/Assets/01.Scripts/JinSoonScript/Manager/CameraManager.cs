@@ -10,8 +10,8 @@ public class CameraManager : Singleton<CameraManager>
     [SerializeField] private List<CinemachineVirtualCamera> cameraSet;
     [SerializeField] private PlayerFollowObj follow;            //플레이어 따라가는 뇨속
 
-    private Vector2 startingTrackedObjectOffset;
-    private Tween panCameraTween;
+        private Vector2 startingTrackedObjectOffset;
+        private Tween panCameraTween;
 
     private CinemachineVirtualCamera currentCam;                //현재 카메라
     private CinemachineFramingTransposer framingTransposer;     //카메라 움직여주는 놈
@@ -20,7 +20,7 @@ public class CameraManager : Singleton<CameraManager>
 
     private float shakeTime = 0;
 
-    private Vector2[] dirArr = new Vector2[4] 
+    private Vector2[] dirArr = new Vector2[4]
     { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
     private void Awake()
@@ -36,7 +36,7 @@ public class CameraManager : Singleton<CameraManager>
         activeCam.Priority = 10;
         currentCam = activeCam;
 
-        currentConfiner = 
+        currentConfiner =
             currentCam.GetComponent<CinemachineConfiner2D>();
         framingTransposer = currentCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         currentPerline = currentCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -51,12 +51,12 @@ public class CameraManager : Singleton<CameraManager>
 
         if (!panToStartingPos)
         {
-            endPos = 
+            endPos =
                 dirArr[(int)direction] * panDistance + startingTrackedObjectOffset;
         }
         else
             endPos = startingTrackedObjectOffset;
-        
+
 
         if (panCameraTween != null && panCameraTween.IsActive())
             panCameraTween.Kill();

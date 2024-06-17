@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     protected RectTransform rect;
 
+    protected Image img;
     protected Inventory inventory;
     protected GameObject selectUI;
     protected RectTransform[] parents;
@@ -70,7 +71,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         assignedItem = null;
     }
 
-    public void Select()
+    public virtual void Select()
     {
         if (inventory != null)
         {

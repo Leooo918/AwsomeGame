@@ -131,10 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fe849e63b215743b7513e66965cb3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portionEffectPf: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
-  maxEffectGatter: 10
-  portionThrowingSpeed: 25
-  spinPower: 500
+  _portionEffectPf: {fileID: 9185461987383870436, guid: ebcfc329cc98e3d449404ec1167115f8, type: 3}
+  _maxEffectGatter: 10
+  _portionThrowingSpeed: 20
+  _spinPower: 360
 --- !u!50 &2130675457367933389
 Rigidbody2D:
   serializedVersion: 4

@@ -13,7 +13,6 @@ public class Herbs : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Transform pivot;
-    private TextMeshPro timerTxt;
     private Player player;
 
     private float gatherTime = 0;
@@ -30,7 +29,6 @@ public class Herbs : MonoBehaviour
     {
         spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         pivot = interact.transform.Find("Pivot");
-        timerTxt = interact.transform.Find("Timer").GetComponent<TextMeshPro>();
 
         if (item == null) return;
         gatherTime = item.gatheringTime;
@@ -39,15 +37,13 @@ public class Herbs : MonoBehaviour
 
     private void Update()
     {
-        timerTxt.SetText($"{Math.Round(gatherTime - gatherTimeDown, 1)}s");
-
         if (gatherStart)
         {
             gatherTimeDown += Time.deltaTime;
             OnGatheringHerb?.Invoke(gatherTimeDown);
             float progress = gatherTimeDown / gatherTime;
             progress = Mathf.Clamp01(progress);
-            pivot.localScale = new Vector3(progress, 1, 1);
+            pivot.localScale = new Vector3(1, progress, 1);
 
             if (gatherTime <= gatherTimeDown)
                 GetHurb();
@@ -59,7 +55,7 @@ public class Herbs : MonoBehaviour
 
             float progress = gatherTimeDown / gatherTime;
             progress = Mathf.Clamp01(progress);
-            pivot.localScale = new Vector3(progress, 1, 1);
+            pivot.localScale = new Vector3(1, progress, 1);
 
             if (0 >= gatherTimeDown)
                 CancelGathering();
@@ -112,7 +108,6 @@ public class Herbs : MonoBehaviour
         gatherTimeDown = Mathf.Clamp(gatherTimeDown, 0, gatherTime);
 
         if (gatherTime <= 0) CancelGathering();
-
     }
 
 

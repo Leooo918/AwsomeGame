@@ -10,4 +10,5 @@ public abstract class SkillSO : ScriptableObject
 
     public Stat skillCoolTime;
     public Stat attackDistance;
+    public Stat skillAfterDelay;
 }

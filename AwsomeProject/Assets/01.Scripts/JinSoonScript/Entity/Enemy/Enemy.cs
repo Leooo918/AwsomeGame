@@ -12,16 +12,16 @@ public abstract class Enemy<T> : Entity where T : Enum
     public float PatrolTime { get; protected set; }
     public float PatrolDelay { get; protected set; }
     public float detectingDistance { get; protected set; }
-    public float attackDistance {  get; protected set; }
+    public float attackDistance { get; protected set; }
 
     #endregion
 
     #region Settings
 
-    [SerializeField] private Transform findPlayerMark;
+    [SerializeField] protected Transform findPlayerMark;
 
-    [SerializeField] private LayerMask whatIsPlayer;
-    [SerializeField] private LayerMask whatIsObstacle;
+    [SerializeField] protected LayerMask whatIsPlayer;
+    [SerializeField] protected LayerMask whatIsObstacle;
 
     public Transform patrolOriginPos;
 
@@ -104,7 +104,7 @@ public abstract class Enemy<T> : Entity where T : Enum
             return;
         }
 
-        
+
         SpriteRenderer sr = findPlayerMark.GetComponent<SpriteRenderer>();
         sr.color = new Color(1, 1, 1, 1);
         findPlayerMark.localScale = Vector3.one;

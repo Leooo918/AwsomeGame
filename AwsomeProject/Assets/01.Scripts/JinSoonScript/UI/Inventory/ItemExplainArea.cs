@@ -14,6 +14,7 @@ public class ItemExplainArea : MonoBehaviour
     private void Awake()
     {
         inventory.OnSelectItem += SetExplain;
+        SetExplain(null);
     }
 
     public void SetExplain(ItemSO item)

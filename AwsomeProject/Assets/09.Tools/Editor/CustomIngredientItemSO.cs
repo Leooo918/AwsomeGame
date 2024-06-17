@@ -83,15 +83,15 @@ public class CustomIngredientItemSO : Editor
 
                 EditorGUILayout.BeginHorizontal();
                 {
-                    EditorGUILayout.TextField("Name", _itemName.stringValue);
+                    EditorGUILayout.PropertyField(_itemName);
                 }
                 EditorGUILayout.EndHorizontal();
 
                 //GUIStyle style = GUIStyle.none;
-                EditorGUILayout.TextField("ItemExplain", _itemExplain.stringValue);
+                EditorGUILayout.PropertyField(_itemExplain);
                 EditorGUILayout.PropertyField(_prefab);
                 EditorGUILayout.PropertyField(_itemType);
-                EditorGUILayout.IntField("MaxCarryAmountPerSlot",_maxCarryAmountPerSlot.intValue);
+                EditorGUILayout.PropertyField(_maxCarryAmountPerSlot);
             }
             EditorGUILayout.EndVertical();
         }

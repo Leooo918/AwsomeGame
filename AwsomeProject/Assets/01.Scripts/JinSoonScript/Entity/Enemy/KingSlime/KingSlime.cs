@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum KingSlimeStateEnum 
+public enum KingSlimeStateEnum
 {
     Ready,
     JumpAttack,
@@ -14,7 +14,7 @@ public enum KingSlimeStateEnum
     Dead
 }
 
-public enum KingSlimeSkillEnum 
+public enum KingSlimeSkillEnum
 {
     KingJumpAttack,
     KingMucusAttack,
@@ -34,8 +34,11 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     #endregion
 
-    [HideInInspector] public bool moveAnim = false;
+    public GameObject mucus;
     [HideInInspector] public bool readyFlip = false;
+
+    private float currentSkillAfterDelay;
+    private bool canUseSkill = true;
 
     #region HpBar
 
@@ -94,41 +97,15 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
             var item = notReady[i];
             if (item.Item2 + item.Item1.skillCoolTime.GetValue() < Time.time)
             {
-                notReady.Remove(item);
+                notReady.RemoveAt(i--);
                 if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
                 readySkill.Push(item.Item1);
-                --i;
             }
         }
 
         //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
         //hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
         //pivot.localScale = new Vector3(hpPercentage, 1, 1);
-    }
-
-    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-
-    public override void Stun(float duration)
-    {
-        if (isDead) return;
-        stunDuration = duration;
-        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
-    }
-
-    public void Attack()
-    {
-        //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
-        SkillSO skill = readySkill.Peek();
-        if (skill == null)
-        {
-            StateMachine.ChangeState(KingSlimeStateEnum.Ready);
-            return;
-        }
-
-        skill.skill.UseSkill();
-        notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
-        readySkill.Pop();
-        attackDistance = 0;
     }
 
     private void ShuffleSkillStack()
@@ -159,6 +136,57 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         attackDistance = readySkill.Peek().attackDistance.GetValue();
     }
 
+    public override void Stun(float duration)
+    {
+        if (isDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
+    }
+
+    public void UseSkill()
+    {
+        //현재 스킬을 못쓴다면 return
+        if (canUseSkill == false) return;
+
+        //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
+        if (readySkill.TryPeek(out SkillSO skill) == false || skill == null)
+        {
+            if (skill != null)
+            {
+                readySkill.Pop();
+                readySkill.Push(skill);
+            }
+            StateMachine.ChangeState(KingSlimeStateEnum.Ready);
+            return;
+        }
+
+        //스킬의 공격 범위에 플레이어가 없다면
+        attackDistance = skill.attackDistance.GetValue();
+        Player player = IsPlayerDetected();
+        if (player == null)
+        {
+            StateMachine.ChangeState(KingSlimeStateEnum.Ready);
+            readySkill.Pop();
+            readySkill.Push(skill);
+            return;
+        }
+
+        skill.skill.UseSkill();
+        currentSkillAfterDelay = skill.skillAfterDelay.GetValue();
+        Debug.Log(currentSkillAfterDelay);
+        notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
+        readySkill.Pop();
+    }
+
+    public void SetSkillAfterDelay() => StartCoroutine(DelaySkill());
+
+    private IEnumerator DelaySkill()
+    {
+        canUseSkill = false;
+        yield return currentSkillAfterDelay;
+        canUseSkill = true;
+    }
+
     private void OnHit()
     {
         HitEvent?.Invoke();
@@ -180,5 +208,18 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
 
         StateMachine.ChangeState(KingSlimeStateEnum.Dead);
+    }
+
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+    public override Player IsPlayerDetected()
+    {
+        Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
+
+        if (player == null)
+            return null;
+
+        player.TryGetComponent(out Player playerCompo);
+        return playerCompo;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     public Stat maxHp { get; private set; }
     public float curHp { get; private set; }
     public float lastAttackDamage { get; private set; }
-    public bool isLastAttackCritical { get; private set; }  
+    public bool isLastAttackCritical { get; private set; }
 
     //효과, 지속시간, 시작된 시간
     protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
@@ -26,7 +27,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         Init();
     }
 
-    public void Init( )
+    public void Init()
     {
         maxHp = owner.Stat.maxHp;
         curHp = maxHp.GetValue();
@@ -36,7 +37,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
-        if(owner.isDead) return;
+        if (owner.isDead) return;
         //방어력 계산, 크리티컬 확인
         //damage = owners.
 
@@ -54,7 +55,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         if (withFeedBack)
         {
             onHit?.Invoke();
-            onKnockBack?.Invoke(knockPower);
+            //onKnockBack?.Invoke(knockPower);
         }
         if (curHp <= 0)
         {
@@ -110,6 +111,24 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
         effects.Add(new Tuple<Effect, float, float>(effect, effect.duration, Time.time));
         effect.EnterEffort(owner);
+    }
+
+    public void Rape(float time)
+    {
+        KingSlime slime = owner as KingSlime;
+        if (slime)
+        {
+            Debug.Log("밍밍");
+            slime.StateMachine.ChangeState(KingSlimeStateEnum.Vined);
+            StartCoroutine(DelayRapeOff(slime, time));
+        }
+    }
+
+    IEnumerator DelayRapeOff(KingSlime slime, float time)
+    {
+        yield return new WaitForSeconds(time);
+        slime.CanStateChangeable = true;
+        slime.StateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
 
 

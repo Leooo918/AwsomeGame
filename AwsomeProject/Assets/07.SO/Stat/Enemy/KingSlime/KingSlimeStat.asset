@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: KingSlimeStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 0
+    baseValue: 200
     modifiers: []
     percentModifiers: []
   armor:

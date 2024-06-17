@@ -27,8 +27,6 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
         curSlotNumTxt = transform.Find("CurrentSlotNum").GetComponent<TextMeshProUGUI>();
     }
 
-
-
     public void GoSlotNumUp()
     {
         curSlotNum++;

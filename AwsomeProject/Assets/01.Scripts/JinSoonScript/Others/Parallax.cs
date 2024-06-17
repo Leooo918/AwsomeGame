@@ -9,6 +9,7 @@ public class Parallax : MonoBehaviour
     private GameObject cam;
     public bool isFastenY;
     public float parallaxEffect;
+    [SerializeField] private float height = 0;
 
     private void Awake()
     {
@@ -22,15 +23,15 @@ public class Parallax : MonoBehaviour
         float temp = (cam.transform.position.x * (1 - parallaxEffect));
         float dist = (cam.transform.position.x * parallaxEffect);
 
-        Vector3 targetPos = new Vector3(startPos + dist, 0, transform.position.z);
+        Vector3 targetPos = new Vector3(startPos + dist, height, transform.position.z);
 
         if(isFastenY)
         {
-            targetPos.y = cam.transform.position.y;
+            targetPos.y += cam.transform.position.y;
         }
         else
         {
-            targetPos.y = transform.position.y;
+            targetPos.y += transform.position.y;
         }
 
         transform.position = targetPos;

@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: RedFruit
   m_EditorClassIdentifier: 
   id: 1
-  itemName: "\uBE68\uAC04\uC5F4\uB9E4"
+  itemName: "\uD1B5\uD1B5\uBC84\uC12F"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uC544\uC8FC \uBE68\uAC04 \uBC84\uC12F"
-  dotImage: {fileID: 0}
-  itemImage: {fileID: -1790349488, guid: 304b67974f39be1439057c2fa5147f82, type: 3}
+  itemExplain: "\uC5B4\uB9B0\uD1B5\uD1B5\uBC84\uC12F, \uC791\uC544\uC11C \uBC1F\uACE0
+    \uC62C\uB77C\uAC08 \uC21C \uC5C6\uC9C0\uB9CC \uC678\uD53C\uAC00 \uC587\uC544
+    \uAE4C\uB531\uD558\uBA74 \uD130\uC9C8\uAC83 \uAC19\uB2E4"
+  dotImage: {fileID: -1188624020, guid: 4a2395f54a39c154589d9c784385150f, type: 3}
+  itemImage: {fileID: 21300000, guid: bf39809123d944845a65edb74d90478a, type: 3}
   prefab: {fileID: 6910422564161804073, guid: c9befb66ad19a6f4ebc96dd0b1037ed8, type: 3}
-  ingredientType: 2
+  ingredientType: 0
   gatheringTime: 2
   effectType: 0
   effectPoint: 3

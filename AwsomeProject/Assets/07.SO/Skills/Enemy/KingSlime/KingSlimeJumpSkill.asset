@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   skillName: KingJumpAttack
-  skill: {fileID: 0}
   skillCoolTime:
-    baseValue: 3
+    baseValue: 2
     modifiers: []
     percentModifiers: []
   attackDistance:
     baseValue: 20
+    modifiers: []
+    percentModifiers: []
+  skillAfterDelay:
+    baseValue: 3
     modifiers: []
     percentModifiers: []
   kingSlimeAirTime: 4

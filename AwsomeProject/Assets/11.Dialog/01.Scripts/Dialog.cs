@@ -174,6 +174,7 @@ public class Dialog : MonoBehaviour
             isOptionSelected = false;
         }
 
+        curTxt = "";
         yield return null;
 
         if (readlineCoroutine != null)

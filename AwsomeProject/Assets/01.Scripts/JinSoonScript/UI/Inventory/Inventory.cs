@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
+    [SerializeField] private Vector2Int inventorySize = new Vector2Int(5, 4);
     private string path = "";
     public Action<ItemSO> OnSelectItem;
 
@@ -20,6 +22,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
+        inventory = new InventorySlot[inventorySize.x, inventorySize.y];
 
         for (int i = 0; i < inventory.GetLength(1); i++)
         {
@@ -47,6 +50,35 @@ public class Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Load();
+        }
+    }
+
+    private void OnDisable()
+    {
+        for (int i = 0; i < inventory.GetLength(0); i++)
+        {
+            for (int j = 0; j < inventory.GetLength(1); j++)
+            {
+                if (inventory[i, j].assignedItem != null)
+                {
+                    inventory[i, j].assignedItem.gameObject.SetActive(false);
+                }
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < inventory.GetLength(0); i++)
+        {
+            for (int j = 0; j < inventory.GetLength(1); j++)
+            {
+                if (inventory[i, j].assignedItem != null)
+                {
+                    inventory[i, j].assignedItem.gameObject.SetActive(true);
+                }
+
+            }
         }
     }
 
@@ -163,8 +195,6 @@ public class Inventory : MonoBehaviour
                     ItemStruct itemS;
                     itemS.amount = inventory[i, j].assignedItem.itemAmount;
                     itemS.id = inventory[i, j].assignedItem.itemSO.id;
-                    itemS.posX = i;
-                    itemS.posY = j;
 
                     saveData.inventory.Add(itemS);
                 }
@@ -213,11 +243,25 @@ public class Inventory : MonoBehaviour
                 if (itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) continue;
                 if (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false) continue;
 
-                itemPf = itemSet.itemset[k].prefab;
-                Item it = Instantiate(itemPf, itemParent).GetComponent<Item>();
+                bool b = false;
+                for (int l = 0; l < inventory.GetLength(0); l++)
+                {
+                    for (int j = 0; j < inventory.GetLength(1); j++)
+                    {
+                        if (inventory[l, j].assignedItem == null)
+                        {
+                            itemPf = itemSet.itemset[k].prefab;
+                            Item it = Instantiate(itemPf, itemParent).GetComponent<Item>();
 
-                it.Init(itemStruct.amount, inventory[itemStruct.posX, itemStruct.posY]);
-                inventory[itemStruct.posX, itemStruct.posY].InsertItem(it);
+                            it.Init(itemStruct.amount, inventory[l, j]);
+                            inventory[l, j].InsertItem(it);
+
+                            b = true;
+                            break;
+                        }
+                    }
+                    if (b) break;
+                }
             }
         }
     }
@@ -233,7 +277,5 @@ public class Inventory : MonoBehaviour
     {
         public int id;
         public int amount;
-        public int posX;
-        public int posY;
     }
 }

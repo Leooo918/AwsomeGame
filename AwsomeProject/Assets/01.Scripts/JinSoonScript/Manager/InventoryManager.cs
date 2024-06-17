@@ -14,6 +14,11 @@ public class InventoryManager : Singleton<InventoryManager>
     public InventorySlot curCheckingSlot { get; private set; }
 
     public RectTransform inventoryRect;
+    
+    private RectTransform ingredientsInventory;
+    private RectTransform portionInventory;
+    private bool isIngredientsInventoryActive = true;
+
     public Transform itemParent;
     public Transform explainparent;
 
@@ -28,9 +33,15 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Awake()
     {
-        explainName = explainparent.Find("Name").GetComponent<TextMeshProUGUI>();
-        explainTxt = explainparent.Find("Explain").GetComponent<TextMeshProUGUI>();
-        explainImage = explainparent.Find("Image").GetComponent<Image>();
+        explainName = explainparent.Find("Name/Txt").GetComponent<TextMeshProUGUI>();
+        explainTxt = explainparent.Find("Explain/Txt").GetComponent<TextMeshProUGUI>();
+        explainImage = explainparent.Find("Frame/Image").GetComponent<Image>();
+        SetExplain(null);
+
+        ingredientsInventory = inventoryRect.transform.Find("IngredientsInventory").GetComponent<RectTransform>();
+        portionInventory = inventoryRect.transform.Find("PortionInventory").GetComponent<RectTransform>();
+
+        EnbableIgredientsInventory(true);
     }
 
     private void OnEnable()
@@ -87,10 +98,26 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public Item MakeItemInstanceByItemSO(ItemSO itemSO, int amount = 1)
     {
+        if (itemSO == null) return null;
         Item item = Instantiate(itemSO.prefab, itemParent).GetComponent<Item>();
-        
         item.SetItemAmount(amount);
 
         return item;
+    }
+
+    public void EnbableIgredientsInventory(bool isEnable)
+    {
+        isIngredientsInventoryActive = isEnable;
+        if(isIngredientsInventoryActive)
+        {
+            ingredientsInventory.gameObject.SetActive(true);
+            portionInventory.gameObject.SetActive(false);
+        }
+        else
+        {
+
+            ingredientsInventory.gameObject.SetActive(false);
+            portionInventory.gameObject.SetActive(true);
+        }
     }
 }

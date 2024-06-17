@@ -24,6 +24,7 @@ public class EntitySkill<T> : MonoBehaviour where T : Enum
             {
                 if (skillSO.skills[i].skillName == skillName)
                 {
+                    if (skillDic.TryGetValue(skillEnum, out SkillSO value)) continue;
                     skillDic.Add(skillEnum, skillSO.skills[i]);
                 }
             }

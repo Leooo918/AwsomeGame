@@ -24,6 +24,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action ForthQuickSlot;
     public event Action FifthQuickSlot;
 
+    public event Action OnTryUseQuickSlot;
     public event Action OnUseQuickSlot;
 
     #endregion
@@ -32,8 +33,8 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
     #region input value 
 
-    public float XInput {  get; private set; }
-    public float YInput {  get; private set; }
+    public float XInput { get; private set; }
+    public float YInput { get; private set; }
 
     #endregion
 
@@ -42,7 +43,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
     private void OnEnable()
     {
-        if(controlls == null) 
+        if (controlls == null)
         {
             controlls = new Controlls();
             controlls.Player.SetCallbacks(this);
@@ -77,13 +78,13 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             DashEvent?.Invoke();
     }
 
     public void OnPressTab(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             PressTabEvent?.Invoke();
     }
 
@@ -127,7 +128,10 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
     public void OnUsePortion(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
+            OnTryUseQuickSlot?.Invoke();
+
+        if (context.canceled)
             OnUseQuickSlot?.Invoke();
     }
 

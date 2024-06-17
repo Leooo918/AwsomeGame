@@ -13,6 +13,7 @@ public class QuickSlotInserter : InventorySlot
     {
         base.Awake();
         inserterSet = transform.parent.GetComponent<QuickSlotInserterSet>();
+        //selectedUI = transform.Find("SelectedUI").gameObject;
     }
 
     public override void InsertItem(Item item)
@@ -21,6 +22,15 @@ public class QuickSlotInserter : InventorySlot
         base.InsertItem(item);
 
         QuickSlotManager.Instance.QuickSlotSetsParent.SetItem(item.itemSO, inserterSet.slotNum, slotIdx);
+    }
+
+    public override void Select()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            inserterSet.inserter[i].UnSelect();
+        }
+        selectUI.SetActive(true);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
