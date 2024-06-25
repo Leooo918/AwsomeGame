@@ -34,7 +34,7 @@ public class ShopPanel : MonoBehaviour, IWindowPanel
         ShopItemSO[] soArr = _shopItemTables.list
                            .Where(x => x.CheckSelect()).ToArray();
 
-        if (soArr.Length < 9)
+        if (soArr.Length < 6)
         {
             //혹시나 멍청이 이슈방지용 사실상 필요없는 코드
             Debug.LogError("Error! : Must hav 6 item at least");

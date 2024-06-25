@@ -15,15 +15,14 @@ public class WildBoarReadyState : EnemyState<WildBoarEnum>
 
     public override void Enter()
     {
-        base.Enter();
+        /*base.Enter();
 
         playerTrm = PlayerManager.Instance.PlayerTrm;
 
         enemy.FindPlayerEvt(() =>
         {
             isReady = true;
-
-        });
+        });*/
     }
 
     public override void Exit()
@@ -44,6 +43,5 @@ public class WildBoarReadyState : EnemyState<WildBoarEnum>
         {
             wildBoar.Flip();
         }
-
     }
 }

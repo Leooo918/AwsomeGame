@@ -28,4 +28,9 @@ public class ShopUI : MonoBehaviour, IPointerClickHandler
     {
         _clickPanel.SetActive(false);
     }
+
+    public void OffShop()
+    {
+        UIManager.Instance.Close(Window.Shop);
+    }
 }
