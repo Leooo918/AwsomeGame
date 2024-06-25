@@ -9,6 +9,7 @@ public enum WildBoarEnum
     Ready,
     Rush,
     Groggy,
+    Stun,
     Dead
 }
 
@@ -20,7 +21,7 @@ public enum WildBoarSkillEnum
 public class WildBoar : Enemy<WildBoarEnum>
 {
     //public WildBoarStatusSO wildBoarStatus { get; protected set; }
-    public EnemyStateMachine<WildBoarEnum> StateMachine { get; private set; }
+    public WildBoarSkill Skills { get; private set; }
 
     public Stack<SkillSO> readySkill = new Stack<SkillSO>();
     public List<Tuple<SkillSO, float>> notReady = new List<Tuple<SkillSO, float>>();
@@ -34,24 +35,8 @@ public class WildBoar : Enemy<WildBoarEnum>
     protected override void Awake()
     {
         base.Awake();
-        StateMachine = new EnemyStateMachine<WildBoarEnum>();
-
-        foreach(WildBoarEnum stateEnum in Enum.GetValues(typeof(WildBoarEnum)))
-        {
-            string typeName = stateEnum.ToString();
-            Type t = Type.GetType($"WildBoar{typeName}State");
-            try
-            {
-                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName)
-                    as EnemyState<WildBoarEnum>;
-                StateMachine.AddState(stateEnum, enemyState);
-            }
-            catch(Exception e)
-            {
-                Debug.LogError($"Enemy WildBoar : no State {typeName}");
-                Debug.LogError(e);
-            }
-        }
+        Skills = gameObject.AddComponent<WildBoarSkill>();
+        Skills.Init(EntitySkillSO);
 
         foreach (var item in EntitySkillSO.skills)
         {
@@ -63,7 +48,7 @@ public class WildBoar : Enemy<WildBoarEnum>
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
 
-        pivot = hpBar.Find("Pivot");
+        //pivot = hpBar.Find("Pivot");
     }
 
     private void OnEnable()
@@ -81,6 +66,7 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Start()
     {
         StateMachine.Initialize(WildBoarEnum.Idle, this);
+
     }
 
     private void Update()
@@ -99,12 +85,19 @@ public class WildBoar : Enemy<WildBoarEnum>
             }
         }
 
-        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
-        pivot.localScale = new Vector3(hpPercentage, 1, 1);
+        //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
+        //hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
+        //pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+
+    public override void Stun(float duration)
+    {
+        if (isDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(WildBoarEnum.Stun);
+    }
 
     public override void Dead(Vector2 dir)
     {
@@ -126,11 +119,29 @@ public class WildBoar : Enemy<WildBoarEnum>
         attackDistance = 0;
     }
 
+    public void SkillStack()
+    {
+        List<SkillSO> skills = EntitySkillSO.skills;
+
+        readySkill.Clear();
+        for (int i = 0; i < skills.Count; i++)
+        {
+            //쿨타임중이면 공격스택에 넣지말고
+            if (readySkill.Contains(skills[i])) continue;
+
+            //쿨타임이 아닌 녀석들만 스택에 넣어두어라
+            readySkill.Push(skills[i]);
+        }
+        if (readySkill.Peek() == null) return;
+
+        attackDistance = readySkill.Peek().attackDistance.GetValue();
+    }
+
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(WildBoarEnum.Ready);
-    }
+        StateMachine.ChangeState(WildBoarEnum.Rush);
+    } 
 
     private void OnDie(Vector2 dir)
     {

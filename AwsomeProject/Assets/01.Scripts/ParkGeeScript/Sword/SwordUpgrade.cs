@@ -13,7 +13,6 @@ public class SwordUpgrade : MonoBehaviour
     private void Awake()
     {
         entityStat = FindAnyObjectByType<EntityStat>();
-        Debug.Log(entityStat);
     }
 
     private void Update()
