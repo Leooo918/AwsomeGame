@@ -19,17 +19,33 @@ public class QuickSlotInserter : InventorySlot
     public override void InsertItem(Item item)
     {
         if (item.itemSO.itemType != ItemType.Portion) return;
-        base.InsertItem(item);
 
-        QuickSlotManager.Instance.QuickSlotSetsParent.SetItem(item.itemSO, inserterSet.slotNum, slotIdx);
+        QuickSlotManager.Instance.InsertItem(inserterSet.slotNum, slotIdx, item.itemSO);
+        base.InsertItem(item);
+    }
+
+    public override void DeleteItem()
+    {
+        if (assignedItem == null) return;
+
+        QuickSlotManager.Instance.RemoveItem(inserterSet.slotNum, slotIdx);
+        assignedItem = null;
+    }
+
+    public void RemoveItem()
+    {
+        if (assignedItem == null) return;
+
+        QuickSlotManager.Instance.RemoveItem(inserterSet.slotNum, slotIdx);
+        Destroy(assignedItem.gameObject);
+        assignedItem = null;
     }
 
     public override void Select()
     {
         for (int i = 0; i < 5; i++)
-        {
             inserterSet.inserter[i].UnSelect();
-        }
+
         selectUI.SetActive(true);
     }
 

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,9 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
 {
     private KingSlime kingSlime;
     private GameObject mucusPf;
+    private Tween moveTween;
     private bool isFired = false;
+    private int doMucusAttackAnimTriggerHash = Animator.StringToHash("DoMucusAttack");
 
     public KingSlimeMucusAttackState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
@@ -36,6 +39,17 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
         mucusInstance.transform.position = kingSlime.transform.position;
         mucusInstance.Fire(fireDirection * 2);
         isFired = true;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+        Vector3 targetPosition = kingSlime.GetJumpPos();
+        moveTween = enemy.transform.DOJump(targetPosition, 10, 1, 0.5f)
+            .OnComplete(() =>
+            {
+                enemy.animatorCompo.SetTrigger(doMucusAttackAnimTriggerHash);
+            });
     }
 
     public override void Exit()

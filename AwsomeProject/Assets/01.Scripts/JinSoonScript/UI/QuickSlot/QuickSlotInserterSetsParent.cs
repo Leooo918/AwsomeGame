@@ -25,6 +25,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     private void Awake()
     {
         curSlotNumTxt = transform.Find("CurrentSlotNum").GetComponent<TextMeshProUGUI>();
+        Init();
     }
 
     public void GoSlotNumUp()
@@ -36,8 +37,8 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
 
         curSlotNumTxt.SetText($"{curSlotNum + 1}");
 
-        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[curSlotNum];
-        nextQuickSlot.Init(items);
+        nextQuickSlot.Init(curSlotNum);
+
         curQuickSlot.GoDisable(upPeek, originPos, disableColor);
         nextQuickSlot.GoEnable(originPos, Color.white);
 
@@ -55,8 +56,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
 
         curSlotNumTxt.SetText($"{curSlotNum + 1}");
 
-        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[curSlotNum];
-        nextQuickSlot.Init(items);
+        nextQuickSlot.Init(curSlotNum);
         curQuickSlot.GoDisable(downPeek, originPos, disableColor);
         nextQuickSlot.GoEnable(originPos, Color.white);
 
@@ -67,6 +67,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
 
     public void Init()
     {
+        maxQuickSlotCnt = QuickSlotManager.Instance.MaxQuickSlotCnt;
         nextQuickSlot = GetQuickSlot();
         curQuickSlot = GetQuickSlot();
     }
@@ -75,8 +76,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     {
         QuickSlotInserterSet quickSlotSet =
             Instantiate(quickSlotSetPf, transform).GetComponent<QuickSlotInserterSet>();
-        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[curSlotNum];
-        quickSlotSet.Init(items);
+        quickSlotSet.Init(curSlotNum);
 
         RectTransform rect = quickSlotSet.GetComponent<RectTransform>();
         Image img = rect.GetComponent<Image>();

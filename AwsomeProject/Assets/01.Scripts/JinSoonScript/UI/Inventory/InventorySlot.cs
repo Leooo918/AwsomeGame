@@ -59,7 +59,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         item.Init(item.itemAmount, this);
     }
 
-    public void DeleteItem()
+    public virtual void DeleteItem()
     {
         assignedItem = null;
     }
