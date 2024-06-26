@@ -7,11 +7,12 @@ using UnityEngine.UI;
 public class QuickSlotInserterSet : MonoBehaviour
 {
     public readonly QuickSlotInserter[] inserter = new QuickSlotInserter[5];
+    private int _slotIdx;
     private RectTransform inserterSetRect;
     private Image[] inserterImages;
 
     public bool isEnable = false;
-    public int slotNum = 0;
+    public int slotNum => _slotIdx;
 
     private Sequence seq;
 
@@ -38,7 +39,25 @@ public class QuickSlotInserterSet : MonoBehaviour
             .Join(inserterSetRect.DOScale(1.1f, 0.3f))
             .AppendCallback(() => transform.SetAsFirstSibling())
             .Append(inserterSetRect.DOAnchorPos(origin, 0.2f))
-            .Join(inserterSetRect.DOScale(0.9f, 0.2f));
+            .Join(inserterSetRect.DOScale(1f, 0.2f))
+            .OnStart(() =>
+            {
+                for (int i = 0; i < inserter.Length; i++)
+                {
+                    if (inserter[i].assignedItem != null)
+                        inserter[i].assignedItem.transform.SetParent(transform);
+                }
+            })
+            .OnComplete(() =>
+            {
+                for (int i = 0; i < inserter.Length; i++)
+                {
+                    if (inserter[i].assignedItem != null)
+                        Destroy(inserter[i].assignedItem.gameObject);
+
+                    inserter[i].UnSelect();
+                }
+            });
 
         foreach (var item in inserterImages)
             seq.Join(item.DOColor(disableColor, 0.5f));
@@ -51,20 +70,42 @@ public class QuickSlotInserterSet : MonoBehaviour
 
         seq = DOTween.Sequence();
 
-        seq.Append(inserterSetRect.DOAnchorPos(origin, 0.5f))
-           .Join(inserterSetRect.DOScale(1f, 0.5f));
-
         foreach (var item in inserterImages)
             seq.Join(item.DOColor(enableColor, 0.5f));
+
+        seq.Join(inserterSetRect.DOScale(1f, 0.5f))
+            .OnComplete(() =>
+            {
+                Transform itemParent = InventoryManager.Instance.itemParent;
+                for (int i = 0; i < inserter.Length; i++)
+                {
+                    if (inserter[i].assignedItem != null)
+                        inserter[i].assignedItem.transform.SetParent(itemParent);
+                }
+            });
+
     }
 
-    public void Init(QuickSlotItems items)
+    public void Init(int slotIdx)
     {
+        _slotIdx = slotIdx;
+
+        QuickSlotItems items = QuickSlotManager.Instance.GetQuickSlot(_slotIdx);
         for (int i = 0; i < items.items.Length; i++)
         {
+            if (inserter[i].assignedItem != null)
+                inserter[i].RemoveItem();
+
             if (items.items[i] == null) continue;
-            Item item = InventoryManager.Instance.MakeItemInstanceByItemSO(items.items[i]);
-            inserter[i].InsertItem(item);
+
+            Item item =
+                InventoryManager.Instance.MakeItemInstanceByItemSO(items.items[i]);
+
+            if (item != null)
+            {
+                inserter[i].InsertItem(item);
+                item.transform.SetParent(transform);
+            }
         }
     }
 }

@@ -38,6 +38,8 @@ public abstract class Enemy<T> : Entity where T : Enum
     protected int lastAnimationBoolHash;
 
     private bool playerDetected = false;
+    public float DashTime;
+    public readonly float DashPower;
 
     protected override void Awake()
     {

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,9 @@ public class QuickSlotSetsParent : MonoBehaviour
     public GameObject quickSlotSetPf;
 
     //현재 사용가능한 퀵슬롯
-    [HideInInspector] public QuickSlotSet currentQuickSlotSet;
+    public QuickSlotSet currentQuickSlotSet;
     //다음 퀵슬롯
-    [HideInInspector] public QuickSlotSet nextSlot;
+    public QuickSlotSet nextSlot;
 
     public QuickSlotOffset enabledOffset;
     public QuickSlotOffset disabledOffset;
@@ -22,6 +23,13 @@ public class QuickSlotSetsParent : MonoBehaviour
     private Sequence seq;
     private Coroutine coroutine;
 
+    private void Awake()
+    {
+        QuickSlotItems firstSet = QuickSlotManager.Instance.GetQuickSlot(0);
+        QuickSlotItems secondSet = QuickSlotManager.Instance.GetQuickSlot(1);
+        InitQuickSlotSet(firstSet, secondSet);
+    }
+
     public void SetItem(ItemSO item, int slotNum, int slotIdx)
     {
         //현재 존재하는 퀵슬롯세트에 아이템을 넣어다면 아이템이 넣을게 보이게
@@ -30,6 +38,11 @@ public class QuickSlotSetsParent : MonoBehaviour
 
         if (nextSlot != null && nextSlot.slotNum == slotNum)
             nextSlot.SetItem(item, slotIdx);
+    }
+
+    public void RemoveItem(int slotIdx, int selectedSlot)
+    {
+
     }
 
     /// <summary>
@@ -92,14 +105,14 @@ public class QuickSlotSetsParent : MonoBehaviour
     }
 
     /// <summary>
-    /// When Use All Quickslot and moveto next quickSlots
+    /// When Use All Quickslot and move to next quickSlots
     /// </summary>
     /// <returns></returns>
     private IEnumerator GoNextQuickSlotRoutine()
     {
         currentQuickSlotSet.DisableQuickSlotSet();
         currentQuickSlotSet = nextSlot;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
 
 
         //얘는 null이 나올 수도 있음

@@ -4,71 +4,68 @@ using UnityEngine;
 
 public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
 {
+    private Transform enemyTrm;
+    private Transform targetTrm;
     private KingSlime kingSlime;
     private GameObject jumpAttackWarning;
 
-    private float originGravityScale;
-    private float playerFollowingSpeed = 2f;
-    private float playerFollowingTime = 2f;
+    private int fallAnimTriggerHash = Animator.StringToHash("Fall");
+    private int landAnimTriggerHash = Animator.StringToHash("Land");
+    private int jumpanimTriggerHash = Animator.StringToHash("Jump");
 
-    private bool isFindingPlayer = false;
-    private bool isGoUp = false;
-    private bool isGoDown = false;
+    private float attackDelay = 1f;
+    private float fallSpeed = 70f;
+    private float jumpDelay = 2f;
+    private float jumpHeight = 20f;
+    private float jumpSpeed = 50f;
+    private float moveSpeed = 5f;
+    private float randomDelay;
+    private float originGravity;
 
-    private int fallAnimBoolHash = Animator.StringToHash("Fall");
-    private int landAnimBoolHash = Animator.StringToHash("Land");
-
+    private float targetHeight;
+    private bool _isJumped = false;
+    private bool _isFalling = false;
+    private bool _isFollowingPlayer = false;
 
     public KingSlimeJumpAttackState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         kingSlime = enemy as KingSlime;
-        jumpAttackWarning = enemy.transform.Find("JumpAttackWarning").gameObject;
+        enemyTrm = enemy.transform;
+        targetTrm = PlayerManager.Instance.PlayerTrm;
+        jumpAttackWarning =
+            enemy.transform.Find("JumpAttackWarning").gameObject;
     }
 
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
-        if (isGoUp == false) isGoUp = true;
-        else if (isFindingPlayer == false)
-        {
-            jumpAttackWarning.SetActive(true);
-            isFindingPlayer = true;
-
-            enemy.StartDelayCallBack(playerFollowingTime, () =>
-            {
-                enemy.animatorCompo.SetBool(fallAnimBoolHash, true);
-                jumpAttackWarning.SetActive(false);
-                isGoDown = true;
-            });
-        }
-        else enemyStateMachine.ChangeState(KingSlimeStateEnum.Ready);
+        enemyStateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        //시작하고 jumpDelay후 올라감
         enemy.StopImmediately(true);
-        originGravityScale = enemy.rigidbodyCompo.gravityScale;
-        jumpAttackWarning.SetActive(false);
-        enemy.animatorCompo.SetBool(fallAnimBoolHash, false);
-        enemy.animatorCompo.SetBool(landAnimBoolHash, false);
-        isGoUp = false;
-        isFindingPlayer = false;
-        isGoDown = false;
-        enemy.rigidbodyCompo.gravityScale = 0f;
+        enemy.StartDelayCallBack(jumpDelay,
+            () =>
+            {
+                enemy.animatorCompo.SetTrigger(jumpanimTriggerHash);
+                targetHeight = enemyTrm.position.y + jumpHeight;
+                originGravity = enemy.rigidbodyCompo.gravityScale;
+                enemy.rigidbodyCompo.gravityScale = 0f;
+                _isJumped = true;
+            });
     }
 
     public override void Exit()
     {
-        jumpAttackWarning.SetActive(false);
-        enemy.rigidbodyCompo.gravityScale = originGravityScale;
-        enemy.animatorCompo.SetBool(fallAnimBoolHash, false);
-        enemy.animatorCompo.SetBool(landAnimBoolHash, false);
-        isGoUp = false;
-        isFindingPlayer = false;
-        isGoDown = false;
+        enemy.rigidbodyCompo.gravityScale = originGravity;
+        _isJumped = false;
+        _isFalling = false;
+        _isFollowingPlayer = false;
         kingSlime.SetSkillAfterDelay();
-        enemy.StopImmediately(true);
         base.Exit();
     }
 
@@ -76,28 +73,74 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
     {
         base.UpdateState();
 
-        if (isGoDown)
-        {
-            rigidbody.gravityScale = originGravityScale * 2.5f;
+        //점프
+        if (_isJumped)
+            JumpProcess();
 
-            if (enemy.IsGroundDetected())
+        //따라다니기
+        if (_isFollowingPlayer)
+            FollowProcess();
+
+        if (_isFalling)
+            FallProcess();
+    }
+
+    private void FallProcess()
+    {
+        Debug.Log("밍밍밍");
+        //땅이 감지 됬다면 이제 착지 애니메이션
+        if(enemy.IsGroundDetected())
+        {
+            enemy.rigidbodyCompo.gravityScale = originGravity;
+            enemy.animatorCompo.SetTrigger(landAnimTriggerHash);
+            _isFalling = false;
+        }
+
+        enemyTrm.position += Vector3.down * fallSpeed * Time.deltaTime;
+    }
+
+    private void JumpProcess()
+    {
+        enemyTrm.position +=
+                Vector3.up * jumpSpeed * Time.deltaTime;
+
+        if (jumpHeight <= enemyTrm.position.y)
+        {
+            _isJumped = false;
+            enemy.StartDelayCallBack(0.5f,
+                () =>
+                {
+                    jumpAttackWarning.SetActive(true);
+                    _isFollowingPlayer = true;
+                    _isJumped = false;
+
+                    randomDelay = Random.Range(4f, 7f);
+                    enemy.StartDelayCallBack(randomDelay,
+                        DelayFallProcess);
+                });
+        }
+    }
+
+    private void FollowProcess()
+    {
+        float dir =
+                targetTrm.position.x - enemyTrm.position.x;
+        dir = Mathf.Clamp(dir, -1, 1);
+
+        enemyTrm.position +=
+            Vector3.right * moveSpeed * dir * Time.deltaTime;
+    }
+
+    private void DelayFallProcess()
+    {
+        Debug.Log("밍;;;");
+        enemy.StartDelayCallBack(attackDelay,
+            () =>
             {
-                enemy.animatorCompo.SetBool(landAnimBoolHash, true);
-                rigidbody.gravityScale = originGravityScale;
-            }
-
-            return;
-        }
-
-        //올라가는 중
-        if (isFindingPlayer == true)
-        {
-            float playerDir = PlayerManager.Instance.PlayerTrm.position.x - enemy.transform.position.x;
-
-            enemy.transform.position +=
-                (Vector3.right * playerDir).normalized * playerFollowingSpeed * Time.deltaTime;
-        }
-        else if (isGoUp == true)
-            enemy.transform.position += Vector3.up * 100f * Time.deltaTime;
+                jumpAttackWarning.SetActive(false);
+                enemy.animatorCompo.SetTrigger(fallAnimTriggerHash);
+                _isFollowingPlayer = false;
+                _isFalling = true;
+            });
     }
 }

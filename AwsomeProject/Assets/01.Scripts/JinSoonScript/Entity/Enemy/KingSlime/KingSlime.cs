@@ -222,4 +222,9 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         player.TryGetComponent(out Player playerCompo);
         return playerCompo;
     }
+
+    public Vector3 GetJumpPos()
+    {
+        return Vector3.zero;
+    }
 }

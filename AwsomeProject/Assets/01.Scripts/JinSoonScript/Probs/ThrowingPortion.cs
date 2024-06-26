@@ -31,12 +31,14 @@ public class ThrowingPortion : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, _currentRotation);
         _currentRotation += _spinPower * Time.deltaTime;
+        Vector3 forceDir = new Vector3(_portionThrowingDirection.x, 0).normalized * _portionThrowingSpeed;
+        forceDir.y = _rigidbody.velocity.y;
+        _rigidbody.velocity = forceDir;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         //이것도 파티클 시스템 쓰면 그거 받아와서 암튼 풀링하고 뭐시기 해줘야도미
-        Debug.Log(collision);
         Instantiate(_portionEffectPf, transform.position, Quaternion.identity);
         //CameraManager.Instance.ShakeCam(7f, 7f, 0.1f);
 

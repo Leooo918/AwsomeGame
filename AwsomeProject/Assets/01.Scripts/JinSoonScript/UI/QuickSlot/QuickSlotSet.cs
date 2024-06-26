@@ -64,7 +64,7 @@ public class QuickSlotSet : MonoBehaviour
         if (slots[selectedSlot].AssignedPortion != null)
         {
             slots[selectedSlot].UseItem();
-            QuickSlotManager.Instance.UseItem(selectedSlot);
+            QuickSlotManager.Instance.RemoveItem(0, selectedSlot);
         }
 
         bool isSlotEmpty = true;
@@ -94,6 +94,8 @@ public class QuickSlotSet : MonoBehaviour
         }
     }
 
+    #region QuickSlotAnimation
+
     public void EnableQuickSlotSet(QuickSlotOffset offset)
     {
         SetQuickSlotInput();
@@ -109,7 +111,6 @@ public class QuickSlotSet : MonoBehaviour
             .Join(quickSlotSetRect.DOAnchorPos(offset.position, tweeningTime))
             .Join(quickSlotSetImage.DOColor(offset.color, tweeningTime));
     }
-
     public void DisableQuickSlotSet()
     {
         UnSetQuickSlotInput();
@@ -125,6 +126,10 @@ public class QuickSlotSet : MonoBehaviour
             .OnComplete(() => Destroy(gameObject));
     }
 
+    #endregion
+
+    #region QuickSlotInput
+
     private void SetQuickSlotInput()
     {
         player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
@@ -135,7 +140,6 @@ public class QuickSlotSet : MonoBehaviour
 
         player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
     }
-
     private void UnSetQuickSlotInput()
     {
         player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
@@ -146,6 +150,8 @@ public class QuickSlotSet : MonoBehaviour
 
         player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
     }
+
+    #endregion
 
     public void Init(QuickSlotItems items, bool isEnable, int slotNum)
     {
