@@ -24,7 +24,7 @@ public class QuickSlotSetsParent : MonoBehaviour
     private Sequence seq;
     private Coroutine coroutine;
 
-    private void Awake()
+    private void Start()
     {
         QuickSlotItems firstSet = QuickSlotManager.Instance.GetQuickSlot(0);
         QuickSlotItems secondSet = QuickSlotManager.Instance.GetQuickSlot(1);
