@@ -10,9 +10,9 @@ public class ThrowingPortion : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
 
-    [SerializeField] private GameObject _portionEffectPf;
+    private GameObject _portionEffectPf;
     [SerializeField] private int _maxEffectGatter = 10;
-    [SerializeField] private float _portionThrowingSpeed = 20f;
+    [SerializeField] private float _portionThrowingSpeed = 40f;
     [SerializeField] private float _spinPower = 360f;
     private float _currentRotation = 0;
 
@@ -31,9 +31,10 @@ public class ThrowingPortion : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, _currentRotation);
         _currentRotation += _spinPower * Time.deltaTime;
-        Vector3 forceDir = new Vector3(_portionThrowingDirection.x, 0).normalized * _portionThrowingSpeed;
-        forceDir.y = _rigidbody.velocity.y;
-        _rigidbody.velocity = forceDir;
+
+        Vector3 direction = _portionThrowingDirection * _portionThrowingSpeed;
+        direction.y = _rigidbody.velocity.y;
+        _rigidbody.velocity = (direction);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +73,8 @@ public class ThrowingPortion : MonoBehaviour
         Vector3 mouseDir = 
             (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
+        PortionItemSO portionSO = portion.itemSO as PortionItemSO;
+        _portionEffectPf = portionSO.portionParticle;
         _portionThrowingDirection = mouseDir;
         _rigidbody.AddForce(_portionThrowingDirection * _portionThrowingSpeed, ForceMode2D.Impulse);
 

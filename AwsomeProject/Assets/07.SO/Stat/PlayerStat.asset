@@ -29,7 +29,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   jumpForce:
-    baseValue: 15
+    baseValue: 20
     modifiers: []
     percentModifiers: []
   criticalChance:

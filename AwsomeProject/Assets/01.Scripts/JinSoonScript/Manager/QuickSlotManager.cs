@@ -28,7 +28,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
     public QuickSlotSetsParent quickSlotSetParent;
 
 
-    private void Awake()
+    private void Start()
     {
         MaxQuickSlotCnt = maxQuickSlotCnt;
         quickSlots = new QuickSlotItems[maxQuickSlotCnt];

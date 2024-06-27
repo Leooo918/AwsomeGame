@@ -120,7 +120,7 @@ public class QuickSlotSetsParent : MonoBehaviour
         currentQuickSlotSet = nextQuickSlotSet;
         yield return new WaitForSeconds(0.4f);
 
-
+        currentQuickSlotSet.slotNum = 0;
         currentQuickSlotSet.EnableQuickSlotSet(enabledOffset);
         nextQuickSlotSet = null;
         yield return new WaitForSeconds(0.5f);

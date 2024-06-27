@@ -19,9 +19,9 @@ public class ProjectaryCircle : MonoBehaviour
 
     private void Update()
     {
-        float dist = (_playerTrm.position - transform.position).magnitude;
-        float alpha = Mathf.Lerp(0, 255, maxDist / dist);
+        //float dist = (_playerTrm.position - transform.position).magnitude;
+        //float alpha = Mathf.Lerp(0, 255, maxDist / dist);
 
-        _renderer.color = new Color(originColor.r, originColor.g, originColor.b, alpha);
+        //_renderer.color = new Color(originColor.r, originColor.g, originColor.b, alpha);
     }
 }

@@ -20,6 +20,7 @@ public class PortionItemSO : ItemSO
     public EffectEnum effect;
     //요걸 리스트로 한 이유는 C포션을 만들려면 무조건 A효과와 B효과의 조합만이 아닐 수도 있다고 생각해서
     public List<EffectInfo> requireEffects = new List<EffectInfo>();
+    public GameObject portionParticle;
 
     //얘네는 Portion으로 만들때 지정해줄건데 아마 여기서 빠질 듯
     public int effecLv;

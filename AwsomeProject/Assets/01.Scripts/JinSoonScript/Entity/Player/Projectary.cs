@@ -6,7 +6,7 @@ public class Projectary : MonoBehaviour
     private Player player;
     [SerializeField] private float _time;
     [SerializeField] private int _count;
-    private float portionThrowingSpeed = 20f;
+    private float portionThrowingSpeed = 40f;
 
     [SerializeField]
     private GameObject _projectaryPrefab;
@@ -40,7 +40,7 @@ public class Projectary : MonoBehaviour
     {
         if(_isDrawingProjectile)
         {
-            Vector2 pos = transform.position + Vector3.up;
+            Vector2 pos = transform.position;
             Vector2 mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector3)pos).normalized;
             Vector3 power = mouseDir * portionThrowingSpeed;
             DrawLine(pos, power);
@@ -70,9 +70,13 @@ public class Projectary : MonoBehaviour
         //Debug.Log(power.x);
         bool flag = true;
         float gravity = Physics2D.gravity.y;
-        for (int i = 0; i < _projectileList.Count; i++)
+        for (int i = 1; i < _projectileList.Count; i++)
         {
             Transform t = _projectileList[i];
+            SpriteRenderer renderer = t.GetComponent<SpriteRenderer>();
+            Color color = renderer.color;
+            color.a = (float)(_projectileList.Count - i) / _projectileList.Count;
+            renderer.color = color;
             if (flag)
             {
                 t.gameObject.SetActive(true);
@@ -83,9 +87,7 @@ public class Projectary : MonoBehaviour
                 dotPos.y = pos.y + power.y * time + (gravity * Mathf.Pow(time, 2)) * 0.5f;
 
                 if (Physics2D.OverlapCircle(dotPos, .3f, _whatIsObstacle))
-                {
                     flag = false;
-                }
 
                 t.position = dotPos;
             }
