@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fb526b5322c41f418007a861e92484b, type: 3}
-  m_Name: ArmoryMushroom
+  m_Name: TongMushroom
   m_EditorClassIdentifier: 
-  id: 4
-  itemName: "\uAC11\uC637\uBC84\uC12F"
+  id: 0
+  itemName: "\uD1B5\uD1B5\uBC84\uC12F"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uB9E4\uC6B0 \uB2E8\uB2E8\uD55C \uBC84\uC12F"
-  dotImage: {fileID: 1100351195, guid: 4a2395f54a39c154589d9c784385150f, type: 3}
-  itemImage: {fileID: 21300000, guid: c3b16dfd6ec16d04c848f99b7601560f, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: c890b622e2dfe3a47b38d0d3204ffc7d, type: 3}
+  itemExplain: "\uD1B5\uD1B5\uBC84\uC12F\u3141"
+  dotImage: {fileID: -1715390132, guid: 4a2395f54a39c154589d9c784385150f, type: 3}
+  itemImage: {fileID: 21300000, guid: 9139e73f755cef141be1dc062cb0abce, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: 627793b01ee784448b6f1e5959ff98be, type: 3}
   ingredientType: 0
-  gatheringTime: 4
-  effectType: 2
-  effectPoint: 3
+  gatheringTime: 0
+  effectType: 0
+  effectPoint: 0

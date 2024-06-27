@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RedFruit
   m_EditorClassIdentifier: 
   id: 1
-  itemName: "\uD1B5\uD1B5\uBC84\uC12F"
+  itemName: "\uBE68\uAC04\uC5F4\uB9E4"
   itemType: 0
   maxCarryAmountPerSlot: 5
   itemExplain: "\uC5B4\uB9B0\uD1B5\uD1B5\uBC84\uC12F, \uC791\uC544\uC11C \uBC1F\uACE0

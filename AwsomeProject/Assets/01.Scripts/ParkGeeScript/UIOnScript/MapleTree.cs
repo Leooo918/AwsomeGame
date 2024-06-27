@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PutOpen : MonoBehaviour
+public class MapleTree : MonoBehaviour
 {
     [SerializeField] private GameObject _interact;
+    [SerializeField] private DropItem[] _dropItemPrefabs;
+    Collider2D col;
+
+    private void Awake()
+    {
+        col = GetComponent<Collider2D>();
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -14,7 +21,11 @@ public class PutOpen : MonoBehaviour
             _interact.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
-                UIManager.Instance.Open(Window.PotionCraft);
+                int randomIdx = Random.Range(0, _dropItemPrefabs.Length);
+                DropItem randomDropItem = _dropItemPrefabs[randomIdx];
+
+                Instantiate(randomDropItem, transform.position, Quaternion.identity);
+                col.enabled = false;
             }
         }
     }
@@ -24,7 +35,6 @@ public class PutOpen : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _interact.SetActive(false);
-            //UIManager.Instance.GuideOff();
         }
     }
 }

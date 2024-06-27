@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8959519642044216649}
   - component: {fileID: 3255625083039247061}
   m_Layer: 5
-  m_Name: DashPortion
+  m_Name: StonePotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  m_Sprite: {fileID: 1596027072, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

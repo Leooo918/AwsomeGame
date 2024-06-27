@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ShopOpen : MonoBehaviour
 {
-    [SerializeField] private GameObject _f;
+    [SerializeField] private GameObject _interact;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             //UIManager.Instance.GuideOn();
-            _f.SetActive(true);
+            _interact.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
                 UIManager.Instance.Open(Window.Shop);
@@ -23,7 +23,7 @@ public class ShopOpen : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _f.SetActive(false);
+            _interact.SetActive(false);
             //UIManager.Instance.GuideOff();
         }
     }

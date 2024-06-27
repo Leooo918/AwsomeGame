@@ -5,7 +5,8 @@ using UnityEngine;
 
 public enum Window
 {
-    Shop
+    Shop,
+    PotionCraft
 }
 
 public class UIManager : Singleton<UIManager>
