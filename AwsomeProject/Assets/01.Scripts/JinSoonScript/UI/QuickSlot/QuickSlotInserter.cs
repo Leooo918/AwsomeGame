@@ -20,7 +20,7 @@ public class QuickSlotInserter : InventorySlot
     {
         if (item.itemSO.itemType != ItemType.Portion) return;
 
-        QuickSlotManager.Instance.InsertItem(inserterSet.slotNum, slotIdx, item.itemSO);
+        QuickSlotManager.Instance.InsertItem(inserterSet.SlotIdx, slotIdx, item.itemSO);
         base.InsertItem(item);
     }
 
@@ -28,16 +28,15 @@ public class QuickSlotInserter : InventorySlot
     {
         if (assignedItem == null) return;
 
-        QuickSlotManager.Instance.RemoveItem(inserterSet.slotNum, slotIdx);
-        assignedItem = null;
+        QuickSlotManager.Instance.RemoveItem(inserterSet.SlotIdx, slotIdx, false);
     }
 
-    public void RemoveItem()
+    public void RemoveItem(bool removeInstance)
     {
         if (assignedItem == null) return;
 
-        QuickSlotManager.Instance.RemoveItem(inserterSet.slotNum, slotIdx);
-        Destroy(assignedItem.gameObject);
+        if (removeInstance)
+            Destroy(assignedItem.gameObject);
         assignedItem = null;
     }
 

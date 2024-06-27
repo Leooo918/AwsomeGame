@@ -22,6 +22,9 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     private Vector2 upPeek = new Vector2(-40f, 500f);
     private Color disableColor = new Color(0.8f, 0.8f, 0.8f, 1f);
 
+    public QuickSlotInserterSet CurQuickSlot => curQuickSlot;
+    public QuickSlotInserterSet NextQuickSlot => nextQuickSlot;
+
     private void Awake()
     {
         curSlotNumTxt = transform.Find("CurrentSlotNum").GetComponent<TextMeshProUGUI>();
@@ -65,6 +68,30 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
         nextQuickSlot = temp;
     }
 
+    public void RemoveItem(int slotIdx, int selectedSlot, bool removeInstance)
+    {
+        if (curQuickSlot != null && curQuickSlot.SlotIdx == slotIdx)
+            curQuickSlot.inserter[selectedSlot].RemoveItem(removeInstance);
+
+        if (nextQuickSlot != null && nextQuickSlot.SlotIdx == slotIdx)
+            nextQuickSlot.inserter[selectedSlot].RemoveItem(removeInstance);
+    }
+
+    public void SetItem(ItemSO item, int slotIdx, int selectedSlot)
+    {
+        if (curQuickSlot != null && curQuickSlot.SlotIdx == slotIdx)
+        {
+            Item itemInstance = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
+            curQuickSlot.inserter[selectedSlot].InsertItem(itemInstance);
+        }
+
+        if (nextQuickSlot != null && nextQuickSlot.SlotIdx == slotIdx)
+        {
+            Item itemInstance = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
+            nextQuickSlot.inserter[selectedSlot].InsertItem(itemInstance);
+        }
+    }
+
     public void Init()
     {
         maxQuickSlotCnt = QuickSlotManager.Instance.MaxQuickSlotCnt;
@@ -86,5 +113,11 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
         img.color = quickSlotOffset.color;
 
         return quickSlotSet;
+    }
+
+    public void GotoNextQuickSlotSet()
+    {
+        curQuickSlot.Init(curQuickSlot.SlotIdx);
+        nextQuickSlot.Init(nextQuickSlot.SlotIdx);
     }
 }

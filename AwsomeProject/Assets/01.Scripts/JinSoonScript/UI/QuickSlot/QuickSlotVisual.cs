@@ -46,7 +46,7 @@ public class QuickSlotVisual : MonoBehaviour
             PlayerManager.Instance.Player.healthCompo.GetEffort(portion.portionEffect);
             //여기서 추가로 이펙트나 그런거 나올 수 있게 해줘야함
         }
-        else if(portion.portionType == Portion.PortionForThrow)
+        else if (portion.portionType == Portion.PortionForThrow)
         {
             PlayerManager.Instance.Player.ThrowPortion(portion);
         }
@@ -57,7 +57,7 @@ public class QuickSlotVisual : MonoBehaviour
     public void DeleteItem()
     {
         AssignedPortion = null;
-        Destroy(itemObj);
+        if (itemObj != null) Destroy(itemObj);
     }
 
     public void EnableSlot()
