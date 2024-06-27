@@ -57,6 +57,11 @@ public class QuickSlotSet : MonoBehaviour
         slots[index].SetItem(item);
     }
 
+    public void RemoveItem(int idx)
+    {
+        slots[idx].DeleteItem();
+    }
+
     private void UseQuickSlot()
     {
         if (selectedSlot == -1) return;
@@ -64,7 +69,7 @@ public class QuickSlotSet : MonoBehaviour
         if (slots[selectedSlot].AssignedPortion != null)
         {
             slots[selectedSlot].UseItem();
-            QuickSlotManager.Instance.RemoveItem(0, selectedSlot);
+            QuickSlotManager.Instance.RemoveItem(0, selectedSlot, true);
         }
 
         bool isSlotEmpty = true;
@@ -75,7 +80,11 @@ public class QuickSlotSet : MonoBehaviour
                 isSlotEmpty = false;
         }
 
-        if (isSlotEmpty) quickSlotSetsParent.GotoNextQuickSlotSet();
+        if (isSlotEmpty)
+        {
+            QuickSlotManager.Instance.MoveToNextQuickSlot();
+            //quickSlotSetsParent.GotoNextQuickSlotSet();
+        }
     }
 
     public void SelectOneSlot(int num)

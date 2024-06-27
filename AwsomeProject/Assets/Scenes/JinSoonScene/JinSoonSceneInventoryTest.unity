@@ -5285,8 +5285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxQuickSlotCnt: 3
-  quickSlotInserter: {fileID: 1174473587}
-  quickSlot: {fileID: 606504700}
+  quickSlotInserterSetParent: {fileID: 1174473587}
+  quickSlotSetParent: {fileID: 606504700}
 --- !u!1 &367851766
 GameObject:
   m_ObjectHideFlags: 0
@@ -8418,7 +8418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quickSlotSetPf: {fileID: 4429037214168679027, guid: c73f2ba823bbf6140bb87e36fcaf27dc, type: 3}
   currentQuickSlotSet: {fileID: 0}
-  nextSlot: {fileID: 0}
+  nextQuickSlotSet: {fileID: 0}
   enabledOffset:
     position: {x: 500, y: -530, z: 0}
     scale: {x: 1, y: 1, z: 1}
@@ -16028,7 +16028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2f90848dbf8924a95bf7dbb1cebfc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFastenY: 1
+  isFastenY: 0
   parallaxEffect: 0
   height: 4.5
 --- !u!1 &1424088166

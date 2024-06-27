@@ -27,11 +27,11 @@ public class Parallax : MonoBehaviour
 
         if(isFastenY)
         {
-            targetPos.y += cam.transform.position.y;
+            targetPos.y = cam.transform.position.y;
         }
         else
         {
-            targetPos.y += transform.position.y;
+            targetPos.y = transform.position.y;
         }
 
         transform.position = targetPos;

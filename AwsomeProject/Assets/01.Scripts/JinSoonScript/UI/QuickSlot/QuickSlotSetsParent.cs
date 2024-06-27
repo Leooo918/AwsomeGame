@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class QuickSlotSetsParent : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class QuickSlotSetsParent : MonoBehaviour
     //현재 사용가능한 퀵슬롯
     public QuickSlotSet currentQuickSlotSet;
     //다음 퀵슬롯
-    public QuickSlotSet nextSlot;
+    public QuickSlotSet nextQuickSlotSet;
 
     public QuickSlotOffset enabledOffset;
     public QuickSlotOffset disabledOffset;
@@ -30,19 +31,23 @@ public class QuickSlotSetsParent : MonoBehaviour
         InitQuickSlotSet(firstSet, secondSet);
     }
 
-    public void SetItem(ItemSO item, int slotNum, int slotIdx)
+    public void SetItem(ItemSO item, int slotIdx, int selectedSlot)
     {
         //현재 존재하는 퀵슬롯세트에 아이템을 넣어다면 아이템이 넣을게 보이게
-        if (currentQuickSlotSet != null && currentQuickSlotSet.slotNum == slotNum)
-            currentQuickSlotSet.SetItem(item, slotIdx);
+        if (currentQuickSlotSet != null && currentQuickSlotSet.slotNum == slotIdx)
+            currentQuickSlotSet.SetItem(item, selectedSlot);
 
-        if (nextSlot != null && nextSlot.slotNum == slotNum)
-            nextSlot.SetItem(item, slotIdx);
+        if (nextQuickSlotSet != null && nextQuickSlotSet.slotNum == slotIdx)
+            nextQuickSlotSet.SetItem(item, selectedSlot);
     }
 
     public void RemoveItem(int slotIdx, int selectedSlot)
     {
+        if (currentQuickSlotSet != null && currentQuickSlotSet.slotNum == slotIdx)
+            currentQuickSlotSet.RemoveItem(selectedSlot);
 
+        if (nextQuickSlotSet != null && nextQuickSlotSet.slotNum == slotIdx)
+            nextQuickSlotSet.RemoveItem(selectedSlot);
     }
 
     /// <summary>
@@ -70,11 +75,11 @@ public class QuickSlotSetsParent : MonoBehaviour
     public void SetNextQuickSlotSet(QuickSlotItems quickSlotSet, int slotNum)
     {
         float tweeningTime = 0.5f;
-        nextSlot = Instantiate(quickSlotSetPf, transform).GetComponent<QuickSlotSet>();
-        nextSlot.Init(quickSlotSet, false, slotNum);
+        nextQuickSlotSet = Instantiate(quickSlotSetPf, transform).GetComponent<QuickSlotSet>();
+        nextQuickSlotSet.Init(quickSlotSet, false, slotNum);
 
-        RectTransform rect = nextSlot.GetComponent<RectTransform>();
-        Image img = nextSlot.GetComponent<Image>();
+        RectTransform rect = nextQuickSlotSet.GetComponent<RectTransform>();
+        Image img = nextQuickSlotSet.GetComponent<Image>();
         currentQuickSlotSet.transform.SetAsLastSibling();
 
         Color color = disabledOffset.color;
@@ -100,7 +105,6 @@ public class QuickSlotSetsParent : MonoBehaviour
     public void GotoNextQuickSlotSet()
     {
         if (coroutine != null) StopCoroutine(coroutine);
-
         coroutine = StartCoroutine(GoNextQuickSlotRoutine());
     }
 
@@ -110,28 +114,27 @@ public class QuickSlotSetsParent : MonoBehaviour
     /// <returns></returns>
     private IEnumerator GoNextQuickSlotRoutine()
     {
+        //currentQuickSlotSet을 제거해!
         currentQuickSlotSet.DisableQuickSlotSet();
-        currentQuickSlotSet = nextSlot;
+        //현재 슬롯을 다음 슬롯으로 교체
+        currentQuickSlotSet = nextQuickSlotSet;
         yield return new WaitForSeconds(0.4f);
 
 
-        //얘는 null이 나올 수도 있음
-        if (nextSlot != null)
-        {
-            nextSlot.EnableQuickSlotSet(enabledOffset);
-            nextSlot = null;
-            yield return new WaitForSeconds(0.5f);
-        }
+        currentQuickSlotSet.EnableQuickSlotSet(enabledOffset);
+        nextQuickSlotSet = null;
+        yield return new WaitForSeconds(0.5f);
+
 
         if (nextIndex >= maxQuickSlotCnt) yield break;
 
-        QuickSlotItems items = QuickSlotManager.Instance.GetNextQuickSlot();
-        SetNextQuickSlotSet(items, nextIndex);
+        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[1];
+        SetNextQuickSlotSet(items, 1);
     }
 
     /// <summary>
     /// Initialize QuickSlot
-    /// SetQuickSlots, currentSlot, nextSlot
+    /// SetQuickSlots, currentSlot, nextQuickSlotSet
     /// </summary>
     public void InitQuickSlotSet(QuickSlotItems firstSlot, QuickSlotItems secondSlot)
     {

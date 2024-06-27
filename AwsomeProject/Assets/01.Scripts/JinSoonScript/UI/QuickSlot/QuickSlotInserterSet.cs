@@ -12,7 +12,7 @@ public class QuickSlotInserterSet : MonoBehaviour
     private Image[] inserterImages;
 
     public bool isEnable = false;
-    public int slotNum => _slotIdx;
+    public int SlotIdx => _slotIdx;
 
     private Sequence seq;
 
@@ -86,6 +86,11 @@ public class QuickSlotInserterSet : MonoBehaviour
 
     }
 
+    public void RemoveItem()
+    {
+
+    }
+
     public void Init(int slotIdx)
     {
         _slotIdx = slotIdx;
@@ -94,7 +99,7 @@ public class QuickSlotInserterSet : MonoBehaviour
         for (int i = 0; i < items.items.Length; i++)
         {
             if (inserter[i].assignedItem != null)
-                inserter[i].RemoveItem();
+                inserter[i].RemoveItem(true);
 
             if (items.items[i] == null) continue;
 
