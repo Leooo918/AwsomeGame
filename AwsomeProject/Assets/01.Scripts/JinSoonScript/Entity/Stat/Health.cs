@@ -12,6 +12,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     public float curHp { get; private set; }
     public float lastAttackDamage { get; private set; }
     public bool isLastAttackCritical { get; private set; }
+    public bool isInvincible { get; private set; }
 
     //효과, 지속시간, 시작된 시간
     protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
@@ -37,7 +38,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
-        if (owner.isDead) return;
+        if (owner.isDead || isInvincible) return;
         //방어력 계산, 크리티컬 확인
         //damage = owners.
 
@@ -73,6 +74,16 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     {
         amount = -Mathf.Clamp(amount, 0f, maxHp.GetValue() - 1);
         maxHp.AddModifier(amount);
+    }
+
+    public void EnableInvincibility()
+    {
+        isInvincible = true;
+    }
+
+    public void DisableInvincibility()
+    {
+        isInvincible = false;
     }
 
     #endregion

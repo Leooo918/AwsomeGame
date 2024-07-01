@@ -6,7 +6,13 @@ public enum EffectEnum
     Armored = 2,
     FreezePrevent = 3,
     Growth = 4,
-    Explosion = 5
-    //Dash = 2,
+    Explosion = 5,
+    Dash = 6,
+    Stun = 7,
+    AirBorn = 8,
+    Invincibility = 9,
+    FireArmor = 10,
+    DoubleExplotion = 11,
+    AirBornDown
     //Poision = 3
 }

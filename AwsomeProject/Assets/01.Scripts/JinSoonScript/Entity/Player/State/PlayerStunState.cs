@@ -24,6 +24,10 @@ public class PlayerStunState : PlayerState
             player.CanStateChangeable = true;
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
+        //if ()
+        //{
+
+        //}
     }
 
     public override void Exit()

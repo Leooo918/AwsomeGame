@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
-  m_Name: DashPortion
+  m_Name: AirBornPotionLv3
   m_EditorClassIdentifier: 
-  id: 103
-  itemName: "\uB3CC\uC9C4\uD3EC\uC158"
+  id: 110
+  itemName: "\uBD80\uC720\uD3EC\uC158Lv3"
   itemType: 1
   maxCarryAmountPerSlot: 3
-  itemExplain: "\uC12D\uCDE8\uC2DC  \uC77C\uC815\uC2DC\uAC04 \uB3CC\uC9C4\uD6A8\uACFC
-    \uC0DD\uC131"
-  dotImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  itemImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: f4ac773c0e85b0e40ba7520ed5cf5b9f, type: 3}
-  portionType: 1
-  effect: 6
+  itemExplain: "\uC801\uC911\uB2F9\uD55C \uC801\uC744 \uC77C\uC815 \uC2DC\uAC04 \uACF5\uC911\uC5D0
+    \uB744\uC6B0\uACE0 \uB5A8\uC5B4\uC9C8 \uB54C \uCD94\uAC00\uB85C \uD53C\uD574\uB97C
+    \uC785\uD78C\uB2E4."
+  dotImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  itemImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  prefab: {fileID: 0}
+  portionType: 0
+  effect: 8
   requireEffects: []
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0

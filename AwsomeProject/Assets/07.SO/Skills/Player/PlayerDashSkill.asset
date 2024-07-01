@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   skillName: Dash
-  skill: {fileID: 0}
   skillCoolTime:
-    baseValue: 2
+    baseValue: 1
     modifiers: []
     percentModifiers: []
   attackDistance:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  skillAfterDelay:
     baseValue: 0
     modifiers: []
     percentModifiers: []
@@ -28,9 +31,9 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   dashTime:
-    baseValue: 2
+    baseValue: 3
     modifiers: []
     percentModifiers: []
-  canUseSkill: 0
+  canUseSkill: 1
   isInvincibleWhileDash: 0
   isAttackWhileDash: 0

@@ -11,6 +11,7 @@ public enum SlimeStateEnum
     Return,
     JumpAttack,
     Stun,
+    AirBorn,
     Dead
 }
 
@@ -113,6 +114,14 @@ public class Slime : Enemy<SlimeStateEnum>
         if (isDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
+    }
+
+    public override void AirBorn(float duration)
+    {
+        base.AirBorn(duration);
+        if (isDead) return;
+        airBornDuration = duration;
+        StateMachine.ChangeState(SlimeStateEnum.AirBorn);
     }
 
     public override void Dead(Vector2 dir)

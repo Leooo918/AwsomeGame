@@ -37,7 +37,10 @@ public abstract class Entity : MonoBehaviour
 
     public float stunDuration { get; protected set; }
     public bool canBeStun { get; protected set; }
-
+    public float airBornDuration { get; protected set; }
+    public bool canBeAirBorn { get; protected set; }
+    public float upArmorDuration { get; protected set; }
+    
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
@@ -152,6 +155,29 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Stun(float duration) { }
 
+    public virtual void AirBorn(float duration) 
+    {
+        Debug.Log("에어본");
+        float additionalVerticalSpeed = 15.0f;
+        Vector2 currentVelocity = rigidbodyCompo.velocity;
+        rigidbodyCompo.velocity = new Vector2(currentVelocity.x, currentVelocity.y + additionalVerticalSpeed);
+        StartCoroutine(AirBornDurationCoroutine(duration));
+    }
+
+    public virtual void UpArmor(float figure)
+    {
+    }
+
+    public virtual void Invincibility(float duration) 
+    {
+        healthCompo.EnableInvincibility();
+    }
+
+    public virtual void InvincibilityDisable()
+    {
+        healthCompo.DisableInvincibility();
+    }
+
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임
     public Coroutine StartDelayCallBack(float delay, Action callBack)
     {
@@ -162,6 +188,14 @@ public abstract class Entity : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         callBack?.Invoke();
+    }
+
+    IEnumerator AirBornDurationCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        float originalYVelocity = -5.0f;
+        rigidbodyCompo.velocity = new Vector2(rigidbodyCompo.velocity.x, originalYVelocity);
     }
 
 #if UNITY_EDITOR

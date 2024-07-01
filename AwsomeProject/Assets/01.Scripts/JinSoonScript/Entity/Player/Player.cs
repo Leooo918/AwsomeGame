@@ -13,6 +13,7 @@ public enum PlayerStateEnum
     Gathering,
     Stun,
     NormalAttack,
+    SelfStun,
     Dead
 }
 
@@ -152,8 +153,31 @@ public class Player : Entity
     {
         //if (canBeStun == false) return;
         this.stunDuration = duration;
-
+        Debug.Log("스턴상태");
         StateMachine.ChangeState(PlayerStateEnum.Stun);
+    }
+
+    public override void AirBorn(float duration)
+    {
+
+    }
+
+    public override void UpArmor(float figure)
+    {
+        base.UpArmor(figure);
+    }
+
+    public override void Invincibility(float duration)
+    {
+        base.Invincibility(duration);
+        Debug.Log("무적상태");
+        StateMachine.ChangeState(PlayerStateEnum.Stun);
+    }
+
+    public override void InvincibilityDisable()
+    {
+        base.InvincibilityDisable();
+        StateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 
     /// <summary>

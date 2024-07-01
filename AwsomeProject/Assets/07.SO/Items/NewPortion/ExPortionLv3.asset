@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
-  m_Name: DashPortion
+  m_Name: ExPortionLv3
   m_EditorClassIdentifier: 
-  id: 103
-  itemName: "\uB3CC\uC9C4\uD3EC\uC158"
+  id: 108
+  itemName: "\uD3ED\uBC1C\uD3EC\uC158Lv3"
   itemType: 1
   maxCarryAmountPerSlot: 3
-  itemExplain: "\uC12D\uCDE8\uC2DC  \uC77C\uC815\uC2DC\uAC04 \uB3CC\uC9C4\uD6A8\uACFC
-    \uC0DD\uC131"
-  dotImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  itemImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: f4ac773c0e85b0e40ba7520ed5cf5b9f, type: 3}
-  portionType: 1
-  effect: 6
+  itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 2\uBC88\uC758 \uD3ED\uBC1C\uC744
+    \uC77C\uC73C\uD0A8\uB2E4."
+  dotImage: {fileID: 728140508, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  itemImage: {fileID: 728140508, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: 77746d6c88b78774b9f0b3ab23865c19, type: 3}
+  portionType: 0
+  effect: 11
   requireEffects: []
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
-  effecLv: 0
-  duration: 0
+  effecLv: 3
+  duration: 1
   usingTime: 0.5
   isInfinite: 0
