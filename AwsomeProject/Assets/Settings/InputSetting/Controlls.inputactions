@@ -16,12 +16,12 @@
                 },
                 {
                     "name": "YMovement",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "2641e09e-c09b-429c-afeb-e8a4a98e9fcf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -117,6 +117,15 @@
                     "name": "UsePortion",
                     "type": "Button",
                     "id": "365c993f-90e1-47d7-b9af-8c58160c4d16",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Option",
+                    "type": "Button",
+                    "id": "1c041103-31ba-4ee9-875e-d3d5a33b8acb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -308,6 +317,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "UsePortion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "33c68bc8-6644-4fb5-b935-0a539fc4ef99",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Option",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

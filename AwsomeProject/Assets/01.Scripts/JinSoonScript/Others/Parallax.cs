@@ -29,10 +29,6 @@ public class Parallax : MonoBehaviour
         {
             targetPos.y = cam.transform.position.y;
         }
-        else
-        {
-            targetPos.y = transform.position.y;
-        }
 
         transform.position = targetPos;
 

@@ -40,7 +40,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     {
         if (owner.isDead || isInvincible) return;
         //방어력 계산, 크리티컬 확인
-        //damage = owners.
+        //_damage = owners.
 
         isLastAttackCritical = false;
         lastAttackDamage = damage;

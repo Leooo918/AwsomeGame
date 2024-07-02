@@ -20,7 +20,7 @@ TagManager:
   - WorkSpace
   - Spine
   - ThrowingPortion
-  - 
+  - CameraConfinder
   - 
   - 
   - 
@@ -53,6 +53,9 @@ TagManager:
     locked: 0
   - name: Item
     uniqueID: 950916033
+    locked: 0
+  - name: Ground
+    uniqueID: 2076237703
     locked: 0
   - name: Spine
     uniqueID: 764107117

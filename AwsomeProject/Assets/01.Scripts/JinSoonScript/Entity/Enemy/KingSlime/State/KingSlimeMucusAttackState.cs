@@ -5,57 +5,76 @@ using UnityEngine;
 
 public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
 {
-    private KingSlime kingSlime;
-    private GameObject mucusPf;
-    private Tween moveTween;
-    private bool isFired = false;
-    private int doMucusAttackAnimTriggerHash = Animator.StringToHash("DoMucusAttack");
+    private KingSlime _kingSlime;
+    private GameObject _mucusPf;
+    private Tween _moveTween;
+    private Vector2 _targetPosition;
+    private bool _isFired = false;
+    private bool _isJumped = false;
+    private int _doMucusAttackAnimTriggerHash = Animator.StringToHash("DoMucusAttack");
 
     public KingSlimeMucusAttackState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        kingSlime = enemy as KingSlime;
-        mucusPf = kingSlime?.mucus;
+        _kingSlime = enemy as KingSlime;
+        if (_kingSlime?.EntitySkillSO.GetSkillSO("KingMucusAttack") != null)
+            _mucusPf = (_kingSlime?.EntitySkillSO.GetSkillSO("KingMucusAttack") as KingMucusAttackSkillSO).mucusPf;
     }
 
-    //여기 부분은 구조 자체를 새로 짜고
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
 
-        if (isFired == true)
+        if (_isFired == true)
         {
+            enemy.CanStateChangeable = true;
             enemy.StateMachine.ChangeState(KingSlimeStateEnum.Ready);
             return;
         }
 
+        if (_isJumped == false)
+        {
+            Vector3 targetPosition = _kingSlime.GetJumpPos();
+
+            Vector2 targetDir = targetPosition - enemy.transform.position;
+            _moveTween = enemy.transform.DOJump(targetPosition, 10, 1, 0.8f).SetEase(Ease.Linear)
+                .OnComplete(() =>
+                {
+                    enemy.animatorCompo.SetTrigger(_doMucusAttackAnimTriggerHash);
+                    _isJumped = true;
+                });
+
+            return;
+        }
+
         Vector2 fireDirection = new Vector2(0, 1);
-        Vector2 playerDir = PlayerManager.Instance.PlayerTrm.position - kingSlime.transform.position;
-        fireDirection.y *= fireDirection.magnitude;
+        Vector2 playerDir = PlayerManager.Instance.PlayerTrm.position - _kingSlime.transform.position;
         fireDirection.x = playerDir.x;
+        fireDirection.y *= fireDirection.magnitude;
 
-        fireDirection = fireDirection.normalized * fireDirection.magnitude;
+        fireDirection = fireDirection.normalized * playerDir.magnitude;
 
-        KingSlimeMucus mucusInstance = MonoBehaviour.Instantiate(mucusPf).GetComponent<KingSlimeMucus>();
-        mucusInstance.transform.position = kingSlime.transform.position;
+        KingSlimeMucus mucusInstance = MonoBehaviour.Instantiate(_mucusPf).GetComponent<KingSlimeMucus>();
+        mucusInstance.transform.position = _kingSlime.transform.position;
         mucusInstance.Fire(fireDirection * 2);
-        isFired = true;
+        _isFired = true;
     }
 
     public override void Enter()
     {
         base.Enter();
-        Vector3 targetPosition = kingSlime.GetJumpPos();
-        moveTween = enemy.transform.DOJump(targetPosition, 10, 1, 0.5f)
-            .OnComplete(() =>
-            {
-                enemy.animatorCompo.SetTrigger(doMucusAttackAnimTriggerHash);
-            });
+        enemy.CanStateChangeable = false;
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
     }
 
     public override void Exit()
     {
-        isFired = false;
-        kingSlime.SetSkillAfterDelay();
+        _isFired = false;
+        _isJumped = false;
+        _kingSlime.SetSkillAfterDelay();
         base.Exit();
     }
 }
