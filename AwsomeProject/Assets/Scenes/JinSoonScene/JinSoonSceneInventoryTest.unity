@@ -7469,7 +7469,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -30}
+  m_LocalPosition: {x: -0.015334748, y: 1.89788, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7862,7 +7862,7 @@ GameObject:
   - component: {fileID: 588492779}
   - component: {fileID: 588492780}
   m_Layer: 0
-  m_Name: Option
+  m_Name: OptionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7876,7 +7876,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588492778}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14034,6 +14034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3577a2aef276fe047abb9d15c5017b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasTrm: {fileID: 0}
 --- !u!1 &996557502
 GameObject:
   m_ObjectHideFlags: 0
@@ -46632,5 +46633,5 @@ SceneRoots:
   - {fileID: 1211209123}
   - {fileID: 1097629803}
   - {fileID: 1159507524}
-  - {fileID: 588492779}
   - {fileID: 1904135130}
+  - {fileID: 588492779}

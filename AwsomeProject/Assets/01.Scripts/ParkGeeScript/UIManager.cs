@@ -3,39 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Window
+public enum UIType
 {
     Shop,
-    PotionCraft
+    PotionCraft,
+    Option
 }
 
 public class UIManager : Singleton<UIManager>
 {
-    public Dictionary<Window, IWindowPanel> panelDictionary;
+    public Dictionary<UIType, IManageableUI> panelDictionary;
 
-    [SerializeField] private Transform _canvasTrm;
+    //[SerializeField] private Transform _canvasTrm;
 
     private void Awake()
     {
-        panelDictionary = new Dictionary<Window, IWindowPanel>();
-        foreach (Window w in Enum.GetValues(typeof(Window)))
+        panelDictionary = new Dictionary<UIType, IManageableUI>();
+        foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {
-            IWindowPanel panel = _canvasTrm.GetComponent($"{w.ToString()}Panel") as IWindowPanel;
+            IManageableUI panel = 
+                GameObject.Find($"{w.ToString()}Panel").GetComponent<IManageableUI>();
+            //IManageableUI panel = _canvasTrm.GetComponent($"{w.ToString()}Panel") as IManageableUI;
             panelDictionary.Add(w, panel);
         }
     }
 
-    public void Open(Window target)
+    public void Open(UIType target)
     {
-        if (panelDictionary.TryGetValue(target, out IWindowPanel panel))
+        if (panelDictionary.TryGetValue(target, out IManageableUI panel))
         {
             panel.Open();
         }
     }
 
-    public void Close(Window target)
+    public void Close(UIType target)
     {
-        if(panelDictionary.TryGetValue(target, out IWindowPanel panel))
+        if(panelDictionary.TryGetValue(target, out IManageableUI panel))
         {
             panel.Close();
         }

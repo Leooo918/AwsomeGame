@@ -204,7 +204,7 @@ public class Player : Entity
 
     private void OpenOption()
     {
-        UIManager.Instance.ActiveUI(UIType.Option);
+        UIManager.Instance.Open(UIType.Option);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
