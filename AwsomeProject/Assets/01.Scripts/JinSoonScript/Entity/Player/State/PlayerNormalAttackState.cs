@@ -21,24 +21,13 @@ public class PlayerNormalAttackState : PlayerState
         if (player.lastAttackTime + playerNormalAttackSO.attackComboDragTime <= Time.time)
             player.ComboCounter = 0;
 
-        AttackInfo fAttackInfo = playerNormalAttackSO.firstAttackInfo;
-        fAttackInfo.damage = 
-            (int)(fAttackInfo.attackMultiplier * 
-            player.Stat.GetStatByEnum(StatType.Damage).GetValue());
+            AttackInfo attackInfo = playerNormalAttackSO.attackInfos[player.ComboCounter];
+            attackInfo.damage =
+                (int)(attackInfo.attackMultiplier * player.Stat.GetStatByEnum(StatType.Damage).GetValue());
 
-        AttackInfo sAttackInfo = playerNormalAttackSO.secondAttackInfo;
-        sAttackInfo.damage = 
-            (int)(sAttackInfo.attackMultiplier* 
-            player.Stat.GetStatByEnum(StatType.Damage).GetValue());
-
-        //공격 세팅해주고
-        if (player.ComboCounter == 0)
-            playerAttack.SetCurrentAttackInfo(fAttackInfo);
-        else if(player.ComboCounter == 1)
-            playerAttack.SetCurrentAttackInfo(sAttackInfo);
+        playerAttack.SetCurrentAttackInfo(attackInfo);
 
         player.StopImmediately(false);
-        playerNormalAttackSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack) as PlayerNormalAttackSO;
 
         //애니메이션 실행 콤보카운터로 그리고 +1 근데 2이상이면 다시 0으로
         player.animatorCompo.SetInteger(comboCounterHash, player.ComboCounter++);

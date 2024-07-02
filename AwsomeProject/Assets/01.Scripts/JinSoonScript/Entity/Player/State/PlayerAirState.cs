@@ -29,6 +29,9 @@ public class PlayerAirState : PlayerState
         //떨어질 때는 조금 천천히 움직여지게
         float xInput = player.PlayerInput.XInput;
 
+        if (player.canClimb && player.PlayerInput.YInput != 0)
+            stateMachine.ChangeState(PlayerStateEnum.Climb);
+
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected()) return;
 
         player.SetVelocity(player.MoveSpeed * xInput, rigidbody.velocity.y);

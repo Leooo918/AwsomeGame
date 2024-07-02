@@ -14,9 +14,9 @@ public class InventoryManager : Singleton<InventoryManager>
     public InventorySlot curCheckingSlot { get; private set; }
 
     public RectTransform inventoryRect;
-    
-    private RectTransform ingredientsInventory;
-    private RectTransform portionInventory;
+
+    [SerializeField] private RectTransform ingredientsInventory;
+    [SerializeField] private RectTransform portionInventory;
     private bool isIngredientsInventoryActive = true;
 
     public Transform itemParent;
@@ -37,9 +37,6 @@ public class InventoryManager : Singleton<InventoryManager>
         explainTxt = explainparent.Find("Explain/Txt").GetComponent<TextMeshProUGUI>();
         explainImage = explainparent.Find("Frame/Image").GetComponent<Image>();
         SetExplain(null);
-
-        ingredientsInventory = inventoryRect.transform.Find("IngredientsInventory").GetComponent<RectTransform>();
-        portionInventory = inventoryRect.transform.Find("PortionInventory").GetComponent<RectTransform>();
 
         EnbableIgredientsInventory(true);
     }
@@ -108,7 +105,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public void EnbableIgredientsInventory(bool isEnable)
     {
         isIngredientsInventoryActive = isEnable;
-        if(isIngredientsInventoryActive)
+        if (isIngredientsInventoryActive)
         {
             ingredientsInventory.gameObject.SetActive(true);
             portionInventory.gameObject.SetActive(false);

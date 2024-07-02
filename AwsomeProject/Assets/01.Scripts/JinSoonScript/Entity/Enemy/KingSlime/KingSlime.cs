@@ -35,10 +35,10 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     #endregion
 
     public GameObject mucus;
-    [HideInInspector] public bool readyFlip = false;
+    [HideInInspector] public bool _readyFlip = false;
 
-    private float currentSkillAfterDelay;
-    private bool canUseSkill = true;
+    private float _currentSkillAfterDelay;
+    private bool _canUseSkill = true;
 
     #region HpBar
 
@@ -58,13 +58,11 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         {
             item.skill.SetOwner(this);
             Type type = item.skill.GetType();
-            gameObject.AddComponent(type);
+            //gameObject.AddComponent(type);
         }
 
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
-
-        //pivot = hpBar.Find("Pivot");
     }
 
     private void OnEnable()
@@ -139,6 +137,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     public override void Stun(float duration)
     {
         if (isDead) return;
+
         stunDuration = duration;
         StateMachine.ChangeState(KingSlimeStateEnum.Stun);
     }
@@ -146,7 +145,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     public void UseSkill()
     {
         //현재 스킬을 못쓴다면 return
-        if (canUseSkill == false) return;
+        if (_canUseSkill == false) return;
 
         //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
         if (readySkill.TryPeek(out SkillSO skill) == false || skill == null)
@@ -172,19 +171,16 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         }
 
         skill.skill.UseSkill();
-        currentSkillAfterDelay = skill.skillAfterDelay.GetValue();
-        Debug.Log(currentSkillAfterDelay);
+        _currentSkillAfterDelay = skill.skillAfterDelay.GetValue();
         notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
         readySkill.Pop();
     }
 
-    public void SetSkillAfterDelay() => StartCoroutine(DelaySkill());
-
-    private IEnumerator DelaySkill()
+    public void SetSkillAfterDelay()
     {
-        canUseSkill = false;
-        yield return currentSkillAfterDelay;
-        canUseSkill = true;
+        Debug.Log(_currentSkillAfterDelay);
+        _canUseSkill = false;
+        StartDelayCallBack(_currentSkillAfterDelay, () => _canUseSkill = true);
     }
 
     private void OnHit()
@@ -223,8 +219,24 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         return playerCompo;
     }
 
+
+    [SerializeField] private Vector2 left, right;
     public Vector3 GetJumpPos()
     {
-        return Vector3.zero;
+        float leftDir = Mathf.Abs(left.x - transform.position.x);
+        float rightDir = Mathf.Abs(right.x - transform.position.x);
+
+        if (leftDir < 1)
+            return right;
+        else if (rightDir < 1)
+            return left;
+        else
+        {
+            if (leftDir < rightDir)
+                return left;
+            else
+                return right;
+        }
+
     }
 }

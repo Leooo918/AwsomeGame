@@ -37,7 +37,13 @@ public class PortionTable : MonoBehaviour
             }
         }
 
-        PortionManager.Instance.portionSet.FindMakeablePortion(effects.ToArray(), out PortionItemSO portion);
+        PortionManager.Instance.portionSet.FindMakeablePortion(effects.ToArray(),portionType, out PortionItemSO portion);
+        
+        if(portion == null)
+        {
+            Debug.Log("포션이 존재하지 않는www");
+            return;
+        }
         Item itemInstance = InventoryManager.Instance.MakeItemInstanceByItemSO(portion);
 
         if (InventoryManager.Instance.PlayerInventory.TryInsertItem(itemInstance) == false)

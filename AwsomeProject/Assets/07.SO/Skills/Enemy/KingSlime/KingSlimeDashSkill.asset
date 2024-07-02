@@ -26,7 +26,7 @@ MonoBehaviour:
     baseValue: 5
     modifiers: []
     percentModifiers: []
-  dashPower: 15
-  dashTime: 0.7
+  dashPower: 50
+  dashTime: 0.5
   dashReadyDelay: 3
   dashAfterDelay: 5

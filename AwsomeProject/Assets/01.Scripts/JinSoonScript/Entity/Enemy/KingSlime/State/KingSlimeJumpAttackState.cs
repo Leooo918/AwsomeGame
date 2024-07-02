@@ -4,41 +4,54 @@ using UnityEngine;
 
 public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
 {
-    private Transform enemyTrm;
-    private Transform targetTrm;
-    private KingSlime kingSlime;
-    private GameObject jumpAttackWarning;
+    private Transform _enemyTrm;
+    private Transform _targetTrm;
+    private KingSlime _kingSlime;
+    private GameObject _jumpAttackWarning;
 
-    private int fallAnimTriggerHash = Animator.StringToHash("Fall");
-    private int landAnimTriggerHash = Animator.StringToHash("Land");
-    private int jumpanimTriggerHash = Animator.StringToHash("Jump");
+    private int _fallAnimTriggerHash = Animator.StringToHash("Fall");
+    private int _landAnimTriggerHash = Animator.StringToHash("Land");
+    private int _jumpanimTriggerHash = Animator.StringToHash("Jump");
 
-    private float attackDelay = 1f;
-    private float fallSpeed = 70f;
-    private float jumpDelay = 2f;
-    private float jumpHeight = 20f;
-    private float jumpSpeed = 50f;
-    private float moveSpeed = 5f;
-    private float randomDelay;
-    private float originGravity;
+    private float _attackDelay = 1f;
+    private float _fallSpeed = 70f;
+    private float _jumpDelay = 2f;
+    private float _jumpHeight = 20f;
+    private float _jumpSpeed = 50f;
+    private float _moveSpeed = 5f;
+    private float _randomDelay;
+    private float _originGravity;
 
-    private float targetHeight;
+    private float _targetHeight;
+    private bool _readyJump = true;
     private bool _isJumped = false;
     private bool _isFalling = false;
     private bool _isFollowingPlayer = false;
 
     public KingSlimeJumpAttackState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        kingSlime = enemy as KingSlime;
-        enemyTrm = enemy.transform;
-        targetTrm = PlayerManager.Instance.PlayerTrm;
-        jumpAttackWarning =
+        _kingSlime = enemy as KingSlime;
+        _enemyTrm = enemy.transform;
+        _jumpAttackWarning =
             enemy.transform.Find("JumpAttackWarning").gameObject;
     }
 
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+
+        if(_readyJump)
+        {
+            enemy.animatorCompo.SetTrigger(_jumpanimTriggerHash);
+            _targetHeight = _enemyTrm.position.y + _jumpHeight;
+            _originGravity = enemy.rigidbodyCompo.gravityScale;
+            enemy.rigidbodyCompo.gravityScale = 0f;
+            _isJumped = true;
+            _readyJump = false;
+            return;
+        }
+
+        enemy.CanStateChangeable = true;
         enemyStateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
 
@@ -47,25 +60,19 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
         base.Enter();
 
         //시작하고 jumpDelay후 올라감
+        _targetTrm = PlayerManager.Instance.PlayerTrm;
         enemy.StopImmediately(true);
-        enemy.StartDelayCallBack(jumpDelay,
-            () =>
-            {
-                enemy.animatorCompo.SetTrigger(jumpanimTriggerHash);
-                targetHeight = enemyTrm.position.y + jumpHeight;
-                originGravity = enemy.rigidbodyCompo.gravityScale;
-                enemy.rigidbodyCompo.gravityScale = 0f;
-                _isJumped = true;
-            });
+        enemy.CanStateChangeable = false;
     }
 
     public override void Exit()
     {
-        enemy.rigidbodyCompo.gravityScale = originGravity;
+        enemy.rigidbodyCompo.gravityScale = _originGravity;
         _isJumped = false;
         _isFalling = false;
+        _readyJump = true;
         _isFollowingPlayer = false;
-        kingSlime.SetSkillAfterDelay();
+        _kingSlime.SetSkillAfterDelay();
         base.Exit();
     }
 
@@ -87,35 +94,34 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
 
     private void FallProcess()
     {
-        Debug.Log("밍밍밍");
         //땅이 감지 됬다면 이제 착지 애니메이션
         if(enemy.IsGroundDetected())
         {
-            enemy.rigidbodyCompo.gravityScale = originGravity;
-            enemy.animatorCompo.SetTrigger(landAnimTriggerHash);
+            enemy.rigidbodyCompo.gravityScale = _originGravity;
+            enemy.animatorCompo.SetTrigger(_landAnimTriggerHash);
             _isFalling = false;
         }
 
-        enemyTrm.position += Vector3.down * fallSpeed * Time.deltaTime;
+        _enemyTrm.position += Vector3.down * _fallSpeed * Time.deltaTime;
     }
 
     private void JumpProcess()
     {
-        enemyTrm.position +=
-                Vector3.up * jumpSpeed * Time.deltaTime;
+        _enemyTrm.position +=
+                Vector3.up * _jumpSpeed * Time.deltaTime;
 
-        if (jumpHeight <= enemyTrm.position.y)
+        if (_jumpHeight <= _enemyTrm.position.y)
         {
             _isJumped = false;
             enemy.StartDelayCallBack(0.5f,
                 () =>
                 {
-                    jumpAttackWarning.SetActive(true);
+                    _jumpAttackWarning.SetActive(true);
                     _isFollowingPlayer = true;
                     _isJumped = false;
 
-                    randomDelay = Random.Range(4f, 7f);
-                    enemy.StartDelayCallBack(randomDelay,
+                    _randomDelay = Random.Range(4f, 7f);
+                    enemy.StartDelayCallBack(_randomDelay,
                         DelayFallProcess);
                 });
         }
@@ -124,21 +130,20 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
     private void FollowProcess()
     {
         float dir =
-                targetTrm.position.x - enemyTrm.position.x;
+                _targetTrm.position.x - _enemyTrm.position.x;
         dir = Mathf.Clamp(dir, -1, 1);
 
-        enemyTrm.position +=
-            Vector3.right * moveSpeed * dir * Time.deltaTime;
+        _enemyTrm.position +=
+            Vector3.right * _moveSpeed * dir * Time.deltaTime;
     }
 
     private void DelayFallProcess()
     {
-        Debug.Log("밍;;;");
-        enemy.StartDelayCallBack(attackDelay,
+        enemy.StartDelayCallBack(_attackDelay,
             () =>
             {
-                jumpAttackWarning.SetActive(false);
-                enemy.animatorCompo.SetTrigger(fallAnimTriggerHash);
+                _jumpAttackWarning.SetActive(false);
+                enemy.animatorCompo.SetTrigger(_fallAnimTriggerHash);
                 _isFollowingPlayer = false;
                 _isFalling = true;
             });

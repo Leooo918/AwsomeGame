@@ -6,10 +6,8 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class RecipeManager : MonoBehaviour
+public class RecipeManager : Singleton<RecipeManager>
 {
-    public static RecipeManager Instance;
-
     public RecipeSetSO recipeSet;
     public List<RecipeSO> curRecipe;// { get; private set; }
 
@@ -23,11 +21,6 @@ public class RecipeManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
-            Destroy(Instance);
-
-        Instance = this;
-
         path = Path.Combine(Application.dataPath, "SaveDatas\\OwnedRecipes.json");
         seq = DOTween.Sequence();
     }
@@ -74,10 +67,10 @@ public class RecipeManager : MonoBehaviour
 
         recipe.ingredients = ingredients;
         recipe.portion = portion;
+        recipe.id = portion.id;
         curRecipe.Add(recipe);
 
-        if (loading == false)
-            Save();
+        if (loading == false) Save();
     }
 
 

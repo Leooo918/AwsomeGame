@@ -26,5 +26,5 @@ MonoBehaviour:
     baseValue: 3
     modifiers: []
     percentModifiers: []
-  mucusPf: {fileID: 0}
+  mucusPf: {fileID: 3771830235869242607, guid: 1994f31ea3b9d9a4fadc6adb7e563129, type: 3}
   mucusFirePower: 7
