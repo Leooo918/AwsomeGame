@@ -18,12 +18,12 @@ MonoBehaviour:
   maxCarryAmountPerSlot: 3
   itemExplain: "\uC801\uC911\uB2F9\uD55C \uC801\uC744 \uC77C\uC815 \uC2DC\uAC04 \uACF5\uC911\uC5D0
     \uB744\uC6B0\uACE0 \uB5A8\uC5B4\uC9C8 \uB54C \uCD94\uAC00\uB85C \uD53C\uD574\uB97C
-    \uC785\uD78C\uB2E4."
+    \uC900\uB2E4."
   dotImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
   itemImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  prefab: {fileID: 0}
+  prefab: {fileID: 6910422564161804073, guid: cb3bb421d913b5544add0a36f9f88b5c, type: 3}
   portionType: 0
-  effect: 8
+  effect: 12
   requireEffects: []
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0

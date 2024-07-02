@@ -13,7 +13,7 @@ public class SlimeStunState : EnemyState<SlimeStateEnum>
         enemy.StartDelayCallBack(enemy.stunDuration, () =>
         {
             enemy.CanStateChangeable = true;
-            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
             if (enemy.healthCompo.curHp < 0)
             {
                 enemyStateMachine.ChangeState(SlimeStateEnum.Dead);

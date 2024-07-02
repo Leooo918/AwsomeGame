@@ -14,7 +14,7 @@ public class DashTrail : MonoBehaviour
 
     private void Start()
     {
-        _particle.gameObject.SetActive(false);
+        _particle.Stop();
     }
 
     private void Update()
@@ -24,7 +24,7 @@ public class DashTrail : MonoBehaviour
             ParticleSystem.MainModule main = _particle.main;
             if (main.startRotation.mode == ParticleSystemCurveMode.Constant)
             {
-                main.startRotation = -transform.eulerAngles.y * Mathf.Deg2Rad;
+                main.startRotationY = -transform.eulerAngles.y;
             }
         }
     }

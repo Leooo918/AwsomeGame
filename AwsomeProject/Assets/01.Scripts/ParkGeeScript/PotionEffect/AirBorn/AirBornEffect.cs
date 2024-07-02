@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class AirBornEffect : Effect
 {
+    private int damage;
+    PortionItemSO stat;
+
     public override void EnterEffort(Entity target)
     {
         base.EnterEffort(target);
-        target.healthCompo.TakeDamage(10, Vector2.zero, null);
-        target.AirBorn(3f);
+        float duration = stat.duration;
+        target.healthCompo.TakeDamage(damage, Vector2.zero, null);
+        target.AirBorn(duration);
     }
 }

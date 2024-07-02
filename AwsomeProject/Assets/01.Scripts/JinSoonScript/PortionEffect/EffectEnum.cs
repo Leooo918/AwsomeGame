@@ -13,6 +13,7 @@ public enum EffectEnum
     Invincibility = 9,
     FireArmor = 10,
     DoubleExplotion = 11,
-    AirBornDown
+    AirBornDown = 12,
+    TripleExplotion = 13
     //Poision = 3
 }

@@ -15,7 +15,7 @@ public class SlimeAirBornState : EnemyState<SlimeStateEnum>
         enemy.StartDelayCallBack(enemy.airBornDuration, () =>
         {
             enemy.CanStateChangeable = true;
-            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
+            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
         });
     }
 }

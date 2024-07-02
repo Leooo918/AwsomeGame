@@ -158,9 +158,6 @@ public abstract class Entity : MonoBehaviour
     public virtual void AirBorn(float duration) 
     {
         Debug.Log("에어본");
-        float additionalVerticalSpeed = 15.0f;
-        Vector2 currentVelocity = rigidbodyCompo.velocity;
-        rigidbodyCompo.velocity = new Vector2(currentVelocity.x, currentVelocity.y + additionalVerticalSpeed);
         StartCoroutine(AirBornDurationCoroutine(duration));
     }
 
@@ -192,10 +189,25 @@ public abstract class Entity : MonoBehaviour
 
     IEnumerator AirBornDurationCoroutine(float duration)
     {
-        yield return new WaitForSeconds(duration);
+        float elapsedTime = 0.0f;
+        float initialVerticalSpeed = 5.0f; 
+        Vector2 originalVelocity = rigidbodyCompo.velocity;
 
-        float originalYVelocity = -5.0f;
-        rigidbodyCompo.velocity = new Vector2(rigidbodyCompo.velocity.x, originalYVelocity);
+        rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
+
+        while (elapsedTime < duration)
+        {
+            float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
+
+            rigidbodyCompo.velocity = new Vector2(0, verticalSpeed);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        float fallSpeed = -40f;
+        rigidbodyCompo.velocity = new Vector2(originalVelocity.x, fallSpeed);
+        Debug.Log("에어본 종료");
     }
 
 #if UNITY_EDITOR

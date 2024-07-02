@@ -23,7 +23,7 @@ MonoBehaviour:
   itemImage: {fileID: 728140508, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
   prefab: {fileID: 6910422564161804073, guid: b7112a2d3b037f444a9fee9e0e06b7ea, type: 3}
   portionType: 0
-  effect: 0
+  effect: 13
   requireEffects: []
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0

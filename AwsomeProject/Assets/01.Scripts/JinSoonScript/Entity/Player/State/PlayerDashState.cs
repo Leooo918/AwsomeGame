@@ -16,7 +16,7 @@ public class PlayerDashState : PlayerState
         if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = false;
 
         if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
-        player.transform.Find("DashTrail").gameObject.SetActive(true);
+        player.transform.Find("DashTrail").GetComponent<ParticleSystem>().Play();
 
             xInput = player.PlayerInput.XInput;
 
@@ -43,7 +43,7 @@ public class PlayerDashState : PlayerState
         if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = true;
 
         if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
-        player.transform.Find("DashTrail").gameObject.SetActive(false);
+        player.transform.Find("DashTrail").GetComponent<ParticleSystem>().Stop();
 
         player.StopImmediately(false);
     }
