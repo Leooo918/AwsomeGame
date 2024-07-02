@@ -21,10 +21,11 @@ public class UIManager : Singleton<UIManager>
         panelDictionary = new Dictionary<UIType, IManageableUI>();
         foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {
-            IManageableUI panel = 
-                GameObject.Find($"{w.ToString()}Panel").GetComponent<IManageableUI>();
-            //IManageableUI panel = _canvasTrm.GetComponent($"{w.ToString()}Panel") as IManageableUI;
-            panelDictionary.Add(w, panel);
+            IManageableUI panel =
+                GameObject.Find($"{w.ToString()}Panel")?.GetComponent<IManageableUI>();
+
+            if (panel != null)
+                panelDictionary.Add(w, panel);
         }
     }
 
@@ -34,13 +35,21 @@ public class UIManager : Singleton<UIManager>
         {
             panel.Open();
         }
+        else
+        {
+            Debug.LogWarning($"{target.ToString()}Panel is not exist in this scene.\nBut you trying to open it");
+        }
     }
 
     public void Close(UIType target)
     {
-        if(panelDictionary.TryGetValue(target, out IManageableUI panel))
+        if (panelDictionary.TryGetValue(target, out IManageableUI panel))
         {
             panel.Close();
+        }
+        else
+        {
+            Debug.LogWarning($"{target.ToString()}Panel is not exist in this scene.\nBut you trying to close it");
         }
     }
 }

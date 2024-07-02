@@ -62,6 +62,20 @@ public class Option : MonoBehaviour, IManageableUI
     {
         GameManager.Instance.Restart();
     }
+    public void Open()
+    {
+        if (tween != null && tween.active)
+            tween.Kill();
+
+        tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay);
+    }
+    public void Close()
+    {
+        if (tween != null && tween.active)
+            tween.Kill();
+
+        tween = _optionRect.DOAnchorPos(_closeOffset, _easeingDelay);
+    }
 
     public void Save()
     {
@@ -76,21 +90,5 @@ public class Option : MonoBehaviour, IManageableUI
         OnMasterVolumeChange(float.Parse(s[0]));
         OnBGMVolumeChange(float.Parse(s[1]));
         OnSFXVolumeChange(float.Parse(s[2]));
-    }
-
-    public void Open()
-    {
-        if (tween != null && tween.active)
-            tween.Kill();
-
-        tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay);
-    }
-
-    public void Close()
-    {
-        if (tween != null && tween.active)
-            tween.Kill();
-
-        tween = _optionRect.DOAnchorPos(_closeOffset, _easeingDelay);
     }
 }
