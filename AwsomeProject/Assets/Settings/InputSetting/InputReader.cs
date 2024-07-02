@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action InteractRelease;
     public event Action PressTabEvent;
     public event Action AttackEvent;
+    public event Action OpenOptionEvent;
 
     #region QuickSlot
 
@@ -92,6 +93,11 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     {
         if (context.performed)
             AttackEvent?.Invoke();
+    }
+    public void OnOption(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OpenOptionEvent?.Invoke();
     }
 
     #region QuickSlots

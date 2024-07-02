@@ -13,11 +13,13 @@ public class KingSlimeMucus : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject);
         Destroy(gameObject);
     }
 
     public void Fire(Vector2 direction)
     {
+        Debug.Log("นึ");
         rigid.AddForce(direction, ForceMode2D.Impulse);
     }
 }

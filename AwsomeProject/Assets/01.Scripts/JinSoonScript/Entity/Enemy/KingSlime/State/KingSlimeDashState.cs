@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
 {
+    private KingDashSkillSO _dashSkillSO;
+
     public KingSlimeDashState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
+        if (enemy?.EntitySkillSO.GetSkillSO("KingDash") != null)
+            _dashSkillSO = enemy?.EntitySkillSO.GetSkillSO("KingDash") as KingDashSkillSO;
     }
 
+    private int _dashStartHash = Animator.StringToHash("DashStart");
+    private bool _isDashing = false;
     private float dashTime;
-    private float xInput;
+    private float dashDir;
 
     public override void Enter()
     {
@@ -21,22 +27,33 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         //이건 고치고
         //enemy.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
 
-        xInput = enemy.FacingDir;
-
-        if (xInput == 0) xInput = enemy.FacingDir * -0.5f;
-
-        enemy.SetVelocity(enemy.DashPower * xInput, 0, true);
-        dashTime = Time.time;
+        enemy.CanStateChangeable = false;
+        dashDir = enemy.FacingDir;
+        enemy.DashPower = _dashSkillSO.dashPower;
+        enemy.DashTime = _dashSkillSO.dashTime;
+        if (dashDir == 0) dashDir = enemy.FacingDir;
     }
     public override void UpdateState()
     {
         base.UpdateState();
 
-        enemy.SetVelocity(enemy.DashPower * xInput, 0, true);
+        if (_isDashing == false) return;
+
+        enemy.SetVelocity(enemy.DashPower * dashDir, 0, true);
 
         if (Time.time - dashTime > enemy.DashTime)
         {
+            enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(KingSlimeStateEnum.Ready);
+        }
+
+        if (enemy.IsWallDetected())
+        {
+            Vector2 knockDir = new Vector2(-enemy.FacingDir * 2, 1).normalized;
+            knockDir *= 10f;
+            enemy.CanStateChangeable = true;
+            enemy.Stun(4f);
+            enemy.KnockBack(knockDir);
         }
     }
 
@@ -48,7 +65,17 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
 
         //이건 고치고
         //enemy.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
-
+        _isDashing = false;
         enemy.StopImmediately(false);
+    }
+
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+        enemy.animatorCompo.SetTrigger(_dashStartHash);
+        _isDashing = true;
+
+        enemy.SetVelocity(enemy.DashPower * dashDir, 0, false);
+        dashTime = Time.time;
     }
 }
