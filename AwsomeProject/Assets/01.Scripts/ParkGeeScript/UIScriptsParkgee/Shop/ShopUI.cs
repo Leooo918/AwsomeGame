@@ -31,6 +31,6 @@ public class ShopUI : MonoBehaviour, IPointerClickHandler
 
     public void OffShop()
     {
-        UIManager.Instance.Close(Window.Shop);
+        UIManager.Instance.Close(UIType.Shop);
     }
 }

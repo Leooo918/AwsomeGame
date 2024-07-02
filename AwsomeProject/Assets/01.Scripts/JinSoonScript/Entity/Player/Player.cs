@@ -13,7 +13,7 @@ public enum PlayerStateEnum
     Gathering,
     Stun,
     NormalAttack,
-    SelfStun,
+    Climb,
     Dead
 }
 
@@ -71,6 +71,7 @@ public class Player : Entity
 
     public GameObject StunEffect { get; private set; }
     private bool isInventoryOpen = false;
+    public bool canClimb { get; private set; } = false;
 
     [SerializeField] private GameObject thowingPortionPf;
     [SerializeField] private HpBar hpBar;
@@ -114,6 +115,7 @@ public class Player : Entity
     private void OnEnable()
     {
         _inputReader.PressTabEvent += InventoryOpen;
+        _inputReader.OpenOptionEvent += OpenOption;
         healthCompo.onKnockBack += KnockBack;
         healthCompo.onDie += OnDie;
         healthCompo.onHit += OnHit;
@@ -123,6 +125,7 @@ public class Player : Entity
     private void OnDisable()
     {
         _inputReader.PressTabEvent -= InventoryOpen;
+        _inputReader.OpenOptionEvent -= OpenOption;
         healthCompo.onKnockBack -= KnockBack;
         healthCompo.onDie -= OnDie;
         healthCompo.onHit -= OnHit;
@@ -134,14 +137,13 @@ public class Player : Entity
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
-
     protected void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DashSkill d = SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill as DashSkill;
-            d.canUseSkill = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    DashSkill d = SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill as DashSkill;
+        //    d._canUseSkill = true;
+        //}
 
         SetHpSlider();
 
@@ -153,31 +155,8 @@ public class Player : Entity
     {
         //if (canBeStun == false) return;
         this.stunDuration = duration;
-        Debug.Log("스턴상태");
+
         StateMachine.ChangeState(PlayerStateEnum.Stun);
-    }
-
-    public override void AirBorn(float duration)
-    {
-
-    }
-
-    public override void UpArmor(float figure)
-    {
-        base.UpArmor(figure);
-    }
-
-    public override void Invincibility(float duration)
-    {
-        base.Invincibility(duration);
-        Debug.Log("무적상태");
-        StateMachine.ChangeState(PlayerStateEnum.Stun);
-    }
-
-    public override void InvincibilityDisable()
-    {
-        base.InvincibilityDisable();
-        StateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 
     /// <summary>
@@ -223,6 +202,11 @@ public class Player : Entity
         }
     }
 
+    private void OpenOption()
+    {
+        UIManager.Instance.Open(UIType.Option);
+    }
+
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     public void OnHit() => HitEvent?.Invoke();
 
@@ -232,7 +216,7 @@ public class Player : Entity
         StateMachine.ChangeState(PlayerStateEnum.Dead);
     }
 
-    internal void ThrowPortion(PortionItem portion)
+    public void ThrowPortion(PortionItem portion)
     {
         Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
         ThrowingPortion throwingPortion =
@@ -242,8 +226,16 @@ public class Player : Entity
         throwingPortion.Init(portion);
     }
 
-    internal void WeaponEnchant(PortionItem portion)
+    public void WeaponEnchant(PortionItem portion)
     {
 
+    }
+
+    public void Climb(bool b)
+    {
+        if (b == true)
+            canClimb = true;
+        else
+            canClimb = false;
     }
 }

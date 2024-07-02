@@ -62,15 +62,14 @@ public class Option : MonoBehaviour, IManageableUI
     {
         GameManager.Instance.Restart();
     }
-
-    public void Active()
+    public void Open()
     {
         if (tween != null && tween.active)
             tween.Kill();
 
         tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay);
     }
-    public void Disable()
+    public void Close()
     {
         if (tween != null && tween.active)
             tween.Kill();

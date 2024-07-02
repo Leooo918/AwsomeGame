@@ -70,7 +70,7 @@ public class UIOn : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            UIManager.Instance.Open(Window.Shop);
+            UIManager.Instance.Open(UIType.Shop);
         }
     }
 
