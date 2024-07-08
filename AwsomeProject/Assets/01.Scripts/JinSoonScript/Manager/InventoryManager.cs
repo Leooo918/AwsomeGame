@@ -105,7 +105,6 @@ public class InventoryManager : Singleton<InventoryManager>
     public void EnbableIgredientsInventory(bool isEnable)
     {
         isIngredientsInventoryActive = isEnable;
-        Debug.Log(isIngredientsInventoryActive);
 
         if (isIngredientsInventoryActive)
         {
