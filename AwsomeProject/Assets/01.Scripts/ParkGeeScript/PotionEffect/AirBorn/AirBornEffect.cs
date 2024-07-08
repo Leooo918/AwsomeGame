@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class AirBornEffect : Effect
 {
-    private int damage;
-    PortionItemSO stat;
-
+    //public PortionItemSO potionStat;
     public override void EnterEffort(Entity target)
     {
         base.EnterEffort(target);
-        float duration = stat.duration;
-        target.healthCompo.TakeDamage(damage, Vector2.zero, null);
-        target.AirBorn(duration);
+        
+        //if (potionStat == null)
+        //{
+        //    Debug.LogError("stat¿Ã «“¥Á æ»µ ");
+        //    return;
+        //}
+
+        //duration = potionStat.duration;
+        //figure = potionStat.figure;
+
+        target.healthCompo.TakeDamage(10, Vector2.zero, null);
+        target.AirBorn(1f);
     }
 }

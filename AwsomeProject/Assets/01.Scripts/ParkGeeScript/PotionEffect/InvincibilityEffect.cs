@@ -9,7 +9,6 @@ public class InvincibilityEffect : Effect
         base.EnterEffort(target);
         target.Invincibility(3f);
         target.Stun(3f);
-        Debug.Log("½ÇÇà");
         CoroutineManager.Instance.StartManagedCoroutine(DelayCoroutine(target, 3f));
     }
 

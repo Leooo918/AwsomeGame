@@ -8,6 +8,8 @@ public class HealEffect : Effect
 
     public override void EnterEffort(Entity target)
     {
-        target.healthCompo.GetHeal(10);
+        Debug.Log(target.healthCompo.curHp);
+        target.healthCompo.GetHeal(5);
+        Debug.Log(target.healthCompo.curHp);
     }
 }

@@ -18,7 +18,6 @@ public class PlayerStunState : PlayerState
     {
         base.UpdateState();
 
-
         if (Time.time - stunTime >= player.stunDuration)
         {
             player.CanStateChangeable = true;

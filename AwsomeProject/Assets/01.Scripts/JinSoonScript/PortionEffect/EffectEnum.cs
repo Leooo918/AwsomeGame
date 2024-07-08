@@ -14,6 +14,9 @@ public enum EffectEnum
     FireArmor = 10,
     DoubleExplotion = 11,
     AirBornDown = 12,
-    TripleExplotion = 13
+    TripleExplotion = 13,
+    AirStun = 14,
+    StunClean = 15,
+    InvincibilityDash = 16,
     //Poision = 3
 }

@@ -159,6 +159,34 @@ public class Player : Entity
         StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 
+    public override void AirBorn(float duration)
+    {
+
+    }
+
+    //public override void UpArmor(float figure)
+    //{
+
+    //}
+
+    public override void Invincibility(float duration)
+    {
+        base.Invincibility(duration);
+        StateMachine.ChangeState(PlayerStateEnum.Stun);
+    }
+
+    public override void InvincibilityDisable()
+    {
+        base.InvincibilityDisable();
+        StateMachine.ChangeState(PlayerStateEnum.Idle);
+    }
+
+    public override void Clean()
+    {
+        base.Clean();
+        StateMachine.ChangeState(PlayerStateEnum.Idle);
+    }
+
     /// <summary>
     /// 대쉬하는
     /// </summary>

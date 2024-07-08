@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DashEffect : Effect
+public class InvincibilityDashEffect : Effect
 {
     Player player;
 
@@ -15,10 +15,15 @@ public class DashEffect : Effect
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = true;
+        dashSkillSO.IsInvincibleWhileDash = true;
+
+        accumulatedTime = 0f;
     }
 
     public override void UpdateEffort()
     {
+        base.UpdateEffort();
+
         accumulatedTime += Time.deltaTime;
 
         if (accumulatedTime > useTime)
@@ -32,6 +37,7 @@ public class DashEffect : Effect
         base.ExitEffort();
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+        dashSkillSO.IsInvincibleWhileDash = false;
         dashSkillSO.CanUseSkill = false;
     }
 }

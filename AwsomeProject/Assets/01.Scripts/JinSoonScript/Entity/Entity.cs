@@ -51,7 +51,6 @@ public abstract class Entity : MonoBehaviour
     public bool CanStateChangeable { get; set; } = true;
     public bool isDead { get; protected set; } = false;
 
-
     protected virtual void Awake()
     {
         Transform visualTrm = transform.Find("Visual");
@@ -163,6 +162,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void UpArmor(float figure)
     {
+
     }
 
     public virtual void Invincibility(float duration) 
@@ -173,6 +173,11 @@ public abstract class Entity : MonoBehaviour
     public virtual void InvincibilityDisable()
     {
         healthCompo.DisableInvincibility();
+    }
+
+    public virtual void Clean()
+    {
+
     }
 
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임

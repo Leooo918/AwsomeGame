@@ -10,6 +10,7 @@ public abstract class Effect
 
     public int portionLevel { get; protected set; } = 1;
     public float duration { get; protected set; } = 1f;
+    public int figure { get; protected set; } = 1;
 
     public virtual void EnterEffort(Entity target)
     {
