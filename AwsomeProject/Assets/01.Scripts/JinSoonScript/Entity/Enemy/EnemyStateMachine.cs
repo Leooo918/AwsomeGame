@@ -25,7 +25,6 @@ public class EnemyStateMachine<T> where T : Enum
     {
         if (!enemy.CanStateChangeable) return;
 
-        UnityEngine.Debug.Log(newState.ToString());
         CurrentState.Exit();
         CurrentState = stateDictionary[newState];
         CurrentState.Enter();

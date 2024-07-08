@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -14,7 +12,7 @@ public class BookMark : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Sprite disableSprite;
 
     [SerializeField] private bool isEnableInventory = true;
-    public event UnityAction<bool> clickEvent;
+    public event Action<bool> clickEvent;
 
     private void Awake()
     {
@@ -27,7 +25,7 @@ public class BookMark : MonoBehaviour, IPointerClickHandler
         {
             Enable();
             clickEvent?.Invoke(isEnableInventory);
-            InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
+            //InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
         }
     }
 
@@ -46,6 +44,6 @@ public class BookMark : MonoBehaviour, IPointerClickHandler
     {
         Enable();
         clickEvent?.Invoke(isEnableInventory);
-        InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
+        //InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
     }
 }
