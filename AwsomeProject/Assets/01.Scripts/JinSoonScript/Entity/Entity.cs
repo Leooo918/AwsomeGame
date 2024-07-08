@@ -37,7 +37,10 @@ public abstract class Entity : MonoBehaviour
 
     public float stunDuration { get; protected set; }
     public bool canBeStun { get; protected set; }
-
+    public float airBornDuration { get; protected set; }
+    public bool canBeAirBorn { get; protected set; }
+    public float upArmorDuration { get; protected set; }
+    
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
@@ -47,7 +50,6 @@ public abstract class Entity : MonoBehaviour
     public int FacingDir { get; protected set; } = 1;
     public bool CanStateChangeable { get; set; } = true;
     public bool isDead { get; protected set; } = false;
-
 
     protected virtual void Awake()
     {
@@ -152,6 +154,32 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Stun(float duration) { }
 
+    public virtual void AirBorn(float duration) 
+    {
+        Debug.Log("에어본");
+        StartCoroutine(AirBornDurationCoroutine(duration));
+    }
+
+    public virtual void UpArmor(float figure)
+    {
+
+    }
+
+    public virtual void Invincibility(float duration) 
+    {
+        healthCompo.EnableInvincibility();
+    }
+
+    public virtual void InvincibilityDisable()
+    {
+        healthCompo.DisableInvincibility();
+    }
+
+    public virtual void Clean()
+    {
+
+    }
+
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임
     public Coroutine StartDelayCallBack(float delay, Action callBack)
     {
@@ -162,6 +190,29 @@ public abstract class Entity : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         callBack?.Invoke();
+    }
+
+    IEnumerator AirBornDurationCoroutine(float duration)
+    {
+        float elapsedTime = 0.0f;
+        float initialVerticalSpeed = 5.0f; 
+        Vector2 originalVelocity = rigidbodyCompo.velocity;
+
+        rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
+
+        while (elapsedTime < duration)
+        {
+            float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
+
+            rigidbodyCompo.velocity = new Vector2(0, verticalSpeed);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        float fallSpeed = -40f;
+        rigidbodyCompo.velocity = new Vector2(originalVelocity.x, fallSpeed);
+        Debug.Log("에어본 종료");
     }
 
 #if UNITY_EDITOR

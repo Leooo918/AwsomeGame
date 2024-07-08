@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PotionCraftPanal : MonoBehaviour, IWindowPanel
+public class PotionCraftPanal : MonoBehaviour, IManageableUI
 {
     [SerializeField] private float _onYPos;
     [SerializeField] private float _offYPos;

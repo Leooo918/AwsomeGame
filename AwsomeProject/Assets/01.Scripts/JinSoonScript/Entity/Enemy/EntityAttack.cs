@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class EntityAttack : MonoBehaviour
 {
-    [SerializeField] private Entity entity;
+    [SerializeField] private Entity _entity;
 
-    [SerializeField] private int maxDetectingEnemyNum;
-    [SerializeField] private float attackRange;
-    [SerializeField] private Vector2 attackOffset;
-    [SerializeField] private LayerMask whatIsEnemy;
+    [SerializeField] private int _maxDetectingEnemyNum;
+    [SerializeField] private float _attackRange;
+    [SerializeField] private Vector2 _attackOffset;
+    [SerializeField] private LayerMask _whatIsEnemy;
 
-    private Vector2 knockBackPower;
-    private int damage = 1;
-    private Collider2D[] colls;
+    private Vector2 _knockBackPower;
+    private Vector2 _moveDesire;
+    private int _damage = 1;
+    private Collider2D[] _colls;
 
     private void Awake()
     {
-        colls = new Collider2D[maxDetectingEnemyNum];
-        entity = GetComponent<Entity>();
+        _colls = new Collider2D[_maxDetectingEnemyNum];
+        _entity = GetComponent<Entity>();
     }
 
     /// <summary>
@@ -26,17 +27,21 @@ public class EntityAttack : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        int detected = Physics2D.OverlapCircleNonAlloc(transform.position + new Vector3(attackOffset.x * entity.FacingDir, attackOffset.y, 0), attackRange, colls, whatIsEnemy);
+        int detected = Physics2D.OverlapCircleNonAlloc(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange, _colls, _whatIsEnemy);
         bool isCameraShaked = false;
 
+        Vector2 currentMoveDesire = _moveDesire;
+        currentMoveDesire.x *= _entity.FacingDir;
+
+        _entity.rigidbodyCompo.AddForce(currentMoveDesire, ForceMode2D.Impulse);
         for (int i = 0; i < detected; i++)
         {
-            if (colls[i].TryGetComponent<Entity>(out Entity e))
+            if (_colls[i].TryGetComponent<Entity>(out Entity e))
             {
-                knockBackPower.x *= Mathf.Sign(e.transform.position.x - transform.position.x);
-                e.healthCompo.TakeDamage(damage, knockBackPower, entity);
+                _knockBackPower.x *= Mathf.Sign(e.transform.position.x - transform.position.x);
+                e.healthCompo.TakeDamage(_damage, _knockBackPower, _entity);
 
-                if(!isCameraShaked)
+                if (!isCameraShaked)
                 {
                     CameraManager.Instance.ShakeCam(1f, 1f, 0.05f);
                     isCameraShaked = true;
@@ -47,15 +52,16 @@ public class EntityAttack : MonoBehaviour
 
     public void SetCurrentAttackInfo(AttackInfo attackInfo)
     {
-        attackRange = attackInfo.radius;
-        attackOffset = attackInfo.offset;
-        knockBackPower = attackInfo.knockBackPower;
-        damage = attackInfo.damage;
+        _attackRange = attackInfo.radius;
+        _attackOffset = attackInfo.offset;
+        _knockBackPower = attackInfo.knockBackPower;
+        _moveDesire = attackInfo.moveDesire;
+        _damage = attackInfo.damage;
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + new Vector3(attackOffset.x * entity.FacingDir, attackOffset.y, 0), attackRange);
+        Gizmos.DrawWireSphere(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange);
     }
 }

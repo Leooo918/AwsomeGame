@@ -205,9 +205,9 @@ TextureImporter:
       name: UITileSheet_5
       rect:
         serializedVersion: 2
-        x: 176
+        x: 168
         y: 259
-        width: 16
+        width: 24
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -436,9 +436,9 @@ TextureImporter:
       name: UITileSheet_16
       rect:
         serializedVersion: 2
-        x: 176
+        x: 168
         y: 227
-        width: 16
+        width: 24
         height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

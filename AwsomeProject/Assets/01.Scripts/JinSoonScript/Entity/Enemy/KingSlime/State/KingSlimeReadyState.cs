@@ -11,13 +11,13 @@ public class KingSlimeReadyState : EnemyState<KingSlimeStateEnum>
     public KingSlimeReadyState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         kingSlime = enemy as KingSlime;
-        playerTrm = PlayerManager.Instance.PlayerTrm;
     }
 
     public override void UpdateState()
     {
         kingSlime.UseSkill();
 
+        playerTrm = PlayerManager.Instance.PlayerTrm;
         Vector2 dir = (playerTrm.position - enemy.transform.position).normalized;
         if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
     }

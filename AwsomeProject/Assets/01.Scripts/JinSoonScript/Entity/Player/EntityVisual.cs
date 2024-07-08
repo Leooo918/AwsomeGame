@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class EntityVisual : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     private Material playerMat;
-    [SerializeField] private float whiteTime = 0.15f; 
+    [SerializeField] private float whiteTime = 0.15f;
+    [SerializeField] private GameObject _skillEffect;
 
     private void Awake()
     {
@@ -20,6 +22,11 @@ public class EntityVisual : MonoBehaviour
         {
             Hit();
         }
+    }
+
+    public void SkillEffect()
+    {
+        _skillEffect.SetActive(true);
     }
 
     public void Hit()

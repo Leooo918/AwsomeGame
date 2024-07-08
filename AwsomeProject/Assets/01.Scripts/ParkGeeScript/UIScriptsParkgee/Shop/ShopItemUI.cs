@@ -41,6 +41,6 @@ public class ShopItemUI : MonoBehaviour
 
     private void SelectItem()
     {
-        UIManager.Instance.Close(Window.Shop);
+        UIManager.Instance.Close(UIType.Shop);
     }
 }

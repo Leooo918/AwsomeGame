@@ -24,6 +24,7 @@ public class PortionItemSO : ItemSO
 
     //얘네는 Portion으로 만들때 지정해줄건데 아마 여기서 빠질 듯
     public int effecLv;
+    public int figure;
     public float duration;
     public float usingTime = 0.5f;
     public bool isInfinite;

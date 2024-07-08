@@ -23,6 +23,9 @@ public class PlayerIdleState : PlayerGroundState
 
         float xInput = player.PlayerInput.XInput;
 
+        if (player.canClimb && player.PlayerInput.YInput != 0)
+            stateMachine.ChangeState(PlayerStateEnum.Climb);
+
         //이동방향과 벽방향이 같다면 return
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected())
             return;

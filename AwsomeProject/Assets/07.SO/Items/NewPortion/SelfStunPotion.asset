@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
+  m_Name: SelfStunPotion
+  m_EditorClassIdentifier: 
+  id: 107
+  itemName: "\uC11D\uD654\uD3EC\uC158"
+  itemType: 1
+  maxCarryAmountPerSlot: 3
+  itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 \uC6C0\uC9C1\uC784\uC774 \uBD88\uAC00\uB2A5\uD574\uC9C0\uB294
+    \uB300\uC2E0 \uBAA8\uB4E0 \uD53C\uD574\uB97C \uC785\uC9C0 \uC54A\uB294\uB2E4."
+  dotImage: {fileID: -935731466, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  itemImage: {fileID: -935731466, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: 367d6fb93fa835d45a88abb187802469, type: 3}
+  portionType: 1
+  effect: 9
+  requireEffects: []
+  portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
+  effecLv: 0
+  duration: 0
+  usingTime: 0.5
+  isInfinite: 0

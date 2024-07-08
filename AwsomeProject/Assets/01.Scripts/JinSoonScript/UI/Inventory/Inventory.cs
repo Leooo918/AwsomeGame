@@ -19,6 +19,28 @@ public class Inventory : MonoBehaviour
     [SerializeField] private bool indicateIngredient = false;
     [SerializeField] private bool indicatePortion = false;
 
+    private bool indicateThrowingPortion = false;
+    private bool indicateDrinkingPortion = false;
+
+    public bool IndicateThrowingPortion
+    {
+        get => indicateThrowingPortion;
+        set
+        {
+            indicateThrowingPortion = value;
+            Load();
+        }
+    }
+    public bool IndicateDrinkingPortion
+    {
+        get => indicateDrinkingPortion;
+        set
+        {
+            indicateDrinkingPortion = value;
+            Load();
+        }
+    }
+
     private void Awake()
     {
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
@@ -239,9 +261,21 @@ public class Inventory : MonoBehaviour
 
             for (int k = 0; k < itemSet.itemset.Count; k++)
             {
-                if (itemSet.itemset[k].id != id) continue;
-                if (itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) continue;
-                if (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false) continue;
+                if (itemSet.itemset[k].id != id ||
+                    (itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) ||
+                    (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false))
+                    continue;
+
+                if (itemSet.itemset[k].itemType == ItemType.Portion)
+                {
+                    PortionItemSO portionSO = itemSet.itemset[k] as PortionItemSO;
+
+                    if (portionSO.portionType == Portion.PortionForThrow
+                        && indicateThrowingPortion == false) continue;
+
+                    if (portionSO.portionType == Portion.PortionForMyself
+                        && indicateDrinkingPortion == false) continue;
+                }
 
                 bool b = false;
                 for (int l = 0; l < inventory.GetLength(0); l++)

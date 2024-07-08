@@ -38,12 +38,12 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""YMovement"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""2641e09e-c09b-429c-afeb-e8a4a98e9fcf"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",
@@ -139,6 +139,15 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""name"": ""UsePortion"",
                     ""type"": ""Button"",
                     ""id"": ""365c993f-90e1-47d7-b9af-8c58160c4d16"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Option"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c041103-31ba-4ee9-875e-d3d5a33b8acb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -332,6 +341,17 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""action"": ""UsePortion"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33c68bc8-6644-4fb5-b935-0a539fc4ef99"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -359,6 +379,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         m_Player_QuickSlotForth = m_Player.FindAction("QuickSlotForth", throwIfNotFound: true);
         m_Player_QuickSlotFifth = m_Player.FindAction("QuickSlotFifth", throwIfNotFound: true);
         m_Player_UsePortion = m_Player.FindAction("UsePortion", throwIfNotFound: true);
+        m_Player_Option = m_Player.FindAction("Option", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -433,6 +454,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_QuickSlotForth;
     private readonly InputAction m_Player_QuickSlotFifth;
     private readonly InputAction m_Player_UsePortion;
+    private readonly InputAction m_Player_Option;
     public struct PlayerActions
     {
         private @Controlls m_Wrapper;
@@ -450,6 +472,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         public InputAction @QuickSlotForth => m_Wrapper.m_Player_QuickSlotForth;
         public InputAction @QuickSlotFifth => m_Wrapper.m_Player_QuickSlotFifth;
         public InputAction @UsePortion => m_Wrapper.m_Player_UsePortion;
+        public InputAction @Option => m_Wrapper.m_Player_Option;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -498,6 +521,9 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @UsePortion.started += instance.OnUsePortion;
             @UsePortion.performed += instance.OnUsePortion;
             @UsePortion.canceled += instance.OnUsePortion;
+            @Option.started += instance.OnOption;
+            @Option.performed += instance.OnOption;
+            @Option.canceled += instance.OnOption;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -541,6 +567,9 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @UsePortion.started -= instance.OnUsePortion;
             @UsePortion.performed -= instance.OnUsePortion;
             @UsePortion.canceled -= instance.OnUsePortion;
+            @Option.started -= instance.OnOption;
+            @Option.performed -= instance.OnOption;
+            @Option.canceled -= instance.OnOption;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -582,5 +611,6 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         void OnQuickSlotForth(InputAction.CallbackContext context);
         void OnQuickSlotFifth(InputAction.CallbackContext context);
         void OnUsePortion(InputAction.CallbackContext context);
+        void OnOption(InputAction.CallbackContext context);
     }
 }

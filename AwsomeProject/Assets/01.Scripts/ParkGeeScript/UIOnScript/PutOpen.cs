@@ -14,7 +14,7 @@ public class PutOpen : MonoBehaviour
             _interact.SetActive(true);
             if (Input.GetKeyDown(KeyCode.F))
             {
-                UIManager.Instance.Open(Window.PotionCraft);
+                UIManager.Instance.Open(UIType.PotionCraft);
             }
         }
     }

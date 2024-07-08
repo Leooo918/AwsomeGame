@@ -13,6 +13,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
     private GrowingDirection _direction;
     private bool _isGrowing = false;
     private bool _isEndGrow = false;
+    private bool _canClimb = false;
 
     private float _currentScale;
     private float _growingSpeed = 9f;
@@ -27,6 +28,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         _animator = transform.Find("Visual").GetComponent<Animator>();
         _collider = GetComponent<BoxCollider2D>();
         _currentScale = _collider.size.y;
+        _canClimb = _direction == GrowingDirection.Up;
     }
 
     private void Update()
@@ -67,7 +69,11 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision);
+        if(_canClimb && collision.TryGetComponent(out Player player))
+        {
+            player.Climb(true);
+        }
+
         if (collision.TryGetComponent(out IDamageable enemy) && _isGrowing)
         {
             enemy.Rape(3f);
@@ -81,6 +87,14 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
             _isEndGrow = true;
             _isGrowing = false;
             _collider.enabled = false;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (_canClimb && collision.TryGetComponent(out Player player))
+        {
+            player.Climb(false);
         }
     }
 

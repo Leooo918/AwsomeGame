@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 
-public class ShopPanel : MonoBehaviour, IWindowPanel
+public class ShopPanel : MonoBehaviour, IManageableUI
 {
     [SerializeField] private float _onYPos;
     [SerializeField] private float _offYPos;

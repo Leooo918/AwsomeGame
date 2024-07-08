@@ -39,7 +39,7 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     private bool playerDetected = false;
     public float DashTime;
-    public readonly float DashPower;
+    public float DashPower;
 
     protected override void Awake()
     {
@@ -61,7 +61,7 @@ public abstract class Enemy<T> : Entity where T : Enum
             }
             catch (Exception e)
             {
-                Debug.LogError($"Enemy Slime : no state [ {typeName} ]");
+                Debug.LogError($"Enemy {scriptName} : no state [ {typeName} ]");
                 Debug.LogError(e);
             }
         }
