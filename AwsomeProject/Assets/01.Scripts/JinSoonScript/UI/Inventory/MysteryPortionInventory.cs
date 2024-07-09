@@ -1,11 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MysteryPortionInventory : Inventory
 {
     private InventorySlot[] _slots;
+    [SerializeField] private MysteryPortionIndicator _indicator;
+
     [SerializeField] private int _slotCnt = 3;
     [SerializeField] private PortionItemSO[] _mysteryPortions;
 
@@ -15,8 +17,9 @@ public class MysteryPortionInventory : Inventory
     private int _openedMysteryPortionCnt = 1;
     private string _path;
 
-    protected override  void Awake()
+    protected override void Awake()
     {
+        _path = Path.Combine(Application.dataPath, "MysteryPortionProgress.txt");
         _slots = new InventorySlot[_slotCnt];
 
         for (int i = 0; i < _slotCnt; i++)
@@ -34,7 +37,7 @@ public class MysteryPortionInventory : Inventory
 
     protected override void OnDisable() { }
 
-    protected override void OnEnable() { }
+    protected override void OnEnable() { Load(); }
 
     public void UnlockMysteryPortion(int portionCnt)
     {
@@ -47,10 +50,29 @@ public class MysteryPortionInventory : Inventory
 
     public override void UnSelectAllSlot()
     {
-        for(int i = 0; i < _slots.Length; i++)
+        for (int i = 0; i < _slots.Length; i++)
         {
             _slots[i].UnSelect();
         }
+    }
+
+    public override void SelectItem(Item assignedItem)
+    {
+        base.SelectItem(assignedItem);
+        _indicator.ChangePortionImage(assignedItem);
+    }
+
+    public override void Save()
+    {
+        File.WriteAllText(path, _openedMysteryPortionCnt.ToString());
+    }
+
+    public override void Load()
+    {
+        if(File.Exists(path) == false)
+            Save();
+
+        _openedMysteryPortionCnt = int.Parse(File.ReadAllText(path));
     }
 
     private IEnumerator DelaySetItem()

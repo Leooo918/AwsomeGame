@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MysteryPortionIndicator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private MysteryPortionInventory _inventory;
+    [SerializeField] private Image _portionImage;
 
-    // Update is called once per frame
-    void Update()
+    private PortionItem _portion;
+    private PortionItemSO _mysteryPortion;
+
+    public void ChangePortionImage(Item item)
     {
-        
+        _portion = item as PortionItem;
+
+        if(_portion != null )
+        {
+            _mysteryPortion = _portion.itemSO as PortionItemSO;
+        }
+
+        _portionImage.sprite = item.itemSO.dotImage;
     }
 }

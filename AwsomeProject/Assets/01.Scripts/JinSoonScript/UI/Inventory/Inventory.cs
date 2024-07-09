@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
     [SerializeField] private Vector2Int inventorySize = new Vector2Int(5, 4);
-    private string path = "";
+    protected string path = "";
     public Action<ItemSO> OnSelectItem;
 
     [SerializeField] private Transform slotParent;
@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour
 
     private bool indicateThrowingPortion = false;
     private bool indicateDrinkingPortion = false;
+    public Item selectedItem;
 
     public bool IndicateThrowingPortion
     {
@@ -190,7 +191,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void Save()
+    public virtual void Save()
     {
         InventorySaveData saveData = new();
 
@@ -213,7 +214,7 @@ public class Inventory : MonoBehaviour
         File.WriteAllText(path, json);
     }
 
-    public void Load()
+    public virtual void Load()
     {
         InventorySaveData saveData;
 
@@ -284,6 +285,11 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+    }
+
+    public virtual void SelectItem(Item assignedItem)
+    {
+        selectedItem = assignedItem;
     }
 
     public class InventorySaveData
