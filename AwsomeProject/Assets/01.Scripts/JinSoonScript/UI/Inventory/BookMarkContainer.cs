@@ -12,8 +12,11 @@ public class BookMarkContainer : MonoBehaviour
 
     public Inventory portionInventory;
 
-    [SerializeField] private GameObject portionInventoryObj;
-    [SerializeField] private GameObject recipeObj;
+    [SerializeField] private GameObject _portionInventoryObj;
+    [SerializeField] private GameObject _recipeObj;
+
+    private bool _isPortionInventoryEnabled = false;
+    private bool _isDrinkingPortionInventoryEnabled = false;
 
     private void OnEnable()
     {
@@ -34,6 +37,9 @@ public class BookMarkContainer : MonoBehaviour
     }
     private void OnClickBookMark(bool isEnableDrinkingPortion)
     {
+        _isDrinkingPortionInventoryEnabled = isEnableDrinkingPortion;
+        if (_isPortionInventoryEnabled == false) return;
+
         if(isEnableDrinkingPortion)
         {
             portionInventory.IndicateDrinkingPortion = true;
@@ -49,16 +55,18 @@ public class BookMarkContainer : MonoBehaviour
     private void OnClickLeftBookMark(bool isEnableInventory)
     {
         InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
+        _isPortionInventoryEnabled = !isEnableInventory;
 
         if (isEnableInventory)
         {
-            recipeObj.SetActive(true);
-            portionInventoryObj.SetActive(false);
+            _recipeObj.SetActive(true);
+            _portionInventoryObj.SetActive(false);
         }
         else
         {
-            recipeObj.SetActive(false);
-            portionInventoryObj.SetActive(true);
+            _recipeObj.SetActive(false);
+            _portionInventoryObj.SetActive(true);
+            OnClickBookMark(_isDrinkingPortionInventoryEnabled);
         }
     }
 }

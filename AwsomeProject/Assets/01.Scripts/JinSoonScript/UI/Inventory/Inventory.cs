@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
         inventory = new InventorySlot[inventorySize.x, inventorySize.y];
@@ -56,26 +56,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         StartCoroutine(DelayLoad());
     }
 
-    private void Update()
-    {
-        //디버그용 코드들 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Save();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Load();
-        }
-    }
-
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
@@ -89,7 +75,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
@@ -193,7 +179,7 @@ public class Inventory : MonoBehaviour
         return amount <= 0;
     }
 
-    public void UnSelectAllSlot()
+    public virtual void UnSelectAllSlot()
     {
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
