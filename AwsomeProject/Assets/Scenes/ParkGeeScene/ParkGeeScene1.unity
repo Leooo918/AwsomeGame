@@ -12101,7 +12101,7 @@ Animator:
   m_GameObject: {fileID: 921183543}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b1e8c2ad16252d0409c4d19e8794cf15, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -14871,7 +14871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 445387511067698906, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2230550602945823284, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46447,7 +46447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde92ba9b412ac6428c14025097a8d19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
 --- !u!1 &2124041806
 GameObject:
   m_ObjectHideFlags: 0
@@ -46634,9 +46634,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.5}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.97
 --- !u!50 &2131134162
 Rigidbody2D:
   serializedVersion: 4
@@ -46673,17 +46673,17 @@ Transform:
   m_GameObject: {fileID: 2131134157}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2106846666}
   - {fileID: 921183544}
   - {fileID: 766108042}
   - {fileID: 399748750}
   - {fileID: 672166055}
-  - {fileID: 1664126830}
+  - {fileID: 2106846666}
   - {fileID: 894470879}
+  - {fileID: 1664126830}
   m_Father: {fileID: 269954094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2131134165

@@ -11,15 +11,27 @@
         },
         {
             "id": 2,
-            "amount": 4
+            "amount": 5
         },
         {
             "id": 1,
-            "amount": 1
+            "amount": 2
         },
         {
             "id": 2,
             "amount": 5
+        },
+        {
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 2,
+            "amount": 1
+        },
+        {
+            "id": 4,
+            "amount": 1
         }
     ]
 }
