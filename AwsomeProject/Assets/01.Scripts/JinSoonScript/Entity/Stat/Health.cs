@@ -56,7 +56,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         if (withFeedBack)
         {
             onHit?.Invoke();
-            //onKnockBack?.Invoke(knockPower);
+            onKnockBack?.Invoke(knockPower);
         }
         if (curHp <= 0)
         {
