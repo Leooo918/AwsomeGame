@@ -289,6 +289,7 @@ public class Inventory : MonoBehaviour
 
     public virtual void SelectItem(Item assignedItem)
     {
+        if(assignedItem == null) return;
         selectedItem = assignedItem;
     }
 
