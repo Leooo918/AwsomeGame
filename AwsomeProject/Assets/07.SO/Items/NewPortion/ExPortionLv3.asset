@@ -24,8 +24,9 @@ MonoBehaviour:
   portionType: 0
   effect: 11
   requireEffects: []
-  portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
+  portionParticle: {fileID: 5772863079720111497, guid: ac061ed62649efa4ab4ede62efbc06a0, type: 3}
   effecLv: 3
+  figure: 0
   duration: 1
   usingTime: 0.5
   isInfinite: 0

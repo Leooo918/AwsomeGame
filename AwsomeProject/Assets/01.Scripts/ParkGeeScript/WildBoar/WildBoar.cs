@@ -66,7 +66,6 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Start()
     {
         StateMachine.Initialize(WildBoarEnum.Idle, this);
-
     }
 
     private void Update()
@@ -101,7 +100,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Dead(Vector2 dir)
     {
-
+        StateMachine.ChangeState(WildBoarEnum.Dead);
     }
 
     public void Attack()

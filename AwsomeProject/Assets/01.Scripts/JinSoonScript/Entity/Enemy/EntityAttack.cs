@@ -62,6 +62,6 @@ public class EntityAttack : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange);
+        //Gizmos.DrawWireSphere(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange);
     }
 }
