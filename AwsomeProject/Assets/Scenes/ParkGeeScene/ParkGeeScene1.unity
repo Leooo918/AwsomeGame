@@ -1182,6 +1182,7 @@ MonoBehaviour:
   slotPf: {fileID: 834932366130897234, guid: b97dbba1636e5a7419ced5824b9a1e99, type: 3}
   indicateIngredient: 1
   indicatePortion: 0
+  selectedItem: {fileID: 0}
 --- !u!4 &83307999
 Transform:
   m_ObjectHideFlags: 0
@@ -9887,6 +9888,7 @@ MonoBehaviour:
   quickSlotSetPf: {fileID: 4429037214168679027, guid: c73f2ba823bbf6140bb87e36fcaf27dc, type: 3}
   currentQuickSlotSet: {fileID: 0}
   nextQuickSlotSet: {fileID: 0}
+  portionIndicator: {fileID: 0}
   enabledOffset:
     position: {x: 500, y: -530, z: 0}
     scale: {x: 1, y: 1, z: 1}
@@ -12742,6 +12744,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 919067664}
     m_Modifications:
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844044392263411663, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746552325718919734, guid: abd008b729bfd3641a860732def3d36c, type: 3}
       propertyPath: m_Name
       value: InventoryBackground
@@ -12838,8 +12864,28 @@ PrefabInstance:
       propertyPath: slotParent
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7870607985415331438, guid: abd008b729bfd3641a860732def3d36c, type: 3}
-      propertyPath: maxQuickSlotCnt
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8347551256430743996, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
