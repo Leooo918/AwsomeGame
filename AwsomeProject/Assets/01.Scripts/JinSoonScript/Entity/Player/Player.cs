@@ -139,12 +139,6 @@ public class Player : Entity
 
     protected void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    DashSkill d = SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill as DashSkill;
-        //    d._canUseSkill = true;
-        //}
-
         SetHpSlider();
 
         StateMachine.CurrentState.UpdateState();

@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class DisableMap : MonoBehaviour
 {
+    private readonly Vector3 offset = Vector2.up;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player))
-        {
-            MapManager.Instance.DisableMap(player.transform.position);
-        }
+        Debug.Log("밍밍밍");
+        MapManager.Instance.DisableMap(collision.transform.position + offset);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player))
-        {
-            MapManager.Instance.EnableMap(player.transform.position);
-        }
+        Debug.Log("밍");
+
+        MapManager.Instance.EnableMap(collision.transform.position + offset);
     }
 }

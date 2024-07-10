@@ -29,7 +29,7 @@ public class PlayerManager : Singleton<PlayerManager>
         get
         {
             if (playerTrm == null)
-                playerTrm = player.transform;
+                playerTrm = Player.transform;
 
             return playerTrm;
         }
