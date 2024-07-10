@@ -6,8 +6,11 @@ public class MysteryPortionIndicator : MonoBehaviour
 {
     [SerializeField] private MysteryPortionInventory _inventory;
     [SerializeField] private Transform _portionParent;
+    [SerializeField]private RectTransform _slotRect;
 
-    private RectTransform _rect;
+    [SerializeField] private float _enabledOffset;
+    [SerializeField] private float _disabledOffset;
+
     private Player _player;
 
     private PortionItem _portion;
@@ -19,7 +22,6 @@ public class MysteryPortionIndicator : MonoBehaviour
     private void Awake()
     {
         _player = PlayerManager.Instance.Player;
-        _rect = GetComponent<RectTransform>();
     }
 
     private void OnEnable()
@@ -81,7 +83,7 @@ public class MysteryPortionIndicator : MonoBehaviour
         if (_slotTween != null && _slotTween.active)
             _slotTween.Kill();
 
-        _slotTween = _rect.DOAnchorPosY(-445, 0.5f);
+        _slotTween = _slotRect.DOAnchorPosY(_enabledOffset, 0.3f);
     }
 
     private void UnSelectMysteryPortion(int num = 69)
@@ -91,6 +93,6 @@ public class MysteryPortionIndicator : MonoBehaviour
         if (_slotTween != null && _slotTween.active)
             _slotTween.Kill();
 
-        _slotTween = _rect.DOAnchorPosY(-500, 0.5f);
+        _slotTween = _slotRect.DOAnchorPosY(_disabledOffset, 0.3f);
     }
 }

@@ -18,13 +18,13 @@ using UnityEngine.UI;
 public class QuickSlotSet : MonoBehaviour
 {
     [SerializeField] private AnimationCurve disableAnimCurve;
+    [SerializeField] private RectTransform quickSlotSetRect;
 
     public int slotNum = 0;
 
     private readonly QuickSlotVisual[] slots = new QuickSlotVisual[5];
     private QuickSlotSetsParent quickSlotSetsParent;
 
-    private RectTransform quickSlotSetRect;
     private Image quickSlotSetImage;
     private Player player;
     private Shadow shadow;
@@ -36,11 +36,11 @@ public class QuickSlotSet : MonoBehaviour
 
     private void Awake()
     {
+        Transform slotParent = transform.Find("Slots");
         for (int i = 0; i < 5; i++)
-            slots[i] = transform.GetChild(i).GetComponent<QuickSlotVisual>();
+            slots[i] = slotParent.GetChild(i).GetComponent<QuickSlotVisual>();
 
         quickSlotSetsParent = transform.parent.GetComponent<QuickSlotSetsParent>();
-        quickSlotSetRect = GetComponent<RectTransform>();
         quickSlotSetImage = GetComponent<Image>();
         shadow = GetComponent<Shadow>();
 
@@ -118,34 +118,21 @@ public class QuickSlotSet : MonoBehaviour
 
     #region QuickSlotAnimation
 
-    public void EnableQuickSlotSet(QuickSlotOffset offset)
-    {
-        SetQuickSlotInput();
-
-        float tweeningTime = 0.5f;
-
-        if (seq != null && seq.active)
-            seq.Kill();
-
-        seq = DOTween.Sequence();
-
-        seq.Append(quickSlotSetRect.DOScale(offset.scale, tweeningTime).SetEase(Ease.Linear))
-            .Join(quickSlotSetRect.DOAnchorPos(offset.position, tweeningTime))
-            .Join(quickSlotSetImage.DOColor(offset.color, tweeningTime));
-    }
-    public void DisableQuickSlotSet()
+    public void ChangeQuickSlotSet(QuickSlotItems items)
     {
         UnSetQuickSlotInput();
 
-        float tweeningTime = 0.5f;
         if (seq != null && seq.active)
             seq.Kill();
 
         seq = DOTween.Sequence();
 
-        seq.Append(quickSlotSetRect.DOAnchorPosY(-680f, tweeningTime).SetEase(disableAnimCurve))
-            .Join(quickSlotSetRect.DOAnchorPosX(Random.Range(-25f, 25f), tweeningTime))
-            .OnComplete(() => Destroy(gameObject));
+        float tweeningTime = Random.Range(0.50f, 0.70f);
+
+        Debug.Log("นึ");
+        seq.Append(quickSlotSetRect.DOAnchorPosY(-150f, tweeningTime).SetEase(disableAnimCurve))
+            .Join(quickSlotSetRect.DOAnchorPosX(Random.Range(-10f, 10f), tweeningTime));
+            //.OnComplete(() => Destroy(gameObject));
     }
 
     #endregion
