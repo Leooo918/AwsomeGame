@@ -54,7 +54,7 @@ public class MysteryPortionIndicator : MonoBehaviour
 
     private void UseMysteryPortion()
     {
-        if (_isSelectedMysteryPortion == false) return;
+        if (_isSelectedMysteryPortion == false || _portion == null) return;
 
         switch (_portion.portionType)
         {

@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class DoubleExplotionEffect : Effect
 {
+    private float _delay = 0.5f;
     public override void EnterEffort(Entity target)
     {
         base.EnterEffort(target);
         target.healthCompo.TakeDamage(20, Vector2.zero, null);
-        CoroutineManager.Instance.StartManagedCoroutine(DelayBoom(target, 0.5f));
-    }
-
-    private IEnumerator DelayBoom(Entity target, float time)
-    {
-        yield return new WaitForSeconds(time);
-        target.healthCompo.TakeDamage(20, Vector2.zero, null);
+        target.StartDelayCallBack(_delay, () =>
+        {
+            target.healthCompo.TakeDamage(20, Vector2.zero, null);
+        });
     }
 }
