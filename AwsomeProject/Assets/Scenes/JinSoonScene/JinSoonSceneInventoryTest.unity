@@ -2059,7 +2059,7 @@ GameObject:
   - component: {fileID: 254453469}
   - component: {fileID: 254453471}
   - component: {fileID: 254453470}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6598,10 +6598,10 @@ Camera:
   field of view: 34
   orthographic: 1
   orthographic size: 8
-  m_Depth: -1
+  m_Depth: -27.37
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2007
+    m_Bits: 42967
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -11441,7 +11441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 896959778}
   - component: {fileID: 896959779}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: DashAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13859,7 +13859,7 @@ GameObject:
   - component: {fileID: 1144037529}
   - component: {fileID: 1144037528}
   - component: {fileID: 1144037530}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: DisableBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17858,7 +17858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1158700622}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WallChecker
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -20244,7 +20244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387546473}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
