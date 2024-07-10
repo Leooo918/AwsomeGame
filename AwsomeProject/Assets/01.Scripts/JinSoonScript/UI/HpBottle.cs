@@ -30,10 +30,10 @@ public class HpBottle : MonoBehaviour
 
         if (isBottleFull)
         {
-            seq = DOTween.Sequence();
-
             if(seq != null && seq.active)
                 seq.Kill();
+
+            seq = DOTween.Sequence();
 
             seq.Append(DOTween.To(() => 1, x => fill.fillAmount = x, 0.5f, 0.5f))
                 .Join(imageRect.DOAnchorPosY(500f, 0.4f))
@@ -42,10 +42,10 @@ public class HpBottle : MonoBehaviour
         }
         else
         {
-            seq = DOTween.Sequence();
-
             if (seq != null && seq.active)
                 seq.Kill();
+
+            seq = DOTween.Sequence();
 
             seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 0f, 0.5f))
                 .Join(imageRect.DOAnchorPosY(500f, 0.4f))

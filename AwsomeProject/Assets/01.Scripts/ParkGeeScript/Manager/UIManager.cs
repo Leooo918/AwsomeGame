@@ -15,9 +15,13 @@ public class UIManager : Singleton<UIManager>
     public Dictionary<UIType, IManageableUI> panelDictionary;
 
     //[SerializeField] private Transform _canvasTrm;
+    public GameObject PressFMessageObj { get; private set; }
 
     private void Awake()
     {
+        PressFMessageObj = GameObject.Find("PressFAlram");
+        PressFMessageObj.SetActive(false);
+
         panelDictionary = new Dictionary<UIType, IManageableUI>();
         foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {

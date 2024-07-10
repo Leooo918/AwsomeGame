@@ -103,7 +103,6 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     {
         QuickSlotInserterSet quickSlotSet =
             Instantiate(quickSlotSetPf, transform).GetComponent<QuickSlotInserterSet>();
-        Debug.Log(curSlotNum);
         quickSlotSet.Init(curSlotNum);
 
         RectTransform rect = quickSlotSet.GetComponent<RectTransform>();
