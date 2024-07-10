@@ -12,6 +12,7 @@ public class WildBoarDeadState : EnemyState<WildBoarEnum>
     public override void Enter()
     {
         base.Enter();
+        //enemy.CanStateChangeable = true;
     }
 
     public override void AnimationFinishTrigger()

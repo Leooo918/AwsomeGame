@@ -9,34 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8fe5995db7744642aa999ea9042496a, type: 3}
-  m_Name: WildBoarStat
+  m_Script: {fileID: 11500000, guid: ee2263c016c87334d8a80323e5d81538, type: 3}
+  m_Name: AirBirdStataa
   m_EditorClassIdentifier: 
-  maxHp:
-    baseValue: 50
-    modifiers: []
-    percentModifiers: []
-  armor:
-    baseValue: 10
-    modifiers: []
-    percentModifiers: []
-  damage:
-    baseValue: 10
-    modifiers: []
-    percentModifiers: []
-  moveSpeed:
-    baseValue: 5
-    modifiers: []
-    percentModifiers: []
-  jumpForce:
+  patrolTime:
     baseValue: 0
     modifiers: []
     percentModifiers: []
-  criticalChance:
+  patrolDelay:
     baseValue: 0
     modifiers: []
     percentModifiers: []
-  criticalDamage:
+  detectingDistance:
     baseValue: 0
     modifiers: []
     percentModifiers: []
+  dropItems: []
