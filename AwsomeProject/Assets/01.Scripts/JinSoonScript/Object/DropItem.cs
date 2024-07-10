@@ -11,11 +11,7 @@ public class DropItem : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    private void Start()
-    {
-        txt = UIManager.Instance.PressFAlram;
+        txt = GameObject.Find("PressFAlram").GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
