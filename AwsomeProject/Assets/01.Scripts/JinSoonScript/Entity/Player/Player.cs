@@ -200,8 +200,8 @@ public class Player : Entity
 
     public void SetHpSlider()
     {
-        hpSlider.maxValue = healthCompo.maxHp.GetValue();
-        hpSlider.value = healthCompo.curHp;
+        //hpSlider.maxValue = healthCompo.maxHp.GetValue();
+        //hpSlider.value = healthCompo.curHp;
     }
 
     /// <summary>
