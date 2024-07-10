@@ -15,6 +15,7 @@ public class KingSlimeReadyState : EnemyState<KingSlimeStateEnum>
 
     public override void UpdateState()
     {
+        Debug.Log("นึ");
         kingSlime.UseSkill();
 
         playerTrm = PlayerManager.Instance.PlayerTrm;

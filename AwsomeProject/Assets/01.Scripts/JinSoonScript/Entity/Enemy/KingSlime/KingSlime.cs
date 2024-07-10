@@ -29,7 +29,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     #region SkillSection
 
-    public Stack<SkillSO> readySkill = new Stack<SkillSO>();
+    public Queue<SkillSO> readySkill = new Queue<SkillSO>();
     public List<Tuple<SkillSO, float>> notReady = new List<Tuple<SkillSO, float>>();
 
     #endregion
@@ -57,7 +57,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         foreach (var item in EntitySkillSO.skills)
         {
             item.skill.SetOwner(this);
-            Type type = item.skill.GetType();
+            //Type type = item.skill.GetType();
             //gameObject.AddComponent(type);
         }
 
@@ -97,7 +97,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
             {
                 notReady.RemoveAt(i--);
                 if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
-                readySkill.Push(item.Item1);
+                readySkill.Enqueue(item.Item1);
             }
         }
 
@@ -113,7 +113,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         {
             int a = UnityEngine.Random.Range(0, skills.Count);
             int b = UnityEngine.Random.Range(0, skills.Count);
-
+             
             SkillSO temp = skills[a];
             skills[a] = skills[b];
             skills[b] = temp;
@@ -127,7 +127,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
             if (readySkill.Contains(skills[i])) continue;
 
             //쿨타임이 아닌 녀석들만 스택에 넣어두어라
-            readySkill.Push(skills[i]);
+            readySkill.Enqueue(skills[i]);
         }
         if (readySkill.Peek() == null) return;
 
@@ -152,8 +152,8 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         {
             if (skill != null)
             {
-                readySkill.Pop();
-                readySkill.Push(skill);
+                readySkill.Dequeue();
+                readySkill.Enqueue(skill);
             }
             StateMachine.ChangeState(KingSlimeStateEnum.Ready);
             return;
@@ -165,15 +165,15 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         if (player == null)
         {
             StateMachine.ChangeState(KingSlimeStateEnum.Ready);
-            readySkill.Pop();
-            readySkill.Push(skill);
+            readySkill.Dequeue();
+            readySkill.Enqueue(skill);
             return;
         }
 
         skill.skill.UseSkill();
         _currentSkillAfterDelay = skill.skillAfterDelay.GetValue();
         notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
-        readySkill.Pop();
+        readySkill.Dequeue();
     }
 
     public void SetSkillAfterDelay()

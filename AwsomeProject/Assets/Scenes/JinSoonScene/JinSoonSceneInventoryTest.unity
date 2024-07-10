@@ -18724,7 +18724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entity: {fileID: 1199669016}
-  _maxDetectingEnemyNum: 0
+  _maxDetectingEnemyNum: 5
   _attackRange: 0
   _attackOffset: {x: 0, y: 0}
   _whatIsEnemy:

@@ -62,6 +62,7 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("นึ");
         enemy.CanStateChangeable = false;
     }
 
