@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum UIType
@@ -14,10 +15,13 @@ public class UIManager : Singleton<UIManager>
 {
     public Dictionary<UIType, IManageableUI> panelDictionary;
 
-    //[SerializeField] private Transform _canvasTrm;
+    public TextMeshProUGUI PressFAlram { get; private set; }
 
     private void Awake()
     {
+        PressFAlram = GameObject.Find("PressFAlram").GetComponent<TextMeshProUGUI>();
+        PressFAlram.gameObject.SetActive(false);
+
         panelDictionary = new Dictionary<UIType, IManageableUI>();
         foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {

@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class InvincibilityEffect : Effect
 {
+    private float _delay = 3f;
+
     public override void EnterEffort(Entity target)
     {
         base.EnterEffort(target);
         target.Invincibility(3f);
         target.Stun(3f);
-        CoroutineManager.Instance.StartManagedCoroutine(DelayCoroutine(target, 3f));
-    }
-
-    private IEnumerator DelayCoroutine(Entity target, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        target.InvincibilityDisable();
-        Debug.Log("公利钱覆");
+        target.StartDelayCallBack(_delay, () =>
+        {
+            target.InvincibilityDisable();
+            Debug.Log("公利钱覆");
+        });
     }
 }
