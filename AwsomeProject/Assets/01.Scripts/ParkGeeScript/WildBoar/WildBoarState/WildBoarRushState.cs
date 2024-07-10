@@ -20,13 +20,14 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
     {
         base.Enter();
 
+        Debug.Log("Rush");
         playerTrm = PlayerManager.Instance.PlayerTrm;
-        //enemy.animatorCompo.SetBool(animBoolHash, false);
+        enemy.animatorCompo.SetBool(animBoolHash, false);
 
         enemy.FindPlayerEvt(() =>
         {
             rushStart = true;
-            //enemy.animatorCompo.SetBool(animBoolHash, true);
+            enemy.animatorCompo.SetBool(animBoolHash, true);
         });
     }
 

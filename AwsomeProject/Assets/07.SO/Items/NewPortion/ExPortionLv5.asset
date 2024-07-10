@@ -19,8 +19,8 @@ MonoBehaviour:
   itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 3\uBC88\uC758 \uD3ED\uBC1C\uC744
     \uC77C\uC73C\uD0A4\uACE0 \uBAA8\uB450\uC801\uC911 \uC2DC \uC77C\uC815\uC2DC\uAC04
     \uC2A4\uD134\uC744 \uBD80\uC5EC\uD55C\uB2E4."
-  dotImage: {fileID: 728140508, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  itemImage: {fileID: 728140508, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  dotImage: {fileID: 999294197, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  itemImage: {fileID: 999294197, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
   prefab: {fileID: 6910422564161804073, guid: b7112a2d3b037f444a9fee9e0e06b7ea, type: 3}
   portionType: 0
   effect: 13

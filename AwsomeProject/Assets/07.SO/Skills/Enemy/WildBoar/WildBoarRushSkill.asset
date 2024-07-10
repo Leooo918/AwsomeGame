@@ -12,22 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a700d205cd12348b0fb307eaf90f33, type: 3}
   m_Name: WildBoarRushSkill
   m_EditorClassIdentifier: 
-  id: 0
-  skillName: Rush
-  skill: {fileID: 0}
+  id: 5
+  skillName: RushSkill
   skillCoolTime:
-    baseValue: 0
-    modifiers: 
-    percentModifiers: 
+    baseValue: 10
+    modifiers: []
+    percentModifiers: []
   attackDistance:
+    baseValue: 6
+    modifiers: []
+    percentModifiers: []
+  skillAfterDelay:
     baseValue: 0
-    modifiers: 
-    percentModifiers: 
+    modifiers: []
+    percentModifiers: []
+  AttackInfo:
+    attackMultiplier: 2
+    offset: {x: 0, y: 0}
+    knockBackPower: {x: 7, y: 3}
+    moveDesire: {x: 0, y: 0}
+    radius: 1.5
+    damage: 0
   rushSpeed:
-    baseValue: 0
-    modifiers: 
-    percentModifiers: 
+    baseValue: 15
+    modifiers: []
+    percentModifiers: []
   damage:
-    baseValue: 0
-    modifiers: 
-    percentModifiers: 
+    baseValue: 10
+    modifiers: []
+    percentModifiers: []
