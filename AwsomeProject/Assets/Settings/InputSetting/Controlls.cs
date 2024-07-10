@@ -91,51 +91,6 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""QuickSlotFirst"",
-                    ""type"": ""Button"",
-                    ""id"": ""fb407dbf-abff-4552-acd0-8888f7af743c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""QuickSlotSecond"",
-                    ""type"": ""Button"",
-                    ""id"": ""9f24c6a9-fe49-4157-b6d0-1318c5d86cda"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""QuickSlotThird"",
-                    ""type"": ""Button"",
-                    ""id"": ""8b4d11cb-c5a9-4876-91c6-d402b2c66d62"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""QuickSlotForth"",
-                    ""type"": ""Button"",
-                    ""id"": ""a2ce3a7f-34e3-4801-ba8f-927cbf60f994"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""QuickSlotFifth"",
-                    ""type"": ""Button"",
-                    ""id"": ""5b1fa6a8-4552-4e24-b57c-abd43aa99ca0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""UsePortion"",
                     ""type"": ""Button"",
                     ""id"": ""365c993f-90e1-47d7-b9af-8c58160c4d16"",
@@ -152,6 +107,24 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectMysteryPortion"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8a7e015-cce6-46a9-967d-ec54f6f09d8f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectQuickSlot"",
+                    ""type"": ""Value"",
+                    ""id"": ""ec3010da-e198-47c0-9607-217cd763b809"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -278,61 +251,6 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c0fa28c6-70aa-4614-85e7-fac5f0c7e965"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""QuickSlotFirst"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7c2ae5d8-e6db-4901-bf8d-78c3e9d8233b"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""QuickSlotSecond"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e9b3f8bf-466d-44cb-bd4b-118f8635cab9"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""QuickSlotThird"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b4dbdfd3-c15b-4c62-97e3-cf7b2f64fa2f"",
-                    ""path"": ""<Keyboard>/5"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""QuickSlotFifth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5cc91e44-c1db-4650-8030-269dc1f7e644"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""QuickSlotForth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7de0684d-b061-4934-8aea-9409b126c240"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -350,6 +268,72 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Option"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e47937a-5d5d-423b-a305-c93ff80efc38"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectMysteryPortion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6efcd12f-7613-4aad-9eca-ba9c70a4ba51"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoardAndMouse"",
+                    ""action"": ""SelectQuickSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23d0fcf6-880c-4f6c-8b1f-0759c96b31be"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoardAndMouse"",
+                    ""action"": ""SelectQuickSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""701b0e25-4e64-4e9e-978b-63b9baf5c4d0"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoardAndMouse"",
+                    ""action"": ""SelectQuickSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3d6cc3e8-5c2f-4492-af43-9db1001aeedb"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoardAndMouse"",
+                    ""action"": ""SelectQuickSlot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d70a1a4-6139-4c4c-b3f7-67520fc88492"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoardAndMouse"",
+                    ""action"": ""SelectQuickSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -373,13 +357,10 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_PressTab = m_Player.FindAction("PressTab", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_QuickSlotFirst = m_Player.FindAction("QuickSlotFirst", throwIfNotFound: true);
-        m_Player_QuickSlotSecond = m_Player.FindAction("QuickSlotSecond", throwIfNotFound: true);
-        m_Player_QuickSlotThird = m_Player.FindAction("QuickSlotThird", throwIfNotFound: true);
-        m_Player_QuickSlotForth = m_Player.FindAction("QuickSlotForth", throwIfNotFound: true);
-        m_Player_QuickSlotFifth = m_Player.FindAction("QuickSlotFifth", throwIfNotFound: true);
         m_Player_UsePortion = m_Player.FindAction("UsePortion", throwIfNotFound: true);
         m_Player_Option = m_Player.FindAction("Option", throwIfNotFound: true);
+        m_Player_SelectMysteryPortion = m_Player.FindAction("SelectMysteryPortion", throwIfNotFound: true);
+        m_Player_SelectQuickSlot = m_Player.FindAction("SelectQuickSlot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -448,13 +429,10 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_PressTab;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_QuickSlotFirst;
-    private readonly InputAction m_Player_QuickSlotSecond;
-    private readonly InputAction m_Player_QuickSlotThird;
-    private readonly InputAction m_Player_QuickSlotForth;
-    private readonly InputAction m_Player_QuickSlotFifth;
     private readonly InputAction m_Player_UsePortion;
     private readonly InputAction m_Player_Option;
+    private readonly InputAction m_Player_SelectMysteryPortion;
+    private readonly InputAction m_Player_SelectQuickSlot;
     public struct PlayerActions
     {
         private @Controlls m_Wrapper;
@@ -466,13 +444,10 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @PressTab => m_Wrapper.m_Player_PressTab;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @QuickSlotFirst => m_Wrapper.m_Player_QuickSlotFirst;
-        public InputAction @QuickSlotSecond => m_Wrapper.m_Player_QuickSlotSecond;
-        public InputAction @QuickSlotThird => m_Wrapper.m_Player_QuickSlotThird;
-        public InputAction @QuickSlotForth => m_Wrapper.m_Player_QuickSlotForth;
-        public InputAction @QuickSlotFifth => m_Wrapper.m_Player_QuickSlotFifth;
         public InputAction @UsePortion => m_Wrapper.m_Player_UsePortion;
         public InputAction @Option => m_Wrapper.m_Player_Option;
+        public InputAction @SelectMysteryPortion => m_Wrapper.m_Player_SelectMysteryPortion;
+        public InputAction @SelectQuickSlot => m_Wrapper.m_Player_SelectQuickSlot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,27 +478,18 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @QuickSlotFirst.started += instance.OnQuickSlotFirst;
-            @QuickSlotFirst.performed += instance.OnQuickSlotFirst;
-            @QuickSlotFirst.canceled += instance.OnQuickSlotFirst;
-            @QuickSlotSecond.started += instance.OnQuickSlotSecond;
-            @QuickSlotSecond.performed += instance.OnQuickSlotSecond;
-            @QuickSlotSecond.canceled += instance.OnQuickSlotSecond;
-            @QuickSlotThird.started += instance.OnQuickSlotThird;
-            @QuickSlotThird.performed += instance.OnQuickSlotThird;
-            @QuickSlotThird.canceled += instance.OnQuickSlotThird;
-            @QuickSlotForth.started += instance.OnQuickSlotForth;
-            @QuickSlotForth.performed += instance.OnQuickSlotForth;
-            @QuickSlotForth.canceled += instance.OnQuickSlotForth;
-            @QuickSlotFifth.started += instance.OnQuickSlotFifth;
-            @QuickSlotFifth.performed += instance.OnQuickSlotFifth;
-            @QuickSlotFifth.canceled += instance.OnQuickSlotFifth;
             @UsePortion.started += instance.OnUsePortion;
             @UsePortion.performed += instance.OnUsePortion;
             @UsePortion.canceled += instance.OnUsePortion;
             @Option.started += instance.OnOption;
             @Option.performed += instance.OnOption;
             @Option.canceled += instance.OnOption;
+            @SelectMysteryPortion.started += instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.performed += instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.canceled += instance.OnSelectMysteryPortion;
+            @SelectQuickSlot.started += instance.OnSelectQuickSlot;
+            @SelectQuickSlot.performed += instance.OnSelectQuickSlot;
+            @SelectQuickSlot.canceled += instance.OnSelectQuickSlot;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -549,27 +515,18 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @QuickSlotFirst.started -= instance.OnQuickSlotFirst;
-            @QuickSlotFirst.performed -= instance.OnQuickSlotFirst;
-            @QuickSlotFirst.canceled -= instance.OnQuickSlotFirst;
-            @QuickSlotSecond.started -= instance.OnQuickSlotSecond;
-            @QuickSlotSecond.performed -= instance.OnQuickSlotSecond;
-            @QuickSlotSecond.canceled -= instance.OnQuickSlotSecond;
-            @QuickSlotThird.started -= instance.OnQuickSlotThird;
-            @QuickSlotThird.performed -= instance.OnQuickSlotThird;
-            @QuickSlotThird.canceled -= instance.OnQuickSlotThird;
-            @QuickSlotForth.started -= instance.OnQuickSlotForth;
-            @QuickSlotForth.performed -= instance.OnQuickSlotForth;
-            @QuickSlotForth.canceled -= instance.OnQuickSlotForth;
-            @QuickSlotFifth.started -= instance.OnQuickSlotFifth;
-            @QuickSlotFifth.performed -= instance.OnQuickSlotFifth;
-            @QuickSlotFifth.canceled -= instance.OnQuickSlotFifth;
             @UsePortion.started -= instance.OnUsePortion;
             @UsePortion.performed -= instance.OnUsePortion;
             @UsePortion.canceled -= instance.OnUsePortion;
             @Option.started -= instance.OnOption;
             @Option.performed -= instance.OnOption;
             @Option.canceled -= instance.OnOption;
+            @SelectMysteryPortion.started -= instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.performed -= instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.canceled -= instance.OnSelectMysteryPortion;
+            @SelectQuickSlot.started -= instance.OnSelectQuickSlot;
+            @SelectQuickSlot.performed -= instance.OnSelectQuickSlot;
+            @SelectQuickSlot.canceled -= instance.OnSelectQuickSlot;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -605,12 +562,9 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnPressTab(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnQuickSlotFirst(InputAction.CallbackContext context);
-        void OnQuickSlotSecond(InputAction.CallbackContext context);
-        void OnQuickSlotThird(InputAction.CallbackContext context);
-        void OnQuickSlotForth(InputAction.CallbackContext context);
-        void OnQuickSlotFifth(InputAction.CallbackContext context);
         void OnUsePortion(InputAction.CallbackContext context);
         void OnOption(InputAction.CallbackContext context);
+        void OnSelectMysteryPortion(InputAction.CallbackContext context);
+        void OnSelectQuickSlot(InputAction.CallbackContext context);
     }
 }

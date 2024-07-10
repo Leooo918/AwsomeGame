@@ -15,11 +15,11 @@ public class MysteryPortionInventory : Inventory
     [SerializeField] private Transform _slotParent;
 
     private int _openedMysteryPortionCnt = 1;
-    private string _path;
 
     protected override void Awake()
     {
-        _path = Path.Combine(Application.dataPath, "MysteryPortionProgress.txt");
+        path = Path.Combine(Application.dataPath, "MysteryPortionProgress.txt");
+
         _slots = new InventorySlot[_slotCnt];
 
         for (int i = 0; i < _slotCnt; i++)
@@ -32,10 +32,19 @@ public class MysteryPortionInventory : Inventory
 
     protected override void Start()
     {
-        StartCoroutine("DelaySetItem");
     }
 
-    protected override void OnDisable() { }
+    protected override void OnDisable() 
+    {
+        Save();
+        for(int i = 0; i < _slots.Length; i++)
+        {
+            if (_slots[i] != null && _slots[i].assignedItem != null)
+            {
+                Destroy(_slots[i].assignedItem.gameObject);
+            }
+        }
+    }
 
     protected override void OnEnable() { Load(); }
 
@@ -43,6 +52,7 @@ public class MysteryPortionInventory : Inventory
     {
         if (_openedMysteryPortionCnt < portionCnt) _openedMysteryPortionCnt = portionCnt;
 
+        Debug.Log(portionCnt);
         Item item = InventoryManager.Instance.MakeItemInstanceByItemSO(_mysteryPortions[portionCnt - 1]);
         item.GetComponent<Image>().raycastTarget = false;
         _slots[portionCnt - 1].InsertItem(item);
@@ -59,7 +69,7 @@ public class MysteryPortionInventory : Inventory
     public override void SelectItem(Item assignedItem)
     {
         base.SelectItem(assignedItem);
-        _indicator.ChangePortionImage(assignedItem);
+        _indicator.ChangePortionImage(assignedItem.itemSO);
     }
 
     public override void Save()
@@ -73,6 +83,8 @@ public class MysteryPortionInventory : Inventory
             Save();
 
         _openedMysteryPortionCnt = int.Parse(File.ReadAllText(path));
+
+        StartCoroutine("DelaySetItem");
     }
 
     private IEnumerator DelaySetItem()

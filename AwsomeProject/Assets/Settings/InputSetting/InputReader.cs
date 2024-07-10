@@ -16,14 +16,11 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public event Action PressTabEvent;
     public event Action AttackEvent;
     public event Action OpenOptionEvent;
+    public event Action SelectMysteryPortion;
 
     #region QuickSlot
 
-    public event Action FirstQuickSlot;
-    public event Action SecondQuickSlot;
-    public event Action ThirdQuickSlot;
-    public event Action ForthQuickSlot;
-    public event Action FifthQuickSlot;
+    public event Action<int> SelectQuickSlot;
 
     public event Action OnTryUseQuickSlot;
     public event Action OnUseQuickSlot;
@@ -102,36 +99,6 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
     #region QuickSlots
 
-    public void OnQuickSlotFirst(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            FirstQuickSlot?.Invoke();
-    }
-
-    public void OnQuickSlotSecond(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            SecondQuickSlot?.Invoke();
-    }
-
-    public void OnQuickSlotThird(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            ThirdQuickSlot?.Invoke();
-    }
-
-    public void OnQuickSlotForth(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            ForthQuickSlot?.Invoke();
-    }
-
-    public void OnQuickSlotFifth(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            FifthQuickSlot?.Invoke();
-    }
-
     public void OnUsePortion(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -139,6 +106,22 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
 
         if (context.canceled)
             OnUseQuickSlot?.Invoke();
+    }
+
+    public void OnSelectMysteryPortion(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            SelectMysteryPortion?.Invoke();
+    }
+
+    public void OnSelectQuickSlot(InputAction.CallbackContext context)
+    {
+        int slotNum;
+
+        if(context.performed && int.TryParse(context.control.name, out slotNum))
+        {
+            SelectQuickSlot?.Invoke(slotNum - 1);
+        }
     }
 
     #endregion
