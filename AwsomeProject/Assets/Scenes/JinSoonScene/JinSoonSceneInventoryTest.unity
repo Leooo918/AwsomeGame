@@ -18009,7 +18009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68f0ef4040852d4da2dfd859f551e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 0}
+  _entity: {fileID: 1159507526}
   _maxDetectingEnemyNum: 0
   _attackRange: 0
   _attackOffset: {x: 0, y: 0}
@@ -18028,7 +18028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68f0ef4040852d4da2dfd859f551e24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 0}
+  _entity: {fileID: 1159507526}
   _maxDetectingEnemyNum: 0
   _attackRange: 0
   _attackOffset: {x: 0, y: 0}
