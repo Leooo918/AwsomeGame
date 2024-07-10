@@ -69,12 +69,8 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
 
     private void Jump()
     {
-        Debug.Log("มกวม");
         if (jumpSkill == null)
             jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
-
-        Debug.Log(slime.Skills);
-        Debug.Log(jumpSkill);
 
         enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
     }
