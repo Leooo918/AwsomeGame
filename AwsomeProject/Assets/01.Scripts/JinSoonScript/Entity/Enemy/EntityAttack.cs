@@ -36,7 +36,7 @@ public class EntityAttack : MonoBehaviour
         _entity.rigidbodyCompo.AddForce(currentMoveDesire, ForceMode2D.Impulse);
         for (int i = 0; i < detected; i++)
         {
-            if (_colls[i].TryGetComponent<Entity>(out Entity e))
+            if (_colls[i].TryGetComponent(out Entity e))
             {
                 _knockBackPower.x *= Mathf.Sign(e.transform.position.x - transform.position.x);
                 e.healthCompo.TakeDamage(_damage, _knockBackPower, _entity);

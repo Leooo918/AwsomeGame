@@ -38,10 +38,11 @@ public class Projectary : MonoBehaviour
 
     private void Update()
     {
-        if(_isDrawingProjectile)
+        if (_isDrawingProjectile)
         {
             Vector2 pos = transform.position;
             Vector2 mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector3)pos;
+            mouseDir = mouseDir.normalized;
             Vector3 power = mouseDir * portionThrowingSpeed;
             DrawLine(pos, power);
         }
@@ -73,12 +74,13 @@ public class Projectary : MonoBehaviour
         for (int i = 1; i < _projectileList.Count; i++)
         {
             Transform t = _projectileList[i];
-            SpriteRenderer renderer = t.GetComponent<SpriteRenderer>();
-            Color color = renderer.color;
-            color.a = (float)(_projectileList.Count - i) / _projectileList.Count;
-            renderer.color = color;
             if (flag)
             {
+                SpriteRenderer renderer = t.GetComponent<SpriteRenderer>();
+                Color color = renderer.color;
+                color.a = (float)(_projectileList.Count - i) / _projectileList.Count;
+                renderer.color = color;
+
                 t.gameObject.SetActive(true);
 
                 Vector2 dotPos;

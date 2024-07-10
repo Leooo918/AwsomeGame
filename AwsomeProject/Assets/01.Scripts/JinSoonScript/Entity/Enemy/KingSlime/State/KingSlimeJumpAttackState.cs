@@ -60,6 +60,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
         base.Enter();
 
         //시작하고 jumpDelay후 올라감
+        Debug.Log("밍");
         _targetTrm = PlayerManager.Instance.PlayerTrm;
         enemy.StopImmediately(true);
         enemy.CanStateChangeable = false;

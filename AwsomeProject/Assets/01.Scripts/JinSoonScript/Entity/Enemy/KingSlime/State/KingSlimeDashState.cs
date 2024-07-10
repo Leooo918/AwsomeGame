@@ -20,6 +20,7 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("밍");
 
         //대쉬 중 무적?
         //enemy.colliderCompo.enabled = false;
@@ -37,6 +38,7 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     {
         base.UpdateState();
 
+        Debug.Log(_isDashing);
         if (_isDashing == false) return;
 
         enemy.SetVelocity(enemy.DashPower * dashDir, 0, true);
