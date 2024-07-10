@@ -12744,7 +12744,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1746552325718919734, guid: abd008b729bfd3641a860732def3d36c, type: 3}
       propertyPath: m_Name
-      value: InventoryBackground (1)
+      value: InventoryBackground
       objectReference: {fileID: 0}
     - target: {fileID: 4838087461996741220, guid: abd008b729bfd3641a860732def3d36c, type: 3}
       propertyPath: m_Pivot.x
@@ -12824,6 +12824,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4838087461996741220, guid: abd008b729bfd3641a860732def3d36c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279946243778791841, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: slotPf
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279946243778791841, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: itemParent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279946243778791841, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: slotParent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7870607985415331438, guid: abd008b729bfd3641a860732def3d36c, type: 3}
+      propertyPath: maxQuickSlotCnt
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
