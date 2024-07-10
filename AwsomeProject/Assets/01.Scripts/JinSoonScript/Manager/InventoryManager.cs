@@ -7,7 +7,7 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     public ItemSetSO ItemSet;
     [SerializeField] private Inventory playerInventory;
-    private QuickSlotSet quickslot;
+    [SerializeField] private QuickSlotSet quickslot;
     public Inventory PlayerInventory => playerInventory;
     public QuickSlotSet QuickSlot => quickslot;
     public Item curMovingItem { get; private set; }
