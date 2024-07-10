@@ -23,14 +23,14 @@ public class EnemyState<T> where T : Enum
     //상태에 진입했을 때 실행할 함수
     public virtual void Enter()
     {
-        //enemy.animatorCompo.SetBool(animBoolHash, true);
+        enemy.animatorCompo.SetBool(animBoolHash, true);
         triggerCall = false; //애니메이션이 다 끝났을때 실행될 불리언 값
     }
 
     //상태를 나갈때 실행할 함수
     public virtual void Exit()
     {
-        //enemy.animatorCompo.SetBool(animBoolHash, false);
+        enemy.animatorCompo.SetBool(animBoolHash, false);
     }
 
     //이 상태일 때 실행될 함수
