@@ -41,7 +41,7 @@ public class Projectary : MonoBehaviour
         if(_isDrawingProjectile)
         {
             Vector2 pos = transform.position;
-            Vector2 mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector3)pos).normalized;
+            Vector2 mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector3)pos;
             Vector3 power = mouseDir * portionThrowingSpeed;
             DrawLine(pos, power);
         }
