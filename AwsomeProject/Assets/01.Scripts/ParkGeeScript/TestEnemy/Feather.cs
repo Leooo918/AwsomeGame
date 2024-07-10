@@ -12,8 +12,15 @@ public class Feather : MonoBehaviour
         _direction = direction.normalized;
     }
 
-    void Update()
+    private void Update()
     {
         transform.Translate(_direction * _moveSpeed * Time.deltaTime);
+        StartCoroutine(DestroyCo());
+    }
+
+    private IEnumerator DestroyCo()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

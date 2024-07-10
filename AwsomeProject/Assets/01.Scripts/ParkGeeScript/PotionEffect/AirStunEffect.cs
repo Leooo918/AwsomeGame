@@ -9,10 +9,10 @@ public class AirStunEffect : Effect
         base.EnterEffort(target);
         target.AirBorn(1.5f);
         target.Stun(1.5f);
-        CoroutineManager.Instance.StartManagedCoroutine(Asd(target, 1.6f));
+        CoroutineManager.Instance.StartManagedCoroutine(DownDamage(target, 1.6f));
     }
 
-    private IEnumerator Asd(Entity target, float delay)
+    private IEnumerator DownDamage(Entity target, float delay)
     {
         yield return new WaitForSeconds(delay);
 

@@ -162,7 +162,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void UpArmor(float figure)
     {
-
+        //healthCompo.
     }
 
     public virtual void Invincibility(float duration) 
