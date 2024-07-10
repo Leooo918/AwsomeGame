@@ -14,6 +14,7 @@ public class QuickSlotSetsParent : MonoBehaviour
     public QuickSlotSet currentQuickSlotSet;
     //´ÙÀ½ Äü½½·Ô
     public QuickSlotSet nextQuickSlotSet;
+    public MysteryPortionIndicator portionIndicator;
 
     public QuickSlotOffset enabledOffset;
     public QuickSlotOffset disabledOffset;

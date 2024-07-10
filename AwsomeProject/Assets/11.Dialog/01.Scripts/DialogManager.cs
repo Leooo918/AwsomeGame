@@ -23,11 +23,11 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         //디버그용도
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Debug.Log("밍");
-            StartDialog(dialogSO[0]);
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    Debug.Log("밍");
+        //    StartDialog(dialogSO[0]);
+        //}
     }
 
     public void StartDialog(DialogSO dialogSO)

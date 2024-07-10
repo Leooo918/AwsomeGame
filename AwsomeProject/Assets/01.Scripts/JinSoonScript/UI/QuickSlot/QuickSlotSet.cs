@@ -62,6 +62,22 @@ public class QuickSlotSet : MonoBehaviour
         slots[idx].DeleteItem();
     }
 
+    private void SelectOneSlot(int num)
+    {
+        if (selectedSlot == num)
+            num = -1;
+
+        selectedSlot = num;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i == num)
+                slots[i].EnableSlot();
+            else
+                slots[i].DisableSlot();
+        }
+    }
+
     private void UseQuickSlot()
     {
         if (selectedSlot == -1) return;
@@ -77,7 +93,10 @@ public class QuickSlotSet : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             if (slots[i].AssignedPortion != null)
+            {
                 isSlotEmpty = false;
+                break;
+            }
         }
 
         if (isSlotEmpty)
@@ -87,19 +106,13 @@ public class QuickSlotSet : MonoBehaviour
         }
     }
 
-    public void SelectOneSlot(int num)
+    private void UnSelectAllSlot()
     {
-        if (selectedSlot == num)
-            num = -1;
-
-        selectedSlot = num;
+        selectedSlot = -1;
 
         for (int i = 0; i < 5; i++)
         {
-            if (i == num)
-                slots[i].EnableSlot();
-            else
-                slots[i].DisableSlot();
+            slots[i].DisableSlot();
         }
     }
 
@@ -141,23 +154,15 @@ public class QuickSlotSet : MonoBehaviour
 
     private void SetQuickSlotInput()
     {
-        player.PlayerInput.FirstQuickSlot += () => SelectOneSlot(0);
-        player.PlayerInput.SecondQuickSlot += () => SelectOneSlot(1);
-        player.PlayerInput.ThirdQuickSlot += () => SelectOneSlot(2);
-        player.PlayerInput.ForthQuickSlot += () => SelectOneSlot(3);
-        player.PlayerInput.FifthQuickSlot += () => SelectOneSlot(4);
-
+        player.PlayerInput.SelectQuickSlot += SelectOneSlot;
         player.PlayerInput.OnUseQuickSlot += UseQuickSlot;
+        player.PlayerInput.SelectMysteryPortion += UnSelectAllSlot;
     }
     private void UnSetQuickSlotInput()
     {
-        player.PlayerInput.FirstQuickSlot -= () => SelectOneSlot(0);
-        player.PlayerInput.SecondQuickSlot -= () => SelectOneSlot(1);
-        player.PlayerInput.ThirdQuickSlot -= () => SelectOneSlot(2);
-        player.PlayerInput.ForthQuickSlot -= () => SelectOneSlot(3);
-        player.PlayerInput.FifthQuickSlot -= () => SelectOneSlot(4);
-
+        player.PlayerInput.SelectQuickSlot -= SelectOneSlot;
         player.PlayerInput.OnUseQuickSlot -= UseQuickSlot;
+        player.PlayerInput.SelectMysteryPortion -= UnSelectAllSlot;
     }
 
     #endregion
