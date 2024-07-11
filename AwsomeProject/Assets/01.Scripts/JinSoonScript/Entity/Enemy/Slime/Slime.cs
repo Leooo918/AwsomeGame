@@ -52,8 +52,6 @@ public class Slime : Enemy<SlimeStateEnum>
         foreach (var item in EntitySkillSO.skills)
         {
             item.skill.SetOwner(this);
-            Type type = item.skill.GetType();
-            gameObject.AddComponent(type);
         }
 
         moveSpeed = Stat.moveSpeed.GetValue();

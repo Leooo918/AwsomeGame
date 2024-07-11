@@ -119,9 +119,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
         int slotNum;
 
         if(context.performed && int.TryParse(context.control.name, out slotNum))
-        {
             SelectQuickSlot?.Invoke(slotNum - 1);
-        }
     }
 
     #endregion

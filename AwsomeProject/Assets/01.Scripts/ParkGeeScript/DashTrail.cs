@@ -9,7 +9,6 @@ public class DashTrail : MonoBehaviour
     private void Awake()
     {
         _particle = GetComponentInChildren<ParticleSystem>();
-        Debug.Log(_particle);
     }
 
     private void Start()
