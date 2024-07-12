@@ -54,20 +54,13 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
 
         // 벽에 박으면 Groggy상태로 전환
         canRush = wildBoar.IsGroundDetected();
-        if (wildBoar.IsWallDetected() == true && canRush == true) Groggy();
+        if (wildBoar.IsWallDetected() == true && canRush == true)
+            enemyStateMachine.ChangeState(WildBoarEnum.Groggy);
 
         Vector2 dir = (playerTrm.position - enemy.transform.position).normalized;
         if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
 
         if (wildBoar.moveAnima == true)
             enemy.SetVelocity(dir.x * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y);
-    }
-
-    private void Groggy()
-    {
-        //if (rushSkill == null)
-            //rushSkill = wildBoar.Skills.GetSkillByEnum(WildBoarSkillEnum.Rush) as WildBoarRushSkillSO;
-
-        //enemy.SetVelocity(0, rushSkill.rushSpeed.GetValue());
     }
 }

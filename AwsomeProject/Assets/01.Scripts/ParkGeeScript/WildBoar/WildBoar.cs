@@ -118,9 +118,18 @@ public class WildBoar : Enemy<WildBoarEnum>
         attackDistance = 0;
     }
 
-    public void SkillStack()
+    public void SuffleSkillStack()
     {
         List<SkillSO> skills = EntitySkillSO.skills;
+        for (int i = 0; i < 10; i++)
+        {
+            int a = UnityEngine.Random.Range(0, skills.Count);
+            int b = UnityEngine.Random.Range(0, skills.Count);
+
+            SkillSO temp = skills[a];
+            skills[a] = skills[b];
+            skills[b] = temp;
+        }
 
         readySkill.Clear();
         for (int i = 0; i < skills.Count; i++)
