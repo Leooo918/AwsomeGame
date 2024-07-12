@@ -9,16 +9,6 @@ public class WildBoarIdleState : EnemyState<WildBoarEnum>
     {
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }
-
     public override void UpdateState()
     {
         base.UpdateState();
@@ -27,6 +17,7 @@ public class WildBoarIdleState : EnemyState<WildBoarEnum>
         if (player != null && enemy.IsObstacleInLine(enemy.runAwayDistance) == false)
         {
             enemy.FindPlayerEvt(() => enemyStateMachine.ChangeState(WildBoarEnum.Ready));
+            Debug.Log("Ready½ÇÇà");
         }
     }
 }

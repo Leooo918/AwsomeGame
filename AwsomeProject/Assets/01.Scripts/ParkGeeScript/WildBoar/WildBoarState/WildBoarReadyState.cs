@@ -5,30 +5,26 @@ using UnityEngine;
 public class WildBoarReadyState : EnemyState<WildBoarEnum>
 {
     private WildBoar wildBoar;
-    private Transform playerTrm;
     private bool isReady = false;
+    private float time;
+    //private float 
 
     public WildBoarReadyState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) 
         : base(enemy, enemyStateMachine, animBoolName)
     {
+        wildBoar = enemy as WildBoar;
     }
 
     public override void Enter()
     {
-        /*base.Enter();
-
-        playerTrm = PlayerManager.Instance.PlayerTrm;
-
-        enemy.FindPlayerEvt(() =>
-        {
-            isReady = true;
-        });*/
+        base.Enter();
+        Debug.Log("Ready");
     }
 
     public override void Exit()
     {
         base.Exit();
-        isReady = false;
+        isReady = true;
 
         enemyStateMachine.ChangeState(WildBoarEnum.Rush);
     }
