@@ -18,8 +18,8 @@ MonoBehaviour:
   maxCarryAmountPerSlot: 3
   itemExplain: "\uC801\uC911\uB2F9\uD55C \uC801\uC744 \uC77C\uC815 \uC2DC\uAC04 \uACF5\uC911\uC5D0
     \uB744\uC6B4\uB2E4."
-  dotImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  itemImage: {fileID: -245882633, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  dotImage: {fileID: -778717252, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  itemImage: {fileID: -778717252, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
   prefab: {fileID: 6910422564161804073, guid: dce628cad69b33b4689ed2244feca37a, type: 3}
   portionType: 0
   effect: 8
