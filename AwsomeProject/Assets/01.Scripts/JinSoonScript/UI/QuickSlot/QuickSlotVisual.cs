@@ -8,6 +8,10 @@ public class QuickSlotVisual : MonoBehaviour
     private PortionItem portion;
     private GameObject itemObj;
 
+    [SerializeField] private float _enableOffset = 20f;
+    [SerializeField] private float _disableOffset = 2f;
+    [SerializeField] private float _delay = 0.5f;
+
     private RectTransform rect;
     private Tween tween;
     private Vector3 offset = new Vector3(0f, 7f, 0f);
@@ -64,7 +68,7 @@ public class QuickSlotVisual : MonoBehaviour
         if (tween != null && tween.active)
             tween.Kill();
 
-        tween = rect.DOAnchorPosY(-30f, 0.5f);
+        tween = rect.DOAnchorPosY(_enableOffset, _delay);
     }
 
     public void DisableSlot()
@@ -72,6 +76,6 @@ public class QuickSlotVisual : MonoBehaviour
         if (tween != null && tween.active)
             tween.Kill();
 
-        tween = rect.DOAnchorPosY(-90f, 0.5f);
+        tween = rect.DOAnchorPosY(_disableOffset, _delay);
     }
 }

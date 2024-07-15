@@ -95,7 +95,7 @@ public class QuickSlotInserterSet : MonoBehaviour
     {
         _slotIdx = slotIdx;
 
-        QuickSlotItems items = QuickSlotManager.Instance.GetQuickSlot(_slotIdx);
+        QuickSlotItems items = QuickSlotManager.Instance.QuickSlots[_slotIdx];
         for (int i = 0; i < items.items.Length; i++)
         {
             if (inserter[i].assignedItem != null)

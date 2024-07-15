@@ -35,9 +35,9 @@ public class HpBottle : MonoBehaviour
 
             seq = DOTween.Sequence();
 
-            seq.Append(DOTween.To(() => 1, x => fill.fillAmount = x, 0.5f, 0.5f))
-                .Join(imageRect.DOAnchorPosY(500f, 0.4f))
-                .Insert(0.4f, imageRect.DOAnchorPosY(0f, 0.4f));
+            seq.Append(DOTween.To(() => 1, x => fill.fillAmount = x, 0.5f, 0.1f))
+                .Join(imageRect.DOAnchorPosY(15f, 0.05f))
+                .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
             isBottleFull = false;
         }
         else
@@ -47,10 +47,15 @@ public class HpBottle : MonoBehaviour
 
             seq = DOTween.Sequence();
 
-            seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 0f, 0.5f))
-                .Join(imageRect.DOAnchorPosY(500f, 0.4f))
-                .Insert(0.4f, imageRect.DOAnchorPosY(0f, 0.4f));
+            seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 0f, 0.1f))
+                .Join(imageRect.DOAnchorPosY(15f, 0.05f))
+                .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
             isBottleEmpty = true;
         }
+    }
+
+    public void SetAsHalfHp()
+    {
+        fill.fillAmount = 0.5f;
     }
 }

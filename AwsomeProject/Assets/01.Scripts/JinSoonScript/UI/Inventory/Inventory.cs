@@ -234,6 +234,8 @@ public class Inventory : MonoBehaviour
             {
                 if (inventory[j, i].assignedItem != null)
                     Destroy(inventory[j, i].assignedItem.gameObject);
+
+                inventory[j,i].DeleteItem();
             }
         }
 
@@ -265,17 +267,17 @@ public class Inventory : MonoBehaviour
                 }
 
                 bool b = false;
-                for (int l = 0; l < inventory.GetLength(0); l++)
+                for (int l = 0; l < inventory.GetLength(1); l++)
                 {
-                    for (int j = 0; j < inventory.GetLength(1); j++)
+                    for (int j = 0; j < inventory.GetLength(0); j++)
                     {
-                        if (inventory[l, j].assignedItem == null)
+                        if (inventory[j, l].assignedItem == null)
                         {
                             itemPf = itemSet.itemset[k].prefab;
                             Item it = Instantiate(itemPf, itemParent).GetComponent<Item>();
 
-                            it.Init(itemStruct.amount, inventory[l, j]);
-                            inventory[l, j].InsertItem(it);
+                            it.Init(itemStruct.amount, inventory[j, l]);
+                            inventory[j, l].InsertItem(it);
 
                             b = true;
                             break;

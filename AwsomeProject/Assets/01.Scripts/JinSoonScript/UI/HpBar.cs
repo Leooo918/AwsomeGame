@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class HpBar : MonoBehaviour
 {
+    [SerializeField] private HpBottle _hpBottlePf;
     private HpBottle[] hpBottles;
-
-    private void Awake()
-    {
-        hpBottles = GetComponentsInChildren<HpBottle>();
-    }
 
     public void TakeDamage()
     {
-        for(int i = hpBottles.Length-1; i >= 0; i--)
+        for (int i = hpBottles.Length - 1; i >= 0; i--)
         {
-            if(hpBottles[i].IsBottleEmpty == false)
+            if (hpBottles[i].IsBottleEmpty == false)
             {
                 hpBottles[i].HpDown();
                 break;
             }
         }
+    }
+
+    public void Init(int hp)
+    {
+        for (int i = 0; i < hp; i += 2)
+        {
+            HpBottle bottle = Instantiate(_hpBottlePf, transform);
+            if (i < 2)
+                bottle.SetAsHalfHp();
+        }
+
+        hpBottles = GetComponentsInChildren<HpBottle>();
     }
 }

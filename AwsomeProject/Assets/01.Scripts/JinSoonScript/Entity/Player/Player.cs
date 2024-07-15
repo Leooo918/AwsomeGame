@@ -29,8 +29,6 @@ public class Player : Entity
 
     #region Status
 
-    public Slider hpSlider;
-
     public float MoveSpeed { get; protected set; } = 7f;
     public float JumpForce { get; protected set; } = 10f;
 
@@ -74,11 +72,14 @@ public class Player : Entity
     public bool canClimb { get; private set; } = false;
 
     [SerializeField] private GameObject thowingPortionPf;
-    [SerializeField] private HpBar hpBar;
+    [SerializeField] private HpBar _hpDecator;
 
     protected override void Awake()
     {
         base.Awake();
+
+        if (_hpDecator != null)
+            _hpDecator.Init((int)healthCompo.curHp);
 
         MoveSpeed = Stat.moveSpeed.GetValue();
         JumpForce = Stat.jumpForce.GetValue();
@@ -119,7 +120,6 @@ public class Player : Entity
         healthCompo.onKnockBack += KnockBack;
         healthCompo.onDie += OnDie;
         healthCompo.onHit += OnHit;
-        healthCompo.onHit += () => hpBar.TakeDamage();
     }
 
     private void OnDisable()
@@ -129,7 +129,6 @@ public class Player : Entity
         healthCompo.onKnockBack -= KnockBack;
         healthCompo.onDie -= OnDie;
         healthCompo.onHit -= OnHit;
-        healthCompo.onHit -= () => hpBar.TakeDamage();
     }
 
     protected void Start()

@@ -52,7 +52,6 @@ public class MysteryPortionInventory : Inventory
     {
         if (_openedMysteryPortionCnt < portionCnt) _openedMysteryPortionCnt = portionCnt;
 
-        Debug.Log(portionCnt);
         Item item = InventoryManager.Instance.MakeItemInstanceByItemSO(_mysteryPortions[portionCnt - 1]);
         item.GetComponent<Image>().raycastTarget = false;
         _slots[portionCnt - 1].InsertItem(item);

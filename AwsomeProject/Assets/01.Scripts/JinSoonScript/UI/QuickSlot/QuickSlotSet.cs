@@ -27,9 +27,7 @@ public class QuickSlotSet : MonoBehaviour
 
     private Image quickSlotSetImage;
     private Player player;
-    private Shadow shadow;
 
-    public bool isEnable = false;
     private int selectedSlot = -1;
 
     private Sequence seq;
@@ -42,7 +40,6 @@ public class QuickSlotSet : MonoBehaviour
 
         quickSlotSetsParent = transform.parent.GetComponent<QuickSlotSetsParent>();
         quickSlotSetImage = GetComponent<Image>();
-        shadow = GetComponent<Shadow>();
 
         player = PlayerManager.Instance.Player;
     }
@@ -87,6 +84,8 @@ public class QuickSlotSet : MonoBehaviour
             slots[selectedSlot].UseItem();
             QuickSlotManager.Instance.RemoveItem(0, selectedSlot, true);
         }
+        else
+            return;
 
         bool isSlotEmpty = true;
 
@@ -102,7 +101,6 @@ public class QuickSlotSet : MonoBehaviour
         if (isSlotEmpty)
         {
             QuickSlotManager.Instance.MoveToNextQuickSlot();
-            //quickSlotSetsParent.GotoNextQuickSlotSet();
         }
     }
 
@@ -125,14 +123,48 @@ public class QuickSlotSet : MonoBehaviour
         if (seq != null && seq.active)
             seq.Kill();
 
+        slotNum = -1;
         seq = DOTween.Sequence();
 
         float tweeningTime = Random.Range(0.50f, 0.70f);
+        Graphic[] graphics = quickSlotSetRect.GetComponentsInChildren<Graphic>();
 
-        Debug.Log("นึ");
         seq.Append(quickSlotSetRect.DOAnchorPosY(-150f, tweeningTime).SetEase(disableAnimCurve))
-            .Join(quickSlotSetRect.DOAnchorPosX(Random.Range(-10f, 10f), tweeningTime));
-            //.OnComplete(() => Destroy(gameObject));
+            .Join(quickSlotSetRect.DOAnchorPosX(Random.Range(-10f, 10f), tweeningTime))
+            .AppendCallback(() =>
+            {
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    slots[i].DisableSlot();
+                    if (items.items[i] != null)
+                        slots[i].SetItem(items.items[i]);
+                }
+
+                foreach (Graphic g in graphics)
+                {
+                    if (g != null)
+                        g.color = new Color(1, 1, 1, 0);
+                }
+
+                quickSlotSetRect.anchoredPosition = new Vector2(-200f, 0f);
+            })
+            .AppendInterval(0.2f)
+            .AppendCallback(() =>
+            {
+                for (int i = 0; i < slots.Length; i++)
+                {
+                    if (items.items[i] != null)
+                        slots[i].SetItem(items.items[i]);
+                }
+
+                foreach (Graphic g in graphics)
+                {
+                    if (g != null)
+                        seq.Join(g.DOFade(1f, 0.2f).SetEase(Ease.InSine));
+                }
+            })
+            .Append(quickSlotSetRect.DOAnchorPosX(-75f, 0.25f).SetEase(Ease.InSine))
+            .OnComplete(SetQuickSlotInput);
     }
 
     #endregion
@@ -154,16 +186,15 @@ public class QuickSlotSet : MonoBehaviour
 
     #endregion
 
-    public void Init(QuickSlotItems items, bool isEnable, int slotNum)
+    public void Init(QuickSlotItems items)
     {
-        if (isEnable)
-            SetQuickSlotInput();
+        SetQuickSlotInput();
 
-        this.slotNum = slotNum;
-        this.isEnable = isEnable;
-        shadow.enabled = isEnable;
+        slotNum = 0;
 
         for (int i = 0; i < 5; i++)
             slots[i].SetItem(items.items[i]);
+
+        selectedSlot = -1;
     }
 }

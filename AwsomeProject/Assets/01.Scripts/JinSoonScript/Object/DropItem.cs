@@ -5,13 +5,13 @@ public class DropItem : MonoBehaviour
 {
     public ItemSO item;
     private Rigidbody2D rb;
-    private TextMeshProUGUI txt;
+    private GameObject txt;
     private bool interacting;
 
-    private void Awake()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        txt = GameObject.Find("PressFAlram").GetComponent<TextMeshProUGUI>();
+        txt = UIManager.Instance.PressFMessageObj;
     }
 
     private void Update()
@@ -20,7 +20,10 @@ public class DropItem : MonoBehaviour
         {
             Item i = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
             if (InventoryManager.Instance.PlayerInventory.TryInsertItem(i))
+            {
+                DropItemManager.Instance.IndicateItemPanel(i.itemSO);
                 Destroy(gameObject);
+            }
             else Destroy(i);
         }
     }
@@ -32,9 +35,9 @@ public class DropItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent<Player>(out Player player))
+        if (collision.TryGetComponent<Player>(out Player player))
         {
-            txt.enabled = true;
+            txt.SetActive(true);
             interacting = true;
         }
     }
@@ -43,7 +46,7 @@ public class DropItem : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            txt.enabled = false;
+            txt.SetActive(false);
             interacting = false;
         }
     }

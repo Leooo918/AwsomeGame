@@ -7,7 +7,8 @@ public enum UIType
 {
     Shop,
     PotionCraft,
-    Option
+    Option,
+    ItemGather
 }
 
 public class UIManager : Singleton<UIManager>
@@ -56,4 +57,6 @@ public class UIManager : Singleton<UIManager>
             Debug.LogWarning($"{target.ToString()}Panel is not exist in this scene.\nBut you trying to close it");
         }
     }
+
+    public IManageableUI GetUI(UIType target) => panelDictionary[target];
 }
