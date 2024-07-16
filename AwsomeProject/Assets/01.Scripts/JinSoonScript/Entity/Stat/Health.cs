@@ -9,8 +9,8 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     public Entity owner { get; private set; }
 
     public Stat maxHp { get; private set; }
+    public float weight {  get; private set; }
     public float curHp { get; private set; }
-    public float curArmor { get; private set; }
     public float lastAttackDamage { get; private set; }
     public bool isLastAttackCritical { get; private set; }
     public bool isInvincible { get; private set; }
@@ -31,6 +31,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void Init()
     {
+        weight = owner.Stat.weight;
         maxHp = owner.Stat.maxHp;
         curHp = maxHp.GetValue();
     }
@@ -39,7 +40,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
-        if (owner.isDead || isInvincible) return;
+        if (owner.IsDead || isInvincible) return;
         //방어력 계산, 크리티컬 확인
         //_damage = owners.
 
@@ -47,6 +48,8 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         lastAttackDamage = damage;
         curHp -= damage;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
+
+        knockPower /= weight;
 
         if (curHp <= 0) onDie?.Invoke(knockPower);
         AfterHitFeedback(knockPower, true);

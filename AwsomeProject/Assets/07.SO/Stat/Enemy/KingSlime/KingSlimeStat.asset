@@ -32,6 +32,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
     percentModifiers: []
+  weight: 2
   criticalChance:
     baseValue: 0
     modifiers: []

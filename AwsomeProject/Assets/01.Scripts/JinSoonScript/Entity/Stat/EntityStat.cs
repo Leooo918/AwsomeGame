@@ -12,6 +12,7 @@ public class EntityStat : ScriptableObject
     public Stat damage;
     public Stat moveSpeed;
     public Stat jumpForce;
+    public float weight = 1;
     [Tooltip("Percentage-2ndDecimalPlace")]public Stat criticalChance;
     [Tooltip("Percentage-2ndDecimalPlace")]public Stat criticalDamage;
 

@@ -49,7 +49,8 @@ public abstract class Entity : MonoBehaviour
     public Action<int> OnFlip;
     public int FacingDir { get; protected set; } = 1;
     public bool CanStateChangeable { get; set; } = true;
-    public bool isDead { get; protected set; } = false;
+    public bool IsDead { get; protected set; } = false;
+    public bool CanKnockback { get; set; } = true;
 
     protected virtual void Awake()
     {
@@ -139,6 +140,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void KnockBack(Vector2 power)
     {
+        if (CanKnockback == false) return;
         StopImmediately(true);
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 

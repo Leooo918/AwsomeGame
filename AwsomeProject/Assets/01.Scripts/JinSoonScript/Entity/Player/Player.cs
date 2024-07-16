@@ -233,7 +233,7 @@ public class Player : Entity
 
     public void OnDie(Vector2 hitDir)
     {
-        isDead = true;
+        IsDead = true;
         StateMachine.ChangeState(PlayerStateEnum.Dead);
     }
 
