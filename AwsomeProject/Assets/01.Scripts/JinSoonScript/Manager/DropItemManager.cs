@@ -8,7 +8,7 @@ using UnityEngine;
 public class DropItemManager : Singleton<DropItemManager>
 {
     private string _path;
-    private List<int> _itemsHaveBeenGet;
+    [SerializeField]private List<int> _itemsHaveBeenGet;
 
     private void Awake()
     {
