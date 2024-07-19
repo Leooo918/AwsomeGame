@@ -28,7 +28,7 @@ public class TestWildBoar : MonoBehaviour
         {
             float elapsedTime = Time.time - dashStartTime;
             float currentSpeed = Mathf.Lerp(_minDashSpeed, _maxDashSpeed, elapsedTime / _dashtime);
-            Debug.Log(currentSpeed);
+            //Debug.Log(currentSpeed);
             float distanceToMove = currentSpeed * Time.deltaTime;
             transform.position += dashDirection * distanceToMove;
 
