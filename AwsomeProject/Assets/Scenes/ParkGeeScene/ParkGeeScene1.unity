@@ -12908,7 +12908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &1041418492
 Rigidbody2D:
   serializedVersion: 4
@@ -46218,11 +46218,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 564699545741186052, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.65
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 564699545741186052, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.35
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 564699545741186052, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46260,25 +46260,9 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 433880492}
-    - target: {fileID: 2562549265638240618, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6036357366582687555, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
       propertyPath: m_Name
       value: WildBoar
-      objectReference: {fileID: 0}
-    - target: {fileID: 6036357366582687555, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728880793283975311, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728880793283975311, guid: b7e74d7baea094b4db09cb5b7f7080f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
