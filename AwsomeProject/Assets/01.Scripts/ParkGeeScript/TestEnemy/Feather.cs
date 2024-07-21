@@ -21,6 +21,11 @@ public class Feather : MonoBehaviour
     private IEnumerator DestroyCo()
     {
         yield return new WaitForSeconds(2f);
+        DestroyFeather();
+    }
+
+    private void DestroyFeather()
+    {
         Destroy(gameObject);
     }
 }

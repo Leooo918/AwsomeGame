@@ -1,18 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HasEffectManager : MonoBehaviour
+public class HasEffectManager : Singleton<HasEffectManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image _dashEffectImg;
+    [SerializeField] private Image _hardenEffectImg;
+
+    public void DashOn()
     {
-        
+        _dashEffectImg.enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DashOff()
     {
-        
+        _dashEffectImg.enabled = false;
+    }
+
+    public void HardenOn()
+    {
+        _hardenEffectImg.enabled = true;
+    }
+
+    public void HardenOff()
+    {
+        _hardenEffectImg.enabled = false;
     }
 }
