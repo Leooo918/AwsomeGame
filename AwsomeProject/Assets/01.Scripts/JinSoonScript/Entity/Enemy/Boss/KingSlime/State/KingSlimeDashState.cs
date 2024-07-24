@@ -35,7 +35,6 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     {
         base.UpdateState();
 
-        Debug.Log(_isDashing);
         if (_isDashing == false) return;
 
         enemy.SetVelocity(enemy.DashPower * dashDir, 0, true);

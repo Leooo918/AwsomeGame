@@ -23,7 +23,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   skillAfterDelay:
-    baseValue: 5
+    baseValue: 3
     modifiers: []
     percentModifiers: []
   dashPower: 50

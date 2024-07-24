@@ -23,6 +23,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
     private float _originGravity;
 
     private float _targetHeight;
+    private bool _isStartSkillEffect = false;
     private bool _readyJump = true;
     private bool _isJumped = false;
     private bool _isFalling = false;
@@ -40,8 +41,16 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
     {
         base.AnimationFinishTrigger();
 
+        if(!_isStartSkillEffect)
+        {
+            CameraManager.Instance.StartShakeCam(3, 3);
+            _isStartSkillEffect = true;
+            return;
+        }
+
         if(_readyJump)
         {
+            CameraManager.Instance.StopShakeCam();
             enemy.animatorCompo.SetTrigger(_jumpanimTriggerHash);
             _targetHeight = _enemyTrm.position.y + _jumpHeight;
             _originGravity = enemy.rigidbodyCompo.gravityScale;
@@ -61,6 +70,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
 
         //시작하고 jumpDelay후 올라감
         Debug.Log("밍");
+        enemy.CanKnockback = false;
         _targetTrm = PlayerManager.Instance.PlayerTrm;
         enemy.StopImmediately(true);
         enemy.CanStateChangeable = false;
@@ -73,6 +83,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
         _isFalling = false;
         _readyJump = true;
         _isFollowingPlayer = false;
+        _isStartSkillEffect = false;
         _kingSlime.SetSkillAfterDelay();
         base.Exit();
     }
@@ -80,16 +91,17 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
     public override void UpdateState()
     {
         base.UpdateState();
+        Debug.Log(_isJumped);
 
         //점프
         if (_isJumped)
             JumpProcess();
 
         //따라다니기
-        if (_isFollowingPlayer)
+        else if (_isFollowingPlayer)
             FollowProcess();
 
-        if (_isFalling)
+        else if (_isFalling)
             FallProcess();
     }
 
@@ -111,7 +123,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
         _enemyTrm.position +=
                 Vector3.up * _jumpSpeed * Time.deltaTime;
 
-        if (_jumpHeight <= _enemyTrm.position.y)
+        if (_targetHeight <= _enemyTrm.position.y)
         {
             _isJumped = false;
             enemy.StartDelayCallBack(0.5f,
@@ -122,8 +134,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
                     _isJumped = false;
 
                     _randomDelay = Random.Range(4f, 7f);
-                    enemy.StartDelayCallBack(_randomDelay,
-                        DelayFallProcess);
+                    enemy.StartDelayCallBack(_randomDelay, DelayFallProcess);
                 });
         }
     }

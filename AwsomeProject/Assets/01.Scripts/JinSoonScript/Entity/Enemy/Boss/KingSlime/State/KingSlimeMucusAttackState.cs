@@ -34,6 +34,10 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
         if (_isJumped == false)
         {
             Vector3 targetPosition = _kingSlime.GetJumpPos();
+            Vector3 playerPos = PlayerManager.Instance.PlayerTrm.position;
+
+            float dir = (playerPos - targetPosition).normalized.x;
+            enemy.FlipController(dir);
 
             Vector2 targetDir = targetPosition - enemy.transform.position;
             _moveTween = enemy.transform.DOJump(targetPosition, 10, 1, 0.8f).SetEase(Ease.Linear)
@@ -64,17 +68,14 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
         base.Enter();
         Debug.Log("นึ");
         enemy.CanStateChangeable = false;
-    }
-
-    public override void UpdateState()
-    {
-        base.UpdateState();
+        enemy.CanKnockback = false;
     }
 
     public override void Exit()
     {
         _isFired = false;
         _isJumped = false;
+        enemy.CanKnockback = true;
         _kingSlime.SetSkillAfterDelay();
         base.Exit();
     }

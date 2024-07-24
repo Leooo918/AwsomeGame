@@ -146,8 +146,8 @@ MonoBehaviour:
   mucus: {fileID: 3771830235869242607, guid: 1994f31ea3b9d9a4fadc6adb7e563129, type: 3}
   _readyFlip: 0
   hpBar: {fileID: 0}
-  left: {x: -12, y: 0}
-  right: {x: 15, y: 4}
+  left: {x: 1520, y: 95}
+  right: {x: 1565, y: 95}
 --- !u!114 &2846361665996748813
 MonoBehaviour:
   m_ObjectHideFlags: 0

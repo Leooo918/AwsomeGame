@@ -138,8 +138,6 @@ public class Player : Entity
 
     protected void Update()
     {
-        SetHpSlider();
-
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
     }
@@ -197,12 +195,6 @@ public class Player : Entity
         StateMachine.ChangeState(PlayerStateEnum.Dash);
     }
 
-    public void SetHpSlider()
-    {
-        //hpSlider.maxValue = healthCompo.maxHp.GetValue();
-        //hpSlider.value = healthCompo.curHp;
-    }
-
     /// <summary>
     /// 인벤토리 열때
     /// 움직이는거 다 빼뒀다가 나중에 다시 넣어주
@@ -211,14 +203,12 @@ public class Player : Entity
     {
         if (isInventoryOpen == false)
         {
-            _inputReader.Controlls.asset.FindAction("XMovement").Disable();
-            _inputReader.Controlls.asset.FindAction("YMovement").Disable();
+            PlayerManager.Instance.DisablePlayerMovementInput();
             isInventoryOpen = true;
         }
         else
         {
-            _inputReader.Controlls.asset.FindAction("XMovement").Enable();
-            _inputReader.Controlls.asset.FindAction("YMovement").Enable();
+            PlayerManager.Instance.EnablePlayerMovementInput();
             isInventoryOpen = false;
         }
     }

@@ -8,7 +8,8 @@ public enum UIType
     Shop,
     PotionCraft,
     Option,
-    ItemGather
+    ItemGather,
+    BossStageEnter
 }
 
 public class UIManager : Singleton<UIManager>
