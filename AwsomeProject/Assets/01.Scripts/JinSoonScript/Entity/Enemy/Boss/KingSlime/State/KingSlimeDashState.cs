@@ -21,12 +21,10 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     {
         base.Enter();
 
-        //대쉬 중 무적?
-        //enemy.colliderCompo.enabled = false;
-
         //이건 고치고
         //enemy.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
 
+        enemy.CanKnockback = false;
         enemy.CanStateChangeable = false;
         dashDir = enemy.FacingDir;
         enemy.DashPower = _dashSkillSO.dashPower;
@@ -37,7 +35,6 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     {
         base.UpdateState();
 
-        Debug.Log(_isDashing);
         if (_isDashing == false) return;
 
         enemy.SetVelocity(enemy.DashPower * dashDir, 0, true);
@@ -62,7 +59,8 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     {
         base.Exit();
         //대쉬 중 무적?
-        //enemy.colliderCompo.enabled = true;
+        enemy.colliderCompo.enabled = true;
+        enemy.CanKnockback = true;
 
         //이건 고치고
         //enemy.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
@@ -73,6 +71,10 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+
+        //대쉬 중 무적?
+        enemy.colliderCompo.enabled = false;
+
         enemy.animatorCompo.SetTrigger(_dashStartHash);
         _isDashing = true;
 

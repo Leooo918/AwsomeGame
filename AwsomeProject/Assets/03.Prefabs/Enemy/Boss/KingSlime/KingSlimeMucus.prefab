@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8013148390628889586}
   - component: {fileID: 425676499861564983}
   - component: {fileID: 221651042856436672}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: KingSlimeMucus
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -31,6 +31,9 @@ public class CameraControllerTrigger : MonoBehaviour
     public CustomInspectorObj inspectorObj;
     private Collider2D _collider;
 
+    public Action<Player> OnAfterSwapCameraToLeft;
+    public Action<Player> OnAfterSwapCameraToRight;
+
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
@@ -62,7 +65,10 @@ public class CameraControllerTrigger : MonoBehaviour
             if (inspectorObj.swapCameras && inspectorObj.cameraOnLeft != null && inspectorObj.cameraOnRight != null)
             {
                 if(exitDirection.x > 0)
+                {
                     CameraManager.Instance.ChangeCam(inspectorObj.cameraOnRight);
+                    OnAfterSwapCameraToRight?.Invoke(player);
+                }
                 else
                     CameraManager.Instance.ChangeCam(inspectorObj.cameraOnLeft);
             }

@@ -23,7 +23,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   skillAfterDelay:
-    baseValue: 3
+    baseValue: 2
     modifiers: []
     percentModifiers: []
   mucusPf: {fileID: 3771830235869242607, guid: 1994f31ea3b9d9a4fadc6adb7e563129, type: 3}

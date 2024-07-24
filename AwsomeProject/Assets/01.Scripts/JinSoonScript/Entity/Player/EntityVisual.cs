@@ -29,6 +29,11 @@ public class EntityVisual : MonoBehaviour
         _skillEffect.SetActive(true);
     }
 
+    public void EndSkillEffect()
+    {
+        _skillEffect.SetActive(false);
+    }
+
     public void Hit()
     {
         StartCoroutine("HitRoutine");

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public enum KingSlimeStateEnum
 {
+    Disable,
     Ready,
     JumpAttack,
     Dash,
@@ -23,9 +25,13 @@ public enum KingSlimeSkillEnum
 
 
 
-public class KingSlime : Enemy<KingSlimeStateEnum>
+public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 {
     public KingSlimeSkill Skills { get; private set; }
+    bool IBoss.IsBossDead { get; set; }
+    public CinemachineVirtualCamera _bossRoomCam { get; set; }
+    public CinemachineVirtualCamera _bossWatchingCam { get; set; }
+
 
     #region SkillSection
 
@@ -51,6 +57,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     {
         base.Awake();
 
+        StateMachine.Initialize(KingSlimeStateEnum.Ready, this);
         Skills = gameObject.AddComponent<KingSlimeSkill>();
         Skills.Init(EntitySkillSO);
 
@@ -80,7 +87,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     protected void Start()
     {
-        StateMachine.Initialize(KingSlimeStateEnum.Ready, this);
         patrolEndTime = Time.time;
 
         ShuffleSkillStack();
@@ -113,7 +119,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         {
             int a = UnityEngine.Random.Range(0, skills.Count);
             int b = UnityEngine.Random.Range(0, skills.Count);
-             
+
             SkillSO temp = skills[a];
             skills[a] = skills[b];
             skills[b] = temp;
@@ -136,7 +142,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     public override void Stun(float duration)
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         stunDuration = duration;
         StateMachine.ChangeState(KingSlimeStateEnum.Stun);
@@ -178,7 +184,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     public void SetSkillAfterDelay()
     {
-        Debug.Log(_currentSkillAfterDelay);
         _canUseSkill = false;
         StartDelayCallBack(_currentSkillAfterDelay, () => _canUseSkill = true);
     }
@@ -191,7 +196,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
 
     private void OnDie(Vector2 dir)
     {
-        isDead = true;
+        IsDead = true;
         for (int i = 0; i < EnemyStat.dropItems.Count; i++)
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
@@ -238,5 +243,30 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
                 return right;
         }
 
+    }
+
+    void IBoss.StartBoss()
+    {
+        StartCoroutine(EnableBossRoutine());
+    }
+
+    void IBoss.EndBoss()
+    {
+
+    }
+
+   private IEnumerator EnableBossRoutine()
+    {
+        PlayerManager.Instance.DisableAllPlayerInput();
+        StateMachine.ChangeState(KingSlimeStateEnum.Disable);
+        CameraManager.Instance.ChangeCam(_bossWatchingCam);
+        CameraManager.Instance.ChangeFollow(transform);
+        yield return new WaitForSeconds(0.5f);
+        UIManager.Instance.Open(UIType.BossStageEnter);
+        yield return new WaitForSeconds(2.3f);
+        CameraManager.Instance.ChangeCam(_bossRoomCam);
+        yield return new WaitForSeconds(0.5f);
+        PlayerManager.Instance.EnableAllPlayerInput();
+        StateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
 }

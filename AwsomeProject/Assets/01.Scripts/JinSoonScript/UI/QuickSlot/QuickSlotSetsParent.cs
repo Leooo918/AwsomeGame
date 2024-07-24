@@ -1,10 +1,6 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class QuickSlotSetsParent : MonoBehaviour
 {
@@ -21,9 +17,9 @@ public class QuickSlotSetsParent : MonoBehaviour
     private Sequence seq;
     private Coroutine coroutine;
 
-    private void Start()
+    private void Awake()
     {
-        QuickSlotItems firstSet = QuickSlotManager.Instance.GetQuickSlot(0);
+        QuickSlotItems firstSet = QuickSlotManager.Instance.QuickSlots[0];
         InitQuickSlotSet(firstSet);
     }
 
@@ -47,7 +43,7 @@ public class QuickSlotSetsParent : MonoBehaviour
     public void SetCurrentQuickSlotSet(QuickSlotItems quickSlotSet)
     {
         currentQuickSlotSet = Instantiate(quickSlotSetPf, transform).GetComponent<QuickSlotSet>();
-        currentQuickSlotSet.Init(quickSlotSet, true, 0);
+        currentQuickSlotSet.Init(quickSlotSet);
 
         RectTransform rect = currentQuickSlotSet.GetComponent<RectTransform>();
         Image img = currentQuickSlotSet.GetComponent<Image>();
@@ -63,7 +59,7 @@ public class QuickSlotSetsParent : MonoBehaviour
     /// </summary>
     public void GotoNextQuickSlotSet()
     {
-        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[1];
+        QuickSlotItems items = QuickSlotManager.Instance.quickSlots[0];
         //currentQuickSlotSet을 제거해!
         currentQuickSlotSet.ChangeQuickSlotSet(items);
     }

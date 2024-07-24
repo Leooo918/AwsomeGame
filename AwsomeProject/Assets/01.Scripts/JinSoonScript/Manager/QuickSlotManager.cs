@@ -20,19 +20,28 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
     //데이터상 존재하는 퀵슬롯에 할당되 있는 아이템들
     [HideInInspector] public QuickSlotItems[] quickSlots;
 
-    public QuickSlotInserterSetsParent quickSlotInserterSetParent;
-    public QuickSlotSetsParent quickSlotSetParent;
-
-
-    private void Awake()
+    public QuickSlotItems[] QuickSlots
     {
-        MaxQuickSlotCnt = maxQuickSlotCnt;
-        quickSlots = new QuickSlotItems[maxQuickSlotCnt];
+        get
+        {
+            if(quickSlots == null || quickSlots.Length <= 0)
+            {
+                quickSlots = new QuickSlotItems[maxQuickSlotCnt];
 
-        for (int i = 0; i < maxQuickSlotCnt; i++)
-            quickSlots[i] = new QuickSlotItems(i);
+                for (int i = 0; i < maxQuickSlotCnt; i++)
+                    quickSlots[i] = new QuickSlotItems(i);
+            }
+
+            return quickSlots;
+        }
+        private set
+        {
+            quickSlots = value;
+        }
     }
 
+    public QuickSlotInserterSetsParent quickSlotInserterSetParent;
+    public QuickSlotSetsParent quickSlotSetParent;
 
     public QuickSlotItems GetNextQuickSlot()
     {
@@ -53,6 +62,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
     public void MoveToNextQuickSlot()
     {
         //이거 앞으로 당기기ㅎㅎ
+        // 뒤로도 당겨주
         QuickSlotItems[] temp = quickSlots;
 
         for (int i = 1; i < temp.Length; i++)
@@ -75,8 +85,6 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         quickSlots[slotIdx].items[selectedSlot] = item;
         quickSlotSetParent.SetItem(item, slotIdx, selectedSlot);
     }
-
-    public QuickSlotItems GetQuickSlot(int idx) => quickSlots[idx];
 }
 
 public class QuickSlotItems

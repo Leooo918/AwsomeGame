@@ -25,7 +25,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     public QuickSlotInserterSet CurQuickSlot => curQuickSlot;
     public QuickSlotInserterSet NextQuickSlot => nextQuickSlot;
 
-    private void Start()
+    private void Awake()
     {
         curSlotNumTxt = transform.Find("CurrentSlotNum").GetComponent<TextMeshProUGUI>();
         Init();
@@ -117,6 +117,7 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
 
     public void GotoNextQuickSlotSet()
     {
+        Debug.Log(curQuickSlot);
         curQuickSlot.Init(curQuickSlot.SlotIdx);
         nextQuickSlot.Init(nextQuickSlot.SlotIdx);
     }

@@ -36,8 +36,11 @@ public class InventoryManager : Singleton<InventoryManager>
         explainName = explainparent.Find("Name/Txt").GetComponent<TextMeshProUGUI>();
         explainTxt = explainparent.Find("Explain/Txt").GetComponent<TextMeshProUGUI>();
         explainImage = explainparent.Find("Frame/Image").GetComponent<Image>();
-        SetExplain(null);
+    }
 
+    private void Start()
+    {
+        SetExplain(null);
         EnbableIgredientsInventory(true);
     }
 

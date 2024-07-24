@@ -15,7 +15,6 @@ public class GrowingGrassAnimationTrigger : MonoBehaviour
 
     public void GrowStart()
     {
-        Debug.Log("นึ");
         growingGrass.GrowStart();
     }
 }

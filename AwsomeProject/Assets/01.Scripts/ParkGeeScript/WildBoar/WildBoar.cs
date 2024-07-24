@@ -96,7 +96,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stun(float duration)
     {
-        if (isDead) return;
+        if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(WildBoarEnum.Stun);
     }
@@ -154,7 +154,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     private void OnDie(Vector2 dir)
     {
-        isDead = true;
+        IsDead = true;
         for(int i = 0; i< EnemyStat.dropItems.Count; i++)
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
