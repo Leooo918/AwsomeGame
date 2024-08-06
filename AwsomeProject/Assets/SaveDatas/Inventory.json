@@ -6,7 +6,11 @@
             "amount": 5
         },
         {
-            "id": 101,
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 2,
             "amount": 5
         },
         {
@@ -27,23 +31,15 @@
         },
         {
             "id": 2,
-            "amount": 5
-        },
-        {
-            "id": 2,
-            "amount": 5
-        },
-        {
-            "id": 2,
-            "amount": 5
-        },
-        {
-            "id": 2,
             "amount": 2
         },
         {
-            "id": 103,
-            "amount": 2
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 102,
+            "amount": 1
         }
     ]
 }
