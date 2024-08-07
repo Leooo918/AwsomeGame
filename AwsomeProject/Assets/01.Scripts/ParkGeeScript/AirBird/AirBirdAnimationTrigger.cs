@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class AirBirdAnimationTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private AirBird airbird;
+
+    private void Awake()
     {
-        
+        airbird = GetComponentInParent<AirBird>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AnimationFinishTrigger()
     {
-        
+        airbird.AnimationFinishTrigger();
     }
 }

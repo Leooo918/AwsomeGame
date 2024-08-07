@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisableMap : MonoBehaviour
 {
-    private readonly Vector3 offset = Vector2.up;
+    private readonly Vector3 offset = Vector2.up * 0.5f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

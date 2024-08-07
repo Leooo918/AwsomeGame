@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504d37a8e3f6f234ca084c5d2d496737, type: 3}
   m_Name: WildBoarSkills
   m_EditorClassIdentifier: 
-  skills: []
+  skills:
+  - {fileID: 11400000, guid: fe99873c1ada334438b4c48881f8d631, type: 2}

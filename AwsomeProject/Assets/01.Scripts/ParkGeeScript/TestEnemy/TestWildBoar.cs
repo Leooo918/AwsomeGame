@@ -6,8 +6,9 @@ public class TestWildBoar : MonoBehaviour
     [SerializeField] private GameObject _player;
     [SerializeField] private GameObject _checkPlayer;
     private float _distance = 5f;
-    private float _dashtime = 0.3f;
-    private float _dashSpeed = 30f;
+    private float _dashtime = 1.5f;
+    private float _minDashSpeed = 5f;
+    private float _maxDashSpeed = 20f;
     private float _dashDelay = 3f;
     private bool isDashing = false;
     private bool isCoroutineRunning = false;
@@ -26,7 +27,9 @@ public class TestWildBoar : MonoBehaviour
         if (isDashing)
         {
             float elapsedTime = Time.time - dashStartTime;
-            float distanceToMove = _dashSpeed * Time.deltaTime;
+            float currentSpeed = Mathf.Lerp(_minDashSpeed, _maxDashSpeed, elapsedTime / _dashtime);
+            //Debug.Log(currentSpeed);
+            float distanceToMove = currentSpeed * Time.deltaTime;
             transform.position += dashDirection * distanceToMove;
 
             if (elapsedTime >= _dashtime)

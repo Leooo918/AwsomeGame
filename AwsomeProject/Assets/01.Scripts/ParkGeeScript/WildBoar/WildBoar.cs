@@ -48,17 +48,19 @@ public class WildBoar : Enemy<WildBoarEnum>
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
 
-        //pivot = hpBar.Find("Pivot");
+        pivot = hpBar.Find("Pivot");
     }
 
     private void OnEnable()
     {
+        healthCompo.onKnockBack += KnockBack;
         healthCompo.onHit += OnHit;
         healthCompo.onDie += OnDie;
     }
 
     private void OnDisable()
     {
+        healthCompo.onKnockBack -= KnockBack;
         healthCompo.onHit -= OnHit;
         healthCompo.onDie -= OnDie;
     }
@@ -66,6 +68,7 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Start()
     {
         StateMachine.Initialize(WildBoarEnum.Idle, this);
+        ShuffleSkillStack();
     }
 
     private void Update()
@@ -84,9 +87,9 @@ public class WildBoar : Enemy<WildBoarEnum>
             }
         }
 
-        //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        //hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
-        //pivot.localScale = new Vector3(hpPercentage, 1, 1);
+        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
+        hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
+        pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
@@ -100,7 +103,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Dead(Vector2 dir)
     {
-        StateMachine.ChangeState(WildBoarEnum.Dead);
+
     }
 
     public void Attack()
@@ -118,17 +121,24 @@ public class WildBoar : Enemy<WildBoarEnum>
         attackDistance = 0;
     }
 
-    public void SkillStack()
+    public void ShuffleSkillStack()
     {
         List<SkillSO> skills = EntitySkillSO.skills;
+        for (int i = 0; i < 10; i++)
+        {
+            int a = UnityEngine.Random.Range(0, skills.Count);
+            int b = UnityEngine.Random.Range(0, skills.Count);
+
+            SkillSO temp = skills[a];
+            skills[a] = skills[b];
+            skills[b] = temp;
+        }
 
         readySkill.Clear();
         for (int i = 0; i < skills.Count; i++)
         {
-            //쿨타임중이면 공격스택에 넣지말고
             if (readySkill.Contains(skills[i])) continue;
 
-            //쿨타임이 아닌 녀석들만 스택에 넣어두어라
             readySkill.Push(skills[i]);
         }
         if (readySkill.Peek() == null) return;
@@ -139,7 +149,7 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(WildBoarEnum.Rush);
+        StateMachine.ChangeState(WildBoarEnum.Ready);
     } 
 
     private void OnDie(Vector2 dir)

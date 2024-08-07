@@ -15,16 +15,11 @@ public class DashEffect : Effect
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = true;
+        HasEffectManager.Instance.DashOn();
     }
 
     public override void UpdateEffort()
     {
-        accumulatedTime += Time.deltaTime;
-
-        if (accumulatedTime > useTime)
-        {
-            ExitEffort();
-        }
     }
 
     public override void ExitEffort()
@@ -33,5 +28,6 @@ public class DashEffect : Effect
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = false;
+        HasEffectManager.Instance.DashOff();
     }
 }
