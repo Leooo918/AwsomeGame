@@ -22,11 +22,13 @@ public class HitFeedBack : MonoBehaviour
     public void Hit()
     {
         HitEffect effect = Instantiate(hitEffect).GetComponent<HitEffect>();
-        float fontSize = health.isLastAttackCritical ? criticalFontSize : normalHitFontSize;
-        Color color = health.isLastAttackCritical ? criticalColor : normalHitColor;
+
+        bool isCrit = health.hitData.isLastAttackCritical;
+        float fontSize = isCrit ? criticalFontSize : normalHitFontSize;
+        Color color = isCrit ? criticalColor : normalHitColor;
         Vector2 position = (Vector2)transform.position + new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(0.5f, 1.5f));
 
-        effect.Init(health.lastAttackDamage, fontSize, color, position);
+        effect.Init(health.hitData.lastAttackDamage, fontSize, color, position);
         effect.DoEffect();
     }
 }

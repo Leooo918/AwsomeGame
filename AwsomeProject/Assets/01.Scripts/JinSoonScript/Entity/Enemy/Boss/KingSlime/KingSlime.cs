@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum KingSlimeStateEnum
@@ -32,31 +33,27 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
     public CinemachineVirtualCamera _bossRoomCam { get; set; }
     public CinemachineVirtualCamera _bossWatchingCam { get; set; }
 
-
-    #region SkillSection
+    #region Skill
 
     public Queue<SkillSO> readySkill = new Queue<SkillSO>();
     public List<Tuple<SkillSO, float>> notReady = new List<Tuple<SkillSO, float>>();
+    public GameObject mucus;
 
     #endregion
 
-    public GameObject mucus;
-    [HideInInspector] public bool _readyFlip = false;
+    public FallingRockSpawner spanwer;
 
+    [HideInInspector] public bool _readyFlip = false;
     private float _currentSkillAfterDelay;
     private bool _canUseSkill = true;
-
-    #region HpBar
-
-    [SerializeField] private Transform hpBar;
-    private Transform pivot;
-
-    #endregion
+    private BossHealth _bossHealth;
 
     protected override void Awake()
     {
         base.Awake();
 
+        _bossHealth = healthCompo as BossHealth;
+        _bossHealth.OnChangePhase += GoToNextPhase;
         StateMachine.Initialize(KingSlimeStateEnum.Ready, this);
         Skills = gameObject.AddComponent<KingSlimeSkill>();
         Skills.Init(EntitySkillSO);
@@ -112,6 +109,8 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         //pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
+    #region SkillSection
+
     private void ShuffleSkillStack()
     {
         List<SkillSO> skills = EntitySkillSO.skills;
@@ -140,14 +139,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         attackDistance = readySkill.Peek().attackDistance.GetValue();
     }
 
-    public override void Stun(float duration)
-    {
-        if (IsDead) return;
-
-        stunDuration = duration;
-        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
-    }
-
     public void UseSkill()
     {
         //현재 스킬을 못쓴다면 return
@@ -167,7 +158,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
         //스킬의 공격 범위에 플레이어가 없다면
         attackDistance = skill.attackDistance.GetValue();
-        Player player = IsPlayerDetected();
+        Player player = PlayerManager.Instance.Player;
         if (player == null)
         {
             StateMachine.ChangeState(KingSlimeStateEnum.Ready);
@@ -187,6 +178,10 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         _canUseSkill = false;
         StartDelayCallBack(_currentSkillAfterDelay, () => _canUseSkill = true);
     }
+
+    #endregion
+
+    #region HealthSection
 
     private void OnHit()
     {
@@ -211,18 +206,17 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         StateMachine.ChangeState(KingSlimeStateEnum.Dead);
     }
 
-    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-
-    public override Player IsPlayerDetected()
+    public override void Stun(float duration)
     {
-        Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
+        if (IsDead) return;
 
-        if (player == null)
-            return null;
-
-        player.TryGetComponent(out Player playerCompo);
-        return playerCompo;
+        stunDuration = duration;
+        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
     }
+
+    #endregion
+
+    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
 
     [SerializeField] private Vector2 left, right;
@@ -244,29 +238,55 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         }
 
     }
+    
 
-    void IBoss.StartBoss()
+    #region BossSection
+
+    public void StartBoss()
     {
         StartCoroutine(EnableBossRoutine());
     }
 
-    void IBoss.EndBoss()
+    public void EndBoss()
     {
 
     }
 
-   private IEnumerator EnableBossRoutine()
+
+    public void GoToNextPhase(int phase)
+    {
+        if(phase == 1)
+            StartCoroutine(ChangePhaseRoutine());
+        Debug.Log("밍밍밍");
+        Debug.Log($"{phase}페이지 밍밍");
+    }
+
+    private IEnumerator ChangePhaseRoutine()
+    {
+        yield return null;
+    }
+
+    private IEnumerator EnableBossRoutine()
     {
         PlayerManager.Instance.DisableAllPlayerInput();
         StateMachine.ChangeState(KingSlimeStateEnum.Disable);
-        CameraManager.Instance.ChangeCam(_bossWatchingCam);
+
+        CameraManager.Instance.ChangeCam(_bossWatchingCam, false);
         CameraManager.Instance.ChangeFollow(transform);
+        
         yield return new WaitForSeconds(0.5f);
+
         UIManager.Instance.Open(UIType.BossStageEnter);
+        
         yield return new WaitForSeconds(2.3f);
-        CameraManager.Instance.ChangeCam(_bossRoomCam);
+        
+        CameraManager.Instance.ChangeCam(_bossRoomCam, false);
+        
         yield return new WaitForSeconds(0.5f);
+
         PlayerManager.Instance.EnableAllPlayerInput();
         StateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
+
+    #endregion
 }

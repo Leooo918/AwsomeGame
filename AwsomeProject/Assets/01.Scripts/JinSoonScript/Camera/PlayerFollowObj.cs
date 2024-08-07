@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerFollowObj : MonoBehaviour
 {
     [SerializeField] private Transform toFollow;
-
     [SerializeField] private Vector2 offset;
 
     private void Update()

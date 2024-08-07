@@ -6,7 +6,6 @@ using UnityEngine;
 public class KingMucusAttackSkillSO : SkillSO
 {
     public GameObject mucusPf;
-    public float mucusFirePower = 7f;
 
     private void OnEnable()
     {

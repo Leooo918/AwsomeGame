@@ -29,7 +29,14 @@ public class Player : Entity
 
     #region Status
 
-    public float MoveSpeed { get; protected set; } = 7f;
+    public float MoveSpeed 
+    { 
+        get 
+        {
+            return Stat.moveSpeed.GetValue();
+        } 
+        private set { } 
+    }
     public float JumpForce { get; protected set; } = 10f;
 
     #endregion
@@ -47,8 +54,20 @@ public class Player : Entity
 
     [SerializeField] private float coyoteTime = 0.3f;
     public float CoyoteTime => coyoteTime;
+
+    private bool canJump = false;
     [HideInInspector]
-    public bool canJump = false;
+    public bool CanJump 
+    { 
+        get
+        {
+            return curJumpCnt < maxJumpCnt;
+        }
+        set
+        {
+            canJump = value;
+        }
+    }
 
     #endregion
 
@@ -66,6 +85,9 @@ public class Player : Entity
     [HideInInspector] public float lastAttackTime;
 
     #endregion
+
+    public int maxJumpCnt { get; private set; } = 2;
+    public int curJumpCnt = 0;
 
     public GameObject StunEffect { get; private set; }
     private bool isInventoryOpen = false;

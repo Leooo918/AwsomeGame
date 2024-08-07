@@ -8,7 +8,7 @@ public class WildBoarRushSkill : Skill
 
     public override void UseSkill()
     {
-        //if (wildBoar == null) wildBoar = owner as WildBoar;
+        //if (wildBoar == null) wildBoar = _owner as WildBoar;
         //wildBoar.StateMachine.ChangeState(WildBoarEnum.Rush);
     }
 }

@@ -24,7 +24,7 @@ public class HpBar : MonoBehaviour
         for (int i = 0; i < hp; i += 2)
         {
             HpBottle bottle = Instantiate(_hpBottlePf, transform);
-            if (i < 2)
+            if (i % 2 == 1)
                 bottle.SetAsHalfHp();
         }
 

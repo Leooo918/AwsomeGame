@@ -8,9 +8,7 @@ public abstract class Effect
 {
     protected Entity target;
 
-    public int portionLevel { get; protected set; } = 1;
     public float duration { get; protected set; } = 1f;
-    public int figure { get; protected set; } = 1;
 
     public virtual void EnterEffort(Entity target)
     {
@@ -27,9 +25,7 @@ public abstract class Effect
 
     }
 
-    public void Init(int level, float duration)
+    public void Init()
     {
-        portionLevel = level;
-        this.duration = duration;
     }
 }

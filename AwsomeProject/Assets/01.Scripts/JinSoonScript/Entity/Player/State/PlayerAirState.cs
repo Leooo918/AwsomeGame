@@ -10,15 +10,17 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.PlayerInput.DashEvent += player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill;
-        player.PlayerInput.AttackEvent += player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill;
+        player.PlayerInput.JumpEvent += HandleJumpEvent;
+        player.PlayerInput.DashEvent += HandleDashEvent;
+        player.PlayerInput.AttackEvent += HandleAttackEvent;
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.PlayerInput.DashEvent -= player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill;
-        player.PlayerInput.AttackEvent -= player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill;
+        player.PlayerInput.JumpEvent -= HandleJumpEvent;
+        player.PlayerInput.DashEvent -= HandleDashEvent;
+        player.PlayerInput.AttackEvent -= HandleAttackEvent;
     }
 
 
@@ -36,4 +38,17 @@ public class PlayerAirState : PlayerState
 
         player.SetVelocity(player.MoveSpeed * xInput, rigidbody.velocity.y);
     }
+
+    private void HandleJumpEvent()
+    {
+        if (player.CanJump)
+        {
+            player.curJumpCnt++;
+            stateMachine.ChangeState(PlayerStateEnum.Jump);
+            //player.CanJump = false;
+        }
+    }
+
+    private void HandleDashEvent() => player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill.UseSkill();
+    private void HandleAttackEvent() => player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill.UseSkill();
 }

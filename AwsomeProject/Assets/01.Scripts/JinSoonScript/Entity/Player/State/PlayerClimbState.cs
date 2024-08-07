@@ -48,7 +48,7 @@ public class PlayerClimbState : PlayerState
     private void HandleJumpEvent()
     {
         stateMachine.ChangeState(PlayerStateEnum.Jump);
-        player.canJump = false;
+        player.CanJump = false;
     }
 
     private void HandleDashEvent()
