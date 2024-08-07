@@ -71,7 +71,7 @@ public class AirBird : Enemy<AirBirdEnum>
 
     public override void Stun(float duration)
     {
-        if (isDead) return;
+        if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
