@@ -19,5 +19,8 @@ public enum EffectEnum
     StunClean = 15,
     InvincibilityDash = 16,
     AirBorn2 = 17,
+    Dash2 = 18,
+    Stun2 = 19,
+    Explosion2 = 20
     //Poision = 3
 }
