@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
-  m_Name: SelfStunPotion
+  m_Name: UpArmorPotion
   m_EditorClassIdentifier: 
   id: 107
   itemName: "\uC11D\uD654\uD3EC\uC158"

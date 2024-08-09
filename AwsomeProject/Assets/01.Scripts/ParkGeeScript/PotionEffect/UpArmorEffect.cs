@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvincibilityEffect : Effect
+public class UpArmorEffect : Effect
 {
     private float _delay = 3f;
 
     public override void EnterEffort(Entity target)
     {
         base.EnterEffort(target);
-        target.Invincibility(3f);
-        target.Stun(3f);
+        target.UpArmor(5);
+        HasEffectManager.Instance.ArmorOn(0);
         target.StartDelayCallBack(_delay, () =>
         {
-            target.InvincibilityDisable();
-            Debug.Log("무적풀림");
+            target.LostArmor(5);
+            HasEffectManager.Instance.ArmorOff();
         });
     }
 }
