@@ -19,6 +19,7 @@ public class HasEffectManager : Singleton<HasEffectManager>
         if (_activeIndexes.Count < _blank.Length)
         {
             int currentIndex = _activeIndexes.Count;
+            _blank[currentIndex].gameObject.SetActive(true);
             _blank[currentIndex].sprite = _dashEffectSprite;
             _border[currentIndex].sprite = _borderSprites[a];
             _activeIndexes.Add(currentIndex);
@@ -31,7 +32,7 @@ public class HasEffectManager : Singleton<HasEffectManager>
         if (_activeIndexes.Count > 0)
         {
             int lastIndex = _activeIndexes[_activeIndexes.Count - 1];
-            RemoveEffectAtIndex(lastIndex);
+            ClearEffectAtIndex(lastIndex);
             _activeIndexes.RemoveAt(_activeIndexes.Count - 1);
         }
     }
@@ -41,6 +42,7 @@ public class HasEffectManager : Singleton<HasEffectManager>
         if (_activeIndexes.Count < _blank.Length)
         {
             int currentIndex = _activeIndexes.Count;
+            _blank[currentIndex].gameObject.SetActive(true);
             _blank[currentIndex].sprite = _armorUpEffectSprite;
             _border[currentIndex].sprite = _borderSprites[a];
             _activeIndexes.Add(currentIndex);
@@ -53,24 +55,23 @@ public class HasEffectManager : Singleton<HasEffectManager>
         if (_activeIndexes.Count > 0)
         {
             int lastIndex = _activeIndexes[_activeIndexes.Count - 1];
-            RemoveEffectAtIndex(lastIndex);
+            ClearEffectAtIndex(lastIndex);
             _activeIndexes.RemoveAt(_activeIndexes.Count - 1);
         }
     }
 
-    private void RemoveEffectAtIndex(int index)
+    private void ClearEffectAtIndex(int index)
     {
+        _blank[index].gameObject.SetActive(false);
         _blank[index].sprite = null;
         _border[index].sprite = null;
+    }
 
-        for (int i = index; i < _blank.Length - 1; i++)
-        {
-            _blank[i].sprite = _blank[i + 1].sprite;
-            _border[i].sprite = _border[i + 1].sprite;
-        }
-
-        _blank[_blank.Length - 1].sprite = null;
-        _border[_border.Length - 1].sprite = null;
+    private void RemoveEffectAtIndex(int index)
+    {
+        _blank[index].gameObject.SetActive(false);
+        _blank[index].sprite = null;
+        _border[index].sprite = null;
     }
 }
 
