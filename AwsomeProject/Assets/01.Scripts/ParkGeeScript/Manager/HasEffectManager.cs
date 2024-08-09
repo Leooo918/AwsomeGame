@@ -9,6 +9,7 @@ public class HasEffectManager : Singleton<HasEffectManager>
     [SerializeField] private Image[] _border;
 
     [SerializeField] private Sprite[] _borderSprites;
+
     [SerializeField] private Sprite _dashEffectSprite;
     [SerializeField] private Sprite _armorUpEffectSprite;
 
