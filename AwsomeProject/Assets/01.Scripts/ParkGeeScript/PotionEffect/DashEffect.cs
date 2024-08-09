@@ -11,11 +11,11 @@ public class DashEffect : Effect
 
     public override void EnterEffort(Entity target)
     {
-        player = target as Player;
+        //player = target as Player;
 
-        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-        dashSkillSO.CanUseSkill = true;
-        HasEffectManager.Instance.DashOn(0);
+        //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+        //dashSkillSO.CanUseSkill = true;
+        //HasEffectManager.Instance.DashOn(0);
     }
 
     public override void UpdateEffort()
@@ -26,8 +26,8 @@ public class DashEffect : Effect
     {
         base.ExitEffort();
 
-        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-        dashSkillSO.CanUseSkill = false;
-        HasEffectManager.Instance.DashOff();
+        //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+        //dashSkillSO.CanUseSkill = false;
+        //HasEffectManager.Instance.DashOff();
     }
 }
