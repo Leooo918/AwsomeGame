@@ -1,26 +1,34 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 {
     public Entity owner { get; private set; }
+    public Slider hpSlider;
 
     public Stat maxHp { get; private set; }
-    public float weight {  get; private set; }
+    public float weight { get; private set; }
     public float curHp { get; private set; }
+<<<<<<< HEAD
+
+    public HitData hitData { get; private set; }
+=======
     public Stat maxArmor { get; private set; }
     public float curArmor { get; private set; }
     public float lastAttackDamage { get; private set; }
     public bool isLastAttackCritical { get; private set; }
+>>>>>>> main
     public bool isInvincible { get; private set; }
 
     //효과, 지속시간, 시작된 시간
     protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
 
     public Action onHit;
+    public Action onCrit;
     public Action<Vector2> onKnockBack;
     public Action<Vector2> onDie;
 
@@ -36,24 +44,46 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         weight = owner.Stat.weight;
         maxHp = owner.Stat.maxHp;
         curHp = maxHp.GetValue();
+        hitData = new HitData();
     }
 
     #region HealthRegion
 
-    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="knockPower"></param>
+    /// <param name="dealer"></param>
+    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
     {
         if (owner.IsDead || isInvincible) return;
-        //방어력 계산, 크리티컬 확인
-        //_damage = owners.
 
-        isLastAttackCritical = false;
-        lastAttackDamage = damage;
+        //크리티컬 계산
+        if (dealer != null)
+        {
+            float criticalChance = dealer.Stat.criticalChance.GetValue() * 100;
+            bool isCrit = Random.Range(0, 10001) <= criticalChance;
+
+            if (isCrit)
+            {
+                onCrit?.Invoke();
+                damage = (int)(damage * (dealer.Stat.criticalDamage.GetValue() / 100));
+            }
+            hitData.isLastAttackCritical = isCrit;
+        }
+
+        //hitData에 맞았다라고 저장
+        hitData.lastAttackDamage = damage;
+        hitData.lastAttackEntity = dealer;
+        hitData.lastHitTime = Time.time;
+
+        //hp감소시켜
         curHp -= damage;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
 
+        //무게로 나눠 무게가 1이면 그대로, 2면 1/2로 날라감
         knockPower /= weight;
-
-        if (curHp <= 0) onDie?.Invoke(knockPower);
         AfterHitFeedback(knockPower, true);
     }
 
@@ -65,9 +95,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
             onKnockBack?.Invoke(knockPower);
         }
         if (curHp <= 0)
-        {
             onDie?.Invoke(knockPower);
-        }
     }
 
     public void GetHeal(int amount)
@@ -104,6 +132,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     private void Update()
     {
+        if (hpSlider != null) hpSlider.value = curHp / maxHp.GetValue();
 
         for (int i = 0; i < effects.Count; i++)
         {
@@ -141,7 +170,6 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
         KingSlime slime = owner as KingSlime;
         if (slime)
         {
-            Debug.Log("밍밍");
             slime.StateMachine.ChangeState(KingSlimeStateEnum.Vined);
             StartCoroutine(DelayRapeOff(slime, time));
         }
@@ -156,4 +184,12 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
 
     #endregion
+}
+
+public class HitData
+{
+    public float lastHitTime;
+    public float lastAttackDamage;
+    public bool isLastAttackCritical;
+    public Entity lastAttackEntity;
 }

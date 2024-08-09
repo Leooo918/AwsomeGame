@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum PlayerStateEnum
 {
@@ -29,7 +27,14 @@ public class Player : Entity
 
     #region Status
 
-    public float MoveSpeed { get; protected set; } = 7f;
+    public float MoveSpeed
+    {
+        get
+        {
+            return Stat.moveSpeed.GetValue();
+        }
+        private set { }
+    }
     public float JumpForce { get; protected set; } = 10f;
 
     #endregion
@@ -47,8 +52,20 @@ public class Player : Entity
 
     [SerializeField] private float coyoteTime = 0.3f;
     public float CoyoteTime => coyoteTime;
+
+    private bool canJump = false;
     [HideInInspector]
-    public bool canJump = false;
+    public bool CanJump
+    {
+        get
+        {
+            return curJumpCnt < maxJumpCnt;
+        }
+        set
+        {
+            canJump = value;
+        }
+    }
 
     #endregion
 
@@ -67,6 +84,9 @@ public class Player : Entity
 
     #endregion
 
+    public int maxJumpCnt { get; private set; } = 2;
+    public int curJumpCnt = 0;
+
     public GameObject StunEffect { get; private set; }
     private bool isInventoryOpen = false;
     public bool canClimb { get; private set; } = false;
@@ -74,12 +94,14 @@ public class Player : Entity
     [SerializeField] private GameObject thowingPortionPf;
     [SerializeField] private HpBar _hpDecator;
 
+    public bool throwingPortionSelected = false;
+    public Vector2 portionThrowingDir;
+
     protected override void Awake()
     {
         base.Awake();
 
-        if (_hpDecator != null)
-            _hpDecator.Init((int)healthCompo.curHp);
+        _hpDecator?.Init((int)healthCompo.curHp);
 
         MoveSpeed = Stat.moveSpeed.GetValue();
         JumpForce = Stat.jumpForce.GetValue();

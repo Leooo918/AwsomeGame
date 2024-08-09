@@ -1,14 +1,7 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-
-public enum BossEnum
-{
-    KingSlime
-}
+using UnityEngine.UI;
 
 
 public class BossRoom : MonoBehaviour
@@ -22,8 +15,12 @@ public class BossRoom : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera _bossRoomCam;
     [SerializeField] private CinemachineVirtualCamera _bossWatchingCam;
 
-    [SerializeField] private GameObject _boss;
-    private IBoss boss;
+    [SerializeField] private GameObject _bossObj;
+    [SerializeField] private Slider _bossHpSlider;
+    [SerializeField] private FallingRockSpawner _spawner;
+    [SerializeField] private CameraBetweenToObj _cameraFollow;
+    private IBoss _boss;
+    private KingSlime _kingSlime;
 
     private bool _enterRoom = false;
     private bool _clearRoom = false;
@@ -40,19 +37,27 @@ public class BossRoom : MonoBehaviour
             //BossRoomEnterEvent?.Invoke();
             _enterRoom = true;
 
-            boss = Instantiate(_boss, transform).GetComponent<IBoss>();
-            boss._bossWatchingCam = _bossWatchingCam;
-            boss._bossRoomCam = _bossRoomCam; 
-            boss.StartBoss();
+            _boss = Instantiate(_bossObj, transform).GetComponent<IBoss>();
+            _kingSlime = (_boss as KingSlime);
+
+            _kingSlime.healthCompo.hpSlider = _bossHpSlider;
+            _kingSlime.spanwer = _spawner;
+
+            _boss._bossWatchingCam = _bossWatchingCam;
+            _boss._bossRoomCam = _bossRoomCam;
+            _boss.StartBoss();
+
+            _cameraFollow._obj1 = PlayerManager.Instance.PlayerTrm;
+            _cameraFollow._obj2 = _kingSlime.transform;
         }
     }
 
     private void EndBossRoom()
     {
-        if (boss != null && boss.IsBossDead == true)
+        if (_boss != null)
         {
             BossClearEvent?.Invoke();
-            boss.EndBoss();
+            _boss.EndBoss();
         }
     }
 }

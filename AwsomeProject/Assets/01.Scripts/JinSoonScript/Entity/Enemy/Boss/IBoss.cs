@@ -11,4 +11,6 @@ public interface IBoss
 
     public void StartBoss();
     public void EndBoss();
+
+    public void GoToNextPhase(int phase);
 }

@@ -59,18 +59,25 @@ public class CameraControllerTrigger : MonoBehaviour
                 CameraManager.Instance.PanCameraOnContact(inspectorObj.panDistance, inspectorObj.panTime, inspectorObj.panDirection, true);
             }
 
-            Vector2 exitDirection = 
+            Vector2 exitDirection =
                 (other.transform.position - _collider.transform.position).normalized;
 
-            if (inspectorObj.swapCameras && inspectorObj.cameraOnLeft != null && inspectorObj.cameraOnRight != null)
+            if (inspectorObj.swapCameras)
             {
-                if(exitDirection.x > 0)
+                if (exitDirection.x > 0)
                 {
-                    CameraManager.Instance.ChangeCam(inspectorObj.cameraOnRight);
+                    if (inspectorObj.cameraOnRight != null)
+                        CameraManager.Instance.ChangeCam(inspectorObj.cameraOnRight);
+
                     OnAfterSwapCameraToRight?.Invoke(player);
                 }
                 else
-                    CameraManager.Instance.ChangeCam(inspectorObj.cameraOnLeft);
+                {
+                    if (inspectorObj.cameraOnLeft != null)
+                        CameraManager.Instance.ChangeCam(inspectorObj.cameraOnLeft);
+
+                    OnAfterSwapCameraToLeft?.Invoke(player);
+                }
             }
         }
 

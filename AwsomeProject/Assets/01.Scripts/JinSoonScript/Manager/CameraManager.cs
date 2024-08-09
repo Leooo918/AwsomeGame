@@ -34,7 +34,7 @@ public class CameraManager : Singleton<CameraManager>
         _playerRect = PlayerManager.Instance.PlayerTrm;
     }
 
-    public void ChangeCam(CinemachineVirtualCamera activeCam)
+    public void ChangeCam(CinemachineVirtualCamera activeCam, bool changeFollowToPlayer = true)
     {
         _cameraSet.ForEach(x => x.Priority = 5);
 
@@ -46,7 +46,17 @@ public class CameraManager : Singleton<CameraManager>
         _framingTransposer = _currentCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         _currentPerline = _currentCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        _currentCam.Follow = _follow.transform;
+        if (changeFollowToPlayer)
+        {
+            _currentCam.Follow = _follow.transform;
+            Debug.Log("นึนึ");
+        }
+        else
+        {
+            Debug.Log("นึ");
+
+        }
+
         _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
     }
 
@@ -97,9 +107,9 @@ public class CameraManager : Singleton<CameraManager>
         DOTween.To(() => _currentCam.m_Lens.OrthographicSize, x => _currentCam.m_Lens.OrthographicSize = x, _originOrthorgraphicSize, 0.5f);
     }
 
-    public void ChangeFollow(Transform toFollow)=>_currentCam.m_Follow = toFollow;
+    public void ChangeFollow(Transform toFollow) => _currentCam.m_Follow = toFollow;
 
-    public void ChangeFollowToPlayer()=>_currentCam.m_Follow = _playerRect;
+    public void ChangeFollowToPlayer() => _currentCam.m_Follow = _playerRect;
 
     public void ShakeCam(float amplitude, float frequency, float time)
     {

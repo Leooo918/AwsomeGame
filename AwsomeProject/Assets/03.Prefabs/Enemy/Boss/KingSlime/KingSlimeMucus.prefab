@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf56da8a3b612946a5e91dc38cd5283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slowFlooring: {fileID: 8130789204211917425, guid: c2142dca270ea094295f6b6e0809304a, type: 3}
 --- !u!58 &425676499861564983
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 6
+  m_GravityScale: 9.8
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

@@ -38,6 +38,6 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   criticalDamage:
-    baseValue: 0
+    baseValue: 200
     modifiers: []
     percentModifiers: []

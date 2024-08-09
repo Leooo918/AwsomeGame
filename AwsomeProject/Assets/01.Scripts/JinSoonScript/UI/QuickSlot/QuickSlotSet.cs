@@ -73,6 +73,15 @@ public class QuickSlotSet : MonoBehaviour
             else
                 slots[i].DisableSlot();
         }
+
+        if (num > 0 && slots[num].AssignedPortion.portionType == Portion.PortionForThrow)
+        {
+            player.throwingPortionSelected = true;
+        }
+        else
+        {
+            player.throwingPortionSelected = false;
+        }
     }
 
     private void UseQuickSlot()

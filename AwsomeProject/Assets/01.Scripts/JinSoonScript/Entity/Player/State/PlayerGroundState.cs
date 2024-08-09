@@ -16,6 +16,7 @@ public class PlayerGroundState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.curJumpCnt = 0;
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;
@@ -36,15 +37,15 @@ public class PlayerGroundState : PlayerState
         base.UpdateState();
 
         if (player.IsGroundDetected() == false)
-            player.StartDelayCallBack(player.CoyoteTime, () => player.canJump = false);
+            player.StartDelayCallBack(player.CoyoteTime, () => player.CanJump = false);
         else
-            player.canJump = true;
+            player.CanJump = true;
 
 
 
-        if (player.canJump == false && !player.IsGroundDetected())
+        if (player.CanJump == false && !player.IsGroundDetected())
         {
-            player.canJump = false;
+            player.CanJump = false;
             stateMachine.ChangeState(PlayerStateEnum.Fall);
         }
     }
@@ -55,10 +56,11 @@ public class PlayerGroundState : PlayerState
 
     private void HandleJumpEvent()
     {
-        if (player.canJump)
+        if (player.CanJump)
         {
+            player.curJumpCnt = 1;
             stateMachine.ChangeState(PlayerStateEnum.Jump);
-            player.canJump = false;
+            //_player.CanJump = false;
         }
     }
 

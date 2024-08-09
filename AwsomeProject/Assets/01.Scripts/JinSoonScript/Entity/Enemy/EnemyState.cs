@@ -36,7 +36,7 @@ public class EnemyState<T> where T : Enum
     //이 상태일 때 실행될 함수
     public virtual void UpdateState()
     {
-        //player.animatorCompo.SetFloat(_yVelocityHash, _rigidbody.velocity.y);
+        //_player.animatorCompo.SetFloat(_yVelocityHash, _rigidbody.velocity.y);
     }
 
     public virtual void AnimationFinishTrigger()

@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyContactHit : MonoBehaviour
 {
-    [SerializeField] private int damage;
-    private Entity owner;
+    [SerializeField] private int _damage;
+    [SerializeField] private Vector2 _knockBackPower;
+    private Entity _owner;
+
 
     private void Awake()
     {
-        owner = GetComponent<Entity>();
+        _owner = GetComponentInParent<Entity>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out Player player))
+        if (collision.TryGetComponent(out Player player))
         {
-            Vector2 knockPower = (Vector2)(player.transform.position - transform.position).normalized + Vector2.up;
-            knockPower *= 8;
-            player.healthCompo.TakeDamage(damage, knockPower, owner);
+            Vector2 knockPower = _knockBackPower;
+            if (player.transform.position.x > transform.position.x) knockPower.x *= -1;
+
+            player.healthCompo.TakeDamage(_damage, knockPower, _owner);
         }
     }
 }

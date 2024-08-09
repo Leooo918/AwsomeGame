@@ -20,8 +20,8 @@ public class PlayerJumpState : PlayerAirState
     {
         base.UpdateState();
 
-        //float dashDir = player.PlayerInput.XInput;
-        //player.SetVelocity(dashDir * player.MoveSpeed, _rigidbody.velocity.y);
+        //float dashDir = _player.PlayerInput.XInput;
+        //_player.SetVelocity(dashDir * _player.MoveSpeed, _rigidbody.velocity.y);
 
         if (player.rigidbodyCompo.velocity.y <= 0)
             player.StateMachine.ChangeState(PlayerStateEnum.Fall);
