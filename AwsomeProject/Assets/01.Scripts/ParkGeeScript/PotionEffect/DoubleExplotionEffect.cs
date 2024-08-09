@@ -11,6 +11,7 @@ public class DoubleExplotionEffect : Effect
         target.healthCompo.TakeDamage(20, Vector2.zero, null);
         target.StartDelayCallBack(_delay, () =>
         {
+            EffectInstantiateManager.Instance.ParticleInstantiate();
             target.healthCompo.TakeDamage(20, Vector2.zero, null);
         });
     }

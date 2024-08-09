@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
-  m_Name: InvincibilityDashPotion
+  m_Name: DashPotionLv3
   m_EditorClassIdentifier: 
   id: 115
   itemName: "\uBB34\uC801\uB300\uC26C\uD3EC\uC158"
   itemType: 1
   maxCarryAmountPerSlot: 3
   itemExplain: "\uB300\uC26C\uC5D0 \uBB34\uC801\uC774 \uBD99\uB294\uB2E4."
-  dotImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
-  itemImage: {fileID: 1721116641, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  dotImage: {fileID: 941563716, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  itemImage: {fileID: 941563716, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
   prefab: {fileID: 6910422564161804073, guid: eff9af4f6b3f2c145b629da51f330930, type: 3}
   portionType: 1
   effect: 16

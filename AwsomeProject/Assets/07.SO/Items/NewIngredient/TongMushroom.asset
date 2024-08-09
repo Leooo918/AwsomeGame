@@ -16,8 +16,8 @@ MonoBehaviour:
   itemName: "\uD1B5\uD1B5\uBC84\uC12F"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uD1B5\uD1B5\uBC84\uC12F\u3141"
-  dotImage: {fileID: -1715390132, guid: 4a2395f54a39c154589d9c784385150f, type: 3}
+  itemExplain: "\uD1B5\uD1B5\uBC84\uC12F\n"
+  dotImage: {fileID: 681501887, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemImage: {fileID: 21300000, guid: 9139e73f755cef141be1dc062cb0abce, type: 3}
   prefab: {fileID: 6910422564161804073, guid: 627793b01ee784448b6f1e5959ff98be, type: 3}
   ingredientType: 0

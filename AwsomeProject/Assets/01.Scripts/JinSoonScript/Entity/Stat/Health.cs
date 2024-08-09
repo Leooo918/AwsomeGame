@@ -13,8 +13,15 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     public Stat maxHp { get; private set; }
     public float weight { get; private set; }
     public float curHp { get; private set; }
+<<<<<<< HEAD
 
     public HitData hitData { get; private set; }
+=======
+    public Stat maxArmor { get; private set; }
+    public float curArmor { get; private set; }
+    public float lastAttackDamage { get; private set; }
+    public bool isLastAttackCritical { get; private set; }
+>>>>>>> main
     public bool isInvincible { get; private set; }
 
     //효과, 지속시간, 시작된 시간
@@ -99,7 +106,8 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void GetArmor(int amount)
     {
-
+        curArmor += amount;
+        curArmor = Math.Clamp(curArmor, 0, maxArmor.GetValue());
     }
 
     public void ReduceMaxHp(float amount)

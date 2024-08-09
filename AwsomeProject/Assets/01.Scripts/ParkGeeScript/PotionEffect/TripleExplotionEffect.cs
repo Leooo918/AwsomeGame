@@ -13,10 +13,12 @@ public class TripleExplotionEffect : Effect
 
         target.StartDelayCallBack(_delay, () =>
         {
+            EffectInstantiateManager.Instance.ParticleInstantiate();
             target.healthCompo.TakeDamage(10, Vector2.zero, null);
 
             target.StartDelayCallBack(_delay, () =>
             {
+                EffectInstantiateManager.Instance.ParticleInstantiate();
                 target.healthCompo.TakeDamage(10, Vector2.zero, null);
                 target.Stun(1f);
             });
