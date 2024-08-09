@@ -15,7 +15,7 @@ public class DashEffect : Effect
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = true;
-        HasEffectManager.Instance.DashOn();
+        HasEffectManager.Instance.DashOn(0);
     }
 
     public override void UpdateEffort()

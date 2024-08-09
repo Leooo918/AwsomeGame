@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8959519642044216649}
   - component: {fileID: 3255625083039247061}
   m_Layer: 5
-  m_Name: AirStunPotion
+  m_Name: StunPotionLv3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
