@@ -5,13 +5,13 @@ public class DropItem : MonoBehaviour
 {
     public ItemSO item;
     private Rigidbody2D rb;
-    private GameObject txt;
+    private PopUpPanel _popUp;
     private bool interacting;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        txt = UIManager.Instance.PressFMessageObj;
+        _popUp = UIManager.Instance.panelDictionary[UIType.PopUp] as PopUpPanel;
     }
 
     private void Update()
@@ -35,9 +35,10 @@ public class DropItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out Player player))
+        if (collision.TryGetComponent(out Player player))
         {
-            txt.SetActive(true);
+            _popUp.SetText("아이템 줍기 [F]");
+            UIManager.Instance.Open(UIType.PopUp);
             interacting = true;
         }
     }
@@ -46,7 +47,7 @@ public class DropItem : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            txt.SetActive(false);
+            UIManager.Instance.Close(UIType.PopUp);
             interacting = false;
         }
     }

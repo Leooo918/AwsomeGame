@@ -63,4 +63,9 @@ public class ShopPanel : MonoBehaviour, IManageableUI
             .SetUpdate(true)
             .OnComplete(() => _isPlay = false);
     }
+
+    public void Init()
+    {
+
+    }
 }

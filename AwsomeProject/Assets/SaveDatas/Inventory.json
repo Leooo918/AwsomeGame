@@ -6,48 +6,8 @@
             "amount": 5
         },
         {
-            "id": 101,
-            "amount": 5
-        },
-        {
-            "id": 114,
-            "amount": 5
-        },
-        {
-            "id": 115,
-            "amount": 5
-        },
-        {
-            "id": 116,
-            "amount": 5
-        },
-        {
-            "id": 103,
-            "amount": 5
-        },
-        {
-            "id": 106,
-            "amount": 5
-        },
-        {
-            "id": 110,
-            "amount": 5
-        },
-        {
-            "id": 108,
-            "amount": 5
-        },
-        {
-            "id": 109,
-            "amount": 5
-        },
-        {
-            "id": 104,
-            "amount": 5
-        },
-        {
-            "id": 113,
-            "amount": 5
+            "id": 2,
+            "amount": 1
         }
     ]
 }
