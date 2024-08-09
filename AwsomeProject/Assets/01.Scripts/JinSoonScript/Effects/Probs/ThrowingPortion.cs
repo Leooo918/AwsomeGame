@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ThrowingPortion : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ThrowingPortion : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
     private SpriteRenderer _spriteRenderer;
+    private Player _player;
 
 
     private GameObject _portionEffectPf;
@@ -21,6 +23,7 @@ public class ThrowingPortion : MonoBehaviour
 
     private void Awake()
     {
+        _player = PlayerManager.Instance.Player;
         _spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         _results = new Collider2D[_maxEffectGatter];
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -32,9 +35,9 @@ public class ThrowingPortion : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, _currentRotation);
         _currentRotation += _spinPower * Time.deltaTime;
 
-        //Vector3 direction = _portionThrowingDirection * _portionThrowingSpeed;
-        //direction.y = _rigidbody.velocity.y;
-        //_rigidbody.velocity = (direction);
+        Vector3 direction = _portionThrowingDirection;
+        direction.y = _rigidbody.velocity.y;
+        _rigidbody.velocity = (direction);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -67,7 +70,7 @@ public class ThrowingPortion : MonoBehaviour
 
     public void Init(PortionItem portion)
     {
-        this.effect = portion.portionEffect;
+        effect = portion.portionEffect;
         _spriteRenderer.sprite = portion.portionSprite;
 
         Vector3 mouseDir = 
@@ -77,9 +80,11 @@ public class ThrowingPortion : MonoBehaviour
 
         PortionItemSO portionSO = portion.itemSO as PortionItemSO;
         _portionEffectPf = portionSO.portionParticle;
-        _portionThrowingDirection = mouseDir;
+        
+        _portionThrowingDirection = mouseDir * _portionThrowingSpeed;
+        _portionThrowingDirection = _player.portionThrowingDir;
         //Debug.Log($"{_portionThrowingDirection}, {(_portionThrowingDirection * _portionThrowingSpeed).normalized}, {_portionThrowingDirection.magnitude}, {_portionThrowingDirection * _portionThrowingSpeed}, {_portionThrowingSpeed}, {(_portionThrowingDirection * _portionThrowingSpeed).magnitude}");
-        _rigidbody.AddForce(_portionThrowingDirection * _portionThrowingSpeed, ForceMode2D.Impulse);
+        _rigidbody.AddForce(_portionThrowingDirection, ForceMode2D.Impulse);
 
         StartCoroutine(DelayColliderOn());
     }

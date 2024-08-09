@@ -6,6 +6,7 @@ using UnityEngine;
 public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
 {
     private KingSlime _kingSlime;
+    private BossHealth _health;
     private KingMucusAttackSkillSO _mucusAttackSO;
     private GameObject _mucusPf;
     private Tween _moveTween;
@@ -14,11 +15,13 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
     private bool _isJumped = false;
     private int _doMucusAttackAnimTriggerHash = Animator.StringToHash("DoMucusAttack");
 
-    private int[] fireOffset = new int[3] { -5, 0, 5 };
+    private int[] fireOffset = new int[5] { -5, 0, 5, -3,3 };
+    private int[] fireOffsetX = new int[5] { 0, 0, 0, 3, 3 };
 
     public KingSlimeMucusAttackState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         _kingSlime = enemy as KingSlime;
+        _health = _kingSlime.healthCompo as BossHealth;
         if (_kingSlime?.EntitySkillSO.GetSkillSO("KingMucusAttack") != null)
         {
             _mucusAttackSO = _kingSlime?.EntitySkillSO.GetSkillSO("KingMucusAttack") as KingMucusAttackSkillSO;
@@ -59,15 +62,32 @@ public class KingSlimeMucusAttackState : EnemyState<KingSlimeStateEnum>
 
 
         Rigidbody2D mucusRb = _mucusPf.GetComponent<Rigidbody2D>();
-        for (int i = 0; i < 3; i++)
-        {
-            Vector2 fireDirection;
-            fireDirection.x = (PlayerManager.Instance.PlayerTrm.position - _kingSlime.transform.position).magnitude * -dir * 2;
-            fireDirection.y = Mathf.Clamp(mucusRb.gravityScale * 2 + fireOffset[i], 1, 100);
 
-            KingSlimeMucus mucusInstance = MonoBehaviour.Instantiate(_mucusPf).GetComponent<KingSlimeMucus>();
-            mucusInstance.transform.position = _kingSlime.transform.position;
-            mucusInstance.Fire(fireDirection, enemy);
+        if (_health.currentPhase == 1)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Vector2 fireDirection;
+                fireDirection.x = (PlayerManager.Instance.PlayerTrm.position - _kingSlime.transform.position).magnitude * -dir * 2 + fireOffsetX[i];
+                fireDirection.y = Mathf.Clamp(mucusRb.gravityScale * 2 + fireOffset[i], 1, 100);
+
+                KingSlimeMucus mucusInstance = MonoBehaviour.Instantiate(_mucusPf).GetComponent<KingSlimeMucus>();
+                mucusInstance.transform.position = _kingSlime.transform.position;
+                mucusInstance.Fire(fireDirection, enemy, 6f);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Vector2 fireDirection;
+                fireDirection.x = (PlayerManager.Instance.PlayerTrm.position - _kingSlime.transform.position).magnitude * -dir * 2;
+                fireDirection.y = Mathf.Clamp(mucusRb.gravityScale * 2 + fireOffset[i], 1, 100);
+
+                KingSlimeMucus mucusInstance = MonoBehaviour.Instantiate(_mucusPf).GetComponent<KingSlimeMucus>();
+                mucusInstance.transform.position = _kingSlime.transform.position;
+                mucusInstance.Fire(fireDirection, enemy, 3f);
+            }
         }
 
         _isFired = true;

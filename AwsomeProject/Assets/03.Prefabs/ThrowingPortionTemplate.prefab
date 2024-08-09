@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxEffectGatter: 10
-  _portionThrowingSpeed: 40
+  _portionThrowingSpeed: 20
   _spinPower: 360
 --- !u!50 &2130675457367933389
 Rigidbody2D:
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 9.8
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

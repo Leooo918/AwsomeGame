@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum PlayerStateEnum
 {
@@ -29,13 +27,13 @@ public class Player : Entity
 
     #region Status
 
-    public float MoveSpeed 
-    { 
-        get 
+    public float MoveSpeed
+    {
+        get
         {
             return Stat.moveSpeed.GetValue();
-        } 
-        private set { } 
+        }
+        private set { }
     }
     public float JumpForce { get; protected set; } = 10f;
 
@@ -57,8 +55,8 @@ public class Player : Entity
 
     private bool canJump = false;
     [HideInInspector]
-    public bool CanJump 
-    { 
+    public bool CanJump
+    {
         get
         {
             return curJumpCnt < maxJumpCnt;
@@ -96,12 +94,14 @@ public class Player : Entity
     [SerializeField] private GameObject thowingPortionPf;
     [SerializeField] private HpBar _hpDecator;
 
+    public bool throwingPortionSelected = false;
+    public Vector2 portionThrowingDir;
+
     protected override void Awake()
     {
         base.Awake();
 
-        if (_hpDecator != null)
-            _hpDecator.Init((int)healthCompo.curHp);
+        _hpDecator?.Init((int)healthCompo.curHp);
 
         MoveSpeed = Stat.moveSpeed.GetValue();
         JumpForce = Stat.jumpForce.GetValue();

@@ -60,7 +60,7 @@ public class PlayerGroundState : PlayerState
         {
             player.curJumpCnt = 1;
             stateMachine.ChangeState(PlayerStateEnum.Jump);
-            //player.CanJump = false;
+            //_player.CanJump = false;
         }
     }
 

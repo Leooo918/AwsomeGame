@@ -45,7 +45,7 @@ public class PlayerAirState : PlayerState
         {
             player.curJumpCnt++;
             stateMachine.ChangeState(PlayerStateEnum.Jump);
-            //player.CanJump = false;
+            //_player.CanJump = false;
         }
     }
 

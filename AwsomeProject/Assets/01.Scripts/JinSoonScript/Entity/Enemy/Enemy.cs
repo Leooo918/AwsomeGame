@@ -51,12 +51,12 @@ public abstract class Enemy<T> : Entity where T : Enum
         foreach (T stateEnum in Enum.GetValues(typeof(T)))
         {
             string typeName = stateEnum.ToString();
-            string scriptName = this.GetType().ToString();
+            string scriptName = GetType().ToString();
             Type t = Type.GetType($"{scriptName}{typeName}State");
 
             try
             {
-                var enemyState = Activator.CreateInstance(t, this, StateMachine, typeName) as EnemyState<T>;
+                var enemyState = Activator.CreateInstance(type: t, this, StateMachine, typeName) as EnemyState<T>;
                 StateMachine.AddState(stateEnum, enemyState);
             }
             catch (Exception e)
