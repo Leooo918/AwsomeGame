@@ -35,4 +35,8 @@ public class PotionCraftPanal : MonoBehaviour, IManageableUI
             .OnComplete(() => _isPlay = false);
     }
 
+    public void Init()
+    {
+
+    }
 }

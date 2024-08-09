@@ -77,4 +77,9 @@ public class DiePanel : MonoBehaviour, IManageableUI
         }
         Debug.Log(curProgress);
     }
+
+    public void Init()
+    {
+
+    }
 }

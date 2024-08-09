@@ -18,11 +18,6 @@ public class ItemGatherPanal : MonoBehaviour, IManageableUI
 
     private Sequence _seq;
 
-    private void Awake()
-    {
-        _bgRect = _bgGroup.GetComponent<RectTransform>();
-    }
-
     public void Close()
     {
         if (_seq != null && _seq.active)
@@ -51,5 +46,13 @@ public class ItemGatherPanal : MonoBehaviour, IManageableUI
         _nameTxt.SetText(_item.itemName);
         _explainTxt.SetText(_item.itemExplain);
         _itemImage.sprite = _item.itemImage;
+    }
+
+    public void Init()
+    {
+        _bgRect = _bgGroup.GetComponent<RectTransform>();
+
+        _bgGroup.alpha = 0f;
+        _bgRect.anchoredPosition = new Vector2(_bgRect.anchoredPosition.x, -100);
     }
 }

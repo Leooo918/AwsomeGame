@@ -91,4 +91,9 @@ public class Option : MonoBehaviour, IManageableUI
         OnBGMVolumeChange(float.Parse(s[1]));
         OnSFXVolumeChange(float.Parse(s[2]));
     }
+
+    public void Init()
+    {
+        _optionRect.anchoredPosition = _closeOffset;
+    }
 }

@@ -22,14 +22,8 @@ public class BossStageEnterPanal : MonoBehaviour, IManageableUI
 
     public void Close()
     {
-        if (_seq != null && _seq.active)
-            _seq.Kill();
-
-        _seq = DOTween.Sequence();
-
-        _seq.Append(_bgLeft.DOAnchorPosX(-1920, _tweenTime).SetEase(_easing))
-            .Join(_bgRight.DOAnchorPosX(1920, _tweenTime).SetEase(_easing))
-            .Join(_bossNameTxt.rectTransform.DOAnchorPosX(1920, _tweenTime).SetEase(_easing));
+        
+        //쓸일 없음 Open하면 나왔다 사라지는 거 까지 다 됨
     }
 
     public void Open()
@@ -53,5 +47,12 @@ public class BossStageEnterPanal : MonoBehaviour, IManageableUI
                 _bgRight.anchoredPosition = new Vector2(1920, _bgRight.anchoredPosition.y);
                 _bossNameTxt.rectTransform.anchoredPosition = new Vector2(1920, _bossNameTxt.rectTransform.anchoredPosition.y);
             });
+    }
+
+    public void Init()
+    {
+        _bgLeft.anchoredPosition = new Vector2(-1920, _bgLeft.anchoredPosition.y);
+        _bgRight.anchoredPosition = new Vector2(1920, _bgRight.anchoredPosition.y);
+        _bossNameTxt.rectTransform.anchoredPosition = new Vector2(1920, _bossNameTxt.rectTransform.anchoredPosition.y);
     }
 }
