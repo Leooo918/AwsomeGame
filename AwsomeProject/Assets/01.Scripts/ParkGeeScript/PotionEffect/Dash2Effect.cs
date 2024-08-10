@@ -15,19 +15,13 @@ public class Dash2Effect : Effect
 
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.CanUseSkill = true;
-        HasEffectManager.Instance.DashOn(0);
-    }
+        HasEffectManager.Instance.DashOn(1);
 
-    public override void UpdateEffort()
-    {
-    }
-
-    public override void ExitEffort()
-    {
-        base.ExitEffort();
-
-        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-        dashSkillSO.CanUseSkill = false;
-        HasEffectManager.Instance.DashOff();
+        target.StartDelayCallBack(useTime, () =>
+        {
+            PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+            dashSkillSO.CanUseSkill = false;
+            HasEffectManager.Instance.DashOff();
+        });
     }
 }

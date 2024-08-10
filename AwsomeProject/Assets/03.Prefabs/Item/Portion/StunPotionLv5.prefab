@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8959519642044216649}
   - component: {fileID: 3255625083039247061}
   m_Layer: 5
-  m_Name: SelfStunPotion
+  m_Name: StunPotionLv5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -935731466, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  m_Sprite: {fileID: 933395174, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -223,4 +223,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20fee592a29457b49a53f2cba5973e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSO: {fileID: 11400000, guid: bccf184e792562f4a923b4af472f7a0a, type: 2}
+  itemSO: {fileID: 11400000, guid: f8c227ee5158f1d47a376ec4aeb1cf9f, type: 2}

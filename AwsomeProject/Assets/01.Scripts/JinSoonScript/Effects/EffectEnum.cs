@@ -21,6 +21,11 @@ public enum EffectEnum
     AirBorn2 = 17,
     Dash2 = 18,
     Stun2 = 19,
-    Explosion2 = 20
+    Explosion2 = 20,
+    DoubleExplotion2 = 21,
+    AirStun2 = 22,
+    Stun5 = 23,
+    AirBornDown2 = 24,
+    AirBornDown3 = 25
     //Poision = 3
 }
