@@ -21,7 +21,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   detectingDistance:
-    baseValue: 0
+    baseValue: 15
     modifiers: []
     percentModifiers: []
   dropItems: []

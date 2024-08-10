@@ -63,7 +63,7 @@ public abstract class Entity : MonoBehaviour
         entityAttack = GetComponent<EntityAttack>();
 
         stat = Instantiate(stat);
-        entitySkillSO = Instantiate(entitySkillSO);
+        entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
     }
 
 

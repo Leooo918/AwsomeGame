@@ -6,7 +6,7 @@ using UnityEngine;
 public enum WildBoarEnum
 {
     Idle,
-    Ready,
+    Move,
     Rush,
     Groggy,
     Stun,
@@ -20,35 +20,38 @@ public enum WildBoarSkillEnum
 
 public class WildBoar : Enemy<WildBoarEnum>
 {
-    //public WildBoarStatusSO wildBoarStatus { get; protected set; }
+    //public WildBoarStatus wildBoarStatus { get; protected set; }
     public WildBoarSkill Skills { get; private set; }
 
-    public Stack<SkillSO> readySkill = new Stack<SkillSO>();
-    public List<Tuple<SkillSO, float>> notReady = new List<Tuple<SkillSO, float>>();
+    [SerializeField] private Transform _hpBar;
+    public GameObject dashAttackCollider; 
+    private Transform _playerTrm;
+    private Transform _pivot;
 
-    [HideInInspector] public bool moveAnima = false;
-    [HideInInspector] public bool readyFlip = false;
+    private SkillSO _rushSkill;
 
-    [SerializeField] private Transform hpBar;
-    private Transform pivot;
+    private float _attackDelay;
+    public void SetAttackDelay(float delay) => _attackDelay = Time.time + delay;
+
 
     protected override void Awake()
     {
         base.Awake();
+        _playerTrm = PlayerManager.Instance.PlayerTrm;
+
         Skills = gameObject.AddComponent<WildBoarSkill>();
         Skills.Init(EntitySkillSO);
 
         foreach (var item in EntitySkillSO.skills)
         {
             item.skill.SetOwner(this);
-            Type type = item.skill.GetType();
-            gameObject.AddComponent(type);
         }
 
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
+        _rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
 
-        pivot = hpBar.Find("Pivot");
+        _pivot = _hpBar.Find("Pivot");
     }
 
     private void OnEnable()
@@ -68,28 +71,16 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Start()
     {
         StateMachine.Initialize(WildBoarEnum.Idle, this);
-        ShuffleSkillStack();
+        attackDistance = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush).attackDistance.GetValue();
     }
 
     private void Update()
     {
         StateMachine.CurrentState.UpdateState();
 
-        for (int i = 0; i<notReady.Count; ++i)
-        {
-            var item = notReady[i];
-            if (item.Item2 + item.Item1.skillCoolTime.GetValue() < Time.time)
-            {
-                notReady.Remove(item);
-                if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
-                readySkill.Push(item.Item1);
-                --i;
-            }
-        }
-
         float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
-        pivot.localScale = new Vector3(hpPercentage, 1, 1);
+        _hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
+        _pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
@@ -101,61 +92,37 @@ public class WildBoar : Enemy<WildBoarEnum>
         StateMachine.ChangeState(WildBoarEnum.Stun);
     }
 
-    public override void Dead(Vector2 dir)
-    {
+    public override void Dead(Vector2 dir) { }
 
+    public void TryAttack()
+    {
+        float dist = (transform.position - _playerTrm.position).magnitude;
+
+        if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
+        {
+            _rushSkill.skill.UseSkill();
+        }
+        else if(dist < attackDistance)
+        {
+            Attack();
+        }
     }
 
     public void Attack()
     {
-        SkillSO skill = readySkill.Peek();
-        if(skill == null)
-        {
-            StateMachine.ChangeState(WildBoarEnum.Idle);
-            return;
-        }
 
-        skill.skill.UseSkill();
-        notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
-        readySkill.Pop();
-        attackDistance = 0;
-    }
-
-    public void ShuffleSkillStack()
-    {
-        List<SkillSO> skills = EntitySkillSO.skills;
-        for (int i = 0; i < 10; i++)
-        {
-            int a = UnityEngine.Random.Range(0, skills.Count);
-            int b = UnityEngine.Random.Range(0, skills.Count);
-
-            SkillSO temp = skills[a];
-            skills[a] = skills[b];
-            skills[b] = temp;
-        }
-
-        readySkill.Clear();
-        for (int i = 0; i < skills.Count; i++)
-        {
-            if (readySkill.Contains(skills[i])) continue;
-
-            readySkill.Push(skills[i]);
-        }
-        if (readySkill.Peek() == null) return;
-
-        attackDistance = readySkill.Peek().attackDistance.GetValue();
     }
 
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(WildBoarEnum.Ready);
+        StateMachine.ChangeState(WildBoarEnum.Idle);
     } 
 
     private void OnDie(Vector2 dir)
     {
         IsDead = true;
-        for(int i = 0; i< EnemyStat.dropItems.Count; i++)
+        for (int i = 0; i < EnemyStat.dropItems.Count; i++)
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
             {

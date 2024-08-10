@@ -31,7 +31,7 @@ public class HpBottle : MonoBehaviour
         if (isBottleFull)
         {
             if(seq != null && seq.active)
-                seq.Kill();
+                seq.Complete();
 
             seq = DOTween.Sequence();
 

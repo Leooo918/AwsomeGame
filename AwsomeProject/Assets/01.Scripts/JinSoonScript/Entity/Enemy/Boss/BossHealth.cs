@@ -16,7 +16,7 @@ public class BossHealth : Health
     {
         base.TakeDamage(damage, knockPower, dealer);
 
-        if (curHp <= phaseChangeHealth[currentPhase])
+        if (currentPhase < maxPhase - 1 && curHp <= phaseChangeHealth[currentPhase])
             GoToNextPhase();
     }
 
