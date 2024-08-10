@@ -5430,6 +5430,7 @@ MonoBehaviour:
   - {fileID: -1413788210, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
   _dashEffectSprite: {fileID: -2090304537, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
   _armorUpEffectSprite: {fileID: -1606659967, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+  _upDamageEffectSprite: {fileID: 1466171610, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
 --- !u!1 &504275190
 GameObject:
   m_ObjectHideFlags: 8
@@ -7056,7 +7057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 445387511067698906, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2230550602945823284, guid: c7e672b8eae59de4bb7fc4adfdf10b64, type: 3}
       propertyPath: m_LocalPosition.x

@@ -186,6 +186,13 @@ public abstract class Entity : MonoBehaviour
     {
         Debug.Log("Entity에서 실행된 Clean");
         CleanDamageManager.Instance.DamageObject();
+
+        if (stunDuration > 0)
+        {
+            stunDuration = 0;
+            canBeStun = false;
+            Debug.Log("스턴 해제됨");
+        }
     }
 
     //얘가 막 몇초 후 실행 시키기 그런걸 다 관리 해줄 거임

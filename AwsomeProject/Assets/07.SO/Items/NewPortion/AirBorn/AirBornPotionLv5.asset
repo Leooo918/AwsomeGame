@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AirBornPotionLv5
   m_EditorClassIdentifier: 
   id: 120
-  itemName: "\uBD80\uC720\uD3EC\uC158Lv3"
+  itemName: "\uBD80\uC720\uD3EC\uC158Lv5"
   itemType: 1
   maxCarryAmountPerSlot: 3
   itemExplain: "\uC801\uC911\uB2F9\uD55C \uC801\uC744 \uC77C\uC815 \uC2DC\uAC04 \uACF5\uC911\uC5D0

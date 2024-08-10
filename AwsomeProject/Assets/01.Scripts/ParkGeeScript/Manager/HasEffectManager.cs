@@ -11,9 +11,11 @@ public class HasEffectManager : Singleton<HasEffectManager>
     [SerializeField] private Sprite[] _borderSprites;
     [SerializeField] private Sprite _dashEffectSprite;
     [SerializeField] private Sprite _armorUpEffectSprite;
+    [SerializeField] private Sprite _upDamageEffectSprite;
 
     private List<int> _activeDashIndexes = new List<int>();
     private List<int> _activeArmorIndexes = new List<int>();
+    private List<int> _activeDamageIndexes = new List<int>();
 
     public void DashOn(int a)
     {
@@ -61,6 +63,16 @@ public class HasEffectManager : Singleton<HasEffectManager>
             _activeArmorIndexes.RemoveAt(_activeArmorIndexes.Count - 1);
             Debug.Log("ArmorOff Index: " + lastIndex);
         }
+    }
+
+    public void DamageOn(int a)
+    {
+
+    }
+
+    public void DamageOff()
+    {
+
     }
 
     private void ClearEffectAtIndex(int index)

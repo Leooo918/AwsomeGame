@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
-  m_Name: UpArmorPotionLv1
+  m_Name: DashPotionLv4
   m_EditorClassIdentifier: 
-  id: 107
-  itemName: "\uC11D\uD654\uD3EC\uC158"
+  id: 115
+  itemName: "\uB300\uC26C\uD3EC\uC158Lv4"
   itemType: 1
   maxCarryAmountPerSlot: 3
-  itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 \uC6C0\uC9C1\uC784\uC774 \uBD88\uAC00\uB2A5\uD574\uC9C0\uB294
-    \uB300\uC2E0 \uBAA8\uB4E0 \uD53C\uD574\uB97C \uC785\uC9C0 \uC54A\uB294\uB2E4."
-  dotImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
-  itemImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: 367d6fb93fa835d45a88abb187802469, type: 3}
+  itemExplain: "\uC12D\uCDE8\uC2DC  \uC77C\uC815\uC2DC\uAC04 \uB3CC\uC9C4\uC744 \uD560
+    \uC218 \uC788\uB2E4. \uB3CC\uC9C4\uD558\uB294 \uB3D9\uC548\uC5D0 \uBB34\uC801\uC0C1\uD0DC\uC774\uB2E4."
+  dotImage: {fileID: 941563716, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  itemImage: {fileID: 941563716, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: eff9af4f6b3f2c145b629da51f330930, type: 3}
   portionType: 1
-  effect: 9
+  effect: 16
   requireEffects:
-  - effect: 2
-    requirePoint: 1
+  - effect: 6
+    requirePoint: 3
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0
   figure: 0
