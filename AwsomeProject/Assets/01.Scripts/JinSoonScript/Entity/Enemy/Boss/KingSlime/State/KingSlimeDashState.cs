@@ -12,6 +12,13 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
     private readonly int _maxDashCnt = 3;
     private int _curDashCnt = 0;
 
+    private int _dashStartHash = Animator.StringToHash("DashStart");
+    private bool _isDashing = false;
+
+    private float _dashPower;
+    private float _dashTime;
+    private float _dashDir;
+
     public KingSlimeDashState(Enemy<KingSlimeStateEnum> enemy, EnemyStateMachine<KingSlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         if (enemy?.EntitySkillSO.GetSkillSO("KingDash") != null)
@@ -20,10 +27,6 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         _bossHealth = enemy.healthCompo as BossHealth;
     }
 
-    private int _dashStartHash = Animator.StringToHash("DashStart");
-    private bool _isDashing = false;
-    private float dashTime;
-    private float dashDir;
 
     public override void Enter()
     {
@@ -35,9 +38,8 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
 
         enemy.CanKnockback = false;
         enemy.CanStateChangeable = false;
-        dashDir = enemy.FacingDir;
-        enemy.DashPower = _dashSkillSO.dashPower;
-        enemy.DashTime = _dashSkillSO.dashTime;
+        _dashDir = enemy.FacingDir;
+        _dashPower = _dashSkillSO.dashPower;
     }
 
     public override void UpdateState()
@@ -46,8 +48,8 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
 
         if (_isDashing == false) return;
 
-        enemy.SetVelocity(enemy.DashPower * dashDir, 0, true);
-        if (Time.time - dashTime > enemy.DashTime)
+        enemy.SetVelocity(_dashPower * _dashDir, 0, true);
+        if (Time.time > _dashTime)
         {
             if (_bossHealth.currentPhase == 1 && ++_curDashCnt < _maxDashCnt)
             {
@@ -93,8 +95,8 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         enemy.animatorCompo.SetTrigger(_dashStartHash);
         _isDashing = true;
 
-        enemy.SetVelocity(enemy.DashPower * dashDir, 0, false);
-        dashTime = Time.time;
+        enemy.SetVelocity(_dashPower * _dashDir, 0, false);
+        _dashTime = Time.time + _dashSkillSO.dashTime;
     }
 
     private void DashAgain()
@@ -109,8 +111,8 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
 
         _isDashing = false;
         enemy.StopImmediately(false);
-        dashDir = PlayerManager.Instance.PlayerTrm.position.x < enemy.transform.position.x ? -1 : 1;
-        if (dashDir != enemy.FacingDir) enemy.Flip();
+        _dashDir = PlayerManager.Instance.PlayerTrm.position.x < enemy.transform.position.x ? -1 : 1;
+        if (_dashDir != enemy.FacingDir) enemy.Flip();
 
         enemy.StartDelayCallBack(0.3f, Enter);
     }

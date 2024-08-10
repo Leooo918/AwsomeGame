@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TestWildBoar : MonoBehaviour
 {
-    [SerializeField] private GameObject _player;
+    private Transform _player;
     [SerializeField] private GameObject _checkPlayer;
     private float _distance = 5f;
     private float _dashtime = 1.5f;
@@ -15,9 +15,14 @@ public class TestWildBoar : MonoBehaviour
     private Vector3 dashDirection;
     private float dashStartTime;
 
+    private void Awake()
+    {
+        _player = PlayerManager.Instance.PlayerTrm;
+    }
+
     private void Update()
     {
-        float distanceToPlayer = Vector3.Distance(_player.transform.position, transform.position);
+        float distanceToPlayer = Vector3.Distance(_player.position, transform.position);
 
         if (distanceToPlayer < _distance && !isDashing && !isCoroutineRunning)
         {
@@ -47,7 +52,7 @@ public class TestWildBoar : MonoBehaviour
         _checkPlayer.SetActive(true);
         yield return new WaitForSeconds(1f);
 
-        dashDirection = (_player.transform.position - transform.position).normalized;
+        dashDirection = (_player.position - transform.position).normalized;
         dashDirection = new Vector3(dashDirection.x, 0, dashDirection.z);
         dashStartTime = Time.time;
         isDashing = true;

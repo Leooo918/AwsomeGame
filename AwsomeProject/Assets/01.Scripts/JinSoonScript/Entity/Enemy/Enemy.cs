@@ -38,14 +38,12 @@ public abstract class Enemy<T> : Entity where T : Enum
     protected int lastAnimationBoolHash;
 
     private bool playerDetected = false;
-    public float DashTime;
-    public float DashPower;
 
     protected override void Awake()
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
-        enemyStat = Instantiate(enemyStat);
+        enemyStat = ScriptableObject.Instantiate(enemyStat);
 
         StateMachine = new EnemyStateMachine<T>();
         foreach (T stateEnum in Enum.GetValues(typeof(T)))
@@ -72,7 +70,7 @@ public abstract class Enemy<T> : Entity where T : Enum
     public virtual Player IsPlayerDetected()
     {
         Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
-
+        Debug.Log(player + " " + detectingDistance);
         if (player == null)
             return null;
 

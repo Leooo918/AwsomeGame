@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WildBoarStunState : EnemyState<WildBoarEnum>
 {
+    private float _stunStartTime;
     public WildBoarStunState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
@@ -16,15 +17,18 @@ public class WildBoarStunState : EnemyState<WildBoarEnum>
     public override void Enter()
     {
         base.Enter();
+        _stunStartTime = Time.time;
         enemy.CanStateChangeable = false;
-        enemy.StartDelayCallBack(enemy.stunDuration, () =>
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+
+        if(Time.time > enemy.stunDuration + _stunStartTime)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(WildBoarEnum.Idle);
-            if (enemy.healthCompo.curHp < 0)
-            {
-                enemyStateMachine.ChangeState(WildBoarEnum.Dead);
-            }
-        });
+        }
     }
 }

@@ -105,8 +105,8 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         }
 
         //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        //hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
-        //pivot.localScale = new Vector3(hpPercentage, 1, 1);
+        //_hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
+        //_pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     #region SkillSection
