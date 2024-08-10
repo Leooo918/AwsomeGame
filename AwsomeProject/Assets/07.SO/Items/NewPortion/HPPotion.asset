@@ -22,9 +22,12 @@ MonoBehaviour:
   prefab: {fileID: 6910422564161804073, guid: 1120d22a90630934a8b7669827bceb5f, type: 3}
   portionType: 1
   effect: 0
-  requireEffects: []
+  requireEffects:
+  - effect: 0
+    requirePoint: 1
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0
+  figure: 0
   duration: 0
   usingTime: 0.5
   isInfinite: 0
