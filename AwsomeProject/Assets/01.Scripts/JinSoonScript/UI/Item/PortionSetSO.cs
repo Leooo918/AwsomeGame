@@ -16,39 +16,39 @@ public class PortionSetSO : ScriptableObject
     /// <param name="effects">저기에 사용될 효과</param>
     /// <param name="portion">반환해줄 포션</param>
     /// <returns>만들수 있는 포션이 있나?</returns>
-    public bool FindMakeablePortion(EffectInfo[] effects, Portion portionType, out PortionItemSO portion)
+    public bool FindMakeablePortion(List<EffectInfo> effects, Portion portionType, out PortionItemSO portion)
     {
-        List<EffectInfo> infos = new List<EffectInfo>();
+        List<EffectInfo> infos = effects;
 
         //사용된 재료들의 효과들 중 겹치는 것들을 정리해서 infos에 넣어주
-        for (int i = 0; i < effects.Length; i++)
-        {
-            bool isOverlap = false;
-            for (int j = 0; j < infos.Count; j++)
-            {
-                if (effects[i].effect == infos[j].effect)
-                {
-                    isOverlap = true;
-                    EffectInfo temp = infos[j];
-                    temp.requirePoint += effects[i].requirePoint;
-                    infos[j] = temp;
-                    break;
-                }
-            }
+        //for (int i = 0; i < effects.Count; i++)
+        //{
+        //    bool isOverlap = false;
+        //    for (int j = 0; j < infos.Count; j++)
+        //    {
+        //        if (effects[i].effect == infos[j].effect)
+        //        {
+        //            isOverlap = true;
+        //            EffectInfo temp = infos[j];
+        //            temp.requirePoint += effects[i].requirePoint;
+        //            infos[j] = temp;
+        //            break;
+        //        }
+        //    }
 
-            if (!isOverlap)
-            {
-                infos.Add(effects[i]);
-            }
-        }
+        //    if (!isOverlap)
+        //    {
+        //        infos.Add(effects[i]);
+        //    }
+        //}
         
         for (int i = 0; i < portions.Count; i++)
         {
             if (portions[i].CheckCanMakePortion(infos) && portions[i].portionType == portionType)
             {
                 Debug.Log(portions[i].itemName);
-                portion = CreateInstance("PortionItemSO") as PortionItemSO;
-                portion.Init(portions[i]);
+                portion = ScriptableObject.Instantiate(portions[i]);// CreateInstance("PortionItemSO") as PortionItemSO;
+                //portion.Init(portions[i]);
                 return true;
             }
         }
