@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 {
     public Entity owner { get; private set; }
-    public Slider hpSlider;
 
     public Stat maxHp { get; private set; }
     public float weight { get; private set; }
@@ -139,8 +138,6 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     private void Update()
     {
-        if (hpSlider != null) hpSlider.value = curHp / maxHp.GetValue();
-
         for (int i = 0; i < effects.Count; i++)
         {
             Tuple<Effect, float, float> effect = effects[i];

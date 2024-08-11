@@ -29,17 +29,36 @@ public class PortionTable : MonoBehaviour
             if (ingredientsSlot[i].assignedItem != null)
             {
                 IngredientItemSO item = ingredientsSlot[i].assignedItem.itemSO as IngredientItemSO;
-                EffectInfo effect = new EffectInfo();
-                effect.effect = item.effectType;
-                effect.requirePoint = item.effectPoint;
+                bool containSameEffect = false;
 
-                effects.Add(effect);
+                for (int j = 0; j < effects.Count; i++)
+                {
+                    if (effects[i].effect == item.effectType)
+                    {
+                        EffectInfo tmpEffect = new EffectInfo();
+                        tmpEffect.effect = effects[i].effect;
+                        tmpEffect.requirePoint = effects[i].requirePoint + item.effectPoint;
+
+                        effects[i] = tmpEffect;
+                        containSameEffect = true;
+                        break;
+                    }
+                }
+
+                if (!containSameEffect)
+                {
+                    EffectInfo effect = new EffectInfo();
+                    effect.effect = item.effectType;
+                    effect.requirePoint = item.effectPoint;
+
+                    effects.Add(effect);
+                }
             }
         }
 
-        PortionManager.Instance.portionSet.FindMakeablePortion(effects.ToArray(),portionType, out PortionItemSO portion);
-        
-        if(portion == null)
+        bool portionExist = PortionManager.Instance.portionSet.FindMakeablePortion(effects, portionType, out PortionItemSO portion);
+
+        if (portionExist == false)
         {
             Debug.Log("포션이 존재하지 않는www");
             return;

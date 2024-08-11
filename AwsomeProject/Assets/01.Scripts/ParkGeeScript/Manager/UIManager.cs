@@ -10,7 +10,8 @@ public enum UIType
     Option,
     ItemGather,
     BossStageEnter,
-    PopUp
+    PopUp,
+    BossHp
 }
 
 public class UIManager : Singleton<UIManager>
@@ -37,6 +38,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (panelDictionary.TryGetValue(target, out IManageableUI panel))
         {
+            panel.Init();
             panel.Open();
         }
         else

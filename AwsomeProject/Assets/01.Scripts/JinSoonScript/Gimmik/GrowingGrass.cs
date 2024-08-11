@@ -86,7 +86,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
 
         if (collision.TryGetComponent(out IDamageable enemy) && _isGrowing)
         {
-            //enemy.Rape(3f);
+            //_enemy.Rape(3f);
             enemy.TakeDamage(0, Vector2.zero, null);
             //여기에 적 속박 시키게 하는 코드
         }

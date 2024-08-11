@@ -247,6 +247,7 @@ public class Player : Entity
     {
         IsDead = true;
         StateMachine.ChangeState(PlayerStateEnum.Dead);
+        CanStateChangeable = false;
     }
 
     public void ThrowPortion(PortionItem portion)

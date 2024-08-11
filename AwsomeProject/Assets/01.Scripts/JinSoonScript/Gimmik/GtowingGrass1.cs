@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class GtowingGrass1 : MonoBehaviour
+public class GtowingGrass1 : MonoBehaviour, IGetPortionEffect
 {
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField]private Transform _objTrm;
@@ -19,11 +19,6 @@ public class GtowingGrass1 : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            _isGrowing = true;
-        }
-
         if (_isGrowing)
         {
             bool isRightDetectedWall = false;
@@ -70,5 +65,13 @@ public class GtowingGrass1 : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(new Vector2(right, _objTrm.position.y), rSize);
         Gizmos.DrawWireCube(new Vector2(left, _objTrm.position.y), lSize);
+    }
+
+    public void GetEffort(Effect effect)
+    {
+        GrowthEffect growth = effect as GrowthEffect;
+
+        if (growth == null) return;
+        _isGrowing = true;
     }
 }

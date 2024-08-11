@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WildBoarStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 50
+    baseValue: 150
     modifiers: []
     percentModifiers: []
   armor:
