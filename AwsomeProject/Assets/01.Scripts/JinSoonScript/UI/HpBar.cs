@@ -5,15 +5,28 @@ using UnityEngine;
 public class HpBar : MonoBehaviour
 {
     [SerializeField] private HpBottle _hpBottlePf;
+    private int _currentHealth;
     private HpBottle[] hpBottles;
+    private Health _playerHealth;
+
+    private void Start()
+    {
+        _playerHealth = PlayerManager.Instance.Player.healthCompo;
+    }
 
     public void TakeDamage()
     {
+        int healthTmp = _currentHealth;
+        _currentHealth = (int)_playerHealth.curHp;
         for (int i = hpBottles.Length - 1; i >= 0; i--)
         {
             if (hpBottles[i].IsBottleEmpty == false)
             {
-                hpBottles[i].HpDown();
+                for (int j = 0; j < healthTmp - _currentHealth; j++)
+                {
+                    hpBottles[i].HpDown();
+                    if(hpBottles[i].IsBottleEmpty) i--;
+                }
                 break;
             }
         }
@@ -29,5 +42,6 @@ public class HpBar : MonoBehaviour
         }
 
         hpBottles = GetComponentsInChildren<HpBottle>();
+        _currentHealth = hp;
     }
 }

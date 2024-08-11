@@ -17,7 +17,7 @@ public class EnemyContactHit : MonoBehaviour
         if (collision.TryGetComponent(out Player player))
         {
             Vector2 knockPower = _knockBackPower;
-            if (player.transform.position.x > transform.position.x) knockPower.x *= -1;
+            if (player.transform.position.x < transform.position.x) knockPower.x *= -1;
 
             player.healthCompo.TakeDamage(_damage, knockPower, _owner);
         }

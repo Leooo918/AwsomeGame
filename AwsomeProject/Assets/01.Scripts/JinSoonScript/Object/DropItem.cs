@@ -8,9 +8,13 @@ public class DropItem : MonoBehaviour
     private PopUpPanel _popUp;
     private bool interacting;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
         _popUp = UIManager.Instance.panelDictionary[UIType.PopUp] as PopUpPanel;
     }
 

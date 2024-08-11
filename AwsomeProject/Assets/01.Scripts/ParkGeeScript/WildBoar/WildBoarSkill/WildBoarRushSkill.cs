@@ -10,6 +10,5 @@ public class WildBoarRushSkill : Skill
     {
         if (wildBoar == null) wildBoar = owner as WildBoar;
         wildBoar.StateMachine.ChangeState(WildBoarEnum.Rush);
-        Debug.Log("러쉬 실행");
     }
 }

@@ -19,11 +19,13 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
 
         playerTrm = PlayerManager.Instance.PlayerTrm;
         enemy.animatorCompo.SetBool(animBoolHash, false);
+        enemy.animatorCompo.SetBool("Idle", true);
 
         enemy.FindPlayerEvt(() =>
         {
             chaseStart = true;
             enemy.animatorCompo.SetBool(animBoolHash, true);
+            enemy.animatorCompo.SetBool("Idle", false);
         });
     }
 
