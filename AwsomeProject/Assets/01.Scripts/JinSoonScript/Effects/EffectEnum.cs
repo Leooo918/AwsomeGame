@@ -10,7 +10,7 @@ public enum EffectEnum
     Dash = 6,
     Stun = 7,
     AirBorn = 8,
-    Invincibility = 9,
+    UpArmor = 9,
     FireArmor = 10,
     DoubleExplotion = 11,
     AirBornDown = 12,

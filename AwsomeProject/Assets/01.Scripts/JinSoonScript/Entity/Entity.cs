@@ -162,9 +162,14 @@ public abstract class Entity : MonoBehaviour
         StartCoroutine(AirBornDurationCoroutine(duration));
     }
 
-    public virtual void UpArmor(float figure)
+    public virtual void UpArmor(int figure)
     {
-        healthCompo.GetArmor(5);
+        healthCompo.GetArmor(figure);
+    }
+
+    public virtual void LostArmor(int figure)
+    {
+        healthCompo.LostArmor(figure);
     }
 
     public virtual void Invincibility(float duration) 

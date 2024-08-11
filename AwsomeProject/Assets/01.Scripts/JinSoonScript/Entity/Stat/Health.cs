@@ -42,7 +42,9 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     {
         weight = owner.Stat.weight;
         maxHp = owner.Stat.maxHp;
+        maxArmor = owner.Stat.maxHp;
         curHp = maxHp.GetValue();
+        curArmor = maxArmor.GetValue();
         hitData = new HitData();
     }
 
@@ -105,8 +107,14 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     public void GetArmor(int amount)
     {
-        //curArmor += amount;
-        //curArmor = Math.Clamp(curArmor, 0, maxArmor.GetValue());
+        curArmor += amount;
+        curArmor = Math.Clamp(curArmor, 0, maxArmor.GetValue());
+    }
+
+    public void LostArmor(int amount)
+    {
+        curArmor -= amount;
+        curArmor = Math.Clamp(curArmor, 0, maxArmor.GetValue());
     }
 
     public void ReduceMaxHp(float amount)
