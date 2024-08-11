@@ -24,19 +24,19 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         {
             //대쉬 시작
             _isRushing = true;
+            _wildBoar.dashAttackCollider.SetActive(true);
         }
         else
         {
             //대쉬 끝
-            enemyStateMachine.ChangeState(WildBoarEnum.Move);
             enemy.StopImmediately(false);
+            enemyStateMachine.ChangeState(WildBoarEnum.Move);
         }
     }
 
     public override void Enter()
     {
         base.Enter();
-        _wildBoar.dashAttackCollider.SetActive(true);
         _isRushing = false;
         _rushDir = enemy.FacingDir;
         _rushSpeed = _rushSkill.rushSpeed.GetValue();

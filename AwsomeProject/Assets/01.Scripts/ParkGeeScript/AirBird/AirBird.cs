@@ -22,18 +22,25 @@ public class AirBird : Enemy<AirBirdEnum>
 {
     public AirBirdSkill Skills { get; private set; }
 
-    public Stack<SkillSO> readySkill = new Stack<SkillSO>();
-    public List<Tuple<SkillSO, float>> notReady = new List<Tuple<SkillSO, float>>();
-
     [HideInInspector] public bool moveAnima = false;
     [HideInInspector] public bool readyFlip = false;
 
     [SerializeField] private Transform hpBar;
+    [SerializeField] private GameObject _featherPf;
+    private Transform _playerTrm;
     private Transform pivot;
+
+    public GameObject FeatherPf => _featherPf;
+    private SkillSO _shootSkill;
+
+    private float _skillReuseTime;
+
+    public void SetAfterDelay(float time) => _skillReuseTime = Time.time + time;
 
     protected override void Awake()
     {
         base.Awake();
+        _playerTrm = PlayerManager.Instance.PlayerTrm;
         Skills = gameObject.AddComponent<AirBirdSkill>();
         Skills.Init(EntitySkillSO);
 
@@ -48,6 +55,7 @@ public class AirBird : Enemy<AirBirdEnum>
         detectingDistance = EnemyStat.detectingDistance.GetValue();
 
         pivot = hpBar.Find("Pivot");
+        _shootSkill = Skills.GetSkillByEnum(AirBirdSkillEnum.Shoot);
     }
 
     private void OnEnable()
@@ -80,45 +88,19 @@ public class AirBird : Enemy<AirBirdEnum>
     {
     }
 
+    public void TryAttack()
+    {
+        float dist = (_playerTrm.position - transform.position).magnitude;
+        if (_shootSkill.attackDistance.GetValue() > dist || _skillReuseTime > Time.time) return;
+
+        _shootSkill.skill.UseSkill();
+    }
+
     public void Attack()
     {
-        SkillSO skill = readySkill.Peek();
-        if (skill == null)
-        {
-            StateMachine.ChangeState(AirBirdEnum.Idle);
-            return;
-        }
 
-        skill.skill.UseSkill();
-        notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
-        readySkill.Pop();
-        attackDistance = 0;
     }
 
-    public void ShuffleSkillStack()
-    {
-        List<SkillSO> skills = EntitySkillSO.skills;
-        for (int i = 0; i < 10; i++)
-        {
-            int a = UnityEngine.Random.Range(0, skills.Count);
-            int b = UnityEngine.Random.Range(0, skills.Count);
-
-            SkillSO temp = skills[a];
-            skills[a] = skills[b];
-            skills[b] = temp;
-        }
-
-        readySkill.Clear();
-        for (int i = 0; i < skills.Count; i++)
-        {
-            if (readySkill.Contains(skills[i])) continue;
-
-            readySkill.Push(skills[i]);
-        }
-        if (readySkill.Peek() == null) return;
-
-        attackDistance = readySkill.Peek().attackDistance.GetValue();
-    }
 
     private void OnHit()
     {

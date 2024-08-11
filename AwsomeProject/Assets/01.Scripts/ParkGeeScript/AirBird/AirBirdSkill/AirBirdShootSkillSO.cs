@@ -6,7 +6,6 @@ using UnityEngine;
 public class AirBirdShootSkillSO : SkillSO
 {
     [Header("AirBirdInfo")]
-    public AttackInfo AttackInfo;
     public Stat shootSpeed;
     public Stat damage;
 
