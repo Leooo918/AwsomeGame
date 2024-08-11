@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb526b5322c41f418007a861e92484b, type: 3}
   m_Name: TongMushroom
   m_EditorClassIdentifier: 
-  id: 0
+  id: 5
   itemName: "\uD1B5\uD1B5\uBC84\uC12F"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uD1B5\uD1B5\uBC84\uC12F\n"
+  itemExplain: "\uD3ED\uBC1C\uC758 \uD798\uC744 \uAC00\uC9C0\uACE0\uC788\uB294 \uBC84\uC12F\uC774\uB2E4.\n"
   dotImage: {fileID: 681501887, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemImage: {fileID: 21300000, guid: 9139e73f755cef141be1dc062cb0abce, type: 3}
   prefab: {fileID: 6910422564161804073, guid: 627793b01ee784448b6f1e5959ff98be, type: 3}
   ingredientType: 0
-  gatheringTime: 0
+  gatheringTime: 5
   effectType: 0
-  effectPoint: 0
+  effectPoint: 3
