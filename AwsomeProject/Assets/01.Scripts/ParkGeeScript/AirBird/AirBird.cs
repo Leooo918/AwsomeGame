@@ -128,7 +128,6 @@ public class AirBird : Enemy<AirBirdEnum>
 
     private void OnDie(Vector2 dir)
     {
-        IsDead = true;
         for (int i = 0; i < EnemyStat.dropItems.Count; i++)
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)
@@ -139,6 +138,9 @@ public class AirBird : Enemy<AirBirdEnum>
             }
         }
 
+        CanStateChangeable = true;
         StateMachine.ChangeState(AirBirdEnum.Dead);
+        CanStateChangeable = false;
+        IsDead = true;
     }
 }

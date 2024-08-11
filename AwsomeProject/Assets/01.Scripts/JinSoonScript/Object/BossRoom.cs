@@ -40,7 +40,6 @@ public class BossRoom : MonoBehaviour
             _boss = Instantiate(_bossObj, transform).GetComponent<IBoss>();
             _kingSlime = (_boss as KingSlime);
 
-            _kingSlime.healthCompo.hpSlider = _bossHpSlider;
             _kingSlime.spanwer = _spawner;
 
             _boss._bossWatchingCam = _bossWatchingCam;

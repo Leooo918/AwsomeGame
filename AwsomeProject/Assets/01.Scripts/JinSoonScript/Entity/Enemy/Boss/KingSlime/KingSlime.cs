@@ -47,6 +47,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
     private float _currentSkillAfterDelay;
     private bool _canUseSkill = true;
     private BossHealth _bossHealth;
+    private BossHpBarUI _bossHpBar;
 
     protected override void Awake()
     {
@@ -87,6 +88,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         patrolEndTime = Time.time;
 
         ShuffleSkillStack();
+        _bossHpBar = UIManager.Instance.panelDictionary[UIType.BossHp] as BossHpBarUI;
     }
 
     private void Update()
@@ -245,11 +247,13 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
     public void StartBoss()
     {
         StartCoroutine(EnableBossRoutine());
+        _bossHpBar.SetOwner(healthCompo);
+        healthCompo.onHit += _bossHpBar.SetEnemyHealth;
     }
 
     public void EndBoss()
     {
-
+        healthCompo.onHit -= _bossHpBar.SetEnemyHealth;
     }
 
 
@@ -281,7 +285,9 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         yield return new WaitForSeconds(2.3f);
         
         CameraManager.Instance.ChangeCam(_bossRoomCam, false);
-        
+        UIManager.Instance.Open(UIType.BossHp);
+
+
         yield return new WaitForSeconds(0.5f);
 
         PlayerManager.Instance.EnableAllPlayerInput();
