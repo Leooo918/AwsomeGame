@@ -18,15 +18,19 @@ public class ShopPanel : MonoBehaviour, IManageableUI
 
     public void Open()
     {
-        if (_isPlay) return;
-        //Time.timeScale = 0;
-        SettingRandomItem();
-        _isPlay = true;
+        //if (_isPlay) return;
+        ////Time.timeScale = 0;
+        //SettingRandomItem();
+        //_isPlay = true;
 
-        _rectTrm.DOAnchorPosY(_onYPos, 0.3f)
-            .SetEase(Ease.InOutFlash)
-            .SetUpdate(true)
-            .OnComplete(() => _isPlay = false);
+        //_rectTrm.DOAnchorPosY(_onYPos, 0.3f)
+        //    .SetEase(Ease.InOutFlash)
+        //    .SetUpdate(true)
+        //    .OnComplete(() => _isPlay = false);
+
+        gameObject.SetActive(true);
+        PlayerManager.Instance.DisablePlayerMovementInput();
+        SettingRandomItem();
     }
     
     private void SettingRandomItem()
@@ -54,18 +58,21 @@ public class ShopPanel : MonoBehaviour, IManageableUI
 
     public void Close()
     {
-        if (_isPlay) return;
-        //Time.timeScale = 1;
-        _isPlay = true;
+        //if (_isPlay) return;
+        ////Time.timeScale = 1;
+        //_isPlay = true;
 
-        _rectTrm.DOAnchorPosY(_offYPos, 0.3f)
-            .SetEase(Ease.OutBack)
-            .SetUpdate(true)
-            .OnComplete(() => _isPlay = false);
+        //_rectTrm.DOAnchorPosY(_offYPos, 0.3f)
+        //    .SetEase(Ease.OutBack)
+        //    .SetUpdate(true)
+        //    .OnComplete(() => _isPlay = false);
+                    
+        gameObject.SetActive(false);
+        PlayerManager.Instance.EnablePlayerMovementInput();
     }
 
     public void Init()
     {
-
+        gameObject.SetActive(false);
     }
 }

@@ -17,8 +17,8 @@ MonoBehaviour:
   itemType: 1
   maxCarryAmountPerSlot: 3
   itemExplain: "\uCB49\uCB49 \uC131\uC7A5 \uD558\uB294 \uCB49~"
-  dotImage: {fileID: -2041542126, guid: 79889aa3d53f1dd40b8f8407c5b24804, type: 3}
-  itemImage: {fileID: -2041542126, guid: 79889aa3d53f1dd40b8f8407c5b24804, type: 3}
+  dotImage: {fileID: 21300000, guid: 408b86cd54ce4a046839712d97e144f8, type: 3}
+  itemImage: {fileID: 21300000, guid: 408b86cd54ce4a046839712d97e144f8, type: 3}
   prefab: {fileID: 6910422564161804073, guid: f43960d83ab5e1d43b723418f710e42d, type: 3}
   portionType: 0
   effect: 4
@@ -27,6 +27,7 @@ MonoBehaviour:
     requirePoint: 10
   portionParticle: {fileID: 9185461987383870436, guid: ebcfc329cc98e3d449404ec1167115f8, type: 3}
   effecLv: 0
+  figure: 0
   duration: 0
   usingTime: 0.5
   isInfinite: 0

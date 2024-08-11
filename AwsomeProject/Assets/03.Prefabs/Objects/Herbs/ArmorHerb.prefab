@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e1546be072623740b12e0f5be5edf64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interact: {fileID: 0}
+  interact: {fileID: 6629215670446977334}
   item: {fileID: 11400000, guid: 5c94a6dc3b21eb946a458de94fb94577, type: 2}
   gatheredImage: {fileID: 1216669219, guid: b47af10805eee6943b61c003cd42b8d7, type: 3}
   OnGatheringHerb:
