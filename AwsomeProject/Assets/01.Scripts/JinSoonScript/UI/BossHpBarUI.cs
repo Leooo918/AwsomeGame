@@ -50,6 +50,6 @@ public class BossHpBarUI : MonoBehaviour, IManageableUI
         _seq = DOTween.Sequence();
 
         _seq.Append(DOTween.To(() => _hpBar.value, x => _hpBar.value = x, hpRatio, _hpDownDelay))
-            .Append(transform.DOPunchPosition(transform.position, 0.4f));
+            .Join(transform.DOPunchPosition(transform.position, 0.4f, 7));
     }
 }

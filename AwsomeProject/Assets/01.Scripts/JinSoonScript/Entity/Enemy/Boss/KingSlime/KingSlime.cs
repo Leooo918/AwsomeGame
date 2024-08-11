@@ -68,6 +68,7 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
+        _bossHpBar = UIManager.Instance.panelDictionary[UIType.BossHp] as BossHpBarUI;
     }
 
     private void OnEnable()
@@ -88,7 +89,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         patrolEndTime = Time.time;
 
         ShuffleSkillStack();
-        _bossHpBar = UIManager.Instance.panelDictionary[UIType.BossHp] as BossHpBarUI;
     }
 
     private void Update()
