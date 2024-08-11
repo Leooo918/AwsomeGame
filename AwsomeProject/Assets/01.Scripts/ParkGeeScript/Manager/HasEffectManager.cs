@@ -11,53 +11,68 @@ public class HasEffectManager : Singleton<HasEffectManager>
     [SerializeField] private Sprite[] _borderSprites;
     [SerializeField] private Sprite _dashEffectSprite;
     [SerializeField] private Sprite _armorUpEffectSprite;
+    [SerializeField] private Sprite _upDamageEffectSprite;
 
-    private List<int> _activeIndexes = new List<int>();
+    private List<int> _activeDashIndexes = new List<int>();
+    private List<int> _activeArmorIndexes = new List<int>();
+    private List<int> _activeDamageIndexes = new List<int>();
 
     public void DashOn(int a)
     {
-        if (_activeIndexes.Count < _blank.Length)
+        if (_activeDashIndexes.Count + _activeArmorIndexes.Count < _blank.Length)
         {
-            int currentIndex = _activeIndexes.Count;
+            int currentIndex = _activeDashIndexes.Count + _activeArmorIndexes.Count;
             _blank[currentIndex].gameObject.SetActive(true);
             _blank[currentIndex].sprite = _dashEffectSprite;
             _border[currentIndex].sprite = _borderSprites[a];
-            _activeIndexes.Add(currentIndex);
-            Debug.Log(currentIndex);
+            _activeDashIndexes.Add(currentIndex);
+            Debug.Log("DashOn Index: " + currentIndex);
         }
     }
 
     public void DashOff()
     {
-        if (_activeIndexes.Count > 0)
+        if (_activeDashIndexes.Count > 0)
         {
-            int lastIndex = _activeIndexes[_activeIndexes.Count - 1];
+            int lastIndex = _activeDashIndexes[_activeDashIndexes.Count - 1];
             ClearEffectAtIndex(lastIndex);
-            _activeIndexes.RemoveAt(_activeIndexes.Count - 1);
+            _activeDashIndexes.RemoveAt(_activeDashIndexes.Count - 1);
+            Debug.Log("DashOff Index: " + lastIndex);
         }
     }
 
     public void ArmorOn(int a)
     {
-        if (_activeIndexes.Count < _blank.Length)
+        if (_activeDashIndexes.Count + _activeArmorIndexes.Count < _blank.Length)
         {
-            int currentIndex = _activeIndexes.Count;
+            int currentIndex = _activeDashIndexes.Count + _activeArmorIndexes.Count;
             _blank[currentIndex].gameObject.SetActive(true);
             _blank[currentIndex].sprite = _armorUpEffectSprite;
             _border[currentIndex].sprite = _borderSprites[a];
-            _activeIndexes.Add(currentIndex);
-            Debug.Log(currentIndex);
+            _activeArmorIndexes.Add(currentIndex);
+            Debug.Log("ArmorOn Index: " + currentIndex);
         }
     }
 
     public void ArmorOff()
     {
-        if (_activeIndexes.Count > 0)
+        if (_activeArmorIndexes.Count > 0)
         {
-            int lastIndex = _activeIndexes[_activeIndexes.Count - 1];
+            int lastIndex = _activeArmorIndexes[_activeArmorIndexes.Count - 1];
             ClearEffectAtIndex(lastIndex);
-            _activeIndexes.RemoveAt(_activeIndexes.Count - 1);
+            _activeArmorIndexes.RemoveAt(_activeArmorIndexes.Count - 1);
+            Debug.Log("ArmorOff Index: " + lastIndex);
         }
+    }
+
+    public void DamageOn(int a)
+    {
+
+    }
+
+    public void DamageOff()
+    {
+
     }
 
     private void ClearEffectAtIndex(int index)
@@ -66,12 +81,4 @@ public class HasEffectManager : Singleton<HasEffectManager>
         _blank[index].sprite = null;
         _border[index].sprite = null;
     }
-
-    private void RemoveEffectAtIndex(int index)
-    {
-        _blank[index].gameObject.SetActive(false);
-        _blank[index].sprite = null;
-        _border[index].sprite = null;
-    }
 }
-

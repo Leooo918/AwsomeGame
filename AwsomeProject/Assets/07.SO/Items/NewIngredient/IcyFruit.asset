@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: IcyFruit
   m_EditorClassIdentifier: 
   id: 3
-  itemName: "\uC5BC\uC74C\uC5F4\uB9E4"
+  itemName: "\uB0A0\uAC1C"
   itemType: 0
   maxCarryAmountPerSlot: 5
-  itemExplain: "\uC5BC\uC74C\uCC98\uB7FC \uCC28\uAC00\uC6B4 \uC5F4\uB9E4"
-  dotImage: {fileID: 0}
-  itemImage: {fileID: 0}
+  itemExplain: "\uC5B4\uB9B0\uC0C8\uC758 \uB0A0\uAC1C\n"
+  dotImage: {fileID: 271567606, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemImage: {fileID: 21300000, guid: 33ebb3e5af9afea4bb438711cd166b7f, type: 3}
   prefab: {fileID: 0}
   ingredientType: 2
   gatheringTime: 5
-  effectType: 1
+  effectType: 8
   effectPoint: 5

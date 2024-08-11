@@ -16,7 +16,7 @@ MonoBehaviour:
   itemName: "\uD3ED\uBC1C\uD3EC\uC158Lv5"
   itemType: 1
   maxCarryAmountPerSlot: 3
-  itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 3\uBC88\uC758 \uD3ED\uBC1C\uC744
+  itemExplain: "\uB3C4\uB2EC\uD55C \uACF3\uC5D0 3\uBC88\uC758 \uD3ED\uBC1C\uC744
     \uC77C\uC73C\uD0A4\uACE0 \uBAA8\uB450\uC801\uC911 \uC2DC \uC77C\uC815\uC2DC\uAC04
     \uC2A4\uD134\uC744 \uBD80\uC5EC\uD55C\uB2E4."
   dotImage: {fileID: 999294197, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
@@ -24,7 +24,9 @@ MonoBehaviour:
   prefab: {fileID: 6910422564161804073, guid: b7112a2d3b037f444a9fee9e0e06b7ea, type: 3}
   portionType: 0
   effect: 13
-  requireEffects: []
+  requireEffects:
+  - effect: 5
+    requirePoint: 5
   portionParticle: {fileID: 5772863079720111497, guid: ac061ed62649efa4ab4ede62efbc06a0, type: 3}
   effecLv: 0
   figure: 0

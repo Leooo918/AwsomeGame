@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interact: {fileID: 3186963489055109366}
-  item: {fileID: 11400000, guid: bd99e511e889d8241bc0f3af6dac856e, type: 2}
+  item: {fileID: 11400000, guid: ee7ac0c345a2f624ea1ba3540fef5a81, type: 2}
   gatheredImage: {fileID: 0}
   OnGatheringHerb:
     m_PersistentCalls:

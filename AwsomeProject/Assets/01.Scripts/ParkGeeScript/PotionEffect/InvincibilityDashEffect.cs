@@ -6,7 +6,6 @@ public class InvincibilityDashEffect : Effect
 {
     Player player;
 
-    private float accumulatedTime = 0f;
     private float useTime = 5f;
 
     public override void EnterEffort(Entity target)
@@ -18,28 +17,22 @@ public class InvincibilityDashEffect : Effect
         dashSkillSO.IsInvincibleWhileDash = true;
         HasEffectManager.Instance.DashOn(2);
 
-        accumulatedTime = 0f;
+        target.StartDelayCallBack(useTime, () =>
+        {
+            PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+            dashSkillSO.IsInvincibleWhileDash = false;
+            dashSkillSO.CanUseSkill = false;
+            HasEffectManager.Instance.DashOff();
+        });
     }
 
     public override void UpdateEffort()
     {
         base.UpdateEffort();
-
-        accumulatedTime += Time.deltaTime;
-
-        if (accumulatedTime > useTime)
-        {
-            ExitEffort();
-        }
     }
 
     public override void ExitEffort()
     {
         base.ExitEffort();
-
-        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-        dashSkillSO.IsInvincibleWhileDash = false;
-        dashSkillSO.CanUseSkill = false;
-        HasEffectManager.Instance.DashOff();
     }
 }
