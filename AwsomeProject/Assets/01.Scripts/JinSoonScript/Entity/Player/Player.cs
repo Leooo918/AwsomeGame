@@ -245,9 +245,10 @@ public class Player : Entity
 
     public void OnDie(Vector2 hitDir)
     {
-        IsDead = true;
+        CanStateChangeable = true;
         StateMachine.ChangeState(PlayerStateEnum.Dead);
         CanStateChangeable = false;
+        IsDead = true;
     }
 
     public void ThrowPortion(PortionItem portion)

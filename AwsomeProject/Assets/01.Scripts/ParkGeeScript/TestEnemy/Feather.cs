@@ -1,11 +1,16 @@
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Feather : MonoBehaviour
+public class Feather : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float _moveSpeed = 5f;
     private Vector3 _direction;
+    private float _speed;
+    private float _maxLifeTime = 5f;
+    private float _destroyingTime;
+    private bool _stop = false;
 
     public void SetDirection(Vector3 direction)
     {
@@ -14,18 +19,55 @@ public class Feather : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(_direction * _moveSpeed * Time.deltaTime);
-        StartCoroutine(DestroyCo());
-    }
+        if (_stop) return;
 
-    private IEnumerator DestroyCo()
-    {
-        yield return new WaitForSeconds(2f);
-        DestroyFeather();
+        transform.Translate(_direction * Time.deltaTime);
+
+        if (_destroyingTime < Time.time)
+            DestroyFeather();
     }
 
     private void DestroyFeather()
     {
         Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
+    {
+        Player player = dealer as Player;
+        if (player == null) return;
+
+        Vector2 direction = (transform.position - player.transform.position).normalized;
+        float rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.up = direction;
+
+        _stop = true;
+        _destroyingTime = Time.time + _maxLifeTime;
+        transform.DORotate(new Vector3(0, 0, rot), 0.1f)
+            .OnComplete(() =>
+            {
+                _stop = false;
+
+                });
+
+    }
+
+    public void Shoot(Vector2 playerDir)
+    {
+ //       float rot = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+ //       transform.eulerAngles = new Vector3(0, 0, rot);
+
+        transform.up = playerDir;
+        _speed = playerDir.magnitude;
+        _direction = Vector2.up * _speed;
+        _destroyingTime = Time.time + _maxLifeTime;
+
+        Debug.Log("นึ");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DestroyFeather();
+        Debug.Log(collision.transform.name);
     }
 }

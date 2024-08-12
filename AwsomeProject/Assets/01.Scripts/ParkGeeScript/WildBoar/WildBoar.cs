@@ -121,7 +121,6 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     private void OnDie(Vector2 dir)
     {
-        Debug.Log("團仃辦凶Я厄兮六纂;ヲ仃;濟");
         for (int i = 0; i < EnemyStat.dropItems.Count; i++)
         {
             if (UnityEngine.Random.Range(0, 101) < EnemyStat.dropItems[i].appearChance)

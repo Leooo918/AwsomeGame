@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504d37a8e3f6f234ca084c5d2d496737, type: 3}
   m_Name: AirBirdSkills
   m_EditorClassIdentifier: 
-  skills: []
+  skills:
+  - {fileID: 11400000, guid: 09bd28302a129b540b90313ed87dba8b, type: 2}

@@ -70,7 +70,6 @@ public abstract class Enemy<T> : Entity where T : Enum
     public virtual Player IsPlayerDetected()
     {
         Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
-        Debug.Log(player + " " + detectingDistance);
         if (player == null)
             return null;
 
