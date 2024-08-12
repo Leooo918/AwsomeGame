@@ -38,8 +38,8 @@ public class Feather : MonoBehaviour, IDamageable
         if (player == null) return;
 
         Vector2 direction = (transform.position - player.transform.position).normalized;
-        float rot = Mathf.Atan2(direction.y, direction.x);
-        _direction = direction * _speed;
+        float rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.up = direction;
 
         _stop = true;
         _destroyingTime = Time.time + _maxLifeTime;
@@ -54,11 +54,20 @@ public class Feather : MonoBehaviour, IDamageable
 
     public void Shoot(Vector2 playerDir)
     {
-        float rot = Mathf.Atan2(playerDir.y, playerDir.x);
-        transform.eulerAngles = new Vector3(0, 0, rot);
+ //       float rot = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+ //       transform.eulerAngles = new Vector3(0, 0, rot);
 
+        transform.up = playerDir;
         _speed = playerDir.magnitude;
-        _direction = playerDir;
+        _direction = Vector2.up * _speed;
         _destroyingTime = Time.time + _maxLifeTime;
+
+        Debug.Log("นึ");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        DestroyFeather();
+        Debug.Log(collision.transform.name);
     }
 }

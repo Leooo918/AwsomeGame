@@ -4,57 +4,41 @@ using UnityEngine;
 
 public class AirBirdChaseState : EnemyState<AirBirdEnum>
 {
-    private AirBird airbird;
-    private AirBirdShootSkillSO shootSkill;
-    private bool canJump = false;
-    private Transform playerTrm;
-    private bool chaseStart = false;
+    private AirBird _airBird;
+    private Transform _playerTrm;
+
+    private float _upDownSpeed = 2f;
+    private bool _isGoDown = false;
 
     public AirBirdChaseState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        airbird = enemy as AirBird;
+        _airBird = enemy as AirBird;
+        _playerTrm = PlayerManager.Instance.PlayerTrm;
     }
 
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
+        _isGoDown = !_isGoDown;
     }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        playerTrm = PlayerManager.Instance.PlayerTrm;
-        enemy.animatorCompo.SetBool(animBoolHash, false);
-
-        enemy.FindPlayerEvt(() =>
-        {
-            chaseStart = true;
-            enemy.animatorCompo.SetBool(animBoolHash, true);
-        });
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        chaseStart = false;
-    }
-
     public override void UpdateState()
     {
         base.UpdateState();
 
-        if (chaseStart == false) return;
+        float dist = (_playerTrm.position - enemy.transform.position).magnitude;
+        float xDist = Mathf.Abs(_playerTrm.position.x - enemy.transform.position.x);
+        if (dist > _airBird.runAwayDistance)
+            enemyStateMachine.ChangeState(AirBirdEnum.Idle);
 
+        float playerDir = Mathf.Sign((_playerTrm.position - enemy.transform.position).x);
 
-        float dist = Vector3.Distance(playerTrm.position, enemy.transform.position);
+        if (enemy.FacingDir != playerDir && xDist > 4)
+            enemy.Flip();
 
-        if (dist <= enemy.attackDistance) airbird.Attack();
+        float x = enemy.FacingDir * enemy.moveSpeed;
+        float y = _isGoDown ? -1 : 1;
 
-        Vector2 dir = (playerTrm.position - enemy.transform.position).normalized;
-        if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
-
-        if (airbird.moveAnima == true)
-            enemy.SetVelocity(dir.x * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y);
+        enemy.SetVelocity(x, y * _upDownSpeed);
+        _airBird.TryAttack();
     }
 }

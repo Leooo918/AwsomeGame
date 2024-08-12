@@ -56,6 +56,7 @@ public class AirBird : Enemy<AirBirdEnum>
 
         pivot = hpBar.Find("Pivot");
         _shootSkill = Skills.GetSkillByEnum(AirBirdSkillEnum.Shoot);
+        _skillReuseTime = Time.time;
     }
 
     private void OnEnable()
@@ -75,6 +76,11 @@ public class AirBird : Enemy<AirBirdEnum>
         StateMachine.Initialize(AirBirdEnum.Idle, this);
     }
 
+    private void Update()
+    {
+        StateMachine.CurrentState.UpdateState();
+    }
+
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
     public override void Stun(float duration)
@@ -91,14 +97,9 @@ public class AirBird : Enemy<AirBirdEnum>
     public void TryAttack()
     {
         float dist = (_playerTrm.position - transform.position).magnitude;
-        if (_shootSkill.attackDistance.GetValue() > dist || _skillReuseTime > Time.time) return;
+        if (_shootSkill.attackDistance.GetValue() < dist || _skillReuseTime > Time.time) return;
 
         _shootSkill.skill.UseSkill();
-    }
-
-    public void Attack()
-    {
-
     }
 
 
