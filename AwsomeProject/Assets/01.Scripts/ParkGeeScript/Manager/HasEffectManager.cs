@@ -67,7 +67,10 @@ public class HasEffectManager : Singleton<HasEffectManager>
 
     public void DamageOn(int a)
     {
+        //if(_activeDamageIndexes.Count + _activeArmorIndexes.Count)
+        //{
 
+        //}
     }
 
     public void DamageOff()
