@@ -40,7 +40,6 @@ public class PortionSetSO : ScriptableObject
         //    {
         //        infos.Add(effects[i]);
         //    }
-        //}
         
         for (int i = 0; i < portions.Count; i++)
         {

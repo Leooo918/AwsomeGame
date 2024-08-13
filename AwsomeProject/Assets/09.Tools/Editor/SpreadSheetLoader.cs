@@ -11,7 +11,6 @@ using UnityEngine.UIElements;
 public enum SOType
 {
     IngredientItemSO,
-    RecipeSO,
     PortionItemSO
 }
 
@@ -169,8 +168,6 @@ public class SpreadSheetLoader : EditorWindow
                     {
                         effects[i].effect = Enum.Parse<EffectEnum>(dataArr[7 + i * 2]);
                         effects[i].requirePoint = int.Parse(dataArr[8 + i * 2]);
-                        Debug.Log(effects[i].effect);
-                        Debug.Log(effects[i].requirePoint);
                     }
 
                     CreateSO(
