@@ -33,8 +33,8 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Awake()
     {
-        explainName = explainparent.Find("Name/Txt").GetComponent<TextMeshProUGUI>();
-        explainTxt = explainparent.Find("Explain/Txt").GetComponent<TextMeshProUGUI>();
+        explainName = explainparent.Find("Name").GetComponent<TextMeshProUGUI>();
+        explainTxt = explainparent.Find("Explain").GetComponent<TextMeshProUGUI>();
         explainImage = explainparent.Find("Frame/Image").GetComponent<Image>();
     }
 

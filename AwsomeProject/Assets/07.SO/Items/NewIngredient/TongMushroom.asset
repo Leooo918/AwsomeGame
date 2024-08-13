@@ -22,5 +22,5 @@ MonoBehaviour:
   prefab: {fileID: 6910422564161804073, guid: 627793b01ee784448b6f1e5959ff98be, type: 3}
   ingredientType: 0
   gatheringTime: 5
-  effectType: 0
+  effectType: 10
   effectPoint: 3
