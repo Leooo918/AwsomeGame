@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb526b5322c41f418007a861e92484b, type: 3}
+  m_Name: WingBooty
+  m_EditorClassIdentifier: 
+  id: 3
+  itemName: "\uB0A0\uAC1C"
+  itemType: 0
+  maxCarryAmountPerSlot: 5
+  itemExplain: "\uC5B4\uB9B0\uC0C8\uC758 \uB0A0\uAC1C\n"
+  dotImage: {fileID: 271567606, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemImage: {fileID: 21300000, guid: 33ebb3e5af9afea4bb438711cd166b7f, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: 11ea1ef67af8d714e917359ff1d171db, type: 3}
+  ingredientType: 3
+  gatheringTime: 5
+  effectType: 8
+  effectPoint: 5

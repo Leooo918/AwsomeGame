@@ -79,7 +79,7 @@ public class CustomIngredientItemSO : Editor
 
             EditorGUILayout.BeginVertical();
             {
-                EditorGUILayout.IntField("id", _id.intValue);
+                EditorGUILayout.PropertyField(_id);
 
                 EditorGUILayout.BeginHorizontal();
                 {
@@ -99,9 +99,9 @@ public class CustomIngredientItemSO : Editor
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.PropertyField(_ingredientType);
-        EditorGUILayout.IntField(_gatheringTime.intValue);
+        EditorGUILayout.PropertyField(_gatheringTime);
         EditorGUILayout.PropertyField(_effectType);
-        EditorGUILayout.IntField(_effectPoint.intValue);
+        EditorGUILayout.PropertyField(_effectPoint);
 
 
         //끝날 때 해줄일 

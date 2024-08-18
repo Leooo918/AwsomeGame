@@ -22,7 +22,7 @@ MonoBehaviour:
   dotImage: {fileID: -682256301, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemImage: {fileID: 21300000, guid: bf39809123d944845a65edb74d90478a, type: 3}
   prefab: {fileID: 6910422564161804073, guid: c9befb66ad19a6f4ebc96dd0b1037ed8, type: 3}
-  ingredientType: 0
+  ingredientType: 2
   gatheringTime: 2
   effectType: 0
   effectPoint: 3
