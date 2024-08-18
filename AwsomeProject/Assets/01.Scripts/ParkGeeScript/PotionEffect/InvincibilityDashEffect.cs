@@ -6,7 +6,7 @@ public class InvincibilityDashEffect : Effect
 {
     Player player;
 
-    private float useTime = 5f;
+    private float useTime = 15f;
 
     public override void EnterEffort(Entity target)
     {
