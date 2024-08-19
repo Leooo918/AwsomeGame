@@ -12,15 +12,18 @@ public class DashEffect : Effect
     {
         player = target as Player;
 
-        PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-        dashSkillSO.CanUseSkill = true;
-        HasEffectManager.Instance.DashOn(0);
+        player.canDash = true;
+
+        //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+        //dashSkillSO.CanUseSkill = true;
+        //HasEffectManager.Instance.DashOn(0);
 
         target.StartDelayCallBack(useTime, () =>
         {
-            PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
-            dashSkillSO.CanUseSkill = false;
-            HasEffectManager.Instance.DashOff();
+            player.canDash = false;
+            //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
+            //dashSkillSO.CanUseSkill = false;
+            //HasEffectManager.Instance.DashOff();
         });
     }
 

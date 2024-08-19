@@ -97,6 +97,8 @@ public class Player : Entity
     public bool throwingPortionSelected = false;
     public Vector2 portionThrowingDir;
 
+    public bool canDash = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -237,7 +239,15 @@ public class Player : Entity
 
     private void OpenOption()
     {
-        UIManager.Instance.Open(UIType.Option);
+        Option option = UIManager.Instance.GetUI(UIType.Option) as Option;
+        if (option.isOpened)
+        {
+            option.Close();
+        }
+        else
+        {
+            option.Open();
+        }
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();

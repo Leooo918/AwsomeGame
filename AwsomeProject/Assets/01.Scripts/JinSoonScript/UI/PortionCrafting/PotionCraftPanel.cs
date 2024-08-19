@@ -8,6 +8,7 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
     {
         gameObject.SetActive(false);
         PlayerManager.Instance.EnablePlayerMovementInput();
+        PlayerManager.Instance.EnablePlayerInventoryInput();
     }
 
     public void Open()
@@ -15,6 +16,7 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
         //뭔가 dotween으로 맛있는 거 만드는거는 나중에
         gameObject.SetActive(true);
         PlayerManager.Instance.DisablePlayerMovementInput();
+        PlayerManager.Instance.DisablePlayerInventoryInput();
     }
 
     public void Init()

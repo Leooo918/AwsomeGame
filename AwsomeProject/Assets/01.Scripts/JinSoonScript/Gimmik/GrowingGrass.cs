@@ -6,6 +6,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
 {
     //private 
     private BoxCollider2D _collider;
+    private Player _player;
     [SerializeField] private Animator _animator;
     [SerializeField] private SpriteRenderer _visual;
     [SerializeField] private SpriteRenderer _visualTemp;
@@ -36,6 +37,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         _collider = GetComponent<BoxCollider2D>();
         _currentScale = _collider.size.y;
         _canClimb = _direction == GrowingDirection.Up;
+        _player = PlayerManager.Instance.Player;
 
         _originColliderOffset = _collider.offset;
         _originColliderSize = _collider.size;
@@ -61,7 +63,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         _collider.offset = new Vector2(0f, _currentScale / 2);
         _currentScale += Time.deltaTime * _growingSpeed;
 
-        if (_currentScale > _maxGrowingSize)
+        if (_currentScale >= _maxGrowingSize)
         {
             _animator.speed = 0;
             _isGrowing = false;
@@ -146,6 +148,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
             {
                 _visualTemp.enabled = false;
                 _visual.color = Color.white;
+                _player.Climb(false);
             });
     }
 
