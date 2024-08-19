@@ -11,7 +11,8 @@ public enum UIType
     ItemGather,
     BossStageEnter,
     PopUp,
-    BossHp
+    BossHp,
+    PlayerDie
 }
 
 public class UIManager : Singleton<UIManager>

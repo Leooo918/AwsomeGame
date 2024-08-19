@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DiePanel : MonoBehaviour, IManageableUI
@@ -19,6 +20,10 @@ public class DiePanel : MonoBehaviour, IManageableUI
     [SerializeField] private Transform _gatheredIngredientsContainer;
 
     private float _progress;
+    private int _time;
+    private int _killCnt;
+    private int _gatherCnt;
+    private int _coinCnt;
 
     private void Awake()
     {
@@ -27,7 +32,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             Debug.Log("นึ");
             Init(189, 25, 32, 1202, 0.5f);
@@ -37,13 +42,10 @@ public class DiePanel : MonoBehaviour, IManageableUI
 
     public void Init(int timer, int killCnt, int gatherCnt, int coinCnt, float progress)
     {
-        int minute = timer / 60;
-        int second = timer % 60;
-        _timer.SetText($"{minute}: {second}");
-        _kill.SetText(killCnt.ToString());
-        _gather.SetText(gatherCnt.ToString());
-        _coin.SetText(coinCnt.ToString());
-
+        _time = timer;
+        _killCnt = killCnt;
+        _gatherCnt = gatherCnt;
+        _coinCnt = coinCnt;
         _progress = progress;
     }
 
@@ -61,7 +63,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
     private IEnumerator ProgressRoutine()
     {
         float curProgress = 0;
-        _player.anchoredPosition = new Vector2(_progressStart.anchoredPosition.x, _player.anchoredPosition.y); 
+        _player.anchoredPosition = new Vector2(_progressStart.anchoredPosition.x, _player.anchoredPosition.y);
         yield return new WaitForSeconds(0.5f);
 
         while (curProgress < _progress)
@@ -75,7 +77,49 @@ public class DiePanel : MonoBehaviour, IManageableUI
 
             yield return null;
         }
-        Debug.Log(curProgress);
+
+        int time = 0;
+        curProgress = 0;
+        while(curProgress <= 1)
+        {
+            time = (int)Mathf.Lerp(0, _time, curProgress);
+            int minute = time / 60;
+            int second = time % 60;
+
+            _timer.SetText($"{minute} : {second}");
+            curProgress += 0.005f;
+            yield return null;
+        }
+
+        int kill = 0;
+        curProgress = 0;
+        while (curProgress <= 1)
+        {
+            kill = (int)Mathf.Lerp(0, _killCnt, curProgress);
+            _kill.SetText($"{kill}");
+            curProgress += 0.005f;
+            yield return null;
+        }
+
+        int gather = 0;
+        curProgress = 0;
+        while (curProgress <= 1)
+        {
+            gather = (int)Mathf.Lerp(0, gather, curProgress);
+            _gather.SetText($"{gather}");
+            curProgress += 0.005f;
+            yield return null;
+        }
+
+        int coin = 0;
+        curProgress = 0;
+        while (curProgress <= 1)
+        {
+            coin = (int)Mathf.Lerp(0, _coinCnt, curProgress);
+            _coin.SetText($"{coin}");
+            curProgress += 0.005f;
+            yield return null;
+        }
     }
 
     public void Init()

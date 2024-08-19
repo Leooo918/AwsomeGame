@@ -66,6 +66,7 @@ public class Herbs : MonoBehaviour
     {
         if (herbGathered) return;
 
+        GameManager.Instance.gatherCnt++;
         player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         interact.SetActive(false);
         herbGathered = true;

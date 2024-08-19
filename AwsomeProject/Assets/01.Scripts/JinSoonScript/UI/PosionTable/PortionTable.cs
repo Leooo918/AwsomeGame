@@ -31,15 +31,15 @@ public class PortionTable : MonoBehaviour
                 IngredientItemSO item = ingredientsSlot[i].assignedItem.itemSO as IngredientItemSO;
                 bool containSameEffect = false;
 
-                for (int j = 0; j < effects.Count; i++)
+                for (int j = 0; j < effects.Count; j++)
                 {
-                    if (effects[i].effect == item.effectType)
+                    if (effects[j].effect == item.effectType)
                     {
                         EffectInfo tmpEffect = new EffectInfo();
-                        tmpEffect.effect = effects[i].effect;
-                        tmpEffect.requirePoint = effects[i].requirePoint + item.effectPoint;
+                        tmpEffect.effect = effects[j].effect;
+                        tmpEffect.requirePoint = effects[j].requirePoint + item.effectPoint;
 
-                        effects[i] = tmpEffect;
+                        effects[j] = tmpEffect;
                         containSameEffect = true;
                         break;
                     }

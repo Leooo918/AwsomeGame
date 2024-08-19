@@ -11,7 +11,7 @@ public class AirBirdDeadState : EnemyState<AirBirdEnum>
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("deadAirBird");
+        GameManager.Instance.killCnt++;
     }
 
     public override void AnimationFinishTrigger()
