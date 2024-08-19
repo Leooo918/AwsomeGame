@@ -97,6 +97,8 @@ public class Player : Entity
     public bool throwingPortionSelected = false;
     public Vector2 portionThrowingDir;
 
+    public bool canDash = false;
+
     protected override void Awake()
     {
         base.Awake();

@@ -17,11 +17,11 @@ public class DashSkill : Skill
         //대쉬 쿨타임이면 return;
         if (dashStartTime + dashCoolTime > Time.time) return;
         //스킬이 해금되지 않았으면 return
-        if (canUseSkill == false) return;
+        Player player = owner as Player;
+        if (player.canDash == false) return;
 
         dashStartTime = Time.time;
 
-        Player player = owner as Player;
         player.Dash(dashTime / 10f, dashPower, isInvincibleWhileDash, isAttackWhileDash);
     }
 
