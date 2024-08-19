@@ -75,4 +75,12 @@ public class ShopPanel : MonoBehaviour, IManageableUI
     {
         gameObject.SetActive(false);
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Close();
+        }
+    }
 }

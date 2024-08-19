@@ -3,11 +3,11 @@
     "inventory": [
         {
             "id": 4,
-            "amount": 1
+            "amount": 4
         },
         {
-            "id": 103,
-            "amount": 1
+            "id": 1,
+            "amount": 2
         }
     ]
 }
