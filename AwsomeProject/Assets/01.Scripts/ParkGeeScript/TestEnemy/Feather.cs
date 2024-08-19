@@ -67,7 +67,11 @@ public class Feather : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.TryGetComponent(out Player player))
+        {
+            player.healthCompo.TakeDamage(1, Vector2.zero, null);
+        }
+
         DestroyFeather();
-        Debug.Log(collision.transform.name);
     }
 }

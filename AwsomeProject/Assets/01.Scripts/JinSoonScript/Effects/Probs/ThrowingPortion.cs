@@ -84,6 +84,6 @@ public class ThrowingPortion : MonoBehaviour
         //Debug.Log($"{_portionThrowingDirection}, {(_portionThrowingDirection * _portionThrowingSpeed).normalized}, {_portionThrowingDirection.magnitude}, {_portionThrowingDirection * _portionThrowingSpeed}, {_portionThrowingSpeed}, {(_portionThrowingDirection * _portionThrowingSpeed).magnitude}");
         _rigidbody.AddForce(_portionThrowingDirection, ForceMode2D.Impulse);
 
-        StartCoroutine(DelayColliderOn());
+        //StartCoroutine(DelayColliderOn());
     }
 }

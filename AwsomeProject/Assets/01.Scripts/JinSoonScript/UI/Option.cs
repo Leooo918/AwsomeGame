@@ -29,6 +29,8 @@ public class Option : MonoBehaviour, IManageableUI
     private float _bgm;
     private float _sfx;
 
+    public bool isOpened = false;
+
     private void Awake()
     {
         _path = Path.Combine(Application.dataPath, "Option.txt");
@@ -68,6 +70,7 @@ public class Option : MonoBehaviour, IManageableUI
             tween.Kill();
 
         tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay);
+        isOpened = true;
     }
     public void Close()
     {
@@ -75,6 +78,7 @@ public class Option : MonoBehaviour, IManageableUI
             tween.Kill();
 
         tween = _optionRect.DOAnchorPos(_closeOffset, _easeingDelay);
+        isOpened = false;
     }
 
     public void Save()

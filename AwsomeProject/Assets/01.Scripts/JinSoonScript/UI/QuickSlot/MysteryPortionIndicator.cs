@@ -1,4 +1,5 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +7,15 @@ public class MysteryPortionIndicator : MonoBehaviour
 {
     [SerializeField] private MysteryPortionInventory _inventory;
     [SerializeField] private Transform _portionParent;
-    [SerializeField]private RectTransform _slotRect;
+    [SerializeField] private RectTransform _slotRect;
 
+    [SerializeField] private Image coolTimeImage;
+    [SerializeField] private TextMeshProUGUI _timer;
     [SerializeField] private float _enabledOffset;
     [SerializeField] private float _disabledOffset;
+    [SerializeField] private float _coolTime = 30f;
+
+    private float _coolTimeDown;
 
     private Player _player;
 
@@ -22,6 +28,7 @@ public class MysteryPortionIndicator : MonoBehaviour
     private void Awake()
     {
         _player = PlayerManager.Instance.Player;
+        _coolTimeDown = _coolTime;
     }
 
     private void OnEnable()
@@ -36,6 +43,21 @@ public class MysteryPortionIndicator : MonoBehaviour
         _player.PlayerInput.SelectMysteryPortion -= SelectMysteriyPortion;
         _player.PlayerInput.SelectQuickSlot -= UnSelectMysteryPortion;
         _player.PlayerInput.OnUseQuickSlot -= UseMysteryPortion;
+    }
+
+    private void Update()
+    {
+        if (_coolTime > _coolTimeDown)
+        {
+            _coolTimeDown += Time.deltaTime;
+            _timer.SetText($"{(_coolTime - _coolTimeDown).ToString("0.0")}s");
+
+            if(_coolTime <= _coolTimeDown)
+                _timer.gameObject.SetActive(false);
+        }
+
+        coolTimeImage.rectTransform.anchoredPosition = _slotRect.anchoredPosition;
+        coolTimeImage.fillAmount = 1 - (_coolTimeDown / _coolTime);
     }
 
     public void ChangePortionImage(ItemSO itemSO)
@@ -55,7 +77,9 @@ public class MysteryPortionIndicator : MonoBehaviour
     private void UseMysteryPortion()
     {
         if (_isSelectedMysteryPortion == false || _portion == null) return;
+        if (_coolTimeDown < _coolTime) return;
 
+        _timer.gameObject.SetActive(true);
         switch (_portion.portionType)
         {
             case Portion.PortionForMyself:
@@ -68,11 +92,13 @@ public class MysteryPortionIndicator : MonoBehaviour
                 PlayerManager.Instance.Player.WeaponEnchant(_portion);
                 break;
         }
+
+        _coolTimeDown = 0;
     }
 
     private void SelectMysteriyPortion()
     {
-        if(_isSelectedMysteryPortion == true)
+        if (_isSelectedMysteryPortion == true)
         {
             _player.throwingPortionSelected = false;
             UnSelectMysteryPortion();

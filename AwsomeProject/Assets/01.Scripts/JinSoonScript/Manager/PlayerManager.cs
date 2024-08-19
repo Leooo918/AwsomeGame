@@ -75,6 +75,7 @@ public class PlayerManager : Singleton<PlayerManager>
         player.PlayerInput.Controlls.asset.FindAction("Jump").Disable();
         player.PlayerInput.Controlls.asset.FindAction("Dash").Disable();
         player.PlayerInput.Controlls.asset.FindAction("Attack").Disable();
+        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Disable();
     }
 
     public void EnablePlayerMovementInput()
@@ -84,5 +85,20 @@ public class PlayerManager : Singleton<PlayerManager>
         player.PlayerInput.Controlls.asset.FindAction("Jump").Enable();
         player.PlayerInput.Controlls.asset.FindAction("Dash").Enable();
         player.PlayerInput.Controlls.asset.FindAction("Attack").Enable();
+        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Enable();
+    }
+
+    public void EnablePlayerInventoryInput()
+    {
+        player.PlayerInput.Controlls.asset.FindAction("PressTab").Enable();
+        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Enable();
+        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Enable();
+    }
+
+    public void DisablePlayerInventoryInput()
+    {
+        player.PlayerInput.Controlls.asset.FindAction("PressTab").Disable();
+        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Disable();
+        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Disable();
     }
 }
