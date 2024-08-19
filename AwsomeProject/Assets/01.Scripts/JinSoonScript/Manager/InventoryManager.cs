@@ -20,7 +20,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private bool isIngredientsInventoryActive = true;
 
     public Transform itemParent;
-    public Transform explainparent;
+    public Transform explainParent;
 
     [SerializeField] private InputReader inputReader;
 
@@ -33,9 +33,9 @@ public class InventoryManager : Singleton<InventoryManager>
 
     private void Awake()
     {
-        explainName = explainparent.Find("Name").GetComponent<TextMeshProUGUI>();
-        explainTxt = explainparent.Find("Explain").GetComponent<TextMeshProUGUI>();
-        explainImage = explainparent.Find("Frame/Image").GetComponent<Image>();
+        explainName = explainParent.Find("Name/Txt").GetComponent<TextMeshProUGUI>();
+        explainTxt = explainParent.Find("Explain/Txt").GetComponent<TextMeshProUGUI>();
+        explainImage = explainParent.Find("Frame/Image").GetComponent<Image>();
     }
 
     private void Start()

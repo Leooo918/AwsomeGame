@@ -20,7 +20,7 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         //뭐 이건 나중에 끌때 저장, 켤때 불러오기 또 하게 해
-        playTime += Time.time;
+        playTime += Time.deltaTime;
     }
 
     public void Restart()

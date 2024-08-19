@@ -237,7 +237,15 @@ public class Player : Entity
 
     private void OpenOption()
     {
-        UIManager.Instance.Open(UIType.Option);
+        Option option = UIManager.Instance.GetUI(UIType.Option) as Option;
+        if (option.isOpened)
+        {
+            option.Close();
+        }
+        else
+        {
+            option.Open();
+        }
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
