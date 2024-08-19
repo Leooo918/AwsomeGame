@@ -11,6 +11,7 @@ public class SlimeDeadState : EnemyState<SlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
+        GameManager.Instance.killCnt++;
     }
 
     public override void Exit()
