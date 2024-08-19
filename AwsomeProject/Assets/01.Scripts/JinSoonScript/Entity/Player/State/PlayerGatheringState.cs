@@ -11,7 +11,6 @@ public class PlayerGatheringState : PlayerState
     public override void Enter()
     {
         base.Enter();
-
         player.StopImmediately(true);
     }
 }

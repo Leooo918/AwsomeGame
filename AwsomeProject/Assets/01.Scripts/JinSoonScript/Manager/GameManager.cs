@@ -12,6 +12,17 @@ public class GameManager : Singleton<GameManager>
     private Sequence _fadeAwaySeq;
     private bool _gameOver = false;
 
+    public float playTime = 0;
+    public int killCnt = 0;
+    public int gatherCnt = 0;
+    public int coinCnt = 0;
+
+    private void Update()
+    {
+        //뭐 이건 나중에 끌때 저장, 켤때 불러오기 또 하게 해
+        playTime += Time.time;
+    }
+
     public void Restart()
     {
         _fadeAwaySeq = DOTween.Sequence();
