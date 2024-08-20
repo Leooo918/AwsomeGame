@@ -15,6 +15,7 @@ public class ShopPanel : MonoBehaviour, IManageableUI
 
     private ShopItemUI[] _shopItem;
     private bool _isPlay;
+    private bool _isShuple = false;
 
     public void Open()
     {
@@ -35,6 +36,9 @@ public class ShopPanel : MonoBehaviour, IManageableUI
     
     private void SettingRandomItem()
     {
+        if (_isShuple)
+            return;
+
         ShopItemSO[] soArr = _shopItemTables.list
                            .Where(x => x.CheckSelect()).ToArray();
 
@@ -54,6 +58,8 @@ public class ShopPanel : MonoBehaviour, IManageableUI
             _shopItem[i].SetItemData(soArr[index]);
             soArr[index] = soArr[soArr.Length - 1 - i];
         }
+
+        _isShuple = true;
     }
 
     public void Close()
