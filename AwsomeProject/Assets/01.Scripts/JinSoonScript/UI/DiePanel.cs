@@ -1,10 +1,7 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class DiePanel : MonoBehaviour, IManageableUI
 {
