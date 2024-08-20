@@ -69,11 +69,13 @@ public class Option : MonoBehaviour, IManageableUI
         if (tween != null && tween.active)
             tween.Kill();
 
-        tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay);
+        tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay)
+            .OnComplete(() => Time.timeScale = 0f);
         isOpened = true;
     }
     public void Close()
     {
+        Time.timeScale = 1f;
         if (tween != null && tween.active)
             tween.Kill();
 
