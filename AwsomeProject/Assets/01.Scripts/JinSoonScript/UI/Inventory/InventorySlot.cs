@@ -61,6 +61,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             position += r.localPosition;
         }
 
+        Debug.Log(position);
         item.GetComponent<RectTransform>().localPosition = position;
         item.Init(item.itemAmount, this);
     }

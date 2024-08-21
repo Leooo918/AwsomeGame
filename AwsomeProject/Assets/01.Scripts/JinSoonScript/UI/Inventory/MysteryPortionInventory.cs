@@ -44,9 +44,9 @@ public class MysteryPortionInventory : Inventory
                 Destroy(_slots[i].assignedItem.gameObject);
             }
         }
-    }
 
-    protected override void OnEnable() { Load(); }
+        _isDisabled = false;
+    }
 
     public void UnlockMysteryPortion(int portionCnt)
     {

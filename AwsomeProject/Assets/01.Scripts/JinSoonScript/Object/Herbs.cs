@@ -120,6 +120,7 @@ public class Herbs : MonoBehaviour
             player.PlayerInput.InteractPress += GatherHerb;
             player.PlayerInput.InteractRelease += CancleGathering;
 
+
             isTriggered = true;
             gatherStart = false;
             gatherEnd = false;
