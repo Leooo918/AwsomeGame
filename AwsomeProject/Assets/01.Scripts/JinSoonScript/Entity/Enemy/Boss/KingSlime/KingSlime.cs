@@ -94,7 +94,13 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
     private void Update()
     {
         StateMachine.CurrentState.UpdateState();
+        //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
+        //_hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
+        //_pivot.localScale = new Vector3(hpPercentage, 1, 1);
+    }
 
+    private void LateUpdate()
+    {
         for (int i = 0; i < notReady.Count; ++i)
         {
             var item = notReady[i];
@@ -105,10 +111,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
                 readySkill.Enqueue(item.Item1);
             }
         }
-
-        //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        //_hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
-        //_pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     #region SkillSection

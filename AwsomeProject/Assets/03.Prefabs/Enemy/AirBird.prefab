@@ -331,7 +331,7 @@ MonoBehaviour:
   patrolEndTime: 0
   moveAnima: 0
   readyFlip: 0
-  hpBar: {fileID: 3345549309983403818}
+  _hpBar: {fileID: 3345549309983403818}
   _featherPf: {fileID: 7533499247333062178, guid: c948a80cb3f42624b935df957be496da, type: 3}
 --- !u!114 &7526917019190474438
 MonoBehaviour:

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 5
   skillName: Rush
   skillCoolTime:
-    baseValue: 5
+    baseValue: 2
     modifiers: []
     percentModifiers: []
   attackDistance:
@@ -23,7 +23,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   skillAfterDelay:
-    baseValue: 0
+    baseValue: 2
     modifiers: []
     percentModifiers: []
   AttackInfo:

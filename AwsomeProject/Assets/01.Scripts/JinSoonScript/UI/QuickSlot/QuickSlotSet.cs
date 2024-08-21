@@ -74,7 +74,7 @@ public class QuickSlotSet : MonoBehaviour
                 slots[i].DisableSlot();
         }
 
-        if (num > 0 && slots[num].AssignedPortion.portionType == Portion.PortionForThrow)
+        if (num > 0 && slots[num].AssignedPortion != null && slots[num].AssignedPortion.portionType == Portion.PortionForThrow)
         {
             player.throwingPortionSelected = true;
         }

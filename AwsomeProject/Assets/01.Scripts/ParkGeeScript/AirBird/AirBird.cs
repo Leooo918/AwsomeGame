@@ -25,10 +25,10 @@ public class AirBird : Enemy<AirBirdEnum>
     [HideInInspector] public bool moveAnima = false;
     [HideInInspector] public bool readyFlip = false;
 
-    [SerializeField] private Transform hpBar;
+    [SerializeField] private Transform _hpBar;
     [SerializeField] private GameObject _featherPf;
     private Transform _playerTrm;
-    private Transform pivot;
+    private Transform _pivot;
 
     public GameObject FeatherPf => _featherPf;
     private SkillSO _shootSkill;
@@ -54,7 +54,7 @@ public class AirBird : Enemy<AirBirdEnum>
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
 
-        pivot = hpBar.Find("Pivot");
+        _pivot = _hpBar.Find("Pivot");
         _shootSkill = Skills.GetSkillByEnum(AirBirdSkillEnum.Shoot);
         _skillReuseTime = Time.time;
     }
@@ -79,6 +79,11 @@ public class AirBird : Enemy<AirBirdEnum>
     private void Update()
     {
         StateMachine.CurrentState.UpdateState();
+
+
+        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
+        _hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
+        _pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();

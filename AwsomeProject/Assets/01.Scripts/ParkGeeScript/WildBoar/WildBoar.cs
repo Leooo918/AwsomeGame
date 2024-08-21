@@ -104,7 +104,7 @@ public class WildBoar : Enemy<WildBoarEnum>
         }
         else if(dist < attackDistance)
         {
-            Attack();
+            _rushSkill.skill.UseSkill();
         }
     }
 

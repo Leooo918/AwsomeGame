@@ -26,7 +26,7 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
             return;
         }
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 1; i <= 1; i++)
         {
             Vector2 playerDir = ((_playerTrm.position + (Vector3)_offset[i]) - enemy.transform.position).normalized * _shootSkill.shootSpeed.GetValue();
 
