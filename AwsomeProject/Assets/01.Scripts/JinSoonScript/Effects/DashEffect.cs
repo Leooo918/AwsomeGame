@@ -11,8 +11,8 @@ public class DashEffect : Effect
     public override void EnterEffort(Entity target)
     {
         player = target as Player;
-
         player.canDash = true;
+        HasEffectManager.Instance.DashOn(0);
 
         //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         //dashSkillSO.CanUseSkill = true;
@@ -21,6 +21,7 @@ public class DashEffect : Effect
         target.StartDelayCallBack(useTime, () =>
         {
             player.canDash = false;
+            HasEffectManager.Instance.DashOff();
             //PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
             //dashSkillSO.CanUseSkill = false;
             //HasEffectManager.Instance.DashOff();

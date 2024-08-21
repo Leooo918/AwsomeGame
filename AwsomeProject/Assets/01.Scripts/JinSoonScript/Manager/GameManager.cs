@@ -3,11 +3,14 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image _fadeout;
     [SerializeField] private GameObject _gameOverUI;
+    [SerializeField] private GameObject _shopBuyPanel;
+    [SerializeField] private TextMeshProUGUI _coinTxt;
     private float _fadeOutTime;
     private Sequence _fadeAwaySeq;
     private bool _gameOver = false;
@@ -21,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     {
         //뭐 이건 나중에 끌때 저장, 켤때 불러오기 또 하게 해
         playTime += Time.deltaTime;
+
     }
 
     public void Restart()
@@ -62,5 +66,11 @@ public class GameManager : Singleton<GameManager>
             _fadeAwaySeq.Append(_fadeout.DOFade(1, _fadeOutTime))
                 .AppendCallback(() => SceneManager.LoadScene(0));
         }
+    }
+
+    public void BuyItem()
+    {
+        _shopBuyPanel.SetActive(false);
+
     }
 }

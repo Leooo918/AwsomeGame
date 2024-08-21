@@ -5,12 +5,14 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField]private Transform _objTrm;
     [SerializeField] private float _growingSpeed = 20;
+    private Rigidbody2D rb2d;
     private bool _isGrowing = false;
 
     private RaycastHit2D[] _coll;
 
     private void Awake()
     {
+        rb2d = GetComponent<Rigidbody2D>();
         _coll = new RaycastHit2D[1];
     }
 
@@ -49,6 +51,8 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
                 _isGrowing = false;
                 transform.localScale = Vector3.one * 3;
             }
+
+            rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
 
