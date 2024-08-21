@@ -27,12 +27,15 @@ public class MapManager : Singleton<MapManager>
     public Vector3Int GetTilePos(Vector2 pos) => _groundTile.WorldToCell(pos);
     public Vector2 GetWorldPos(Vector3Int pos) => _groundTile.CellToWorld(pos);
 
-    public void DisableMap(Vector3 worldPos)
+    public bool DisableMap(Vector3 worldPos)
     {
+        Vector3Int cellpos = _disableTile.WorldToCell(worldPos);
+
+        if (_disableTile.GetTile(cellpos) == null) return false;
+
         if (disableSeq != null && disableSeq.active) disableSeq.Kill();
         disableSeq = DOTween.Sequence();
 
-        Vector3Int cellpos = _disableTile.WorldToCell(worldPos);
 
         visit.Clear();
         Queue<Vector3Int> positions = new Queue<Vector3Int>();
@@ -58,6 +61,8 @@ public class MapManager : Singleton<MapManager>
                     targetColor => _disableTile.SetColor(nextPostion, targetColor), endColor, _easingDelay));
             }
         }
+
+        return true;
 
         //for (int i = -exRadius; i <= exRadius; i++)
         //{
@@ -85,7 +90,7 @@ public class MapManager : Singleton<MapManager>
         //}
     }
 
-    public void EnableMap(Vector3 worldPos)
+    public void EnableMap()
     {
         if (disableSeq != null && disableSeq.active) disableSeq.Kill();
         disableSeq = DOTween.Sequence();

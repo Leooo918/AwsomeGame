@@ -20,8 +20,6 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public Sprite itemImage { get; protected set; }
     public GameObject prefab { get; protected set; }
 
-    private Transform itemParent;
-    private Transform selectItemParent;
 
     #endregion
 
@@ -39,9 +37,6 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
         amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
-
-        itemParent = InventoryManager.Instance.itemParent;
-        selectItemParent = InventoryManager.Instance.selectedItemParent;
     }
 
     public bool RemoveItem(int amount)
