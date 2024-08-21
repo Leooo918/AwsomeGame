@@ -36,6 +36,9 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         _dashContactCollider = enemy.transform.Find("DashContactCollider").GetComponent<Collider2D>();
         _contactcollider = enemy.transform.Find("EnemyContactCollider").GetComponent<Collider2D>();
 
+        if (Mathf.Sign((PlayerManager.Instance.PlayerTrm.position - enemy.transform.position).x) != enemy.FacingDir)
+            enemy.Flip();
+
         enemy.CanKnockback = false;
         enemy.CanStateChangeable = false;
         _dashDir = enemy.FacingDir;

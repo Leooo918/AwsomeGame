@@ -67,6 +67,7 @@ public class MysteryPortionInventory : Inventory
 
     public override void SelectItem(Item assignedItem)
     {
+        if (assignedItem == null || assignedItem.itemSO == null) return;
         base.SelectItem(assignedItem);
         _indicator.ChangePortionImage(assignedItem.itemSO);
     }

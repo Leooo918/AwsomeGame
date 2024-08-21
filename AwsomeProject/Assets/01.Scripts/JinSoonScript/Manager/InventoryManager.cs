@@ -11,6 +11,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public Inventory PlayerInventory => playerInventory;
     public QuickSlotSet QuickSlot => quickslot;
     public Item curMovingItem { get; private set; }
+    public Item combineableItem;
     public InventorySlot curCheckingSlot { get; private set; }
 
     public RectTransform inventoryRect;
@@ -20,6 +21,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private bool isIngredientsInventoryActive = true;
 
     public Transform itemParent;
+    public Transform selectedItemParent;
     public Transform explainParent;
 
     [SerializeField] private InputReader inputReader;

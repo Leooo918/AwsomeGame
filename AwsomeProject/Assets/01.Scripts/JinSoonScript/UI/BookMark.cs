@@ -42,6 +42,7 @@ public class BookMark : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button != 0) return;
         Enable();
         clickEvent?.Invoke(isEnableInventory);
         //InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);

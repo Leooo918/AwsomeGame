@@ -6,23 +6,11 @@
             "amount": 5
         },
         {
-            "id": 6,
-            "amount": 5
-        },
-        {
-            "id": 4,
-            "amount": 5
-        },
-        {
-            "id": 7,
-            "amount": 5
-        },
-        {
-            "id": 2,
-            "amount": 5
-        },
-        {
             "id": 8,
+            "amount": 5
+        },
+        {
+            "id": 6,
             "amount": 5
         },
         {
@@ -30,7 +18,15 @@
             "amount": 5
         },
         {
+            "id": 4,
+            "amount": 5
+        },
+        {
             "id": 9,
+            "amount": 5
+        },
+        {
+            "id": 7,
             "amount": 5
         },
         {
@@ -38,8 +34,12 @@
             "amount": 5
         },
         {
+            "id": 2,
+            "amount": 5
+        },
+        {
             "id": 1,
-            "amount": 1
+            "amount": 2
         }
     ]
 }

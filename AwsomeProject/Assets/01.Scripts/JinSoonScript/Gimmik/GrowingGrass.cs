@@ -36,7 +36,6 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         _direction = (GrowingDirection)(int)(transform.eulerAngles.z / 90f);
         _collider = GetComponent<BoxCollider2D>();
         _currentScale = _collider.size.y;
-        _canClimb = _direction == GrowingDirection.Up;
         _player = PlayerManager.Instance.Player;
 
         _originColliderOffset = _collider.offset;
@@ -89,7 +88,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         if (collision.TryGetComponent(out IDamageable enemy) && _isGrowing)
         {
             //_enemy.Rape(3f);
-            enemy.TakeDamage(0, Vector2.zero, null);
+            //enemy.TakeDamage(0, Vector2.zero, null);
             //여기에 적 속박 시키게 하는 코드
         }
 
@@ -113,6 +112,7 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
     public void GrowStart()
     {
         _isGrowing = true;
+        _canClimb = _direction == GrowingDirection.Up;
 
         Vector2 rayDir = Vector2.up;
         rayDir = Quaternion.Euler(0, 0, 90 * (int)_direction) * rayDir;

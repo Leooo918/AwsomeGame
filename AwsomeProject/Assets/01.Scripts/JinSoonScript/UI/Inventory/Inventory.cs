@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private Transform slotParent;
     [SerializeField] private Transform itemParent;
+    [SerializeField] private Transform selectedItemParent;
     [SerializeField] private InventorySlot slotPf;
 
     [SerializeField] private bool indicateIngredient = false;
@@ -22,6 +23,7 @@ public class Inventory : MonoBehaviour
     private bool indicateThrowingPortion = false;
     private bool indicateDrinkingPortion = false;
     public Item selectedItem;
+    public Item combineableItem;
 
     public bool IndicateThrowingPortion
     {
@@ -291,6 +293,15 @@ public class Inventory : MonoBehaviour
 
     public virtual void SelectItem(Item assignedItem)
     {
+        if(assignedItem == null)
+        {
+            selectedItem.transform.SetParent(itemParent);
+        }
+        else
+        {
+            assignedItem.transform.SetParent(selectedItemParent);
+        }
+
         selectedItem = assignedItem;
     }
 

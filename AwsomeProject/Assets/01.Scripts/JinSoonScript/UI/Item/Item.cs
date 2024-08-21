@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public ItemSO itemSO;
 
@@ -19,6 +19,9 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public Sprite itemImage { get; protected set; }
     public GameObject prefab { get; protected set; }
+
+    private Transform itemParent;
+    private Transform selectItemParent;
 
     #endregion
 
@@ -36,6 +39,9 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         visual = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
         amountTxt = transform.Find("Amount").GetComponent<TextMeshProUGUI>();
+
+        itemParent = InventoryManager.Instance.itemParent;
+        selectItemParent = InventoryManager.Instance.selectedItemParent;
     }
 
     public bool RemoveItem(int amount)
@@ -79,6 +85,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         visual.raycastTarget = false;
         InventoryManager.Instance.MoveItem(this);
+        //transform.parent = selectItemParent;
 
         //아이템을 선택했을때 슬롯에서 그 아이템은 더이상 할당되있지 않은 상태인
         if (assignedSlot != null)
@@ -96,6 +103,26 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         visual.raycastTarget = true;
         InventoryManager.Instance.MoveItem(null);
+        //transform.parent = itemParent;
+
+        Item toCombine = InventoryManager.Instance.combineableItem;
+        if (toCombine != null && toCombine.itemSO.id == itemSO.id)
+        {
+            if(toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
+            {
+                toCombine.SetItemAmount(itemAmount + toCombine.itemAmount);
+
+                if (toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
+                {
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    SetItemAmount(maxCarryAmountPerSlot - itemAmount);
+                    toCombine.SetItemAmount(toCombine.maxCarryAmountPerSlot);
+                }
+            }
+        }
 
         //선택중인 슬롯이 없을 때
         if (InventoryManager.Instance.curCheckingSlot == null)
@@ -134,5 +161,18 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         itemExplain = itemSO.itemExplain;
         itemImage = itemSO.itemImage;
         prefab = itemSO.prefab;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (InventoryManager.Instance.curMovingItem != null)
+        {
+            InventoryManager.Instance.combineableItem = this;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        InventoryManager.Instance.combineableItem = null;
     }
 }
