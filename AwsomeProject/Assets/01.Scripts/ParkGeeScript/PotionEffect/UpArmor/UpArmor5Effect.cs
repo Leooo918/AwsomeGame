@@ -10,7 +10,7 @@ public class UpArmor5Effect : Effect
     {
         base.EnterEffort(target);
         target.UpArmor(20);
-        HasEffectManager.Instance.ArmorOn(0);
+        HasEffectManager.Instance.ArmorOn(4);
         target.StartDelayCallBack(_delay, () =>
         {
             target.LostArmor(20);
