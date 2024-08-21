@@ -2,12 +2,12 @@
     "quickSlot": [],
     "inventory": [
         {
-            "id": 103,
-            "amount": 5
-        },
-        {
             "id": 4,
             "amount": 1
+        },
+        {
+            "id": 103,
+            "amount": 5
         },
         {
             "id": 102,
