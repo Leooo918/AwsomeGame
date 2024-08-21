@@ -23,7 +23,7 @@ MonoBehaviour:
   portionType: 1
   effect: 9
   requireEffects:
-  - effect: 2
+  - effect: 30
     requirePoint: 2
   portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
   effecLv: 0

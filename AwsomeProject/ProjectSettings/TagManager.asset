@@ -60,6 +60,9 @@ TagManager:
   - name: Spine
     uniqueID: 764107117
     locked: 0
-  - name: UI
+  - name: Player
     uniqueID: 3135332079
+    locked: 0
+  - name: UI
+    uniqueID: 3498048347
     locked: 0

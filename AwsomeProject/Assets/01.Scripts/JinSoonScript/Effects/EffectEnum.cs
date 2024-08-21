@@ -30,6 +30,9 @@ public enum EffectEnum
     FireArmor2 = 26,
     FireArmor3 = 27,
     FireArmor4 = 28,
-    FireArmor5 = 29
+    FireArmor5 = 29,
+    UpArmor2 = 30,
+    UpArmor4 = 31,
+    UpArmor5 = 32
     //Poision = 3
 }
