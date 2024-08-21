@@ -140,8 +140,6 @@ MonoBehaviour:
   lastAttackTime: 0
   patrolStartTime: 0
   patrolEndTime: 0
-  DashTime: 0
-  DashPower: 0
   mucus: {fileID: 3771830235869242607, guid: 1994f31ea3b9d9a4fadc6adb7e563129, type: 3}
   spanwer: {fileID: 0}
   _readyFlip: 0
@@ -159,10 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e0923279e95d4409a6635b2fb15b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpSlider: {fileID: 0}
   maxPhase: 2
   phaseChangeHealth:
-  - 100
+  - 180
 --- !u!50 &3174118969937779973
 Rigidbody2D:
   serializedVersion: 4

@@ -1,13 +1,14 @@
+using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
     public InventorySlot[,] inventory = new InventorySlot[5, 4];
+    private List<ItemStruct> excludingItems = new List<ItemStruct>();
     [SerializeField] private Vector2Int inventorySize = new Vector2Int(5, 4);
     protected string path = "";
     public Action<ItemSO> OnSelectItem;
@@ -25,13 +26,15 @@ public class Inventory : MonoBehaviour
     public Item selectedItem;
     public Item combineableItem;
 
+    protected bool _isDisabled = false;
+
     public bool IndicateThrowingPortion
     {
         get => indicateThrowingPortion;
         set
         {
             indicateThrowingPortion = value;
-            Load();
+            StartCoroutine(DelayLoad());
         }
     }
     public bool IndicateDrinkingPortion
@@ -40,7 +43,7 @@ public class Inventory : MonoBehaviour
         set
         {
             indicateDrinkingPortion = value;
-            Load();
+            StartCoroutine(DelayLoad());
         }
     }
 
@@ -66,31 +69,35 @@ public class Inventory : MonoBehaviour
 
     protected virtual void OnDisable()
     {
+        Save();
+
         for (int i = 0; i < inventory.GetLength(0); i++)
         {
             for (int j = 0; j < inventory.GetLength(1); j++)
             {
                 if (inventory[i, j].assignedItem != null)
                 {
-                    inventory[i, j].assignedItem.gameObject.SetActive(false);
+                    Destroy(inventory[i, j].assignedItem.gameObject);
                 }
             }
         }
+        _isDisabled = true;
     }
 
     protected virtual void OnEnable()
     {
-        for (int i = 0; i < inventory.GetLength(0); i++)
-        {
-            for (int j = 0; j < inventory.GetLength(1); j++)
-            {
-                if (inventory[i, j].assignedItem != null)
-                {
-                    inventory[i, j].assignedItem.gameObject.SetActive(true);
-                }
-
-            }
-        }
+        Load();
+        //for (int i = 0; i < inventory.GetLength(0); i++)
+        //{
+        //    for (int j = 0; j < inventory.GetLength(1); j++)
+        //    {
+        //        if (inventory[i, j].assignedItem != null)
+        //        {
+        //            inventory[i, j].assignedItem.gameObject.SetActive(true);
+        //        }
+        //    }
+        //}
+        _isDisabled = false;
     }
 
     IEnumerator DelayLoad()
@@ -129,8 +136,8 @@ public class Inventory : MonoBehaviour
                     else
                     {
                         it.AddItem(remainItem);
-
                         Destroy(item.gameObject);
+
                         Save();
                         return true;
                     }
@@ -149,6 +156,9 @@ public class Inventory : MonoBehaviour
                 if (it == null)
                 {
                     inventory[j, i].InsertItem(item);
+
+                    item.gameObject.SetActive(!_isDisabled);
+
                     Save();
                     return true;
                 }
@@ -212,12 +222,18 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        foreach (var item in excludingItems)
+        {
+            saveData.inventory.Add(item);
+        }
+
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(path, json);
     }
 
     public virtual void Load()
     {
+        excludingItems = new List<ItemStruct>();
         InventorySaveData saveData;
 
         if (!File.Exists(path))
@@ -237,7 +253,7 @@ public class Inventory : MonoBehaviour
                 if (inventory[j, i].assignedItem != null)
                     Destroy(inventory[j, i].assignedItem.gameObject);
 
-                inventory[j,i].DeleteItem();
+                inventory[j, i].DeleteItem();
             }
         }
 
@@ -252,20 +268,33 @@ public class Inventory : MonoBehaviour
 
             for (int k = 0; k < itemSet.itemset.Count; k++)
             {
-                if (itemSet.itemset[k].id != id ||
-                    (itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) ||
-                    (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false))
+                if (itemSet.itemset[k].id != id)
                     continue;
+
+                if ((itemSet.itemset[k].itemType == ItemType.Portion && indicatePortion == false) ||
+                    (itemSet.itemset[k].itemType == ItemType.Ingredient && indicateIngredient == false))
+                {
+                    excludingItems.Add(itemStruct);
+                    continue;
+                }
 
                 if (itemSet.itemset[k].itemType == ItemType.Portion)
                 {
                     PortionItemSO portionSO = itemSet.itemset[k] as PortionItemSO;
 
                     if (portionSO.portionType == Portion.PortionForThrow
-                        && indicateThrowingPortion == false) continue;
+                        && indicateThrowingPortion == false)
+                    {
+                        excludingItems.Add(itemStruct);
+                        continue;
+                    }
 
                     if (portionSO.portionType == Portion.PortionForMyself
-                        && indicateDrinkingPortion == false) continue;
+                        && indicateDrinkingPortion == false)
+                    {
+                        excludingItems.Add(itemStruct);
+                        continue;
+                    }
                 }
 
                 bool b = false;
@@ -293,9 +322,9 @@ public class Inventory : MonoBehaviour
 
     public virtual void SelectItem(Item assignedItem)
     {
-        if(assignedItem == null)
+        if (assignedItem == null)
         {
-            selectedItem.transform.SetParent(itemParent);
+            selectedItem?.transform.SetParent(itemParent);
         }
         else
         {
