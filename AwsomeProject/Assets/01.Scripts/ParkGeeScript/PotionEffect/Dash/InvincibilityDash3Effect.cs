@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvincibilityDashEffect : Effect
+public class InvincibilityDash3Effect : Effect
 {
     Player player;
 
-    private float useTime = 15f;
+    private float useTime = 60f;
 
     public override void EnterEffort(Entity target)
     {
@@ -15,7 +15,7 @@ public class InvincibilityDashEffect : Effect
         player.canDash = true;
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.IsInvincibleWhileDash = true;
-        HasEffectManager.Instance.DashOn(2);
+        HasEffectManager.Instance.DashOn(4);
 
         target.StartDelayCallBack(useTime, () =>
         {
@@ -24,15 +24,5 @@ public class InvincibilityDashEffect : Effect
             player.canDash = false;
             HasEffectManager.Instance.DashOff();
         });
-    }
-
-    public override void UpdateEffort()
-    {
-        base.UpdateEffort();
-    }
-
-    public override void ExitEffort()
-    {
-        base.ExitEffort();
     }
 }
