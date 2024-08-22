@@ -1,40 +1,93 @@
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PutOpen : MonoBehaviour
 {
     [SerializeField] private GameObject _interact;
-    private Player _player;
+    [SerializeField] private Player _player;
+    [SerializeField] private float _radius = 2f;
+
+    //private Player _player;
     private PopUpPanel _popUpPanel;
+    private bool _isPlayerInRange = false;
 
     private void Start()
     {
         _popUpPanel = UIManager.Instance.panelDictionary[UIType.PopUp] as PopUpPanel;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    #region
+    private void Update()
     {
-        if (collision.TryGetComponent(out _player))
+        CheckPlayerDistance();
+    }
+
+    private void CheckPlayerDistance()
+    {
+        float distance = Vector2.Distance(transform.position, _player.transform.position);
+
+        if (distance <= _radius)
         {
-            _popUpPanel.SetText("器记 力累 [ F ]");
-            UIManager.Instance.Open(UIType.PopUp);
-            _player.PlayerInput.InteractPress += OnInteract;
+            if (!_isPlayerInRange)
+            {
+                _isPlayerInRange = true;
+                OnPlayerEnter();
+            }
+        }
+        else
+        {
+            if (_isPlayerInRange)
+            {
+                _isPlayerInRange = false;
+                OnPlayerExit();
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnPlayerEnter()
     {
-        if (collision.TryGetComponent(out _player))
-        {
-            UIManager.Instance.Close(UIType.PopUp);
-            _player.PlayerInput.InteractPress -= OnInteract;
-        }
+        Debug.Log("Enter");
+        _popUpPanel.SetText("器记 力累 [ F ]");
+        UIManager.Instance.Open(UIType.PopUp);
+        _player.PlayerInput.InteractPress += OnInteract;
     }
+
+    private void OnPlayerExit()
+    {
+        Debug.Log("Exit");
+        UIManager.Instance.Close(UIType.PopUp);
+        _player.PlayerInput.InteractPress -= OnInteract;
+    }
+    #endregion
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.TryGetComponent(out _player))
+    //    {
+    //        _popUpPanel.SetText("器记 力累 [ F ]");
+    //        UIManager.Instance.Open(UIType.PopUp);
+    //        _player.PlayerInput.InteractPress += OnInteract;
+    //    }
+    //}
+
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.TryGetComponent(out _player))
+    //    {
+    //        UIManager.Instance.Close(UIType.PopUp);
+    //        _player.PlayerInput.InteractPress -= OnInteract;
+    //    }
+    //}
 
     private void OnInteract()
     {
         UIManager.Instance.Open(UIType.PotionCraft);
         UIManager.Instance.Close(UIType.PopUp);
         _player.PlayerInput.InteractPress -= OnInteract;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        Gizmos.DrawSphere(transform.position, _radius);
     }
 }

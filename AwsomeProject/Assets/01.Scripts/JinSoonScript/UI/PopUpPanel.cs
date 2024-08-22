@@ -9,7 +9,8 @@ public class PopUpPanel : MonoBehaviour, IManageableUI
     [SerializeField] private TextMeshProUGUI _popUpText;
     [SerializeField] private float _easingTime = 0.3f;
     private CanvasGroup _canvasGroup;
-    private float _originY;
+    private float _originY = -370;
+    private float _downY = -430;
     private RectTransform _rect;
 
     private Sequence _seq;
@@ -22,7 +23,7 @@ public class PopUpPanel : MonoBehaviour, IManageableUI
         _seq = DOTween.Sequence();
 
         _seq.Append(_canvasGroup.DOFade(0, _easingTime))
-            .Join(_rect.DOAnchorPosY(_originY - 50f, _easingTime));
+            .Join(_rect.DOAnchorPosY(_downY, _easingTime));
     }
 
     public void Open()
