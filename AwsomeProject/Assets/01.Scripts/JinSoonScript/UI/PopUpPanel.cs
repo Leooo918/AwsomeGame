@@ -50,6 +50,6 @@ public class PopUpPanel : MonoBehaviour, IManageableUI
         _originY = _rect.anchoredPosition.y;
 
         _canvasGroup.alpha = 0;
-        _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x,_originY - 50f);
+        _rect.anchoredPosition = new Vector2(_rect.anchoredPosition.x,_downY);
     }
 }
