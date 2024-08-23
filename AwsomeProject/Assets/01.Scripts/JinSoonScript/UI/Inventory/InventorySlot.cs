@@ -16,6 +16,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Item assignedItem { get; protected set; }
     public bool isSelectedNow { get; protected set; } = false;
 
+    private bool acceptInsert = true;
+
+    public void AcceptInsert(bool accept) => acceptInsert = accept;
+
     protected virtual void Awake()
     {
         parents = transform.GetComponentsInParent<RectTransform>();
@@ -27,14 +31,18 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
+
         rect.localScale = new Vector3(1.05f, 1.05f, 1f);
+        if (acceptInsert == false) return;
         if (assignedItem != null) return;
         InventoryManager.Instance.CheckSlot(this);
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {
+
         rect.localScale = new Vector3(1f, 1f, 1f);
+        if (acceptInsert == false) return;
         if (assignedItem != null) return;
         InventoryManager.Instance.CheckSlot(null);
     }
@@ -53,6 +61,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public virtual void InsertItem(Item item)
     {
+        //if (acceptInsert == false) return;
+
         assignedItem = item;
         Vector3 position = Vector3.zero;
         foreach (var r in parents)
@@ -61,7 +71,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             position += r.localPosition;
         }
 
-        Debug.Log(position);
         item.GetComponent<RectTransform>().localPosition = position;
         item.Init(item.itemAmount, this);
     }

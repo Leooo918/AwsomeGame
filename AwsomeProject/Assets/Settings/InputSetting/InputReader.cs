@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [CreateAssetMenu(menuName = "SO/InputReader")]
-public class InputReader : ScriptableObject, Controlls.IPlayerActions
+public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls.IUIActions
 {
     #region input event
 
@@ -34,6 +34,8 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
     public float XInput { get; private set; }
     public float YInput { get; private set; }
 
+    public Vector2 MousePosition { get; private set; }
+
     #endregion
 
     private Controlls controlls;
@@ -45,8 +47,10 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
         {
             controlls = new Controlls();
             controlls.Player.SetCallbacks(this);
+            controlls.UI.SetCallbacks(this);
         }
         controlls.Player.Enable();
+        controlls.UI.Enable();
     }
 
     public void OnXMovement(InputAction.CallbackContext context)
@@ -80,21 +84,22 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
             DashEvent?.Invoke();
     }
 
-    public void OnPressTab(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            PressTabEvent?.Invoke();
-    }
-
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.performed)
             AttackEvent?.Invoke();
     }
+
     public void OnOption(InputAction.CallbackContext context)
     {
         if (context.performed)
             OpenOptionEvent?.Invoke();
+    }
+
+    public void OnOpenInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            PressTabEvent?.Invoke();
     }
 
     #region QuickSlots
@@ -122,5 +127,10 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions
             SelectQuickSlot?.Invoke(slotNum - 1);
     }
 
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        Vector2 screenPos = context.ReadValue<Vector2>();
+        MousePosition = Camera.main.ScreenToWorldPoint(screenPos);
+    }
     #endregion
 }

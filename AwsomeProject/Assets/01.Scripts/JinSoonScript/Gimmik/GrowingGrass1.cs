@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
@@ -5,10 +6,16 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField]private Transform _objTrm;
     [SerializeField] private float _growingSpeed = 20;
+    [SerializeField] private float _delay = 7f;
     private Rigidbody2D rb2d;
     private bool _isGrowing = false;
+    private bool _isGrowed = false;
+    private bool _isReturning = false;
 
     private RaycastHit2D[] _coll;
+
+    private Vector2 _originPos;
+    private Vector2 _originSize = Vector2.one;
 
     private void Awake()
     {
@@ -44,15 +51,39 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
             }
 
             if (isRightDetectedWall && isLeftDetectedWall)
+            {
                 _isGrowing = false;
+                _isGrowed = true;
+                StartCoroutine(DelayReturn());
+            }
 
             if (transform.localScale.x > 3)
             {
                 _isGrowing = false;
+                _isGrowed = true;
                 transform.localScale = Vector3.one * 3;
+
+                StartCoroutine(DelayReturn());
             }
 
             rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
+        }
+
+        if(_isReturning)
+        {
+            Vector3 dir = ((Vector3)_originPos - transform.position).normalized * _growingSpeed * Time.deltaTime;
+            transform.position += dir;
+            transform.localScale -= Vector3.one * _growingSpeed * Time.deltaTime;
+
+            if(transform.localScale.x <= 1)
+            {
+                transform.localScale = Vector3.one;
+                transform.position = _originPos;
+
+                rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+                _isReturning = false;
+                _isGrowed = false;
+            }
         }
     }
 
@@ -72,7 +103,14 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
     {
         GrowthEffect growth = effect as GrowthEffect;
 
-        if (growth == null) return;
+        if (growth == null || _isGrowed) return;
         _isGrowing = true;
+        _originPos = transform.position;
+    }
+
+    private IEnumerator DelayReturn()
+    {
+        yield return new WaitForSeconds(_delay);
+        _isReturning = true;
     }
 }

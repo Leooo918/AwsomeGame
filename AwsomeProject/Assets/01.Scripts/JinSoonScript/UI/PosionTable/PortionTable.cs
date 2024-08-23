@@ -10,7 +10,6 @@ public class PortionTable : MonoBehaviour
     private Portion portionType = Portion.PortionForThrow;
     [SerializeField] private RectTransform portionTrm;
     [SerializeField] private RectTransform portionTableTrm;
-    [SerializeField] private GameObject portionResult;
 
     private void Awake()
     {
@@ -87,7 +86,13 @@ public class PortionTable : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         seq.Append(portionTableTrm.DOAnchorPosY(-1080, 0.2f))
-            .Append(portionResult.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBounce));
+            .OnComplete(() =>
+            {
+                ItemGatherPanel gatherPanel = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+                gatherPanel.Init(portion);
+                gatherPanel.Open();
+            });
+            //.Append(portionResult.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBounce));
     }
 
     public void ChangePortionType(bool down)

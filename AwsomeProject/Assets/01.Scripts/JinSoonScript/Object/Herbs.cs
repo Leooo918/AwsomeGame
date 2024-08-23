@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -73,8 +74,30 @@ public class Herbs : MonoBehaviour
 
         IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.itemParent).GetComponent<IngredientItem>();
         iItem.SetItemAmount(1);
-        InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+        bool canAddItem = InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+        
+        if(canAddItem)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(iItem.itemSO);
+            gather.Open();
+        }
+        else
+        {
+            StartCoroutine(DelayClosePopUp());
+        }
+
         spriteRenderer.sprite = gatheredImage;
+    }
+
+    private IEnumerator DelayClosePopUp()
+    {
+        PopUpPanel popUp = UIManager.Instance.GetUI(UIType.PopUp) as PopUpPanel;
+        popUp.SetText("¿Œ∫•≈‰∏Æ∞° ≤À√°Ω¿¥œ¥Ÿ");
+        popUp.Open();
+        yield return new WaitForSeconds(2f);
+        popUp.Close();
+
     }
 
     private void CancelGathering()

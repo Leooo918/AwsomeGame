@@ -21,7 +21,7 @@ public class Chest : MonoBehaviour
 
     private void Update()
     {
-        if (_isInteracting)
+        if (_isInteracting && !_isOpen)
         {
             if (Input.GetKeyDown(KeyCode.F))
                 Open();
@@ -55,7 +55,7 @@ public class Chest : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out Player player) && !_isOpen)
+        if (collision.TryGetComponent(out Player player) && !_isOpen)
         {
             UIManager.Instance.Close(UIType.PopUp);
             _isInteracting = false;

@@ -33,27 +33,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "696bb3c9-99e6-4fd5-b372-50ed5401ca76",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "b02f500a-a310-42b3-a09d-1aed023167ee",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "PressTab",
-                    "type": "Button",
-                    "id": "daa7cd79-1cb6-44ef-9401-90ba3730dc2a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -69,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Aim",
+                    "type": "Value",
+                    "id": "3d00420c-540f-415c-8177-674c6cc4d82d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "UsePortion",
                     "type": "Button",
                     "id": "365c993f-90e1-47d7-b9af-8c58160c4d16",
@@ -78,31 +69,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Option",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "1c041103-31ba-4ee9-875e-d3d5a33b8acb",
+                    "id": "696bb3c9-99e6-4fd5-b372-50ed5401ca76",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "SelectMysteryPortion",
-                    "type": "Button",
-                    "id": "b8a7e015-cce6-46a9-967d-ec54f6f09d8f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectQuickSlot",
-                    "type": "Value",
-                    "id": "ec3010da-e198-47c0-9607-217cd763b809",
-                    "expectedControlType": "Integer",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -207,17 +180,6 @@
                 },
                 {
                     "name": "",
-                    "id": "d3e7cb98-651f-42e2-97e6-0daa87e325eb",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PressTab",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a32570c4-5925-4cce-b48d-7f7026ec2215",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -240,7 +202,62 @@
                 },
                 {
                     "name": "",
-                    "id": "33c68bc8-6644-4fb5-b935-0a539fc4ef99",
+                    "id": "388398e9-31aa-444a-9901-99d66a45e880",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "68a25c36-4202-450a-825b-873f0e2d0ef8",
+            "actions": [
+                {
+                    "name": "Option",
+                    "type": "Button",
+                    "id": "542e8a62-92b9-4ad2-910b-c6654c128470",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventory",
+                    "type": "Button",
+                    "id": "66adab80-9cf8-45cc-a761-540b28dc22a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectMysteryPortion",
+                    "type": "Button",
+                    "id": "1bd96f9f-ba7c-4c7d-bfaf-7a2d9c46be61",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectQuickSlot",
+                    "type": "Value",
+                    "id": "86676c92-b0c5-48f7-9f04-ae16979daa98",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a35b5885-28db-4cff-837d-962a2f3a7d29",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -251,7 +268,18 @@
                 },
                 {
                     "name": "",
-                    "id": "3e47937a-5d5d-423b-a305-c93ff80efc38",
+                    "id": "5c5ff0e0-0296-48a8-b84b-92eeb477ffdf",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ebae6b90-6fb4-4149-81b7-75857a2c86b4",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -262,7 +290,7 @@
                 },
                 {
                     "name": "",
-                    "id": "6efcd12f-7613-4aad-9eca-ba9c70a4ba51",
+                    "id": "700696f6-f34c-48dc-a98b-7bc0bb28f8e6",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
@@ -273,7 +301,7 @@
                 },
                 {
                     "name": "",
-                    "id": "23d0fcf6-880c-4f6c-8b1f-0759c96b31be",
+                    "id": "0d8e58a2-a647-49db-8d66-ccc02656348e",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
@@ -284,7 +312,7 @@
                 },
                 {
                     "name": "",
-                    "id": "701b0e25-4e64-4e9e-978b-63b9baf5c4d0",
+                    "id": "55d6a016-e38a-4c65-9b31-fc987abc491c",
                     "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
@@ -295,7 +323,7 @@
                 },
                 {
                     "name": "",
-                    "id": "3d6cc3e8-5c2f-4492-af43-9db1001aeedb",
+                    "id": "e4f79b2f-6581-4683-b93c-f369bdf17621",
                     "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
@@ -306,7 +334,7 @@
                 },
                 {
                     "name": "",
-                    "id": "5d70a1a4-6139-4c4c-b3f7-67520fc88492",
+                    "id": "b2dc8473-8f91-4bef-b6b7-e4f25a58459b",
                     "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",

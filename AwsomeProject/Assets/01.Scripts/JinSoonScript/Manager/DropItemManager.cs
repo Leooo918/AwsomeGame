@@ -21,7 +21,7 @@ public class DropItemManager : Singleton<DropItemManager>
     {
         if (_itemsHaveBeenGet.Contains(item.id)) return;
 
-        ItemGatherPanal panal = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanal;
+        ItemGatherPanel panal = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
         panal.Init(item);
         panal.Open();
 

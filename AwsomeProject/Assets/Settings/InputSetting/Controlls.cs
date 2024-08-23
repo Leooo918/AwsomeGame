@@ -55,27 +55,9 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""696bb3c9-99e6-4fd5-b372-50ed5401ca76"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""b02f500a-a310-42b3-a09d-1aed023167ee"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PressTab"",
-                    ""type"": ""Button"",
-                    ""id"": ""daa7cd79-1cb6-44ef-9401-90ba3730dc2a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -91,6 +73,15 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""3d00420c-540f-415c-8177-674c6cc4d82d"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""UsePortion"",
                     ""type"": ""Button"",
                     ""id"": ""365c993f-90e1-47d7-b9af-8c58160c4d16"",
@@ -100,31 +91,13 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Option"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
-                    ""id"": ""1c041103-31ba-4ee9-875e-d3d5a33b8acb"",
+                    ""id"": ""696bb3c9-99e6-4fd5-b372-50ed5401ca76"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SelectMysteryPortion"",
-                    ""type"": ""Button"",
-                    ""id"": ""b8a7e015-cce6-46a9-967d-ec54f6f09d8f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SelectQuickSlot"",
-                    ""type"": ""Value"",
-                    ""id"": ""ec3010da-e198-47c0-9607-217cd763b809"",
-                    ""expectedControlType"": ""Integer"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -229,17 +202,6 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d3e7cb98-651f-42e2-97e6-0daa87e325eb"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PressTab"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a32570c4-5925-4cce-b48d-7f7026ec2215"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -262,7 +224,62 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""33c68bc8-6644-4fb5-b935-0a539fc4ef99"",
+                    ""id"": ""388398e9-31aa-444a-9901-99d66a45e880"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""68a25c36-4202-450a-825b-873f0e2d0ef8"",
+            ""actions"": [
+                {
+                    ""name"": ""Option"",
+                    ""type"": ""Button"",
+                    ""id"": ""542e8a62-92b9-4ad2-910b-c6654c128470"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""66adab80-9cf8-45cc-a761-540b28dc22a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectMysteryPortion"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bd96f9f-ba7c-4c7d-bfaf-7a2d9c46be61"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectQuickSlot"",
+                    ""type"": ""Value"",
+                    ""id"": ""86676c92-b0c5-48f7-9f04-ae16979daa98"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a35b5885-28db-4cff-837d-962a2f3a7d29"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -273,7 +290,18 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e47937a-5d5d-423b-a305-c93ff80efc38"",
+                    ""id"": ""5c5ff0e0-0296-48a8-b84b-92eeb477ffdf"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebae6b90-6fb4-4149-81b7-75857a2c86b4"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -284,7 +312,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6efcd12f-7613-4aad-9eca-ba9c70a4ba51"",
+                    ""id"": ""700696f6-f34c-48dc-a98b-7bc0bb28f8e6"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -295,7 +323,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""23d0fcf6-880c-4f6c-8b1f-0759c96b31be"",
+                    ""id"": ""0d8e58a2-a647-49db-8d66-ccc02656348e"",
                     ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -306,7 +334,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""701b0e25-4e64-4e9e-978b-63b9baf5c4d0"",
+                    ""id"": ""55d6a016-e38a-4c65-9b31-fc987abc491c"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -317,7 +345,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3d6cc3e8-5c2f-4492-af43-9db1001aeedb"",
+                    ""id"": ""e4f79b2f-6581-4683-b93c-f369bdf17621"",
                     ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -328,7 +356,7 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5d70a1a4-6139-4c4c-b3f7-67520fc88492"",
+                    ""id"": ""b2dc8473-8f91-4bef-b6b7-e4f25a58459b"",
                     ""path"": ""<Keyboard>/5"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -353,14 +381,17 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         m_Player_XMovement = m_Player.FindAction("XMovement", throwIfNotFound: true);
         m_Player_YMovement = m_Player.FindAction("YMovement", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-        m_Player_PressTab = m_Player.FindAction("PressTab", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_UsePortion = m_Player.FindAction("UsePortion", throwIfNotFound: true);
-        m_Player_Option = m_Player.FindAction("Option", throwIfNotFound: true);
-        m_Player_SelectMysteryPortion = m_Player.FindAction("SelectMysteryPortion", throwIfNotFound: true);
-        m_Player_SelectQuickSlot = m_Player.FindAction("SelectQuickSlot", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Option = m_UI.FindAction("Option", throwIfNotFound: true);
+        m_UI_OpenInventory = m_UI.FindAction("OpenInventory", throwIfNotFound: true);
+        m_UI_SelectMysteryPortion = m_UI.FindAction("SelectMysteryPortion", throwIfNotFound: true);
+        m_UI_SelectQuickSlot = m_UI.FindAction("SelectQuickSlot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,14 +456,11 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_XMovement;
     private readonly InputAction m_Player_YMovement;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
-    private readonly InputAction m_Player_PressTab;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_UsePortion;
-    private readonly InputAction m_Player_Option;
-    private readonly InputAction m_Player_SelectMysteryPortion;
-    private readonly InputAction m_Player_SelectQuickSlot;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @Controlls m_Wrapper;
@@ -440,14 +468,11 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         public InputAction @XMovement => m_Wrapper.m_Player_XMovement;
         public InputAction @YMovement => m_Wrapper.m_Player_YMovement;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
-        public InputAction @PressTab => m_Wrapper.m_Player_PressTab;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @UsePortion => m_Wrapper.m_Player_UsePortion;
-        public InputAction @Option => m_Wrapper.m_Player_Option;
-        public InputAction @SelectMysteryPortion => m_Wrapper.m_Player_SelectMysteryPortion;
-        public InputAction @SelectQuickSlot => m_Wrapper.m_Player_SelectQuickSlot;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,30 +491,21 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
-            @PressTab.started += instance.OnPressTab;
-            @PressTab.performed += instance.OnPressTab;
-            @PressTab.canceled += instance.OnPressTab;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
             @UsePortion.started += instance.OnUsePortion;
             @UsePortion.performed += instance.OnUsePortion;
             @UsePortion.canceled += instance.OnUsePortion;
-            @Option.started += instance.OnOption;
-            @Option.performed += instance.OnOption;
-            @Option.canceled += instance.OnOption;
-            @SelectMysteryPortion.started += instance.OnSelectMysteryPortion;
-            @SelectMysteryPortion.performed += instance.OnSelectMysteryPortion;
-            @SelectMysteryPortion.canceled += instance.OnSelectMysteryPortion;
-            @SelectQuickSlot.started += instance.OnSelectQuickSlot;
-            @SelectQuickSlot.performed += instance.OnSelectQuickSlot;
-            @SelectQuickSlot.canceled += instance.OnSelectQuickSlot;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -503,30 +519,21 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
-            @PressTab.started -= instance.OnPressTab;
-            @PressTab.performed -= instance.OnPressTab;
-            @PressTab.canceled -= instance.OnPressTab;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
             @UsePortion.started -= instance.OnUsePortion;
             @UsePortion.performed -= instance.OnUsePortion;
             @UsePortion.canceled -= instance.OnUsePortion;
-            @Option.started -= instance.OnOption;
-            @Option.performed -= instance.OnOption;
-            @Option.canceled -= instance.OnOption;
-            @SelectMysteryPortion.started -= instance.OnSelectMysteryPortion;
-            @SelectMysteryPortion.performed -= instance.OnSelectMysteryPortion;
-            @SelectMysteryPortion.canceled -= instance.OnSelectMysteryPortion;
-            @SelectQuickSlot.started -= instance.OnSelectQuickSlot;
-            @SelectQuickSlot.performed -= instance.OnSelectQuickSlot;
-            @SelectQuickSlot.canceled -= instance.OnSelectQuickSlot;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -544,6 +551,76 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Option;
+    private readonly InputAction m_UI_OpenInventory;
+    private readonly InputAction m_UI_SelectMysteryPortion;
+    private readonly InputAction m_UI_SelectQuickSlot;
+    public struct UIActions
+    {
+        private @Controlls m_Wrapper;
+        public UIActions(@Controlls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Option => m_Wrapper.m_UI_Option;
+        public InputAction @OpenInventory => m_Wrapper.m_UI_OpenInventory;
+        public InputAction @SelectMysteryPortion => m_Wrapper.m_UI_SelectMysteryPortion;
+        public InputAction @SelectQuickSlot => m_Wrapper.m_UI_SelectQuickSlot;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Option.started += instance.OnOption;
+            @Option.performed += instance.OnOption;
+            @Option.canceled += instance.OnOption;
+            @OpenInventory.started += instance.OnOpenInventory;
+            @OpenInventory.performed += instance.OnOpenInventory;
+            @OpenInventory.canceled += instance.OnOpenInventory;
+            @SelectMysteryPortion.started += instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.performed += instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.canceled += instance.OnSelectMysteryPortion;
+            @SelectQuickSlot.started += instance.OnSelectQuickSlot;
+            @SelectQuickSlot.performed += instance.OnSelectQuickSlot;
+            @SelectQuickSlot.canceled += instance.OnSelectQuickSlot;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @Option.started -= instance.OnOption;
+            @Option.performed -= instance.OnOption;
+            @Option.canceled -= instance.OnOption;
+            @OpenInventory.started -= instance.OnOpenInventory;
+            @OpenInventory.performed -= instance.OnOpenInventory;
+            @OpenInventory.canceled -= instance.OnOpenInventory;
+            @SelectMysteryPortion.started -= instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.performed -= instance.OnSelectMysteryPortion;
+            @SelectMysteryPortion.canceled -= instance.OnSelectMysteryPortion;
+            @SelectQuickSlot.started -= instance.OnSelectQuickSlot;
+            @SelectQuickSlot.performed -= instance.OnSelectQuickSlot;
+            @SelectQuickSlot.canceled -= instance.OnSelectQuickSlot;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyBoardAndMouseSchemeIndex = -1;
     public InputControlScheme KeyBoardAndMouseScheme
     {
@@ -558,12 +635,16 @@ public partial class @Controlls: IInputActionCollection2, IDisposable
         void OnXMovement(InputAction.CallbackContext context);
         void OnYMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
-        void OnPressTab(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnUsePortion(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
         void OnOption(InputAction.CallbackContext context);
+        void OnOpenInventory(InputAction.CallbackContext context);
         void OnSelectMysteryPortion(InputAction.CallbackContext context);
         void OnSelectQuickSlot(InputAction.CallbackContext context);
     }
