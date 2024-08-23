@@ -5,10 +5,15 @@ using UnityEngine;
 public class ShopOpen : MonoBehaviour
 {
     [SerializeField] private GameObject _interact;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private float detectionRadius = 5f;
+    [SerializeField] private float _detectionRadius = 5f;
 
-    private bool isPlayerInRange = false;
+    private bool _isPlayerInRange = false;
+    private Transform _playerTransform;
+
+    private void Awake()
+    {
+        _playerTransform = PlayerManager.Instance.PlayerTrm;
+    }
 
     private void Update()
     {
@@ -17,13 +22,13 @@ public class ShopOpen : MonoBehaviour
 
     private void CheckPlayerDistance()
     {
-        float distance = Vector2.Distance(transform.position, playerTransform.position);
+        float distance = Vector2.Distance(transform.position, _playerTransform.position);
 
-        if (distance <= detectionRadius)
+        if (distance <= _detectionRadius)
         {
-            if (!isPlayerInRange)
+            if (!_isPlayerInRange)
             {
-                isPlayerInRange = true;
+                _isPlayerInRange = true;
                 OnPlayerEnter();
             }
 
@@ -34,9 +39,9 @@ public class ShopOpen : MonoBehaviour
         }
         else
         {
-            if (isPlayerInRange)
+            if (_isPlayerInRange)
             {
-                isPlayerInRange = false;
+                _isPlayerInRange = false;
                 OnPlayerExit();
             }
         }
@@ -57,6 +62,6 @@ public class ShopOpen : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawSphere(transform.position, detectionRadius);
+        Gizmos.DrawSphere(transform.position, _detectionRadius);
     }
 }

@@ -3,16 +3,16 @@ using UnityEngine;
 public class PutOpen : MonoBehaviour
 {
     [SerializeField] private GameObject _interact;
-    [SerializeField] private Player _player;
     [SerializeField] private float _radius = 2f;
 
-    //private Player _player;
+    private Player _player;
     private PopUpPanel _popUpPanel;
     private bool _isPlayerInRange = false;
 
     private void Start()
     {
         _popUpPanel = UIManager.Instance.panelDictionary[UIType.PopUp] as PopUpPanel;
+        _player = PlayerManager.Instance.Player;
     }
 
     #region
@@ -88,6 +88,6 @@ public class PutOpen : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawSphere(transform.position, _radius);
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 }
