@@ -258,7 +258,8 @@ public class Player : Entity
     public void OnDie(Vector2 hitDir)
     {
         CanStateChangeable = true;
-        PlayerManager.Instance.DisableAllPlayerInput();
+        PlayerManager.Instance.DisablePlayerMovementInput();
+        PlayerManager.Instance.DisablePlayerInventoryInput();
         StateMachine.ChangeState(PlayerStateEnum.Dead);
         CanStateChangeable = false;
         IsDead = true;
