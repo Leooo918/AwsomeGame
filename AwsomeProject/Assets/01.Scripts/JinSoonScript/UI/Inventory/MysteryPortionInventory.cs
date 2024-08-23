@@ -26,6 +26,7 @@ public class MysteryPortionInventory : Inventory
         {
             _slots[i] = Instantiate(_slotPf, _slotParent).GetComponent<InventorySlot>();
             _slots[i].transform.SetSiblingIndex(i);
+            _slots[i].AcceptInsert(false);
             _slots[i].Init(this);
         }
     }
@@ -47,6 +48,8 @@ public class MysteryPortionInventory : Inventory
 
         _isDisabled = false;
     }
+
+    
 
     public void UnlockMysteryPortion(int portionCnt)
     {
