@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bf16ce0879c854bafac150c855bf4f, type: 3}
+  m_Name: DrinkStunPotionLv3
+  m_EditorClassIdentifier: 
+  id: 114
+  itemName: "\uBC14\uC704\uD3EC\uC158Lv3"
+  itemType: 1
+  maxCarryAmountPerSlot: 3
+  itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 \uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD55C\uB2E4."
+  dotImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  itemImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: cdb83b1f0fd446141b8836f6f19a80c0, type: 3}
+  portionType: 1
+  effect: 15
+  requireEffects:
+  - effect: 15
+    requirePoint: 2
+  portionParticle: {fileID: 897338170744746074, guid: db708d976b06aff4780c76bdaa077170, type: 3}
+  effecLv: 0
+  figure: 0
+  duration: 0
+  usingTime: 0.5
+  isInfinite: 0

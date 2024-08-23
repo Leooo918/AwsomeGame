@@ -16,7 +16,7 @@ public enum EffectEnum
     AirBornDown = 12,
     TripleExplotion = 13,
     AirStun = 14,
-    StunClean = 15,
+    UpArmor3 = 15,
     InvincibilityDash = 16,
     AirBorn2 = 17,
     Dash2 = 18,
