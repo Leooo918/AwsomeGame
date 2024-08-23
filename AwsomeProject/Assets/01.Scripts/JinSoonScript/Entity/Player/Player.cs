@@ -92,12 +92,14 @@ public class Player : Entity
     public bool canClimb { get; private set; } = false;
 
     [SerializeField] private GameObject thowingPortionPf;
+    [SerializeField] private Vector3 _throwingOffset;
     [SerializeField] private HpBar _hpDecator;
 
     public bool throwingPortionSelected = false;
     public Vector2 portionThrowingDir;
 
     public bool canDash = false;
+    public Vector3 ThrowingOffset { get => _throwingOffset; private set => _throwingOffset = value; }
 
     protected override void Awake()
     {
@@ -160,7 +162,7 @@ public class Player : Entity
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
-    protected void Update()
+    protected void FixedUpdate()
     {
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
@@ -263,7 +265,7 @@ public class Player : Entity
 
     public void ThrowPortion(PortionItem portion)
     {
-        Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+        Vector3 spawnPosition = transform.position + ThrowingOffset;
         ThrowingPortion throwingPortion =
             Instantiate(thowingPortionPf, spawnPosition, Quaternion.identity)
             .GetComponent<ThrowingPortion>();

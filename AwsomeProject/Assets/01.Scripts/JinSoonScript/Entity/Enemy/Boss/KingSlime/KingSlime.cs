@@ -274,7 +274,8 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
     private IEnumerator EnableBossRoutine()
     {
-        PlayerManager.Instance.DisableAllPlayerInput();
+        PlayerManager.Instance.DisablePlayerMovementInput();
+        PlayerManager.Instance.DisablePlayerInventoryInput();
         StateMachine.ChangeState(KingSlimeStateEnum.Disable);
 
         CameraManager.Instance.ChangeCam(_bossWatchingCam, false);
@@ -292,7 +293,8 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
         yield return new WaitForSeconds(0.5f);
 
-        PlayerManager.Instance.EnableAllPlayerInput();
+        PlayerManager.Instance.EnablePlayerMovementInput();
+        PlayerManager.Instance.EnablePlayerInventoryInput();
         StateMachine.ChangeState(KingSlimeStateEnum.Ready);
     }
 

@@ -33,9 +33,9 @@ public class ThrowingPortion : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, _currentRotation);
         _currentRotation += _spinPower * Time.deltaTime;
 
-        Vector3 direction = _portionThrowingDirection;
-        direction.y = _rigidbody.velocity.y;
-        _rigidbody.velocity = (direction);
+        //Vector3 direction = _portionThrowingDirection;
+        //direction.y = _rigidbody.velocity.y;
+        //_rigidbody.velocity = (direction);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -79,7 +79,7 @@ public class ThrowingPortion : MonoBehaviour
         PortionItemSO portionSO = portion.itemSO as PortionItemSO;
         _portionEffectPf = portionSO.portionParticle;
         
-        _portionThrowingDirection = mouseDir * _portionThrowingSpeed;
+        //_portionThrowingDirection = mouseDir * _portionThrowingSpeed;
         _portionThrowingDirection = _player.portionThrowingDir;
         //Debug.Log($"{_portionThrowingDirection}, {(_portionThrowingDirection * _portionThrowingSpeed).normalized}, {_portionThrowingDirection.magnitude}, {_portionThrowingDirection * _portionThrowingSpeed}, {_portionThrowingSpeed}, {(_portionThrowingDirection * _portionThrowingSpeed).magnitude}");
         _rigidbody.AddForce(_portionThrowingDirection, ForceMode2D.Impulse);

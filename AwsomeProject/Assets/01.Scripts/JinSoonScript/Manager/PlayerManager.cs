@@ -37,68 +37,23 @@ public class PlayerManager : Singleton<PlayerManager>
         }
     }
 
-    public void DisableAllPlayerInput()
-    {
-        player.PlayerInput.Controlls.asset.FindAction("XMovement").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("YMovement").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Jump").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Interact").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Dash").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("PressTab").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Attack").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Option").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Disable();
-    }
-
-    public void EnableAllPlayerInput()
-    {
-        player.PlayerInput.Controlls.asset.FindAction("XMovement").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("YMovement").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Jump").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Interact").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Dash").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("PressTab").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Attack").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Option").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Enable();
-    }
-
     public void DisablePlayerMovementInput()
     {
-
-        player.PlayerInput.Controlls.asset.FindAction("XMovement").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("YMovement").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Jump").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Dash").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("Attack").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Disable();
+        player.PlayerInput.Controlls.Player.Disable();
     }
 
     public void EnablePlayerMovementInput()
     {
-        player.PlayerInput.Controlls.asset.FindAction("XMovement").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("YMovement").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Jump").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Dash").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("Attack").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("UsePortion").Enable();
+        player.PlayerInput.Controlls.Player.Enable();
     }
 
     public void EnablePlayerInventoryInput()
     {
-        player.PlayerInput.Controlls.asset.FindAction("PressTab").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Enable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Enable();
+        player.PlayerInput.Controlls.UI.Enable();
     }
 
     public void DisablePlayerInventoryInput()
     {
-        player.PlayerInput.Controlls.asset.FindAction("PressTab").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectMysteryPortion").Disable();
-        player.PlayerInput.Controlls.asset.FindAction("SelectQuickSlot").Disable();
+        player.PlayerInput.Controlls.UI.Disable();
     }
 }
