@@ -6,11 +6,13 @@ public class MapleTree : MonoBehaviour
 {
     [SerializeField] private GameObject _interact;
     [SerializeField] private DropItem[] _dropItemPrefabs;
+    [SerializeField] private float _detectionRadius = 5f;
     private Animator _animator;
     Collider2D _col;
 
     private Transform _playerTrm;
-    private bool _isPlayerInRange;
+    private bool _isPlayerInRange = false;
+    private bool _isAttack = false;
 
     private void Awake()
     {
@@ -26,28 +28,60 @@ public class MapleTree : MonoBehaviour
 
     private void CheckInRange()
     {
+        float distance = Vector2.Distance(transform.position, _playerTrm.position);
 
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        if(distance <=_detectionRadius)
         {
-            _interact.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.F))
+            if(!_isPlayerInRange && !_isAttack)
             {
+                _isPlayerInRange = true;
+                OnPlayerEnter();
+            }
+            if(Input.GetMouseButtonDown(0) && !_isAttack)
+            {
+                _isAttack = true;
                 StartCoroutine(PerformHit());
+            }
+        }
+        else
+        {
+            if(_isPlayerInRange)
+            {
+                _isPlayerInRange = false;
+                OnPlayerExit();
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnPlayerEnter()
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            _interact.SetActive(false);
-        }
+        _interact.SetActive(true);
     }
+
+    private void OnPlayerExit()
+    {
+        _interact.SetActive(false);
+    }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        _interact.SetActive(true);
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            StartCoroutine(PerformHit());
+    //        }
+    //    }
+    //}
+
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        _interact.SetActive(false);
+    //    }
+    //}
 
     private IEnumerator PerformHit()
     {
@@ -61,5 +95,11 @@ public class MapleTree : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         _animator.SetBool("Hit", false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1f, 0, 0, 0.5f);
+        Gizmos.DrawSphere(transform.position, _detectionRadius);
     }
 }
