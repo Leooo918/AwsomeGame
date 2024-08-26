@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interact: {fileID: 3290448095050289722}
   _dropItemPrefabs:
-  - {fileID: 689498179160031931, guid: 0bbd45e4789e924419f197eb8a1c4b40, type: 3}
+  - {fileID: 689498179160031931, guid: 32cc683e3f81245499c2d2097360977d, type: 3}
   _detectionRadius: 2.5
 --- !u!61 &6571713324130290165
 BoxCollider2D:
