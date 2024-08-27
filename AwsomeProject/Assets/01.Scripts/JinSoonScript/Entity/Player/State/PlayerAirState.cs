@@ -6,12 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAirState : PlayerState
 {
-    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) {}
+    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     public override void Enter()
     {
         base.Enter();
-        player.curJumpCnt = 1;
+        if (player.curJumpCnt < 1)
+            player.curJumpCnt = 1;
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;
