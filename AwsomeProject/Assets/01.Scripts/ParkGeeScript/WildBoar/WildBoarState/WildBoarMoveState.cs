@@ -23,6 +23,8 @@ public class WildBoarMoveState : EnemyState<WildBoarEnum>
         float moveDir = enemy.FacingDir * enemy.moveSpeed;
         enemy.SetVelocity(moveDir, enemy.rigidbodyCompo.velocity.y);
 
+        Debug.Log("นึ");
+
         _wildBoar.TryAttack();
     }
 }
