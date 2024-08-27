@@ -29,6 +29,7 @@ public class Inventory : MonoBehaviour
 
     protected virtual void Awake()
     {
+        Debug.Log("นึ");
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
         inventory = new InventorySlot[inventorySize.x, inventorySize.y];
 
