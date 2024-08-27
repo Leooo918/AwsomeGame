@@ -63,6 +63,9 @@ TagManager:
   - name: Player
     uniqueID: 3135332079
     locked: 0
+  - name: PlayerFrontGround
+    uniqueID: 3515962251
+    locked: 0
   - name: UI
     uniqueID: 3498048347
     locked: 0

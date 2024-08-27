@@ -162,7 +162,7 @@ public class Player : Entity
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
-    protected void FixedUpdate()
+    protected void Update()
     {
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
@@ -286,5 +286,17 @@ public class Player : Entity
             canClimb = true;
         else
             canClimb = false;
+    }
+
+    public void CheckOneWayPlatform()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(groundChecker.position,
+            new Vector2(groundCheckBoxWidth, 0.05f), 0,
+            Vector2.down, groundCheckDistance, whatIsGroundAndWall);
+
+        if(hit.collider.TryGetComponent(out OneWayPlatform p))
+        {
+            p.Interact(this);
+        }
     }
 }
