@@ -39,7 +39,6 @@ public class DialogGraphView : GraphView
     public void ParpurateView(DialogSO dialog)
     {
         this.dialog = dialog;
-
         CreateNodeAndEdge();
     }
 
@@ -115,10 +114,6 @@ public class DialogGraphView : GraphView
 
     private void CreateScriptView(ScriptSO script, bool isFirstNode = false)
     {
-        NormalScriptSO normal = script as NormalScriptSO;
-        OptionSO option = script as OptionSO;
-        NoScriptSO image = script as NoScriptSO;
-
         ScriptView scriptView = new ScriptView(script, isFirstNode);
 
         scriptView.OnNodeSeleted = OnNodeSeleted;

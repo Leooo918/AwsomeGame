@@ -39,17 +39,6 @@ public class BookMarkContainer : MonoBehaviour
     {
         _isDrinkingPortionInventoryEnabled = isEnableDrinkingPortion;
         if (_isPortionInventoryEnabled == false) return;
-
-        if(isEnableDrinkingPortion)
-        {
-            portionInventory.IndicateDrinkingPortion = true;
-            portionInventory.IndicateThrowingPortion = false;
-        }
-        else
-        {
-            portionInventory.IndicateDrinkingPortion = false;
-            portionInventory.IndicateThrowingPortion = true;
-        }
     }
 
     private void OnClickLeftBookMark(bool isEnableInventory)

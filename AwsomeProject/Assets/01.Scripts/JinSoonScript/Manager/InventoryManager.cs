@@ -42,7 +42,7 @@ public class InventoryManager : Singleton<InventoryManager>
     private void Start()
     {
         SetExplain(null);
-        EnbableIgredientsInventory(true);
+        //EnbableIgredientsInventory(true);
     }
 
     private void OnEnable()
@@ -110,16 +110,16 @@ public class InventoryManager : Singleton<InventoryManager>
     {
         isIngredientsInventoryActive = isEnable;
 
-        if (isIngredientsInventoryActive)
-        {
-            ingredientsInventory.gameObject.SetActive(true);
-            portionInventory.gameObject.SetActive(false);
-        }
-        else
-        {
+        //if (isIngredientsInventoryActive)
+        //{
+        //    ingredientsInventory.gameObject.SetActive(true);
+        //    portionInventory.gameObject.SetActive(false);
+        //}
+        //else
+        //{
 
-            ingredientsInventory.gameObject.SetActive(false);
-            portionInventory.gameObject.SetActive(true);
-        }
+        //    ingredientsInventory.gameObject.SetActive(false);
+        //    portionInventory.gameObject.SetActive(true);
+        //}
     }
 }
