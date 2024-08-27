@@ -109,6 +109,7 @@ MonoBehaviour:
   lastAttackTime: 0
   patrolStartTime: 0
   patrolEndTime: 0
+  _contactDamage: {fileID: 4497345133906402780}
   moveAnim: 0
   readyFlip: 0
   hpBar: {fileID: 8760831436546034775}
@@ -173,8 +174,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0041129217, y: 0.68230706}
-  m_Size: {x: 1.1213392, y: 0.94850934}
+  m_Offset: {x: 0.004112921, y: 0.6803511}
+  m_Size: {x: 1.1213393, y: 0.94459736}
   m_Direction: 1
 --- !u!50 &7266504766220132557
 Rigidbody2D:

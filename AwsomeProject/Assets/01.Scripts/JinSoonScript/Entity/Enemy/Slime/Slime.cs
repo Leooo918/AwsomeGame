@@ -24,6 +24,7 @@ public class Slime : Enemy<SlimeStateEnum>
 {
     public SlimeSkill Skills { get; private set; }
 
+    [SerializeField] private GameObject _contactDamage;
 
     #region SkillSection
 
@@ -191,6 +192,7 @@ public class Slime : Enemy<SlimeStateEnum>
         CanStateChangeable = true;
         StateMachine.ChangeState(SlimeStateEnum.Dead);
         CanStateChangeable = false;
+        _contactDamage.SetActive(false);
         IsDead = true;
     }
 }
