@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6947777386023810976}
   - component: {fileID: 6769811420822886422}
   m_Layer: 0
-  m_Name: Wing
+  m_Name: WingDropItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
