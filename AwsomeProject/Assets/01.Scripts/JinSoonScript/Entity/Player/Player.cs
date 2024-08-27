@@ -189,7 +189,7 @@ public class Player : Entity
     public override void Invincibility(float duration)
     {
         base.Invincibility(duration);
-        StateMachine.ChangeState(PlayerStateEnum.Stun);
+        //StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 
     public override void InvincibilityDisable()
