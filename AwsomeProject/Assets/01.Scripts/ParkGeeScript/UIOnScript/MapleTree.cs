@@ -40,7 +40,7 @@ public class MapleTree : MonoBehaviour
             if(Input.GetMouseButtonDown(0) && !_isAttack)
             {
                 _isAttack = true;
-                StartCoroutine(PerformHit());
+                StartCoroutine(HitCo());
             }
         }
         else
@@ -63,29 +63,12 @@ public class MapleTree : MonoBehaviour
         _interact.SetActive(false);
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        _interact.SetActive(true);
-    //        if (Input.GetMouseButtonDown(0))
-    //        {
-    //            StartCoroutine(PerformHit());
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        _interact.SetActive(false);
-    //    }
-    //}
-
-    private IEnumerator PerformHit()
+    private IEnumerator HitCo()
     {
         _animator.SetBool("Hit", true);
+
+        AnimatorStateInfo animatorState = _animator.GetCurrentAnimatorStateInfo(0);
+        Debug.Log(animatorState.length);
 
         int randomIdx = Random.Range(0, _dropItemPrefabs.Length);
         DropItem randomDropItem = _dropItemPrefabs[randomIdx];
@@ -93,7 +76,7 @@ public class MapleTree : MonoBehaviour
 
         _col.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(animatorState.length);
         _animator.SetBool("Hit", false);
     }
 
