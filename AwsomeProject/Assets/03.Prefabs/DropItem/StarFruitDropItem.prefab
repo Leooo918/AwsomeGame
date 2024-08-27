@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6947777386023810976}
   - component: {fileID: 6769811420822886422}
   m_Layer: 0
-  m_Name: ChestNut
+  m_Name: StarFruitDropItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ebb12ee34ef5a47b39dd61e83ecdfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: dedee22f45b31eb4f9b74d315dd0d8d5, type: 2}
+  item: {fileID: 11400000, guid: 5f1ecec5fe940d7478e00752f9bc8c5e, type: 2}
 --- !u!212 &4131539934879039155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_SortingLayerID: 950916033
   m_SortingLayer: 4
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1007849703, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  m_Sprite: {fileID: 954808718, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -21,34 +21,15 @@ public class Inventory : MonoBehaviour
     [SerializeField] private bool indicateIngredient = false;
     [SerializeField] private bool indicatePortion = false;
 
-    private bool indicateThrowingPortion = false;
-    private bool indicateDrinkingPortion = false;
     public Item selectedItem;
     public Item combineableItem;
 
     protected bool _isDisabled = false;
 
-    public bool IndicateThrowingPortion
-    {
-        get => indicateThrowingPortion;
-        set
-        {
-            indicateThrowingPortion = value;
-            StartCoroutine(DelayLoad());
-        }
-    }
-    public bool IndicateDrinkingPortion
-    {
-        get => indicateDrinkingPortion;
-        set
-        {
-            indicateDrinkingPortion = value;
-            StartCoroutine(DelayLoad());
-        }
-    }
 
     protected virtual void Awake()
     {
+        Debug.Log("นึ");
         path = Path.Combine(Application.dataPath, "SaveDatas\\Inventory.json");
         inventory = new InventorySlot[inventorySize.x, inventorySize.y];
 
@@ -276,25 +257,6 @@ public class Inventory : MonoBehaviour
                 {
                     excludingItems.Add(itemStruct);
                     continue;
-                }
-
-                if (itemSet.itemset[k].itemType == ItemType.Portion)
-                {
-                    PortionItemSO portionSO = itemSet.itemset[k] as PortionItemSO;
-
-                    if (portionSO.portionType == Portion.PortionForThrow
-                        && indicateThrowingPortion == false)
-                    {
-                        excludingItems.Add(itemStruct);
-                        continue;
-                    }
-
-                    if (portionSO.portionType == Portion.PortionForMyself
-                        && indicateDrinkingPortion == false)
-                    {
-                        excludingItems.Add(itemStruct);
-                        continue;
-                    }
                 }
 
                 bool b = false;

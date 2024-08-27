@@ -27,16 +27,16 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   attackInfos:
-  - attackMultiplier: 1
+  - attackMultiplier: 4
     offset: {x: 0.5, y: 1}
-    knockBackPower: {x: 8, y: 8}
-    moveDesire: {x: 8, y: 0}
+    knockBackPower: {x: 6, y: 0}
+    moveDesire: {x: 12, y: 0}
     radius: 1.7
     damage: 0
-  - attackMultiplier: 2
+  - attackMultiplier: 6.6
     offset: {x: 1.05, y: 0.94}
-    knockBackPower: {x: 6, y: 12}
-    moveDesire: {x: 5, y: 0}
+    knockBackPower: {x: 10, y: 10}
+    moveDesire: {x: 10, y: 0}
     radius: 0.89
     damage: 0
   attackComboDragTime: 0.7

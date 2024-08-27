@@ -56,6 +56,12 @@ public class PlayerGroundState : PlayerState
 
     private void HandleJumpEvent()
     {
+        if(player.PlayerInput.YInput < 0)
+        {
+            player.CheckOneWayPlatform();
+            return;
+        }
+
         if (player.CanJump)
         {
             player.curJumpCnt = 1;

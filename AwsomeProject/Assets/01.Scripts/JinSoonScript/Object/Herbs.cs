@@ -139,6 +139,8 @@ public class Herbs : MonoBehaviour
     {
         if (collision.TryGetComponent<Player>(out player) && herbGathered == false)
         {
+            interact.transform.position = 
+                new Vector3(interact.transform.position.x, player.transform.position.y + 2.5f, 0);
             interact.SetActive(true);
             player.PlayerInput.InteractPress += GatherHerb;
             player.PlayerInput.InteractRelease += CancleGathering;

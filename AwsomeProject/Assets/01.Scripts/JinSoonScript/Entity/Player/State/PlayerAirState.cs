@@ -2,14 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerAirState : PlayerState
 {
-    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) {}
+    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     public override void Enter()
     {
         base.Enter();
+        if (player.curJumpCnt < 1)
+            player.curJumpCnt = 1;
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;

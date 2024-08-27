@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -796918949
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 4
   m_Sprite: {fileID: -386324525, guid: 4bf776da4c4bd0c46ac7c3c35b2d782f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interact: {fileID: 6629215670446977334}
   item: {fileID: 11400000, guid: 5c94a6dc3b21eb946a458de94fb94577, type: 2}
-  gatheredImage: {fileID: -1039551061, guid: 3d32002c8c2da8a499e77165f8289155, type: 3}
+  gatheredImage: {fileID: 0}
   OnGatheringHerb:
     m_PersistentCalls:
       m_Calls: []
@@ -328,7 +328,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -796918949
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 5
   m_Sprite: {fileID: -39523852, guid: 4bf776da4c4bd0c46ac7c3c35b2d782f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -98,8 +98,10 @@ public class WildBoar : Enemy<WildBoarEnum>
     {
         float dist = (transform.position - _playerTrm.position).magnitude;
 
+        Debug.Log(_attackDelay);
         if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
         {
+            Debug.Log("½Ã¹ß");
             _rushSkill.skill.UseSkill();
         }
         else if(dist < attackDistance)
