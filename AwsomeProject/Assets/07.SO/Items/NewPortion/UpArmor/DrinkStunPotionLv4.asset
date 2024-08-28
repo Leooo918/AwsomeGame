@@ -19,7 +19,7 @@ MonoBehaviour:
   itemExplain: "\uC77C\uC815\uC2DC\uAC04\uB3D9\uC548 \uBC29\uC5B4\uB825\uC774 \uC99D\uAC00\uD55C\uB2E4."
   dotImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
   itemImage: {fileID: 1431118189, guid: 84bdd3544e6b14b40919138ffd87f7e3, type: 3}
-  prefab: {fileID: 6910422564161804073, guid: 367d6fb93fa835d45a88abb187802469, type: 3}
+  prefab: {fileID: 6910422564161804073, guid: 3fef4cae6cb0881459041364a03e3fdf, type: 3}
   portionType: 1
   effect: 9
   requireEffects:
