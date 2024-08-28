@@ -8,7 +8,7 @@ public class MapleTree : MonoBehaviour
     [SerializeField] private DropItem[] _dropItemPrefabs;
     [SerializeField] private float _detectionRadius = 5f;
     private Animator _animator;
-    Collider2D _col;
+    private Collider2D _col;
 
     private Transform _playerTrm;
     private bool _isPlayerInRange = false;
