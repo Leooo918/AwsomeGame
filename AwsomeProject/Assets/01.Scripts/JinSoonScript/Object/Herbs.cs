@@ -74,7 +74,8 @@ public class Herbs : MonoBehaviour
 
         IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.itemParent).GetComponent<IngredientItem>();
         iItem.SetItemAmount(1);
-        bool canAddItem = InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+        bool canAddItem = 
+            InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
         
         if(canAddItem)
         {
