@@ -76,7 +76,7 @@ public class QuickSlotInserterSet : MonoBehaviour
         seq.Join(inserterSetRect.DOScale(1f, 0.5f))
             .OnComplete(() =>
             {
-                Transform itemParent = InventoryManager.Instance.itemParent;
+                Transform itemParent = InventoryManager.Instance.ItemParent;
                 for (int i = 0; i < inserter.Length; i++)
                 {
                     if (inserter[i].assignedItem != null)

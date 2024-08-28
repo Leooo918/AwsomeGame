@@ -1,4 +1,13 @@
 {
     "quickSlot": [],
-    "inventory": []
+    "inventory": [
+        {
+            "id": 4,
+            "amount": 1,
+            "itemPos": {
+                "x": 0,
+                "y": 0
+            }
+        }
+    ]
 }

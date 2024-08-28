@@ -17,9 +17,9 @@ public class QuickSlotInserterSetsParent : MonoBehaviour
     private QuickSlotInserterSet nextQuickSlot;
     private int curSlotNum = 0;
 
-    private Vector2 originPos = new Vector2(0f, 385f);
-    private Vector2 downPeek = new Vector2(40f, 270f);
-    private Vector2 upPeek = new Vector2(-40f, 500f);
+    private Vector2 originPos = new Vector2(0f, 25f);
+    private Vector2 downPeek = new Vector2(40f, -90f);
+    private Vector2 upPeek = new Vector2(-40f, 140f);
     private Color disableColor = new Color(0.8f, 0.8f, 0.8f, 1f);
 
     public QuickSlotInserterSet CurQuickSlot => curQuickSlot;

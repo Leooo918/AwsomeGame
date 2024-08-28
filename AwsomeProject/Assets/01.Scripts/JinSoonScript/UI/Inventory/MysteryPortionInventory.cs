@@ -31,10 +31,6 @@ public class MysteryPortionInventory : Inventory
         }
     }
 
-    protected override void Start()
-    {
-    }
-
     protected override void OnDisable() 
     {
         Save();

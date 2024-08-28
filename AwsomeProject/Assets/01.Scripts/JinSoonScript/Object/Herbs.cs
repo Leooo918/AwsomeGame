@@ -72,7 +72,7 @@ public class Herbs : MonoBehaviour
         interact.SetActive(false);
         herbGathered = true;
 
-        IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.itemParent).GetComponent<IngredientItem>();
+        IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.ItemParent).GetComponent<IngredientItem>();
         iItem.SetItemAmount(1);
         bool canAddItem = 
             InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);

@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditorInternal.Profiling.Memory.Experimental;
+using System.Linq;
+
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,6 +14,17 @@ using UnityEditor;
 public class ItemSetSO : ScriptableObject
 {
     public List<ItemSO> itemset;
+
+    public ItemSO GetItem(int id)
+    {
+        List<ItemSO> itemList = itemset.Where(item => item.id == id).ToList();
+
+        if(itemList.Count == 0)
+            return null;
+
+        return itemList[0];
+    }
+
 
     public void AddItem(ItemSO item)
     {
@@ -23,7 +38,7 @@ public class ItemSetSO : ScriptableObject
 
     public ItemSO FindItem(int id)
     {
-        for(int i = 0; i < itemset.Count; i++)
+        for (int i = 0; i < itemset.Count; i++)
         {
             if (itemset[i].id == id)
             {

@@ -2,28 +2,31 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections.Generic;
+using System.Linq;
 
 public class InventoryManager : Singleton<InventoryManager>
 {
     public ItemSetSO ItemSet;
     [SerializeField] private Inventory playerInventory;
-    [SerializeField] private QuickSlotSet quickslot;
+    private QuickSlotSet quickslot;
     public Inventory PlayerInventory => playerInventory;
     public QuickSlotSet QuickSlot => quickslot;
     public Item curMovingItem { get; private set; }
-    public Item combineableItem;
+    [HideInInspector]public Item combineableItem;
     public InventorySlot curCheckingSlot { get; private set; }
 
     public RectTransform inventoryRect;
 
-    [SerializeField] private RectTransform ingredientsInventory;
-    [SerializeField] private RectTransform portionInventory;
     private bool isIngredientsInventoryActive = true;
 
-    public Transform itemParent;
-    public Transform explainParent;
+    [SerializeField] private Transform itemParent;
+    [SerializeField] private Transform explainParent;
 
     [SerializeField] private InputReader inputReader;
+
+    public Transform ItemParent => itemParent;
+    public Transform ExplainParent => explainParent;
 
     private TextMeshProUGUI explainName;
     private TextMeshProUGUI explainTxt;
@@ -32,17 +35,16 @@ public class InventoryManager : Singleton<InventoryManager>
     private Tween tween;
     private bool inventoryOpen = false;
 
+    private List<Inventory> inventories;
+
     private void Awake()
     {
+        inventories = FindObjectsByType<Inventory>(FindObjectsSortMode.None).ToList();
+
         explainName = explainParent.Find("Name").GetComponent<TextMeshProUGUI>();
         explainTxt = explainParent.Find("Explain").GetComponent<TextMeshProUGUI>();
         explainImage = explainParent.Find("Frame/Image").GetComponent<Image>();
-    }
-
-    private void Start()
-    {
         SetExplain(null);
-        //EnbableIgredientsInventory(true);
     }
 
     private void OnEnable()
@@ -53,6 +55,11 @@ public class InventoryManager : Singleton<InventoryManager>
     private void OnDisable()
     {
         inputReader.PressTabEvent -= OnPressTab;
+    }
+
+    public void LoadAllInventory()
+    {
+        inventories.ForEach(inven => inven.Load());
     }
 
     public void MoveItem(Item item) => curMovingItem = item;
@@ -108,18 +115,6 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void EnbableIgredientsInventory(bool isEnable)
     {
-        isIngredientsInventoryActive = isEnable;
 
-        //if (isIngredientsInventoryActive)
-        //{
-        //    ingredientsInventory.gameObject.SetActive(true);
-        //    portionInventory.gameObject.SetActive(false);
-        //}
-        //else
-        //{
-
-        //    ingredientsInventory.gameObject.SetActive(false);
-        //    portionInventory.gameObject.SetActive(true);
-        //}
     }
 }
