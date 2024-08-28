@@ -1,16 +1,4 @@
 {
     "quickSlot": [],
-    "inventory": [
-        {
-<<<<<<< Updated upstream
-=======
-            "id": 5,
-            "amount": 4
-        },
-        {
->>>>>>> Stashed changes
-            "id": 1,
-            "amount": 1
-        }
-    ]
+    "inventory": []
 }
