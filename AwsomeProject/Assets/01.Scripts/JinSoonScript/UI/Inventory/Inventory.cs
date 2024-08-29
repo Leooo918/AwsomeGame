@@ -1,4 +1,3 @@
-using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public InventorySlot[,] inventory = new InventorySlot[5, 4];
+    private InventorySlot[,] inventory = new InventorySlot[5, 4];
     private List<ItemStruct> excludingItems = new List<ItemStruct>();
     [SerializeField] private Vector2Int inventorySize = new Vector2Int(5, 4);
     protected string path = "";
@@ -66,7 +65,7 @@ public class Inventory : MonoBehaviour
 
     protected virtual void OnEnable()
     {
-        Load();
+        //Load();
         //for (int i = 0; i < inventory.GetLength(0); i++)
         //{
         //    for (int j = 0; j < inventory.GetLength(1); j++)
@@ -77,7 +76,7 @@ public class Inventory : MonoBehaviour
         //        }
         //    }
         //}
-        _isDisabled = false;
+        //_isDisabled = false;
     }
 
     IEnumerator DelayLoad()
@@ -104,6 +103,7 @@ public class Inventory : MonoBehaviour
                 //같은 아이템이 있는지 확인
                 //같은 아이템이 있다면 그 아이템의 한칸 최대 수량보다 적을동안아이템을
                 //그 칸에 넣어주기
+                Debug.Log(inventory + " " + inventory.GetLength(0) + " " + inventory.GetLength(1) + " " + inventory[i, j] + " " + i + " " + j);
                 Item it = inventory[i, j].assignedItem;
                 if (it != null && it.itemSO.id == id)
                 {
@@ -202,10 +202,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        foreach (var item in excludingItems)
-        {
-            saveData.inventory.Add(item);
-        }
+        excludingItems.ForEach(item => saveData.inventory.Add(item));
 
         string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(path, json);
@@ -279,6 +276,8 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+
+        Debug.Log(inventory[0, 0]);
     }
 
     public virtual void SelectItem(Item assignedItem)
