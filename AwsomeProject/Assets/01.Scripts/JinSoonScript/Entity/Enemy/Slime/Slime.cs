@@ -34,14 +34,7 @@ public class Slime : Enemy<SlimeStateEnum>
     #endregion
 
     [HideInInspector] public bool moveAnim = false;
-    [HideInInspector] public bool readyFlip = false;
 
-    #region HpBar
-
-    [SerializeField] private Transform hpBar;
-    private Transform pivot;
-
-    #endregion
 
     protected override void Awake()
     {
@@ -59,8 +52,6 @@ public class Slime : Enemy<SlimeStateEnum>
         PatrolTime = EnemyStat.patrolTime.GetValue();
         PatrolDelay = EnemyStat.patrolDelay.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
-
-        pivot = hpBar.Find("Pivot");
     }
 
     private void OnEnable()
@@ -80,7 +71,6 @@ public class Slime : Enemy<SlimeStateEnum>
     protected void Start()
     {
         StateMachine.Initialize(SlimeStateEnum.Idle, this);
-        patrolEndTime = Time.time;
 
         ShuffleSkillStack();
     }
@@ -100,10 +90,6 @@ public class Slime : Enemy<SlimeStateEnum>
                 --i;
             }
         }
-
-        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        hpBar.localScale = new Vector3(FacingDir * hpBar.localScale.x, hpBar.localScale.y, hpBar.localScale.z);
-        pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();

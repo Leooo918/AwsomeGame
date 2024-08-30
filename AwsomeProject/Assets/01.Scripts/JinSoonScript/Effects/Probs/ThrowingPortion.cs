@@ -80,7 +80,7 @@ public class ThrowingPortion : MonoBehaviour
         _portionEffectPf = portionSO.portionParticle;
         
         //_portionThrowingDirection = mouseDir * _portionThrowingSpeed;
-        _portionThrowingDirection = _player.portionThrowingDir;
+        _portionThrowingDirection = _player.PortionThrowingDir;
         //Debug.Log($"{_portionThrowingDirection}, {(_portionThrowingDirection * _portionThrowingSpeed).normalized}, {_portionThrowingDirection.magnitude}, {_portionThrowingDirection * _portionThrowingSpeed}, {_portionThrowingSpeed}, {(_portionThrowingDirection * _portionThrowingSpeed).magnitude}");
         _rigidbody.AddForce(_portionThrowingDirection, ForceMode2D.Impulse);
 

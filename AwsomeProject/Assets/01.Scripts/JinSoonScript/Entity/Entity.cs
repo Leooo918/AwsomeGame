@@ -24,9 +24,11 @@ public abstract class Entity : MonoBehaviour
     [Header("Collision info")]
     [SerializeField] protected LayerMask whatIsGroundAndWall;
     [SerializeField] protected LayerMask whatIsProbs;
+    [Space(10)]
     [SerializeField] protected Transform groundChecker;
     [SerializeField] protected float groundCheckBoxWidth;
     [SerializeField] protected float groundCheckDistance;
+    [Space(10)]
     [SerializeField] protected Transform wallChecker;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float wallCheckBoxHeight;

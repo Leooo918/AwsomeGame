@@ -3,6 +3,22 @@
     "inventory": [
         {
             "id": 4,
+            "amount": 2,
+            "itemPos": {
+                "x": 0,
+                "y": 0
+            }
+        },
+        {
+            "id": 1,
+            "amount": 1,
+            "itemPos": {
+                "x": 1,
+                "y": 0
+            }
+        },
+        {
+            "id": 102,
             "amount": 1,
             "itemPos": {
                 "x": 0,

@@ -80,7 +80,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         visual.raycastTarget = false;
         InventoryManager.Instance.MoveItem(this);
-        //transform.parent = selectItemParent;
+        //transform._parent = selectItemParent;
 
         //아이템을 선택했을때 슬롯에서 그 아이템은 더이상 할당되있지 않은 상태인
         if (assignedSlot != null)
@@ -98,7 +98,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         visual.raycastTarget = true;
         InventoryManager.Instance.MoveItem(null);
-        //transform.parent = itemParent;
+        //transform._parent = itemParent;
 
         Item toCombine = InventoryManager.Instance.combineableItem;
         if (toCombine != null && toCombine.itemSO.id == itemSO.id)
@@ -160,6 +160,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("밍?");
         if (InventoryManager.Instance.curMovingItem != null)
         {
             InventoryManager.Instance.combineableItem = this;
@@ -168,6 +169,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Debug.Log("밍!");
         InventoryManager.Instance.combineableItem = null;
     }
 }

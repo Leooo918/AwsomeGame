@@ -3,9 +3,8 @@ using System;
 using UnityEngine;
 public abstract class Enemy<T> : Entity where T : Enum
 {
-    [SerializeField] private EnemyStatSO enemyStat;
     public EnemyStateMachine<T> StateMachine { get; private set; }
-    public EnemyStatSO EnemyStat => enemyStat;
+    public EnemyStatSO EnemyStat { get; private set; }
 
     #region EnemyStat
     public float moveSpeed { get; protected set; }
@@ -18,21 +17,14 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     #region Settings
 
-    [SerializeField] protected Transform findPlayerMark;
-
     [SerializeField] protected LayerMask whatIsPlayer;
     [SerializeField] protected LayerMask whatIsObstacle;
-
-    public Transform patrolOriginPos;
 
     [Header("Attack Settings")]
     public float runAwayDistance;
     [HideInInspector] public float lastAttackTime;
 
     #endregion
-
-    [HideInInspector] public float patrolStartTime;
-    [HideInInspector] public float patrolEndTime;
 
     public float defaultMoveSpeed { get; protected set; }
     protected int lastAnimationBoolHash;
@@ -43,7 +35,7 @@ public abstract class Enemy<T> : Entity where T : Enum
     {
         base.Awake();
         defaultMoveSpeed = moveSpeed;
-        enemyStat = ScriptableObject.Instantiate(enemyStat);
+        EnemyStat = Stat as EnemyStatSO;
 
         StateMachine = new EnemyStateMachine<T>();
         foreach (T stateEnum in Enum.GetValues(typeof(T)))
@@ -67,6 +59,11 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     #region DetectRegion
 
+
+    /// <summary>
+    /// 플레이어를 바라보고, detectingDistance 만큼 가까이 있으면
+    /// </summary>
+    /// <returns></returns>
     public virtual Player IsPlayerDetected()
     {
         Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
@@ -84,6 +81,11 @@ public abstract class Enemy<T> : Entity where T : Enum
         else return null;
     }
 
+    /// <summary>
+    /// 플레이어까지 직선상에 적이있는지
+    /// </summary>
+    /// <param name="distance">플레이어까지의 거리</param>
+    /// <returns></returns>
     public virtual bool IsObstacleInLine(float distance)
     {
         Vector2 dir = ((PlayerManager.Instance.PlayerTrm.position + Vector3.up) - transform.position).normalized;
@@ -91,33 +93,12 @@ public abstract class Enemy<T> : Entity where T : Enum
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
     }
 
+    /// <summary>
+    /// 진행방향 앞쪽에 바닥이있는지 확인
+    /// </summary>
+    /// <returns></returns>
     public bool CheckFront() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);
     #endregion
-
-    public virtual void FindPlayerEvt(Action action)
-    {
-        //이미 감지됬었다면 걍 액션 인보크 시켜주고 리턴
-        if (playerDetected == true)
-        {
-            action?.Invoke();
-            return;
-        }
-
-
-        SpriteRenderer sr = findPlayerMark.GetComponent<SpriteRenderer>();
-        sr.color = new Color(1, 1, 1, 1);
-        findPlayerMark.localScale = Vector3.one;
-
-        //대충 느낌표로 찾았다 어필해주고 움직이기 시작
-        findPlayerMark.DOScaleY(1, 0.5f)
-            .SetDelay(0.3f)
-            .OnComplete(() =>
-            {
-                action?.Invoke();
-                sr.DOFade(0, 0.5f);
-                playerDetected = true;
-            });
-    }
 
     public void MissPlayer() => playerDetected = false;
 

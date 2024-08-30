@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 /// <summary>
 /// 얘는 3가지 상태가 있다고 생각하면 됨
@@ -76,11 +77,11 @@ public class QuickSlotSet : MonoBehaviour
 
         if (num > 0 && slots[num].AssignedPortion != null && slots[num].AssignedPortion.portionType == Portion.PortionForThrow)
         {
-            player.throwingPortionSelected = true;
+            player.throwingPortionSelected = (true);
         }
         else
         {
-            player.throwingPortionSelected = false;
+            player.throwingPortionSelected = (false);
         }
     }
 

@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/EnemyStat")]
-public class EnemyStatSO : ScriptableObject
+public class EnemyStatSO : EntityStat
 {
     public Stat patrolTime;
     public Stat patrolDelay;
@@ -13,11 +13,13 @@ public class EnemyStatSO : ScriptableObject
 
     public List<DropItemStruct> dropItems = new List<DropItemStruct>();
 
-    protected Dictionary<EnemyStatType, Stat> statDic;
+    protected Dictionary<EnemyStatType, Stat> enemyStatDic;
 
-    protected virtual void OnEnable()
+    protected override void OnEnable()
     {
-        statDic = new Dictionary<EnemyStatType, Stat>();
+        base.OnEnable();
+
+        enemyStatDic = new Dictionary<EnemyStatType, Stat>();
 
         Type agentStatType = typeof(EnemyStatSO);
 
@@ -27,7 +29,7 @@ public class EnemyStatSO : ScriptableObject
             {
                 string fieldName = LowerFirstChar(enumType.ToString());
                 FieldInfo statField = agentStatType.GetField(fieldName);
-                statDic.Add(enumType, statField.GetValue(this) as Stat);
+                enemyStatDic.Add(enumType, statField.GetValue(this) as Stat);
             }
             catch (Exception ex)
             {

@@ -47,8 +47,9 @@ public class PosionThrowingVisualizer : MonoBehaviour
             transform.localScale = _coll[0].bounds.size * 1.2f;
             if (!_aimEnemy.activeSelf) _aimEnemy.SetActive(true);
             if (_aimNothing.activeSelf) _aimNothing.SetActive(false);
-            _player.portionThrowingDir =
-                CalculateThrowDirection(_playerTrm.position, _coll[0].transform.position);
+
+            Vector2 direction = CalculateThrowDirection(_playerTrm.position, _coll[0].transform.position);
+            _player.PortionThrowingDir = (direction);
 
             return;
         }
@@ -77,8 +78,8 @@ public class PosionThrowingVisualizer : MonoBehaviour
 
         //_throwingSpeed = CalculateLaunchSpeed(_playerTrm.position, mousePosition);
 
-        _player.portionThrowingDir =
-            CalculateThrowDirection(_playerTrm.position + _player.ThrowingOffset, mousePosition);
+        Vector2 dir = CalculateThrowDirection(_playerTrm.position + _player.ThrowingOffset, mousePosition);
+        _player.PortionThrowingDir = (dir);
     }
 
 

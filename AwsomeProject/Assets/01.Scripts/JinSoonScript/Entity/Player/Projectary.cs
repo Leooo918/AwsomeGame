@@ -140,7 +140,7 @@ public class Projectary : MonoBehaviour
             t.position = dotPos;
         }
 
-        _player.portionThrowingDir = power * 2;
+        _player.PortionThrowingDir = (power * 2); 
     }
 
     private Vector2 CalculateThrowDirection(Vector2 startPosition, Vector2 targetPosition, float initialSpeed)

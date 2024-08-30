@@ -12,7 +12,7 @@ public class InvincibilityDashEffect : Effect
     {
         player = target as Player;
 
-        player.canDash = true;
+        player.canDash = (true);
         PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
         dashSkillSO.IsInvincibleWhileDash = true;
         HasEffectManager.Instance.DashOn(2);
@@ -21,7 +21,7 @@ public class InvincibilityDashEffect : Effect
         {
             PlayerDashSkillSO dashSkillSO = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash) as PlayerDashSkillSO;
             dashSkillSO.IsInvincibleWhileDash = false;
-            player.canDash = false;
+            player.canDash = (false);
             HasEffectManager.Instance.DashOff();
         });
     }

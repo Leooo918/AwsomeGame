@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum PanDirection
 {
@@ -34,6 +35,9 @@ public class CameraControllerTrigger : MonoBehaviour
     public Action<Player> OnAfterSwapCameraToLeft;
     public Action<Player> OnAfterSwapCameraToRight;
 
+    //카메라 막 연속으로 움직일 때도 얘 사용하면 됨
+    public UnityEvent OnAfterPanDirection;
+
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
@@ -41,7 +45,7 @@ public class CameraControllerTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Player>(out Player player))
+        if (other.TryGetComponent(out Player player))
         {
             if (inspectorObj.panCameraOnContact)
             {
@@ -52,7 +56,7 @@ public class CameraControllerTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<Player>(out Player player))
+        if (other.TryGetComponent(out Player player))
         {
             if (inspectorObj.panCameraOnContact)
             {

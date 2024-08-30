@@ -24,6 +24,6 @@ public class WildBoarIdleState : EnemyState<WildBoarEnum>
             enemyStateMachine.ChangeState(WildBoarEnum.Move);
 
         if (player != null && enemy.IsObstacleInLine(enemy.runAwayDistance) == false)
-            enemy.FindPlayerEvt(() => enemyStateMachine.ChangeState(WildBoarEnum.Move));
+            enemyStateMachine.ChangeState(WildBoarEnum.Move);
     }
 }

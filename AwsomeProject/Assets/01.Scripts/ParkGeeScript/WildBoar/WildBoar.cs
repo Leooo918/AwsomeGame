@@ -20,13 +20,10 @@ public enum WildBoarSkillEnum
 
 public class WildBoar : Enemy<WildBoarEnum>
 {
-    //public WildBoarStatus wildBoarStatus { get; protected set; }
     public WildBoarSkill Skills { get; private set; }
 
-    [SerializeField] private Transform _hpBar;
     public GameObject dashAttackCollider; 
     private Transform _playerTrm;
-    private Transform _pivot;
 
     private SkillSO _rushSkill;
 
@@ -50,8 +47,6 @@ public class WildBoar : Enemy<WildBoarEnum>
         moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
         _rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
-
-        _pivot = _hpBar.Find("Pivot");
     }
 
     private void OnEnable()
@@ -77,10 +72,6 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Update()
     {
         StateMachine.CurrentState.UpdateState();
-
-        float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
-        _hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);
-        _pivot.localScale = new Vector3(hpPercentage, 1, 1);
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
@@ -98,15 +89,13 @@ public class WildBoar : Enemy<WildBoarEnum>
     {
         float dist = (transform.position - _playerTrm.position).magnitude;
 
-        Debug.Log(_attackDelay);
         if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
         {
-            Debug.Log("½Ã¹ß");
             _rushSkill.skill.UseSkill();
         }
         else if(dist < attackDistance)
         {
-            _rushSkill.skill.UseSkill();
+            //_rushSkill.skill.UseSkill();
         }
     }
 

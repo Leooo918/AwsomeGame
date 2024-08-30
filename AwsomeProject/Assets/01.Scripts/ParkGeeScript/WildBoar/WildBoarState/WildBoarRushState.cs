@@ -55,14 +55,15 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
     {
         base.UpdateState();
         if (_isRushing)
-        {
             enemy.SetVelocity(_rushDir * _rushSpeed, 0);
-        }
 
-        if (enemy.IsGroundDetected() == false)
+        if (enemy.CheckFront() == false)
         {
-            enemyStateMachine.ChangeState(WildBoarEnum.Move);
+            _isRushing = false;
+            enemy.StopImmediately(true);
+            enemy.StartDelayCallBack(0.3f, () => enemyStateMachine.ChangeState(WildBoarEnum.Move));
         }
+        
         if (enemy.IsWallDetected() == true)
         {
             Vector2 dir = new Vector2(-enemy.FacingDir * 5, 10);

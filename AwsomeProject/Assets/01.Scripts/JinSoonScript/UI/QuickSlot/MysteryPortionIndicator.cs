@@ -100,12 +100,12 @@ public class MysteryPortionIndicator : MonoBehaviour
     {
         if (_isSelectedMysteryPortion == true)
         {
-            _player.throwingPortionSelected = false;
+            _player.throwingPortionSelected = (false);
             UnSelectMysteryPortion();
             return;
         }
 
-        _player.throwingPortionSelected = true;
+        _player.throwingPortionSelected = (true);
         _isSelectedMysteryPortion = true;
 
         if (_slotTween != null && _slotTween.active)

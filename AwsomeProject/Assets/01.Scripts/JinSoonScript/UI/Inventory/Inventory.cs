@@ -222,8 +222,6 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        Debug.Log(path);
-        Debug.Log(saveData.inventory.Count);
         //saveData에 있는 아이템을 끌어와
         for (int i = 0; i < saveData.inventory.Count; i++)
         {

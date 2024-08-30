@@ -12,6 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2263c016c87334d8a80323e5d81538, type: 3}
   m_Name: AirBirdEnemyStat
   m_EditorClassIdentifier: 
+  maxHp:
+    baseValue: 100
+    modifiers: []
+    percentModifiers: []
+  armor:
+    baseValue: 10
+    modifiers: []
+    percentModifiers: []
+  damage:
+    baseValue: 10
+    modifiers: []
+    percentModifiers: []
+  moveSpeed:
+    baseValue: 5
+    modifiers: []
+    percentModifiers: []
+  jumpForce:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  weight: 1
+  criticalChance:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  criticalDamage:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
   patrolTime:
     baseValue: 0
     modifiers: []

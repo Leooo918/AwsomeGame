@@ -12,12 +12,12 @@ public class Dash2Effect : Effect
     {
         player = target as Player;
 
-        player.canDash = true;
+        player.canDash = (true);
         HasEffectManager.Instance.DashOn(1);
 
         target.StartDelayCallBack(useTime, () =>
         {
-            player.canDash = false;
+            player.canDash = (false);
             HasEffectManager.Instance.DashOff();
         });
     }

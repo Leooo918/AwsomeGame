@@ -55,7 +55,7 @@ namespace DialogSystem
                     }
                 }
             }
-            //BranchSO branch = parent as BranchSO;
+            //BranchSO branch = _parent as BranchSO;
             //if (branch)
             //{
             //    switch (outputPort.portName)
@@ -94,7 +94,7 @@ namespace DialogSystem
                     }
                 }
             }
-            //BranchSO branch = parent as BranchSO;
+            //BranchSO branch = _parent as BranchSO;
             //if (branch)
             //{
             //    switch (outputPort.portName)
@@ -134,7 +134,7 @@ namespace DialogSystem
                 }
             }
 
-            //BranchSO branch = parent as BranchSO;
+            //BranchSO branch = _parent as BranchSO;
             //if (branch)
             //{
             //    if (branch.nextScriptOnTrue != null)

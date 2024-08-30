@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using System.Linq;
 using DG.Tweening;
-using System.Drawing;
 
+//대충 카메라 관련된거는 걍 다 여기서 처리하는 방식으로 가려고 함
 public class CameraManager : Singleton<CameraManager>
 {
-    [SerializeField] private List<CinemachineVirtualCamera> _cameraSet;
+    //이거 첫번째로 넣어준 카메라를 디폴트로 세팅해줌
+    [SerializeField] private List<CinemachineVirtualCamera> _cameraSet; //시네머신 다 넣어주
     [SerializeField] private PlayerFollowObj _follow;            //플레이어 따라가는 뇨속
 
-    private Vector2 _startingTrackedObjectOffset;
-    private Tween _panCameraTween;
+    private Vector2 _startingTrackedObjectOffset;   
+    private Tween _panCameraTween;  
 
     private CinemachineVirtualCamera _currentCam;                //현재 카메라
     private CinemachineFramingTransposer _framingTransposer;     //카메라 움직여주는 놈
@@ -34,6 +34,11 @@ public class CameraManager : Singleton<CameraManager>
         _playerRect = PlayerManager.Instance.PlayerTrm;
     }
 
+    /// <summary>
+    /// 걍 카메라 바꿔주는거임
+    /// </summary>
+    /// <param name="activeCam"></param>
+    /// <param name="changeFollowToPlayer"></param>
     public void ChangeCam(CinemachineVirtualCamera activeCam, bool changeFollowToPlayer = true)
     {
         _cameraSet.ForEach(x => x.Priority = 5);
@@ -41,33 +46,32 @@ public class CameraManager : Singleton<CameraManager>
         activeCam.Priority = 10;
         _currentCam = activeCam;
 
-        _currentConfiner =
-            _currentCam.GetComponent<CinemachineConfiner2D>();
+        _currentConfiner = _currentCam.GetComponent<CinemachineConfiner2D>();
         _framingTransposer = _currentCam.GetCinemachineComponent<CinemachineFramingTransposer>();
         _currentPerline = _currentCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         if (changeFollowToPlayer)
-        {
             _currentCam.Follow = _follow.transform;
-            Debug.Log("밍밍");
-        }
-        else
-        {
-            Debug.Log("밍");
-
-        }
 
         _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
     }
 
+    /// <summary>
+    /// 대충 CameraFramingTransfoser로 해두면 Offset조정 하는거 건들여서 움직이는거임
+    /// 카메라 연출을 원했고 일단 CameraControllerTrigger 스크립트에서 범위에 들어갔을 때 
+    /// 카메라 살짝 위쪽을 보여주는 연출 그런 걸 원했던거임
+    /// </summary>
+    /// <param name="panDistance"></param>
+    /// <param name="panTime"></param>
+    /// <param name="direction"></param>
+    /// <param name="panToStartingPos"></param>
     public void PanCameraOnContact(float panDistance, float panTime, PanDirection direction, bool panToStartingPos)
     {
         Vector3 endPos = Vector3.zero;
 
         if (!panToStartingPos)
         {
-            endPos =
-                _dirArr[(int)direction] * panDistance + _startingTrackedObjectOffset;
+            endPos = _dirArr[(int)direction] * panDistance + _startingTrackedObjectOffset;
         }
         else
             endPos = _startingTrackedObjectOffset;

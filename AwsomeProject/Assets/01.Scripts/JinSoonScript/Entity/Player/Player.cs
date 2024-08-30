@@ -48,6 +48,14 @@ public class Player : Entity
 
     #endregion
 
+    #region ComponentRegion
+
+    public PlayerStateMachine StateMachine { get; private set; }
+    [SerializeField] private InputReader _inputReader;
+    public InputReader PlayerInput => _inputReader;
+
+    #endregion
+
     #region CoyoteTime
 
     [SerializeField] private float coyoteTime = 0.3f;
@@ -69,14 +77,6 @@ public class Player : Entity
 
     #endregion
 
-    #region ComponentRegion
-
-    public PlayerStateMachine StateMachine { get; private set; }
-    [SerializeField] private InputReader _inputReader;
-    public InputReader PlayerInput => _inputReader;
-
-    #endregion
-
     #region Attack
 
     [HideInInspector] public int ComboCounter = 0;
@@ -85,21 +85,23 @@ public class Player : Entity
     #endregion
 
     public int maxJumpCnt { get; private set; } = 2;
-    public int curJumpCnt = 0;
+    [HideInInspector] public int curJumpCnt = 0;
 
-    public GameObject StunEffect { get; private set; }
+    [SerializeField] private GameObject _stunEffect;
+    public GameObject StunEffect => _stunEffect;
+
     private bool isInventoryOpen = false;
     public bool canClimb { get; private set; } = false;
 
+    [SerializeField] private HpBar _hpDecator;
     [SerializeField] private GameObject thowingPortionPf;
     [SerializeField] private Vector3 _throwingOffset;
-    [SerializeField] private HpBar _hpDecator;
-
-    public bool throwingPortionSelected = false;
-    public Vector2 portionThrowingDir;
-
-    public bool canDash = false;
     public Vector3 ThrowingOffset { get => _throwingOffset; private set => _throwingOffset = value; }
+
+    [HideInInspector] public bool throwingPortionSelected = false;
+    [HideInInspector] public Vector2 PortionThrowingDir;
+    [HideInInspector] public bool canDash = false;
+
 
     protected override void Awake()
     {
@@ -109,7 +111,6 @@ public class Player : Entity
 
         MoveSpeed = Stat.moveSpeed.GetValue();
         JumpForce = Stat.jumpForce.GetValue();
-
 
         SkillSO = gameObject.AddComponent<PlayerSkill>();
         SkillSO.Init(EntitySkillSO);
@@ -134,9 +135,6 @@ public class Player : Entity
 
         foreach (var item in EntitySkillSO.skills)
             item.skill.SetOwner(this);
-
-        StunEffect = transform.Find("StunEffect").gameObject;
-        StunEffect.SetActive(false);
     }
 
     private void OnEnable()
@@ -294,7 +292,7 @@ public class Player : Entity
             new Vector2(groundCheckBoxWidth, 0.05f), 0,
             Vector2.down, groundCheckDistance, whatIsGroundAndWall);
 
-        if(hit.collider.TryGetComponent(out OneWayPlatform p))
+        if (hit.collider.TryGetComponent(out OneWayPlatform p))
         {
             p.Interact(this);
         }

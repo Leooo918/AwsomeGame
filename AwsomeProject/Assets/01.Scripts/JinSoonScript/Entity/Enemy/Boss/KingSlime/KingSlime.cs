@@ -86,8 +86,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
     protected void Start()
     {
-        patrolEndTime = Time.time;
-
         ShuffleSkillStack();
     }
 
