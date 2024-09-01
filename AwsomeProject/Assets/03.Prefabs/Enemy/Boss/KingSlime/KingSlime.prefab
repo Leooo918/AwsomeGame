@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935b295f2ebc7e346b1f39622b62a905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: 63b9210f1eeff744d9f19587151e1cd3, type: 2}
+  stat: {fileID: 11400000, guid: 9487680726ef7dd469bf679c1a491330, type: 2}
   entitySkillSO: {fileID: 11400000, guid: c8aac720e97fc8c438f78489858f7bb1, type: 2}
   whatIsGroundAndWall:
     serializedVersion: 2
@@ -127,19 +127,14 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  enemyStat: {fileID: 11400000, guid: 9487680726ef7dd469bf679c1a491330, type: 2}
-  findPlayerMark: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 64
-  patrolOriginPos: {fileID: 0}
   runAwayDistance: 0
   lastAttackTime: 0
-  patrolStartTime: 0
-  patrolEndTime: 0
   mucus: {fileID: 3771830235869242607, guid: 1994f31ea3b9d9a4fadc6adb7e563129, type: 3}
   spanwer: {fileID: 0}
   _readyFlip: 0
@@ -239,6 +234,7 @@ MonoBehaviour:
   normalHitFontSize: 7
   criticalColor: {r: 0.94509804, g: 0.13333334, b: 0.05490196, a: 1}
   normalHitColor: {r: 1, g: 1, b: 1, a: 1}
+  health: {fileID: 0}
 --- !u!114 &7520680949235039424
 MonoBehaviour:
   m_ObjectHideFlags: 0
