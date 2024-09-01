@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MapleTree : MonoBehaviour
 {
-    [SerializeField] private GameObject _interact;
-    [SerializeField] private DropItem[] _dropItemPrefabs;
-    [SerializeField] private float _detectionRadius = 5f;
+    [SerializeField] private GameObject _interact; // 안내 표시(자식에 있음)
+    [SerializeField] private DropItem[] _dropItemPrefabs; // DropItem스크립트 참고
+    [SerializeField] private float _detectionRadius = 5f; // 탐지 범위
     private Animator _animator;
     private Collider2D _col;
 
@@ -28,9 +28,9 @@ public class MapleTree : MonoBehaviour
 
     private void CheckInRange()
     {
-        float distance = Vector2.Distance(transform.position, _playerTrm.position);
+        float distance = Vector2.Distance(transform.position, _playerTrm.position); // 거리  계산
 
-        if(distance <=_detectionRadius)
+        if(distance <=_detectionRadius) // 거리 비교
         {
             if(!_isPlayerInRange && !_isAttack)
             {
@@ -80,7 +80,7 @@ public class MapleTree : MonoBehaviour
         _animator.SetBool("Hit", false);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() // debug
     {
         Gizmos.color = new Color(1f, 0, 0, 0.5f);
         Gizmos.DrawSphere(transform.position, _detectionRadius);

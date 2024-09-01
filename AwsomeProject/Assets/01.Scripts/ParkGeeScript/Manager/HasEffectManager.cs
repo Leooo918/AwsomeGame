@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HasEffectManager : Singleton<HasEffectManager>
+public class HasEffectManager : Singleton<HasEffectManager> // 코드가 별로니 마음대로 수정하거나 없애도됩니다.
 {
-    [SerializeField] private Image[] _blank;
-    [SerializeField] private Image[] _border;
+    [SerializeField] private Image[] _blank; // 빈칸 넣어주기
+    [SerializeField] private Image[] _border; // 테두리 부분 넣기
 
-    [SerializeField] private Sprite[] _borderSprites;
+    [SerializeField] private Sprite[] _borderSprites; // 테두리 종류 넣기
     [SerializeField] private Sprite _dashEffectSprite;
     [SerializeField] private Sprite _armorUpEffectSprite;
     [SerializeField] private Sprite _upDamageEffectSprite;
