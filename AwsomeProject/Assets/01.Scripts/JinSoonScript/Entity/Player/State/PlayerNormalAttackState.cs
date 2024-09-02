@@ -21,9 +21,9 @@ public class PlayerNormalAttackState : PlayerState
         if (player.lastAttackTime + playerNormalAttackSO.attackComboDragTime <= Time.time)
             player.ComboCounter = 0;
 
-            AttackInfo attackInfo = playerNormalAttackSO.attackInfos[player.ComboCounter];
-            attackInfo.damage =
-                (int)(attackInfo.attackMultiplier * player.Stat.GetStatByEnum(StatType.Damage).GetValue());
+        AttackInfo attackInfo = playerNormalAttackSO.attackInfos[player.ComboCounter];
+        attackInfo.damage =
+            (int)(attackInfo.attackMultiplier * player.Stat.GetStatByEnum(StatType.Damage).GetValue());
 
         playerAttack.SetCurrentAttackInfo(attackInfo);
 
@@ -36,9 +36,17 @@ public class PlayerNormalAttackState : PlayerState
         player.lastAttackTime = Time.time;
     }
 
-    public override void AnimationFinishTrigger()
+    public override void UpdateState()
     {
-        player.StateMachine.ChangeState(PlayerStateEnum.Idle);
-        base.AnimationFinishTrigger();
+        base.UpdateState();
+        if(IsTriggerCalled(AnimationTriggerEnum.AttackTrigger))
+        {
+            playerAttack.Attack();
+        }
+        if (IsTriggerCalled(AnimationTriggerEnum.EndTrigger))
+        {
+            stateMachine.ChangeState(PlayerStateEnum.Idle);
+        }
+
     }
 }

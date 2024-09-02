@@ -250,7 +250,7 @@ public class Player : Entity
         }
     }
 
-    public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    public void AnimationTrigger(AnimationTriggerEnum trigger) => StateMachine.CurrentState.AnimationTrigger(trigger);
     public void OnHit() => HitEvent?.Invoke();
 
     public void OnDie(Vector2 hitDir)

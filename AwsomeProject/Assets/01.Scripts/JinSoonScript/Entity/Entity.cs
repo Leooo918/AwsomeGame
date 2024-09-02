@@ -47,7 +47,6 @@ public abstract class Entity : MonoBehaviour
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
 
-
     public Action<int> OnFlip;
     public int FacingDir { get; protected set; } = 1;
     public bool CanStateChangeable { get; set; } = true;
@@ -243,6 +242,5 @@ public abstract class Entity : MonoBehaviour
         Gizmos.DrawWireCube(groundChecker.position,
             new Vector2(groundCheckBoxWidth, groundCheckDistance));
     }
-
 #endif
 }

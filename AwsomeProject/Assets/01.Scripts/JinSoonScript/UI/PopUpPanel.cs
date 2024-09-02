@@ -33,7 +33,6 @@ public class PopUpPanel : MonoBehaviour, IManageableUI
 
         _seq = DOTween.Sequence();
 
-        Debug.Log("¹Ö¤¤");
         _seq.Append(_canvasGroup.DOFade(1, _easingTime))
             .Join(_rect.DOAnchorPosY(_originY, _easingTime));
     }

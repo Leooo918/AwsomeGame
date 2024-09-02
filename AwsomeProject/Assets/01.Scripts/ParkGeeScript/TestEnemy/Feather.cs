@@ -61,8 +61,6 @@ public class Feather : MonoBehaviour, IDamageable
         _speed = playerDir.magnitude;
         _direction = Vector2.up * _speed;
         _destroyingTime = Time.time + _maxLifeTime;
-
-        Debug.Log("นึ");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

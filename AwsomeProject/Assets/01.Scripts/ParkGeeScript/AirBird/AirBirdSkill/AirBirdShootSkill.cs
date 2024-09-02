@@ -10,6 +10,5 @@ public class AirBirdShootSkill : Skill
     {
         if (airBird == null) airBird = owner as AirBird;
         airBird.StateMachine.ChangeState(AirBirdEnum.Shoot);
-        Debug.Log("발사 실행");
     }
 }

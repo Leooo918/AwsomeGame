@@ -10,7 +10,7 @@ public class PlayerState
 
     protected int _animBoolHash;
     protected readonly int _yVelocityHash = Animator.StringToHash("y_velocity");
-    protected bool _triggerCall;
+    protected int _animationTriggerBit = 0;
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, string animBoolName)
     {
@@ -24,7 +24,7 @@ public class PlayerState
     public virtual void Enter()
     {
         player.animatorCompo.SetBool(_animBoolHash, true);
-        _triggerCall = false; //애니메이션이 다 끝났을때 실행될 불리언 값
+        _animationTriggerBit = 0;
     }
 
     //상태를 나갈때 실행할 함수
@@ -39,9 +39,17 @@ public class PlayerState
         
     }
 
-    
-    public virtual void AnimationFinishTrigger()
+
+    public virtual void AnimationTrigger(AnimationTriggerEnum trigger)
     {
-        _triggerCall = true;
+        _animationTriggerBit |= (int)trigger;
+    }
+
+    protected bool IsTriggerCalled(AnimationTriggerEnum trigger)
+    {
+        bool isTriggered = (_animationTriggerBit & (int)trigger) != 0;
+        if (isTriggered)
+            _animationTriggerBit &= ~(int)trigger;
+        return isTriggered;
     }
 }

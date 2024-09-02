@@ -45,7 +45,6 @@ public class PutOpen : MonoBehaviour
 
     private void OnPlayerEnter()
     {
-        Debug.Log("Enter");
         _popUpPanel.SetText("포션 제작 [ F ]");
         UIManager.Instance.Open(UIType.PopUp);
         _player.PlayerInput.InteractPress += OnInteract;
@@ -53,7 +52,6 @@ public class PutOpen : MonoBehaviour
 
     private void OnPlayerExit()
     {
-        Debug.Log("Exit");
         UIManager.Instance.Close(UIType.PopUp);
         _player.PlayerInput.InteractPress -= OnInteract;
     }
