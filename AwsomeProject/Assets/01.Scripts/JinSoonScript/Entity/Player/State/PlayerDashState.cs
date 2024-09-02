@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PlayerDashState : PlayerState
 {
-    public PlayerDashState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
+    public PlayerDashState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) 
+    {
+        _dashAttackColl = player.transform.Find("DashAttackCollider").GetComponent<Collider2D>();
+        _dashTrail = player.transform.Find("DashTrail").GetComponent<ParticleSystem>();
+    }
 
+    private Collider2D _dashAttackColl;
+    private ParticleSystem _dashTrail;
     private float dashTime;
     private float xInput;
 
@@ -15,8 +21,9 @@ public class PlayerDashState : PlayerState
 
         if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = false;
 
-        if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = true;
-        player.transform.Find("DashTrail").GetComponent<ParticleSystem>().Play();
+        if (player.IsAttackWhileDash == true)
+            _dashAttackColl.enabled = true;
+        _dashTrail.Play();
 
             xInput = player.PlayerInput.XInput;
 
@@ -42,8 +49,9 @@ public class PlayerDashState : PlayerState
         base.Exit();
         if (player.IsInvincibleWhileDash == true) player.colliderCompo.enabled = true;
 
-        if (player.IsAttackWhileDash == true) player.transform.Find("DashAttackCollider").GetComponent<Collider2D>().enabled = false;
-        player.transform.Find("DashTrail").GetComponent<ParticleSystem>().Stop();
+        if (player.IsAttackWhileDash == true)
+            _dashAttackColl.enabled = false;
+        _dashTrail.Stop();
 
         player.StopImmediately(false);
     }

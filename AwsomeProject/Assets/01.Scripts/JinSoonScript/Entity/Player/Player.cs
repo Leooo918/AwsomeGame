@@ -280,10 +280,7 @@ public class Player : Entity
 
     public void Climb(bool b)
     {
-        if (b == true)
-            canClimb = true;
-        else
-            canClimb = false;
+        canClimb = b;
     }
 
     public void CheckOneWayPlatform()

@@ -12,11 +12,9 @@ public enum AnimationTriggerEnum
 public class PlayerAnimationTrigger : MonoBehaviour
 {
     private Player player;
-    private EntityAttack entityAttack;
 
     private void Awake()
     {
-        entityAttack = transform.parent.GetComponent<EntityAttack>();
         player = transform.parent.GetComponent<Player>();
     }
 
