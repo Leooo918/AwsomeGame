@@ -22,8 +22,8 @@ public class Inventory : MonoBehaviour
 
     [SerializeField] private List<ItemStruct> _excludingItem = new List<ItemStruct>();
 
-    public Item selectedItem;
-    public Item combineableItem;
+    [HideInInspector] public Item selectedItem;
+    [HideInInspector] public Item combineableItem;
 
     protected bool _isDisabled = false;
 
@@ -73,6 +73,8 @@ public class Inventory : MonoBehaviour
     /// return값이 false면 필드의 item 인스턴스를 지우지 않으면 됨</returns>
     public bool TryInsertItem(Item item)
     {
+        if (item == null) return false;
+
         int id = item.itemSO.id;
         int remainItem = item.itemAmount;
 
@@ -83,26 +85,33 @@ public class Inventory : MonoBehaviour
                 //같은 아이템이 있는지 확인
                 //같은 아이템이 있다면 그 아이템의 한칸 최대 수량보다 적을동안아이템을
                 //그 칸에 넣어주기
-                Debug.Log(inventory + " " + inventory.GetLength(0) + " " + inventory.GetLength(1) + " " + inventory[i, j] + " " + i + " " + j);
+                //Debug.Log(inventory + " " + inventory.GetLength(0) + " " + inventory.GetLength(1) + " " + inventory[i, j] + " " + i + " " + j);
                 Item it = inventory[i, j].assignedItem;
 
-                if (it != null && it.itemSO.id == id)
+                if (it != null && it.itemSO.id == id && it.itemAmount != it.itemSO.maxCarryAmountPerSlot)
                 {
                     int remainSpace = it.itemSO.maxCarryAmountPerSlot - it.itemAmount;
                     if (remainSpace - remainItem < 0)
                     {
-                        remainItem -= remainSpace;
-                        it.AddItem(remainItem - remainSpace);
+                        it.AddItem(remainSpace);
+
+                        Debug.Log(it.itemAmount + " " + inventory[i, j].assignedItem.itemAmount);
+
+                        Item newItem = InventoryManager.Instance.MakeItemInstanceByItemSO(it.itemSO, remainItem - remainSpace);
+                        InventoryManager.Instance.PlayerInventory.TryInsertItem(newItem);
                     }
                     else
                     {
                         it.AddItem(remainItem);
                         Destroy(item.gameObject);
 
+                        Debug.Log(it.itemAmount + " " + inventory[i, j].assignedItem.itemAmount);
+
                         Save();
+
                         InventoryManager.Instance.LoadAllInventory();
-                        return true;
                     }
+                    return true;
 
                 }
             }
@@ -228,7 +237,7 @@ public class Inventory : MonoBehaviour
             ItemStruct itemStruct = saveData.inventory[i];
             int id = itemStruct.id;
             ItemSO itemSO = InventoryManager.Instance.ItemSet.GetItem(id);
-            Debug.Log(id);
+            //Debug.Log(id);
 
             if (id == -1 || itemSO == null) continue;
 
@@ -247,6 +256,7 @@ public class Inventory : MonoBehaviour
             Vector2Int pos = itemStruct.itemPos;
 
             Item it = Instantiate(itemSO.prefab, itemParent).GetComponent<Item>();
+            //Debug.Log(it);
             it.Init(amount, inventory[pos.x, pos.y]);
             inventory[pos.x, pos.y].InsertItem(it);
         }

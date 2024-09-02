@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public ItemSO itemSO;
 
@@ -19,14 +19,14 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public Sprite itemImage { get; protected set; }
     public GameObject prefab { get; protected set; }
+    public Image visual { get; protected set; }
 
 
     #endregion
 
     protected RectTransform rect;
-    protected Image visual;
-    protected InventorySlot assignedSlot;
-    protected InventorySlot lastSlot;
+    protected InventorySlot currentSlot;
+    protected InventorySlot prevSlot;
     protected TextMeshProUGUI amountTxt;
 
     private Vector2 offset;
@@ -48,8 +48,8 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
         if (itemAmount <= 0)
         {
-            if (assignedSlot != null)
-                assignedSlot.DeleteItem();
+            if (currentSlot != null)
+                currentSlot.DeleteItem();
             Destroy(gameObject);
         }
 
@@ -58,10 +58,12 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public bool AddItem(int amount)
     {
+        Destroy(gameObject);
         if (itemAmount + amount <= itemSO.maxCarryAmountPerSlot)
         {
             itemAmount += amount;
             amountTxt.SetText(itemAmount.ToString());
+            Debug.Log(itemName + " : " + itemAmount + " : " + amount);
             return true;
         }
         return false;
@@ -83,8 +85,8 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         //transform._parent = selectItemParent;
 
         //아이템을 선택했을때 슬롯에서 그 아이템은 더이상 할당되있지 않은 상태인
-        if (assignedSlot != null)
-            assignedSlot.DeleteItem();
+        if (currentSlot != null)
+            currentSlot.DeleteItem();
 
         offset = eventData.position - new Vector2(Screen.width / 2, Screen.height / 2) - rect.anchoredPosition;
     }
@@ -100,53 +102,53 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         InventoryManager.Instance.MoveItem(null);
         //transform._parent = itemParent;
 
-        Item toCombine = InventoryManager.Instance.combineableItem;
-        if (toCombine != null && toCombine.itemSO.id == itemSO.id)
-        {
-            if(toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
-            {
-                toCombine.SetItemAmount(itemAmount + toCombine.itemAmount);
+        //Item toCombine = InventoryManager.Instance.combineableItem;
+        //if (toCombine != null && toCombine.itemSO.id == itemSO.id)
+        //{
+        //    if(toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
+        //    {
+        //        toCombine.SetItemAmount(itemAmount + toCombine.itemAmount);
 
-                if (toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
-                {
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    SetItemAmount(maxCarryAmountPerSlot - itemAmount);
-                    toCombine.SetItemAmount(toCombine.maxCarryAmountPerSlot);
-                }
-            }
-        }
+        //        if (toCombine.itemAmount <= toCombine.maxCarryAmountPerSlot)
+        //        {
+        //            Destroy(this.gameObject);
+        //        }
+        //        else
+        //        {
+        //            SetItemAmount(maxCarryAmountPerSlot - itemAmount);
+        //            toCombine.SetItemAmount(toCombine.maxCarryAmountPerSlot);
+        //        }
+        //    }
+        //}
 
         //선택중인 슬롯이 없을 때
         if (InventoryManager.Instance.curCheckingSlot == null)
         {
-            if (assignedSlot != null)
-                assignedSlot.InsertItem(this);
+            if (currentSlot != null)
+                currentSlot.InsertItem(this);
 
             return;
         }
 
-        lastSlot = assignedSlot;
-        assignedSlot = InventoryManager.Instance.curCheckingSlot;
-        assignedSlot.InsertItem(this);
+        prevSlot = currentSlot;
+        currentSlot = InventoryManager.Instance.curCheckingSlot;
+        currentSlot.InsertItem(this);
 
 
-        assignedSlot.Select();
+        currentSlot.Select();
 
         InventoryManager.Instance.SetExplain(itemSO);
     }
 
     public void ReturnToLastSlot()
     {
-        lastSlot.InsertItem(this);
+        prevSlot.InsertItem(this);
     }
 
     public void Init(int amount, InventorySlot slot)
     {
         itemAmount = amount;
-        assignedSlot = slot;
+        currentSlot = slot;
         amountTxt.SetText(itemAmount.ToString());
 
         itemId = itemSO.id;
@@ -156,20 +158,5 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         itemExplain = itemSO.itemExplain;
         itemImage = itemSO.itemImage;
         prefab = itemSO.prefab;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("밍?");
-        if (InventoryManager.Instance.curMovingItem != null)
-        {
-            InventoryManager.Instance.combineableItem = this;
-        }
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("밍!");
-        InventoryManager.Instance.combineableItem = null;
     }
 }
