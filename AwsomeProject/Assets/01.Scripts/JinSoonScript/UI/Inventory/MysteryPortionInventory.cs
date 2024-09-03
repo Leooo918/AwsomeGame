@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+//안쓰는거
 public class MysteryPortionInventory : Inventory
 {
     private InventorySlot[] _slots;
@@ -31,21 +32,25 @@ public class MysteryPortionInventory : Inventory
         }
     }
 
-    protected override void OnDisable() 
+    //protected override void OnDisable()
+    //{
+    //    Save();
+    //    //for (int i = 0; i < _slots.Length; i++)
+    //    //{
+    //    //    if (_slots[i] != null && _slots[i].assignedItem != null)
+    //    //    {
+    //    //        Destroy(_slots[i].assignedItem.gameObject);
+    //    //    }
+    //    //}
+
+    //    _isDisabled = false;
+    //}
+
+    private void OnEnable()
     {
-        Save();
-        for(int i = 0; i < _slots.Length; i++)
-        {
-            if (_slots[i] != null && _slots[i].assignedItem != null)
-            {
-                Destroy(_slots[i].assignedItem.gameObject);
-            }
-        }
-
-        _isDisabled = false;
+        Debug.Log("=============================");
+        Load();
     }
-
-    
 
     public void UnlockMysteryPortion(int portionCnt)
     {

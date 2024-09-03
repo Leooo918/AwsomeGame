@@ -50,6 +50,8 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         {
             if (currentSlot != null)
                 currentSlot.DeleteItem();
+
+            //currentSlot.inventory.
             Destroy(gameObject);
         }
 

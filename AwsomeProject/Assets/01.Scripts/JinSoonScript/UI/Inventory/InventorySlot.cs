@@ -10,9 +10,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     protected RectTransform rect;
 
     protected Image img;
-    protected Inventory inventory;
     protected GameObject selectUI;
     protected RectTransform[] parents;
+    public Inventory inventory { get; protected set; }
     public Item assignedItem { get; protected set; }
     public bool isSelectedNow { get; protected set; } = false;
 
@@ -64,14 +64,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         //if (acceptInsert == false) return;
 
         assignedItem = item;
-        Vector3 position = Vector3.zero;
-        foreach (var r in parents)
-        {
-            if (r.GetComponent<Canvas>() != null || r.name == "InventoryBackground") break;
-            position += r.localPosition;
-        }
+        //Vector3 position = Vector3.zero;
+        //foreach (var r in parents)
+        //{
+        //    if (r.GetComponent<Canvas>() != null || r.name == "InventoryBackground") break;
+        //    position += r.localPosition;
+        //}
 
-        item.GetComponent<RectTransform>().localPosition = position;
+        item.GetComponent<RectTransform>().position = transform.position;
         item.Init(item.itemAmount, this);
     }
 

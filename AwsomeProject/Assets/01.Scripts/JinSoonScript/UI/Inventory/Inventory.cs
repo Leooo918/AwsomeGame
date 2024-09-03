@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -48,21 +49,21 @@ public class Inventory : MonoBehaviour
     }
 
 
-    protected virtual void OnDisable()
-    {
-        for (int i = 0; i < inventory.GetLength(0); i++)
-        {
-            for (int j = 0; j < inventory.GetLength(1); j++)
-            {
-                if (inventory[i, j].assignedItem != null)
-                {
-                    Destroy(inventory[i, j].assignedItem.gameObject);
-                }
-            }
-        }
+    //protected virtual void OnDisable()
+    //{
+    //    for (int i = 0; i < inventory.GetLength(0); i++)
+    //    {
+    //        for (int j = 0; j < inventory.GetLength(1); j++)
+    //        {
+    //            if (inventory[i, j].assignedItem != null)
+    //            {
+    //                Destroy(inventory[i, j].assignedItem.gameObject);
+    //            }
+    //        }
+    //    }
 
-        _isDisabled = true;
-    }
+    //    _isDisabled = true;
+    //}
 
 
     /// <summary>
@@ -105,7 +106,7 @@ public class Inventory : MonoBehaviour
                         it.AddItem(remainItem);
                         Destroy(item.gameObject);
 
-                        Debug.Log(it.itemAmount + " " + inventory[i, j].assignedItem.itemAmount);
+                        Debug.Log(it.itemAmount + " <<" + " " + inventory[i, j].assignedItem.itemAmount);
 
                         Save();
 
@@ -215,6 +216,8 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        Debug.Log("sdds");
+
         string json = File.ReadAllText(path);
         InventorySaveData saveData = JsonUtility.FromJson<InventorySaveData>(json);
         _excludingItem = new List<ItemStruct>();
@@ -255,10 +258,18 @@ public class Inventory : MonoBehaviour
             int amount = itemStruct.amount;
             Vector2Int pos = itemStruct.itemPos;
 
+            //Debug.Log(inventory.GetLength(0) + " / " + inventory.GetLength(1));
+            //Debug.Log(pos.x + " | " + pos.y);
+            if (inventory.GetLength(0) <= pos.x || inventory.GetLength(1) <= pos.y) continue;
+
+            //Debug.Log("새로 생성");
             Item it = Instantiate(itemSO.prefab, itemParent).GetComponent<Item>();
             //Debug.Log(it);
+
             it.Init(amount, inventory[pos.x, pos.y]);
             inventory[pos.x, pos.y].InsertItem(it);
+            //if (inventory[pos.x, pos.y].assignedItem != null)
+                //Debug.Log(inventory[pos.x, pos.y].assignedItem.itemAmount + " >> " + inventory[pos.x, pos.y].assignedItem.transform.GetComponent<Image>().GetInstanceID() + " <<");
         }
     }
 

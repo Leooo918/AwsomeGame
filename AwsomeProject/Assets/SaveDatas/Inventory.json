@@ -13,72 +13,16 @@
             "id": 4,
             "amount": 5,
             "itemPos": {
-                "x": 0,
-                "y": 1
-            }
-        },
-        {
-            "id": 4,
-            "amount": 5,
-            "itemPos": {
-                "x": 0,
-                "y": 2
-            }
-        },
-        {
-            "id": 1,
-            "amount": 1,
-            "itemPos": {
                 "x": 1,
                 "y": 0
             }
         },
         {
             "id": 4,
-            "amount": 5,
-            "itemPos": {
-                "x": 1,
-                "y": 1
-            }
-        },
-        {
-            "id": 4,
-            "amount": 2,
-            "itemPos": {
-                "x": 1,
-                "y": 2
-            }
-        },
-        {
-            "id": 4,
-            "amount": 5,
+            "amount": 3,
             "itemPos": {
                 "x": 2,
                 "y": 0
-            }
-        },
-        {
-            "id": 4,
-            "amount": 5,
-            "itemPos": {
-                "x": 2,
-                "y": 1
-            }
-        },
-        {
-            "id": 4,
-            "amount": 5,
-            "itemPos": {
-                "x": 3,
-                "y": 0
-            }
-        },
-        {
-            "id": 4,
-            "amount": 5,
-            "itemPos": {
-                "x": 3,
-                "y": 1
             }
         },
         {

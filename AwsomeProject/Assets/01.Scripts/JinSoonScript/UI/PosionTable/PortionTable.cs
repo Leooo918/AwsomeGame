@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PortionTable : MonoBehaviour
 {
@@ -23,10 +24,12 @@ public class PortionTable : MonoBehaviour
     {
         List<EffectInfo> effects = new List<EffectInfo>();
 
+        bool flag = false;
         for (int i = 0; i < 5; i++)
         {
             if (ingredientsSlot[i].assignedItem != null)
             {
+                flag = true;
                 IngredientItemSO item = ingredientsSlot[i].assignedItem.itemSO as IngredientItemSO;
                 bool containSameEffect = false;
 
@@ -54,6 +57,8 @@ public class PortionTable : MonoBehaviour
                 }
             }
         }
+
+        if (flag == false) return;
 
         bool portionExist = PortionManager.Instance.portionSet.FindMakeablePortion(effects, portionType, out PortionItemSO portion);
 
