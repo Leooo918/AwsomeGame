@@ -13,7 +13,6 @@ public class InventoryManager : Singleton<InventoryManager>
     public Inventory PlayerInventory => playerInventory;
     public QuickSlotSet QuickSlot => quickslot;
     public Item curMovingItem { get; private set; }
-    [HideInInspector]public Item combineableItem;
     public InventorySlot curCheckingSlot { get; private set; }
 
     public RectTransform inventoryRect;

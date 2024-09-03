@@ -31,7 +31,17 @@ public class PortionCraftingIngredientSlot : InventorySlot
             item.RemoveItem(1);
             item.ReturnToLastSlot();
         }
+        assignedItem.visual.raycastTarget = false;
+    }
 
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        base.OnPointerClick(eventData);
 
+        if (assignedItem == null) return;
+
+        assignedItem.visual.raycastTarget = true;
+        InventoryManager.Instance.PlayerInventory.TryInsertItem(assignedItem);
+        assignedItem = null;
     }
 }
