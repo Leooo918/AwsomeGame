@@ -5,11 +5,22 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
     protected string path = "";
-    private InventorySlot[,] inventory = new InventorySlot[5, 4];
+    private InventorySlot[,] _inventory = new InventorySlot[5, 4];
+    private InventorySlot[,] inventory
+    {
+        get => _inventory;
+        set
+        {
+            _inventory = value;
+            Debug.Log("수정된");
+        }
+    }
+    private InventorySlot[,] prevInventory = new InventorySlot[5, 4];
     [SerializeField] private Vector2Int inventorySize = new Vector2Int(5, 4);
     public Action<ItemSO> OnSelectItem;
 
@@ -48,6 +59,9 @@ public class Inventory : MonoBehaviour
         StartCoroutine(DelayLoad());
     }
 
+    private void Update()
+    {
+    }
 
     //protected virtual void OnDisable()
     //{
@@ -88,9 +102,11 @@ public class Inventory : MonoBehaviour
                 //그 칸에 넣어주기
                 //Debug.Log(inventory + " " + inventory.GetLength(0) + " " + inventory.GetLength(1) + " " + inventory[i, j] + " " + i + " " + j);
                 Item it = inventory[i, j].assignedItem;
+                //Debug.Log("씨발" + inventory[i, j].GetInstanceID());
 
                 if (it != null && it.itemSO.id == id && it.itemAmount != it.itemSO.maxCarryAmountPerSlot)
                 {
+                    Debug.Log(it.currentSlot.GetInstanceID() + " | " + j + "," + i + " " + inventory[i, j].GetInstanceID());
                     int remainSpace = it.itemSO.maxCarryAmountPerSlot - it.itemAmount;
                     if (remainSpace - remainItem < 0)
                     {
@@ -106,11 +122,11 @@ public class Inventory : MonoBehaviour
                         it.AddItem(remainItem);
                         Destroy(item.gameObject);
 
-                        Debug.Log(it.itemAmount + " <<" + " " + inventory[i, j].assignedItem.itemAmount);
+                        //Debug.Log(it.itemAmount + " << " + inventory[i, j].assignedItem.itemAmount);
 
                         Save();
 
-                        InventoryManager.Instance.LoadAllInventory();
+                        //InventoryManager.Instance.LoadAllInventory();
                     }
                     return true;
 
@@ -132,7 +148,7 @@ public class Inventory : MonoBehaviour
                     item.gameObject.SetActive(!_isDisabled);
 
                     Save();
-                    InventoryManager.Instance.LoadAllInventory();
+                    //InventoryManager.Instance.LoadAllInventory();
                     return true;
                 }
             }
@@ -140,7 +156,7 @@ public class Inventory : MonoBehaviour
 
         //만약 인벤토리에 빈 곳이 없다면 return false
         Save();
-        InventoryManager.Instance.LoadAllInventory();
+        //InventoryManager.Instance.LoadAllInventory();
         return false;
     }
 

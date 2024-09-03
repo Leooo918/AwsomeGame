@@ -28,7 +28,9 @@ public class PortionCraftingIngredientSlot : InventorySlot
             nItem.Init(1, this);
             assignedItem = nItem;
 
+            Debug.Log("prev : " + item.itemAmount);
             item.RemoveItem(1);
+            Debug.Log("new : " + item.itemAmount);
             item.ReturnToLastSlot();
         }
         assignedItem.visual.raycastTarget = false;

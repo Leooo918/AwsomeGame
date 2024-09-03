@@ -70,7 +70,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         //    if (r.GetComponent<Canvas>() != null || r.name == "InventoryBackground") break;
         //    position += r.localPosition;
         //}
-
+        Debug.Log("Re1 : " + item.itemAmount);
         item.GetComponent<RectTransform>().position = transform.position;
         item.Init(item.itemAmount, this);
     }

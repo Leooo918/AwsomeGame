@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IPointerEnterHandler
 {
     public ItemSO itemSO;
 
@@ -25,7 +25,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     #endregion
 
     protected RectTransform rect;
-    protected InventorySlot currentSlot;
+    public InventorySlot currentSlot;
     protected InventorySlot prevSlot;
     protected TextMeshProUGUI amountTxt;
 
@@ -60,12 +60,13 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public bool AddItem(int amount)
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
         if (itemAmount + amount <= itemSO.maxCarryAmountPerSlot)
         {
+            Debug.Log(itemAmount + " + " + amount);
             itemAmount += amount;
             amountTxt.SetText(itemAmount.ToString());
-            Debug.Log(itemName + " : " + itemAmount + " : " + amount);
+            //Debug.Log(itemName + " : " + itemAmount + " : " + amount);
             return true;
         }
         return false;
@@ -144,6 +145,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void ReturnToLastSlot()
     {
+        Debug.Log("Re : " + itemAmount);
         prevSlot.InsertItem(this);
     }
 
@@ -151,6 +153,7 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         itemAmount = amount;
         currentSlot = slot;
+        Debug.Log(currentSlot.GetInstanceID() + " " + slot.GetInstanceID());
         amountTxt.SetText(itemAmount.ToString());
 
         itemId = itemSO.id;
@@ -160,5 +163,15 @@ public abstract class Item : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         itemExplain = itemSO.itemExplain;
         itemImage = itemSO.itemImage;
         prefab = itemSO.prefab;
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+
     }
 }
