@@ -24,8 +24,8 @@ namespace Doryu.Inventory
             }
         }
 
-        public Dictionary<ItemName, Item> ItemDict { get; private set; } 
-            = new Dictionary<ItemName, Item>();
+        public Dictionary<ItemType, ItemSO> ItemSODict { get; private set; } 
+            = new Dictionary<ItemType, ItemSO>();
         [field:SerializeField] public InventorySlot slotPrefab { get; private set; }
         [field:SerializeField] public Item itemPrefab { get; private set; }
         [SerializeField] private ItemListSO itemListSO;
@@ -37,7 +37,7 @@ namespace Doryu.Inventory
 
             foreach (ItemSO itemSO in itemListSO.itemSOList)
             {
-                ItemDict.Add(itemSO.itemName, itemSO.prefab);
+                ItemSODict.Add(itemSO.itemType, itemSO);
             }
 
             for (int i = 0; i < inventories.Length; i++)
@@ -50,9 +50,7 @@ namespace Doryu.Inventory
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Item item = ItemDict[ItemName.RedMushroom];
-                item.amount = 1;
-                AddItem(item);
+                AddItem(ItemSODict[ItemType.RedMushroom]);
             }
         }
 
@@ -61,6 +59,13 @@ namespace Doryu.Inventory
             for (int i = 0; i < inventories.Length; i++)
             {
                 inventories[i].AddItem(item);
+            }
+        }
+        public void AddItem(ItemSO itemSO, int amount = 1)
+        {
+            for (int i = 0; i < inventories.Length; i++)
+            {
+                inventories[i].AddItem(itemSO, amount);
             }
         }
     }

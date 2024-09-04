@@ -29,7 +29,7 @@ public class ItemExplainArea : MonoBehaviour
         }
 
         icon.color = new Color(1, 1, 1, 1);
-        itemName.SetText(item.itemName.ToString());
+        itemName.SetText(item.itemType.ToString());
         explain.SetText(item.itemExplain);
         icon.sprite = item.image;
     }

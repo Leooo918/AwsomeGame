@@ -15,7 +15,7 @@ namespace Doryu.Inventory
             private set
             {
                 _assignedItem = value;
-                _assignedItem.SetSlot(transform);
+                _assignedItem?.SetSlot(transform);
             }
         }
         public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Doryu.Inventory
 {
+    //public enum ItemType
+    //{ 
+    //    Ingredient,
+    //    Potion,
+    //}
     public enum ItemType
-    { 
-        Resource,
-        Potion,
-    }
-    public enum ItemName
     {
         RedMushroom,
         Y_BounceMushroom,
@@ -23,13 +23,13 @@ namespace Doryu.Inventory
         YoungBirldWing
     }
 
-    [CreateAssetMenu(menuName = "SO/Doryu/Item/Item")]
     public class ItemSO : ScriptableObject
     {
         [Header("ItemData")]
-        public ItemType type;
+        //public ItemType type;
         public int maxMergeAmount = 5;
-        public ItemName itemName;
+        public ItemType itemType;
+        public string itemName;
         [TextArea(3, 20)]
         public string itemExplain;
 
@@ -41,9 +41,5 @@ namespace Doryu.Inventory
         [Space(20)]
         [Header("Prefab")]
         public Item prefab;
-
-        [Space(20)]
-        [Header("Gathering")]
-        public float time;
     }
 }

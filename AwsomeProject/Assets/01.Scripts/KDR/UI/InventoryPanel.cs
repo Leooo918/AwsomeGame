@@ -22,11 +22,6 @@ namespace Doryu
         private RectTransform _rectTrm;
         private Sequence _seq;
 
-        private void Awake()
-        {
-            _rectTrm = transform as RectTransform;
-        }
-
         public void Close()
         {
             if (_seq != null && _seq.IsActive()) _seq.Kill();
@@ -39,6 +34,7 @@ namespace Doryu
 
         public void Init()
         {
+            _rectTrm = transform as RectTransform;
             _rectTrm.anchoredPosition = _closeData.pos;
         }
 

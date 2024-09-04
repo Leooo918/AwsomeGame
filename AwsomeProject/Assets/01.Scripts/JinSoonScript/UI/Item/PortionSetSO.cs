@@ -45,7 +45,7 @@ public class PortionSetSO : ScriptableObject
         {
             if (portions[i].CheckCanMakePortion(infos))
             {
-                Debug.Log(portions[i].itemName);
+                Debug.Log(portions[i].itemType);
                 portion = ScriptableObject.Instantiate(portions[i]);// CreateInstance("PortionItemSO") as PortionItemSO;
                 //portion.Init(portions[i]);
                 return true;
