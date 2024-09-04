@@ -2,19 +2,20 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Doryu.Inventory;
 
-public enum Portion
-{
-    PortionForThrow,
-    PortionForMyself,
-    Flask
-}
+//public enum Portion
+//{
+//    PortionForThrow,
+//    PortionForMyself,
+//    Flask
+//}
 
 [CreateAssetMenu(menuName = "SO/Item/Portion")]
 public class PortionItemSO : ItemSO
 {
-    [Space(20)]
-    public Portion portionType;
+    //[Space(20)]
+    //public Portion portionType;
 
     //이 포션이 가질 진짜 효과
     public EffectEnum effect;
@@ -28,12 +29,6 @@ public class PortionItemSO : ItemSO
     public float duration;
     public float usingTime = 0.5f;
     public bool isInfinite;
-
-
-    private void OnEnable()
-    {
-        itemType = ItemType.Portion;
-    }
 
     /// <summary>
     /// GetListAndCheckCanMakeThisPortionSO
@@ -68,25 +63,25 @@ public class PortionItemSO : ItemSO
         return true;
     }
 
-    public void Init(PortionItemSO portion)
-    {
-        id = portion.id;
-        itemName = portion.itemName;
-        itemType = portion.itemType;
-        maxCarryAmountPerSlot = portion.maxCarryAmountPerSlot;
-        itemExplain = portion.itemExplain;
+    //public void Init(PortionItemSO portion)
+    //{
+    //    id = portion.id;
+    //    itemName = portion.itemName;
+    //    itemType = portion.itemType;
+    //    maxCarryAmountPerSlot = portion.maxCarryAmountPerSlot;
+    //    itemExplain = portion.itemExplain;
 
-        dotImage = portion.dotImage;
-        itemImage = portion.itemImage;
-        prefab = portion.prefab;
+    //    dotImage = portion.dotImage;
+    //    itemImage = portion.itemImage;
+    //    prefab = portion.prefab;
 
-        effect = portion.effect;
-        requireEffects = portion.requireEffects;
-        effecLv = portion.effecLv;
-        duration = portion.duration;
-        usingTime = portion.usingTime;
-        isInfinite = portion.isInfinite;
-    }
+    //    effect = portion.effect;
+    //    requireEffects = portion.requireEffects;
+    //    effecLv = portion.effecLv;
+    //    duration = portion.duration;
+    //    usingTime = portion.usingTime;
+    //    isInfinite = portion.isInfinite;
+    //}
 }
 
 

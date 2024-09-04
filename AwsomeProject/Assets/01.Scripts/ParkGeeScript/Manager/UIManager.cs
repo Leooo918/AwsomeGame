@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Doryu.Inventory;
 
 public enum UIType
 {
@@ -12,6 +13,7 @@ public enum UIType
     BossStageEnter,
     PopUp,
     BossHp,
+    Inventory,
     PlayerDie
 }
 
@@ -24,7 +26,7 @@ public class UIManager : Singleton<UIManager>
         panelDictionary = new Dictionary<UIType, IManageableUI>();
         foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {
-            IManageableUI panel =
+            IManageableUI panel = 
                 GameObject.Find($"{w.ToString()}Panel")?.GetComponent<IManageableUI>();
 
             if (panel != null)

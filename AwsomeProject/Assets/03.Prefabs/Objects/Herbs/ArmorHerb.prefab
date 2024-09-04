@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 2728647268236563829}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.037, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 5565698260347909654}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.88, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interact: {fileID: 6629215670446977334}
-  item: {fileID: 11400000, guid: 5c94a6dc3b21eb946a458de94fb94577, type: 2}
+  itemSO: {fileID: 11400000, guid: a8075e26eb1679946951af22a5a4b6b2, type: 2}
   gatheredImage: {fileID: 0}
   OnGatheringHerb:
     m_PersistentCalls:
@@ -253,8 +253,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03845552, y: -0.24256673}
-  m_Size: {x: 0.72193784, y: 0.5148676}
+  m_Offset: {x: -0.00000001017555, y: -0.08535871}
+  m_Size: {x: 0.7500001, y: 0.5292849}
   m_Direction: 1
 --- !u!1 &6629215670446977334
 GameObject:

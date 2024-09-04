@@ -16,7 +16,7 @@ public class PortionSetSO : ScriptableObject
     /// <param name="effects">저기에 사용될 효과</param>
     /// <param name="portion">반환해줄 포션</param>
     /// <returns>만들수 있는 포션이 있나?</returns>
-    public bool FindMakeablePortion(List<EffectInfo> effects, Portion portionType, out PortionItemSO portion)
+    public bool FindMakeablePortion(List<EffectInfo> effects, out PortionItemSO portion)
     {
         List<EffectInfo> infos = effects;
 
@@ -43,9 +43,9 @@ public class PortionSetSO : ScriptableObject
         
         for (int i = 0; i < portions.Count; i++)
         {
-            if (portions[i].CheckCanMakePortion(infos) && portions[i].portionType == portionType)
+            if (portions[i].CheckCanMakePortion(infos))
             {
-                Debug.Log(portions[i].itemName);
+                Debug.Log(portions[i].itemType);
                 portion = ScriptableObject.Instantiate(portions[i]);// CreateInstance("PortionItemSO") as PortionItemSO;
                 //portion.Init(portions[i]);
                 return true;

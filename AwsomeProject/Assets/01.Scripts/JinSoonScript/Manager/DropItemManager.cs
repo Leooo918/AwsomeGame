@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using Doryu.Inventory;
 
 public class DropItemManager : Singleton<DropItemManager>
 {
@@ -19,14 +20,14 @@ public class DropItemManager : Singleton<DropItemManager>
 
     public void IndicateItemPanel(ItemSO item)
     {
-        if (_itemsHaveBeenGet.Contains(item.id)) return;
+        //if (_itemsHaveBeenGet.Contains(item.id)) return;
 
-        ItemGatherPanel panal = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
-        panal.Init(item);
-        panal.Open();
+        //ItemGatherPanel panal = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+        //panal.Init(item);
+        //panal.Open();
 
-        _itemsHaveBeenGet.Add(item.id);
-        Save();
+        //_itemsHaveBeenGet.Add(item.id);
+        //Save();
     }
 
     private void Save()

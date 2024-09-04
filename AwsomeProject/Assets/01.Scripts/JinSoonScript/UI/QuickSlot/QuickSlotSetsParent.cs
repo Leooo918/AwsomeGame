@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Doryu.Inventory;
 
 public class QuickSlotSetsParent : MonoBehaviour
 {

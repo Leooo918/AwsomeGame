@@ -1,12 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using Doryu.Inventory;
 
 public class QuickSlotVisual : MonoBehaviour
 {
     public PortionItemSO AssignedPortion { get; private set; }
     private PortionItem portion;
-    private GameObject itemObj;
+    private Item itemObj;
 
     [SerializeField] private float _enableOffset = 20f;
     [SerializeField] private float _disableOffset = 2f;
@@ -35,26 +36,26 @@ public class QuickSlotVisual : MonoBehaviour
 
         //아이템이라서 드래그앤드롭이 될 수 있어서 안잡히게 해줘
         itemObj.GetComponent<Image>().raycastTarget = false;
-        portion.Init(1, null);
+        //portion.Init(1, null);
     }
 
     public void UseItem()
     {
-        AssignedPortion = null;
-        portion.RemoveItem(1);
+        //AssignedPortion = null;
+        //portion.RemoveItem(1);
 
-        switch(portion.portionType)
-        {
-            case Portion.PortionForMyself:
-                PlayerManager.Instance.Player.healthCompo.GetEffort(portion.portionEffect);
-                break;
-            case Portion.PortionForThrow:
-                PlayerManager.Instance.Player.ThrowPortion(portion);
-                break;
-            case Portion.Flask:
-                PlayerManager.Instance.Player.WeaponEnchant(portion);
-                break;
-        }
+        //switch(portion.portionType)
+        //{
+        //    case Portion.PortionForMyself:
+        //        PlayerManager.Instance.Player.healthCompo.GetEffort(portion.portionEffect);
+        //        break;
+        //    case Portion.PortionForThrow:
+        //        PlayerManager.Instance.Player.ThrowPortion(portion);
+        //        break;
+        //    case Portion.Flask:
+        //        PlayerManager.Instance.Player.WeaponEnchant(portion);
+        //        break;
+        //}
     }
 
     public void DeleteItem()

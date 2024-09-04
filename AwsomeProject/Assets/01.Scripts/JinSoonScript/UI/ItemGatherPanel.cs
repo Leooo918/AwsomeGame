@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Doryu.Inventory;
 
 public class ItemGatherPanel : MonoBehaviour, IManageableUI
 {
@@ -22,7 +23,8 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
 
     private void Update()
     {
-        if (_isOpen && Keyboard.current.anyKey.wasPressedThisFrame)
+        //아무 키보드  Keyboard.current.anyKey.wasPressedThisFrame
+        if (_isOpen && Input.GetMouseButtonDown(0))
             Close();
     }
 
@@ -62,7 +64,7 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
         _item = item;
         _nameTxt.SetText(_item.itemName);
         _explainTxt.SetText(_item.itemExplain);
-        _itemImage.sprite = _item.itemImage;
+        _itemImage.sprite = _item.image;
     }
 
     public void Init()

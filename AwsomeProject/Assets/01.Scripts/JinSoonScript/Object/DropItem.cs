@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Doryu.Inventory;
 
 public class DropItem : MonoBehaviour
 {
@@ -22,13 +23,13 @@ public class DropItem : MonoBehaviour
     {
         if (interacting && Input.GetKeyDown(KeyCode.F))
         {
-            Item i = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
-            if (InventoryManager.Instance.PlayerInventory.TryInsertItem(i))
-            {
-                DropItemManager.Instance.IndicateItemPanel(i.itemSO);
-                Destroy(gameObject);
-            }
-            else Destroy(i);
+            //Item i = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
+            //if (InventoryManager.Instance.PlayerInventory.TryInsertItem(i))
+            //{
+            //    DropItemManager.Instance.IndicateItemPanel(i.itemSO);
+            //    Destroy(gameObject);
+            //}
+            //else Destroy(i);
         }
     }
 

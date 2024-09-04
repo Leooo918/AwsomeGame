@@ -1,4 +1,5 @@
 using UnityEngine;
+using Doryu.Inventory;
 
 public class QuickSlotManager : Singleton<QuickSlotManager>
 {
@@ -12,7 +13,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         set
         {
             maxQuickSlotCnt = value;
-            quickSlotInserterSetParent.maxQuickSlotCnt = value;
+            //quickSlotInserterSetParent.maxQuickSlotCnt = value;
             quickSlotSetParent.maxQuickSlotCnt = value;
         }
     }
@@ -40,7 +41,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         }
     }
 
-    public QuickSlotInserterSetsParent quickSlotInserterSetParent;
+    //public QuickSlotInserterSetsParent quickSlotInserterSetParent;
     public QuickSlotSetsParent quickSlotSetParent;
 
     public QuickSlotItems GetNextQuickSlot()
@@ -53,8 +54,8 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
             quickSlots[i - 1] = temp[i];
 
         quickSlots[quickSlots.Length - 1] = new QuickSlotItems(quickSlots.Length - 1);
-        quickSlotInserterSetParent.CurQuickSlot.Init(0);
-        quickSlotInserterSetParent.NextQuickSlot.Init(1);
+        //quickSlotInserterSetParent.CurQuickSlot.Init(0);
+        //quickSlotInserterSetParent.NextQuickSlot.Init(1);
 
         return quickSlots[0];
     }
@@ -70,14 +71,14 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         quickSlots[quickSlots.Length - 1] = new QuickSlotItems(quickSlots.Length - 1);
 
         quickSlotSetParent.GotoNextQuickSlotSet();
-        quickSlotInserterSetParent.GotoNextQuickSlotSet();
+        //quickSlotInserterSetParent.GotoNextQuickSlotSet();
     }
 
     public void RemoveItem(int slotIdx, int selectedSlot, bool removeInstance)
     {
         quickSlots[slotIdx].items[selectedSlot] = null;
         quickSlotSetParent.RemoveItem(slotIdx, selectedSlot);
-        quickSlotInserterSetParent.RemoveItem(slotIdx, selectedSlot, removeInstance);
+        //quickSlotInserterSetParent.RemoveItem(slotIdx, selectedSlot, removeInstance);
     }
 
     public void InsertItem(int slotIdx, int selectedSlot, ItemSO item)
