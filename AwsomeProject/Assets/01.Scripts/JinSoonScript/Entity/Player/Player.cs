@@ -1,3 +1,4 @@
+using Doryu.Inventory;
 using System;
 using UnityEngine;
 
@@ -228,11 +229,13 @@ public class Player : Entity
         if (isInventoryOpen == false)
         {
             PlayerManager.Instance.DisablePlayerMovementInput();
+            UIManager.Instance.Open(UIType.Inventory);
             isInventoryOpen = true;
         }
         else
         {
             PlayerManager.Instance.EnablePlayerMovementInput();
+            UIManager.Instance.Close(UIType.Inventory);
             isInventoryOpen = false;
         }
     }

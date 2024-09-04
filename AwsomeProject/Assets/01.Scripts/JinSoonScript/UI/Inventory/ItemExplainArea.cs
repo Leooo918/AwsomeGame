@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Doryu.Inventory;
 
 public class ItemExplainArea : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class ItemExplainArea : MonoBehaviour
 
     private void Awake()
     {
-        inventory.OnSelectItem += SetExplain;
+        //inventory.OnSelectItem += SetExplain;
         SetExplain(null);
     }
 
@@ -28,8 +29,8 @@ public class ItemExplainArea : MonoBehaviour
         }
 
         icon.color = new Color(1, 1, 1, 1);
-        itemName.SetText(item.itemName);
+        itemName.SetText(item.itemName.ToString());
         explain.SetText(item.itemExplain);
-        icon.sprite = item.itemImage;
+        icon.sprite = item.image;
     }
 }

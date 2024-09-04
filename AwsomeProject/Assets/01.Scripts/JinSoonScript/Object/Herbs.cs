@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Herbs : MonoBehaviour
 {
     [SerializeField] private GameObject interact;
-    [SerializeField] private IngredientItemSO item;
+    //[SerializeField] private IngredientItemSO item;
     [SerializeField] private Sprite gatheredImage;
 
     public UnityEvent<float> OnGatheringHerb;
@@ -31,8 +31,8 @@ public class Herbs : MonoBehaviour
         spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         pivot = interact.transform.Find("Pivot");
 
-        if (item == null) return;
-        gatherTime = item.gatheringTime;
+        //if (item == null) return;
+        //gatherTime = item.gatheringTime;
     }
 
 
@@ -65,30 +65,30 @@ public class Herbs : MonoBehaviour
 
     private void GetHurb()
     {
-        if (herbGathered) return;
+        //if (herbGathered) return;
 
-        GameManager.Instance.gatherCnt++;
-        player.StateMachine.ChangeState(PlayerStateEnum.Idle);
-        interact.SetActive(false);
-        herbGathered = true;
+        //GameManager.Instance.gatherCnt++;
+        //player.StateMachine.ChangeState(PlayerStateEnum.Idle);
+        //interact.SetActive(false);
+        //herbGathered = true;
 
-        IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.ItemParent).GetComponent<IngredientItem>();
-        iItem.SetItemAmount(1);
-        bool canAddItem = 
-            InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
+        //IngredientItem iItem = Instantiate(item.prefab, InventoryManager.Instance.ItemParent).GetComponent<IngredientItem>();
+        //iItem.SetItemAmount(1);
+        //bool canAddItem = 
+        //    InventoryManager.Instance.PlayerInventory.TryInsertItem(iItem);
         
-        if(canAddItem)
-        {
-            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
-            gather.Init(iItem.itemSO);
-            gather.Open();
-        }
-        else
-        {
-            StartCoroutine(DelayClosePopUp());
-        }
+        //if(canAddItem)
+        //{
+        //    ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+        //    gather.Init(iItem.itemSO);
+        //    gather.Open();
+        //}
+        //else
+        //{
+        //    StartCoroutine(DelayClosePopUp());
+        //}
 
-        spriteRenderer.sprite = gatheredImage;
+        //spriteRenderer.sprite = gatheredImage;
     }
 
     private IEnumerator DelayClosePopUp()

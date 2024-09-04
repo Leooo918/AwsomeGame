@@ -21,6 +21,6 @@ public class IngredientsInventory : MonoBehaviour
 
     private void OnClickBookMark(bool isEnableInventory)
     {
-        InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
+        //InventoryManager.Instance.EnbableIgredientsInventory(isEnableInventory);
     }
 }

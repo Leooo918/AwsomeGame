@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Doryu.Inventory;
 
 public class ItemGatherPanel : MonoBehaviour, IManageableUI
 {
@@ -59,10 +60,10 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
 
     public void Init(ItemSO item)
     {
-        _item = item;
-        _nameTxt.SetText(_item.itemName);
-        _explainTxt.SetText(_item.itemExplain);
-        _itemImage.sprite = _item.itemImage;
+        //_item = item;
+        //_nameTxt.SetText(_item.itemName);
+        //_explainTxt.SetText(_item.itemExplain);
+        //_itemImage.sprite = _item.itemImage;
     }
 
     public void Init()
