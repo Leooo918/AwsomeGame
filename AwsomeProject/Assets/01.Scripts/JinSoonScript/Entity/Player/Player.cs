@@ -12,7 +12,9 @@ public enum PlayerStateEnum
     Stun,
     NormalAttack,
     Climb,
-    Dead
+    Throw, 
+    Dead,
+    Push,
 }
 
 public enum PlayerSkillEnum
@@ -84,6 +86,9 @@ public class Player : Entity
 
     #endregion
 
+    [SerializeField]
+    private LayerMask _whatIsPush;
+
     public int maxJumpCnt { get; private set; } = 2;
     [HideInInspector] public int curJumpCnt = 0;
 
@@ -101,6 +106,10 @@ public class Player : Entity
     [HideInInspector] public bool throwingPortionSelected = false;
     [HideInInspector] public Vector2 PortionThrowingDir;
     [HideInInspector] public bool canDash = false;
+
+    public Transform CurrentPushTrm { get; set; }
+
+    public GameObject testObject;
 
 
     protected override void Awake()
@@ -293,5 +302,14 @@ public class Player : Entity
         {
             p.Interact(this);
         }
+    }
+
+    public virtual Transform CheckObstacleInFront()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(wallChecker.position,
+            new Vector2(0.05f, wallCheckBoxHeight), 0,
+            Vector2.right * FacingDir, wallCheckDistance, _whatIsPush);
+
+        return hit.transform;
     }
 }

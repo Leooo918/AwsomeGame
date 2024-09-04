@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class PlayerGroundState : PlayerState
     private Skill dashSkill;
     private Skill normalAttackSkill;
 
-    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) 
+    public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         dashSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill;
         normalAttackSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill;
@@ -20,14 +21,15 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;
+        player.PlayerInput.OnTryUseQuickSlot += HandleThrowEvent;
     }
-
 
     public override void Exit()
     {
         player.PlayerInput.JumpEvent -= HandleJumpEvent;
         player.PlayerInput.DashEvent -= HandleDashEvent;
         player.PlayerInput.AttackEvent -= HandleAttackEvent;
+        player.PlayerInput.OnTryUseQuickSlot -= HandleThrowEvent;
         base.Exit();
     }
 
@@ -41,7 +43,12 @@ public class PlayerGroundState : PlayerState
         else
             player.CanJump = true;
 
-
+        Transform trm = player.CheckObstacleInFront();
+        if (trm != null)
+        {
+            player.CurrentPushTrm = trm;
+            stateMachine.ChangeState(PlayerStateEnum.Push);
+        }
 
         if (player.CanJump == false && !player.IsGroundDetected())
         {
@@ -50,13 +57,11 @@ public class PlayerGroundState : PlayerState
         }
     }
 
-
-
     #region HandleEventSection
 
     private void HandleJumpEvent()
     {
-        if(player.PlayerInput.YInput < 0)
+        if (player.PlayerInput.YInput < 0)
         {
             player.CheckOneWayPlatform();
             return;
@@ -78,6 +83,11 @@ public class PlayerGroundState : PlayerState
     private void HandleAttackEvent()
     {
         normalAttackSkill.UseSkill();
+    }
+
+    private void HandleThrowEvent()
+    {
+        stateMachine.ChangeState(PlayerStateEnum.Throw);
     }
 
     #endregion
