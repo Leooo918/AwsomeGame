@@ -19,4 +19,4 @@ MonoBehaviour:
   dotImage: {fileID: -682256301, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   image: {fileID: 21300000, guid: 5f096fe7f03d27e4fbff3fe3ba473b0c, type: 3}
   prefab: {fileID: -1930051512974236873, guid: aa9aa3d2b6b3c874a84db7664b74783d, type: 3}
-  time: 1
+  gatheringTime: 2

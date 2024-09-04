@@ -80,7 +80,7 @@ namespace Doryu.Inventory
                 {
                     if (slots[x, y].assignedItem == null)
                     {
-                        Item newItem = Instantiate(InventoryManager.Instance.itemPrefab, slots[x, y].transform);
+                        Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                         newItem.itemSO = item.itemSO;
                         if (item.amount > item.itemSO.maxMergeAmount)
                         {
@@ -132,7 +132,7 @@ namespace Doryu.Inventory
                 {
                     if (slots[x, y].assignedItem == null)
                     {
-                        Item newItem = Instantiate(InventoryManager.Instance.itemPrefab, slots[x, y].transform);
+                        Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                         newItem.itemSO = itemSO;
                         if (amount > itemSO.maxMergeAmount)
                         {
@@ -196,7 +196,7 @@ namespace Doryu.Inventory
                     if (slotSave != null && slotSave.itemNameInt != -1)
                     {
                         Item item = InventoryManager.Instance.ItemSODict[(ItemType)slotSave.itemNameInt].prefab;
-                        Item itemInst = Instantiate(item, slot.transform);
+                        Item itemInst = Instantiate(item);
                         itemInst.amount = slotSave.amount;
                         slot.SetItem(itemInst);
                     }

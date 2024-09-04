@@ -31,6 +31,9 @@ public class Herbs : MonoBehaviour
     {
         spriteRenderer = transform.Find("Visual").GetComponent<SpriteRenderer>();
         pivot = interact.transform.Find("Pivot");
+
+        if (itemSO == null) return;
+            gatherTime = itemSO.gatheringTime;
     }
 
 
@@ -70,12 +73,20 @@ public class Herbs : MonoBehaviour
         interact.SetActive(false);
         herbGathered = true;
 
-        InventoryManager.Instance.AddItem(itemSO, 1);
+        //Item newitem = Instantiate(itemSO.prefab);
+        //newitem.amount = 1;
+        bool canAddItem = InventoryManager.Instance.TryAddItem(itemSO);
 
-        ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
-        gather.Init(itemSO);
-        gather.Open();
-
+        if (canAddItem)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(itemSO);
+            gather.Open();
+        }
+        else
+        {
+            StartCoroutine(DelayClosePopUp());
+        }
 
         spriteRenderer.sprite = gatheredImage;
     }

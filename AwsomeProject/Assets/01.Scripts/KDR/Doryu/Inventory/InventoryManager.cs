@@ -29,44 +29,53 @@ namespace Doryu.Inventory
         [field:SerializeField] public InventorySlot slotPrefab { get; private set; }
         [field:SerializeField] public Item itemPrefab { get; private set; }
         [SerializeField] private ItemListSO itemListSO;
-        [SerializeField] private Inventory[] inventories;
+        [SerializeField] private Inventory ingredientInventory;
+        [SerializeField] private Inventory potionInventory;
 
         private void Awake()
         {
-            inventories = FindObjectsByType<Inventory>(FindObjectsSortMode.None);
-
             foreach (ItemSO itemSO in itemListSO.itemSOList)
             {
                 ItemSODict.Add(itemSO.itemType, itemSO);
             }
 
-            for (int i = 0; i < inventories.Length; i++)
-            {
-                inventories[i].Init();
-            }
+            ingredientInventory.Init();
+            potionInventory?.Init();
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                AddItem(ItemSODict[ItemType.RedMushroom]);
+                TryAddItem(ItemSODict[ItemType.RedMushroom]);
             }
         }
 
-        public void AddItem(Item item)
+        public bool TryAddItem(Item item)
         {
-            for (int i = 0; i < inventories.Length; i++)
+            bool succes = false;
+            if (item.itemSO is IngredientItemSO)
             {
-                inventories[i].AddItem(item);
+                succes = ingredientInventory.AddItem(item);
             }
+            if (item.itemSO is PotionItemListSO)
+            {
+                succes = potionInventory.AddItem(item);
+            }
+            return succes;
         }
-        public void AddItem(ItemSO itemSO, int amount = 1)
+        public bool TryAddItem(ItemSO itemSO, int amount = 1)
         {
-            for (int i = 0; i < inventories.Length; i++)
+            bool succes = false;
+            if (itemSO is IngredientItemSO)
             {
-                inventories[i].AddItem(itemSO, amount);
+                succes = ingredientInventory.AddItem(itemSO, amount);
             }
+            if (itemSO is PotionItemListSO)
+            {
+                succes = potionInventory.AddItem(itemSO, amount);
+            }
+            return succes;
         }
     }
 }

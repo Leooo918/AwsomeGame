@@ -23,7 +23,8 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
 
     private void Update()
     {
-        if (_isOpen && Keyboard.current.anyKey.wasPressedThisFrame)
+        //아무 키보드  Keyboard.current.anyKey.wasPressedThisFrame
+        if (_isOpen && Input.GetMouseButtonDown(0))
             Close();
     }
 
