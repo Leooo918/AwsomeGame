@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +33,23 @@ namespace Doryu.Inventory
         [SerializeField] private Inventory ingredientInventory;
         [SerializeField] private Inventory potionInventory;
 
+        public Action<InventorySlot> OnSelectedSlot;
+        private InventorySlot _selectedSlot;
+        [HideInInspector]
+        public InventorySlot SelectedSlot
+        {
+            get => _selectedSlot;
+            set
+            {
+                _selectedSlot?.OnMouse(false);
+                _selectedSlot?.OnSelect(false);
+                _selectedSlot = value;
+                _selectedSlot?.OnMouse(true);
+                _selectedSlot?.OnSelect(true);
+                OnSelectedSlot?.Invoke(_selectedSlot);
+            }
+        }
+
         private void Awake()
         {
             foreach (ItemSO itemSO in itemListSO.itemSOList)
@@ -48,6 +66,10 @@ namespace Doryu.Inventory
             if (Input.GetKeyDown(KeyCode.I))
             {
                 TryAddItem(ItemSODict[ItemType.RedMushroom]);
+            }
+            if (_selectedSlot != null && Input.GetMouseButtonDown(0))
+            {
+                SelectedSlot = null;
             }
         }
 

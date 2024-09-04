@@ -37,9 +37,5 @@ namespace Doryu.Inventory
         [Header("Sprite")]
         public Sprite dotImage;
         public Sprite image;
-
-        [Space(20)]
-        [Header("Prefab")]
-        public Item prefab;
     }
 }

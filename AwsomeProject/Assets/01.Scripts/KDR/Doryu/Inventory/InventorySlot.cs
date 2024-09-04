@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Doryu.Inventory
 {
     [Serializable]
-    public class InventorySlot : MonoBehaviour
+    public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         private Item _assignedItem;
         public Item assignedItem
@@ -19,6 +20,13 @@ namespace Doryu.Inventory
             }
         }
         public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;
+
+        private GameObject _selectVolumObj;
+
+        private void Awake()
+        {
+            _selectVolumObj = transform.Find("SelectedUI").gameObject;
+        }
 
         public void SwapSlotData(InventorySlot slot)
         {
@@ -74,6 +82,34 @@ namespace Doryu.Inventory
             }
 
             return over;
+        }
+
+        public void OnMouse(bool isOnMouse)
+        {
+            _selectVolumObj.SetActive(isOnMouse);
+        }
+        public void OnSelect(bool isSelected)
+        {
+            _selectVolumObj.transform.localScale = Vector3.one * (isSelected ? 1.05f : 1f);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (InventoryManager.Instance.SelectedSlot == this) return;
+
+            OnMouse(true);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (InventoryManager.Instance.SelectedSlot == this) return;
+
+            OnMouse(false);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            InventoryManager.Instance.SelectedSlot = this;
         }
     }
 }

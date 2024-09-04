@@ -19,5 +19,5 @@ MonoBehaviour:
     \uC5F4\uB9E4\uB2E4."
   dotImage: {fileID: 954808718, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   image: {fileID: 21300000, guid: 0cb4078174c5bf840901716201159ed2, type: 3}
-  prefab: {fileID: -1930051512974236873, guid: aa9aa3d2b6b3c874a84db7664b74783d, type: 3}
+  prefab: {fileID: -1930051512974236873, guid: 2efe5387f9d07324ca7cafc16282146a, type: 3}
   gatheringTime: 0.1

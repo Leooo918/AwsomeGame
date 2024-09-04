@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Doryu.JBSave;
 using System;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 namespace Doryu.Inventory
 {
@@ -81,6 +82,7 @@ namespace Doryu.Inventory
                     if (slots[x, y].assignedItem == null)
                     {
                         Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
+                        newItem.Init();
                         newItem.itemSO = item.itemSO;
                         if (item.amount > item.itemSO.maxMergeAmount)
                         {
@@ -133,6 +135,7 @@ namespace Doryu.Inventory
                     if (slots[x, y].assignedItem == null)
                     {
                         Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
+                        newItem.Init();
                         newItem.itemSO = itemSO;
                         if (amount > itemSO.maxMergeAmount)
                         {
@@ -162,7 +165,7 @@ namespace Doryu.Inventory
                 for (int y = 0; y < _inventorySize.y; y++)
                 {
                     SlotSave newSlotSaveStruct = new SlotSave();
-                    if (slots[x, y].assignedItem != null)
+                    if (slots[x, y] != null && slots[x, y].assignedItem != null)
                     {
                         newSlotSaveStruct.pos = new Vector2Int(x, y);
                         newSlotSaveStruct.itemNameInt = (int)slots[x, y].assignedItem.itemSO.itemType;
@@ -195,10 +198,11 @@ namespace Doryu.Inventory
                     SlotSave slotSave = _inventoryData.slotDatas[x * 100 + y];
                     if (slotSave != null && slotSave.itemNameInt != -1)
                     {
-                        Item item = InventoryManager.Instance.ItemSODict[(ItemType)slotSave.itemNameInt].prefab;
-                        Item itemInst = Instantiate(item);
-                        itemInst.amount = slotSave.amount;
-                        slot.SetItem(itemInst);
+                        Item item = Instantiate(InventoryManager.Instance.itemPrefab);
+                        item.Init();
+                        item.itemSO = InventoryManager.Instance.ItemSODict[(ItemType)slotSave.itemNameInt];
+                        item.amount = slotSave.amount;
+                        slot.SetItem(item);
                     }
                     else if (slot.assignedItem != null)
                     {

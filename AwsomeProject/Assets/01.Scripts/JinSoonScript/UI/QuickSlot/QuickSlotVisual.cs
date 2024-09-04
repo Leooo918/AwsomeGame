@@ -29,7 +29,7 @@ public class QuickSlotVisual : MonoBehaviour
 
         AssignedPortion = item as PortionItemSO;
 
-        itemObj = Instantiate(AssignedPortion.prefab, transform);
+        //itemObj = Instantiate(AssignedPortion.prefab, transform);
         itemObj.GetComponent<RectTransform>().anchoredPosition = offset;
         itemObj.transform.SetSiblingIndex(1);
         portion = itemObj.GetComponent<PortionItem>();

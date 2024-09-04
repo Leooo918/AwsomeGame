@@ -7,20 +7,18 @@ using Doryu.Inventory;
 
 public class ItemExplainArea : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI explain;
 
     private void Awake()
     {
-        //inventory.OnSelectItem += SetExplain;
-        SetExplain(null);
+        InventoryManager.Instance.OnSelectedSlot += SetExplain;
     }
 
-    public void SetExplain(ItemSO item)
+    public void SetExplain(InventorySlot slot)
     {
-        if (item == null)
+        if (slot == null || slot.assignedItem == null)
         {
             itemName.SetText("");
             explain.SetText("");
@@ -29,8 +27,9 @@ public class ItemExplainArea : MonoBehaviour
         }
 
         icon.color = new Color(1, 1, 1, 1);
-        itemName.SetText(item.itemType.ToString());
-        explain.SetText(item.itemExplain);
-        icon.sprite = item.image;
+        ItemSO itemSO = slot.assignedItem.itemSO;
+        itemName.SetText(itemSO.itemName);
+        explain.SetText(itemSO.itemExplain);
+        icon.sprite = itemSO.image;
     }
 }

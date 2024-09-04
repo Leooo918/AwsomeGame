@@ -18,5 +18,5 @@ MonoBehaviour:
   itemExplain: "\uC904\uAE30\uCC98\uB7FC \uC0DD\uAE34 \uC5F4\uB9E4"
   dotImage: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   image: {fileID: 21300000, guid: bf884409ca88b414c8b831e633864246, type: 3}
-  prefab: {fileID: -1930051512974236873, guid: aa9aa3d2b6b3c874a84db7664b74783d, type: 3}
+  prefab: {fileID: -1930051512974236873, guid: d25579b5de4144b47a39d47754c4838e, type: 3}
   gatheringTime: 2

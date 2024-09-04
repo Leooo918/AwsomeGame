@@ -20,5 +20,5 @@ MonoBehaviour:
     \uC218 \uC788\uB294 \uAC15\uB3C4\uC774"
   dotImage: {fileID: -527573849, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   image: {fileID: 21300000, guid: 53818bfa75d3b3f4c9a26ee967bb1469, type: 3}
-  prefab: {fileID: -1930051512974236873, guid: aa9aa3d2b6b3c874a84db7664b74783d, type: 3}
+  prefab: {fileID: -1930051512974236873, guid: 202133c81548cbc4194167103f5f53c9, type: 3}
   gatheringTime: 0.1
