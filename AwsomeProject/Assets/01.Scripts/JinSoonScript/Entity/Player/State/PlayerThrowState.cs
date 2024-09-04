@@ -7,10 +7,12 @@ using UnityEngine;
 public class PlayerThrowState : PlayerState
 {
     private readonly int _xInputHash = Animator.StringToHash("XInput");
+    private Transform _throwPosTrm;
     private Projectary _projectary;
 
     public PlayerThrowState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
+        _throwPosTrm = player.transform.Find("ThrowPos");
         _projectary = player.transform.Find("Projectary").GetComponent<Projectary>();
     }
 
@@ -26,7 +28,7 @@ public class PlayerThrowState : PlayerState
     {
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
 
-        _projectary.DrawLine(player.transform.position + new Vector3(0.5f, 0.5f), dir * 10);
+        _projectary.DrawLine(_throwPosTrm.position, dir * 30);
 
 
         float z = Vector3.Cross(dir, Vector2.up).z;
@@ -50,8 +52,8 @@ public class PlayerThrowState : PlayerState
     private void HandleThrow()
     {
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
-        Rigidbody2D rigid = GameObject.Instantiate(player.testObject, player.transform.position + Vector3.up * 1.5f, Quaternion.identity).GetComponent<Rigidbody2D>();
-        rigid.AddForce(dir * 10, ForceMode2D.Impulse);
+        Rigidbody2D rigid = GameObject.Instantiate(player.testObject, _throwPosTrm.position, Quaternion.identity).GetComponent<Rigidbody2D>();
+        rigid.AddForce(dir * 30, ForceMode2D.Impulse);
         stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 }

@@ -9,6 +9,8 @@ public class Projectary : MonoBehaviour
     private float _time;
     [SerializeField]
     private int _count;
+    [SerializeField]
+    private float _gravity;
 
     [SerializeField]
     private GameObject _projectaryPrefab;
@@ -38,7 +40,6 @@ public class Projectary : MonoBehaviour
     public void DrawLine(Vector2 pos, Vector3 power)
     {
         bool flag = true;
-        float gravity = Physics2D.gravity.y;
         for (int i = 0; i < _projectileList.Count; i++)
         {
             Transform t = _projectileList[i];
@@ -49,7 +50,7 @@ public class Projectary : MonoBehaviour
                 Vector2 dotPos;
                 float time = _delta * i;
                 dotPos.x = pos.x + power.x * time;
-                dotPos.y = pos.y + power.y * time + (gravity * Mathf.Pow(time, 2)) * 0.5f;
+                dotPos.y = pos.y + power.y * time + (_gravity * Mathf.Pow(time, 2)) * 0.5f;
 
                 if (Physics2D.OverlapCircle(dotPos, .3f, _whatIsObstacle))
                 {

@@ -25,10 +25,15 @@ public class PlayerPushState : PlayerState
         player.CurrentPushTrm.position = _pushObjectPosTrm.position + offset * player.FacingDir;
         player.CurrentPushTrm.position = new Vector3(player.CurrentPushTrm.position.x, prevY);
 
-        player.PlayerInput.JumpEvent += HandleJump;
+        player.PlayerInput.InteractPress += HandleInteract;
     }
 
-    private void HandleJump()
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    private void HandleInteract()
     {
         player.CurrentPushTrm = null;
         stateMachine.ChangeState(PlayerStateEnum.Idle);

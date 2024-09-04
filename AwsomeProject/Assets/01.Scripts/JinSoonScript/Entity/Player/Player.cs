@@ -103,6 +103,9 @@ public class Player : Entity
     [SerializeField] private Vector3 _throwingOffset;
     public Vector3 ThrowingOffset { get => _throwingOffset; private set => _throwingOffset = value; }
 
+    [SerializeField]
+    private float _objectCheckDistance = 0.5f;
+
     [HideInInspector] public bool throwingPortionSelected = false;
     [HideInInspector] public Vector2 PortionThrowingDir;
     [HideInInspector] public bool canDash = false;
@@ -304,11 +307,11 @@ public class Player : Entity
         }
     }
 
-    public virtual Transform CheckObstacleInFront()
+    public virtual Transform CheckObjectInFront()
     {
         RaycastHit2D hit = Physics2D.BoxCast(wallChecker.position,
             new Vector2(0.05f, wallCheckBoxHeight), 0,
-            Vector2.right * FacingDir, wallCheckDistance, _whatIsPush);
+            Vector2.right * FacingDir, _objectCheckDistance, _whatIsPush);
 
         return hit.transform;
     }

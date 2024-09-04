@@ -22,7 +22,19 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;
         player.PlayerInput.OnTryUseQuickSlot += HandleThrowEvent;
+        player.PlayerInput.InteractPress += HandleInteractEvent;
     }
+    
+    private void HandleInteractEvent()
+    {
+        Transform trm = player.CheckObjectInFront();
+        if (trm != null)
+        {
+            player.CurrentPushTrm = trm;
+            stateMachine.ChangeState(PlayerStateEnum.Push);
+        }
+    }
+
 
     public override void Exit()
     {
@@ -30,6 +42,7 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.DashEvent -= HandleDashEvent;
         player.PlayerInput.AttackEvent -= HandleAttackEvent;
         player.PlayerInput.OnTryUseQuickSlot -= HandleThrowEvent;
+        player.PlayerInput.InteractPress -= HandleInteractEvent;
         base.Exit();
     }
 
@@ -42,13 +55,6 @@ public class PlayerGroundState : PlayerState
             player.StartDelayCallBack(player.CoyoteTime, () => player.CanJump = false);
         else
             player.CanJump = true;
-
-        Transform trm = player.CheckObstacleInFront();
-        if (trm != null)
-        {
-            player.CurrentPushTrm = trm;
-            stateMachine.ChangeState(PlayerStateEnum.Push);
-        }
 
         if (player.CanJump == false && !player.IsGroundDetected())
         {
