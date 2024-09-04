@@ -278,20 +278,20 @@ public class Player : Entity
         IsDead = true;
     }
 
-    public void ThrowPortion(PortionItem portion)
-    {
-        Vector3 spawnPosition = transform.position + ThrowingOffset;
-        ThrowingPortion throwingPortion =
-            Instantiate(thowingPortionPf, spawnPosition, Quaternion.identity)
-            .GetComponent<ThrowingPortion>();
+    //public void ThrowPortion(PortionItem portion)
+    //{
+    //    Vector3 spawnPosition = transform.position + ThrowingOffset;
+    //    ThrowingPortion throwingPortion =
+    //        Instantiate(thowingPortionPf, spawnPosition, Quaternion.identity)
+    //        .GetComponent<ThrowingPortion>();
 
-        throwingPortion.Init(portion);
-    }
+    //    throwingPortion.Init(portion);
+    //}
 
-    public void WeaponEnchant(PortionItem portion)
-    {
+    //public void WeaponEnchant(PortionItem portion)
+    //{
 
-    }
+    //}
 
     public void Climb(bool b)
     {

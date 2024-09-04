@@ -2,7 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
-public class GrowingGrass : MonoBehaviour, IGetPortionEffect
+public class GrowingGrass : MonoBehaviour
 {
     //private 
     private BoxCollider2D _collider;
@@ -70,13 +70,13 @@ public class GrowingGrass : MonoBehaviour, IGetPortionEffect
         }
     }
 
-    public void GetEffort(Effect effect)
-    {
-        GrowthEffect growth = effect as GrowthEffect;
-        if (growth == null || _isEndGrow) return;
+    //public void GetEffort(Effect effect)
+    //{
+    //    GrowthEffect growth = effect as GrowthEffect;
+    //    if (growth == null || _isEndGrow) return;
 
-        _animator.SetTrigger(_growingAnimationHash);
-    }
+    //    _animator.SetTrigger(_growingAnimationHash);
+    //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

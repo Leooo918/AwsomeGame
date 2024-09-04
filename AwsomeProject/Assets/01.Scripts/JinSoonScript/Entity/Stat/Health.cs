@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
+public class Health : MonoBehaviour, IDamageable
 {
     public Entity owner { get; private set; }
 
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
     public bool isInvincible { get; private set; }
 
     //효과, 지속시간, 시작된 시간
-    protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
+    //protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
 
     public Action onHit;
     public Action onCrit;
@@ -138,36 +138,36 @@ public class Health : MonoBehaviour, IDamageable, IGetPortionEffect
 
     private void Update()
     {
-        for (int i = 0; i < effects.Count; i++)
-        {
-            Tuple<Effect, float, float> effect = effects[i];
-            effect.Item1.UpdateEffort();
+        //for (int i = 0; i < effects.Count; i++)
+        //{
+        //    Tuple<Effect, float, float> effect = effects[i];
+        //    effect.Item1.UpdateEffort();
 
-            if (effect.Item3 + effect.Item2 < Time.time)
-            {
-                effect.Item1.ExitEffort();
-                effects.Remove(effect);
-            }
-        }
+        //    if (effect.Item3 + effect.Item2 < Time.time)
+        //    {
+        //        effect.Item1.ExitEffort();
+        //        effects.Remove(effect);
+        //    }
+        //}
     }
 
 
-    public virtual void GetEffort(Effect effect)
-    {
-        for (int i = 0; i < effects.Count; i++)
-        {
-            var item = effects[i];
-            if (item.Item1 == effect)
-            {
-                float remainDuration = item.Item2;
-                effects[i] = new Tuple<Effect, float, float>(item.Item1, remainDuration + effect.duration, item.Item3);
-                return;
-            }
-        }
+    //public virtual void GetEffort(Effect effect)
+    //{
+    //    for (int i = 0; i < effects.Count; i++)
+    //    {
+    //        var item = effects[i];
+    //        if (item.Item1 == effect)
+    //        {
+    //            float remainDuration = item.Item2;
+    //            effects[i] = new Tuple<Effect, float, float>(item.Item1, remainDuration + effect.duration, item.Item3);
+    //            return;
+    //        }
+    //    }
 
-        effects.Add(new Tuple<Effect, float, float>(effect, effect.duration, Time.time));
-        effect.EnterEffort(owner);
-    }
+    //    effects.Add(new Tuple<Effect, float, float>(effect, effect.duration, Time.time));
+    //    effect.EnterEffort(owner);
+    //}
 
     public void Rape(float time)
     {

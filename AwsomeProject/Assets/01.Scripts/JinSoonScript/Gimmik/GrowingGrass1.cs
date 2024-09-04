@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
+public class GrowingGrass1 : MonoBehaviour
 {
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField]private Transform _objTrm;
@@ -99,14 +99,14 @@ public class GrowingGrass1 : MonoBehaviour, IGetPortionEffect
         Gizmos.DrawWireCube(new Vector2(left, _objTrm.position.y), lSize);
     }
 
-    public void GetEffort(Effect effect)
-    {
-        GrowthEffect growth = effect as GrowthEffect;
+    //public void GetEffort(Effect effect)
+    //{
+    //    GrowthEffect growth = effect as GrowthEffect;
 
-        if (growth == null || _isGrowed) return;
-        _isGrowing = true;
-        _originPos = transform.position;
-    }
+    //    if (growth == null || _isGrowed) return;
+    //    _isGrowing = true;
+    //    _originPos = transform.position;
+    //}
 
     private IEnumerator DelayReturn()
     {
