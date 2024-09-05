@@ -1,5 +1,4 @@
 using UnityEngine;
-using Doryu.Inventory;
 
 public class QuickSlotManager : Singleton<QuickSlotManager>
 {

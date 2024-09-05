@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using Doryu.Inventory;
 
 public class Herbs : MonoBehaviour
 {
@@ -34,6 +33,8 @@ public class Herbs : MonoBehaviour
 
         if (itemSO == null) return;
             gatherTime = itemSO.gatheringTime;
+
+        player = PlayerManager.Instance.Player;
     }
 
 

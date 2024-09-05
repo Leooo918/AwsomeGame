@@ -1,7 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using Doryu.Inventory;
 
 /// <summary>
 /// 얘는 3가지 상태가 있다고 생각하면 됨

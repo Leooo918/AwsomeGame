@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Doryu.Inventory;
 
 public class ItemGatherPanel : MonoBehaviour, IManageableUI
 {

@@ -35,6 +35,7 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls
     public float YInput { get; private set; }
 
     public Vector2 MousePosition { get; private set; }
+    public Vector2 MouseScreenPosition { get; private set; }
 
     #endregion
 
@@ -129,8 +130,8 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        Vector2 screenPos = context.ReadValue<Vector2>();
-        MousePosition = Camera.main.ScreenToWorldPoint(screenPos);
+        MouseScreenPosition = context.ReadValue<Vector2>();
+        MousePosition = Camera.main.ScreenToWorldPoint(MouseScreenPosition);
     }
     #endregion
 }
