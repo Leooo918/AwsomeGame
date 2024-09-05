@@ -42,7 +42,7 @@ public abstract class Entity : MonoBehaviour
     public float airBornDuration { get; protected set; }
     public bool canBeAirBorn { get; protected set; }
     public float upArmorDuration { get; protected set; }
-    
+
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
@@ -114,10 +114,14 @@ public abstract class Entity : MonoBehaviour
 
     #region CheckCollisionSection
 
-    public virtual bool IsGroundDetected() =>
-        Physics2D.BoxCast(groundChecker.position,
+    public virtual bool IsGroundDetected(Vector3? offset = null)
+    {
+        Vector3 acturalOffset = offset ?? Vector3.zero;
+        return Physics2D.BoxCast(groundChecker.position + acturalOffset,
             new Vector2(groundCheckBoxWidth, 0.05f), 0,
             Vector2.down, groundCheckDistance, whatIsGroundAndWall);
+
+    }
 
 
     public virtual bool IsWallDetected() =>

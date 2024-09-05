@@ -1,17 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerGroundState : PlayerState
 {
     private Skill dashSkill;
     private Skill normalAttackSkill;
+    private CapsuleCollider2D _playerCollider;
+
+    private LayerMask _whatIsVine = LayerMask.GetMask("Vine");
+
+    private Collider2D[] _colliders;
 
     public PlayerGroundState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         dashSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill;
         normalAttackSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill;
+        _playerCollider = player.colliderCompo as CapsuleCollider2D;
+        _colliders = new Collider2D[1];
     }
 
     public override void Enter()
@@ -23,8 +31,11 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.AttackEvent += HandleAttackEvent;
         player.PlayerInput.OnTryUseQuickSlot += HandleThrowEvent;
         player.PlayerInput.InteractPress += HandleInteractEvent;
+        player.PlayerInput.OnYInputEvent += HandleYInputEvent;
     }
+
     
+
     private void HandleInteractEvent()
     {
         Transform trm = player.CheckObjectInFront();
@@ -43,6 +54,7 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.AttackEvent -= HandleAttackEvent;
         player.PlayerInput.OnTryUseQuickSlot -= HandleThrowEvent;
         player.PlayerInput.InteractPress -= HandleInteractEvent;
+        player.PlayerInput.OnYInputEvent -= HandleYInputEvent;
         base.Exit();
     }
 
@@ -50,6 +62,8 @@ public class PlayerGroundState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
+
+       
 
         if (player.IsGroundDetected() == false)
             player.StartDelayCallBack(player.CoyoteTime, () => player.CanJump = false);
@@ -96,5 +110,20 @@ public class PlayerGroundState : PlayerState
         stateMachine.ChangeState(PlayerStateEnum.Throw);
     }
 
+    private void HandleYInputEvent(float input)
+    {
+        if (input <= 0) return;
+        int count = Physics2D.OverlapBoxNonAlloc(player.PlayerCenter.position, _playerCollider.size, 0, _colliders, _whatIsVine);
+
+        if (count != 0)
+        {
+            Collider2D collider = _colliders[0];
+            player.CurrentVine = collider.transform.GetComponent<GrowingGrass>();
+            if (player.CurrentVine.CurrentState == VineState.Grown)
+                stateMachine.ChangeState(PlayerStateEnum.Climb);
+        }
+    }
+
     #endregion
+
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerThrowState : PlayerState
 {
-    private readonly int _xInputHash = Animator.StringToHash("XInput");
+    private readonly int _inputHash = Animator.StringToHash("Input");
     private Transform _throwPosTrm;
     private Projectary _projectary;
 
@@ -21,7 +21,7 @@ public class PlayerThrowState : PlayerState
         base.Enter();
         _projectary.gameObject.SetActive(true);
         player.PlayerInput.OnUseQuickSlot += HandleThrow;
-        player.animatorCompo.SetInteger(_xInputHash, Mathf.CeilToInt(player.PlayerInput.XInput));
+        player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(player.PlayerInput.XInput));
     }
 
     public override void UpdateState()
@@ -38,7 +38,7 @@ public class PlayerThrowState : PlayerState
             player.Flip();
 
         float xInput = player.PlayerInput.XInput;
-        player.animatorCompo.SetInteger(_xInputHash, Mathf.CeilToInt(xInput));
+        player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(xInput));
         player.SetVelocity(xInput * 5, rigidbody.velocity.y, true);
     }
 

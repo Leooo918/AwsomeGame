@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerPushState : PlayerState
 {
-    private readonly int _xInputHash = Animator.StringToHash("XInput");
+    private readonly int _inputHash = Animator.StringToHash("Input");
 
     private Transform _pushObjectPosTrm;
     private Rigidbody2D _pushObjectRigid;
@@ -44,6 +44,6 @@ public class PlayerPushState : PlayerState
         float xInput = player.PlayerInput.XInput;
         _pushObjectRigid.velocity = new Vector2(xInput * 4, _pushObjectRigid.velocity.y);
         player.SetVelocity(xInput * 4, rigidbody.velocity.y, true);
-        player.animatorCompo.SetInteger(_xInputHash, Mathf.CeilToInt(xInput));
+        player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(xInput));
     }
 }

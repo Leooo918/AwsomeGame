@@ -6,7 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAirState : PlayerState
 {
-    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
+    private CapsuleCollider2D _playerCollider;
+    private Collider2D[] _colliders;
+    private LayerMask _whatIsVine = LayerMask.GetMask("Vine");
+    public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) 
+    {
+        _playerCollider = player.colliderCompo as CapsuleCollider2D;
+        _colliders = new Collider2D[1];
+    }
 
     public override void Enter()
     {
@@ -31,11 +38,21 @@ public class PlayerAirState : PlayerState
     {
         base.UpdateState();
 
+        if (player.PlayerInput.YInput > 0.5f)
+        {
+            int count = Physics2D.OverlapBoxNonAlloc(player.PlayerCenter.position, _playerCollider.size, 0, _colliders, _whatIsVine);
+            if (count != 0)
+            {
+                Collider2D collider = _colliders[0];
+                player.CurrentVine = collider.transform.GetComponent<GrowingGrass>();
+                if (player.CurrentVine.CurrentState == VineState.Grown)
+                    stateMachine.ChangeState(PlayerStateEnum.Climb);
+                return;
+            }
+        }
+
         //떨어질 때는 조금 천천히 움직여지게
         float xInput = player.PlayerInput.XInput;
-
-        if (player.canClimb && player.PlayerInput.YInput != 0)
-            stateMachine.ChangeState(PlayerStateEnum.Climb);
 
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected()) return;
 

@@ -17,6 +17,8 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls
     public event Action AttackEvent;
     public event Action OpenOptionEvent;
     public event Action SelectMysteryPortion;
+    public event Action<float> OnXInputEvent;
+    public event Action<float> OnYInputEvent;
 
     #region QuickSlot
 
@@ -56,11 +58,13 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls
     public void OnXMovement(InputAction.CallbackContext context)
     {
         XInput = context.ReadValue<float>();
-    }
+        OnXInputEvent?.Invoke(XInput);
+}
 
     public void OnYMovement(InputAction.CallbackContext context)
     {
         YInput = context.ReadValue<float>();
+        OnYInputEvent?.Invoke(YInput);
     }
 
     public void OnJump(InputAction.CallbackContext context)

@@ -87,6 +87,11 @@ public class Player : Entity
 
     #endregion
 
+    private float _gravityScale;
+
+    [field: SerializeField]
+    public Transform PlayerCenter { get; private set; }
+
     [SerializeField]
     private LayerMask _whatIsPush;
 
@@ -112,6 +117,7 @@ public class Player : Entity
     [HideInInspector] public bool canDash = false;
 
     public Transform CurrentPushTrm { get; set; }
+    public GrowingGrass CurrentVine { get; set; }
 
     public GameObject testObject;
 
@@ -119,7 +125,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-
+        _gravityScale = rigidbodyCompo.gravityScale;
         _hpDecator?.Init((int)healthCompo.curHp);
 
         MoveSpeed = Stat.moveSpeed.GetValue();
@@ -317,5 +323,11 @@ public class Player : Entity
             Vector2.right * FacingDir, _objectCheckDistance, _whatIsPush);
 
         return hit.transform;
+    }
+
+    public void SetGravityActive(bool isActive)
+    {
+        float gravityScale = isActive ? _gravityScale : 0;
+        rigidbodyCompo.gravityScale = gravityScale;
     }
 }
