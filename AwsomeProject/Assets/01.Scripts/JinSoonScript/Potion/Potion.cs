@@ -8,23 +8,28 @@ public enum PotionTypeEnum
     Throw
 }
 
+public struct PotionInfo
+{
+    public EffectTypeEnum[] effectEnums;
+    public int[] levels;
+}
+
 public abstract class Potion : MonoBehaviour
 {
-    public EffectTypeEnum[] effectEnums; 
-    public int[] level;
+    public PotionInfo potionInfo;
     public List<Effect> effects;
     public PotionTypeEnum potionType;
 
     protected virtual void Start()
     {
         effects = new List<Effect>();
-        foreach(var effectEnum in effectEnums)
+        foreach (var effectEnum in potionInfo.effectEnums)
         {
             effects.Add(EffectManager.GetEffect(effectEnum));
         }
-        for(int i = 0; i < effectEnums.Length; i++)
+        for(int i = 0; i < effects.Count; i++)
         {
-            effects[i].Initialize(this, level[i]);
+            effects[i].Initialize(this, potionInfo.levels[i]);
         }
     }
     public abstract void UsePotion();

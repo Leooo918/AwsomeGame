@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public struct PotionEffect
-{
-    public EffectTypeEnum effectEnum;
-}
+
 
 public class ThrowPotion : Potion
 {
