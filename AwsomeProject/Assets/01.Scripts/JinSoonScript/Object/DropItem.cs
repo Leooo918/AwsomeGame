@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using Doryu.Inventory;
 
 public class DropItem : MonoBehaviour
 {
