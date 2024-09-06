@@ -99,13 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7e6b7e947289f4187a82be0aa785ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectEnums: 00000000
-  level: 00000000
+  potionInfos:
+  - effectEnum: 1
+    level: 1
   potionType: 1
   _maxDetactEntity: 1
   _whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 65792
+    m_Bits: 459008
   range: 5
 --- !u!58 &3182620820189470170
 CircleCollider2D:

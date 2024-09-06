@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Entity : MonoBehaviour, IAffectable
+public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
     #region ComponentRegion
     [SerializeField] private EntityStat stat;
@@ -55,6 +55,7 @@ public abstract class Entity : MonoBehaviour, IAffectable
     public bool IsDead { get; protected set; } = false;
     public bool CanKnockback { get; set; } = true;
 
+    private int _animationTriggerBit = 0;
     private StatusEffectManager _statusEffectManager;
     public StatusEffectManager StatusEffectManager => _statusEffectManager;
 
@@ -270,6 +271,18 @@ public abstract class Entity : MonoBehaviour, IAffectable
 
     public virtual void ApplyEffect()
     {
+    }
+
+    public virtual void AnimationTrigger(AnimationTriggerEnum trigger)
+    {
+        _animationTriggerBit |= (int)trigger;
+    }
+
+    public virtual bool IsTriggered(AnimationTriggerEnum trigger) => (_animationTriggerBit & (int)trigger) != 0;
+
+    public virtual void RemoveTrigger(AnimationTriggerEnum trigger)
+    {
+        _animationTriggerBit &= ~(int)trigger;
     }
 #endif
 }
