@@ -11,8 +11,11 @@ public class Inventory : MonoBehaviour
     private InventorySaveData _inventoryData = new InventorySaveData();
     private InventorySlot[,] slots = new InventorySlot[0, 0];
 
+    [SerializeField] private ItemDescriptionArea _description;
     [SerializeField] private Vector2Int _inventorySize;
     [SerializeField] private Transform _slotParent;
+    
+    public Transform itemStorage;
 
     [ContextMenu("ClearSaveData")]
     public void ClearSaveData()
@@ -214,6 +217,13 @@ public class Inventory : MonoBehaviour
                 idx++;
             }
         }
+    }
+
+
+    
+    public void SetSelected(InventorySlot slot)
+    {
+        _description.SetExplain(slot);
     }
 }
 

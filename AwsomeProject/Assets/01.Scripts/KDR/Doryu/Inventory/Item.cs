@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     private TextMeshProUGUI _text;
     private TextMeshProUGUI _textOutLine;
     private Image _image;
+    private RectTransform _rectTrm;
     public int amount;
      
     private ItemSO _itemSO;
@@ -17,7 +18,7 @@ public class Item : MonoBehaviour
         set
         {
             _itemSO = value;
-            _image.sprite = _itemSO.dotImage;
+            _image.sprite = _itemSO.image;
         }
     }
     public bool isFull => amount == itemSO.maxMergeAmount;
@@ -30,6 +31,7 @@ public class Item : MonoBehaviour
 
     public void Init()
     {
+        _rectTrm = transform as RectTransform;
         _text = transform.Find("AmountText").GetComponent<TextMeshProUGUI>();
         _textOutLine = transform.Find("AmountTextOutLine").GetComponent<TextMeshProUGUI>();
         _image = GetComponent<Image>();
@@ -39,12 +41,20 @@ public class Item : MonoBehaviour
     {
         transform.SetParent(trm);
         transform.localPosition = Vector3.zero;
-        transform.localScale = Vector3.one * 1.67f;
+        transform.localScale = Vector3.one;
+        if (_itemSO is PotionItemSO)
+            _rectTrm.sizeDelta = Vector2.one * 60;
+        else if (_itemSO is IngredientItemSO)
+            _rectTrm.sizeDelta = Vector2.one * 110;
     }
     public void SetSlot()
     {
         transform.localPosition = Vector3.zero;
-        transform.localScale = Vector3.one * 1.67f;
+        transform.localScale = Vector3.one;
+        if (_itemSO is PotionItemSO)
+            _rectTrm.sizeDelta = Vector2.one * 60;
+        else if (_itemSO is IngredientItemSO)
+            _rectTrm.sizeDelta = Vector2.one * 110;
     }
 }
 

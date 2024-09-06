@@ -40,23 +40,6 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public InventorySlot dragItemSlot;
     [HideInInspector] public InventorySlot stayMouseSlot;
 
-    public Action<InventorySlot> OnSelectedSlot;
-    private InventorySlot _selectedSlot;
-    [HideInInspector]
-    public InventorySlot SelectedSlot
-    {
-        get => _selectedSlot;
-        set
-        {
-            _selectedSlot?.OnMouse(false);
-            _selectedSlot?.OnSelect(false);
-            _selectedSlot = value;
-            _selectedSlot?.OnMouse(true);
-            _selectedSlot?.OnSelect(true);
-            OnSelectedSlot?.Invoke(_selectedSlot);
-        }
-    }
-
     private void Awake()
     {
         foreach (ItemSO itemSO in itemListSO.itemSOList)
@@ -81,11 +64,7 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(ItemSODict[ItemType.RedMushroom]);
-        }
-        if (_selectedSlot != null && Input.GetMouseButtonDown(0))
-        {
-            SelectedSlot = null;
+            TryAddItem(ItemSODict[ItemType.PoisonPortion]);
         }
 
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
@@ -96,16 +75,9 @@ public class InventoryManager : MonoBehaviour
 
     public void DragUpdate()
     {
-        //if (Input.GetMouseButtonUp(0))
-        //{
-        //    dragItemSlot.assignedItem.SetSlot();
-        //    dragItemSlot = null;
-        //    return;
-        //}
-         
         Vector2 mousePos = Input.mousePosition;
         dragItemSlot.assignedItem.transform.localPosition = 
-            mousePos - (Vector2)dragItemSlot.transform.parent.position;
+            mousePos - (Vector2)dragItemSlot.inventory.itemStorage.position;
     }
 
     public bool TryAddItem(Item item)
@@ -115,12 +87,12 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(item);
         }
-        else if (item.itemSO is PotionItemListSO drinkPotionSO && 
+        else if (item.itemSO is PotionItemSO drinkPotionSO && 
             drinkPotionSO.potionType == PotionType.Drink)
         {
             succes = drinkPotionInventory.AddItem(item);
         }
-        else if (item.itemSO is PotionItemListSO throwPotionSO && 
+        else if (item.itemSO is PotionItemSO throwPotionSO && 
             throwPotionSO.potionType == PotionType.Throw)
         {
             succes = throwPotionInventory.AddItem(item);
@@ -134,12 +106,12 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(itemSO, amount);
         }
-        else if (itemSO is PotionItemListSO drinkPotionSO &&
+        else if (itemSO is PotionItemSO drinkPotionSO &&
             drinkPotionSO.potionType == PotionType.Drink)
         {
             succes = drinkPotionInventory.AddItem(itemSO, amount);
         }
-        else if (itemSO is PotionItemListSO throwPotionSO &&
+        else if (itemSO is PotionItemSO throwPotionSO &&
             throwPotionSO.potionType == PotionType.Throw)
         {
             succes = throwPotionInventory.AddItem(itemSO, amount);

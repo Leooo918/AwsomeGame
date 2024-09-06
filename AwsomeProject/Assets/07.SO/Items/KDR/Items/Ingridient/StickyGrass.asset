@@ -16,7 +16,5 @@ MonoBehaviour:
   itemType: 6
   itemName: "\uC811\uCC29 \uAC00\uC9C0"
   itemExplain: "\uB2FF\uB294 \uBAA8\uB4E0\uAC83\uC5D0 \uBD99\uC73C\uB824\uACE0\uD55C\uB2E4."
-  dotImage: {fileID: 271567606, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  image: {fileID: 21300000, guid: 3adb66d9627b95a48a6a69d3940e055a, type: 3}
-  prefab: {fileID: -1930051512974236873, guid: acf2469ec1f607a42a5f58ee880ea4a5, type: 3}
+  image: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   gatheringTime: 2

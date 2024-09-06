@@ -14,6 +14,7 @@ public enum ItemType
     ShinyFruit,
     SlimeCore,
     YoungBirldWing,
+    PoisonPortion,
 }
 
 public class ItemSO : ScriptableObject
@@ -28,6 +29,5 @@ public class ItemSO : ScriptableObject
 
     [Space(20)]
     [Header("Sprite")]
-    public Sprite dotImage;
     public Sprite image;
 }
