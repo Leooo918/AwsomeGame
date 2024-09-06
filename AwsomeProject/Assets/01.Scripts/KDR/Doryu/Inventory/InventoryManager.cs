@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class InventoryManager : MonoBehaviour
@@ -133,9 +134,15 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(itemSO, amount);
         }
-        if (itemSO is PotionItemListSO)
+        else if (itemSO is PotionItemListSO drinkPotionSO &&
+            drinkPotionSO.potionType == PotionType.Drink)
         {
-            succes = potionInventory.AddItem(itemSO, amount);
+            succes = drinkPotionInventory.AddItem(itemSO, amount);
+        }
+        else if (itemSO is PotionItemListSO throwPotionSO &&
+            throwPotionSO.potionType == PotionType.Throw)
+        {
+            succes = throwPotionInventory.AddItem(itemSO, amount);
         }
         return succes;
     }
