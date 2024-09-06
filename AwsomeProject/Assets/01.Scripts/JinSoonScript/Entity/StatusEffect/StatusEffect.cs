@@ -6,11 +6,12 @@ public abstract class StatusEffect
 {
     private float _startTime;
     private float _cooltime;
+    private StatusEffectType _effectType;
     private StatusEffectInfo _info;
 
     public StatusEffect()
     {
-        _info = new StatusEffectInfo();
+        //_info = new StatusEffectInfo(_effectType);
     }
 
     public StatusEffectInfo GetInfo() => _info;

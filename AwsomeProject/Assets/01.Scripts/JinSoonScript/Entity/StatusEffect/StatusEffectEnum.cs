@@ -11,3 +11,9 @@ public enum StatusEffectEnum
     NatureSync,
     Strength
 }
+
+public enum StatusEffectType
+{
+    Buff,
+    Debuff
+}
