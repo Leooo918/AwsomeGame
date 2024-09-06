@@ -10,9 +10,15 @@ public enum VineState
     Shrunk,
 }
 
-public class GrowingGrass : MonoBehaviour
+public class GrowingGrass : MonoBehaviour, IAffectable
 {
+    private Animator _animator;
     public VineState CurrentState { get; private set; } = VineState.Grown;
+
+    public void ApplyEffect()
+    {
+        
+    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

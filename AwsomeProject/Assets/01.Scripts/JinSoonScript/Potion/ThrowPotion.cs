@@ -23,12 +23,12 @@ public class ThrowPotion : Potion
     public override void UsePotion()
     {
         int count = Physics2D.OverlapCircleNonAlloc(transform.position, range, _colliders, _whatIsEnemy);
-        List<Entity> list = new List<Entity>();
+        List<IAffectable> list = new List<IAffectable>();
         if(count > 0)
         {
             foreach(Collider2D coll in _colliders)
             {
-                if(coll.TryGetComponent(out Entity entity))
+                if(coll.TryGetComponent(out IAffectable entity))
                 {
                     list.Add(entity);
                     
