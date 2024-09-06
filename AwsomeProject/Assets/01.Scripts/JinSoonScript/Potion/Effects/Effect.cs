@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Effect
 {
-    protected List<Entity> _affectedTargets;
+    protected List<IAffectable> _affectedTargets;
     protected int _level;
     protected Potion _potion;
 
@@ -14,7 +14,7 @@ public abstract class Effect
         _level = level;
     }
 
-    public void SetAffectedTargets(List<Entity> targets)
+    public void SetAffectedTargets(List<IAffectable> targets)
     {
         _affectedTargets = targets;
     }

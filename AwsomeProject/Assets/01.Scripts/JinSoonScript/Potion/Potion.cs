@@ -12,26 +12,24 @@ public enum PotionTypeEnum
 [Serializable]
 public struct PotionInfo
 {
-    public EffectTypeEnum[] effectEnums;
-    public int[] levels;
+    public EffectTypeEnum effectEnum;
+    public int level;
 }
 
 public abstract class Potion : MonoBehaviour
 {
-    public PotionInfo potionInfo;
+    public PotionInfo[] potionInfos;
     public List<Effect> effects;
     public PotionTypeEnum potionType;
 
     protected virtual void Start()
     {
         effects = new List<Effect>();
-        foreach (var effectEnum in potionInfo.effectEnums)
+        for(int i = 0; i < potionInfos.Length; i++)
         {
-            effects.Add(EffectManager.GetEffect(effectEnum));
-        }
-        for(int i = 0; i < effects.Count; i++)
-        {
-            effects[i].Initialize(this, potionInfo.levels[i]);
+            Effect effect = EffectManager.GetEffect(potionInfos[i].effectEnum);
+            effect.Initialize(this, potionInfos[i].level);
+            effects.Add(effect);
         }
     }
     public abstract void UsePotion();

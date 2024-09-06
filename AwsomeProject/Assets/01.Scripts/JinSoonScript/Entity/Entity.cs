@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IAffectable
 {
     #region ComponentRegion
     [SerializeField] private EntityStat stat;
@@ -266,6 +266,10 @@ public abstract class Entity : MonoBehaviour
             new Vector2(wallCheckDistance, wallCheckBoxHeight));
         Gizmos.DrawWireCube(groundChecker.position,
             new Vector2(groundCheckBoxWidth, groundCheckDistance));
+    }
+
+    public virtual void ApplyEffect()
+    {
     }
 #endif
 }
