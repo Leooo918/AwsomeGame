@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PotionItem
   m_EditorClassIdentifier: 
   maxMergeAmount: 5
-  itemType: 0
-  itemName: 
-  itemExplain: 
-  dotImage: {fileID: 0}
-  image: {fileID: 0}
+  itemType: 10
+  itemName: "\uB3C5\uD3EC\uC158"
+  itemExplain: "\uC801\uC744 \uB9DE\uCD94\uBA74 \uC801\uC5D0\uAC8C \uB3C5\uB370\uBBF8\uC9C0\uB97C
+    \uC90D\uB2C8\uB2E4."
+  image: {fileID: -551302251, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
+  potionType: 1

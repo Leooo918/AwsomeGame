@@ -6,7 +6,8 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    private Inventory _inventory;
+    public Inventory inventory;
+
     private Item _assignedItem;
     public Item assignedItem
     {
@@ -27,18 +28,19 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
     public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;
+    public bool isSelected;
 
     private GameObject _selectVolumObj;
 
     public void Init(Inventory inventory)
     {
         _selectVolumObj = transform.Find("SelectedUI").gameObject;
-        _inventory = inventory;
+        this.inventory = inventory;
     }
 
     public void Save()
     {
-        _inventory.Save();
+        inventory.Save();
     }
 
     public void SwapSlotData(InventorySlot slot)
@@ -114,7 +116,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (InventoryManager.Instance.SelectedSlot == this) return;
+        if (isSelected) return;
         InventoryManager.Instance.stayMouseSlot = this;
 
         OnMouse(true);
@@ -122,7 +124,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (InventoryManager.Instance.SelectedSlot == this) return;
+        if (isSelected) return;
         InventoryManager.Instance.stayMouseSlot = null;
 
         OnMouse(false);
@@ -130,13 +132,13 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        InventoryManager.Instance.SelectedSlot = this;
+        inventory.SetSelected(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (assignedItem != null)
-            assignedItem.transform.SetParent(transform.parent.parent);
+            assignedItem.transform.SetParent(inventory.itemStorage);
 
         InventoryManager.Instance.dragItemSlot = this;
     }
@@ -150,7 +152,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (InventoryManager.Instance.stayMouseSlot == null)
             assignedItem.SetSlot();
         else
+        {
             SwapSlotData(InventoryManager.Instance.stayMouseSlot);
+            inventory.SetSelected(InventoryManager.Instance.stayMouseSlot);
+        }
         InventoryManager.Instance.dragItemSlot = null;
     }
 
