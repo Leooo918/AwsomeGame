@@ -43,13 +43,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         inventory.Save();
     }
 
-    public void SwapSlotData(InventorySlot slot)
+    public bool TrySwapSlotData(InventorySlot slot)
     {
+        if ((slot.assignedItem != null && inventory.CanEnterInven(slot.assignedItem.itemSO) == false) ||
+            slot.inventory.CanEnterInven(assignedItem.itemSO) == false)
+            return false;
         Item temp = assignedItem;
         assignedItem = slot.assignedItem;
         slot.assignedItem = temp;
         slot.Save();
         Save();
+        return true;
     }
 
     public void SetItem(Item item)
@@ -148,13 +152,20 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (assignedItem != null)
             assignedItem.transform.SetParent(transform);
 
-
-        if (InventoryManager.Instance.stayMouseSlot == null)
-            assignedItem.SetSlot();
+        InventorySlot slot = InventoryManager.Instance.stayMouseSlot;
+        if (slot == null || assignedItem == null)
+            assignedItem?.SetSlot();
         else
         {
-            SwapSlotData(InventoryManager.Instance.stayMouseSlot);
-            inventory.SetSelected(InventoryManager.Instance.stayMouseSlot);
+            if (TrySwapSlotData(slot))
+            {
+                inventory.SetSelected(null);
+                slot.inventory.SetSelected(slot);
+            }
+            else
+            {
+                assignedItem.SetSlot();
+            }
         }
         InventoryManager.Instance.dragItemSlot = null;
     }

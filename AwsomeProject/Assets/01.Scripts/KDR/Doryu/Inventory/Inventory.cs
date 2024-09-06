@@ -6,6 +6,14 @@ using Doryu.JBSave;
 using System;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 
+[Serializable]
+public struct InventoryUseItemData
+{
+    public bool useIngredientItem;
+    public bool useDrinkPotionItem;
+    public bool useThrowPotionItem;
+}
+
 public class Inventory : MonoBehaviour
 {
     private InventorySaveData _inventoryData = new InventorySaveData();
@@ -14,11 +22,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemDescriptionArea _description;
     [SerializeField] private Vector2Int _inventorySize;
     [SerializeField] private Transform _slotParent;
+
+    public InventoryUseItemData useItemData;
     
     public Transform itemStorage;
 
-    [ContextMenu("ClearSaveData")]
-    public void ClearSaveData()
+    [ContextMenu("ResetSaveData")]
+    public void ResetSaveData()
     {
         slots = new InventorySlot[_inventorySize.x, _inventorySize.y];
         for (int y = 0; y < _inventorySize.y; y++)
@@ -30,6 +40,25 @@ public class Inventory : MonoBehaviour
         }
         _inventoryData.Init(_inventorySize.x * 100 + _inventorySize.y);
         Save();
+    }
+
+    public bool CanEnterInven(ItemSO itemSO)
+    {
+        if (itemSO is IngredientItemSO)
+            return useItemData.useIngredientItem;
+        else if (itemSO is PotionItemSO potion)
+        {
+            if (potion.potionType == PotionType.Drink)
+                return useItemData.useDrinkPotionItem;
+            else
+                return useItemData.useThrowPotionItem;
+        }
+        return false;
+    }
+
+    public void SetActive(bool active)
+    {
+        gameObject.SetActive(active);
     }
 
     public void Init()
@@ -55,10 +84,15 @@ public class Inventory : MonoBehaviour
         {
             for (int x = 0; x < _inventorySize.x; x++)
             {
-                if (slots[x, y].assignedItem != null &&
-                    slots[x, y].assignedItem.itemSO == item.itemSO &&
-                    slots[x, y].assignedItem.isFull == false)
+                Item slotItem = slots[x, y].assignedItem;
+                if (slotItem != null &&
+                    slotItem.itemSO == item.itemSO &&
+                    slotItem.isFull == false)
                 {
+                    if (slotItem.itemSO is PotionItemSO potion && potion.level == (item.itemSO as PotionItemSO).level)
+                    {
+                        continue;
+                    }
                     int remain = slots[x, y].AddAmount(item.amount);
                     if (remain != 0)
                     {
@@ -170,7 +204,8 @@ public class Inventory : MonoBehaviour
                 if (slots[x, y] != null && slots[x, y].assignedItem != null)
                 {
                     newSlotSaveStruct.pos = new Vector2Int(x, y);
-                    newSlotSaveStruct.itemNameInt = (int)slots[x, y].assignedItem.itemSO.itemType;
+                    newSlotSaveStruct.itemNameInt = slots[x, y].assignedItem.itemSO.GetItemTypeNumber();
+                    newSlotSaveStruct.isIngredient = slots[x, y].assignedItem.itemSO is IngredientItemSO;
                     newSlotSaveStruct.amount = slots[x, y].assignedItemAmount;
                 }
                 else
@@ -203,7 +238,10 @@ public class Inventory : MonoBehaviour
                 {
                     Item item = Instantiate(InventoryManager.Instance.itemPrefab);
                     item.Init();
-                    item.itemSO = InventoryManager.Instance.ItemSODict[(ItemType)slotSave.itemNameInt];
+                    if (slotSave.isIngredient)
+                        item.itemSO = InventoryManager.Instance.IngredientItemSODict[(IngredientItemType)slotSave.itemNameInt];
+                    else
+                        item.itemSO = InventoryManager.Instance.PotionItemSODict[(PotionItemType)slotSave.itemNameInt];
                     item.amount = slotSave.amount;
                     item.TextUpdate();
                     slot.SetItem(item);
@@ -232,6 +270,7 @@ public class SlotSave
 {
     public Vector2Int pos;
     public int itemNameInt = -1;
+    public bool isIngredient;
     public int amount;
 }
 

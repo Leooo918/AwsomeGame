@@ -7,10 +7,10 @@ public class PotionInventoryTogleUI : MonoBehaviour
 {
     [SerializeField] private Button _throwModeBtn;
     [SerializeField] private Button _drinkModeBtn;
-    [SerializeField] private GameObject _throwInven;
-    [SerializeField] private GameObject _drinkInven;
+    [SerializeField] private Inventory _throwInven;
+    [SerializeField] private Inventory _drinkInven;
 
-    private GameObject _currentInven;
+    private Inventory _currentInven;
 
     private void Start()
     {
@@ -20,8 +20,9 @@ public class PotionInventoryTogleUI : MonoBehaviour
         _drinkModeBtn.onClick.AddListener(() => ChangeInvenView(_drinkInven));
     }
 
-    private void ChangeInvenView(GameObject inven)
+    private void ChangeInvenView(Inventory inven)
     {
+        _currentInven.SetSelected(null);
         _currentInven.SetActive(false);
         _currentInven = inven;
         _currentInven.SetActive(true);
