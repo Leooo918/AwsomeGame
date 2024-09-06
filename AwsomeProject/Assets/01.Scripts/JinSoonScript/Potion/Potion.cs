@@ -11,9 +11,9 @@ public enum PotionTypeEnum
 public abstract class Potion : MonoBehaviour
 {
     public EffectTypeEnum[] effectEnums; 
+    public int[] level;
     public List<Effect> effects;
     public PotionTypeEnum potionType;
-    public int level;
 
     protected virtual void Start()
     {
@@ -22,9 +22,9 @@ public abstract class Potion : MonoBehaviour
         {
             effects.Add(EffectManager.GetEffect(effectEnum));
         }
-        foreach (var e in effects)
+        for(int i = 0; i < effectEnums.Length; i++)
         {
-            e.Initialize(this);
+            effects[i].Initialize(this, level[i]);
         }
     }
     public abstract void UsePotion();

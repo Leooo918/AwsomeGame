@@ -100,12 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectEnums: 00000000
+  level: 00000000
   potionType: 1
-  level: 1
   _maxDetactEntity: 1
-  _whatIsGroundAndWall:
-    serializedVersion: 2
-    m_Bits: 0
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 65792
