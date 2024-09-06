@@ -18,6 +18,7 @@ namespace Doryu
     {
         [SerializeField] private MoveTweenData _closeData;
         [SerializeField] private MoveTweenData _openData;
+        [SerializeField] private BookMark _ingridientBookMark;
 
         private RectTransform _rectTrm;
         private Sequence _seq;
@@ -46,6 +47,7 @@ namespace Doryu
             _seq.Append(
                 _rectTrm.DOAnchorPos(_openData.pos, _openData.time)
                 .SetEase(_openData.curve));
+            _ingridientBookMark.Enable();
         }
     }
 }

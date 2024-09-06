@@ -12,5 +12,5 @@ public enum PotionType
 public class PotionItemSO : ItemSO
 {
     public PotionType potionType;
-    
+    public PotionInfo[] potionInfos;
 }
