@@ -7,4 +7,3 @@ public class ItemListSO : ScriptableObject
 {
     public ItemSO[] itemSOList;
 }
-

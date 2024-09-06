@@ -11,6 +11,7 @@ public class BookMark : MonoBehaviour
     [SerializeField] private Sprite enableSprite;
     [SerializeField] private Sprite disableSprite;
     [SerializeField] private GameObject _panel;
+    [SerializeField] private bool _isActive;
 
     private Button _button;
 
@@ -22,11 +23,18 @@ public class BookMark : MonoBehaviour
         _button.onClick.AddListener(Enable);
     }
 
+    private void Start()
+    {
+        if (_isActive == false)
+        {
+            Disable();
+        }
+    }
+
     public void Enable()
     {
-        if (_panel.activeSelf) return;
-
-        _panel.SetActive(true);
+        _isActive = true;
+        _panel.SetActive(_isActive);
         another.Disable();
         image.sprite = enableSprite;
 
@@ -34,9 +42,8 @@ public class BookMark : MonoBehaviour
 
     public void Disable()
     {
-        if (_panel.activeSelf == false) return;
-
-        _panel.SetActive(false);
+        _isActive = false;
+        _panel.SetActive(_isActive);
         image.sprite = disableSprite;
     }
 }

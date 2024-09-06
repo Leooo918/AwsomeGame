@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 
 
@@ -30,7 +31,10 @@ public class InventoryManager : MonoBehaviour
     [field:SerializeField] public Item itemPrefab { get; private set; }
     [SerializeField] private ItemListSO itemListSO;
     [SerializeField] private Inventory ingredientInventory;
-    [SerializeField] private Inventory potionInventory;
+    [SerializeField] private Inventory throwPotionInventory;
+    [SerializeField] private Inventory drinkPotionInventory;
+
+    private List<Inventory> _inventories;
 
     [HideInInspector] public InventorySlot dragItemSlot;
     [HideInInspector] public InventorySlot stayMouseSlot;
@@ -59,13 +63,22 @@ public class InventoryManager : MonoBehaviour
             ItemSODict.Add(itemSO.itemType, itemSO);
         }
 
-        ingredientInventory.Init();
-        potionInventory?.Init();
+        _inventories = new List<Inventory>();
+        _inventories = FindObjectsByType<Inventory>(FindObjectsSortMode.None).ToList();
+
+        _inventories.ForEach(inven =>
+        {
+            inven.Init();
+        });
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
+        {
+            TryAddItem(ItemSODict[ItemType.RedMushroom]);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
         {
             TryAddItem(ItemSODict[ItemType.RedMushroom]);
         }
@@ -90,7 +103,8 @@ public class InventoryManager : MonoBehaviour
         //}
          
         Vector2 mousePos = Input.mousePosition;
-        dragItemSlot.assignedItem.transform.localPosition = mousePos - (Vector2)dragItemSlot.transform.parent.position;
+        dragItemSlot.assignedItem.transform.localPosition = 
+            mousePos - (Vector2)dragItemSlot.transform.parent.position;
     }
 
     public bool TryAddItem(Item item)
@@ -100,9 +114,15 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(item);
         }
-        if (item.itemSO is PotionItemListSO)
+        else if (item.itemSO is PotionItemListSO drinkPotionSO && 
+            drinkPotionSO.potionType == PotionType.Drink)
         {
-            succes = potionInventory.AddItem(item);
+            succes = drinkPotionInventory.AddItem(item);
+        }
+        else if (item.itemSO is PotionItemListSO throwPotionSO && 
+            throwPotionSO.potionType == PotionType.Throw)
+        {
+            succes = throwPotionInventory.AddItem(item);
         }
         return succes;
     }

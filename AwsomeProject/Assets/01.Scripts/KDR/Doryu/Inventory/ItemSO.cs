@@ -13,7 +13,7 @@ public enum ItemType
     StickyGrass,
     ShinyFruit,
     SlimeCore,
-    YoungBirldWing
+    YoungBirldWing,
 }
 
 public class ItemSO : ScriptableObject
