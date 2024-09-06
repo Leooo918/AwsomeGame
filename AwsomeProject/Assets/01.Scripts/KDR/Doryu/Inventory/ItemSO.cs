@@ -14,7 +14,8 @@ public enum ItemType
     ShinyFruit,
     SlimeCore,
     YoungBirldWing,
-    PoisonPortion,
+    
+    PoisonPotion,
 }
 
 public class ItemSO : ScriptableObject

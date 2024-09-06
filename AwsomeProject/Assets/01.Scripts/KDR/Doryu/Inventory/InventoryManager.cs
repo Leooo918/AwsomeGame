@@ -64,7 +64,7 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(ItemSODict[ItemType.PoisonPortion]);
+            TryAddItem(ItemSODict[ItemType.PoisonPotion]);
         }
 
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
