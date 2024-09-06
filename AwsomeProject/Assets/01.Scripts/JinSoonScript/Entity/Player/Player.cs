@@ -1,4 +1,3 @@
-using Doryu.Inventory;
 using System;
 using UnityEngine;
 
@@ -56,7 +55,7 @@ public class Player : Entity
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
-
+    
     #endregion
 
     #region CoyoteTime

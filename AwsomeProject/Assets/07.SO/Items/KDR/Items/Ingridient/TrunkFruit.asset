@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
+  m_Name: TrunkFruit
+  m_EditorClassIdentifier: 
+  maxMergeAmount: 5
+  itemType: 2
+  itemName: "\uC904\uAE30\uC5F4\uB9E4"
+  itemExplain: "\uC904\uAE30\uCC98\uB7FC \uC0DD\uAE34 \uC5F4\uB9E4"
+  dotImage: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  image: {fileID: 21300000, guid: bf884409ca88b414c8b831e633864246, type: 3}
+  prefab: {fileID: -1930051512974236873, guid: d25579b5de4144b47a39d47754c4838e, type: 3}
+  gatheringTime: 2
