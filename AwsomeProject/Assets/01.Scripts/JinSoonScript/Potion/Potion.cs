@@ -20,7 +20,7 @@ public abstract class Potion : MonoBehaviour
         effects = new List<Effect>();
         foreach(var effectEnum in effectEnums)
         {
-            effects.Add(EffectManager.Instance.GetEffect(effectEnum));
+            effects.Add(EffectManager.GetEffect(effectEnum));
         }
         foreach (var e in effects)
         {
