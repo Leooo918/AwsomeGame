@@ -116,17 +116,17 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (isSelected) return;
         InventoryManager.Instance.stayMouseSlot = this;
 
+        if (isSelected) return;
         OnMouse(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isSelected) return;
         InventoryManager.Instance.stayMouseSlot = null;
 
+        if (isSelected) return;
         OnMouse(false);
     }
 

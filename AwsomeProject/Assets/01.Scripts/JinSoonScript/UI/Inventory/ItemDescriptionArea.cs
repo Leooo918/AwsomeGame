@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class ItemDescriptionArea : MonoBehaviour
 {
@@ -11,11 +10,12 @@ public class ItemDescriptionArea : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI explain;
 
+    private RectTransform _rectTrm;
     private InventorySlot _selectedSlot;
 
     private void Awake()
     {
-        //InventoryManager.Instance.OnSelectedSlot += SetExplain;
+        _rectTrm = icon.transform as RectTransform;
     }
 
     public void SetExplain(InventorySlot slot)
@@ -42,16 +42,12 @@ public class ItemDescriptionArea : MonoBehaviour
             _selectedSlot.OnSelect(true);
         }
 
-        //if (_selectedSlot != null && Input.GetMouseButtonDown(0))
-        //{
-        //    _selectedSlot = null;
-        //}
-
          
         icon.color = new Color(1, 1, 1, 1);
         ItemSO itemSO = slot.assignedItem.itemSO;
         itemName.SetText(itemSO.itemName);
         explain.SetText(itemSO.itemExplain);
         icon.sprite = itemSO.image;
+        _rectTrm.sizeDelta = Vector2.one * (itemSO is IngredientItemSO ? 350f : 200);
     }
-}
+} 

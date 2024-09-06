@@ -19,3 +19,7 @@ MonoBehaviour:
     \uC90D\uB2C8\uB2E4."
   image: {fileID: -551302251, guid: 229e10eee1926d441955bc8f9693911d, type: 3}
   potionType: 1
+  infos: []
+  potionInfos:
+    throwInfos: []
+    drinkInfos: []
