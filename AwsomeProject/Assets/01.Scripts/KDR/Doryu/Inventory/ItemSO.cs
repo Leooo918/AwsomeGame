@@ -16,6 +16,15 @@ public enum ItemType
     YoungBirldWing,
     
     PoisonPotion,
+    FailurePotion,
+    HealPortion,
+    BoomPotion,
+    StonPotion,
+    ShapeHornePotion,
+    SpikePotion,
+    SlapPotion,
+    LightPotion,
+    WeakPotion,
 }
 
 public class ItemSO : ScriptableObject
