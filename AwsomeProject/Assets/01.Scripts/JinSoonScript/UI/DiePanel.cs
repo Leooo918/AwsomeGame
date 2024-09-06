@@ -29,12 +29,12 @@ public class DiePanel : MonoBehaviour, IManageableUI
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Debug.Log("นึ");
-            Init(189, 25, 32, 1202, 0.5f);
-            Open();
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    Debug.Log("นึ");
+        //    Init(189, 25, 32, 1202, 0.5f);
+        //    Open();
+        //}
     }
 
     public void Init(int timer, int killCnt, int gatherCnt, int coinCnt, float progress)

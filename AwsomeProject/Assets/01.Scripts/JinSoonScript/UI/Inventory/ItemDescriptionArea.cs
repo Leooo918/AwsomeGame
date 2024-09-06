@@ -45,8 +45,8 @@ public class ItemDescriptionArea : MonoBehaviour
          
         icon.color = new Color(1, 1, 1, 1);
         ItemSO itemSO = slot.assignedItem.itemSO;
-        itemName.SetText(itemSO.itemName);
-        explain.SetText(itemSO.itemExplain);
+        itemName.SetText(itemSO.GetItemName());
+        explain.SetText(itemSO.GetItemDescription());
         icon.sprite = itemSO.image;
         _rectTrm.sizeDelta = Vector2.one * (itemSO is IngredientItemSO ? 350f : 200);
     }

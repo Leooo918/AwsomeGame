@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Doryu/Item/ItemListSO")]
 public class ItemListSO : ScriptableObject
 {
-    public ItemSO[] itemSOList;
+    public IngredientItemSO[] ingredientItemSOList;
+    public PotionItemSO[] potionItemSOList;
 }

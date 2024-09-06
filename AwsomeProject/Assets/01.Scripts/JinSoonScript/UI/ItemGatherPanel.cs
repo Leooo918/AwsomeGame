@@ -61,8 +61,8 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
     public void Init(ItemSO item)
     {
         _item = item;
-        _nameTxt.SetText(_item.itemName);
-        _explainTxt.SetText(_item.itemExplain);
+        _nameTxt.SetText(_item.GetItemName());
+        _explainTxt.SetText(_item.GetItemDescription());
         _itemImage.sprite = _item.image;
     }
 

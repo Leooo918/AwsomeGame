@@ -26,8 +26,10 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public Dictionary<ItemType, ItemSO> ItemSODict { get; private set; } 
-        = new Dictionary<ItemType, ItemSO>();
+    public Dictionary<IngredientItemType, ItemSO> IngredientItemSODict { get; private set; } 
+        = new Dictionary<IngredientItemType, ItemSO>();
+    public Dictionary<PotionItemType, ItemSO> PotionItemSODict { get; private set; } 
+        = new Dictionary<PotionItemType, ItemSO>();
     [field:SerializeField] public InventorySlot slotPrefab { get; private set; }
     [field:SerializeField] public Item itemPrefab { get; private set; }
     [SerializeField] private ItemListSO itemListSO;
@@ -42,9 +44,13 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        foreach (ItemSO itemSO in itemListSO.itemSOList)
+        foreach (IngredientItemSO itemSO in itemListSO.ingredientItemSOList)
         {
-            ItemSODict.Add(itemSO.itemType, itemSO);
+            IngredientItemSODict.Add(itemSO.itemType, itemSO);
+        }
+        foreach (PotionItemSO itemSO in itemListSO.potionItemSOList)
+        {
+            PotionItemSODict.Add(itemSO.itemType, itemSO);
         }
 
         _inventories = new List<Inventory>();
@@ -60,11 +66,19 @@ public class InventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            TryAddItem(ItemSODict[ItemType.RedMushroom]);
+            TryAddItem(IngredientItemSODict[IngredientItemType.RedMushroom]);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(ItemSODict[ItemType.PoisonPotion]);
+            TryAddItem(PotionItemSODict[PotionItemType.PoisonPotion_Throw]);
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            TryAddItem(PotionItemSODict[PotionItemType.PoisonPotion_Drink]);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            TryAddItem(PotionItemSODict[PotionItemType.HealPortion_Throw]);
         }
 
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
@@ -117,6 +131,18 @@ public class InventoryManager : MonoBehaviour
             succes = throwPotionInventory.AddItem(itemSO, amount);
         }
         return succes;
+    }
+
+    [ContextMenu("ResetSaveData")]
+    public void ResetSaveDate()
+    {
+        if (_inventories == null)
+        {
+            _inventories = new List<Inventory>();
+            _inventories = FindObjectsByType<Inventory>(FindObjectsSortMode.None).ToList();
+        }
+
+        _inventories.ForEach(inven => inven.ResetSaveData());
     }
 }
 
