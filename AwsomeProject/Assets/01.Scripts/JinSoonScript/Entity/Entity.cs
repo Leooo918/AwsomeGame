@@ -43,6 +43,8 @@ public abstract class Entity : MonoBehaviour
     public bool canBeAirBorn { get; protected set; }
     public float upArmorDuration { get; protected set; }
 
+    protected int _statusEffectBit = 0;
+
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
@@ -52,6 +54,9 @@ public abstract class Entity : MonoBehaviour
     public bool CanStateChangeable { get; set; } = true;
     public bool IsDead { get; protected set; } = false;
     public bool CanKnockback { get; set; } = true;
+
+    private StatusEffectManager _statusEffectManager;
+    public StatusEffectManager StatusEffectManager => _statusEffectManager;
 
     protected virtual void Awake()
     {
@@ -65,6 +70,8 @@ public abstract class Entity : MonoBehaviour
 
         stat = Instantiate(stat);
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
+
+        _statusEffectManager = new StatusEffectManager(this);
     }
 
 
@@ -161,7 +168,7 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void Stun(float duration) { }
 
-    public virtual void AirBorn(float duration) 
+    public virtual void AirBorn(float duration)
     {
         Debug.Log("에어본");
         StartCoroutine(AirBornDurationCoroutine(duration));
@@ -177,7 +184,7 @@ public abstract class Entity : MonoBehaviour
         healthCompo.LostArmor(figure);
     }
 
-    public virtual void Invincibility(float duration) 
+    public virtual void Invincibility(float duration)
     {
         healthCompo.EnableInvincibility();
     }
@@ -215,7 +222,7 @@ public abstract class Entity : MonoBehaviour
     IEnumerator AirBornDurationCoroutine(float duration)
     {
         float elapsedTime = 0.0f;
-        float initialVerticalSpeed = 5.0f; 
+        float initialVerticalSpeed = 5.0f;
         Vector2 originalVelocity = rigidbodyCompo.velocity;
 
         rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
@@ -233,6 +240,20 @@ public abstract class Entity : MonoBehaviour
         float fallSpeed = -40f;
         rigidbodyCompo.velocity = new Vector2(originalVelocity.x, fallSpeed);
         Debug.Log("에어본 종료");
+    }
+
+    public void ApplyStatusEffect(StatusEffectEnum statusEffect, int level, float duration)
+    {
+        _statusEffectBit |= (int)statusEffect;
+        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+    }
+
+    public bool IsUnderStatusEffect(StatusEffectEnum statusEffect)
+        => (_statusEffectBit & (int)statusEffect) != 0;
+
+    protected virtual void Update()
+    {
+        _statusEffectManager.UpdateStatusEffects();
     }
 
 #if UNITY_EDITOR

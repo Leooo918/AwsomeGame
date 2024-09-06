@@ -9,7 +9,7 @@ public class PetrificationEffect : Effect
         foreach(var entity in _affectedTargets)
         {
             entity.healthCompo.TakeDamage(3, Vector2.zero, null);
-            entity.Stun(2f);
+            entity.ApplyStatusEffect(StatusEffectEnum.Petrification, _potion.level, 2f);
         }
     }
 }

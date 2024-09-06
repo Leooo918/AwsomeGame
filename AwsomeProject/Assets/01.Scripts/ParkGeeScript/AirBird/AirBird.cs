@@ -73,8 +73,9 @@ public class AirBird : Enemy<AirBirdEnum>
         StateMachine.Initialize(AirBirdEnum.Idle, this);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
     }
 

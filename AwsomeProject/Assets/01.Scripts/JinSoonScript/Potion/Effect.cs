@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Effect
 {
     protected List<Entity> _affectedTargets;
-    private Potion _potion;
+    protected Potion _potion;
 
     public void Initialize(Potion potion)
     {

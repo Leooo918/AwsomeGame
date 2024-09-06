@@ -179,8 +179,9 @@ public class Player : Entity
         StateMachine.Initialize(PlayerStateEnum.Idle, this);
     }
 
-    protected void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
     }

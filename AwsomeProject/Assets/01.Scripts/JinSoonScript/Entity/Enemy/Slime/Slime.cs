@@ -75,8 +75,9 @@ public class Slime : Enemy<SlimeStateEnum>
         ShuffleSkillStack();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
 
         for (int i = 0; i < notReady.Count; ++i)
