@@ -38,7 +38,6 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
         _animator.SetTrigger(_growStartHash);
         yield return new WaitUntil(() => IsTriggered(AnimationTriggerEnum.EndTrigger));
         CurrentState = VineState.Grown;
-        RemoveTrigger(AnimationTriggerEnum.EndTrigger);
         yield return new WaitForSeconds(5f);
         CurrentState = VineState.Shrinking;
         _animator.SetTrigger(_growResetHash);
@@ -60,9 +59,15 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
         _animationTriggerBit |= (int)trigger;
     }
 
-    public bool IsTriggered(AnimationTriggerEnum trigger) => (_animationTriggerBit & (int)trigger) != 0;
+    public bool IsTriggered(AnimationTriggerEnum trigger)
+    {
+        bool isTriggred = (_animationTriggerBit & (int)trigger) != 0;
+        if(isTriggred)
+            RemoveTrigger(trigger);
+        return isTriggred;
+    }
 
-    public void RemoveTrigger(AnimationTriggerEnum trigger)
+        public void RemoveTrigger(AnimationTriggerEnum trigger)
     {
         _animationTriggerBit &= ~(int)trigger;
     }
