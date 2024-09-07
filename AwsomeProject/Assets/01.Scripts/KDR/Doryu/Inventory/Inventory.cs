@@ -42,17 +42,19 @@ public class Inventory : MonoBehaviour
         Save();
     }
 
+    public InventorySlot GetSlot(int x, int y)
+    {
+        return slots[x, y];
+    }    
+
     public bool CanEnterInven(ItemSO itemSO)
     {
         if (itemSO is IngredientItemSO)
             return useItemData.useIngredientItem;
-        else if (itemSO is PotionItemSO potion)
-        {
-            if (potion.potionType == PotionType.Drink)
-                return useItemData.useDrinkPotionItem;
-            else
-                return useItemData.useThrowPotionItem;
-        }
+        else if (itemSO is ThrowPotionItemSO)
+            return useItemData.useThrowPotionItem;
+        else if (itemSO is DrinkPotionItemSO)
+            return useItemData.useDrinkPotionItem;
         return false;
     }
 
@@ -207,8 +209,13 @@ public class Inventory : MonoBehaviour
                 {
                     newSlotSaveStruct.pos = new Vector2Int(x, y);
                     newSlotSaveStruct.itemNameInt = slots[x, y].assignedItem.itemSO.GetItemTypeNumber();
-                    newSlotSaveStruct.isIngredient = slots[x, y].assignedItem.itemSO is IngredientItemSO;
-                    newSlotSaveStruct.amount = slots[x, y].assignedItem.amount;
+                    if (slots[x, y].assignedItem.itemSO is IngredientItemSO)
+                        newSlotSaveStruct.itemType =  ItemType.Ingredient;
+                    else if(slots[x, y].assignedItem.itemSO is ThrowPotionItemSO)
+                        newSlotSaveStruct.itemType =  ItemType.ThrowPotion;
+                    else
+                        newSlotSaveStruct.itemType =  ItemType.DrinkPotion;
+                    newSlotSaveStruct.amount = slots[x, y].assignedItemAmount;
                 }
                 else
                     newSlotSaveStruct.amount = 0;
@@ -241,10 +248,20 @@ public class Inventory : MonoBehaviour
                 {
                     Item item = Instantiate(InventoryManager.Instance.itemPrefab);
                     item.Init();
-                    if (slotSave.isIngredient)
-                        item.itemSO = InventoryManager.Instance.IngredientItemSODict[(IngredientItemType)slotSave.itemNameInt];
-                    else
-                        item.itemSO = InventoryManager.Instance.PotionItemSODict[(PotionItemType)slotSave.itemNameInt];
+                    switch (slotSave.itemType)
+                    {
+                        case ItemType.Ingredient:
+                            item.itemSO = InventoryManager.Instance.IngredientItemSODict[(IngredientItemType)slotSave.itemNameInt];
+                            break;
+                        case ItemType.ThrowPotion:
+                            item.itemSO = InventoryManager.Instance.ThrowPotionItemSODict[(PotionItemType)slotSave.itemNameInt];
+                            break;
+                        case ItemType.DrinkPotion:
+                            item.itemSO = InventoryManager.Instance.DrinkPotionItemSODict[(PotionItemType)slotSave.itemNameInt];
+                            break;
+                        default:
+                            break;
+                    }
                     item.amount = slotSave.amount;
                     slot.SetItem(item);
                 }
@@ -267,12 +284,19 @@ public class Inventory : MonoBehaviour
     }
 }
 
+public enum ItemType
+{
+    Ingredient,
+    ThrowPotion,
+    DrinkPotion,
+}
+
 [Serializable]
 public class SlotSave
 {
     public Vector2Int pos;
     public int itemNameInt = -1;
-    public bool isIngredient;
+    public ItemType itemType;
     public int amount;
 }
 

@@ -107,6 +107,8 @@ public class PlayerGroundState : PlayerState
 
     private void HandleThrowEvent()
     {
+        InventorySlot slot = QuickSlotManager.Instance.GetSelectedPotionSlot();
+        if (slot == null || slot.assignedItem == null || slot.assignedItem.itemSO is DrinkPotionItemSO) return;
         stateMachine.ChangeState(PlayerStateEnum.Throw);
     }
 

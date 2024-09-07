@@ -52,7 +52,7 @@ public class Item : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localScale = Vector3.one;
         if (_itemSO is PotionItemSO)
-            _rectTrm.sizeDelta = Vector2.one * 60;
+            _rectTrm.sizeDelta = Vector2.one * 80;
         else if (_itemSO is IngredientItemSO)
             _rectTrm.sizeDelta = Vector2.one * 110;
     }
@@ -61,7 +61,7 @@ public class Item : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localScale = Vector3.one;
         if (_itemSO is PotionItemSO)
-            _rectTrm.sizeDelta = Vector2.one * 60;
+            _rectTrm.sizeDelta = Vector2.one * 80;
         else if (_itemSO is IngredientItemSO)
             _rectTrm.sizeDelta = Vector2.one * 110;
     }

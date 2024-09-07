@@ -18,19 +18,21 @@ public struct PotionInfo
 
 public abstract class Potion : MonoBehaviour
 {
-    public PotionInfo[] potionInfos;
+    //public PotionItemSO potionItemSO;
     public List<Effect> effects;
-    public PotionTypeEnum potionType;
 
-    protected virtual void Start()
+    public virtual void Init(InventorySlot slot)
     {
+        //this.potionItemSO = potionItemSO;
         effects = new List<Effect>();
-        for(int i = 0; i < potionInfos.Length; i++)
+        PotionInfo[] potionInfos = (slot.assignedItem.itemSO as PotionItemSO).GetItemInfo();
+        for (int i = 0; i < potionInfos.Length; i++)
         {
             Effect effect = EffectManager.GetEffect(potionInfos[i].effectEnum);
             effect.Initialize(this, potionInfos[i].level);
             effects.Add(effect);
         }
+        slot.TrySubAmount();
     }
     public abstract void UsePotion();
 }

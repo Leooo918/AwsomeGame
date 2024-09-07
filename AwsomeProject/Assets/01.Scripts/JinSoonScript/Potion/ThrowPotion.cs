@@ -14,9 +14,18 @@ public class ThrowPotion : Potion
     private LayerMask _whatIsEnemy;
     public int range;
 
-    protected override void Start()
+    private SpriteRenderer _spriteRenderer;
+
+    public override void Init(InventorySlot slot) 
     {
-        base.Start();
+        ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;
+        _maxDetactEntity = throwPotionItemSO.maxDetactEntity;
+        _whatIsEnemy = throwPotionItemSO.whatIsEnemy;
+        range = throwPotionItemSO.range;
+        base.Init(slot);
+
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer.sprite = throwPotionItemSO.image;
         _colliders = new Collider2D[_maxDetactEntity];
     }
 
@@ -47,5 +56,11 @@ public class ThrowPotion : Potion
     {
         Destroy(gameObject);
         UsePotion();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

@@ -6,5 +6,6 @@ using UnityEngine;
 public class ItemListSO : ScriptableObject
 {
     public IngredientItemSO[] ingredientItemSOList;
-    public PotionItemSO[] potionItemSOList;
+    public PotionItemSO[] throwPotionItemSOList;
+    public PotionItemSO[] drinkPotionItemSOList;
 }

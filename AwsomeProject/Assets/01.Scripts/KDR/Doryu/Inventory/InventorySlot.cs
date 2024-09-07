@@ -19,11 +19,36 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
+    public int assignedItemAmount
+    {
+        get => _assignedItem.amount;
+        private set
+        {
+            _assignedItem.amount = value;
+            if (_assignedItem.amount == 0)
+            {
+                Destroy(_assignedItem.gameObject);
+                _assignedItem = null;
+                Save();
+            }
+        }
+    }
+
 
     public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;
     public bool isSelected;
 
     private GameObject _selectVolumObj;
+
+    private void Update()
+    {
+        if (_assignedItem != null && _assignedItem.amount == 0)
+        {
+            Destroy(_assignedItem.gameObject);
+            _assignedItem = null;
+            Save();
+        }
+    }
 
     public void Init(Inventory inventory)
     {
@@ -56,23 +81,24 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public bool TryAddAmount(int amount = 1)
     {
-        if (assignedItem.amount + amount > maxMergeAmount)
+        if (assignedItemAmount + amount > maxMergeAmount)
             return false;
-        assignedItem.amount += amount;
+        assignedItemAmount += amount;
         return true;
     }
     public bool TrySubAmount(int amount = 1)
     {
-        if (assignedItem.amount - amount < maxMergeAmount)
+        if (assignedItemAmount - amount < 0)
             return false;
-        assignedItem.amount += amount;
+        assignedItemAmount -= amount;
+        Save();
         return true;
     }
     public bool TrySetAmount(int amount = 0)
     {
         if (amount > maxMergeAmount || amount < 0)
             return false;
-        assignedItem.amount = amount;
+        assignedItemAmount = amount;
         return true;
     }
     public int AddAmount(int amount = 1)
@@ -80,7 +106,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         int remain = 0;
         if (TryAddAmount(amount) == false)
         {
-            remain = assignedItem.amount + amount - maxMergeAmount;
+            remain = assignedItemAmount + amount - maxMergeAmount;
             TrySetAmount(maxMergeAmount);
         }
 
@@ -91,8 +117,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         int over = 0;
         if (TrySubAmount(amount) == false)
         {
-            over = amount - assignedItem.amount;
+            over = amount - assignedItemAmount;
             TrySetAmount(0);
+            Save();
         }
 
         return over;

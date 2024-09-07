@@ -139,7 +139,7 @@ public class Herbs : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out player) && herbGathered == false)
+        if (collision.CompareTag("Player") && herbGathered == false)
         {
             interact.transform.position = 
                 new Vector3(interact.transform.position.x, player.transform.position.y + 2.5f, 0);
@@ -153,10 +153,10 @@ public class Herbs : MonoBehaviour
             gatherEnd = false;
         }
     }
-
+     
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out player) && herbGathered == false)
+        if (collision.CompareTag("Player") && herbGathered == false)
         {
             CancleGathering();
             player.PlayerInput.InteractPress -= GatherHerb;

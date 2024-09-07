@@ -28,11 +28,12 @@ public class InventoryManager : MonoBehaviour
 
     public Dictionary<IngredientItemType, ItemSO> IngredientItemSODict { get; private set; } 
         = new Dictionary<IngredientItemType, ItemSO>();
-    public Dictionary<PotionItemType, ItemSO> PotionItemSODict { get; private set; } 
+    public Dictionary<PotionItemType, ItemSO> ThrowPotionItemSODict { get; private set; } 
+        = new Dictionary<PotionItemType, ItemSO>();
+    public Dictionary<PotionItemType, ItemSO> DrinkPotionItemSODict { get; private set; } 
         = new Dictionary<PotionItemType, ItemSO>();
     [field:SerializeField] public InventorySlot slotPrefab { get; private set; }
     [field:SerializeField] public Item itemPrefab { get; private set; }
-    [field:SerializeField] public Item quickSlotItemPrefab { get; private set; }
     [SerializeField] private ItemListSO itemListSO;
     [SerializeField] private Inventory ingredientInventory;
     [SerializeField] private Inventory throwPotionInventory;
@@ -49,9 +50,13 @@ public class InventoryManager : MonoBehaviour
         {
             IngredientItemSODict.Add(itemSO.itemType, itemSO);
         }
-        foreach (PotionItemSO itemSO in itemListSO.potionItemSOList)
+        foreach (ThrowPotionItemSO itemSO in itemListSO.throwPotionItemSOList)
         {
-            PotionItemSODict.Add(itemSO.itemType, itemSO);
+            ThrowPotionItemSODict.Add(itemSO.itemType, itemSO);
+        }
+        foreach (DrinkPotionItemSO itemSO in itemListSO.drinkPotionItemSOList)
+        {
+            DrinkPotionItemSODict.Add(itemSO.itemType, itemSO);
         }
 
         _inventories = new List<Inventory>();
@@ -72,15 +77,15 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(PotionItemSODict[PotionItemType.PoisonPotion_Throw]);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.PoisonPotion]);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            TryAddItem(PotionItemSODict[PotionItemType.PoisonPotion_Drink]);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.PoisonPotion]);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            TryAddItem(PotionItemSODict[PotionItemType.HealPortion_Throw]);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPortion]);
         }
         #endregion
 
@@ -104,15 +109,13 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(item);
         }
-        else if (item.itemSO is PotionItemSO drinkPotionSO && 
-            drinkPotionSO.potionType == PotionType.Drink)
-        {
-            succes = drinkPotionInventory.AddItem(item);
-        }
-        else if (item.itemSO is PotionItemSO throwPotionSO && 
-            throwPotionSO.potionType == PotionType.Throw)
+        else if (item.itemSO is ThrowPotionItemSO throwPotionSO)
         {
             succes = throwPotionInventory.AddItem(item);
+        }
+        else if (item.itemSO is DrinkPotionItemSO drinkPotionSO)
+        {
+            succes = drinkPotionInventory.AddItem(item);
         }
         return succes;
     }
@@ -123,15 +126,13 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(itemSO, amount);
         }
-        else if (itemSO is PotionItemSO drinkPotionSO &&
-            drinkPotionSO.potionType == PotionType.Drink)
-        {
-            succes = drinkPotionInventory.AddItem(itemSO, amount);
-        }
-        else if (itemSO is PotionItemSO throwPotionSO &&
-            throwPotionSO.potionType == PotionType.Throw)
+        else if (itemSO is ThrowPotionItemSO throwPotionSO)
         {
             succes = throwPotionInventory.AddItem(itemSO, amount);
+        }
+        else if (itemSO is DrinkPotionItemSO drinkPotionSO)
+        {
+            succes = drinkPotionInventory.AddItem(itemSO, amount);
         }
         return succes;
     }

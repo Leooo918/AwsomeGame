@@ -26,6 +26,10 @@ public class PlayerThrowState : PlayerState
 
     public override void UpdateState()
     {
+        InventorySlot slot = QuickSlotManager.Instance.GetSelectedPotionSlot();
+        if (slot == null || slot.assignedItem == null || slot.assignedItem.itemSO is DrinkPotionItemSO)
+            stateMachine.ChangeState(PlayerStateEnum.Idle);
+
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
 
         _projectary.DrawLine(_throwPosTrm.position, dir * 30);
@@ -52,8 +56,9 @@ public class PlayerThrowState : PlayerState
     private void HandleThrow()
     {
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
-        Rigidbody2D rigid = GameObject.Instantiate(player.testObject, _throwPosTrm.position, Quaternion.identity).GetComponent<Rigidbody2D>();
-        rigid.AddForce(dir * 30, ForceMode2D.Impulse);
+        ThrowPotion potion = GameObject.Instantiate(QuickSlotManager.Instance.throwPotion, _throwPosTrm.position, Quaternion.identity);
+        potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot());
+        potion.GetComponent<Rigidbody2D>().AddForce(dir * 30, ForceMode2D.Impulse);
         stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 }
