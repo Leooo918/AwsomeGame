@@ -41,6 +41,13 @@ public enum PotionItemType
     WeakPotion_Drink,
 }
 
+public enum QuickSlotOutLine
+{
+    Bronze,
+    Silver,
+    Gold,
+}
+
 [CreateAssetMenu(menuName = "SO/Doryu/Item/PotionItem")]
 public class PotionItemSO : ItemSO
 {
@@ -48,6 +55,7 @@ public class PotionItemSO : ItemSO
     [Header("Info")]
     public PotionItemType itemType;
     public PotionType potionType;
+    public QuickSlotOutLine quickSlot;
     public int level = 0;
     public string itemName;
     [TextArea(3, 20)]

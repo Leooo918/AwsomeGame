@@ -18,15 +18,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             _assignedItem?.SetSlot(transform);
         }
     }
-    public int assignedItemAmount
-    {
-        get => _assignedItem.amount;
-        private set
-        {
-            _assignedItem.amount = value;
-            _assignedItem.TextUpdate();
-        }
-    }
+
+
     public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;
     public bool isSelected;
 
@@ -63,23 +56,23 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public bool TryAddAmount(int amount = 1)
     {
-        if (assignedItemAmount + amount > maxMergeAmount)
+        if (assignedItem.amount + amount > maxMergeAmount)
             return false;
-        assignedItemAmount += amount;
+        assignedItem.amount += amount;
         return true;
     }
     public bool TrySubAmount(int amount = 1)
     {
-        if (assignedItemAmount - amount < maxMergeAmount)
+        if (assignedItem.amount - amount < maxMergeAmount)
             return false;
-        assignedItemAmount += amount;
+        assignedItem.amount += amount;
         return true;
     }
     public bool TrySetAmount(int amount = 0)
     {
         if (amount > maxMergeAmount || amount < 0)
             return false;
-        assignedItemAmount = amount;
+        assignedItem.amount = amount;
         return true;
     }
     public int AddAmount(int amount = 1)
@@ -87,7 +80,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         int remain = 0;
         if (TryAddAmount(amount) == false)
         {
-            remain = assignedItemAmount + amount - maxMergeAmount;
+            remain = assignedItem.amount + amount - maxMergeAmount;
             TrySetAmount(maxMergeAmount);
         }
 
@@ -98,7 +91,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         int over = 0;
         if (TrySubAmount(amount) == false)
         {
-            over = amount - assignedItemAmount;
+            over = amount - assignedItem.amount;
             TrySetAmount(0);
         }
 
