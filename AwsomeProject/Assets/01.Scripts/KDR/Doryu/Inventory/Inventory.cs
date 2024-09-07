@@ -24,7 +24,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform _slotParent;
 
     public InventoryUseItemData useItemData;
-    
+    public Action<InventorySlot[,]> OnInventoryModified;
     public Transform itemStorage;
 
     [ContextMenu("ResetSaveData")]
@@ -75,6 +75,8 @@ public class Inventory : MonoBehaviour
         }
         _inventoryData.Init(_inventorySize.x * 100 + _inventorySize.y);
         Load();
+
+        OnInventoryModified?.Invoke(slots);
     }
 
     public bool AddItem(Item item)
@@ -206,7 +208,7 @@ public class Inventory : MonoBehaviour
                     newSlotSaveStruct.pos = new Vector2Int(x, y);
                     newSlotSaveStruct.itemNameInt = slots[x, y].assignedItem.itemSO.GetItemTypeNumber();
                     newSlotSaveStruct.isIngredient = slots[x, y].assignedItem.itemSO is IngredientItemSO;
-                    newSlotSaveStruct.amount = slots[x, y].assignedItemAmount;
+                    newSlotSaveStruct.amount = slots[x, y].assignedItem.amount;
                 }
                 else
                     newSlotSaveStruct.amount = 0;
@@ -214,6 +216,7 @@ public class Inventory : MonoBehaviour
             }
         }
         _inventoryData.SaveJson("Inventory_" + name);
+        OnInventoryModified?.Invoke(slots);
     }
     public void Load()
     {
@@ -243,7 +246,6 @@ public class Inventory : MonoBehaviour
                     else
                         item.itemSO = InventoryManager.Instance.PotionItemSODict[(PotionItemType)slotSave.itemNameInt];
                     item.amount = slotSave.amount;
-                    item.TextUpdate();
                     slot.SetItem(item);
                 }
                 else if (slot.assignedItem != null)

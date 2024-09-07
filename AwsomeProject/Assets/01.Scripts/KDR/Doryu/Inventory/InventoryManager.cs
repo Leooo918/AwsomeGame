@@ -32,6 +32,7 @@ public class InventoryManager : MonoBehaviour
         = new Dictionary<PotionItemType, ItemSO>();
     [field:SerializeField] public InventorySlot slotPrefab { get; private set; }
     [field:SerializeField] public Item itemPrefab { get; private set; }
+    [field:SerializeField] public Item quickSlotItemPrefab { get; private set; }
     [SerializeField] private ItemListSO itemListSO;
     [SerializeField] private Inventory ingredientInventory;
     [SerializeField] private Inventory throwPotionInventory;
@@ -64,6 +65,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        #region Debug
         if (Input.GetKeyDown(KeyCode.I))
         {
             TryAddItem(IngredientItemSODict[IngredientItemType.RedMushroom]);
@@ -80,6 +82,7 @@ public class InventoryManager : MonoBehaviour
         {
             TryAddItem(PotionItemSODict[PotionItemType.HealPortion_Throw]);
         }
+        #endregion
 
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
         {

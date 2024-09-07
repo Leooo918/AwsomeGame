@@ -9,8 +9,17 @@ public class Item : MonoBehaviour
     private TextMeshProUGUI _textOutLine;
     private Image _image;
     private RectTransform _rectTrm;
-    public int amount;
-     
+    private int _amount;
+    public int amount
+    {
+        get => _amount;
+        set
+        {
+            _amount = value;
+            TextUpdate();
+        }
+    }
+
     private ItemSO _itemSO;
     public ItemSO itemSO
     {
