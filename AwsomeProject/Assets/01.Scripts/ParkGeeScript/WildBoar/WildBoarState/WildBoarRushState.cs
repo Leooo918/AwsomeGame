@@ -29,7 +29,7 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         else
         {
             //´ë½¬ ³¡
-            enemy.StopImmediately(false);
+            enemy.MovementCompo.StopImmediately(false);
             enemyStateMachine.ChangeState(WildBoarEnum.Move);
         }
     }
@@ -40,13 +40,13 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         _isRushing = false;
         _rushDir = enemy.FacingDir;
         _rushSpeed = _rushSkill.rushSpeed.GetValue();
-        enemy.StopImmediately(false);
+        enemy.MovementCompo.StopImmediately(false);
     }
 
     public override void Exit()
     {
         _wildBoar.dashAttackCollider.SetActive(false);
-        enemy.StopImmediately(false);
+        enemy.MovementCompo.StopImmediately(false);
         _wildBoar.SetAttackDelay(_rushSkill.skillCoolTime.GetValue());
         base.Exit();
     }
@@ -55,12 +55,12 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
     {
         base.UpdateState();
         if (_isRushing)
-            enemy.SetVelocity(_rushDir * _rushSpeed, 0);
+            enemy.MovementCompo.SetVelocity(new Vector2(_rushDir * _rushSpeed, 0));
 
         if (enemy.CheckFront() == false)
         {
             _isRushing = false;
-            enemy.StopImmediately(true);
+            enemy.MovementCompo.StopImmediately(true);
             enemy.StartDelayCallBack(0.3f, () => enemyStateMachine.ChangeState(WildBoarEnum.Move));
         }
         

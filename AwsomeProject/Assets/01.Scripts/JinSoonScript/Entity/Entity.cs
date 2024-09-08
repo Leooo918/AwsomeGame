@@ -15,6 +15,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
     public Rigidbody2D rigidbodyCompo { get; protected set; }
+    public EntityMovement MovementCompo { get; protected set; }
 
     public EntityAttack entityAttack { get; protected set; }
 
@@ -70,6 +71,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         colliderCompo = GetComponent<Collider2D>();
         healthCompo = GetComponent<Health>();
         entityAttack = GetComponent<EntityAttack>();
+        MovementCompo = GetComponent<EntityMovement>();
+        MovementCompo.Initialize(this);
 
         stat = Instantiate(stat);
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
@@ -84,26 +87,10 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     #region Velocity Section
 
-    public void SetVelocity(float x, float y, bool doNotFlip = false, bool isKnock = false)
-    {
-        if (isKnockbacked == true && isKnock == false) return;
-
-        _xMovement = x;
-        rigidbodyCompo.velocity = new Vector2(rigidbodyCompo.velocity.x, y);
-        if (doNotFlip == false)
-            FlipController(x);
-    }
-
     /// <summary>
     /// Set velocity zero this Entity
     /// </summary>
     /// <param name="withYAxis">Stop With YAxis</param>
-    public void StopImmediately(bool withYAxis)
-    {
-        _xMovement = 0;
-        if (withYAxis)
-            rigidbodyCompo.velocity = Vector2.zero;
-    }
 
     #endregion
 
@@ -160,16 +147,16 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public virtual void KnockBack(Vector2 power)
     {
         if (CanKnockback == false) return;
-        StopImmediately(true);
+        MovementCompo.StopImmediately(true);
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 
         isKnockbacked = true;
-        SetVelocity(power.x, power.y, true, true);
+        MovementCompo.SetVelocity(power, true);
         knockbackCoroutine = StartDelayCallBack(
             knockbackDuration, () =>
             {
                 isKnockbacked = false;
-                StopImmediately(false);
+                MovementCompo.StopImmediately(false);
             });
     }
 

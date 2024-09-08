@@ -85,7 +85,7 @@ public class KingSlimeJumpAttackState : EnemyState<KingSlimeStateEnum>
         //넉백이 안되고, 상태 변환도 안되고, 멈춘상태에서
         enemy.CanKnockback = false;
         enemy.CanStateChangeable = false;
-        enemy.StopImmediately(true);
+        enemy.MovementCompo.StopImmediately(true);
     }
 
     public override void Exit()

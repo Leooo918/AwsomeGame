@@ -31,7 +31,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
         if(jumpSkill == null)
             jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
 
-        enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
+        enemy.MovementCompo.SetVelocity(new Vector2(0, jumpSkill.jumpPower.GetValue()));
         playerDir = Mathf.Sign((PlayerManager.Instance.PlayerTrm.position - enemy.transform.position).x);
     }
 
@@ -39,7 +39,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
     {
         base.UpdateState();
 
-        enemy.SetVelocity(playerDir * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y);
+        enemy.MovementCompo.SetVelocity(new Vector2(playerDir * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y));
 
         if (enemy.rigidbodyCompo.velocity.y < 0)
             enemy.animatorCompo.SetTrigger(_jumpDownAnimHash);
@@ -50,7 +50,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
             enemy.entityAttack.Attack();
 
             enemy.animatorCompo.SetTrigger(_landAnimHash);
-            enemy.StopImmediately(false);
+            enemy.MovementCompo.StopImmediately(false);
         }
     }
 }

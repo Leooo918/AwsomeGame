@@ -35,7 +35,7 @@ public class TestSlow : MonoBehaviour
         Debug.Log("공격을 함");
         float xInput = player.PlayerInput.XInput;
         Rigidbody2D playerRigid = player.GetComponent<Rigidbody2D>();
-        player.SetVelocity(xInput * (player.MoveSpeed % 4), playerRigid.velocity.y);
+        player.MovementCompo.SetVelocity(new Vector2(xInput * (player.MoveSpeed % 4), playerRigid.velocity.y));
         StartCoroutine(AttackDelay());
     }
 
@@ -52,7 +52,7 @@ public class TestSlow : MonoBehaviour
         yield return new WaitForSeconds(1f);
         float xInput = player.PlayerInput.XInput;
         Rigidbody2D playerRigid = player.GetComponent<Rigidbody2D>();
-        player.SetVelocity(xInput * player.MoveSpeed, playerRigid.velocity.y);
+        player.MovementCompo.SetVelocity(new Vector2(xInput * player.MoveSpeed, playerRigid.velocity.y));
         Debug.Log("Attack delay finished");
     }
 }

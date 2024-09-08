@@ -11,7 +11,7 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.UpdateState();
         float xInput = player.PlayerInput.XInput;
-        player.SetVelocity(xInput * player.MoveSpeed, rigidbody.velocity.y);
+        player.MovementCompo.SetVelocity(new Vector2(xInput * player.MoveSpeed, rigidbody.velocity.y));
 
         if (Mathf.Abs(xInput) < 0.05f || player.IsWallDetected())
         {

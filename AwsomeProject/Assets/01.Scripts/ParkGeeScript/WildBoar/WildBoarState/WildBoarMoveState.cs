@@ -21,7 +21,7 @@ public class WildBoarMoveState : EnemyState<WildBoarEnum>
             enemy.Flip();
 
         float moveDir = enemy.FacingDir * enemy.moveSpeed;
-        enemy.SetVelocity(moveDir, enemy.rigidbodyCompo.velocity.y);
+        enemy.MovementCompo.SetVelocity(new Vector2(moveDir, enemy.rigidbodyCompo.velocity.y));
 
         _wildBoar.TryAttack();
     }

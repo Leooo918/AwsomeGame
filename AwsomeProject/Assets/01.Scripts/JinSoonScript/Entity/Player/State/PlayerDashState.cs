@@ -29,14 +29,14 @@ public class PlayerDashState : PlayerState
 
         if (xInput == 0) xInput = player.FacingDir * -0.5f;
 
-        player.SetVelocity(player.DashPower * xInput, 0, true);
+        player.MovementCompo.SetVelocity(new Vector2(player.DashPower * xInput, 0), true);
         dashTime = Time.time;
     }
     public override void UpdateState()
     {
         base.UpdateState();
 
-        player.SetVelocity(player.DashPower * xInput, 0, true);
+        player.MovementCompo.SetVelocity(new Vector2(player.DashPower * xInput, 0), true);
 
         if (Time.time - dashTime > player.DashTime)
         {
@@ -53,7 +53,7 @@ public class PlayerDashState : PlayerState
             _dashAttackColl.enabled = false;
         _dashTrail.Stop();
 
-        player.StopImmediately(false);
+        player.MovementCompo.StopImmediately(false);
     }
 
 }

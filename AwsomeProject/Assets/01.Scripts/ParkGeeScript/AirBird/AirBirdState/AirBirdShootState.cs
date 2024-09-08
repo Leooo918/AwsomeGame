@@ -40,7 +40,7 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.StopImmediately(true);
+        enemy.MovementCompo.StopImmediately(true);
     }
 
     public override void Exit()

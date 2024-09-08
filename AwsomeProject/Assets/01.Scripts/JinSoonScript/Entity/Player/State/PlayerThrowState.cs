@@ -43,7 +43,7 @@ public class PlayerThrowState : PlayerState
 
         float xInput = player.PlayerInput.XInput;
         player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(xInput));
-        player.SetVelocity(xInput * 5, rigidbody.velocity.y, true);
+        player.MovementCompo.SetVelocity(new Vector2(xInput * 5, rigidbody.velocity.y), true);
     }
 
     public override void Exit()

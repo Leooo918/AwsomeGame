@@ -34,7 +34,7 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
         }
 
         if (_slime.moveAnim == true)
-            enemy.SetVelocity(enemy.FacingDir * enemy.moveSpeed, 0, false, false);
+            enemy.MovementCompo.SetVelocity(new Vector2(enemy.FacingDir * enemy.moveSpeed, 0), false);
 
         Player player = enemy.IsPlayerDetected();
 

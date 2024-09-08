@@ -23,7 +23,7 @@ public class Mushroom : Probs
 
         StartCoroutine("DelayActive");
         animator.SetTrigger(animHash);
-        entity.SetVelocity(entity.rigidbodyCompo.velocity.x, jumpHeight);
+        entity.MovementCompo.SetVelocity(new Vector2(entity.rigidbodyCompo.velocity.x, jumpHeight));
     }
 
     private IEnumerator DelayActive()

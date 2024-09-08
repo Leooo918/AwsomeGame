@@ -32,7 +32,7 @@ public class PlayerClimbState : PlayerState
         player.PlayerInput.AttackEvent += HandleAttackEvent;
         player.PlayerInput.OnXInputEvent += HandleXInputEvent;
         player.PlayerInput.OnYInputEvent += HandleYInputEvent;
-        player.StopImmediately(true);
+        player.MovementCompo.StopImmediately(true);
         Vector3 offset = player.CurrentVine.transform.position - player.transform.position;
 
         player.transform.position += new Vector3(offset.x, 0.8f);
@@ -62,7 +62,7 @@ public class PlayerClimbState : PlayerState
         float yInput = player.PlayerInput.YInput;
 
         player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(yInput));
-        player.SetVelocity(0, yInput * player.MoveSpeed);
+        player.MovementCompo.SetVelocity(new Vector2(0, yInput * player.MoveSpeed));
         if (player.CurrentVine.CurrentState != VineState.Grown || player.IsGroundDetected(new Vector3(0, -0.5f, 0)))
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);

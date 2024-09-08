@@ -46,7 +46,7 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
         if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
 
         if (_slime.moveAnim == true)
-            enemy.SetVelocity(dir.x * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y);
+            enemy.MovementCompo.SetVelocity(new Vector2(dir.x * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y));
     }
 
     private void Jump()
@@ -54,6 +54,6 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
         if (_jumpSkill == null)
             _jumpSkill = _slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
 
-        enemy.SetVelocity(0, _jumpSkill.jumpPower.GetValue());
+        enemy.MovementCompo.SetVelocity(new Vector2(0, _jumpSkill.jumpPower.GetValue()));
     }
 }

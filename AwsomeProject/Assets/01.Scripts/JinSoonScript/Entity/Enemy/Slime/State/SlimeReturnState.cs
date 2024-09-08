@@ -19,7 +19,7 @@ public class SlimeReturnState : EnemyState<SlimeStateEnum>
         base.UpdateState();
 
         if (slime.moveAnim == true)
-            enemy.SetVelocity(dir.x, enemy.rigidbodyCompo.velocity.y);
+            enemy.MovementCompo.SetVelocity(new Vector2(dir.x, enemy.rigidbodyCompo.velocity.y));
 
         //만약 앞에 벽이 가로막고 있다면
         if (enemy.IsWallDetected() == true)
@@ -33,7 +33,7 @@ public class SlimeReturnState : EnemyState<SlimeStateEnum>
         if(jumpSkill == null)
             jumpSkill = slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
 
-        enemy.SetVelocity(0, jumpSkill.jumpPower.GetValue());
+        enemy.MovementCompo.SetVelocity(new Vector2(0, jumpSkill.jumpPower.GetValue()));
         isJumping = true;
     }
 }

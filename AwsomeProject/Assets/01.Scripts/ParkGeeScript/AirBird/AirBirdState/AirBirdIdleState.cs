@@ -32,6 +32,6 @@ public class AirBirdIdleState : EnemyState<AirBirdEnum>
             enemyStateMachine.ChangeState(AirBirdEnum.Chase);
 
         float y = _isGoDown ? -1 : 1;
-        enemy.SetVelocity(0, y * _upDownSpeed);
+        enemy.MovementCompo.SetVelocity(new Vector2(0, y * _upDownSpeed));
     }
 }

@@ -38,7 +38,7 @@ public class AirBirdChaseState : EnemyState<AirBirdEnum>
         float x = enemy.FacingDir * enemy.moveSpeed;
         float y = _isGoDown ? -1 : 1;
 
-        enemy.SetVelocity(x, y * _upDownSpeed);
+        enemy.MovementCompo.SetVelocity(new Vector2(x, y * _upDownSpeed));
         _airBird.TryAttack();
     }
 }

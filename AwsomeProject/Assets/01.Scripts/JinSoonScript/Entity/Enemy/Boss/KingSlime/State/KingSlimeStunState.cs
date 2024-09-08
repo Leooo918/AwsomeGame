@@ -15,7 +15,7 @@ public class KingSlimeStunState : EnemyState<KingSlimeStateEnum>
         _stunStartTime = Time.time;
         enemy.CanStateChangeable = false;
 
-        enemy.StopImmediately(false);
+        enemy.MovementCompo.StopImmediately(false);
     }
 
     public override void UpdateState()
