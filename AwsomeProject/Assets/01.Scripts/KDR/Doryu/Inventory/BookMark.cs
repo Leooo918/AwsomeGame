@@ -23,6 +23,7 @@ public class BookMark : MonoBehaviour
     [SerializeField] private GameObject[] _setActiveObj;
     [SerializeField] private MoveRectTrmData[] _moveRectTrmDatas;
     [SerializeField] private bool _isActiveStart;
+    [SerializeField] private bool _useOnDisableReset;
 
     private Button _button;
     private Sequence _seq;
@@ -75,7 +76,7 @@ public class BookMark : MonoBehaviour
 
     private void OnDisable()
     {
-        if (_isActiveStart && _moveRectTrmDatas.Length == 0)
+        if (_isActiveStart && _useOnDisableReset)
             Enable();
     }
 }

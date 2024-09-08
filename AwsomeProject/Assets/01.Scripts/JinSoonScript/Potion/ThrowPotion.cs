@@ -16,7 +16,7 @@ public class ThrowPotion : Potion
 
     private SpriteRenderer _spriteRenderer;
 
-    public override void Init(InventorySlot slot) 
+    public override void Init(QuickSlot slot) 
     {
         ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;
         _maxDetactEntity = throwPotionItemSO.maxDetactEntity;

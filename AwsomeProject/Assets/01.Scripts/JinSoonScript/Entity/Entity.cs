@@ -79,7 +79,6 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     private void FixedUpdate()
     {
-
         rigidbodyCompo.velocity = new Vector2(_xMovement, rigidbodyCompo.velocity.y);
     }
 

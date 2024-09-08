@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: YoungBirldWing
   m_EditorClassIdentifier: 
   maxMergeAmount: 5
+  image: {fileID: 271567606, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemType: 9
   itemName: "\uC5B4\uB9B0\uC0C8\uC758 \uB0A0\uAC1C"
-  itemExplain: "\uC774\uAC78\uB85C \uB0A0 \uC218 \uC788\uB294\uC9C0 \uC758\uC2EC\uC774
-    \uB4DC\uB294 \uC791\uC740 \uB0A0\uAC1C\uC774\uB2E4"
-  image: {fileID: 271567606, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemDescription: "\uD06C\uAE30\uAC00 \uC791\uC544 \uC0AC\uC6A9\uD560 \uC218 \uC788\uB294
+    \uBD80\uC704\uAC00 \uB9CE\uC9C0 \uC54A\uC9C0\uB9CC, \uADF8 \uD488\uC9C8\uC740
+    \uC131\uCCB4\uBCF4\uB2E4 \uC6B0\uC218\uD558\uB2E4."
   gatheringTime: 0.1

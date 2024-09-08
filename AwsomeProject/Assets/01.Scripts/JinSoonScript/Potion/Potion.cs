@@ -21,7 +21,7 @@ public abstract class Potion : MonoBehaviour
     //public PotionItemSO potionItemSO;
     public List<Effect> effects;
 
-    public virtual void Init(InventorySlot slot)
+    public virtual void Init(QuickSlot slot)
     {
         //this.potionItemSO = potionItemSO;
         effects = new List<Effect>();
@@ -32,7 +32,7 @@ public abstract class Potion : MonoBehaviour
             effect.Initialize(this, potionInfos[i].level);
             effects.Add(effect);
         }
-        slot.TrySubAmount();
+        slot.TryUsePotion();
     }
     public abstract void UsePotion();
 }
