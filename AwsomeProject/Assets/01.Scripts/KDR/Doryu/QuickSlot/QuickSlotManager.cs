@@ -10,6 +10,8 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
     [SerializeField] private Inventory _activeSlotInven;
     [SerializeField] private Inventory _passoveSlotInven;
 
+    [field: SerializeField] public Sprite[] slotOutLines { get; private set; }
+
     private int _currentSelectIdx = -1;
     private List<QuickSlot> _passiveQuickSlots = new List<QuickSlot>();
     private List<QuickSlot> _activeLineQuickSlots = new List<QuickSlot>();
@@ -48,10 +50,10 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         }
     }
 
-    public InventorySlot GetSelectedPotionSlot()
+    public QuickSlot GetSelectedPotionSlot()
     {
         if (_currentSelectIdx == -1) return null;
-        return _activeSlotInven.GetSlot(_currentSelectIdx, 0);
+        return _activeLineQuickSlots[_currentSelectIdx];
     }
 
     private void SelectQuickSlot(int index)

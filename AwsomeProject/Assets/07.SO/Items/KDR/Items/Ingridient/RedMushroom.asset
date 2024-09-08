@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: RedMushroom
   m_EditorClassIdentifier: 
   maxMergeAmount: 5
+  image: {fileID: -682256301, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemType: 0
   itemName: "\uBD89\uC740 \uBC84\uC12F"
-  itemExplain: "\uB9E4\uC6B0\uB9E4\uC6B0 \uBE68\uAC04 \uBC84\uC12F\uC774\uB2E4"
-  image: {fileID: -682256301, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemDescription: "\uBD89\uAC8C \uBB3C\uB4E0 \uBC84\uC12F\uC774\uB2E4.\n\uB3C5\uBC84\uC12F\uC774\uC9C0\uB9CC
+    \uC870\uB9AC\uBC95\uC5D0 \uB530\uB77C \uD574\uB3C5\uC81C\uB85C\uB3C4 \uC4F0\uC778\uB2E4."
   gatheringTime: 2

@@ -26,7 +26,7 @@ public class PlayerThrowState : PlayerState
 
     public override void UpdateState()
     {
-        InventorySlot slot = QuickSlotManager.Instance.GetSelectedPotionSlot();
+        QuickSlot slot = QuickSlotManager.Instance.GetSelectedPotionSlot();
         if (slot == null || slot.assignedItem == null || slot.assignedItem.itemSO is DrinkPotionItemSO)
             stateMachine.ChangeState(PlayerStateEnum.Idle);
 

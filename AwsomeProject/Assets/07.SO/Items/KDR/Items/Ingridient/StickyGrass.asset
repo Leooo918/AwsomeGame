@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: StickyGrass
   m_EditorClassIdentifier: 
   maxMergeAmount: 5
+  image: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemType: 6
   itemName: "\uC811\uCC29 \uAC00\uC9C0"
-  itemExplain: "\uB2FF\uB294 \uBAA8\uB4E0\uAC83\uC5D0 \uBD99\uC73C\uB824\uACE0\uD55C\uB2E4."
-  image: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemDescription: "\uD55C\uBC88 \uB2FF\uB294\uC21C\uAC04 \uC27D\uAC8C \uB5A8\uC5B4\uC9C0\uC9C0\uC54A\uB294
+    \uB048\uB048\uC774\uB97C \uB0B4\uBFDC\uB294\uB2E4.\n\uB9CC\uC9C0\uAE30 \uC2EB\uB2E4."
   gatheringTime: 2

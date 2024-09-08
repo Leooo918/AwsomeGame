@@ -36,7 +36,7 @@ public class PotionItemSO : ItemSO
     [Space(20)]
     [Header("Info")]
     public PotionItemType itemType;
-    public QuickSlotOutLine quickSlot;
+    public QuickSlotOutLine quickSlotOutLine;
     public int level = 0;
     public string itemName;
     [TextArea(3, 20)]

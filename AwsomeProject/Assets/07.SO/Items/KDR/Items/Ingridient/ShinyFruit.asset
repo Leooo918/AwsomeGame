@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ShinyFruit
   m_EditorClassIdentifier: 
   maxMergeAmount: 5
+  image: {fileID: 954808718, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemType: 7
   itemName: "\uBC18\uC9DD \uC5F4\uB9E4"
-  itemExplain: "\uC54C \uC218 \uC5C6\uB294 \uC6D0\uB9AC\uB85C \uBC18\uC9DD\uC774\uB294
-    \uC5F4\uB9E4\uB2E4."
-  image: {fileID: 954808718, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
+  itemDescription: "\uC54C \uC218 \uC5C6\uB294 \uC6D0\uB9AC\uB85C \uD63C\uC790 \uBC1C\uAD11\uD558\uACE0
+    \uC788\uB294 \uC5F4\uB9E4\uB2E4.\n\uBA39\uC744 \uC218 \uC788\uC9C0\uB9CC \uAC10\uD788
+    \uC5C4\uB450\uAC00 \uC548\uB09C\uB2E4."
   gatheringTime: 0.1
