@@ -59,6 +59,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     private StatusEffectManager _statusEffectManager;
     public StatusEffectManager StatusEffectManager => _statusEffectManager;
 
+    private float _xMovement;
+
     protected virtual void Awake()
     {
         Transform visualTrm = transform.Find("Visual");
@@ -75,6 +77,11 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         _statusEffectManager = new StatusEffectManager(this);
     }
 
+    private void FixedUpdate()
+    {
+
+        rigidbodyCompo.velocity = new Vector2(_xMovement, rigidbodyCompo.velocity.y);
+    }
 
     #region Velocity Section
 
@@ -82,7 +89,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     {
         if (isKnockbacked == true && isKnock == false) return;
 
-        rigidbodyCompo.velocity = new Vector2(x, y);
+        _xMovement = x;
+        rigidbodyCompo.velocity = new Vector2(rigidbodyCompo.velocity.x, y);
         if (doNotFlip == false)
             FlipController(x);
     }
@@ -93,10 +101,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     /// <param name="withYAxis">Stop With YAxis</param>
     public void StopImmediately(bool withYAxis)
     {
+        _xMovement = 0;
         if (withYAxis)
             rigidbodyCompo.velocity = Vector2.zero;
-        else
-            rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
     }
 
     #endregion

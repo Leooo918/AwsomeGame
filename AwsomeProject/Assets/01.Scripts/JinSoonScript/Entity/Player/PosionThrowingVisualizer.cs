@@ -31,16 +31,17 @@ public class PosionThrowingVisualizer : MonoBehaviour
         _raycast = new RaycastHit2D[1];
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         CheckMousePosition();
     }
 
     private void CheckMousePosition()
     {
-        Vector2 mousePosition = _inputReader.MousePosition;
+        Vector2 mouseScreenPosition = _inputReader.MouseScreenPosition;
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(mouseScreenPosition);
 
-        int detectedEnemy = Physics2D.OverlapCircleNonAlloc(mousePosition, _correction, _coll, _whatIsEnemy);
+        int detectedEnemy = Physics2D.OverlapCircleNonAlloc(mousePos, _correction, _coll, _whatIsEnemy);
         if (detectedEnemy > 0)
         {
             transform.position = _coll[0].transform.position + (Vector3)_coll[0].offset;
@@ -56,14 +57,14 @@ public class PosionThrowingVisualizer : MonoBehaviour
 
 
         int detectedGround = Physics2D.BoxCastNonAlloc
-            (mousePosition, Vector2.one * _correction, 0, Vector2.zero, _raycast, _whatIsGround);
+            (mousePos, Vector2.one * _correction, 0, Vector2.zero, _raycast, _whatIsGround);
 
         if (_aimEnemy.activeSelf) _aimEnemy.SetActive(false);
         if (!_aimNothing.activeSelf) _aimNothing.SetActive(true);
-        transform.position = mousePosition;
+        transform.position = mousePos;
         transform.localScale = Vector3.one;
 
-        Vector2 dir = CalculateThrowDirection(_playerTrm.position + _player.ThrowingOffset, mousePosition);
+        Vector2 dir = CalculateThrowDirection(_playerTrm.position + _player.ThrowingOffset, mousePos);
         _player.PortionThrowingDir = (dir);
     }
 

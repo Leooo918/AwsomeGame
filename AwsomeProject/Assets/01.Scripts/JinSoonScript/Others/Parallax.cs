@@ -7,10 +7,10 @@ public class Parallax : MonoBehaviour
 {
     private float length, startPos;
     private GameObject cam;
-    public bool isFastenY;  //y°ªÀ» °íÁ¤ÇØÁÙ°Å³Ä?
+    public bool isFastenY;  //yï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°Å³ï¿½?
     
-    //´ëÃæ offsetÀÌ¶ó°í »ý°¢ÇÏ¸é µÇ´Âµ¥ °ö¿¬»êÀ¸·Î ¿¬»êÇØÁÜ
-    //0ÀÌ¸é °Á ¾È¿òÁ÷ÀÌ°í, 1ÀÌ¸é Ä«¸Þ¶ó¼Óµµ¿¡ µü ¸ÂÃç¼­ 1º¸´Ù Å©¸é ´õ ºü¸£°Ô, ´õ ÀÛÀ¸¸é ´õ ´À¸®°Ô
+    //ï¿½ï¿½ï¿½ï¿½ offsetï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ç´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //0ï¿½Ì¸ï¿½ ï¿½ï¿½ ï¿½È¿ï¿½ï¿½ï¿½ï¿½Ì°ï¿½, 1ï¿½Ì¸ï¿½ Ä«ï¿½Þ¶ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ç¼­ 1ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public float parallaxEffect;
     [SerializeField] private float height = 0;
 
@@ -21,12 +21,12 @@ public class Parallax : MonoBehaviour
         length = transform.GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         float temp = (cam.transform.position.x * (1 - parallaxEffect));
         float dist = (cam.transform.position.x * parallaxEffect);
 
-        //¿©±â À§Ä¡·Î ÀÌµ¿½ÃÄÑÁÜ ´ëÃæ ½ÃÀÛx À§Ä¡ + Àú Ä«¸Þ¶óÀ§Ä¡¿¡ ¿ÀÇÁ¼Â Àû¿ë½ÃÄÑÁØ°Å
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½x ï¿½ï¿½Ä¡ + ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø°ï¿½
         Vector3 targetPos = new Vector3(startPos + dist, height, transform.position.z);
 
         if (isFastenY)
@@ -34,7 +34,7 @@ public class Parallax : MonoBehaviour
 
         transform.position = targetPos;
 
-        //¿©±â°¡ ±× ÀÌ¹ÌÁö 3°³ ¹ø°¥¾Æ¸é¼­ ³ª¿À°Ô ÇØÁÖ´Â ºÎºÐÀÎwww
+        //ï¿½ï¿½ï¿½â°¡ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Æ¸é¼­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Îºï¿½ï¿½ï¿½www
         if (temp > startPos + length) startPos += length;
         else if (temp < startPos - length) startPos -= length;
     }

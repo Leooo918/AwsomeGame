@@ -1,3 +1,4 @@
+using Doryu;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,14 @@ using UnityEngine;
 public class PotionCraftPanel : MonoBehaviour, IManageableUI
 {
     private RectTransform _rectTrm;
+    private RectTransform _inventoryRectTrm;
+    [SerializeField] private InventoryPanel _inventory;
 
-    public void Close()
+    public void Close() 
     {
         _rectTrm.anchoredPosition = Vector2.right * 3000;
+        _inventoryRectTrm.anchoredPosition = Vector2.down * 1500;
+        _inventory.OnPotUI(false);
         //gameObject.SetActive(false);
         PlayerManager.Instance.EnablePlayerMovementInput();
         PlayerManager.Instance.EnablePlayerInventoryInput();
@@ -18,6 +23,8 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
     {
         //뭔가 dotween으로 맛있는 거 만드는거는 나중에
         _rectTrm.anchoredPosition = Vector2.zero;
+        _inventoryRectTrm.anchoredPosition = Vector2.right * 960;
+        _inventory.OnPotUI(true);
         //gameObject.SetActive(true);
         PlayerManager.Instance.DisablePlayerMovementInput();
         PlayerManager.Instance.DisablePlayerInventoryInput();
@@ -27,6 +34,7 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
     {
         _rectTrm = transform as RectTransform;
         _rectTrm.anchoredPosition = Vector2.right * 3000;
+        _inventoryRectTrm = _inventory.transform as RectTransform;
         //gameObject.SetActive(false);
     }
 

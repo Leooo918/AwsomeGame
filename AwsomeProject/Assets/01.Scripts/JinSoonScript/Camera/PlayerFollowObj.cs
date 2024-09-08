@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerFollowObj : MonoBehaviour
 {
-    [SerializeField] private Transform toFollow;
+    private Transform toFollow;
     [SerializeField] private Vector2 offset;
 
     private void Awake()
@@ -12,7 +12,7 @@ public class PlayerFollowObj : MonoBehaviour
         toFollow = PlayerManager.Instance.PlayerTrm;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position = toFollow.position + (Vector3)offset;
     }

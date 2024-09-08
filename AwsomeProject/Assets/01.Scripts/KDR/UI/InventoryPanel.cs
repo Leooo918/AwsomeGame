@@ -18,7 +18,7 @@ namespace Doryu
     {
         [SerializeField] private MoveTweenData _closeData;
         [SerializeField] private MoveTweenData _openData;
-        [SerializeField] private BookMark _ingridientBookMark;
+        [SerializeField] private BookMark[] _bookMarks;
 
         private RectTransform _rectTrm;
         private Sequence _seq;
@@ -47,7 +47,20 @@ namespace Doryu
             _seq.Append(
                 _rectTrm.DOAnchorPos(_openData.pos, _openData.time)
                 .SetEase(_openData.curve));
-            _ingridientBookMark.Enable();
+            _bookMarks[1].Enable();
+            OnPotUI(false);
+        }
+
+        public void OnPotUI(bool on)
+        {
+            for (int i = 0; i < _bookMarks.Length; i++)
+            {
+                _bookMarks[i].gameObject.SetActive(i < 2 ? !on : on);
+            }
+            if (on)
+                _bookMarks[3].Enable();
+            else
+                _bookMarks[1].Enable();
         }
     }
 }
