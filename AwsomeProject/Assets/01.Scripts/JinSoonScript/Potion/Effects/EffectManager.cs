@@ -7,6 +7,7 @@ public enum EffectTypeEnum
 {
     Petrification,
     Growing,
+    Heal,
 }
 
 public static class EffectManager
@@ -18,7 +19,8 @@ public static class EffectManager
         _effectDictionary = new Dictionary<EffectTypeEnum, Func<Effect>>
         {
             { EffectTypeEnum.Petrification, () => new PetrificationEffect() },
-            { EffectTypeEnum.Growing, () => new GrowingEffect() }
+            { EffectTypeEnum.Growing, () => new GrowingEffect() },
+            { EffectTypeEnum.Heal, () => new HealEffect() }
         };
     }
 

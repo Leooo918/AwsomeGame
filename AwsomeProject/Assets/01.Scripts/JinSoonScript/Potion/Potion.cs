@@ -20,6 +20,7 @@ public abstract class Potion : MonoBehaviour
 {
     //public PotionItemSO potionItemSO;
     public List<Effect> effects;
+    public int level;
 
     public virtual void Init(QuickSlot slot)
     {
@@ -29,7 +30,7 @@ public abstract class Potion : MonoBehaviour
         for (int i = 0; i < potionInfos.Length; i++)
         {
             Effect effect = EffectManager.GetEffect(potionInfos[i].effectEnum);
-            effect.Initialize(this, potionInfos[i].level);
+            effect.Initialize(this, level);
             effects.Add(effect);
         }
         slot.TryUsePotion();

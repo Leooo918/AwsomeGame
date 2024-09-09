@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e430837ccdff34cadda906bb9a9b1b, type: 3}
   m_Name: HealPotion
   m_EditorClassIdentifier: 
-  image: {fileID: 1112867180, guid: b5cb77f47d103ba49abde37c7f8eae14, type: 3}
+  image: {fileID: -460685547, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   itemType: 2
   quickSlotOutLine: 0
   level: 0
-  itemName: "\uB514\uBC84\uD504\uAC10\uC18C\uD3EC\uC158"
+  itemName: "\uCE58\uB8CC\uD3EC\uC158"
   itemDescriptions:
-  - "\uB514\uBC84\uD504 \uC9C0\uC18D\uC2DC\uAC04 10% \uAC10\uC18C"
-  - "\uB514\uBC84\uD504 \uC9C0\uC18D\uC2DC\uAC04 25% \uAC10\uC18C + \uD6A8\uACFC
-    10%\uAC10\uC18C"
-  - "\uB514\uBC84\uD504 \uC9C0\uC18D\uC2DC\uAC04 20% \uAC10\uC18C + \uD6A8\uACFC
-    30%\uAC10\uC18C"
+  - " HP\uAC00 0.5\uCE78 \uD68C\uBCF5\uB41C\uB2E4."
+  - " HP\uAC00 2\uCE78 \uD68C\uBCF5\uB41C\uB2E4."
+  - " HP\uAC00 5\uCE78 \uD68C\uBCF5\uB41C\uB2E4. "
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 2
+      level: 0
+    - effectEnum: 2
+      level: 1
+    - effectEnum: 2
       level: 2

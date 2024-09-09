@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d3f3e564bed3c4099a6372e623ddd3, type: 3}
   m_Name: PoisonPotion
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
-  image: {fileID: 1317597711, guid: b5cb77f47d103ba49abde37c7f8eae14, type: 3}
+  image: {fileID: -114043941, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   itemType: 0
-  quickSlot: 0
+  quickSlotOutLine: 0
   level: 0
   itemName: "\uC911\uB3C5\uD3EC\uC158"
   itemDescriptions:
