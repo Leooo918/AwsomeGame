@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: Y_BounceMushroom
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: 681501887, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 1
+  itemType: 3
   itemName: "\uC5B4\uB9B0 \uD1B5\uD1B5 \uBC84\uC12F"
   itemDescription: "\uB05D\uBD80\uBD84\uC5D0\uC11C \uAC15\uD55C \uD0C4\uB825\uC744
     \uBC1C\uC0DD \uC2DC\uD0A4\uB294 \uBC84\uC12F\uC774\uB2E4.\n\uC131\uCCB4\uB294

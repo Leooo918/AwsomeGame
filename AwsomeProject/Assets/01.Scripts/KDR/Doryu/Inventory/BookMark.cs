@@ -31,9 +31,7 @@ public class BookMark : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("Awake" + name);
         image = GetComponent<Image>();
-        Debug.Log(image);
         _button = GetComponent<Button>();
 
         _button.onClick.AddListener(Enable);

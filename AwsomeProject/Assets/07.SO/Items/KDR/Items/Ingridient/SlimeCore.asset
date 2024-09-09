@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: SlimeCore
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: -562246357, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 8
+  itemType: 23
   itemName: "\uC2AC\uB77C\uC784 \uD575"
   itemDescription: "\uC2AC\uB77C\uC784\uC774 \uD769\uC5B4\uC9C0\uC9C0 \uC54A\uACE0
     \uBC84\uD2F8 \uC218 \uC788\uAC8C \uD574\uC8FC\uB294 \uC2AC\uB77C\uC784\uC758

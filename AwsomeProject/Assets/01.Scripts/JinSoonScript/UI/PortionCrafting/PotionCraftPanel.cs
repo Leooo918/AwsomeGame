@@ -8,12 +8,14 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
     private RectTransform _rectTrm;
     private RectTransform _inventoryRectTrm;
     [SerializeField] private InventoryPanel _inventory;
+    [SerializeField] private Pot _pot;
 
     public void Close() 
     {
         _rectTrm.anchoredPosition = Vector2.right * 3000;
         _inventoryRectTrm.anchoredPosition = Vector2.down * 1500;
         _inventory.OnPotUI(false);
+        _pot.ReturnItem(); 
         //gameObject.SetActive(false);
         PlayerManager.Instance.EnablePlayerMovementInput();
         PlayerManager.Instance.EnablePlayerInventoryInput();

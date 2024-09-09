@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 180, y: -11.7}
-  m_SizeDelta: {x: 500, y: 136.6}
+  m_AnchoredPosition: {x: 180, y: -54.5837}
+  m_SizeDelta: {x: 533.6555, y: 222.3674}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8042071762427835416
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\uC124\uBA85"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05822cc308094d54b80e7c45fa73577d, type: 2}
   m_sharedMaterial: {fileID: -1738628077365002146, guid: 05822cc308094d54b80e7c45fa73577d, type: 2}
@@ -260,7 +260,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -302, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6479010013652356648
 CanvasRenderer:
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1971321875, guid: b5cb77f47d103ba49abde37c7f8eae14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

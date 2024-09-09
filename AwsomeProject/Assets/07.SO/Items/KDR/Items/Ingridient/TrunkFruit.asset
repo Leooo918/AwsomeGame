@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: TrunkFruit
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: -766717039, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 2
+  itemType: 5
   itemName: "\uC904\uAE30\uC5F4\uB9E4"
   itemDescription: "\uC904\uAE30\uB85C \uB458\uB7EC\uC313\uC778 \uC5F4\uB9E4\uC774\uB2E4.\n\uC190\uC9C8\uD558\uAE30
     \uC0C1\uB2F9\uD788 \uADC0\uCC2E\uC9C0\uB9CC \uB9DB\uC740 \uC77C\uD488\uC774\uB2E4."

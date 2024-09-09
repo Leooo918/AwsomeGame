@@ -109,11 +109,11 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(item);
         }
-        else if (item.itemSO is ThrowPotionItemSO throwPotionSO)
+        else if (item.itemSO is ThrowPotionItemSO)
         {
             succes = throwPotionInventory.AddItem(item);
         }
-        else if (item.itemSO is DrinkPotionItemSO drinkPotionSO)
+        else if (item.itemSO is DrinkPotionItemSO)
         {
             succes = drinkPotionInventory.AddItem(item);
         }
