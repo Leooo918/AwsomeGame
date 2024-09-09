@@ -30,7 +30,6 @@ public class Item : MonoBehaviour
             _image.sprite = _itemSO.image;
         }
     }
-    public bool isFull => amount == itemSO.maxMergeAmount;
 
     public void TextUpdate()
     {

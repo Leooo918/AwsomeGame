@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: HornPigHorn
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: -527573849, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 4
+  itemType: 11
   itemName: "\uBFD4\uB3FC\uC9C0\uC758 \uBFD4"
   itemDescription: "\uBFD4\uB3FC\uC9C0\uC758 \uC774\uB984\uC774 \uC65C \uBFD4\uB3FC\uC9C0\uC778\uC9C0
     \uC54C\uAC8C\uD574\uC8FC\uB294 \uC6C5\uC7A5\uD55C \uBFD4\uC774\uB2E4."

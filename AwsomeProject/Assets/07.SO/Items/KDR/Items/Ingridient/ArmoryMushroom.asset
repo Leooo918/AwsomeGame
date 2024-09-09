@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: ArmoryMushroom
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: 304369086, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 3
+  itemType: 7
   itemName: "\uB531\uB531 \uBC84\uC12F"
   itemDescription: "\uC5C4\uCCAD\uC5C4\uCCAD \uB531\uB531\uD55C \uBC84\uC12F\uC774\uB2E4.\n\uADF8\uB0E5\uC740
     \uBABB\uBA39\uB2E4."

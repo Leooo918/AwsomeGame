@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Inventory inventory;
+
+    public int maxMergeAmount = 5;
+    public bool isFull => assignedItem.amount == maxMergeAmount;
 
     private Item _assignedItem;
     public Item assignedItem
@@ -34,8 +38,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-
-    public int maxMergeAmount => assignedItem.itemSO.maxMergeAmount;
     public bool isSelected;
 
     private GameObject _selectVolumObj;
@@ -66,12 +68,79 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if ((slot.assignedItem != null && inventory.CanEnterInven(slot.assignedItem.itemSO) == false) ||
             slot.inventory.CanEnterInven(assignedItem.itemSO) == false)
             return false;
-        Item temp = assignedItem;
-        assignedItem = slot.assignedItem;
-        slot.assignedItem = temp;
+
+        if (slot.assignedItem != null && assignedItem != null && slot.assignedItem.itemSO == assignedItem.itemSO)
+        {
+            slot.assignedItem.amount += assignedItem.amount;
+            if (slot.assignedItem.amount > slot.maxMergeAmount)
+            {
+                assignedItem.amount = slot.assignedItem.amount - slot.maxMergeAmount;
+                slot.assignedItem.amount = slot.maxMergeAmount;
+                assignedItem.SetSlot();
+            }
+            else
+            {
+                Destroy(assignedItem.gameObject);
+                SetItem(null);
+            }
+        }
+        else
+        {
+
+            Item temp = assignedItem;
+            assignedItem = slot.assignedItem;
+            slot.assignedItem = temp;
+
+            if (slot.assignedItem != null && slot.assignedItem.amount > slot.maxMergeAmount)
+            {
+                OverAmount(slot, this);
+            }
+            else if (assignedItem != null && assignedItem.amount > maxMergeAmount)
+            {
+                OverAmount(this, slot);
+            }
+        }
+
         slot.Save();
         Save();
         return true;
+    }
+
+    private void OverAmount(InventorySlot overedSlot, InventorySlot slot)
+    {
+        Item item = Instantiate(InventoryManager.Instance.itemPrefab);
+        item.Init();
+        item.itemSO = overedSlot.assignedItem.itemSO;
+        item.amount = overedSlot.assignedItem.amount - overedSlot.maxMergeAmount;
+        overedSlot.assignedItem.amount = overedSlot.maxMergeAmount;
+        if (slot.assignedItem == null)
+        {
+            slot.SetItem(item);
+        }
+        else if (slot.assignedItem.itemSO == overedSlot.assignedItem.itemSO)
+        {
+            slot.assignedItem.amount += item.amount;
+            if (slot.assignedItem.amount > slot.maxMergeAmount)
+            {
+                int remain = slot.assignedItem.amount - slot.maxMergeAmount;
+                slot.assignedItem.amount = slot.maxMergeAmount;
+                if (remain != 0)
+                {
+                    Item item2 = Instantiate(InventoryManager.Instance.itemPrefab);
+                    item2.Init();
+                    item2.itemSO = slot.assignedItem.itemSO;
+                    item2.amount = remain;
+                    if (slot.inventory.AddItem(item2) == false)
+                    {
+                        Destroy(item2.gameObject);
+                    }
+                }
+            }
+        }
+        else if (slot.inventory.AddItem(item) == false)
+        {
+            Destroy(item.gameObject);
+        }
     }
 
     public void SetItem(Item item)

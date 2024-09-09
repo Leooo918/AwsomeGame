@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21713af0404f59843974be9684bf98dc, type: 3}
   m_Name: StickyGrass
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
   image: {fileID: 875839285, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
-  itemType: 6
+  itemType: 17
   itemName: "\uC811\uCC29 \uAC00\uC9C0"
   itemDescription: "\uD55C\uBC88 \uB2FF\uB294\uC21C\uAC04 \uC27D\uAC8C \uB5A8\uC5B4\uC9C0\uC9C0\uC54A\uB294
     \uB048\uB048\uC774\uB97C \uB0B4\uBFDC\uB294\uB2E4.\n\uB9CC\uC9C0\uAE30 \uC2EB\uB2E4."

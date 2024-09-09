@@ -5,16 +5,16 @@ using UnityEngine;
 
 public enum IngredientItemType
 {
-    RedMushroom,
-    Y_BounceMushroom,
-    TrunkFruit,
-    ArmoryMushroom,
-    HornPigHorn,
-    SpikeMushroom,
-    StickyGrass,
-    ShinyFruit,
-    SlimeCore,
-    YoungBirldWing,
+    RedMushroom = 2,
+    Y_BounceMushroom = 3,
+    TrunkFruit = 5,
+    ArmoryMushroom = 7,
+    HornPigHorn = 11,
+    SpikeMushroom = 13,
+    StickyGrass = 17,
+    ShinyFruit = 19,
+    SlimeCore = 23,
+    YoungBirldWing = 29,
 }
 
 [CreateAssetMenu(menuName = "SO/Doryu/Item/IngredientItem")]

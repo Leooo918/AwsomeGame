@@ -22,11 +22,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemDescriptionArea _description;
     [SerializeField] private Vector2Int _inventorySize;
     [SerializeField] private Transform _slotParent;
+    [SerializeField] private bool _isSlotInstantiate = true;
 
     public InventoryUseItemData useItemData;
     public Action<InventorySlot[,]> OnInventoryModified;
     public Transform itemStorage;
-
+    
     [ContextMenu("ResetSaveData")]
     public void ResetSaveData()
     {
@@ -65,12 +66,21 @@ public class Inventory : MonoBehaviour
 
     public void Init()
     {
+        int idx = 0;
         slots = new InventorySlot[_inventorySize.x, _inventorySize.y];
         for (int y = 0; y < _inventorySize.y; y++)
         {
             for (int x = 0; x < _inventorySize.x; x++)
             {
-                InventorySlot slot = Instantiate(InventoryManager.Instance.slotPrefab, _slotParent);
+                InventorySlot slot;
+                if (_isSlotInstantiate == false)
+                {
+                    slot = transform.GetChild(idx++).GetComponent<InventorySlot>();
+                }
+                else
+                {
+                    slot = Instantiate(InventoryManager.Instance.slotPrefab, _slotParent);
+                }
                 slot.Init(this);
                 slots[x, y] = slot;
             }
@@ -91,9 +101,9 @@ public class Inventory : MonoBehaviour
                 Item slotItem = slots[x, y].assignedItem;
                 if (slotItem != null &&
                     slotItem.itemSO == item.itemSO &&
-                    slotItem.isFull == false)
+                    slots[x, y].isFull == false)
                 {
-                    if (slotItem.itemSO is PotionItemSO potion && potion.level == (item.itemSO as PotionItemSO).level)
+                    if (slotItem.itemSO is PotionItemSO potion && potion.level != (item.itemSO as PotionItemSO).level)
                     {
                         continue;
                     }
@@ -124,12 +134,12 @@ public class Inventory : MonoBehaviour
                     Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                     newItem.Init();
                     newItem.itemSO = item.itemSO;
-                    if (item.amount > item.itemSO.maxMergeAmount)
+                    if (item.amount > slots[x, y].maxMergeAmount)
                     {
-                        newItem.amount = item.itemSO.maxMergeAmount;
+                        newItem.amount = slots[x, y].maxMergeAmount;
                         slots[x, y].SetItem(newItem);
 
-                        item.amount -= item.itemSO.maxMergeAmount;
+                        item.amount -= slots[x, y].maxMergeAmount;
                         AddItem(item);
                     }
                     else
@@ -154,7 +164,7 @@ public class Inventory : MonoBehaviour
             {
                 if (slots[x, y].assignedItem != null &&
                     slots[x, y].assignedItem.itemSO == itemSO &&
-                    slots[x, y].assignedItem.isFull == false)
+                    slots[x, y].isFull == false)
                 {
                     int remain = slots[x, y].AddAmount(amount);
                     if (remain != 0)
@@ -177,12 +187,12 @@ public class Inventory : MonoBehaviour
                     Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                     newItem.Init();
                     newItem.itemSO = itemSO;
-                    if (amount > itemSO.maxMergeAmount)
+                    if (amount > slots[x, y].maxMergeAmount)
                     {
-                        newItem.amount = itemSO.maxMergeAmount;
+                        newItem.amount = slots[x, y].maxMergeAmount;
                         slots[x, y].SetItem(newItem);
 
-                        amount -= itemSO.maxMergeAmount;
+                        amount -= slots[x, y].maxMergeAmount;
                         AddItem(itemSO, amount);
                     }
                     else
@@ -280,7 +290,7 @@ public class Inventory : MonoBehaviour
     
     public void SetSelected(InventorySlot slot)
     {
-        _description.SetExplain(slot);
+        _description?.SetExplain(slot);
     }
 }
 

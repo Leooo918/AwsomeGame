@@ -6,9 +6,6 @@ using UnityEngine;
 
 public abstract class ItemSO : ScriptableObject
 {
-    [Header("ItemData")]
-    public int maxMergeAmount = 5;
-
     public abstract string GetItemName();
     public abstract string GetItemDescription();
     public abstract int GetItemTypeNumber();

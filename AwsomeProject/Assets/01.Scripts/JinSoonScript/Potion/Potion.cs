@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PotionTypeEnum
+public enum PotionType
 {
-    Drink,
-    Throw
+    Drink = 31,
+    Throw = 37
 }
 
 [Serializable]
