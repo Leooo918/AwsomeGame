@@ -21,6 +21,9 @@ public class PlayerIdleState : PlayerGroundState
 
         float xInput = player.PlayerInput.XInput;
 
+        if(!player.IsGroundDetected())
+            stateMachine.ChangeState(PlayerStateEnum.Fall);
+
         if (player.canClimb && player.PlayerInput.YInput != 0)
             stateMachine.ChangeState(PlayerStateEnum.Climb);
 

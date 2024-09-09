@@ -56,7 +56,7 @@ public class PlayerAirState : PlayerState
 
         if (Mathf.Abs(player.FacingDir + xInput) > 1.5f && player.IsWallDetected()) return;
 
-        player.MovementCompo.SetVelocity(new Vector2(player.MoveSpeed * xInput, rigidbody.velocity.y));
+        player.MovementCompo.SetVelocity(new Vector2(player.MoveSpeed * xInput, player.MovementCompo.RigidbodyCompo.velocity.y));
     }
 
     private void HandleJumpEvent()

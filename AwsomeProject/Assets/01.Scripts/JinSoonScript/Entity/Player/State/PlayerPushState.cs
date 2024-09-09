@@ -43,7 +43,7 @@ public class PlayerPushState : PlayerState
     {
         float xInput = player.PlayerInput.XInput;
         _pushObjectRigid.velocity = new Vector2(xInput * 4, _pushObjectRigid.velocity.y);
-        player.MovementCompo.SetVelocity(new Vector2(xInput * 4, rigidbody.velocity.y), true);
+        player.MovementCompo.SetVelocity(new Vector2(xInput * 4, player.MovementCompo.RigidbodyCompo.velocity.y), true);
         player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(xInput));
     }
 }

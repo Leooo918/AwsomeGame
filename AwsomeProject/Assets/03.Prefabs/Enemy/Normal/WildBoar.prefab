@@ -585,6 +585,7 @@ GameObject:
   - component: {fileID: 3315452949548677443}
   - component: {fileID: 2827107475105066123}
   - component: {fileID: 2562549265638240618}
+  - component: {fileID: -4858456381422031983}
   m_Layer: 8
   m_Name: WildBoar
   m_TagString: Untagged
@@ -782,6 +783,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkPlayer: {fileID: 3158436741436910668}
+--- !u!114 &-4858456381422031983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036357366582687555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1c2a84106e6324bbfbd6499a9e2cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6197090011573483309
 GameObject:
   m_ObjectHideFlags: 0

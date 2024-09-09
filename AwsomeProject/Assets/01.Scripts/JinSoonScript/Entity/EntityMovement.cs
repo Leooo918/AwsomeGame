@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class EntityMovement : MonoBehaviour
+public class EntityMovement : MonoBehaviour
 {
     protected Entity _owner;
     public Rigidbody2D RigidbodyCompo { get; protected set; }
@@ -16,7 +17,7 @@ public abstract class EntityMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        RigidbodyCompo.velocity = _velocity;
+        RigidbodyCompo.velocity = new Vector2(_velocity.x,RigidbodyCompo.velocity.y);
     }
 
     public virtual void SetVelocity(Vector2 velocity, bool doNotFlip = false)

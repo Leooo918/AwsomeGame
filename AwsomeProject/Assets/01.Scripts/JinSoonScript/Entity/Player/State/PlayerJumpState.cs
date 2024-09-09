@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerAirState
 
         float xInput = player.PlayerInput.XInput;
 
-        player.MovementCompo.SetVelocity(new Vector2(xInput, player.JumpForce));
+        player.MovementCompo.RigidbodyCompo.AddForce(new Vector2(xInput, player.JumpForce), ForceMode2D.Impulse);
     }
 
 
@@ -23,7 +23,7 @@ public class PlayerJumpState : PlayerAirState
         //float _dashDir = _player.PlayerInput.XInput;
         //_player.MovementCompo.SetVelocity(_dashDir * _player.MoveSpeed, _rigidbody.velocity.y);
 
-        if (player.rigidbodyCompo.velocity.y <= 0)
+        if (player.MovementCompo.RigidbodyCompo.velocity.y <= 0)
             player.StateMachine.ChangeState(PlayerStateEnum.Fall);
     }
 }
