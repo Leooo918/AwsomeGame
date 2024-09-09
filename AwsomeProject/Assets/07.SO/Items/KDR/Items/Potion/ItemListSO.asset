@@ -26,5 +26,6 @@ MonoBehaviour:
   throwPotionItemSOList:
   - {fileID: 11400000, guid: 1a0dc08ae4d22464082a9435b1395080, type: 2}
   - {fileID: 11400000, guid: 7803ab030a2e6d54f8aa693b32c2c2b2, type: 2}
+  - {fileID: 11400000, guid: fb645d0ac0a456d4ca475db4b276c557, type: 2}
   drinkPotionItemSOList:
   - {fileID: 11400000, guid: 0c23d74c1621dc54eb7f7a5c113dde4c, type: 2}
