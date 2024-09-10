@@ -26,8 +26,8 @@ MonoBehaviour:
   - infos:
     - effectEnum: 1
       level: 1
-  maxDetactEntity: 1
+  maxDetactEntity: 2
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 459008
-  range: 5
+  range: 8

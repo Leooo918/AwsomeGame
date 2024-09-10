@@ -16,6 +16,10 @@ public class GrowingEffect : Effect
             {
                 target.ApplyEffect();
             }
+            else if(target is BlockVine)
+            {
+                target.ApplyEffect();
+            }
         }
     }
 }

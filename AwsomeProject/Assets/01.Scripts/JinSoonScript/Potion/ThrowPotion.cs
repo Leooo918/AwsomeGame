@@ -35,9 +35,9 @@ public class ThrowPotion : Potion
         List<IAffectable> list = new List<IAffectable>();
         if(count > 0)
         {
-            foreach(Collider2D coll in _colliders)
+            for (int i = 0; i < count; i++)
             {
-                if(coll.TryGetComponent(out IAffectable entity))
+                if (_colliders[i].TryGetComponent(out IAffectable entity))
                 {
                     list.Add(entity);
                     
