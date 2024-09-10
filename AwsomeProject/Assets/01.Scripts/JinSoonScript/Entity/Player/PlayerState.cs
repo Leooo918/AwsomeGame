@@ -6,7 +6,6 @@ public class PlayerState
 {
     protected PlayerStateMachine stateMachine;
     protected Player player;
-    protected Rigidbody2D rigidbody;
 
     protected int _animBoolHash;
     protected readonly int _yVelocityHash = Animator.StringToHash("y_velocity");
@@ -17,7 +16,6 @@ public class PlayerState
         this.player = player;
         this.stateMachine = stateMachine;
         _animBoolHash = Animator.StringToHash(animBoolName);
-        rigidbody = this.player.rigidbodyCompo;
     }
 
     //상태에 진입했을 때 실행할 함수

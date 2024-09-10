@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerMoveState : PlayerGroundState
 {
@@ -11,7 +10,7 @@ public class PlayerMoveState : PlayerGroundState
     {
         base.UpdateState();
         float xInput = player.PlayerInput.XInput;
-        player.MovementCompo.SetVelocity(new Vector2(xInput * player.MoveSpeed, rigidbody.velocity.y));
+        player.MovementCompo.SetVelocity(new Vector2(xInput * player.MoveSpeed, player.MovementCompo.RigidbodyCompo.velocity.y));
 
         if (Mathf.Abs(xInput) < 0.05f || player.IsWallDetected())
         {

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public enum StatusEffectEnum
 {
-    PoorRecovery,
-    IncreaseKnockback,
-    Poison,
-    Petrification,
-    NatureSync,
-    Strength
+    PoorRecovery = 1,
+    IncreaseKnockback = 2,
+    Poison = 4,
+    Petrification = 8,
+    NatureSync = 16,
+    Strength = 32
 }
 
 public enum StatusEffectType

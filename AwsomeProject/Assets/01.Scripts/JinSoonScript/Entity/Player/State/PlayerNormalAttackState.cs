@@ -27,7 +27,7 @@ public class PlayerNormalAttackState : PlayerState
 
         playerAttack.SetCurrentAttackInfo(attackInfo);
 
-        player.MovementCompo.StopImmediately(false);
+        player.MovementCompo.StopImmediately();
 
         //애니메이션 실행 콤보카운터로 그리고 +1 근데 2이상이면 다시 0으로
         player.animatorCompo.SetInteger(comboCounterHash, player.ComboCounter++);
