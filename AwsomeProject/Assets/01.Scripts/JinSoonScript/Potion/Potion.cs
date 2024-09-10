@@ -26,7 +26,7 @@ public abstract class Potion : MonoBehaviour
     {
         //this.potionItemSO = potionItemSO;
         effects = new List<Effect>();
-        PotionInfo[] potionInfos = (slot.assignedItem.itemSO as PotionItemSO).GetItemInfo();
+        PotionInfo[] potionInfos = (slot.assignedItem.itemSO as PotionItemSO).GetItemInfo(slot.assignedItem.level);
         for (int i = 0; i < potionInfos.Length; i++)
         {
             Effect effect = EffectManager.GetEffect(potionInfos[i].effectEnum);

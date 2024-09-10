@@ -38,21 +38,20 @@ public class PotionItemSO : ItemSO
     public PotionItemType itemType;
     public QuickSlotOutLine quickSlotOutLine;
     public string itemName;
-    public int level = 0;
     [TextArea(3, 20)]
     public string[] itemDescriptions;
     public PotionInfos[] potionInfos;
      
-    public PotionInfo[] GetItemInfo()
+    public PotionInfo[] GetItemInfo(int level = 0)
     {
         return potionInfos[level].infos;
     }
-    public override string GetItemDescription()
+    public override string GetItemDescription(int level = 0)
     {
         return itemDescriptions[level];
-    }
+    } 
 
-    public override string GetItemName()
+    public override string GetItemName(int level = 0)
     {
         if (level != 0)
         {

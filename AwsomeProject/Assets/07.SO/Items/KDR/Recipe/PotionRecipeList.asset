@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PotionRecipeList
   m_EditorClassIdentifier: 
   potionRecipes:
+  - {fileID: 11400000, guid: 6f9bb5c536c2fc346a40add4d40c833f, type: 2}
   - {fileID: 11400000, guid: f2fc3683c7d3e684189ee69f26f25a67, type: 2}
-  - {fileID: 11400000, guid: 2ac2081c24cb94f4191260767510d5fc, type: 2}
   - {fileID: 11400000, guid: 4e7fd63cf45b0b249a85ec1beba72ad1, type: 2}
+  - {fileID: 11400000, guid: 2ac2081c24cb94f4191260767510d5fc, type: 2}

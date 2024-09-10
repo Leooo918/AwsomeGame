@@ -12,6 +12,8 @@ public class HpBar : MonoBehaviour
     private void Start()
     {
         _playerHealth = PlayerManager.Instance.Player.healthCompo;
+        _playerHealth.OnHit += TakeDamage;
+        _playerHealth.OnHeal += TakeHeal;
     }
 
     public void TakeDamage()
@@ -25,6 +27,24 @@ public class HpBar : MonoBehaviour
                 for (int j = 0; j < healthTmp - _currentHealth; j++)
                 {
                     hpBottles[i].HpDown();
+                    if(hpBottles[i].IsBottleEmpty) i--;
+                }
+                break;
+            }
+        }
+    }
+    
+    public void TakeHeal()
+    {
+        int healthTmp = _currentHealth;
+        _currentHealth = (int)_playerHealth.curHp;
+        for (int i = 0; i < hpBottles.Length - 1; i++)
+        {
+            if (hpBottles[i].IsBottleEmpty == false)
+            {
+                for (int j = 0; j < _currentHealth - healthTmp; j++)
+                {
+                    hpBottles[i].HpUp();
                     if(hpBottles[i].IsBottleEmpty) i--;
                 }
                 break;

@@ -69,7 +69,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             slot.inventory.CanEnterInven(assignedItem.itemSO) == false)
             return false;
 
-        if (slot.assignedItem != null && assignedItem != null && slot.assignedItem.itemSO == assignedItem.itemSO)
+        if (slot.assignedItem != null && assignedItem != null && 
+            slot.assignedItem.itemSO == assignedItem.itemSO &&
+            slot.assignedItem.level == assignedItem.level)
         {
             slot.assignedItem.amount += assignedItem.amount;
             if (slot.assignedItem.amount > slot.maxMergeAmount)

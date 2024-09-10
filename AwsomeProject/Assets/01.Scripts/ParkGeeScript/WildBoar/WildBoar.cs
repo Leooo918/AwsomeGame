@@ -51,16 +51,16 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     private void OnEnable()
     {
-        healthCompo.onKnockBack += KnockBack;
-        healthCompo.onHit += OnHit;
-        healthCompo.onDie += OnDie;
+        healthCompo.OnKnockBack += KnockBack;
+        healthCompo.OnHit += OnHit;
+        healthCompo.OnDie += OnDie;
     }
 
     private void OnDisable()
     {
-        healthCompo.onKnockBack -= KnockBack;
-        healthCompo.onHit -= OnHit;
-        healthCompo.onDie -= OnDie;
+        healthCompo.OnKnockBack -= KnockBack;
+        healthCompo.OnHit -= OnHit;
+        healthCompo.OnDie -= OnDie;
     }
 
     private void Start()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 6
+    baseValue: 10
     modifiers: []
     percentModifiers: []
   armor:

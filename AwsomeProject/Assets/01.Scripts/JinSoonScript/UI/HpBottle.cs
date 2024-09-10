@@ -53,6 +53,35 @@ public class HpBottle : MonoBehaviour
             isBottleEmpty = true;
         }
     }
+    public void HpUp()
+    {
+        if (isBottleFull == true) return;
+
+        if (isBottleEmpty)
+        {
+            if(seq != null && seq.active)
+                seq.Complete();
+
+            seq = DOTween.Sequence();
+
+            seq.Append(DOTween.To(() => 0, x => fill.fillAmount = x, 0.5f, 0.1f))
+                .Join(imageRect.DOAnchorPosY(15f, 0.05f))
+                .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
+            isBottleEmpty = false;
+        }
+        else
+        {
+            if (seq != null && seq.active)
+                seq.Kill();
+
+            seq = DOTween.Sequence();
+
+            seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 1f, 0.1f))
+                .Join(imageRect.DOAnchorPosY(15f, 0.05f))
+                .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
+            isBottleFull = true;
+        }
+    }
 
     public void SetAsHalfHp()
     {

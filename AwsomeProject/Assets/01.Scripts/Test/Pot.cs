@@ -46,6 +46,7 @@ public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPo
         {
             _slots[i].ReturnItem();
         }
+        _slots[0].inventorySlot.Save();
     }
     public void ClearItem()
     {
@@ -53,6 +54,7 @@ public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPo
         {
             _slots[i].ClearItem();
         }
+        _slots[0].inventorySlot.Save();
     }
 
     private void CraftPotion()
@@ -66,11 +68,26 @@ public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPo
         item.itemSO = potionSO;
         item.amount = 1;
 
+        int sameItemCount = 0;
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            Item item1 = _slots[i].assignedItem;
+            Item item2 = _slots[(i + 1) % _slots.Length].assignedItem;
+
+            if (item1 == null || item2 == null) continue;
+
+            if (item1.itemSO == item2.itemSO)
+            {
+                sameItemCount++;
+            }
+        }
+        item.level = sameItemCount == 3 ? 2 : sameItemCount;
+
         bool succes = InventoryManager.Instance.TryAddItem(item);
         if (succes)
         {
             ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
-            gather.Init(item.itemSO);
+            gather.Init(item.itemSO, item.level);
             gather.Open();
 
             ClearItem();

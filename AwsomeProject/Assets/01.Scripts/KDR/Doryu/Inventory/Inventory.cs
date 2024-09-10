@@ -5,6 +5,7 @@ using UnityEngine;
 using Doryu.JBSave;
 using System;
 using UnityEditorInternal.Profiling.Memory.Experimental;
+using static Cinemachine.DocumentationSortingAttribute;
 
 [Serializable]
 public struct InventoryUseItemData
@@ -101,12 +102,9 @@ public class Inventory : MonoBehaviour
                 Item slotItem = slots[x, y].assignedItem;
                 if (slotItem != null &&
                     slotItem.itemSO == item.itemSO &&
-                    slots[x, y].isFull == false)
+                    slots[x, y].isFull == false &&
+                    slotItem.level == item.level)
                 {
-                    if (slotItem.itemSO is PotionItemSO potion && potion.level != (item.itemSO as PotionItemSO).level)
-                    {
-                        continue;
-                    }
                     int remain = slots[x, y].AddAmount(item.amount);
                     if (remain != 0)
                     {
@@ -134,6 +132,7 @@ public class Inventory : MonoBehaviour
                     Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                     newItem.Init();
                     newItem.itemSO = item.itemSO;
+                    newItem.level = item.level;
                     if (item.amount > slots[x, y].maxMergeAmount)
                     {
                         newItem.amount = slots[x, y].maxMergeAmount;
@@ -155,7 +154,7 @@ public class Inventory : MonoBehaviour
         Debug.Log("아이템 인벤이 가득 찼습니다.");
         return false;
     }
-    public bool AddItem(ItemSO itemSO, int amount)
+    public bool AddItem(ItemSO itemSO, int amount, int level)
     {
         //이미 있는 아이템에 더하기
         for (int y = 0; y < _inventorySize.y; y++)
@@ -164,12 +163,13 @@ public class Inventory : MonoBehaviour
             {
                 if (slots[x, y].assignedItem != null &&
                     slots[x, y].assignedItem.itemSO == itemSO &&
-                    slots[x, y].isFull == false)
+                    slots[x, y].isFull == false &&
+                    slots[x, y].assignedItem.level == level)
                 {
                     int remain = slots[x, y].AddAmount(amount);
                     if (remain != 0)
                     {
-                        AddItem(itemSO, remain);
+                        AddItem(itemSO, remain, level);
                     }
                     Save();
                     return true;
@@ -187,13 +187,14 @@ public class Inventory : MonoBehaviour
                     Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
                     newItem.Init();
                     newItem.itemSO = itemSO;
+                    newItem.level = level;
                     if (amount > slots[x, y].maxMergeAmount)
                     {
                         newItem.amount = slots[x, y].maxMergeAmount;
                         slots[x, y].SetItem(newItem);
 
                         amount -= slots[x, y].maxMergeAmount;
-                        AddItem(itemSO, amount);
+                        AddItem(itemSO, amount, level);
                     }
                     else
                     {
@@ -221,10 +222,14 @@ public class Inventory : MonoBehaviour
                     newSlotSaveStruct.itemNameInt = slots[x, y].assignedItem.itemSO.GetItemTypeNumber();
                     if (slots[x, y].assignedItem.itemSO is IngredientItemSO)
                         newSlotSaveStruct.itemType =  ItemType.Ingredient;
-                    else if(slots[x, y].assignedItem.itemSO is ThrowPotionItemSO)
-                        newSlotSaveStruct.itemType =  ItemType.ThrowPotion;
-                    else
-                        newSlotSaveStruct.itemType =  ItemType.DrinkPotion;
+                    else if (slots[x, y].assignedItem.itemSO is PotionItemSO potionSO)
+                    {
+                        newSlotSaveStruct.level = slots[x, y].assignedItem.level;
+                        if (potionSO is ThrowPotionItemSO)
+                            newSlotSaveStruct.itemType = ItemType.ThrowPotion;
+                        else
+                            newSlotSaveStruct.itemType = ItemType.DrinkPotion;
+                    }
                     newSlotSaveStruct.amount = slots[x, y].assignedItemAmount;
                 }
                 else
@@ -273,6 +278,7 @@ public class Inventory : MonoBehaviour
                             break;
                     }
                     item.amount = slotSave.amount;
+                    item.level = slotSave.level;
                     slot.SetItem(item);
                 }
                 else if (slot.assignedItem != null)
@@ -307,6 +313,7 @@ public class SlotSave
     public Vector2Int pos;
     public int itemNameInt = -1;
     public ItemType itemType;
+    public int level;
     public int amount;
 }
 

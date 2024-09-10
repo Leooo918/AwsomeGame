@@ -11,7 +11,23 @@ public class Health : MonoBehaviour, IDamageable
 
     public Stat maxHp { get; private set; }
     public float weight { get; private set; }
-    public float curHp { get; private set; }
+    private float _curHp;
+    public float curHp 
+    { 
+        get => _curHp; 
+        private set
+        {
+            if (_curHp < value)
+            {
+                OnHeal?.Invoke();
+            }
+            else
+            {
+                OnHit?.Invoke();
+            }
+            _curHp = value;
+        }
+    }
 
     public HitData hitData { get; private set; }
 
@@ -25,10 +41,11 @@ public class Health : MonoBehaviour, IDamageable
     //효과, 지속시간, 시작된 시간
     //protected List<Tuple<Effect, float, float>> effects = new List<Tuple<Effect, float, float>>();
 
-    public Action onHit;
-    public Action onCrit;
-    public Action<Vector2> onKnockBack;
-    public Action<Vector2> onDie;
+    public Action OnHit;
+    public Action OnHeal;
+    public Action OnCrit;
+    public Action<Vector2> OnKnockBack;
+    public Action<Vector2> OnDie;
 
 
     private void Awake()
@@ -67,7 +84,7 @@ public class Health : MonoBehaviour, IDamageable
 
             if (isCrit)
             {
-                onCrit?.Invoke();
+                OnCrit?.Invoke();
                 damage = (int)(damage * (dealer.Stat.criticalDamage.GetValue() / 100));
             }
             hitData.isLastAttackCritical = isCrit;
@@ -91,11 +108,10 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (withFeedBack)
         {
-            onHit?.Invoke();
-            onKnockBack?.Invoke(knockPower);
+            OnKnockBack?.Invoke(knockPower);
         }
         if (curHp <= 0)
-            onDie?.Invoke(knockPower);
+            OnDie?.Invoke(knockPower);
     }
 
     public void GetHeal(int amount)

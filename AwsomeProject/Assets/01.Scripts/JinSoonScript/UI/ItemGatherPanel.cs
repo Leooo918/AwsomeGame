@@ -58,11 +58,11 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
         _bgGroup.blocksRaycasts = true;
     }
 
-    public void Init(ItemSO item)
+    public void Init(ItemSO item, int level = 0)
     {
         _item = item;
-        _nameTxt.SetText(_item.GetItemName());
-        _explainTxt.SetText(_item.GetItemDescription());
+        _nameTxt.SetText(_item.GetItemName(level));
+        _explainTxt.SetText(_item.GetItemDescription(level));
         _itemImage.sprite = _item.image;
     }
 

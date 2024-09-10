@@ -29,3 +29,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fb645d0ac0a456d4ca475db4b276c557, type: 2}
   drinkPotionItemSOList:
   - {fileID: 11400000, guid: 0c23d74c1621dc54eb7f7a5c113dde4c, type: 2}
+  - {fileID: 11400000, guid: 63ace231151924e46b27366bdd0945e6, type: 2}

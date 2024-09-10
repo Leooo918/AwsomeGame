@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0270c11c4c3874fa7a049ae95a49d9, type: 3}
   m_Name: PoisonPotion_Throw
   m_EditorClassIdentifier: 
-  needIngredients: 0700000007000000
+  needIngredients: 070000000700000007000000
   potionType: 37
   needIngredientValue: 1813
   potion: {fileID: 11400000, guid: 7803ab030a2e6d54f8aa693b32c2c2b2, type: 2}

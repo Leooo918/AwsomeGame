@@ -159,18 +159,18 @@ public class Player : Entity
     {
         _inputReader.PressTabEvent += InventoryOpen;
         _inputReader.OpenOptionEvent += OpenOption;
-        healthCompo.onKnockBack += KnockBack;
-        healthCompo.onDie += OnDie;
-        healthCompo.onHit += OnHit;
+        healthCompo.OnKnockBack += KnockBack;
+        healthCompo.OnDie += OnDie;
+        healthCompo.OnHit += OnHit;
     }
 
     private void OnDisable()
     {
         _inputReader.PressTabEvent -= InventoryOpen;
         _inputReader.OpenOptionEvent -= OpenOption;
-        healthCompo.onKnockBack -= KnockBack;
-        healthCompo.onDie -= OnDie;
-        healthCompo.onHit -= OnHit;
+        healthCompo.OnKnockBack -= KnockBack;
+        healthCompo.OnDie -= OnDie;
+        healthCompo.OnHit -= OnHit;
     }
 
     protected void Start()

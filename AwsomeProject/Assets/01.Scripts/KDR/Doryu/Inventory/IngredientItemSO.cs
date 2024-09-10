@@ -28,12 +28,12 @@ public class IngredientItemSO : ItemSO
     public string itemDescription;
     public float gatheringTime;
 
-    public override string GetItemDescription()
+    public override string GetItemDescription(int level = 0)
     {
         return itemDescription;
     }
 
-    public override string GetItemName()
+    public override string GetItemName(int level = 0)
     {
         return itemName;
     }

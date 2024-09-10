@@ -58,14 +58,14 @@ public class AirBird : Enemy<AirBirdEnum>
 
     private void OnEnable()
     {
-        healthCompo.onHit += OnHit;
-        healthCompo.onDie += OnDie;
+        healthCompo.OnHit += OnHit;
+        healthCompo.OnDie += OnDie;
     }
 
     private void OnDisable()
     {
-        healthCompo.onHit -= OnHit;
-        healthCompo.onDie -= OnDie;
+        healthCompo.OnHit -= OnHit;
+        healthCompo.OnDie -= OnDie;
     }
 
     private void Start()

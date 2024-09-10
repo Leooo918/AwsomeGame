@@ -119,20 +119,20 @@ public class InventoryManager : MonoBehaviour
         }
         return succes;
     }
-    public bool TryAddItem(ItemSO itemSO, int amount = 1)
+    public bool TryAddItem(ItemSO itemSO, int amount = 1, int level = 0)
     {
         bool succes = false;
         if (itemSO is IngredientItemSO)
         {
-            succes = ingredientInventory.AddItem(itemSO, amount);
+            succes = ingredientInventory.AddItem(itemSO, amount, level);
         }
         else if (itemSO is ThrowPotionItemSO throwPotionSO)
         {
-            succes = throwPotionInventory.AddItem(itemSO, amount);
+            succes = throwPotionInventory.AddItem(itemSO, amount, level);
         }
         else if (itemSO is DrinkPotionItemSO drinkPotionSO)
         {
-            succes = drinkPotionInventory.AddItem(itemSO, amount);
+            succes = drinkPotionInventory.AddItem(itemSO, amount, level);
         }
         return succes;
     }

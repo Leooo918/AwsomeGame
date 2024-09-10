@@ -73,15 +73,15 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
 
     private void OnEnable()
     {
-        healthCompo.onKnockBack += KnockBack;
-        healthCompo.onHit += OnHit;
-        healthCompo.onDie += OnDie;
+        healthCompo.OnKnockBack += KnockBack;
+        healthCompo.OnHit += OnHit;
+        healthCompo.OnDie += OnDie;
     }
     private void OnDisable()
     {
-        healthCompo.onKnockBack -= KnockBack;
-        healthCompo.onHit -= OnHit;
-        healthCompo.onDie -= OnDie;
+        healthCompo.OnKnockBack -= KnockBack;
+        healthCompo.OnHit -= OnHit;
+        healthCompo.OnDie -= OnDie;
     }
 
     protected void Start()
@@ -248,12 +248,12 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
     {
         StartCoroutine(EnableBossRoutine());
         _bossHpBar.SetOwner(healthCompo);
-        healthCompo.onHit += _bossHpBar.SetEnemyHealth;
+        healthCompo.OnHit += _bossHpBar.SetEnemyHealth;
     }
 
     public void EndBoss()
     {
-        healthCompo.onHit -= _bossHpBar.SetEnemyHealth;
+        healthCompo.OnHit -= _bossHpBar.SetEnemyHealth;
     }
 
 

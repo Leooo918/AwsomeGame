@@ -31,6 +31,8 @@ public class Item : MonoBehaviour
         }
     }
 
+    [HideInInspector] public int level;
+
     public void TextUpdate()
     {
         _text.SetText("x" + amount.ToString());
