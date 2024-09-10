@@ -11,9 +11,9 @@ public class HealEffect : Effect
     {
         foreach (var target in _affectedTargets)
         {
-            if (target is Player player)
+            if (target is Entity entity)
             {
-                player.healthCompo.GetHeal(heal[_level]);
+                entity.healthCompo.GetHeal(heal[_level]);
                 target.ApplyEffect();
             }
         }

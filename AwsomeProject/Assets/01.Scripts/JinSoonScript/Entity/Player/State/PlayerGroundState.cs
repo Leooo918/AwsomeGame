@@ -29,7 +29,7 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.JumpEvent += HandleJumpEvent;
         player.PlayerInput.DashEvent += HandleDashEvent;
         player.PlayerInput.AttackEvent += HandleAttackEvent;
-        player.PlayerInput.OnTryUseQuickSlot += HandleThrowEvent;
+        player.PlayerInput.OnTryUseQuickSlot += HandleTryUseQuickSlotEvent;
         player.PlayerInput.InteractPress += HandleInteractEvent;
         player.PlayerInput.OnYInputEvent += HandleYInputEvent;
     }
@@ -52,7 +52,7 @@ public class PlayerGroundState : PlayerState
         player.PlayerInput.JumpEvent -= HandleJumpEvent;
         player.PlayerInput.DashEvent -= HandleDashEvent;
         player.PlayerInput.AttackEvent -= HandleAttackEvent;
-        player.PlayerInput.OnTryUseQuickSlot -= HandleThrowEvent;
+        player.PlayerInput.OnTryUseQuickSlot -= HandleTryUseQuickSlotEvent;
         player.PlayerInput.InteractPress -= HandleInteractEvent;
         player.PlayerInput.OnYInputEvent -= HandleYInputEvent;
         base.Exit();
@@ -105,11 +105,21 @@ public class PlayerGroundState : PlayerState
         normalAttackSkill.UseSkill();
     }
 
-    private void HandleThrowEvent()
+    private void HandleTryUseQuickSlotEvent()
     {
         QuickSlot slot = QuickSlotManager.Instance.GetSelectedPotionSlot();
-        if (slot == null || slot.assignedItem == null || slot.assignedItem.itemSO is DrinkPotionItemSO) return;
-        stateMachine.ChangeState(PlayerStateEnum.Throw);
+        if (slot == null || slot.assignedItem == null) return;
+
+        if (slot.assignedItem.itemSO is ThrowPotionItemSO)
+        {
+            stateMachine.ChangeState(PlayerStateEnum.Throw);
+        }
+        else
+        {
+            DrinkPotion drinkPotion = new DrinkPotion();
+            drinkPotion.Init(slot);
+            drinkPotion.UsePotion();
+        }
     }
 
     private void HandleYInputEvent(float input)
