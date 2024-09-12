@@ -12,7 +12,7 @@ public class PlayerJumpState : PlayerAirState
 
         float xInput = player.PlayerInput.XInput;
 
-        player.MovementCompo.RigidbodyCompo.AddForce(new Vector2(xInput, player.JumpForce), ForceMode2D.Impulse);
+        player.MovementCompo.RigidbodyCompo.velocity = new Vector2(xInput, player.JumpForce);
     }
 
 
