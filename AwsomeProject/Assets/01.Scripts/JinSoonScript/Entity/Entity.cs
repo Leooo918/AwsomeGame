@@ -236,13 +236,20 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         Debug.Log("에어본 종료");
     }
 
-    public void ApplyStatusEffect(StatusEffectEnum statusEffect, int level, float duration)
+    public void ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
+    {
+        _statusEffectBit |= (int)statusEffect;
+        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+    }
+    public void ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
         _statusEffectBit |= (int)statusEffect;
         _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
 
-    public bool IsUnderStatusEffect(StatusEffectEnum statusEffect)
+    public bool IsUnderStatusEffect(StatusBuffEffectEnum statusEffect)
+        => (_statusEffectBit & (int)statusEffect) != 0;
+    public bool IsUnderStatusEffect(StatusDebuffEffectEnum statusEffect)
         => (_statusEffectBit & (int)statusEffect) != 0;
 
     protected virtual void Update()

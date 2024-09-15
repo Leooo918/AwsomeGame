@@ -129,12 +129,12 @@ public class Inventory : MonoBehaviour
             {
                 if (slots[x, y].assignedItem == null)
                 {
-                    Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
-                    newItem.Init();
-                    newItem.itemSO = item.itemSO;
-                    newItem.level = item.level;
                     if (item.amount > slots[x, y].maxMergeAmount)
                     {
+                        Item newItem = Instantiate(InventoryManager.Instance.itemPrefab);
+                        newItem.Init();
+                        newItem.itemSO = item.itemSO;
+                        newItem.level = item.level;
                         newItem.amount = slots[x, y].maxMergeAmount;
                         slots[x, y].SetItem(newItem);
 
@@ -143,8 +143,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        newItem.amount = item.amount;
-                        slots[x, y].SetItem(newItem);
+                        slots[x, y].SetItem(item);
                     }
                     Save();
                     return true;

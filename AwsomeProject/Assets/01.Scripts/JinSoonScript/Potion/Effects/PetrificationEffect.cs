@@ -11,7 +11,7 @@ public class PetrificationEffect : Effect
             if (target is Entity entity)
             {
                 entity.healthCompo.TakeDamage(3, Vector2.zero, null);
-                entity.ApplyStatusEffect(StatusEffectEnum.Petrification, _level, 2f);
+                entity.ApplyStatusEffect(StatusDebuffEffectEnum.Petrification, _level, 3f);
             }
         }
     }

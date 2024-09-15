@@ -11,23 +11,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public Stat maxHp { get; private set; }
     public float weight { get; private set; }
-    private float _curHp;
-    public float curHp 
-    { 
-        get => _curHp; 
-        private set
-        {
-            if (_curHp < value)
-            {
-                OnHeal?.Invoke();
-            }
-            else
-            {
-                OnHit?.Invoke();
-            }
-            _curHp = value;
-        }
-    }
+    public float curHp;
 
     public HitData hitData { get; private set; }
 
@@ -98,6 +82,7 @@ public class Health : MonoBehaviour, IDamageable
         //hp감소시켜
         curHp -= damage;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
+        OnHit?.Invoke();
 
         //무게로 나눠 무게가 1이면 그대로, 2면 1/2로 날라감
         knockPower /= weight;
@@ -118,6 +103,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         curHp += amount;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
+        OnHeal?.Invoke();
     }
 
     public void GetArmor(int amount)

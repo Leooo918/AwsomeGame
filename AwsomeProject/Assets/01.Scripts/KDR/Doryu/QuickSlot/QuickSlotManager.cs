@@ -11,6 +11,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
     [SerializeField] private Inventory _passoveSlotInven;
 
     [field: SerializeField] public Sprite[] slotOutLines { get; private set; }
+    [field: SerializeField] public Sprite slotNoneItemOutLine { get; private set; }
 
     private int _currentSelectIdx = -1;
     private List<QuickSlot> _passiveQuickSlots = new List<QuickSlot>();

@@ -10,25 +10,23 @@ public class HpBottle : MonoBehaviour
     private RectTransform imageRect;
     private Sequence seq;
 
-    private bool isBottleFull = true;
-    private bool isBottleEmpty = false;
-
-    public bool IsBottleEmpty => isBottleEmpty;
+    public bool IsBottleFull { get; private set; }
+    public bool IsBottleEmpty { get; private set; }
 
     private void Awake()
     {
         imageRect = transform.Find("HealthBottle").GetComponent<RectTransform>();
         fill = transform.Find("HealthBottle/Heart").GetComponent<Image>();
 
-        isBottleFull = true;
-        isBottleEmpty = false;
+        IsBottleFull = true;
+        IsBottleEmpty = false;
     }
 
     public void HpDown()
     {
-        if (isBottleEmpty == true) return;
+        if (IsBottleEmpty == true) return;
 
-        if (isBottleFull)
+        if (IsBottleFull)
         {
             if(seq != null && seq.active)
                 seq.Complete();
@@ -38,7 +36,7 @@ public class HpBottle : MonoBehaviour
             seq.Append(DOTween.To(() => 1, x => fill.fillAmount = x, 0.5f, 0.1f))
                 .Join(imageRect.DOAnchorPosY(15f, 0.05f))
                 .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
-            isBottleFull = false;
+            IsBottleFull = false;
         }
         else
         {
@@ -50,14 +48,14 @@ public class HpBottle : MonoBehaviour
             seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 0f, 0.1f))
                 .Join(imageRect.DOAnchorPosY(15f, 0.05f))
                 .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
-            isBottleEmpty = true;
+            IsBottleEmpty = true;
         }
     }
     public void HpUp()
     {
-        if (isBottleFull == true) return;
+        if (IsBottleFull == true) return;
 
-        if (isBottleEmpty)
+        if (IsBottleEmpty)
         {
             if(seq != null && seq.active)
                 seq.Complete();
@@ -67,7 +65,7 @@ public class HpBottle : MonoBehaviour
             seq.Append(DOTween.To(() => 0, x => fill.fillAmount = x, 0.5f, 0.1f))
                 .Join(imageRect.DOAnchorPosY(15f, 0.05f))
                 .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
-            isBottleEmpty = false;
+            IsBottleEmpty = false;
         }
         else
         {
@@ -79,7 +77,7 @@ public class HpBottle : MonoBehaviour
             seq.Append(DOTween.To(() => 0.5f, x => fill.fillAmount = x, 1f, 0.1f))
                 .Join(imageRect.DOAnchorPosY(15f, 0.05f))
                 .Insert(0.05f, imageRect.DOAnchorPosY(0f, 0.05f));
-            isBottleFull = true;
+            IsBottleFull = true;
         }
     }
 

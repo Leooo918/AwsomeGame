@@ -77,7 +77,7 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.FailurePotion]);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.WindPotion]);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {

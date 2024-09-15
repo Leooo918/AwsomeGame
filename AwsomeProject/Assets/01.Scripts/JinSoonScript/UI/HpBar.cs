@@ -38,14 +38,17 @@ public class HpBar : MonoBehaviour
     {
         int healthTmp = _currentHealth;
         _currentHealth = (int)_playerHealth.curHp;
-        for (int i = 0; i < hpBottles.Length - 1; i++)
+        Debug.Log(_currentHealth - healthTmp);
+        for (int i = 0; i < hpBottles.Length; i++)
         {
-            if (hpBottles[i].IsBottleEmpty == false)
+            if (hpBottles[i].IsBottleFull == false)
             {
+                Debug.Log("คว" + i);
                 for (int j = 0; j < _currentHealth - healthTmp; j++)
                 {
+                    Debug.Log("คฬ" + i);
                     hpBottles[i].HpUp();
-                    if(hpBottles[i].IsBottleEmpty) i--;
+                    if(hpBottles[i].IsBottleFull) i++;
                 }
                 break;
             }
@@ -57,7 +60,8 @@ public class HpBar : MonoBehaviour
         for (int i = 0; i < hp; i += 2)
         {
             HpBottle bottle = Instantiate(_hpBottlePf, transform);
-            if (i % 2 == 1)
+            
+            if (i + 1 == hp)
                 bottle.SetAsHalfHp();
         }
 
