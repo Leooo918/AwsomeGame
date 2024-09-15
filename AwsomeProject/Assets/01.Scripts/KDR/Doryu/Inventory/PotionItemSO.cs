@@ -7,10 +7,10 @@ using static UnityEditor.PlayerSettings;
 public enum PotionItemType
 {
     PoisonPotion,
-    FailurePotion,
+    WindPotion,
     HealPortion,
     BoomPotion,
-    StonPotion,
+    StonePotion,
     ShapeHornePotion,
     SpikePotion,
     SlapPotion,
@@ -23,6 +23,7 @@ public enum QuickSlotOutLine
     Bronze,
     Silver,
     Gold,
+    Level,
 }
 
 [Serializable]

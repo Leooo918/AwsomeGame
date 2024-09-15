@@ -47,7 +47,6 @@ namespace Doryu.JBSave
             string path = _localPath + saveFileName + ".bin";
             //Class to json
             string jsonData = JsonUtility.ToJson(saveClass, true);
-            Debug.Log(jsonData);
             //Json to byte and encryption
             byte[] bytes = _ByteConverter.GetBytes(jsonData).TogleCrypto(true);
             saveClass.OnSaveData(saveFileName);
