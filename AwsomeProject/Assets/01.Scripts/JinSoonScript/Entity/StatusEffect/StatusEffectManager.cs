@@ -7,15 +7,17 @@ public class StatusEffectManager
 {
     private Entity _owner;
 
-    private Dictionary<StatusEffectEnum, StatusEffect> _statusEffectDictionary;
+    private Dictionary<StatusBuffEffectEnum, StatusEffect> _statusBuffEffectDictionary;
+    private Dictionary<StatusDebuffEffectEnum, StatusEffect> _statusDebuffEffectDictionary;
     private List<StatusEffect> _enableEffects;
 
     public StatusEffectManager(Entity owner)
     {
         _owner = owner;
         _enableEffects = new List<StatusEffect>();
-        _statusEffectDictionary = new Dictionary<StatusEffectEnum, StatusEffect>();
-        foreach (StatusEffectEnum effectEnum in Enum.GetValues(typeof(StatusEffectEnum)))
+        _statusBuffEffectDictionary = new Dictionary<StatusBuffEffectEnum, StatusEffect>();
+        _statusDebuffEffectDictionary = new Dictionary<StatusDebuffEffectEnum, StatusEffect>();
+        foreach (StatusBuffEffectEnum effectEnum in Enum.GetValues(typeof(StatusBuffEffectEnum)))
         {
             string enumName = effectEnum.ToString();
             try
@@ -23,7 +25,22 @@ public class StatusEffectManager
                 Type t = Type.GetType($"{enumName}StatusEffect");
                 StatusEffect effect = Activator.CreateInstance(t) as StatusEffect;
 
-                _statusEffectDictionary.Add(effectEnum, effect);
+                _statusBuffEffectDictionary.Add(effectEnum, effect);
+            }
+            catch (Exception ex)
+            {
+                Debug.Log($"{enumName}");
+            }
+        }
+        foreach (StatusDebuffEffectEnum effectEnum in Enum.GetValues(typeof(StatusDebuffEffectEnum)))
+        {
+            string enumName = effectEnum.ToString();
+            try
+            {
+                Type t = Type.GetType($"{enumName}StatusEffect");
+                StatusEffect effect = Activator.CreateInstance(t) as StatusEffect;
+
+                _statusDebuffEffectDictionary.Add(effectEnum, effect);
             }
             catch (Exception ex)
             {
@@ -49,9 +66,16 @@ public class StatusEffectManager
         }
     }
 
-    public void AddStatusEffect(StatusEffectEnum statusEffect, int level, float cooltime)
+    public void AddStatusEffect(StatusBuffEffectEnum statusEffect, int level, float cooltime)
     {
-        StatusEffect effect = _statusEffectDictionary[statusEffect];
+        StatusEffect effect = _statusBuffEffectDictionary[statusEffect];
+        effect.SetInfo(level);
+        effect.ApplyEffect(_owner, cooltime);
+        _enableEffects.Add(effect);
+    }
+    public void AddStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float cooltime)
+    {
+        StatusEffect effect = _statusDebuffEffectDictionary[statusEffect];
         effect.SetInfo(level);
         effect.ApplyEffect(_owner, cooltime);
         _enableEffects.Add(effect);

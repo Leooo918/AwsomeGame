@@ -15,5 +15,13 @@ MonoBehaviour:
   potionRecipes:
   - {fileID: 11400000, guid: 6f9bb5c536c2fc346a40add4d40c833f, type: 2}
   - {fileID: 11400000, guid: f2fc3683c7d3e684189ee69f26f25a67, type: 2}
+  - {fileID: 11400000, guid: f99ca85c06571ef40922192c4394547f, type: 2}
+  - {fileID: 11400000, guid: 7c79d6c93d72f094ab414302cf76727a, type: 2}
+  - {fileID: 11400000, guid: dacd429b6bea61b4e80f2e892e8289a5, type: 2}
+  - {fileID: 11400000, guid: 27346d84cae8f434fb5f457a2addce94, type: 2}
   - {fileID: 11400000, guid: 4e7fd63cf45b0b249a85ec1beba72ad1, type: 2}
   - {fileID: 11400000, guid: 2ac2081c24cb94f4191260767510d5fc, type: 2}
+  - {fileID: 11400000, guid: 6e253056868f34246a151b37bac0b3b8, type: 2}
+  - {fileID: 11400000, guid: 17edaab85edd2f34c93e5130272b46d0, type: 2}
+  - {fileID: 11400000, guid: 4489ebdf296fdee4b84151009af0a42f, type: 2}
+  - {fileID: 11400000, guid: 35ed187aaf677d34fbdb6d82d4bc6805, type: 2}

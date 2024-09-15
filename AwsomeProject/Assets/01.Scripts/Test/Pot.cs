@@ -14,7 +14,8 @@ public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPo
 
     private void Update()
     {
-        if (_slots[0].assignedItem != null && _slots[1].assignedItem != null)
+        if (_slots[0].assignedItem != null && _slots[1].assignedItem != null &&
+            _slots[0].assignedItem.itemSO == _slots[1].assignedItem.itemSO)
         {
             _slots[2].gameObject.SetActive(true);
         }

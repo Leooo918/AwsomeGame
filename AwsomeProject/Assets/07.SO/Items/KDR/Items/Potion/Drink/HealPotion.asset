@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: -460685547, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   itemType: 2
-  quickSlotOutLine: 0
-  level: 0
+  quickSlotOutLine: 3
   itemName: "\uCE58\uB8CC\uD3EC\uC158"
   itemDescriptions:
   - " HP\uAC00 0.5\uCE78 \uD68C\uBCF5\uB41C\uB2E4."
@@ -25,7 +24,9 @@ MonoBehaviour:
   - infos:
     - effectEnum: 2
       level: 0
+  - infos:
     - effectEnum: 2
       level: 1
+  - infos:
     - effectEnum: 2
       level: 2
