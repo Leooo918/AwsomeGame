@@ -20,7 +20,7 @@ public class BossRoom : MonoBehaviour
     [SerializeField] private FallingRockSpawner _spawner;
     [SerializeField] private CameraBetweenToObj _cameraFollow;
     private IBoss _boss;
-    private KingSlime _kingSlime;
+   // private KingSlime _kingSlime;
 
     private bool _enterRoom = false;
     private bool _clearRoom = false;
@@ -38,16 +38,16 @@ public class BossRoom : MonoBehaviour
             _enterRoom = true;
 
             _boss = Instantiate(_bossObj, transform).GetComponent<IBoss>();
-            _kingSlime = (_boss as KingSlime);
+            //_kingSlime = (_boss as KingSlime);
 
-            _kingSlime.spanwer = _spawner;
+            //_kingSlime.spanwer = _spawner;
 
             _boss._bossWatchingCam = _bossWatchingCam;
             _boss._bossRoomCam = _bossRoomCam;
             _boss.StartBoss();
 
             _cameraFollow._obj1 = PlayerManager.Instance.PlayerTrm;
-            _cameraFollow._obj2 = _kingSlime.transform;
+            //_cameraFollow._obj2 = _kingSlime.transform;
         }
     }
 

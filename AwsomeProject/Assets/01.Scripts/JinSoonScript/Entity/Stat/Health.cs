@@ -171,22 +171,22 @@ public class Health : MonoBehaviour, IDamageable
     //    effect.EnterEffort(owner);
     //}
 
-    public void Rape(float time)
-    {
-        KingSlime slime = owner as KingSlime;
-        if (slime)
-        {
-            slime.StateMachine.ChangeState(KingSlimeStateEnum.Vined);
-            StartCoroutine(DelayRapeOff(slime, time));
-        }
-    }
+    //public void Rape(float time)
+    //{
+    //    KingSlime slime = owner as KingSlime;
+    //    if (slime)
+    //    {
+    //        slime.StateMachine.ChangeState(KingSlimeStateEnum.Vined);
+    //        StartCoroutine(DelayRapeOff(slime, time));
+    //    }
+    //}
 
-    IEnumerator DelayRapeOff(KingSlime slime, float time)
-    {
-        yield return new WaitForSeconds(time);
-        slime.CanStateChangeable = true;
-        slime.StateMachine.ChangeState(KingSlimeStateEnum.Ready);
-    }
+    //IEnumerator DelayRapeOff(KingSlime slime, float time)
+    //{
+    //    yield return new WaitForSeconds(time);
+    //    slime.CanStateChangeable = true;
+    //    slime.StateMachine.ChangeState(KingSlimeStateEnum.Ready);
+    //}
 
 
     #endregion
