@@ -10,7 +10,8 @@ public enum WildBoarEnum
     Rush,
     Groggy,
     Stun,
-    Dead
+    AirBorn,
+    Dead,
 }
 
 public enum WildBoarSkillEnum
@@ -97,6 +98,14 @@ public class WildBoar : Enemy<WildBoarEnum>
         {
             //_rushSkill.skill.UseSkill();
         }
+    }
+
+    public override void AirBorn(float duration, int damagePercent)
+    {
+        base.AirBorn(duration, damagePercent);
+        if (IsDead) return;
+        airBornDuration = duration;
+        StateMachine.ChangeState(WildBoarEnum.AirBorn);
     }
 
     public void Attack()

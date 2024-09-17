@@ -12,7 +12,7 @@ public class BossHealth : Health
     //0 -> 1페이지로 전환되는 순간이라면 1이 넘어감
     public Action<int> OnChangePhase;
 
-    public override void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
+    public override void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
         base.TakeDamage(damage, knockPower, dealer);
 

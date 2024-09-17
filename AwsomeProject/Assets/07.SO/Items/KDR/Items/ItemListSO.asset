@@ -25,8 +25,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a568254b3b85644ea4d18967fa12251, type: 2}
   throwPotionItemSOList:
   - {fileID: 11400000, guid: 1a0dc08ae4d22464082a9435b1395080, type: 2}
+  - {fileID: 11400000, guid: ce4f2f4ee08882147b2237d0752d0585, type: 2}
+  - {fileID: 11400000, guid: b5d26d5277a2816499aeeddc216a6a39, type: 2}
   - {fileID: 11400000, guid: 7803ab030a2e6d54f8aa693b32c2c2b2, type: 2}
-  - {fileID: 11400000, guid: fb645d0ac0a456d4ca475db4b276c557, type: 2}
+  - {fileID: 11400000, guid: f9fa619a3b8cad942ba0dbd9bc51f8a9, type: 2}
+  - {fileID: 11400000, guid: 8aab19d0ad8deea42b586dd929941e22, type: 2}
   drinkPotionItemSOList:
-  - {fileID: 11400000, guid: 0c23d74c1621dc54eb7f7a5c113dde4c, type: 2}
   - {fileID: 11400000, guid: 63ace231151924e46b27366bdd0945e6, type: 2}
+  - {fileID: 11400000, guid: a7ca08a3e823baf448e178252dd91e4e, type: 2}
+  - {fileID: 11400000, guid: eb3d6276d6e13c84da078680c90c095e, type: 2}
+  - {fileID: 11400000, guid: 0c23d74c1621dc54eb7f7a5c113dde4c, type: 2}
+  - {fileID: 11400000, guid: 178bd67bf54bf3d44a406e7453dd019b, type: 2}
+  - {fileID: 11400000, guid: cc3b019148ed97a469952899faa5aab6, type: 2}

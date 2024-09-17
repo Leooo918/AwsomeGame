@@ -56,9 +56,14 @@ public class Health : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     /// <param name="knockPower"></param>
     /// <param name="dealer"></param>
-    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
+    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
         if (owner.IsDead || isInvincible) return;
+
+        if (isPersent)
+        {
+            damage = (int)(maxHp.GetValue() * ((float)damage / 100));
+        }
 
         //크리티컬 계산
         if (dealer != null)

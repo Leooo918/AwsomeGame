@@ -193,11 +193,6 @@ public class Player : Entity
         StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 
-    public override void AirBorn(float duration)
-    {
-
-    }
-
     //public override void UpArmor(float figure)
     //{
 

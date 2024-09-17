@@ -105,7 +105,7 @@ public abstract class Enemy<T> : Entity where T : Enum
     public void OnCompletelyDie()
     {
         //풀링 하면 여기에다가 추가해주면 도미
+        StopAllCoroutines();
         Destroy(gameObject);
     }
-
 }

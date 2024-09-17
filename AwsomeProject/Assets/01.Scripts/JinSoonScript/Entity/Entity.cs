@@ -11,6 +11,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public EntityStat Stat => stat;
     public EntitySkillSO EntitySkillSO => entitySkillSO;
 
+    public EntityVisual visualCompo { get; protected set; }
     public Animator animatorCompo { get; protected set; }
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
@@ -65,6 +66,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     protected virtual void Awake()
     {
         Transform visualTrm = transform.Find("Visual");
+        visualCompo = visualTrm.GetComponent<EntityVisual>();
         animatorCompo = visualTrm.GetComponent<Animator>();
         spriteRendererCompo = visualTrm.GetComponent<SpriteRenderer>();
         rigidbodyCompo = GetComponent<Rigidbody2D>();
@@ -161,11 +163,16 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     }
 
     public virtual void Stun(float duration) { }
+    public virtual void Stone(float duration)
+    {
+        visualCompo.OnStone(true);
+        StartDelayCallBack(duration, () => visualCompo.OnStone(false));
+    }
 
-    public virtual void AirBorn(float duration)
+    public virtual void AirBorn(float duration, int damagePercent)
     {
         Debug.Log("에어본");
-        StartCoroutine(AirBornDurationCoroutine(duration));
+        StartCoroutine(AirBornDurationCoroutine(duration, damagePercent));
     }
 
     public virtual void UpArmor(int figure)
@@ -213,38 +220,59 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         callBack?.Invoke();
     }
 
-    IEnumerator AirBornDurationCoroutine(float duration)
+    IEnumerator AirBornDurationCoroutine(float duration, int damagePercent)
     {
         float elapsedTime = 0.0f;
         float initialVerticalSpeed = 5.0f;
-        Vector2 originalVelocity = rigidbodyCompo.velocity;
+        float originalXMovement = MovementCompo.RigidbodyCompo.velocity.x;
 
-        rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
+
+        MovementCompo.StopImmediately(true);
 
         while (elapsedTime < duration)
         {
             float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
 
-            rigidbodyCompo.velocity = new Vector2(0, verticalSpeed);
+            MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity:true);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         float fallSpeed = -40f;
-        rigidbodyCompo.velocity = new Vector2(originalVelocity.x, fallSpeed);
+        MovementCompo.SetVelocity(new Vector2(originalXMovement, fallSpeed), withYVelocity: true);
+        yield return new WaitUntil(() =>
+        {
+            return MovementCompo.RigidbodyCompo.velocity.y > fallSpeed;
+        });
+        healthCompo.TakeDamage(damagePercent, Vector2.zero, null, true);
+        MovementCompo.SetVelocity(new Vector2(originalXMovement, 0));
+        
         Debug.Log("에어본 종료");
     }
 
     public void ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
+        if (IsUnderStatusEffect(statusEffect)) return;
         _statusEffectBit |= (int)statusEffect;
         _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
     public void ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
+        if (IsUnderStatusEffect(statusEffect)) return;
         _statusEffectBit |= (int)statusEffect;
         _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+    }
+
+    public void RemoveStatusEffect(StatusBuffEffectEnum statusEffect)
+    {
+        if (IsUnderStatusEffect(statusEffect) == false) return;
+        _statusEffectBit ^= (int)statusEffect;
+    }
+    public void RemoveStatusEffect(StatusDebuffEffectEnum statusEffect)
+    {
+        if (IsUnderStatusEffect(statusEffect) == false) return;
+        _statusEffectBit ^= (int)statusEffect;
     }
 
     public bool IsUnderStatusEffect(StatusBuffEffectEnum statusEffect)

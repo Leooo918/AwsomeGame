@@ -32,7 +32,8 @@ public static class EffectManager
         {
             { EffectTypeEnum.Petrification, () => new PetrificationEffect() },
             { EffectTypeEnum.Growing, () => new GrowingEffect() },
-            { EffectTypeEnum.Heal, () => new HealEffect() }
+            { EffectTypeEnum.Heal, () => new HealEffect() },
+            { EffectTypeEnum.Floating, () => new FloatingEffect() },
         };
     }
 

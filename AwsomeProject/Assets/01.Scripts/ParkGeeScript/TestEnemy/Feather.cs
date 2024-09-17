@@ -32,7 +32,7 @@ public class Feather : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer)
+    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
         Player player = dealer as Player;
         if (player == null) return;

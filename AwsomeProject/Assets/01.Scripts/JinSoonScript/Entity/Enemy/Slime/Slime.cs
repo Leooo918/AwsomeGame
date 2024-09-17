@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum SlimeStateEnum
@@ -97,14 +98,23 @@ public class Slime : Enemy<SlimeStateEnum>
 
     public override void Stun(float duration)
     {
+        base.Stun(duration);
         if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
-    public override void AirBorn(float duration)
+    public override void Stone(float duration)
     {
-        base.AirBorn(duration);
+        base.Stone(duration);
+        if (IsDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(SlimeStateEnum.Stun);
+    }
+
+    public override void AirBorn(float duration, int damagePercent)
+    {
+        base.AirBorn(duration, damagePercent);
         if (IsDead) return;
         airBornDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.AirBorn);

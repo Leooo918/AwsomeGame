@@ -19,9 +19,10 @@ public class ThrowPotion : Potion
     public override void Init(QuickSlot slot) 
     {
         ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;
-        _maxDetactEntity = throwPotionItemSO.maxDetactEntity;
-        _whatIsEnemy = throwPotionItemSO.whatIsEnemy;
-        range = throwPotionItemSO.range;
+        ThrowPotionInfos potionInfos = throwPotionItemSO.GetPotionInfo(level);
+        _maxDetactEntity = potionInfos.maxDetactEntity;
+        _whatIsEnemy = potionInfos.whatIsEnemy;
+        range = potionInfos.range;
         base.Init(slot);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
