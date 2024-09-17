@@ -56,11 +56,13 @@ public class Health : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     /// <param name="knockPower"></param>
     /// <param name="dealer"></param>
-    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
+    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPercent = false)
     {
         if (owner.IsDead || isInvincible) return;
 
-        if (isPersent)
+        damage = (int)(damage * ((float)owner.Stat.damageReceive.GetValue() / 100));
+
+        if (isPercent)
         {
             damage = (int)(maxHp.GetValue() * ((float)damage / 100));
         }
@@ -106,6 +108,7 @@ public class Health : MonoBehaviour, IDamageable
 
     public void GetHeal(int amount)
     {
+        amount = (int)(amount * ((float)owner.Stat.recoveryReceive.GetValue() / 100));
         curHp += amount;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
         OnHeal?.Invoke();

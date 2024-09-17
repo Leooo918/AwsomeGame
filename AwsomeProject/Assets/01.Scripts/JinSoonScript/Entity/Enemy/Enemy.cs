@@ -7,11 +7,10 @@ public abstract class Enemy<T> : Entity where T : Enum
     public EnemyStatSO EnemyStat { get; private set; }
 
     #region EnemyStat
-    public float moveSpeed { get; protected set; }
-    public float PatrolTime { get; protected set; }
-    public float PatrolDelay { get; protected set; }
-    public float detectingDistance { get; protected set; }
-    public float attackDistance { get; protected set; }
+    public float PatrolTime { get => EnemyStat.patrolTime.GetValue(); protected set => EnemyStat.patrolTime.SetDefaultValue(value); }
+    public float PatrolDelay { get => EnemyStat.patrolDelay.GetValue(); protected set => EnemyStat.patrolDelay.SetDefaultValue(value); }
+    public float detectingDistance { get => EnemyStat.detectingDistance.GetValue(); protected set => EnemyStat.detectingDistance.SetDefaultValue(value); }
+    public float attackDistance { get => EnemyStat.attackDistance.GetValue(); protected set => EnemyStat.attackDistance.SetDefaultValue(value); }
 
     #endregion
 
@@ -34,8 +33,8 @@ public abstract class Enemy<T> : Entity where T : Enum
     protected override void Awake()
     {
         base.Awake();
-        defaultMoveSpeed = moveSpeed;
         EnemyStat = Stat as EnemyStatSO;
+        defaultMoveSpeed = EnemyStat.moveSpeed.GetValue();
 
         StateMachine = new EnemyStateMachine<T>();
         foreach (T stateEnum in Enum.GetValues(typeof(T)))

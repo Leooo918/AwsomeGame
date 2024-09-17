@@ -49,7 +49,6 @@ public class AirBird : Enemy<AirBirdEnum>
             gameObject.AddComponent(type);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
 
         _shootSkill = Skills.GetSkillByEnum(AirBirdSkillEnum.Shoot);

@@ -6,9 +6,8 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
     #region ComponentRegion
-    [SerializeField] private EntityStat stat;
+    [field:SerializeField] public EntityStatSO Stat { get; private set; }
     [SerializeField] private EntitySkillSO entitySkillSO;
-    public EntityStat Stat => stat;
     public EntitySkillSO EntitySkillSO => entitySkillSO;
 
     public EntityVisual visualCompo { get; protected set; }
@@ -35,6 +34,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float wallCheckBoxHeight;
 
+    public float moveSpeed => Stat.moveSpeed.GetValue();
     protected float knockbackDuration = 0.5f;
     protected Coroutine knockbackCoroutine;
     public bool isKnockbacked { get; protected set; }
@@ -76,7 +76,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         MovementCompo = GetComponent<EntityMovement>();
         MovementCompo.Initialize(this);
 
-        stat = Instantiate(stat);
+        Stat = Instantiate(Stat);
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
 
         _statusEffectManager = new StatusEffectManager(this);
@@ -228,16 +228,23 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
 
         MovementCompo.StopImmediately(true);
+        float prevGravity = MovementCompo.RigidbodyCompo.gravityScale;
+        MovementCompo.RigidbodyCompo.gravityScale = 0;
 
         while (elapsedTime < duration)
         {
-            float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
+            float verticalSpeed = 0;
+
+            if (elapsedTime < 1f)
+                verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
 
             MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity:true);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        MovementCompo.RigidbodyCompo.gravityScale = prevGravity;
 
         float fallSpeed = -40f;
         MovementCompo.SetVelocity(new Vector2(originalXMovement, fallSpeed), withYVelocity: true);
@@ -267,12 +274,12 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public void RemoveStatusEffect(StatusBuffEffectEnum statusEffect)
     {
         if (IsUnderStatusEffect(statusEffect) == false) return;
-        _statusEffectBit ^= (int)statusEffect;
+        _statusEffectBit &= ~(int)statusEffect;
     }
     public void RemoveStatusEffect(StatusDebuffEffectEnum statusEffect)
     {
         if (IsUnderStatusEffect(statusEffect) == false) return;
-        _statusEffectBit ^= (int)statusEffect;
+        _statusEffectBit &= ~(int)statusEffect;
     }
 
     public bool IsUnderStatusEffect(StatusBuffEffectEnum statusEffect)

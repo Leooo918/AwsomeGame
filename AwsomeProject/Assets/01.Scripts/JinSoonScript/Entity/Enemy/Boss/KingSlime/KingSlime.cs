@@ -66,7 +66,6 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
             //gameObject.AddComponent(type);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
         _bossHpBar = UIManager.Instance.panelDictionary[UIType.BossHp] as BossHpBarUI;
     }
@@ -89,8 +88,9 @@ public class KingSlime : Enemy<KingSlimeStateEnum>, IBoss
         ShuffleSkillStack();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
         //float hpPercentage = (float)healthCompo.curHp / healthCompo.maxHp.GetValue();
         //_hpBar.localScale = new Vector3(FacingDir * _hpBar.localScale.x, _hpBar.localScale.y, _hpBar.localScale.z);

@@ -5,11 +5,12 @@ using System.Reflection;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/EnemyStat")]
-public class EnemyStatSO : EntityStat
+public class EnemyStatSO : EntityStatSO
 {
     public Stat patrolTime;
     public Stat patrolDelay;
     public Stat detectingDistance;
+    public Stat attackDistance;
 
     public List<DropItemStruct> dropItems = new List<DropItemStruct>();
 

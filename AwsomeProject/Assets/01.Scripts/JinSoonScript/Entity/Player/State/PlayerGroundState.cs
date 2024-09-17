@@ -117,7 +117,7 @@ public class PlayerGroundState : PlayerState
         else
         {
             DrinkPotion drinkPotion = new DrinkPotion();
-            drinkPotion.Init(slot);
+            drinkPotion.Init(slot, player);
             drinkPotion.UsePotion();
         }
     }

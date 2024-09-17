@@ -46,7 +46,7 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
         if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
 
         if (_slime.moveAnim == true)
-            enemy.MovementCompo.SetVelocity(new Vector2(dir.x * enemy.moveSpeed, enemy.rigidbodyCompo.velocity.y));
+            enemy.MovementCompo.SetVelocity(new Vector2(dir.x * enemy.Stat.moveSpeed.GetValue(), enemy.rigidbodyCompo.velocity.y));
     }
 
     private void Jump()

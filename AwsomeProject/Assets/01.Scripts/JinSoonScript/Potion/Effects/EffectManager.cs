@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum EffectTypeEnum
 {
+    Damage,
     Petrification,
     Growing,
     Heal,
@@ -30,10 +31,14 @@ public static class EffectManager
     {
         _effectDictionary = new Dictionary<EffectTypeEnum, Func<Effect>>
         {
+            { EffectTypeEnum.Damage, () => new DamageEffect() },
             { EffectTypeEnum.Petrification, () => new PetrificationEffect() },
             { EffectTypeEnum.Growing, () => new GrowingEffect() },
             { EffectTypeEnum.Heal, () => new HealEffect() },
             { EffectTypeEnum.Floating, () => new FloatingEffect() },
+            { EffectTypeEnum.Weak, () => new WeakEffect() },
+            { EffectTypeEnum.Slowdown, () => new SlowdownEffect() },
+            { EffectTypeEnum.PoorRecovery, () => new PoorRecoveryEffect() },
         };
     }
 

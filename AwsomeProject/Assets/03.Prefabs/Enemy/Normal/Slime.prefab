@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a208ec3cb7176469f5d590425b7075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: 0757cf61334436d4ab1107800e70e04a, type: 2}
+  <Stat>k__BackingField: {fileID: 11400000, guid: 0757cf61334436d4ab1107800e70e04a, type: 2}
   entitySkillSO: {fileID: 11400000, guid: 7e583722eed0be74ca41d666594aad99, type: 2}
   whatIsGroundAndWall:
     serializedVersion: 2
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56631dcfe4948ed40afb37cb4c5dc9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHp: 0
 --- !u!70 &5825832491732314658
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -688,7 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719731e2f78694b49aa7c8d9f549fc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteTime: 0.15
+  _whiteTime: 0.15
   _skillEffect: {fileID: 0}
 --- !u!1 &7603626212198480491
 GameObject:

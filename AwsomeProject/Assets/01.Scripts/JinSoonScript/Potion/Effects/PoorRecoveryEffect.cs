@@ -10,8 +10,7 @@ public class PoorRecoveryEffect : Effect
         {
             if (target is Entity entity)
             {
-                entity.healthCompo.TakeDamage(3, Vector2.zero, null);
-                entity.ApplyStatusEffect(StatusDebuffEffectEnum.Petrification, _level, 3f);
+                entity.ApplyStatusEffect(StatusDebuffEffectEnum.PoorRecovery, _level, 5f);
             }
         }
     }

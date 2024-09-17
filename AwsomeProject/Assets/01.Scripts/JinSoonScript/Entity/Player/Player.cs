@@ -33,7 +33,7 @@ public class Player : Entity
     {
         get
         {
-            return Stat.moveSpeed.GetValue();
+            return moveSpeed;
         }
         private set { }
     }
@@ -127,7 +127,7 @@ public class Player : Entity
         _gravityScale = rigidbodyCompo.gravityScale;
         _hpDecator?.Init((int)healthCompo.curHp);
 
-        MoveSpeed = Stat.moveSpeed.GetValue();
+        MoveSpeed = moveSpeed;
         JumpForce = Stat.jumpForce.GetValue();
 
         SkillSO = gameObject.AddComponent<PlayerSkill>();

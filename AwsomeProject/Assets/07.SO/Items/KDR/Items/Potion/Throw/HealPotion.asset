@@ -22,16 +22,26 @@ MonoBehaviour:
   - "\uB2E8\uC77C \uB300\uC0C1\uC758 Hp \uD68C\uBCF5\uC18D\uB3C4 50% \uAC10\uC18C"
   potionInfos:
   - infos:
-    - effectEnum: 3
+    - effectEnum: 4
       level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
   - infos:
-    - effectEnum: 3
+    - effectEnum: 4
       level: 1
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
   - infos:
-    - effectEnum: 3
+    - effectEnum: 4
       level: 2
-  maxDetactEntity: 5
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 459008
-  range: 5
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3

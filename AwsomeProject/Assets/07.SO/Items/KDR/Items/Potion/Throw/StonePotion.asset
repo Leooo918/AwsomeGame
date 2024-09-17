@@ -26,6 +26,8 @@ MonoBehaviour:
   potionInfos:
   - infos:
     - effectEnum: 0
+      level: 3
+    - effectEnum: 1
       level: 0
     maxDetactEntity: 5
     whatIsEnemy:
@@ -34,6 +36,8 @@ MonoBehaviour:
     range: 3
   - infos:
     - effectEnum: 0
+      level: 4
+    - effectEnum: 1
       level: 0
     maxDetactEntity: 5
     whatIsEnemy:
@@ -42,6 +46,8 @@ MonoBehaviour:
     range: 3
   - infos:
     - effectEnum: 0
+      level: 5
+    - effectEnum: 1
       level: 0
     maxDetactEntity: 5
     whatIsEnemy:

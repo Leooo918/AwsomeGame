@@ -49,7 +49,6 @@ public class Slime : Enemy<SlimeStateEnum>
             item.skill.SetOwner(this);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         PatrolTime = EnemyStat.patrolTime.GetValue();
         PatrolDelay = EnemyStat.patrolDelay.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();

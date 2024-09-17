@@ -22,7 +22,7 @@ public class Stat
             finalValue += value;
 
         foreach (float value in percentModifiers)
-            finalValue += finalValue / value;
+            finalValue += finalValue * value;
 
         return finalValue;
     }

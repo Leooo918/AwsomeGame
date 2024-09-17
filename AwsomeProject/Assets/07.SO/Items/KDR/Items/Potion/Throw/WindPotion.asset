@@ -31,7 +31,7 @@ MonoBehaviour:
     \uC900\uB2E4."
   potionInfos:
   - infos:
-    - effectEnum: 9
+    - effectEnum: 10
       level: 0
     maxDetactEntity: 5
     whatIsEnemy:
@@ -39,7 +39,7 @@ MonoBehaviour:
       m_Bits: 256
     range: 3
   - infos:
-    - effectEnum: 9
+    - effectEnum: 10
       level: 1
     maxDetactEntity: 5
     whatIsEnemy:
@@ -47,7 +47,7 @@ MonoBehaviour:
       m_Bits: 256
     range: 3
   - infos:
-    - effectEnum: 9
+    - effectEnum: 10
       level: 2
     maxDetactEntity: 5
     whatIsEnemy:

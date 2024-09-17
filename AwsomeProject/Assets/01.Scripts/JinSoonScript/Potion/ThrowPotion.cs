@@ -16,14 +16,14 @@ public class ThrowPotion : Potion
 
     private SpriteRenderer _spriteRenderer;
 
-    public override void Init(QuickSlot slot) 
+    public override void Init(QuickSlot slot, Entity owner) 
     {
         ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;
         ThrowPotionInfos potionInfos = throwPotionItemSO.GetPotionInfo(level);
         _maxDetactEntity = potionInfos.maxDetactEntity;
         _whatIsEnemy = potionInfos.whatIsEnemy;
         range = potionInfos.range;
-        base.Init(slot);
+        base.Init(slot, owner);
 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = throwPotionItemSO.image;

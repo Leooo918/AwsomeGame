@@ -45,7 +45,6 @@ public class WildBoar : Enemy<WildBoarEnum>
             item.skill.SetOwner(this);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
         _rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
     }
@@ -70,8 +69,9 @@ public class WildBoar : Enemy<WildBoarEnum>
         attackDistance = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush).attackDistance.GetValue();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
     }
 
