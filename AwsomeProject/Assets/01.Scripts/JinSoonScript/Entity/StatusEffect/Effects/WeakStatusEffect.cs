@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class WeakStatusEffect : StatusEffect
 {
-    private float[] _percentForLevel = { 10, 20, 30 };
-
     public override void ApplyEffect(Entity target, float cooltime)
     {
         base.ApplyEffect(target, cooltime);
 
-        _target.Stat.damageReceive.AddModifier(_percentForLevel[level]);
+        _target.Stat.globalDamageInflict.AddModifier(-level);
     }
 
     public override void OnEnd()
     {
         base.OnEnd();
-        _target.Stat.damageReceive.RemoveModifier(_percentForLevel[level]);
+
+        _target.Stat.globalDamageInflict.RemoveModifier(-level);
     }
 }

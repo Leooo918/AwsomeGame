@@ -5,12 +5,12 @@ using UnityEngine;
 
 public enum EffectTypeEnum
 {
-    Damage,
-    Petrification,
-    Growing,
-    Heal,
+    Damage, //데미지
+    Petrification, //석화
+    Growing, //성장
+    Heal, //회복
     PoorRecovery, //힐 감소
-    Stun, //석화
+    Stun, //기절
     Slowdown, //이속 감소
     Fragile, //받는 데미지 증가
     DotDeal, //도트딜
@@ -21,6 +21,7 @@ public enum EffectTypeEnum
     NatureSync, //자연동화
     Strength, //힘
     Resistance, //받는 데미지 감소
+    Speed, //이속 증가
 }
 
 public static class EffectManager
@@ -39,6 +40,11 @@ public static class EffectManager
             { EffectTypeEnum.Weak, () => new WeakEffect() },
             { EffectTypeEnum.Slowdown, () => new SlowdownEffect() },
             { EffectTypeEnum.PoorRecovery, () => new PoorRecoveryEffect() },
+            { EffectTypeEnum.Speed, () => new SpeedEffect() },
+            { EffectTypeEnum.Resistance, () => new ResistanceEffect() },
+            { EffectTypeEnum.NatureSync, () => new NatureSyncEffect() },
+            { EffectTypeEnum.Strength, () => new StrengthEffect() },
+            { EffectTypeEnum.Fragile, () => new FragileEffect() },
         };
     }
 

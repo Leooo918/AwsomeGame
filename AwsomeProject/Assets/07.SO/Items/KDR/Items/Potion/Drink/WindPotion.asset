@@ -22,5 +22,11 @@ MonoBehaviour:
   - "\uC774\uC18D 10%  \uC99D\uAC00 + \uACF5\uC18D 20% \uC99D\uAC00"
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 16
+      level: 0
+  - infos:
+    - effectEnum: 16
+      level: 1
+  - infos:
+    - effectEnum: 16
       level: 2

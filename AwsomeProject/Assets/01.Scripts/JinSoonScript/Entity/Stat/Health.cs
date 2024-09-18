@@ -59,8 +59,9 @@ public class Health : MonoBehaviour, IDamageable
     public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPercent = false)
     {
         if (owner.IsDead || isInvincible) return;
-
-        damage = (int)(damage * ((float)owner.Stat.damageReceive.GetValue() / 100));
+        
+        damage = (int)(damage * dealer.Stat.globalDamageInflict.GetValue());
+        damage = (int)(damage * owner.Stat.damageReceive.GetValue());
 
         if (isPercent)
         {
@@ -93,10 +94,10 @@ public class Health : MonoBehaviour, IDamageable
 
         //무게로 나눠 무게가 1이면 그대로, 2면 1/2로 날라감
         knockPower /= weight;
-        AfterHitFeedback(knockPower, true);
+        AfterHitFeedback(knockPower, dealer, true);
     }
 
-    private void AfterHitFeedback(Vector2 knockPower, bool withFeedBack = true)
+    private void AfterHitFeedback(Vector2 knockPower, Entity dealer, bool withFeedBack = true)
     {
         if (withFeedBack)
         {
@@ -104,11 +105,16 @@ public class Health : MonoBehaviour, IDamageable
         }
         if (curHp <= 0)
             OnDie?.Invoke(knockPower);
+
+        if (dealer is Player player)
+        {
+            player.OnKilled?.Invoke(owner);
+        }
     }
 
     public void GetHeal(int amount)
     {
-        amount = (int)(amount * ((float)owner.Stat.recoveryReceive.GetValue() / 100));
+        amount = (int)(amount * owner.Stat.recoveryReceive.GetValue());
         curHp += amount;
         curHp = Mathf.Clamp(curHp, 0, maxHp.GetValue());
         OnHeal?.Invoke();

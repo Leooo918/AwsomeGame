@@ -68,18 +68,22 @@ public class StatusEffectManager
         }
     }
 
-    public void AddStatusEffect(StatusBuffEffectEnum statusEffect, int level, float cooltime)
+    public StatusEffect AddStatusEffect(StatusBuffEffectEnum statusEffect, int level, float cooltime)
     {
         StatusEffect effect = _statusBuffEffectDictionary[statusEffect];
         effect.SetInfo(level);
         effect.ApplyEffect(_owner, cooltime);
         _enableEffects.Add(effect);
+
+        return effect;
     }
-    public void AddStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float cooltime)
+    public StatusEffect AddStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float cooltime)
     {
         StatusEffect effect = _statusDebuffEffectDictionary[statusEffect];
         effect.SetInfo(level);
         effect.ApplyEffect(_owner, cooltime);
         _enableEffects.Add(effect);
+
+        return effect;
     }
 }

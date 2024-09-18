@@ -24,11 +24,11 @@ MonoBehaviour:
     \uB3C4\uD2B8\uB51C"
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 14
       level: 0
   - infos:
-    - effectEnum: 0
-      level: 0
+    - effectEnum: 14
+      level: 1
   - infos:
-    - effectEnum: 0
-      level: 0
+    - effectEnum: 14
+      level: 2

@@ -30,6 +30,20 @@ MonoBehaviour:
       level: 0
     - effectEnum: 6
       level: 1
+    - effectEnum: 7
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 11
+      level: 0
+    - effectEnum: 6
+      level: 1
+    - effectEnum: 7
+      level: 1
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2
@@ -40,16 +54,8 @@ MonoBehaviour:
       level: 1
     - effectEnum: 6
       level: 1
-    maxDetactEntity: 5
-    whatIsEnemy:
-      serializedVersion: 2
-      m_Bits: 256
-    range: 3
-  - infos:
-    - effectEnum: 11
+    - effectEnum: 7
       level: 2
-    - effectEnum: 6
-      level: 1
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2

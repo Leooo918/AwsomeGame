@@ -65,6 +65,8 @@ public abstract class Enemy<T> : Entity where T : Enum
     /// <returns></returns>
     public virtual Player IsPlayerDetected()
     {
+        if (PlayerManager.Instance.Player.isNatureSync) return null;
+
         Collider2D player = Physics2D.OverlapCircle(transform.position, detectingDistance, whatIsPlayer);
         if (player == null)
             return null;

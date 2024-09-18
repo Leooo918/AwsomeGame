@@ -10,7 +10,8 @@ public class EntityStatSO : ScriptableObject
     public Stat maxHp;
     public Stat recoveryReceive;
     public Stat armor;
-    public Stat damage;
+    public Stat physicalDamageInflict;
+    public Stat globalDamageInflict;
     public Stat damageReceive;
     public Stat moveSpeed;
     public Stat jumpForce;
@@ -19,41 +20,37 @@ public class EntityStatSO : ScriptableObject
     [Tooltip("Percentage-2ndDecimalPlace")]public Stat criticalDamage;
 
     protected Entity owner;
-    protected Dictionary<StatType, Stat> statDic;
+    //protected Dictionary<StatType, Stat> statDic;
 
     protected virtual void OnEnable()
     {
-        recoveryReceive.SetDefaultValue(100);
-        damageReceive.SetDefaultValue(100);
+        recoveryReceive.SetDefaultValue(1);
+        damageReceive.SetDefaultValue(1);
+        physicalDamageInflict.SetDefaultValue(1);
+        globalDamageInflict.SetDefaultValue(1);
 
-        statDic = new Dictionary<StatType, Stat>();
+        //statDic = new Dictionary<StatType, Stat>();
 
-        Type agentStatType = typeof(EntityStatSO);
+        //Type agentStatType = typeof(EntityStatSO);
 
-        foreach (StatType enumType in Enum.GetValues(typeof(StatType)))
-        {
-            try
-            {
-                string fieldName = LowerFirstChar(enumType.ToString());
-                FieldInfo statField = agentStatType.GetField(fieldName);
-                statDic.Add(enumType, statField.GetValue(this) as Stat);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"There are no stat - {enumType.ToString()}, {ex.Message}");
-            }
-        }
+        //foreach (StatType enumType in Enum.GetValues(typeof(StatType)))
+        //{
+        //    try
+        //    {
+        //        string fieldName = LowerFirstChar(enumType.ToString());
+        //        FieldInfo statField = agentStatType.GetField(fieldName);
+        //        statDic.Add(enumType, statField.GetValue(this) as Stat);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.LogError($"There are no stat - {enumType.ToString()}, {ex.Message}");
+        //    }
+        //}
     }
 
     public virtual void SetOwner(Entity owner)
     {
         this.owner = owner;
-    }
-
-    public float GetDamage()
-    {
-        //데미지 산출식
-        return damage.GetValue();
     }
 
     public float ArmoredDamage(float incomingDamage)
@@ -86,7 +83,7 @@ public class EntityStatSO : ScriptableObject
         statToModify.RemoveModifier(modifyValue);
     }
 
-    public Stat GetStatByEnum(StatType type) => statDic[type]; 
+    //public Stat GetStatByEnum(StatType type) => statDic[type]; 
 
     private string LowerFirstChar(string input) => $"{char.ToLower(input[0])}{input.Substring(1)}";
 }
@@ -98,14 +95,13 @@ public struct DropItemStruct
     public float appearChance;
 }
 
-public enum StatType
-{
-    MaxHp,
-    Armor,
-    CriticalChance,
-    CriticalDamage,
-    Damage,
-    MoveSpeed,
-    JumpForce
-}
-
+//public enum StatType
+//{
+//    MaxHp,
+//    Armor,
+//    CriticalChance,
+//    CriticalDamage,
+//    Damage,
+//    MoveSpeed,
+//    JumpForce
+//}

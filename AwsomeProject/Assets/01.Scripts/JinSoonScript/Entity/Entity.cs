@@ -169,11 +169,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         StartDelayCallBack(duration, () => visualCompo.OnStone(false));
     }
 
-    public virtual void AirBorn(float duration, int damagePercent)
-    {
-        Debug.Log("에어본");
-        StartCoroutine(AirBornDurationCoroutine(duration, damagePercent));
-    }
+    public virtual void AirBorn(float duration) { }
 
     public virtual void UpArmor(int figure)
     {
@@ -220,55 +216,17 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         callBack?.Invoke();
     }
 
-    IEnumerator AirBornDurationCoroutine(float duration, int damagePercent)
+    public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
-        float elapsedTime = 0.0f;
-        float initialVerticalSpeed = 5.0f;
-        float originalXMovement = MovementCompo.RigidbodyCompo.velocity.x;
-
-
-        MovementCompo.StopImmediately(true);
-        float prevGravity = MovementCompo.RigidbodyCompo.gravityScale;
-        MovementCompo.RigidbodyCompo.gravityScale = 0;
-
-        while (elapsedTime < duration)
-        {
-            float verticalSpeed = 0;
-
-            if (elapsedTime < 1f)
-                verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
-
-            MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity:true);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        MovementCompo.RigidbodyCompo.gravityScale = prevGravity;
-
-        float fallSpeed = -40f;
-        MovementCompo.SetVelocity(new Vector2(originalXMovement, fallSpeed), withYVelocity: true);
-        yield return new WaitUntil(() =>
-        {
-            return MovementCompo.RigidbodyCompo.velocity.y > fallSpeed;
-        });
-        healthCompo.TakeDamage(damagePercent, Vector2.zero, null, true);
-        MovementCompo.SetVelocity(new Vector2(originalXMovement, 0));
-        
-        Debug.Log("에어본 종료");
-    }
-
-    public void ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
-    {
-        if (IsUnderStatusEffect(statusEffect)) return;
+        if (IsUnderStatusEffect(statusEffect)) return null;
         _statusEffectBit |= (int)statusEffect;
-        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+        return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
-    public void ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
+    public StatusEffect ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
-        if (IsUnderStatusEffect(statusEffect)) return;
+        if (IsUnderStatusEffect(statusEffect)) return null;
         _statusEffectBit |= (int)statusEffect;
-        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+        return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
 
     public void RemoveStatusEffect(StatusBuffEffectEnum statusEffect)

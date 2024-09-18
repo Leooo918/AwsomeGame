@@ -19,6 +19,10 @@ public class PlayerThrowState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        if (player.canAttackWithNatureSync == false)
+            player.isNatureSync = false;
+
         _projectary.gameObject.SetActive(true);
         player.PlayerInput.OnUseQuickSlot += HandleThrow;
         player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(player.PlayerInput.XInput));

@@ -28,5 +28,11 @@ MonoBehaviour:
     0.2\uCD08 \uC99D\uAC00(\uCD5C\uB300 10\uD68C)"
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 13
+      level: 0
+  - infos:
+    - effectEnum: 13
+      level: 1
+  - infos:
+    - effectEnum: 13
       level: 2

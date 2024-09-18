@@ -17,13 +17,16 @@ public class PlayerNormalAttackState : PlayerState
     {
         base.Enter();
 
+        if (player.canAttackWithNatureSync == false)
+            player.isNatureSync = false;
+
         //시간이 지나고 공격하면 콤보카운터 초기화
         if (player.lastAttackTime + playerNormalAttackSO.attackComboDragTime <= Time.time)
             player.ComboCounter = 0;
 
         AttackInfo attackInfo = playerNormalAttackSO.attackInfos[player.ComboCounter];
         attackInfo.damage =
-            (int)(attackInfo.attackMultiplier * player.Stat.GetStatByEnum(StatType.Damage).GetValue());
+            (int)(attackInfo.attackMultiplier * player.Stat.physicalDamageInflict.GetValue());
 
         playerAttack.SetCurrentAttackInfo(attackInfo);
 
@@ -47,6 +50,5 @@ public class PlayerNormalAttackState : PlayerState
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
-
     }
 }

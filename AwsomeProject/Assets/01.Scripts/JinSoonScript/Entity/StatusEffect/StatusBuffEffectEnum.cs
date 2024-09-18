@@ -4,10 +4,11 @@ using UnityEngine;
 
 public enum StatusBuffEffectEnum
 {
-    //IncreaseKnockback = 2, //넉백 증가
-    //NatureSync = 16, //자연동화
-    //Strength = 32, //힘
-    //Resistance = 32, //받는 데미지 감소
+    IncreaseKnockback = 2, //넉백 증가
+    NatureSync = 16, //자연동화
+    Strength = 32, //힘
+    Resistance = 64, //받는 데미지 감소
+    Speed = 128, //데미지 감소
 }
 
 public enum StatusDebuffEffectEnum

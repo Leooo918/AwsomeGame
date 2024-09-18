@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class SlowdownStatusEffect : StatusEffect
 {
-    private float[] _percentForLevel = { -0.1f, -0.2f, -0.3f };
+    private float[] _percentWithLevel = { -0.1f, -0.2f, -0.3f };
 
     public override void ApplyEffect(Entity target, float cooltime)
     {
         base.ApplyEffect(target, cooltime);
 
-        _target.Stat.moveSpeed.AddModifierByPercent(_percentForLevel[level]);
+        _target.Stat.moveSpeed.AddModifierByPercent(_percentWithLevel[level]);
     }
 
     public override void OnEnd()
     {
         base.OnEnd();
-        _target.Stat.moveSpeed.RemoveModifierByPercent(_percentForLevel[level]);
+        _target.Stat.moveSpeed.RemoveModifierByPercent(_percentWithLevel[level]);
     }
 }

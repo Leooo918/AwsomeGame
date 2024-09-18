@@ -6,12 +6,13 @@ using UnityEngine;
 public abstract class StatusEffect
 {
     private float _startTime;
-    private float _cooltime;
+    protected float _cooltime;
     protected Entity _target;
     private bool _isBuffEffect;
     private StatusBuffEffectEnum _buffEnum;
     private StatusDebuffEffectEnum _debuffEnum;
     public int level;
+    public Entity owner;
 
     public void Init(StatusBuffEffectEnum statusEnum)
     {

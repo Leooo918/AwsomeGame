@@ -115,8 +115,13 @@ public class Player : Entity
     [HideInInspector] public Vector2 PortionThrowingDir;
     [HideInInspector] public bool canDash = false;
 
+    [HideInInspector] public bool isNatureSync = false;
+    [HideInInspector] public bool canAttackWithNatureSync;
+
     public Transform CurrentPushTrm { get; set; }
     public GrowingGrass CurrentVine { get; set; }
+
+    public Action<Entity> OnKilled;
 
     public GameObject testObject;
 

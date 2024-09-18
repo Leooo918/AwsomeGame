@@ -111,9 +111,9 @@ public class Slime : Enemy<SlimeStateEnum>
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
-    public override void AirBorn(float duration, int damagePercent)
+    public override void AirBorn(float duration)
     {
-        base.AirBorn(duration, damagePercent);
+        base.AirBorn(duration);
         if (IsDead) return;
         airBornDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.AirBorn);
