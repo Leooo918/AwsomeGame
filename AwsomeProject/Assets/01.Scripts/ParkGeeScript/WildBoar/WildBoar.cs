@@ -79,6 +79,15 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stun(float duration)
     {
+        base.Stun(duration);
+        if (IsDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(WildBoarEnum.Stun);
+    }
+
+    public override void Stone(float duration)
+    {
+        base.Stone(duration);
         if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(WildBoarEnum.Stun);
