@@ -124,6 +124,7 @@ public class Player : Entity
     public Action<Entity> OnKilled;
 
     public GameObject testObject;
+    public Spike spike;
 
 
     protected override void Awake()

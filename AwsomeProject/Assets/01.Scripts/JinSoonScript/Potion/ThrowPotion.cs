@@ -44,12 +44,11 @@ public class ThrowPotion : Potion
                     
                 }
             }
-            foreach(Effect effect in effects)
-            {
-                effect.SetAffectedTargets(list);
-                effect.ApplyEffect();
-            }
-
+        }
+        foreach (Effect effect in effects)
+        {
+            effect.SetAffectedTargets(list);
+            effect.ApplyEffect();
         }
     }
 

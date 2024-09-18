@@ -27,10 +27,26 @@ MonoBehaviour:
     \uD06C\uAE30 100% \uC0C1\uC2B9"
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 17
+      level: 0
+    maxDetactEntity: 0
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 17
       level: 1
-  maxDetactEntity: 1
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 459008
-  range: 5
+    maxDetactEntity: 0
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 17
+      level: 2
+    maxDetactEntity: 0
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3

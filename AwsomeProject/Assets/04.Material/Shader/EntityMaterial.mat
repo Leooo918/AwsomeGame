@@ -57,9 +57,10 @@ Material:
     - _DissolveWidth: 0.01
     - _Fade: 1
     - _IsSton: 0
+    - _IsStone: 0
     - _IsWhite: 0
     - _NoiseScale: 60
     - _White: 0
     m_Colors:
-    - _DissolveColor: {r: 0, g: 12.996038, b: 11.433751, a: 0}
+    - _DissolveColor: {r: 7.2356877, g: 766.99567, b: 683.0444, a: 0}
   m_BuildTextureStacks: []

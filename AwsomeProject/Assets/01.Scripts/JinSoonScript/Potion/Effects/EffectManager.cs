@@ -22,6 +22,7 @@ public enum EffectTypeEnum
     Strength, //힘
     Resistance, //받는 데미지 감소
     Speed, //이속 증가
+    Spike, //이속 증가
 }
 
 public static class EffectManager
@@ -45,6 +46,7 @@ public static class EffectManager
             { EffectTypeEnum.NatureSync, () => new NatureSyncEffect() },
             { EffectTypeEnum.Strength, () => new StrengthEffect() },
             { EffectTypeEnum.Fragile, () => new FragileEffect() },
+            { EffectTypeEnum.Spike, () => new SpikeEffect() },
         };
     }
 
