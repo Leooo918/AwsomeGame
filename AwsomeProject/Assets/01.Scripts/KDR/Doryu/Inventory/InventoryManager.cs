@@ -77,15 +77,21 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.WindPotion]);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.WindPotion], level:2);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.WeakPotion], level:2);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.StonePotion], level:2);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion], level:2);
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.PoisonPotion]);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.WindPotion], level: 2);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.WeakPotion], level: 2);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.StonePotion], level: 2);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.HealPotion], level: 2);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPortion]);
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion]);
         }
         #endregion
 

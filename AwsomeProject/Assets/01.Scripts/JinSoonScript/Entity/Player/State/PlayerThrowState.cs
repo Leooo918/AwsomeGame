@@ -19,6 +19,10 @@ public class PlayerThrowState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        if (player.canAttackWithNatureSync == false)
+            player.isNatureSync = false;
+
         _projectary.gameObject.SetActive(true);
         player.PlayerInput.OnUseQuickSlot += HandleThrow;
         player.animatorCompo.SetInteger(_inputHash, Mathf.CeilToInt(player.PlayerInput.XInput));
@@ -57,7 +61,7 @@ public class PlayerThrowState : PlayerState
     {
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
         ThrowPotion potion = GameObject.Instantiate(QuickSlotManager.Instance.throwPotion, _throwPosTrm.position, Quaternion.identity);
-        potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot());
+        potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot(), player);
         potion.GetComponent<Rigidbody2D>().AddForce(dir * 30, ForceMode2D.Impulse);
         stateMachine.ChangeState(PlayerStateEnum.Idle);
     }

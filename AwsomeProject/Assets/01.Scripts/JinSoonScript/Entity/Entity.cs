@@ -6,11 +6,11 @@ using UnityEngine.Events;
 public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
     #region ComponentRegion
-    [SerializeField] private EntityStat stat;
+    [field:SerializeField] public EntityStatSO Stat { get; private set; }
     [SerializeField] private EntitySkillSO entitySkillSO;
-    public EntityStat Stat => stat;
     public EntitySkillSO EntitySkillSO => entitySkillSO;
 
+    public EntityVisual visualCompo { get; protected set; }
     public Animator animatorCompo { get; protected set; }
     public SpriteRenderer spriteRendererCompo { get; protected set; }
     public Collider2D colliderCompo { get; protected set; }
@@ -34,6 +34,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float wallCheckBoxHeight;
 
+    public float moveSpeed => Stat.moveSpeed.GetValue();
     protected float knockbackDuration = 0.5f;
     protected Coroutine knockbackCoroutine;
     public bool isKnockbacked { get; protected set; }
@@ -65,6 +66,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     protected virtual void Awake()
     {
         Transform visualTrm = transform.Find("Visual");
+        visualCompo = visualTrm.GetComponent<EntityVisual>();
         animatorCompo = visualTrm.GetComponent<Animator>();
         spriteRendererCompo = visualTrm.GetComponent<SpriteRenderer>();
         rigidbodyCompo = GetComponent<Rigidbody2D>();
@@ -74,7 +76,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         MovementCompo = GetComponent<EntityMovement>();
         MovementCompo.Initialize(this);
 
-        stat = Instantiate(stat);
+        Stat = Instantiate(Stat);
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
 
         _statusEffectManager = new StatusEffectManager(this);
@@ -161,12 +163,13 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     }
 
     public virtual void Stun(float duration) { }
-
-    public virtual void AirBorn(float duration)
+    public virtual void Stone(float duration)
     {
-        Debug.Log("에어본");
-        StartCoroutine(AirBornDurationCoroutine(duration));
+        visualCompo.OnStone(true);
+        StartDelayCallBack(duration, () => visualCompo.OnStone(false));
     }
+
+    public virtual void AirBorn(float duration) { }
 
     public virtual void UpArmor(int figure)
     {
@@ -213,38 +216,28 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         callBack?.Invoke();
     }
 
-    IEnumerator AirBornDurationCoroutine(float duration)
+    public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
-        float elapsedTime = 0.0f;
-        float initialVerticalSpeed = 5.0f;
-        Vector2 originalVelocity = rigidbodyCompo.velocity;
-
-        rigidbodyCompo.velocity = new Vector2(0, rigidbodyCompo.velocity.y);
-
-        while (elapsedTime < duration)
-        {
-            float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
-
-            rigidbodyCompo.velocity = new Vector2(0, verticalSpeed);
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        float fallSpeed = -40f;
-        rigidbodyCompo.velocity = new Vector2(originalVelocity.x, fallSpeed);
-        Debug.Log("에어본 종료");
+        if (IsUnderStatusEffect(statusEffect)) return null;
+        _statusEffectBit |= (int)statusEffect;
+        return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+    }
+    public StatusEffect ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
+    {
+        if (IsUnderStatusEffect(statusEffect)) return null;
+        _statusEffectBit |= (int)statusEffect;
+        return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
 
-    public void ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
+    public void RemoveStatusEffect(StatusBuffEffectEnum statusEffect)
     {
-        _statusEffectBit |= (int)statusEffect;
-        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+        if (IsUnderStatusEffect(statusEffect) == false) return;
+        _statusEffectBit &= ~(int)statusEffect;
     }
-    public void ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
+    public void RemoveStatusEffect(StatusDebuffEffectEnum statusEffect)
     {
-        _statusEffectBit |= (int)statusEffect;
-        _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
+        if (IsUnderStatusEffect(statusEffect) == false) return;
+        _statusEffectBit &= ~(int)statusEffect;
     }
 
     public bool IsUnderStatusEffect(StatusBuffEffectEnum statusEffect)

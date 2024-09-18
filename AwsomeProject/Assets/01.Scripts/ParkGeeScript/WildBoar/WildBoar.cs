@@ -10,7 +10,8 @@ public enum WildBoarEnum
     Rush,
     Groggy,
     Stun,
-    Dead
+    AirBorn,
+    Dead,
 }
 
 public enum WildBoarSkillEnum
@@ -44,7 +45,6 @@ public class WildBoar : Enemy<WildBoarEnum>
             item.skill.SetOwner(this);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
         _rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
     }
@@ -69,8 +69,9 @@ public class WildBoar : Enemy<WildBoarEnum>
         attackDistance = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush).attackDistance.GetValue();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         StateMachine.CurrentState.UpdateState();
     }
 
@@ -78,6 +79,15 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stun(float duration)
     {
+        base.Stun(duration);
+        if (IsDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(WildBoarEnum.Stun);
+    }
+
+    public override void Stone(float duration)
+    {
+        base.Stone(duration);
         if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(WildBoarEnum.Stun);
@@ -97,6 +107,14 @@ public class WildBoar : Enemy<WildBoarEnum>
         {
             //_rushSkill.skill.UseSkill();
         }
+    }
+
+    public override void AirBorn(float duration)
+    {
+        base.AirBorn(duration);
+        if (IsDead) return;
+        airBornDuration = duration;
+        StateMachine.ChangeState(WildBoarEnum.AirBorn);
     }
 
     public void Attack()

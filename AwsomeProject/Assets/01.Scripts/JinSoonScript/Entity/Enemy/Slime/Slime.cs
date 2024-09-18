@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum SlimeStateEnum
@@ -48,7 +49,6 @@ public class Slime : Enemy<SlimeStateEnum>
             item.skill.SetOwner(this);
         }
 
-        moveSpeed = Stat.moveSpeed.GetValue();
         PatrolTime = EnemyStat.patrolTime.GetValue();
         PatrolDelay = EnemyStat.patrolDelay.GetValue();
         detectingDistance = EnemyStat.detectingDistance.GetValue();
@@ -97,6 +97,15 @@ public class Slime : Enemy<SlimeStateEnum>
 
     public override void Stun(float duration)
     {
+        base.Stun(duration);
+        if (IsDead) return;
+        stunDuration = duration;
+        StateMachine.ChangeState(SlimeStateEnum.Stun);
+    }
+
+    public override void Stone(float duration)
+    {
+        base.Stone(duration);
         if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.Stun);

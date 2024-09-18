@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DrinkPotion : Potion
 {
-    public override void Init(QuickSlot slot)
+    public override void Init(QuickSlot slot, Entity owner)
     {
         //DrinkPotionItemSO drinkPotionItemSO = slot.assignedItem.itemSO as DrinkPotionItemSO;
-        base.Init(slot);
+        base.Init(slot, owner);
     }
     public override void UsePotion()
     {

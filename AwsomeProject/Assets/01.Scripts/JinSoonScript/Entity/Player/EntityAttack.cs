@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
 
         for (int i = 0; i < detected; i++)
         {
-            if (colls[i].TryGetComponent<IDamageable>(out IDamageable health))
+            if (colls[i].TryGetComponent(out IDamageable health))
             {
                 knockBackPower.x *= Mathf.Sign(colls[i].transform.position.x - transform.position.x);
                 health.TakeDamage(damage, knockBackPower, player);

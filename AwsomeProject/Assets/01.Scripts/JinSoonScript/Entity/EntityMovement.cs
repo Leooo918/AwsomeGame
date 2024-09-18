@@ -7,7 +7,7 @@ public class EntityMovement : MonoBehaviour
 {
     protected Entity _owner;
     public Rigidbody2D RigidbodyCompo { get; protected set; }
-    protected Vector2 _velocity;
+    protected float _xVelocity;
 
     public void Initialize(Entity owner)
     {
@@ -17,12 +17,16 @@ public class EntityMovement : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        RigidbodyCompo.velocity = new Vector2(_velocity.x,RigidbodyCompo.velocity.y);
+        RigidbodyCompo.velocity = new Vector2(_xVelocity, RigidbodyCompo.velocity.y);
     }
 
-    public virtual void SetVelocity(Vector2 velocity, bool doNotFlip = false)
+    public virtual void SetVelocity(Vector2 velocity, bool doNotFlip = false, bool withYVelocity = false)
     {
-        _velocity = velocity;
+        _xVelocity = velocity.x;
+        if (withYVelocity)
+        {
+            RigidbodyCompo.velocity = new Vector2(RigidbodyCompo.velocity.x, velocity.y);
+        }
         if (!doNotFlip)
         {
             _owner.FlipController(velocity.x);
@@ -31,10 +35,10 @@ public class EntityMovement : MonoBehaviour
 
     public virtual void StopImmediately(bool withYAxis = false)
     {
-        _velocity.x = 0;
+        _xVelocity = 0;
         if (withYAxis)
         {
-            _velocity = Vector2.zero;
+            RigidbodyCompo.velocity = Vector2.zero;
         }
     }
 }

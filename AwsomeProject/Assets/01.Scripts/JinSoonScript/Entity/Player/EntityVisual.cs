@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class EntityVisual : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-    private Material playerMat;
-    [SerializeField] private float whiteTime = 0.15f;
+    private SpriteRenderer _spriteRenderer;
+    private Material _entityMat;
+    [SerializeField] private float _whiteTime = 0.15f;
     [SerializeField] private GameObject _skillEffect;
+
+    private readonly int BlinkShaderHash = Shader.PropertyToID("_IsWhite");
+    private readonly int StoneShaderHash = Shader.PropertyToID("_IsStone");
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        playerMat = spriteRenderer.material;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _entityMat = _spriteRenderer.material;
     }
 
     private void Update()
@@ -36,13 +39,18 @@ public class EntityVisual : MonoBehaviour
 
     public void Hit()
     {
-        StartCoroutine("HitRoutine");
+        StartCoroutine(HitRoutine());
+    }
+    public void OnStone(bool isOn)
+    {
+        Debug.Log(isOn);
+        _entityMat.SetFloat(StoneShaderHash, isOn ? 1 : 0);
     }
 
     private IEnumerator HitRoutine()
     {
-        playerMat.SetFloat("_IsWhite", 1);
-        yield return new WaitForSeconds(whiteTime);
-        playerMat.SetFloat("_IsWhite", 0);
+        _entityMat.SetFloat(BlinkShaderHash, 1);
+        yield return new WaitForSeconds(_whiteTime);
+        _entityMat.SetFloat(BlinkShaderHash, 0);
     }
 }

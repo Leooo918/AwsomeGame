@@ -8,7 +8,7 @@ public enum PotionItemType
 {
     PoisonPotion,
     WindPotion,
-    HealPortion,
+    HealPotion,
     BoomPotion,
     StonePotion,
     ShapeHornePotion,
@@ -26,12 +26,6 @@ public enum QuickSlotOutLine
     Level,
 }
 
-[Serializable]
-public struct PotionInfos
-{
-    public PotionInfo[] infos;
-}
-
 public class PotionItemSO : ItemSO
 {
     [Space(20)]
@@ -41,12 +35,9 @@ public class PotionItemSO : ItemSO
     public string itemName;
     [TextArea(3, 20)]
     public string[] itemDescriptions;
-    public PotionInfos[] potionInfos;
-     
-    public PotionInfo[] GetItemInfo(int level = 0)
-    {
-        return potionInfos[level].infos;
-    }
+
+    public virtual PotionInfo[] GetPotionEffectInfo(int level = 0) { return null; }
+
     public override string GetItemDescription(int level = 0)
     {
         return itemDescriptions[level];

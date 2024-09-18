@@ -26,9 +26,31 @@ MonoBehaviour:
   potionInfos:
   - infos:
     - effectEnum: 0
-      level: 1
-  maxDetactEntity: 1
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 459008
-  range: 5
+      level: 3
+    - effectEnum: 1
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 0
+      level: 4
+    - effectEnum: 1
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 0
+      level: 5
+    - effectEnum: 1
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3

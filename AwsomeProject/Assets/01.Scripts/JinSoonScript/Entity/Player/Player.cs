@@ -33,7 +33,7 @@ public class Player : Entity
     {
         get
         {
-            return Stat.moveSpeed.GetValue();
+            return moveSpeed;
         }
         private set { }
     }
@@ -115,8 +115,13 @@ public class Player : Entity
     [HideInInspector] public Vector2 PortionThrowingDir;
     [HideInInspector] public bool canDash = false;
 
+    [HideInInspector] public bool isNatureSync = false;
+    [HideInInspector] public bool canAttackWithNatureSync;
+
     public Transform CurrentPushTrm { get; set; }
     public GrowingGrass CurrentVine { get; set; }
+
+    public Action<Entity> OnKilled;
 
     public GameObject testObject;
 
@@ -127,7 +132,7 @@ public class Player : Entity
         _gravityScale = rigidbodyCompo.gravityScale;
         _hpDecator?.Init((int)healthCompo.curHp);
 
-        MoveSpeed = Stat.moveSpeed.GetValue();
+        MoveSpeed = moveSpeed;
         JumpForce = Stat.jumpForce.GetValue();
 
         SkillSO = gameObject.AddComponent<PlayerSkill>();
@@ -191,11 +196,6 @@ public class Player : Entity
         this.stunDuration = duration;
 
         StateMachine.ChangeState(PlayerStateEnum.Stun);
-    }
-
-    public override void AirBorn(float duration)
-    {
-
     }
 
     //public override void UpArmor(float figure)

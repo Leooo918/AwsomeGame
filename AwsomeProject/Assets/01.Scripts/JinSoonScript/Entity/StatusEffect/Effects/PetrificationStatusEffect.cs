@@ -7,6 +7,6 @@ public class PetrificationStatusEffect : StatusEffect
     public override void ApplyEffect(Entity target, float cooltime)
     {
         base.ApplyEffect(target, cooltime);
-        target.Stun(cooltime);
+        target.Stone(cooltime);
     }
 }

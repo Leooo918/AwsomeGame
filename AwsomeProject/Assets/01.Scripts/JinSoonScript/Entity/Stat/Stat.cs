@@ -21,8 +21,11 @@ public class Stat
         foreach (float value in modifiers)
             finalValue += value;
 
+        float totalPercent = 0;
         foreach (float value in percentModifiers)
-            finalValue += finalValue / value;
+            totalPercent += value;
+
+        finalValue += finalValue * totalPercent;
 
         return finalValue;
     }
