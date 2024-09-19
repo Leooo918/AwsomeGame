@@ -80,17 +80,17 @@ public class Slime : Enemy<SlimeStateEnum>
         base.Update();
         StateMachine.CurrentState.UpdateState();
 
-        for (int i = 0; i < notReady.Count; ++i)
-        {
-            var item = notReady[i];
-            if (item.Item2 + item.Item1.skillCoolTime.GetValue() < Time.time)
-            {
-                notReady.Remove(item);
-                if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
-                readySkill.Push(item.Item1);
-                --i;
-            }
-        }
+        //for (int i = 0; i < notReady.Count; ++i)
+        //{
+        //    var item = notReady[i];
+        //    if (item.Item2 + item.Item1.skillCoolTime.GetValue() < Time.time)
+        //    {
+        //        notReady.Remove(item);
+        //        if (readySkill.Count <= 0) attackDistance = item.Item1.attackDistance.GetValue();
+        //        readySkill.Push(item.Item1);
+        //        --i;
+        //    }
+        //}
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
@@ -170,7 +170,7 @@ public class Slime : Enemy<SlimeStateEnum>
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(SlimeStateEnum.Chase);
+        StateMachine.ChangeState(SlimeStateEnum.Idle);
     }
 
     private void OnDie(Vector2 dir)

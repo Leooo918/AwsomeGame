@@ -8,8 +8,11 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
     private Slime _slime;
 
     private float _turningDelay = 2f;
-    private float _lastTurnTime;
+    private float _startTime;
+    private float _idleCool;
     private Player _player;
+
+    private Vector2 _moveDir;
 
     public SlimePatrolState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
@@ -20,36 +23,26 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
-        _lastTurnTime = Time.time;
+        _startTime = Time.time;
+        _idleCool = Random.Range(1f, 2f);
+
+        _moveDir = Random.Range(0, 2) == 0 ? Vector2.right : Vector2.left;
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        if (_lastTurnTime + _turningDelay < Time.time)
-        {
-            enemy.Flip();
-            _lastTurnTime = Time.time;
-        }
+        enemy.MovementCompo.SetVelocity(_moveDir * enemy.EnemyStat.moveSpeed.GetValue());
 
-        if (_slime.moveAnim == true)
-            enemy.MovementCompo.SetVelocity(new Vector2(enemy.FacingDir * enemy.moveSpeed, 0), false);
-
-        Player player = enemy.IsPlayerDetected();
-
-        float dist = dist = Vector3.Distance(_player.transform.position + Vector3.up, enemy.transform.position);
-        if ((player != null && enemy.IsObstacleInLine(dist) == false) || dist < 3)
+        if (enemy.IsPlayerDetected() != null)
         {
             enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
-            return;
         }
 
-        if ((enemy.IsGroundDetected() == false || enemy.IsWallDetected() == true))
+        if (_startTime + _idleCool < Time.time)
         {
-            enemy.Flip();
-            _lastTurnTime = Time.time;
-            return;
+            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
         }
     }
 }

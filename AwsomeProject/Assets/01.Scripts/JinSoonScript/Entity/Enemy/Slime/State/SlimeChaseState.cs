@@ -1,16 +1,15 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SlimeChaseState : EnemyState<SlimeStateEnum>
 {
     private Slime _slime;
-    private Transform _playerTrm;
-    private SlimeJumpSkillSO _jumpSkill;
-    private bool _canJump = false;
+    private Player _player;
 
     public SlimeChaseState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         _slime = enemy as Slime;
-        _playerTrm = PlayerManager.Instance.PlayerTrm;
+        _player = PlayerManager.Instance.Player;
     }
 
     public override void Exit()
@@ -22,38 +21,13 @@ public class SlimeChaseState : EnemyState<SlimeStateEnum>
     {
         base.UpdateState();
 
-        //거리가 멀어지면 걍 돌아가
-        float dist = Vector3.Distance(_playerTrm.position, enemy.transform.position);
-
-        if (dist > enemy.detectingDistance + 5)
+        if ((_player = enemy.IsPlayerDetected()) && enemy.IsPlayerInAttackRange() == null)
         {
-            enemy.MissPlayer();
-            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
+            Vector3 moveDir = ((_player.transform.position.x - _slime.transform.position.x) * Vector3.right).normalized;
+
+            enemy.MovementCompo.SetVelocity(moveDir * enemy.EnemyStat.moveSpeed.GetValue());
         }
-
-        //공격 범위내에 들어오면 공격!
-        if (dist <= enemy.attackDistance) _slime.Attack();
-
-        //앞에 땅이 없다면 지켜만 봐
-        if (_slime.CheckFront() == false) return;
-
-        //벽이 가로막고 있으면 점프
-        _canJump = _slime.IsGroundDetected();
-        if (_slime.IsWallDetected() == true && _canJump == true) Jump();
-
-        //계속 쫒아가게 해주고
-        Vector2 dir = (_playerTrm.position - enemy.transform.position).normalized;
-        if (Mathf.Sign(dir.x) != Mathf.Sign(enemy.FacingDir)) enemy.Flip();
-
-        if (_slime.moveAnim == true)
-            enemy.MovementCompo.SetVelocity(new Vector2(dir.x * enemy.Stat.moveSpeed.GetValue(), enemy.rigidbodyCompo.velocity.y));
-    }
-
-    private void Jump()
-    {
-        if (_jumpSkill == null)
-            _jumpSkill = _slime.Skills.GetSkillByEnum(SlimeSkillEnum.JumpAttack) as SlimeJumpSkillSO;
-
-        enemy.MovementCompo.SetVelocity(new Vector2(0, _jumpSkill.jumpPower.GetValue()));
+        else
+            enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
     }
 }

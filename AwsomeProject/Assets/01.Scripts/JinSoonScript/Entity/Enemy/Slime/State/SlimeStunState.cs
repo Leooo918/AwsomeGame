@@ -9,15 +9,5 @@ public class SlimeStunState : EnemyState<SlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.CanStateChangeable = false;
-        enemy.StartDelayCallBack(enemy.stunDuration, () =>
-        {
-            enemy.CanStateChangeable = true;
-            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
-            if (enemy.healthCompo.curHp < 0)
-            {
-                enemyStateMachine.ChangeState(SlimeStateEnum.Dead);
-            }
-        });
     }
 }

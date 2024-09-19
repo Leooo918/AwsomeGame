@@ -11,11 +11,5 @@ public class SlimeAirBornState : EnemyState<SlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.CanStateChangeable = false;
-        enemy.StartDelayCallBack(enemy.airBornDuration, () =>
-        {
-            enemy.CanStateChangeable = true;
-            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
-        });
     }
 }

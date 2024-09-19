@@ -22,6 +22,7 @@ public abstract class Enemy<T> : Entity where T : Enum
     [Header("Attack Settings")]
     public float runAwayDistance;
     [HideInInspector] public float lastAttackTime;
+    [HideInInspector] public float attackCool;
 
     #endregion
 
@@ -74,12 +75,32 @@ public abstract class Enemy<T> : Entity where T : Enum
         Player playerCompo = player.GetComponent<Player>();
         float dist = Vector2.Distance(player.transform.position, transform.position);
 
-        if (dist < 2.5f) return playerCompo;
-
-        float dir = player.transform.position.x - transform.position.x;
-
-        if (dir > 0 == (FacingDir > 0)) return playerCompo;
+        if (dist < detectingDistance) return playerCompo;
         else return null;
+
+        //float dir = player.transform.position.x - transform.position.x;
+
+        //if (dir > 0 == (FacingDir > 0)) return playerCompo;
+        //else return null;
+    }
+    public virtual Player IsPlayerInAttackRange()
+    {
+        if (PlayerManager.Instance.Player.isNatureSync) return null;
+
+        Collider2D player = Physics2D.OverlapCircle(transform.position, attackDistance, whatIsPlayer);
+        if (player == null)
+            return null;
+
+        Player playerCompo = player.GetComponent<Player>();
+        float dist = Vector2.Distance(player.transform.position, transform.position);
+
+        if (dist < attackDistance) return playerCompo;
+        else return null;
+
+        //float dir = player.transform.position.x - transform.position.x;
+
+        //if (dir > 0 == (FacingDir > 0)) return playerCompo;
+        //else return null;
     }
 
     /// <summary>
