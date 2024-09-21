@@ -16,12 +16,24 @@ MonoBehaviour:
     baseValue: 150
     modifiers: []
     percentModifiers: []
+  recoveryReceive:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
   armor:
     baseValue: 10
     modifiers: []
     percentModifiers: []
-  damage:
-    baseValue: 10
+  physicalDamageInflict:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  globalDamageInflict:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  damageReceive:
+    baseValue: 1
     modifiers: []
     percentModifiers: []
   moveSpeed:
@@ -51,6 +63,10 @@ MonoBehaviour:
     percentModifiers: []
   detectingDistance:
     baseValue: 15
+    modifiers: []
+    percentModifiers: []
+  attackDistance:
+    baseValue: 6.5
     modifiers: []
     percentModifiers: []
   dropItems: []

@@ -21,8 +21,8 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     [Header("Attack Settings")]
     public float runAwayDistance;
+    public float attackCool;
     [HideInInspector] public float lastAttackTime;
-    [HideInInspector] public float attackCool;
 
     #endregion
 
@@ -52,6 +52,7 @@ public abstract class Enemy<T> : Entity where T : Enum
             catch (Exception e)
             {
                 Debug.LogError($"Enemy {scriptName} : no state [ {typeName} ]");
+                Debug.LogError($"{scriptName}{typeName}State");
                 Debug.LogError(e);
             }
         }
@@ -83,34 +84,32 @@ public abstract class Enemy<T> : Entity where T : Enum
         //if (dir > 0 == (FacingDir > 0)) return playerCompo;
         //else return null;
     }
-    public virtual Player IsPlayerInAttackRange()
+    public virtual Player IsPlayerInAttackRange(float width = -1)
     {
         if (PlayerManager.Instance.Player.isNatureSync) return null;
 
         Collider2D player = Physics2D.OverlapCircle(transform.position, attackDistance, whatIsPlayer);
-        if (player == null)
+        Collider2D subPlayer = null;
+        if (width != -1)
+            subPlayer = Physics2D.OverlapCircle(transform.position, attackDistance - width, whatIsPlayer);
+        if (player == null || subPlayer != null)
             return null;
 
         Player playerCompo = player.GetComponent<Player>();
-        float dist = Vector2.Distance(player.transform.position, transform.position);
 
-        if (dist < attackDistance) return playerCompo;
-        else return null;
-
-        //float dir = player.transform.position.x - transform.position.x;
-
-        //if (dir > 0 == (FacingDir > 0)) return playerCompo;
-        //else return null;
+        return playerCompo;
     }
 
     /// <summary>
-    /// 플레이어까지 직선상에 적이있는지
+    /// 플레이어까지 직선상에 장애물이있는지
     /// </summary>
     /// <param name="distance">플레이어까지의 거리</param>
     /// <returns></returns>
     public virtual bool IsObstacleInLine(float distance)
     {
         Vector2 dir = ((PlayerManager.Instance.PlayerTrm.position + Vector3.up) - transform.position).normalized;
+
+        Debug.DrawRay(transform.position, dir, Color.red);
 
         return Physics2D.Raycast(transform.position, dir, distance, whatIsObstacle);
     }
@@ -119,14 +118,14 @@ public abstract class Enemy<T> : Entity where T : Enum
     /// 진행방향 앞쪽에 바닥이있는지 확인
     /// </summary>
     /// <returns></returns>
-    public bool CheckFront() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);
+    public bool IsFrontGround() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);
     #endregion
 
     public void MissPlayer() => playerDetected = false;
 
     public void OnCompletelyDie()
     {
-        //풀링 하면 여기에다가 추가해주면 도미
+        //풀링 하면 여기에다가 추가해주면 도미 
         StopAllCoroutines();
         Destroy(gameObject);
     }

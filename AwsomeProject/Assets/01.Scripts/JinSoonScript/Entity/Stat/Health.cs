@@ -60,7 +60,8 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (owner.IsDead || isInvincible) return;
         
-        damage = (int)(damage * dealer.Stat.globalDamageInflict.GetValue());
+        if (dealer != null)
+            damage = (int)(damage * dealer.Stat.globalDamageInflict.GetValue());
         damage = (int)(damage * owner.Stat.damageReceive.GetValue());
 
         if (isPercent)

@@ -7,8 +7,6 @@ public class SlimeIdleState : EnemyState<SlimeStateEnum>
 
     private float _startTime;
     private float _patrolCool;
-    private Player _player;
-    private Slime _slime;
 
 
     public override void Enter()
@@ -16,6 +14,7 @@ public class SlimeIdleState : EnemyState<SlimeStateEnum>
         base.Enter();
 
         enemy.MovementCompo.StopImmediately();
+
 
         _startTime = Time.time;
         _patrolCool = Random.Range(1f, 3f);
@@ -25,18 +24,37 @@ public class SlimeIdleState : EnemyState<SlimeStateEnum>
     {
         base.UpdateState();
 
-
-        if ((_player = enemy.IsPlayerInAttackRange()) && _slime.lastAttackTime + _slime.attackCool < Time.time)
+        Player player;
+        if (player = enemy.IsPlayerInAttackRange())
         {
-            _slime.lastAttackTime = Time.time;
-            enemyStateMachine.ChangeState(SlimeStateEnum.JumpAttack);
+            if (enemy.IsWallDetected())
+                enemy.FlipController(player.transform.position.x - enemy.transform.position.x);
+            else if (enemy.lastAttackTime + enemy.attackCool < Time.time)
+            {
+                enemy.lastAttackTime = Time.time;
+                enemyStateMachine.ChangeState(SlimeStateEnum.JumpAttack);
+            }
+            else if (enemy.IsPlayerInAttackRange(2) == null)
+            {
+                int prevFacing = enemy.FacingDir;
+                enemy.FlipController(enemy.transform.position.x - player.transform.position.x);
+                if (enemy.IsFrontGround())
+                {
+                    enemy.FlipController(prevFacing);
+                    enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
+                }
+                else
+                    enemy.FlipController(prevFacing);
+            }
         }
-        else if (enemy.IsPlayerDetected() != null)
+        else if (player = enemy.IsPlayerDetected())
         {
-            enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
+            if (enemy.IsWallDetected())
+                enemy.FlipController(player.transform.position.x - enemy.transform.position.x);
+            else
+                enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
         }
-
-        if (_startTime + _patrolCool < Time.time)
+        else if (_startTime + _patrolCool < Time.time)
         {
             enemyStateMachine.ChangeState(SlimeStateEnum.Patrol);
         }

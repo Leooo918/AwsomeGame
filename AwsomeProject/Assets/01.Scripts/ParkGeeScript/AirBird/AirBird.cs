@@ -20,39 +20,14 @@ public enum AirBirdSkillEnum
 
 public class AirBird : Enemy<AirBirdEnum>
 {
-    public AirBirdSkill Skills { get; private set; }
-
     [HideInInspector] public bool moveAnima = false;
     [HideInInspector] public bool readyFlip = false;
 
-    [SerializeField] private GameObject _featherPf;
-    private Transform _playerTrm;
-
-    public GameObject FeatherPf => _featherPf;
-    private SkillSO _shootSkill;
-
-    private float _skillReuseTime;
-
-    public void SetAfterDelay(float time) => _skillReuseTime = Time.time + time;
+    public Feather featherPrefab;
 
     protected override void Awake()
     {
         base.Awake();
-        _playerTrm = PlayerManager.Instance.PlayerTrm;
-        Skills = gameObject.AddComponent<AirBirdSkill>();
-        Skills.Init(EntitySkillSO);
-
-        foreach (var item in EntitySkillSO.skills)
-        {
-            item.skill.SetOwner(this);
-            Type type = item.skill.GetType();
-            gameObject.AddComponent(type);
-        }
-
-        detectingDistance = EnemyStat.detectingDistance.GetValue();
-
-        _shootSkill = Skills.GetSkillByEnum(AirBirdSkillEnum.Shoot);
-        _skillReuseTime = Time.time;
     }
 
     private void OnEnable()
@@ -82,6 +57,7 @@ public class AirBird : Enemy<AirBirdEnum>
 
     public override void Stun(float duration)
     {
+        base.Stun(duration);
         if (IsDead) return;
         stunDuration = duration;
         StateMachine.ChangeState(AirBirdEnum.Stun);
@@ -91,19 +67,10 @@ public class AirBird : Enemy<AirBirdEnum>
     {
     }
 
-    public void TryAttack()
-    {
-        float dist = (_playerTrm.position - transform.position).magnitude;
-        if (_shootSkill.attackDistance.GetValue() < dist || _skillReuseTime > Time.time) return;
-
-        _shootSkill.skill.UseSkill();
-    }
-
-
     private void OnHit()
     {
         HitEvent?.Invoke();
-        StateMachine.ChangeState(AirBirdEnum.Shoot);
+        StateMachine.ChangeState(AirBirdEnum.Idle);
     }
 
     private void OnDie(Vector2 dir)

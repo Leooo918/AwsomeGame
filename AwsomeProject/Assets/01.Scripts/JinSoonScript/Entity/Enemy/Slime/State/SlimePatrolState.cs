@@ -27,6 +27,19 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
         _idleCool = Random.Range(1f, 2f);
 
         _moveDir = Random.Range(0, 2) == 0 ? Vector2.right : Vector2.left;
+
+        int prevFacing = enemy.FacingDir;
+        enemy.FlipController(_moveDir.x);
+        if (enemy.IsFrontGround() == false || enemy.IsWallDetected())
+        {
+            _moveDir *= -1;
+            enemy.Flip();
+            if (enemy.IsFrontGround() == false || enemy.IsWallDetected())
+            {
+                enemy.FlipController(prevFacing);
+                enemyStateMachine.ChangeState(SlimeStateEnum.Idle);
+            }
+        }
     }
 
     public override void UpdateState()
@@ -35,7 +48,7 @@ public class SlimePatrolState : EnemyState<SlimeStateEnum>
 
         enemy.MovementCompo.SetVelocity(_moveDir * enemy.EnemyStat.moveSpeed.GetValue());
 
-        if (enemy.IsPlayerDetected() != null)
+        if (enemy.IsPlayerDetected())
         {
             enemyStateMachine.ChangeState(SlimeStateEnum.Chase);
         }

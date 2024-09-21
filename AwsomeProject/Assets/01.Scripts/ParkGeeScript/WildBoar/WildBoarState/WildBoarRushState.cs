@@ -5,16 +5,14 @@ using UnityEngine;
 public class WildBoarRushState : EnemyState<WildBoarEnum>
 {
     private WildBoar _wildBoar;
-    private WildBoarRushSkillSO _rushSkill;
     private bool _isRushing = false;
-    private float _rushDir = 0;
-    private float _rushSpeed;
+    private Vector2 _rushDir;
+    private float _rushSpeed = 20f;
 
     public WildBoarRushState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName)
         : base(enemy, enemyStateMachine, animBoolName)
     {
         _wildBoar = enemy as WildBoar;
-        _rushSkill = enemy.EntitySkillSO.GetSkillSO("Rush") as WildBoarRushSkillSO;
     }
 
     public override void AnimationFinishTrigger()
@@ -29,8 +27,7 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         else
         {
             //´ë½¬ ³¡
-            enemy.MovementCompo.StopImmediately(false);
-            enemyStateMachine.ChangeState(WildBoarEnum.Move);
+            enemyStateMachine.ChangeState(WildBoarEnum.Idle);
         }
     }
 
@@ -38,37 +35,35 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
     {
         base.Enter();
         _isRushing = false;
-        _rushDir = enemy.FacingDir;
-        _rushSpeed = _rushSkill.rushSpeed.GetValue();
+        _rushDir = Vector2.right * enemy.FacingDir;
         enemy.MovementCompo.StopImmediately(false);
     }
 
     public override void Exit()
     {
         _wildBoar.dashAttackCollider.SetActive(false);
-        enemy.MovementCompo.StopImmediately(false);
-        _wildBoar.SetAttackDelay(_rushSkill.skillCoolTime.GetValue());
         base.Exit();
     }
 
     public override void UpdateState()
     {
         base.UpdateState();
-        if (_isRushing)
-            enemy.MovementCompo.SetVelocity(new Vector2(_rushDir * _rushSpeed, 0));
 
-        if (enemy.CheckFront() == false)
+
+        if (enemy.IsFrontGround() == false)
         {
-            _isRushing = false;
-            enemy.MovementCompo.StopImmediately(true);
-            enemy.StartDelayCallBack(0.3f, () => enemyStateMachine.ChangeState(WildBoarEnum.Move));
+            enemyStateMachine.ChangeState(WildBoarEnum.Idle);
+            return;
         }
-        
+
         if (enemy.IsWallDetected() == true)
         {
             Vector2 dir = new Vector2(-enemy.FacingDir * 5, 10);
             enemy.KnockBack(dir);
             enemy.Stun(2);
         }
+
+        if (_isRushing)
+            enemy.MovementCompo.SetVelocity(_rushDir * _rushSpeed);
     }
 }

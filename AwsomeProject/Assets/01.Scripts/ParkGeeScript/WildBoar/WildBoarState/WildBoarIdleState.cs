@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class WildBoarIdleState : EnemyState<WildBoarEnum>
 {
-    private Transform _playerTrm;
-
     public WildBoarIdleState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName)
         : base(enemy, enemyStateMachine, animBoolName)
     {
-        _playerTrm = PlayerManager.Instance.PlayerTrm;
+
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        enemy.MovementCompo.StopImmediately();
     }
 
     public override void UpdateState()
@@ -17,13 +23,31 @@ public class WildBoarIdleState : EnemyState<WildBoarEnum>
         base.UpdateState();
         Player player = enemy.IsPlayerDetected();
 
-        float dist = Vector3.Distance(_playerTrm.position, enemy.transform.position);
 
-        //너무 가까우면 바로 move로 이동
-        if (dist <= 5)
-            enemyStateMachine.ChangeState(WildBoarEnum.Move);
 
-        if (player != null && enemy.IsObstacleInLine(enemy.runAwayDistance) == false)
-            enemyStateMachine.ChangeState(WildBoarEnum.Move);
+        if (player != null)
+        {
+            Vector2 dir = player.transform.position - enemy.transform.position;
+            if (Mathf.Abs(dir.y) > 1f || enemy.IsObstacleInLine(dir.magnitude)) return;
+
+            enemy.FlipController(dir.x);
+            if (enemy.IsPlayerInAttackRange())
+            {
+                if (enemy.lastAttackTime + enemy.attackCool < Time.time)
+                {
+                    enemy.lastAttackTime = Time.time;
+                    enemyStateMachine.ChangeState(WildBoarEnum.Rush);
+                }
+            }
+            else
+            {
+                enemyStateMachine.ChangeState(WildBoarEnum.Chase);
+                return;
+            }
+        }
+
+
+        //if (player != null && enemy.IsObstacleInLine(enemy.runAwayDistance) == false)
+        //    enemyStateMachine.ChangeState(WildBoarEnum.Chase);
     }
 }

@@ -30,7 +30,7 @@ public class StatusEffectManager
             }
             catch (Exception ex)
             {
-                Debug.Log($"{enumName}");
+                //Debug.Log($"{enumName}");
             }
         }
         foreach (StatusDebuffEffectEnum effectEnum in Enum.GetValues(typeof(StatusDebuffEffectEnum)))
@@ -46,7 +46,7 @@ public class StatusEffectManager
             }
             catch (Exception ex)
             {
-                Debug.Log($"{enumName}");
+                //Debug.Log($"{enumName}");
             }
         }
     }

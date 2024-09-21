@@ -13,6 +13,7 @@ public class WildBoarDeadState : EnemyState<WildBoarEnum>
     {
         base.Enter();
         GameManager.Instance.killCnt++;
+        enemy.colliderCompo.enabled = false;
     }
 
     public override void AnimationFinishTrigger()

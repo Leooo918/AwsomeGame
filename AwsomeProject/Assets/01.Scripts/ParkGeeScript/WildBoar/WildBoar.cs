@@ -6,7 +6,8 @@ using UnityEngine;
 public enum WildBoarEnum
 {
     Idle,
-    Move,
+    Patrol,
+    Chase,
     Rush,
     Groggy,
     Stun,
@@ -37,16 +38,16 @@ public class WildBoar : Enemy<WildBoarEnum>
         base.Awake();
         _playerTrm = PlayerManager.Instance.PlayerTrm;
 
-        Skills = gameObject.AddComponent<WildBoarSkill>();
-        Skills.Init(EntitySkillSO);
+        //Skills = gameObject.AddComponent<WildBoarSkill>();
+        //Skills.Init(EntitySkillSO);
 
-        foreach (var item in EntitySkillSO.skills)
-        {
-            item.skill.SetOwner(this);
-        }
+        //foreach (var item in EntitySkillSO.skills)
+        //{
+        //    item.skill.SetOwner(this);
+        //}
 
         detectingDistance = EnemyStat.detectingDistance.GetValue();
-        _rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
+        //_rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
     }
 
     private void OnEnable()
@@ -66,7 +67,7 @@ public class WildBoar : Enemy<WildBoarEnum>
     private void Start()
     {
         StateMachine.Initialize(WildBoarEnum.Idle, this);
-        attackDistance = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush).attackDistance.GetValue();
+        //attackDistance = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush).attackDistance.GetValue();
     }
 
     protected override void Update()
@@ -95,19 +96,19 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Dead(Vector2 dir) { }
 
-    public void TryAttack()
-    {
-        float dist = (transform.position - _playerTrm.position).magnitude;
+    //public void TryAttack()
+    //{
+    //    float dist = (transform.position - _playerTrm.position).magnitude;
 
-        if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
-        {
-            _rushSkill.skill.UseSkill();
-        }
-        else if(dist < attackDistance)
-        {
-            //_rushSkill.skill.UseSkill();
-        }
-    }
+    //    if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
+    //    {
+    //        _rushSkill.skill.UseSkill();
+    //    }
+    //    else if(dist < attackDistance)
+    //    {
+    //        //_rushSkill.skill.UseSkill();
+    //    }
+    //}
 
     public override void AirBorn(float duration)
     {

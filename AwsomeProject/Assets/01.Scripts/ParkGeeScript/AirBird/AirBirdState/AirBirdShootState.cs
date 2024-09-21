@@ -6,35 +6,14 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
 {
     private AirBird _airBird;
     private Transform _playerTrm;
-    private AirBirdShootSkillSO _shootSkill;
-    private bool _isShoot = false;
+    private float _shootSpeed = 10f;
 
-    private Vector2[] _offset = new Vector2[3] {new Vector2(-4,0), new Vector2(0,0), new Vector2(4,0)};
+    private float[] _offset = { -20f, 0f, 20f };
 
     public AirBirdShootState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         _playerTrm = PlayerManager.Instance.PlayerTrm;
-        _shootSkill = enemy.EntitySkillSO.GetSkillSO("Shoot") as AirBirdShootSkillSO;
         _airBird = enemy as AirBird;
-    }
-
-    public override void AnimationFinishTrigger()
-    {
-        if (triggerCall)
-        {
-            enemyStateMachine.ChangeState(AirBirdEnum.Chase);
-            return;
-        }
-
-        for (int i = 1; i <= 1; i++)
-        {
-            Vector2 playerDir = ((_playerTrm.position + (Vector3)_offset[i]) - enemy.transform.position).normalized * _shootSkill.shootSpeed.GetValue();
-
-            Feather feather = MonoBehaviour.Instantiate(_airBird.FeatherPf, enemy.transform.position, Quaternion.identity).GetComponent<Feather>();
-            feather.Shoot(playerDir);
-        }
-
-        base.AnimationFinishTrigger();
     }
 
     public override void Enter()
@@ -43,10 +22,23 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
         enemy.MovementCompo.StopImmediately(true);
     }
 
-    public override void Exit()
+    public override void AnimationFinishTrigger()
     {
-        _isShoot = false;
-        _airBird.SetAfterDelay(_shootSkill.skillAfterDelay.GetValue());
-        base.Exit();
+        if (triggerCall)
+        {
+            enemyStateMachine.ChangeState(AirBirdEnum.Idle);
+            return;
+        }
+
+        Vector2 defaultShootMovement = (_playerTrm.position + Vector3.up - enemy.transform.position).normalized * _shootSpeed;
+        for (int i = 0; i < 3; i++)
+        {
+            Vector2 shootMovement = Quaternion.Euler(0, 0, _offset[i]) * defaultShootMovement;
+
+            Feather feather = GameObject.Instantiate(_airBird.featherPrefab, enemy.transform.position, Quaternion.identity);
+            feather.Shoot(shootMovement);
+        }
+
+        base.AnimationFinishTrigger();
     }
 }

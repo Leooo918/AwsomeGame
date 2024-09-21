@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AirBirdIdleState : EnemyState<AirBirdEnum>
 {
-    private Transform _playerTrm;
     private bool _isGoDown = false;
 
     private float _originHeight;
@@ -12,26 +11,40 @@ public class AirBirdIdleState : EnemyState<AirBirdEnum>
 
     public AirBirdIdleState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        _playerTrm = PlayerManager.Instance.PlayerTrm;
         _originHeight = enemy.transform.position.y;
     }
 
-    public override void AnimationFinishTrigger()
+    public override void Enter()
     {
-        base.AnimationFinishTrigger();
-        _isGoDown = !_isGoDown;
+        base.Enter();
+        enemy.MovementCompo.RigidbodyCompo.gravityScale = 0;
+        enemy.MovementCompo.StopImmediately(true);
     }
-
 
     public override void UpdateState()
     {
         base.UpdateState();
 
-        float dist = (_playerTrm.position - enemy.transform.position).magnitude;
-        if(dist < enemy.EnemyStat.detectingDistance.GetValue())
-            enemyStateMachine.ChangeState(AirBirdEnum.Chase);
+        Player player;
+        if(player = enemy.IsPlayerDetected())
+        {
+            Vector2 playerDir = player.transform.position + Vector3.up - enemy.transform.position;
+            if (enemy.IsObstacleInLine(playerDir.magnitude)) return;
 
-        float y = _isGoDown ? -1 : 1;
-        enemy.MovementCompo.SetVelocity(new Vector2(0, y * _upDownSpeed));
+            enemy.FlipController(playerDir.x);
+
+            if (enemy.IsPlayerInAttackRange())
+            {
+                if (enemy.lastAttackTime + enemy.attackCool < Time.time)
+                {
+                    enemy.lastAttackTime = Time.time;
+                    enemyStateMachine.ChangeState(AirBirdEnum.Shoot);
+                }
+            }
+            else
+            {
+                enemyStateMachine.ChangeState(AirBirdEnum.Chase);
+            }
+        }
     }
 }

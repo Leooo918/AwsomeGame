@@ -117,18 +117,18 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     #region CheckCollisionSection
 
-    public virtual bool IsGroundDetected(Vector3? offset = null)
+    public virtual bool IsGroundDetected(Vector3? offset = null, float distance = -1)
     {
         Vector3 acturalOffset = offset ?? Vector3.zero;
         return Physics2D.BoxCast(groundChecker.position + acturalOffset,
             new Vector2(groundCheckBoxWidth, 0.05f), 0,
-            Vector2.down, groundCheckDistance, whatIsGroundAndWall);
+            Vector2.down, distance != -1 ? distance : groundCheckDistance, whatIsGroundAndWall);
 
     }
 
 
-    public virtual bool IsWallDetected() =>
-        Physics2D.BoxCast(wallChecker.position,
+    public virtual bool IsWallDetected(float yOffset = 0) =>
+        Physics2D.BoxCast(wallChecker.position + Vector3.up * yOffset,
             new Vector2(0.05f, wallCheckBoxHeight), 0,
             Vector2.right * FacingDir, wallCheckDistance, whatIsGroundAndWall);
 

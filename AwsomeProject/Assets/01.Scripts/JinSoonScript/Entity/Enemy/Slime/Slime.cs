@@ -25,8 +25,6 @@ public class Slime : Enemy<SlimeStateEnum>
 {
     public SlimeSkill Skills { get; private set; }
 
-    [SerializeField] private GameObject _contactDamage;
-
     #region SkillSection
 
     public Stack<SkillSO> readySkill = new Stack<SkillSO>();
@@ -72,7 +70,7 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         StateMachine.Initialize(SlimeStateEnum.Idle, this);
 
-        ShuffleSkillStack();
+        //ShuffleSkillStack();
     }
 
     protected override void Update()
@@ -124,48 +122,48 @@ public class Slime : Enemy<SlimeStateEnum>
 
     }
 
-    public void Attack()
-    {
-        //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
-        SkillSO skill = readySkill.Peek();
-        if (skill == null)
-        {
-            StateMachine.ChangeState(SlimeStateEnum.Idle);
-            return;
-        }
+    //public void Attack()
+    //{
+    //    //준비된 스킬중 Peek의 스킬을 사용하고 쿨타임 돌려주고 준비된 스킬에 이녀석은 이제 없다.
+    //    SkillSO skill = readySkill.Peek();
+    //    if (skill == null)
+    //    {
+    //        StateMachine.ChangeState(SlimeStateEnum.Idle);
+    //        return;
+    //    }
 
-        skill.skill.UseSkill();
-        notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
-        readySkill.Pop();
-        attackDistance = 0;
-    }
-    private void ShuffleSkillStack()
-    {
-        List<SkillSO> skills = EntitySkillSO.skills;
-        for (int i = 0; i < 10; i++)
-        {
-            int a = UnityEngine.Random.Range(0, skills.Count);
-            int b = UnityEngine.Random.Range(0, skills.Count);
+    //    skill.skill.UseSkill();
+    //    notReady.Add(new Tuple<SkillSO, float>(skill, Time.time));
+    //    readySkill.Pop();
+    //    attackDistance = 0;
+    //}
+    //private void ShuffleSkillStack()
+    //{
+    //    List<SkillSO> skills = EntitySkillSO.skills;
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        int a = UnityEngine.Random.Range(0, skills.Count);
+    //        int b = UnityEngine.Random.Range(0, skills.Count);
 
-            SkillSO temp = skills[a];
-            skills[a] = skills[b];
-            skills[b] = temp;
-        }
+    //        SkillSO temp = skills[a];
+    //        skills[a] = skills[b];
+    //        skills[b] = temp;
+    //    }
 
-        //우선 공격스택을 다 비우고
-        readySkill.Clear();
-        for (int i = 0; i < skills.Count; i++)
-        {
-            //쿨타임중이면 공격스택에 넣지말고
-            if (readySkill.Contains(skills[i])) continue;
+    //    //우선 공격스택을 다 비우고
+    //    readySkill.Clear();
+    //    for (int i = 0; i < skills.Count; i++)
+    //    {
+    //        //쿨타임중이면 공격스택에 넣지말고
+    //        if (readySkill.Contains(skills[i])) continue;
 
-            //쿨타임이 아닌 녀석들만 스택에 넣어두어라
-            readySkill.Push(skills[i]);
-        }
-        if (readySkill.Peek() == null) return;
+    //        //쿨타임이 아닌 녀석들만 스택에 넣어두어라
+    //        readySkill.Push(skills[i]);
+    //    }
+    //    if (readySkill.Peek() == null) return;
 
-        attackDistance = readySkill.Peek().attackDistance.GetValue();
-    }
+    //    attackDistance = readySkill.Peek().attackDistance.GetValue();
+    //}
 
     private void OnHit()
     {
@@ -188,7 +186,6 @@ public class Slime : Enemy<SlimeStateEnum>
         CanStateChangeable = true;
         StateMachine.ChangeState(SlimeStateEnum.Dead);
         CanStateChangeable = false;
-        _contactDamage.SetActive(false);
         IsDead = true;
     }
 }

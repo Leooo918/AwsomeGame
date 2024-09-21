@@ -5,40 +5,46 @@ using UnityEngine;
 public class AirBirdChaseState : EnemyState<AirBirdEnum>
 {
     private AirBird _airBird;
-    private Transform _playerTrm;
-
-    private float _upDownSpeed = 2f;
-    private bool _isGoDown = false;
 
     public AirBirdChaseState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
         _airBird = enemy as AirBird;
-        _playerTrm = PlayerManager.Instance.PlayerTrm;
     }
 
-    public override void AnimationFinishTrigger()
-    {
-        base.AnimationFinishTrigger();
-        _isGoDown = !_isGoDown;
-    }
     public override void UpdateState()
     {
         base.UpdateState();
 
-        float dist = (_playerTrm.position - enemy.transform.position).magnitude;
-        float xDist = Mathf.Abs(_playerTrm.position.x - enemy.transform.position.x);
-        if (dist > _airBird.runAwayDistance)
+        Player player = enemy.IsPlayerDetected();
+
+        if (player == null)
+        {
             enemyStateMachine.ChangeState(AirBirdEnum.Idle);
+            return;
+        }
 
-        float playerDir = Mathf.Sign((_playerTrm.position - enemy.transform.position).x);
+        Vector2 dir = player.transform.position + Vector3.up - enemy.transform.position;
+        if (enemy.IsObstacleInLine(dir.magnitude))
+        {
+            enemyStateMachine.ChangeState(AirBirdEnum.Idle);
+            return;
+        }
 
-        if (enemy.FacingDir != playerDir && xDist > 4)
-            enemy.Flip();
+        if (enemy.IsPlayerInAttackRange())
+        {
+            if (enemy.lastAttackTime + enemy.attackCool < Time.time)
+            {
+                enemy.lastAttackTime = Time.time;
+                enemyStateMachine.ChangeState(AirBirdEnum.Shoot);
+            }
+            else
+                enemyStateMachine.ChangeState(AirBirdEnum.Idle);
+        }
+        else
+        {
+            bool onFlying = !enemy.IsGroundDetected(distance: 4.5f);
 
-        float x = enemy.FacingDir * enemy.moveSpeed;
-        float y = _isGoDown ? -1 : 1;
-
-        enemy.MovementCompo.SetVelocity(new Vector2(x, y * _upDownSpeed));
-        _airBird.TryAttack();
+            enemy.MovementCompo.SetVelocity(dir.normalized * enemy.Stat.moveSpeed.GetValue(), withYVelocity: onFlying || dir.y > 0);
+        }
     }
 }

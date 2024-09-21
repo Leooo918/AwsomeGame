@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 719731e2f78694b49aa7c8d9f549fc2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whiteTime: 0.15
+  _whiteTime: 0.15
   _skillEffect: {fileID: 0}
 --- !u!114 &3603938546824428457
 MonoBehaviour:
@@ -145,7 +145,6 @@ GameObject:
   - component: {fileID: 8111229690807289230}
   - component: {fileID: 8957049630049215451}
   - component: {fileID: 7873606520534156473}
-  - component: {fileID: 2293744558803309276}
   - component: {fileID: 5198058128778863970}
   - component: {fileID: 2301481168490938180}
   - component: {fileID: -1556064162413965497}
@@ -248,20 +247,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.93640137, y: 0.34612024}
   m_EdgeRadius: 0
---- !u!114 &2293744558803309276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2462414859231236766}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d31bf5facc9bbf9478e786dbdbc3e61e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _featherPrefabs: {fileID: 7533499247333062178, guid: c948a80cb3f42624b935df957be496da, type: 3}
 --- !u!114 &5198058128778863970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc4de912050e5b4e987cf27267bd020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stat: {fileID: 11400000, guid: 82100713a4342ea40ae3922ad62e5e61, type: 2}
+  <Stat>k__BackingField: {fileID: 11400000, guid: 82100713a4342ea40ae3922ad62e5e61, type: 2}
   entitySkillSO: {fileID: 11400000, guid: 9827fd6ad10e3fc4ebb6e3b12c6e39e7, type: 2}
   whatIsGroundAndWall:
     serializedVersion: 2
@@ -308,12 +293,13 @@ MonoBehaviour:
     m_Bits: 128
   whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 525376
   runAwayDistance: 40
+  attackCool: 3
   lastAttackTime: 0
   moveAnima: 0
   readyFlip: 0
-  _featherPf: {fileID: 7533499247333062178, guid: c948a80cb3f42624b935df957be496da, type: 3}
+  featherPrefab: {fileID: -8909480647727459504, guid: c948a80cb3f42624b935df957be496da, type: 3}
 --- !u!114 &2301481168490938180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56631dcfe4948ed40afb37cb4c5dc9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHp: 0
 --- !u!114 &-1556064162413965497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,8 +397,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1159635217
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -693,8 +680,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1159635217
+  m_SortingLayer: 7
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 4e2c0a3dda01ac445815d553295eef3a, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
