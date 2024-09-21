@@ -42,9 +42,16 @@ public class AirBirdChaseState : EnemyState<AirBirdEnum>
         }
         else
         {
-            bool onFlying = !enemy.IsGroundDetected(distance: 4.5f);
-
-            enemy.MovementCompo.SetVelocity(dir.normalized * enemy.Stat.moveSpeed.GetValue(), withYVelocity: onFlying || dir.y > 0);
+            bool withYVelocity = true;
+            if (enemy.IsGroundDetected(distance: 4f))
+            {
+                dir = (dir.normalized + Vector2.up * 1.5f);
+            }
+            else if (enemy.IsGroundDetected(distance: 5f))
+            {
+                withYVelocity = dir.y > 0;
+            }
+            enemy.MovementCompo.SetVelocity(dir.normalized * enemy.Stat.moveSpeed.GetValue(), withYVelocity: withYVelocity);
         }
     }
 }

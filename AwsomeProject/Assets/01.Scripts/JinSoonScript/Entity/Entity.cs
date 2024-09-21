@@ -40,7 +40,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] protected float wallCheckBoxHeight;
 
     public float moveSpeed => Stat.moveSpeed.GetValue();
-    protected float knockbackDuration = 0.5f;
+    protected float knockbackDuration = 0.1f;
     protected Coroutine knockbackCoroutine;
     public bool isKnockbacked { get; protected set; }
 
@@ -55,6 +55,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
+    [SerializeField] protected GameObject _stunEffect;
 
     public Action<int> OnFlip;
     public int FacingDir { get; protected set; } = 1;
@@ -157,10 +158,10 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     }
 
 
-    public virtual bool IsWallDetected(float yOffset = 0) =>
+    public virtual bool IsWallDetected(float yOffset = 0, float distance = -1) =>
         Physics2D.BoxCast(wallChecker.position + Vector3.up * yOffset,
             new Vector2(0.05f, wallCheckBoxHeight), 0,
-            Vector2.right * FacingDir, wallCheckDistance, whatIsGroundAndWall);
+            Vector2.right * FacingDir, distance == -1 ? wallCheckDistance : distance, whatIsGroundAndWall);
 
     public virtual void CheckObjectOnFoot()
     {
@@ -183,20 +184,35 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         if (knockbackCoroutine != null) StopCoroutine(knockbackCoroutine);
 
         isKnockbacked = true;
-        MovementCompo.SetVelocity(power, true);
+        MovementCompo.SetVelocity(power, true, true);
         knockbackCoroutine = StartDelayCallBack(
             knockbackDuration, () =>
             {
                 isKnockbacked = false;
-                MovementCompo.StopImmediately(false);
+                MovementCompo.StopImmediately(true);
             });
     }
 
-    public virtual void Stun(float duration) { }
+    public virtual void Stun(float duration) 
+    {
+        _stunEffect.SetActive(true);
+        StartDelayCallBack(duration, () => _stunEffect.SetActive(false));
+    }
     public virtual void Stone(float duration)
     {
+        Stun(duration);
         visualCompo.OnStone(true);
-        StartDelayCallBack(duration, () => visualCompo.OnStone(false));
+        healthCompo.OnHit += StonEffect;
+        StartDelayCallBack(duration, () =>
+        {
+            healthCompo.OnHit -= StonEffect;
+            visualCompo.OnStone(false);
+        });
+    }
+    private void StonEffect()
+    {
+        Transform effectTrm = Instantiate(EffectInstantiateManager.Instance.stonHitEffect, transform.position, Quaternion.identity).transform;
+        effectTrm.localScale = Vector3.one * groundCheckBoxWidth;
     }
 
     public virtual void AirBorn(float duration) { }

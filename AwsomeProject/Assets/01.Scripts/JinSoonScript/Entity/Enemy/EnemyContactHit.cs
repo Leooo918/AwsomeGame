@@ -4,6 +4,7 @@ public class EnemyContactHit : MonoBehaviour
 {
     [SerializeField] private int _damage;
     [SerializeField] private Vector2 _knockBackPower;
+    [SerializeField] private Vector3 _cameraShakeData;
     private Entity _owner;
 
 
@@ -17,9 +18,10 @@ public class EnemyContactHit : MonoBehaviour
         if (collision.TryGetComponent(out Player player))
         {
             Vector2 knockPower = _knockBackPower;
-            if (player.transform.position.x < transform.position.x) knockPower.x *= -1;
+            knockPower.x *= _owner.FacingDir;
 
             player.healthCompo.TakeDamage(_damage, knockPower, _owner);
+            CameraManager.Instance.ShakeCam(_cameraShakeData.x, _cameraShakeData.y, _cameraShakeData.z);
         }
     }
 }

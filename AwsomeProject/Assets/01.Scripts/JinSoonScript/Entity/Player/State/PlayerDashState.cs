@@ -23,25 +23,27 @@ public class PlayerDashState : PlayerState
 
         if (player.IsAttackWhileDash == true)
             _dashAttackColl.enabled = true;
+        var mainModule = _dashTrail.main;
+        mainModule.flipRotation = player.FacingDir == 1 ? 0 : 1;
         _dashTrail.Play();
 
-            xInput = player.PlayerInput.XInput;
+        xInput = player.PlayerInput.XInput;
 
         if (xInput == 0) xInput = player.FacingDir * -0.5f;
-
-        player.MovementCompo.SetVelocity(new Vector2(player.DashPower * xInput, 0), true);
+        
         dashTime = Time.time;
     }
     public override void UpdateState()
     {
         base.UpdateState();
 
-        player.MovementCompo.SetVelocity(new Vector2(player.DashPower * xInput, 0), true);
-
-        if (Time.time - dashTime > player.DashTime)
+        if (player.IsWallDetected() || Time.time - dashTime > player.DashTime)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
+            return;
         }
+
+        player.MovementCompo.SetVelocity(new Vector2(player.DashPower * player.FacingDir, 0), true);
     }
 
     public override void Exit()

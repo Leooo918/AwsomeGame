@@ -14,11 +14,11 @@ public class EntityAttack : MonoBehaviour
     private Vector2 _knockBackPower;
     private Vector2 _moveDesire;
     private int _damage = 1;
-    private Collider2D[] _colls;
+    private RaycastHit2D[] _hits;
 
     private void Awake()
     {
-        _colls = new Collider2D[_maxDetectingEnemyNum];
+        _hits = new RaycastHit2D[_maxDetectingEnemyNum];
         _entity = GetComponent<Entity>();
     }
 
@@ -27,23 +27,29 @@ public class EntityAttack : MonoBehaviour
     /// </summary>
     public void Attack()
     {
-        int detected = Physics2D.OverlapCircleNonAlloc(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange, _colls, _whatIsEnemy);
+        int detected = Physics2D.CircleCastNonAlloc(transform.position + new Vector3(_attackOffset.x * _entity.FacingDir, _attackOffset.y, 0), _attackRange, Vector2.right * _entity.FacingDir, _hits, _whatIsEnemy);
         bool isCameraShaked = false;
 
         Vector2 currentMoveDesire = _moveDesire;
         currentMoveDesire.x *= _entity.FacingDir;
+        _knockBackPower.x *= _entity.FacingDir;
 
         _entity.rigidbodyCompo.AddForce(currentMoveDesire, ForceMode2D.Impulse);
         for (int i = 0; i < detected; i++)
         {
-            if (_colls[i].TryGetComponent(out Entity entity))
+            if (_hits[i].transform.TryGetComponent(out IDamageable damageable))
             {
-                _knockBackPower.x *= Mathf.Sign(entity.transform.position.x - transform.position.x);
-                entity.healthCompo.TakeDamage(_damage, _knockBackPower, _entity);
+                damageable.TakeDamage(_damage, _knockBackPower, _entity);
+
+                Vector2 dir = (_hits[i].transform.position - (_entity as Player).PlayerCenter.position).normalized;
+
+                ParticleSystem sliceEffect = Instantiate(EffectInstantiateManager.Instance.sliceEffect, _hits[i].point, Quaternion.identity);
+                var shapeModule = sliceEffect.shape;
+                shapeModule.angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
                 if (!isCameraShaked)
                 {
-                    CameraManager.Instance.ShakeCam(1f, 1f, 0.05f);
+                    CameraManager.Instance.ShakeCam(3f, 6f, 0.05f);
                     isCameraShaked = true;
                 }
             }

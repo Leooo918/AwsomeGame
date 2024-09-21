@@ -97,7 +97,6 @@ public class Player : Entity
     public int maxJumpCnt { get; private set; } = 2;
     [HideInInspector] public int curJumpCnt = 0;
 
-    [SerializeField] private GameObject _stunEffect;
     public GameObject StunEffect => _stunEffect;
 
     private bool isInventoryOpen = false;
@@ -130,6 +129,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        //canDash = true;
         _gravityScale = rigidbodyCompo.gravityScale;
         _hpDecator?.Init((int)healthCompo.curHp);
 
@@ -193,9 +193,8 @@ public class Player : Entity
 
     public override void Stun(float duration)
     {
-        //if (canBeStun == false) return;
-        this.stunDuration = duration;
-
+        base.Stun(duration);
+        stunDuration = duration;
         StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 

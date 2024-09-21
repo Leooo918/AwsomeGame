@@ -60,7 +60,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
                 if (dir.magnitude < _damageRadius)
                 {
                     dir.y = 0;
-                    _player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir, enemy);
+                    _player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir.normalized * 4f, enemy);
                 }
 
                 enemyStateMachine.ChangeState(SlimeStateEnum.Idle);

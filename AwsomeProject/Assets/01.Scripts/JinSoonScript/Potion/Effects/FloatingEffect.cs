@@ -13,7 +13,10 @@ public class FloatingEffect : Effect
             if (target is Entity entity)
             {
                 StatusEffect effect = entity.ApplyStatusEffect(StatusDebuffEffectEnum.Floating, _level, _durationWithLevel[_level]);
-                effect.owner = _potion.owner;
+                if (effect != null)
+                {
+                    effect.owner = _potion.owner;
+                }
             }
         }
     }

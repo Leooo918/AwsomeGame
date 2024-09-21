@@ -13,6 +13,7 @@ public class CameraManager : Singleton<CameraManager>
 
     private Vector2 _startingTrackedObjectOffset;   
     private Tween _panCameraTween;  
+    private Sequence _shakeSeq;  
 
     private CinemachineVirtualCamera _currentCam;                //현재 카메라
     private CinemachineFramingTransposer _framingTransposer;     //카메라 움직여주는 놈
@@ -115,13 +116,18 @@ public class CameraManager : Singleton<CameraManager>
 
     public void ChangeFollowToPlayer() => _currentCam.m_Follow = _playerRect;
 
-    public void ShakeCam(float amplitude, float frequency, float time)
+    public void ShakeCam(float amplitude, float frequency, float time, Ease ease = Ease.Linear, bool isSet = false)
     {
-        _currentPerline.m_AmplitudeGain = amplitude;
-        _currentPerline.m_FrequencyGain = frequency;
-        _shakeTime = time;
+        if (_shakeSeq != null && _shakeSeq.IsActive()) _shakeSeq.Kill();
+        _shakeSeq = DOTween.Sequence();
 
-        StartCoroutine(DelayStopShake());
+        float startAmplitude = isSet ? amplitude : Mathf.Max(amplitude, _currentPerline.m_AmplitudeGain);
+        float startFrequency = isSet ? frequency : Mathf.Max(frequency, _currentPerline.m_FrequencyGain);
+
+        _shakeSeq.Append(DOTween.To(() => startAmplitude, 
+            value => _currentPerline.m_AmplitudeGain = value, 0, time).SetEase(ease));
+        _shakeSeq.Join(DOTween.To(() => startFrequency, 
+            value => _currentPerline.m_FrequencyGain = value, 0, time).SetEase(ease));
     }
 
     public void StartShakeCam(float amplitude, float frequency)

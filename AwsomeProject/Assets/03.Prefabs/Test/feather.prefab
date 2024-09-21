@@ -94,8 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4160932444933272530}
   - component: {fileID: -8909480647727459504}
-  - component: {fileID: -7907148821961194829}
-  - component: {fileID: -7553513787255302769}
+  - component: {fileID: 5980259552147033613}
   m_Layer: 16
   m_Name: feather
   m_TagString: Untagged
@@ -131,35 +130,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a36275d1177c447ba78ead3dbb2528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &-7907148821961194829
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7533499247333062178}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
+  _yOffset: 0.118
+  _whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
+    m_Bits: 525376
+  _whatIsTarget:
     serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &-7553513787255302769
-BoxCollider2D:
+    m_Bits: 128
+  _onDebug: 1
+--- !u!58 &5980259552147033613
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -190,16 +170,6 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0019700825, y: 0.09047585}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
-    newSize: {x: 0.5, y: 0.5}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.182814, y: 0.43528414}
-  m_EdgeRadius: 0
+  m_Radius: 0.5
