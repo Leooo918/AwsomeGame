@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
@@ -27,6 +29,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [Header("Collision info")]
     [SerializeField] protected LayerMask whatIsGroundAndWall;
     [SerializeField] protected LayerMask whatIsProbs;
+    [SerializeField] protected LayerMask whatIsSpikeTrap;
     [Space(10)]
     [SerializeField] protected Transform groundChecker;
     [SerializeField] protected float groundCheckBoxWidth;
@@ -88,6 +91,31 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     {
         //rigidbodyCompo.velocity = new Vector2(_xMovement, rigidbodyCompo.velocity.y);
     }
+
+    protected virtual void Update()
+    {
+        _statusEffectManager.UpdateStatusEffects();
+
+        CheckSpikeTrap();
+    }
+
+    #region SpikeTrapDamage
+    private float _lastSpikeTrapDamageTime;
+    private float _spikeTrapDamageCool = 1f;
+    private int _spikeTrapDamage = 1;
+    private void CheckSpikeTrap()
+    {
+        if (Physics2D.BoxCast(groundChecker.position,
+            new Vector2(groundCheckBoxWidth, 0.05f), 0,
+            Vector2.down, groundCheckDistance, whatIsSpikeTrap) &&
+            _lastSpikeTrapDamageTime + _spikeTrapDamageCool < Time.time)
+        {
+            _lastSpikeTrapDamageTime = Time.time;
+
+            healthCompo.TakeDamage(_spikeTrapDamage, Vector2.zero, null);
+        }
+    }
+    #endregion
 
     #region Velocity Section
 
@@ -246,11 +274,6 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         => (_statusEffectBit & (int)statusEffect) != 0;
     public bool IsUnderStatusEffect(StatusDebuffEffectEnum statusEffect)
         => (_statusEffectBit & (int)statusEffect) != 0;
-
-    protected virtual void Update()
-    {
-        _statusEffectManager.UpdateStatusEffects();
-    }
 
 #if UNITY_EDITOR
 
