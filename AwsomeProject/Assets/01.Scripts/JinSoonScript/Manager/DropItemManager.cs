@@ -12,8 +12,8 @@ public class DropItemManager : Singleton<DropItemManager>
 
     private void Awake()
     {
-        _path = Path.Combine(Application.dataPath, "GatheredItems.txt");
-        Load();
+        //_path = Path.Combine(Application.dataPath, "GatheredItems.txt");
+        //Load();
     }
 
 

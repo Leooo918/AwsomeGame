@@ -69,4 +69,6 @@ MonoBehaviour:
     baseValue: 6
     modifiers: []
     percentModifiers: []
-  dropItems: []
+  dropItems:
+  - dropItemPf: {fileID: 5735242685594573682, guid: 0bbd45e4789e924419f197eb8a1c4b40, type: 3}
+    appearChance: 70

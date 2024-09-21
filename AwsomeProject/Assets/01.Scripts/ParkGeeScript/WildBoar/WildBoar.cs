@@ -96,20 +96,6 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Dead(Vector2 dir) { }
 
-    //public void TryAttack()
-    //{
-    //    float dist = (transform.position - _playerTrm.position).magnitude;
-
-    //    if (Time.time > _attackDelay && dist < _rushSkill.attackDistance.GetValue())
-    //    {
-    //        _rushSkill.skill.UseSkill();
-    //    }
-    //    else if(dist < attackDistance)
-    //    {
-    //        //_rushSkill.skill.UseSkill();
-    //    }
-    //}
-
     public override void AirBorn(float duration)
     {
         base.AirBorn(duration);

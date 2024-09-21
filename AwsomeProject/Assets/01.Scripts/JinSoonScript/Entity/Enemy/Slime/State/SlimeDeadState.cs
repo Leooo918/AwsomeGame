@@ -11,7 +11,6 @@ public class SlimeDeadState : EnemyState<SlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.colliderCompo.enabled = false;
         GameManager.Instance.killCnt++;
     }
 

@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
             mousePos - (Vector2)dragItemSlot.inventory.itemStorage.position;
     }
 
-    public bool TryAddItem(Item item)
+    public bool TryAddItem(Item item, bool openPannel = false)
     {
         bool succes = false;
         if (item.itemSO is IngredientItemSO)
@@ -124,9 +124,17 @@ public class InventoryManager : MonoBehaviour
         {
             succes = drinkPotionInventory.AddItem(item);
         }
+
+        if (openPannel && succes)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(item.itemSO);
+            gather.Open();
+        }
+
         return succes;
     }
-    public bool TryAddItem(ItemSO itemSO, int amount = 1, int level = 0)
+    public bool TryAddItem(ItemSO itemSO, int amount = 1, int level = 0, bool openPannel = false)
     {
         bool succes = false;
         if (itemSO is IngredientItemSO)
@@ -141,6 +149,14 @@ public class InventoryManager : MonoBehaviour
         {
             succes = drinkPotionInventory.AddItem(itemSO, amount, level);
         }
+
+        if (openPannel && succes)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(itemSO);
+            gather.Open();
+        }
+
         return succes;
     }
 

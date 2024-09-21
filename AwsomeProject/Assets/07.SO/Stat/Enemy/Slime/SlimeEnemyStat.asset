@@ -72,3 +72,5 @@ MonoBehaviour:
   dropItems:
   - dropItemPf: {fileID: 5735242685594573682, guid: b311c695f13c5bc4e840f61c5c95f459, type: 3}
     appearChance: 50
+  - dropItemPf: {fileID: 5735242685594573682, guid: b311c695f13c5bc4e840f61c5c95f459, type: 3}
+    appearChance: 50

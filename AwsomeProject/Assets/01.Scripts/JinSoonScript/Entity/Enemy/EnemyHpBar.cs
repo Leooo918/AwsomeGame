@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyHpBar : MonoBehaviour
 {
-    [SerializeField] private Transform _pivot;
+    [SerializeField] private Transform _fill;
     private Transform _parent;
     private Vector3 origin;
 
@@ -41,12 +41,12 @@ public class EnemyHpBar : MonoBehaviour
     private IEnumerator HpDownRoutine(float percentage)
     {
         float process = 1;
-        float origin = _pivot.localScale.x;
+        float origin = _fill.localScale.x;
 
         while (process > 0)
         {
             float xScale = Mathf.Lerp(percentage, origin, process);
-            _pivot.localScale = new Vector3(xScale, 1, 1);
+            _fill.localScale = new Vector3(xScale, 1, 1);
             process -= Time.deltaTime * 5;
             yield return null;
         }

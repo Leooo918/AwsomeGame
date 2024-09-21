@@ -10,6 +10,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] private EntitySkillSO entitySkillSO;
     public EntitySkillSO EntitySkillSO => entitySkillSO;
 
+    public Transform visualTrm { get; protected set; }
+
     public EntityVisual visualCompo { get; protected set; }
     public Animator animatorCompo { get; protected set; }
     public SpriteRenderer spriteRendererCompo { get; protected set; }
@@ -65,7 +67,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     protected virtual void Awake()
     {
-        Transform visualTrm = transform.Find("Visual");
+        visualTrm = transform.Find("Visual");
         visualCompo = visualTrm.GetComponent<EntityVisual>();
         animatorCompo = visualTrm.GetComponent<Animator>();
         spriteRendererCompo = visualTrm.GetComponent<SpriteRenderer>();
@@ -101,7 +103,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public virtual void Flip()
     {
         FacingDir = FacingDir * -1;
-        transform.Rotate(0, 180f, 0);
+        visualTrm.Rotate(0, 180f, 0);
         OnFlip?.Invoke(FacingDir);
     }
 

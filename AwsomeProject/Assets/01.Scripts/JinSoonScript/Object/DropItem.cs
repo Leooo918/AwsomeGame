@@ -3,14 +3,21 @@ using UnityEngine;
 
 public class DropItem : MonoBehaviour
 {
-    public ItemSO item;
-    private Rigidbody2D rb;
+    public ItemSO itemSO;
+    private Rigidbody2D _rigid;
     private PopUpPanel _popUp;
     private bool interacting;
 
+    public bool interactEnable = true;
+
+    private Collider2D[] _colliders = new Collider2D[1];
+    [SerializeField] private Vector2 _offset;
+    [SerializeField] private float _radius = 0.5f;
+    [SerializeField] private LayerMask _whatIsPlayer;
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -20,39 +27,46 @@ public class DropItem : MonoBehaviour
 
     private void Update()
     {
-        if (interacting && Input.GetKeyDown(KeyCode.F))
-        {
-            //Item i = InventoryManager.Instance.MakeItemInstanceByItemSO(item);
-            //if (InventoryManager.Instance.PlayerInventory.TryInsertItem(i))
-            //{
-            //    DropItemManager.Instance.IndicateItemPanel(i.itemSO);
-            //    Destroy(gameObject);
-            //}
-            //else Destroy(i);
-        }
-    }
+        if (interactEnable == false) return;
 
-    public void SpawnItem(Vector2 dir)
-    {
-        rb.AddForce(dir, ForceMode2D.Impulse);
-    }
+        int count = Physics2D.OverlapCircleNonAlloc
+            ((Vector2)transform.position + _offset, 
+            _radius, _colliders, _whatIsPlayer);
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent(out Player player))
+        if (count != 0 && interacting == false)
         {
             _popUp.SetText("아이템 줍기 [F]");
             UIManager.Instance.Open(UIType.PopUp);
             interacting = true;
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.TryGetComponent<Player>(out Player player))
+        else if (count == 0 && interacting)
         {
             UIManager.Instance.Close(UIType.PopUp);
             interacting = false;
         }
+
+        if (interacting && Input.GetKeyDown(KeyCode.F))
+        {
+            if (InventoryManager.Instance.TryAddItem(itemSO, openPannel: true))
+            {
+                DropItemManager.Instance.IndicateItemPanel(itemSO);
+                UIManager.Instance.Close(UIType.PopUp);
+                Destroy(gameObject);
+            }
+        }
     }
+
+    public void SpawnItem(Vector2 dir)
+    {
+        _rigid.AddForce(dir, ForceMode2D.Impulse);
+    }
+
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere((Vector2)transform.position + _offset, _radius);
+    }
+#endif
 }
