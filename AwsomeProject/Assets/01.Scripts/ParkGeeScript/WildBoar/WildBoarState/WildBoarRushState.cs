@@ -27,6 +27,7 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         else
         {
             //´ë½¬ ³¡
+            enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(WildBoarEnum.Idle);
         }
     }
@@ -37,6 +38,7 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
         _isRushing = false;
         _rushDir = Vector2.right * enemy.FacingDir;
         enemy.MovementCompo.StopImmediately(false);
+        enemy.CanStateChangeable = false;
     }
 
     public override void Exit()
@@ -52,6 +54,7 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
 
         if (enemy.IsFrontGround() == false)
         {
+            enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(WildBoarEnum.Idle);
             return;
         }
