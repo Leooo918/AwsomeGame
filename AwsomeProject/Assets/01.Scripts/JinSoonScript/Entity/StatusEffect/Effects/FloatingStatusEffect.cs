@@ -19,7 +19,6 @@ public class FloatingStatusEffect : StatusEffect
     {
         float elapsedTime = 0.0f;
         float initialVerticalSpeed = 5.0f;
-        float originalXMovement = _target.MovementCompo.RigidbodyCompo.velocity.x;
 
         _target.MovementCompo.StopImmediately(true);
         float prevGravity = _target.MovementCompo.RigidbodyCompo.gravityScale;
@@ -27,12 +26,16 @@ public class FloatingStatusEffect : StatusEffect
 
         while (elapsedTime < duration)
         {
-            float verticalSpeed = 0;
-
             if (elapsedTime < 0.2f)
-                verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
+            {
+                float verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
+                _target.MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity: true);
+            }
+            else
+            {
+                _target.MovementCompo.StopImmediately(true);
+            }
 
-            _target.MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity: true);
 
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -41,13 +44,14 @@ public class FloatingStatusEffect : StatusEffect
         _target.MovementCompo.RigidbodyCompo.gravityScale = prevGravity;
 
         float fallSpeed = -40f;
-        _target.MovementCompo.SetVelocity(new Vector2(originalXMovement, fallSpeed), withYVelocity: true);
+        Debug.Log(_target.MovementCompo.canSetVelocity);
+        _target.MovementCompo.SetVelocity(new Vector2(0, fallSpeed), withYVelocity: true);
         yield return new WaitUntil(() =>
         {
             return _target.MovementCompo.RigidbodyCompo.velocity.y > fallSpeed;
         });
         _target.healthCompo.TakeDamage(damagePercent, Vector2.zero, owner, true);
-        _target.MovementCompo.SetVelocity(new Vector2(originalXMovement, 0));
+        _target.MovementCompo.StopImmediately(true);
 
         Debug.Log("에어본 종료");
     }

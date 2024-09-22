@@ -91,8 +91,9 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void AirBorn(float duration)
     {
-        base.AirBorn(duration);
         if (IsDead) return;
+        animatorCompo.speed = 1;
+        base.AirBorn(duration);
         airBornDuration = duration;
         StateMachine.ChangeState(WildBoarEnum.AirBorn);
     }

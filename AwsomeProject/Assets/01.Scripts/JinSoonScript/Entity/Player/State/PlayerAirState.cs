@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerAirState : PlayerState
 {
-    private CapsuleCollider2D _playerCollider;
+    private BoxCollider2D _playerCollider;
     private Collider2D[] _colliders;
     private LayerMask _whatIsVine = LayerMask.GetMask("Vine");
     public PlayerAirState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) 
     {
-        _playerCollider = player.colliderCompo as CapsuleCollider2D;
+        _playerCollider = player.colliderCompo as BoxCollider2D;
         _colliders = new Collider2D[1];
     }
 
