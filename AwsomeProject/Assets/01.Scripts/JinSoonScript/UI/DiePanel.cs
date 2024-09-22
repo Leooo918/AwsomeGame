@@ -118,4 +118,9 @@ public class DiePanel : MonoBehaviour, IManageableUI
             yield return null;
         }
     }
+
+    public void Init()
+    {
+
+    }
 }
