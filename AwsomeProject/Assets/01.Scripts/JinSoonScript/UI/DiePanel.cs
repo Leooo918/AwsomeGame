@@ -10,7 +10,6 @@ public class DiePanel : MonoBehaviour, IManageableUI
     [SerializeField] private TextMeshProUGUI _timer;
     [SerializeField] private TextMeshProUGUI _kill;
     [SerializeField] private TextMeshProUGUI _gather;
-    [SerializeField] private TextMeshProUGUI _coin;
 
     [SerializeField] private RectTransform _progressStart, _progressEnd;
     [SerializeField] private RectTransform _player;
@@ -20,7 +19,6 @@ public class DiePanel : MonoBehaviour, IManageableUI
     private int _time;
     private int _killCnt;
     private int _gatherCnt;
-    private int _coinCnt;
 
     private void Awake()
     {
@@ -37,12 +35,11 @@ public class DiePanel : MonoBehaviour, IManageableUI
         //}
     }
 
-    public void Init(int timer, int killCnt, int gatherCnt, int coinCnt, float progress)
+    public void Init(int timer, int killCnt, int gatherCnt, float progress)
     {
         _time = timer;
         _killCnt = killCnt;
         _gatherCnt = gatherCnt;
-        _coinCnt = coinCnt;
         _progress = progress;
     }
 
@@ -87,6 +84,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
             curProgress += 0.005f;
             yield return null;
         }
+        _kill.SetText($"{_time}");
 
         int kill = 0;
         curProgress = 0;
@@ -97,6 +95,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
             curProgress += 0.005f;
             yield return null;
         }
+        _kill.SetText($"{_killCnt}");
 
         int gather = 0;
         curProgress = 0;
@@ -107,16 +106,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
             curProgress += 0.005f;
             yield return null;
         }
-
-        int coin = 0;
-        curProgress = 0;
-        while (curProgress <= 1)
-        {
-            coin = (int)Mathf.Lerp(0, _coinCnt, curProgress);
-            _coin.SetText($"{coin}");
-            curProgress += 0.005f;
-            yield return null;
-        }
+        _kill.SetText($"{_gatherCnt}");
     }
 
     public void Init()
