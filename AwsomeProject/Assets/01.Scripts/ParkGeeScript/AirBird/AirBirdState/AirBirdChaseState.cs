@@ -32,6 +32,7 @@ public class AirBirdChaseState : EnemyState<AirBirdEnum>
 
         if (enemy.IsPlayerInAttackRange())
         {
+
             if (enemy.lastAttackTime + enemy.attackCool < Time.time)
             {
                 enemy.lastAttackTime = Time.time;

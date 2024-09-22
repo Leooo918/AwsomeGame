@@ -185,10 +185,12 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
         isKnockbacked = true;
         MovementCompo.SetVelocity(power, true, true);
+        MovementCompo.canSetVelocity = false;
         knockbackCoroutine = StartDelayCallBack(
             knockbackDuration, () =>
             {
                 isKnockbacked = false;
+                MovementCompo.canSetVelocity = true;
                 MovementCompo.StopImmediately(true);
             });
     }

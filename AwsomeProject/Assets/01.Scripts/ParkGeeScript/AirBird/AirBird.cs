@@ -20,10 +20,8 @@ public enum AirBirdSkillEnum
 
 public class AirBird : Enemy<AirBirdEnum>
 {
-    [HideInInspector] public bool moveAnima = false;
-    [HideInInspector] public bool readyFlip = false;
-
     public Feather featherPrefab;
+    public float featherShootSpeed = 12f;
 
     protected override void Awake()
     {

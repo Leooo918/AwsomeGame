@@ -137,6 +137,9 @@ MonoBehaviour:
   _whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+  _whatIsReflectTarget:
+    serializedVersion: 2
+    m_Bits: 256
   _onDebug: 1
 --- !u!58 &5980259552147033613
 CircleCollider2D:

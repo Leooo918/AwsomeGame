@@ -6,7 +6,6 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
 {
     private AirBird _airBird;
     private Transform _playerTrm;
-    private float _shootSpeed = 10f;
 
     private float[] _offset = { -20f, 0f, 20f };
 
@@ -30,7 +29,7 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
             return;
         }
 
-        Vector2 defaultShootMovement = (_playerTrm.position + Vector3.up - enemy.transform.position).normalized * _shootSpeed;
+        Vector2 defaultShootMovement = (_playerTrm.position + Vector3.up - enemy.transform.position).normalized * _airBird.featherShootSpeed;
         for (int i = 0; i < 3; i++)
         {
             Vector2 shootMovement = Quaternion.Euler(0, 0, _offset[i]) * defaultShootMovement;

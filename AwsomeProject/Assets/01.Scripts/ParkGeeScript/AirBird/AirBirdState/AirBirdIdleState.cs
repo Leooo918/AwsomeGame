@@ -46,12 +46,14 @@ public class AirBirdIdleState : EnemyState<AirBirdEnum>
                 enemyStateMachine.ChangeState(AirBirdEnum.Chase);
             }
         }
-        else
+
+        if (enemy.IsGroundDetected(distance: 4f))
         {
-            if (enemy.IsGroundDetected(distance: 4f))
-            {
-                enemy.MovementCompo.SetVelocity(Vector2.up * enemy.Stat.moveSpeed.GetValue(), withYVelocity:true);
-            }
+            enemy.MovementCompo.SetVelocity(Vector2.up * enemy.Stat.moveSpeed.GetValue(), withYVelocity: true);
+        }
+        else if (enemy.rigidbodyCompo.velocity.y != 0)
+        {
+            enemy.MovementCompo.SetVelocity(Vector2.zero, withYVelocity: true);
         }
     }
 }

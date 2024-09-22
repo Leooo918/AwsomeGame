@@ -11,13 +11,22 @@ public class Feather : MonoBehaviour, IDamageable
     private float _destroyingTime;
     private bool _stop = false;
     private bool _isStuck = false;
+    private bool _isReflected = false;
+    private CircleCollider2D _collider;
+    private Player _player;
 
     [Range(-0.2f, 0.2f)]
     [SerializeField] private float _yOffset;
     [SerializeField] private LayerMask _whatIsObstacle;  
     [SerializeField] private LayerMask _whatIsTarget;  
-    [SerializeField] private bool _onDebug;  
+    [SerializeField] private LayerMask _whatIsReflectTarget;  
+    [SerializeField] private bool _onDebug;
 
+    private void Awake()
+    {
+        _collider = GetComponent<CircleCollider2D>();
+        _player = PlayerManager.Instance.Player;
+    }
 
     private void FixedUpdate()
     {
@@ -26,16 +35,20 @@ public class Feather : MonoBehaviour, IDamageable
         if (_isStuck == false)
         {
             RaycastHit2D hit;
-            if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _whatIsTarget))
+            if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _isReflected ? _whatIsReflectTarget : _whatIsTarget))
             {
-                hit.transform.GetComponent<Player>().healthCompo.TakeDamage(1, Vector2.zero, null);
-                CameraManager.Instance.ShakeCam(3f, 8f, 0.1f);
-                DestroyFeather();
+                if (hit.transform.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.TakeDamage(_isReflected ? 10 : 1, Vector2.zero, _isReflected ? _player : null);
+                    CameraManager.Instance.ShakeCam(3f, 8f, 0.1f);
+                    DestroyFeather();
+                }
             }
             else if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _whatIsObstacle))
             {
                 transform.Translate(Vector2.up * hit.distance);
                 _isStuck = true;
+                _collider.enabled = false;
             }
             else
             {
@@ -54,7 +67,9 @@ public class Feather : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
-        if (_isStuck) return;
+        if (_isStuck || _isReflected) return;
+
+        _isReflected = true;
 
         Player player = dealer as Player;
         if (player == null) return;
