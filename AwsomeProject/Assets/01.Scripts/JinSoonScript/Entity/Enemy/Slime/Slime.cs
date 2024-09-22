@@ -76,14 +76,15 @@ public class Slime : Enemy<SlimeStateEnum>
 
     public override void Stun(float duration)
     {
-        base.Stun(duration);
         if (IsDead) return;
+        base.Stun(duration);
         stunDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
     public override void Stone(float duration)
     {
+        if (IsDead) return;
         base.Stone(duration);
         animatorCompo.speed = 0;
     }

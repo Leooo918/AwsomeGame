@@ -71,8 +71,8 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stun(float duration)
     {
-        base.Stun(duration);
         if (IsDead) return;
+        base.Stun(duration);
         stunDuration = duration;
          
         if (StateMachine.CurrentState is WildBoarRushState)
@@ -82,6 +82,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stone(float duration)
     {
+        if (IsDead) return;
         base.Stone(duration);
         animatorCompo.speed = 0;
     }

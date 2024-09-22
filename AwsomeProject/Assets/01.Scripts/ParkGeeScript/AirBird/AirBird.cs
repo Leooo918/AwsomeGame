@@ -57,14 +57,15 @@ public class AirBird : Enemy<AirBirdEnum>
 
     public override void Stun(float duration)
     {
-        base.Stun(duration);
         if (IsDead) return;
+        base.Stun(duration);
         stunDuration = duration;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 
     public override void Stone(float duration)
     {
+        if (IsDead) return;
         base.Stone(duration);
         animatorCompo.speed = 0;
     }

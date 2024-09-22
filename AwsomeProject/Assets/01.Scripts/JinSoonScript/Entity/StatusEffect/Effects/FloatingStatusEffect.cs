@@ -29,7 +29,7 @@ public class FloatingStatusEffect : StatusEffect
         {
             float verticalSpeed = 0;
 
-            if (elapsedTime < 1f)
+            if (elapsedTime < 0.2f)
                 verticalSpeed = initialVerticalSpeed * (1 - elapsedTime / duration);
 
             _target.MovementCompo.SetVelocity(new Vector2(0, verticalSpeed), withYVelocity: true);
