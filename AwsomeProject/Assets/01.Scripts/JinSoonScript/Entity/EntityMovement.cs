@@ -8,10 +8,12 @@ public class EntityMovement : MonoBehaviour
     protected Entity _owner;
     public Rigidbody2D RigidbodyCompo { get; protected set; }
     protected float _xVelocity;
+    public bool canSetVelocity;
 
     public void Initialize(Entity owner)
     {
         _owner = owner;
+        canSetVelocity = true;
         RigidbodyCompo = GetComponent<Rigidbody2D>();
     }
 
@@ -22,6 +24,8 @@ public class EntityMovement : MonoBehaviour
 
     public virtual void SetVelocity(Vector2 velocity, bool doNotFlip = false, bool withYVelocity = false)
     {
+        if (canSetVelocity == false) return;
+
         _xVelocity = velocity.x;
         if (withYVelocity)
         {

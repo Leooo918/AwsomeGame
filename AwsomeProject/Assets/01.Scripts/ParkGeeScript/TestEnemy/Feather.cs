@@ -6,22 +6,55 @@ using UnityEngine;
 
 public class Feather : MonoBehaviour, IDamageable
 {
-    private Vector3 _direction;
     private float _speed;
     private float _maxLifeTime = 5f;
     private float _destroyingTime;
     private bool _stop = false;
+    private bool _isStuck = false;
+    private bool _isReflected = false;
+    private CircleCollider2D _collider;
+    private Player _player;
 
-    public void SetDirection(Vector3 direction)
+    [Range(-0.2f, 0.2f)]
+    [SerializeField] private float _yOffset;
+    [SerializeField] private LayerMask _whatIsObstacle;  
+    [SerializeField] private LayerMask _whatIsTarget;  
+    [SerializeField] private LayerMask _whatIsReflectTarget;  
+    [SerializeField] private bool _onDebug;
+
+    private void Awake()
     {
-        _direction = direction.normalized;
+        _collider = GetComponent<CircleCollider2D>();
+        _player = PlayerManager.Instance.Player;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_stop) return;
 
-        transform.Translate(_direction * Time.deltaTime);
+        if (_isStuck == false)
+        {
+            RaycastHit2D hit;
+            if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _isReflected ? _whatIsReflectTarget : _whatIsTarget))
+            {
+                if (hit.transform.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.TakeDamage(_isReflected ? 10 : 1, Vector2.zero, _isReflected ? _player : null);
+                    CameraManager.Instance.ShakeCam(3f, 8f, 0.1f);
+                    DestroyFeather();
+                }
+            }
+            else if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _whatIsObstacle))
+            {
+                transform.Translate(Vector2.up * hit.distance);
+                _isStuck = true;
+                _collider.enabled = false;
+            }
+            else
+            {
+                transform.Translate(Vector2.up * _speed * Time.fixedDeltaTime);
+            }
+        }
 
         if (_destroyingTime < Time.time)
             DestroyFeather();
@@ -34,42 +67,38 @@ public class Feather : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
+        if (_isStuck || _isReflected) return;
+
+        _isReflected = true;
+
         Player player = dealer as Player;
         if (player == null) return;
 
         Vector2 direction = (transform.position - player.transform.position).normalized;
-        float rot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.up = direction;
+
+
+        CameraManager.Instance.ShakeCam(2f, 5f, 0.05f);
 
         _stop = true;
         _destroyingTime = Time.time + _maxLifeTime;
-        transform.DORotate(new Vector3(0, 0, rot), 0.1f)
-            .OnComplete(() =>
-            {
-                _stop = false;
-
-                });
+        transform.DORotateQuaternion(Quaternion.LookRotation(Vector3.back, direction), 0.03f)
+            .OnComplete(() => _stop = false);
 
     }
 
     public void Shoot(Vector2 playerDir)
     {
- //       float rot = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
- //       transform.eulerAngles = new Vector3(0, 0, rot);
-
         transform.up = playerDir;
         _speed = playerDir.magnitude;
-        _direction = Vector2.up * _speed;
         _destroyingTime = Time.time + _maxLifeTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
     {
-        if(collision.TryGetComponent(out Player player))
-        {
-            player.healthCompo.TakeDamage(1, Vector2.zero, null);
-        }
-
-        DestroyFeather();
+        if (_onDebug == false) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position + transform.up * _yOffset, 0.03f);
     }
+#endif
 }

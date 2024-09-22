@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum SlimeStateEnum
 {
@@ -84,9 +85,7 @@ public class Slime : Enemy<SlimeStateEnum>
     public override void Stone(float duration)
     {
         base.Stone(duration);
-        if (IsDead) return;
-        stunDuration = duration;
-        StateMachine.ChangeState(SlimeStateEnum.Stun);
+        animatorCompo.speed = 0;
     }
 
     public override void AirBorn(float duration)

@@ -43,7 +43,6 @@ public class EntityVisual : MonoBehaviour
     }
     public void OnStone(bool isOn)
     {
-        Debug.Log(isOn);
         _entityMat.SetFloat(StoneShaderHash, isOn ? 1 : 0);
     }
 

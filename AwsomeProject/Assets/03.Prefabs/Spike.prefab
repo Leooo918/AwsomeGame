@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4231694094524319752}
   - component: {fileID: 1395597855845601854}
   - component: {fileID: 8885381740782722356}
+  - component: {fileID: 146969480853469396}
   - component: {fileID: 3702644149150725068}
   - component: {fileID: 8484660167040517065}
   m_Layer: 0
@@ -122,6 +123,41 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.03}
   serializedVersion: 2
   m_Radius: 0.24
+--- !u!58 &146969480853469396
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5170799341864792796}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.03}
+  serializedVersion: 2
+  m_Radius: 0.07
 --- !u!50 &3702644149150725068
 Rigidbody2D:
   serializedVersion: 4
@@ -163,4 +199,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _whatIsObstacle:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 525376

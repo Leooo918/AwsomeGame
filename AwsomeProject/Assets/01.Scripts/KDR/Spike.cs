@@ -47,7 +47,7 @@ public class Spike : MonoBehaviour
         _startTime = Time.time;
         _damage = damage;
         _rigid.velocity = dir * speed;
-        _rigid.AddTorque(100f);
+        _rigid.AddTorque(Random.Range(-200f, 200f));
         transform.localScale = Vector3.one * size;
     }
 

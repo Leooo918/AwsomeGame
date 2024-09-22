@@ -10,8 +10,8 @@ public class DamageEffect : Effect
         {
             if (target is Entity entity)
             {
-                Vector2 dir = (_potion.transform.position - entity.transform.position);
-                entity.healthCompo.TakeDamage(_level, dir, _potion.owner);
+                Vector2 dir = (_potion.transform.position - entity.transform.position).normalized;
+                entity.healthCompo.TakeDamage(_level, dir * 4.5f, _potion.owner);
             }
         }
     }

@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class WildBoarStunState : EnemyState<WildBoarEnum>
 {
-    private float _stunStartTime;
     public WildBoarStunState(Enemy<WildBoarEnum> enemy, EnemyStateMachine<WildBoarEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
 
-    public override void AnimationFinishTrigger()
-    {
-        base.AnimationFinishTrigger();
-    }
+    private float _stunStartTime;
 
     public override void Enter()
     {
@@ -21,11 +17,22 @@ public class WildBoarStunState : EnemyState<WildBoarEnum>
         enemy.CanStateChangeable = false;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        enemy.animatorCompo.speed = 1;
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();
 
-        if(Time.time > enemy.stunDuration + _stunStartTime)
+        if (enemy.IsGroundDetected() && enemy.rigidbodyCompo.velocity.x != 0)
+        {
+            enemy.MovementCompo.StopImmediately();
+        }
+
+        if (Time.time > enemy.stunDuration + _stunStartTime)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(WildBoarEnum.Idle);

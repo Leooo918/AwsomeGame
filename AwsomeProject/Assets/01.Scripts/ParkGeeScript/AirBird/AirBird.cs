@@ -20,10 +20,8 @@ public enum AirBirdSkillEnum
 
 public class AirBird : Enemy<AirBirdEnum>
 {
-    [HideInInspector] public bool moveAnima = false;
-    [HideInInspector] public bool readyFlip = false;
-
     public Feather featherPrefab;
+    public float featherShootSpeed = 12f;
 
     protected override void Awake()
     {
@@ -32,12 +30,14 @@ public class AirBird : Enemy<AirBirdEnum>
 
     private void OnEnable()
     {
+        healthCompo.OnKnockBack += KnockBack;
         healthCompo.OnHit += OnHit;
         healthCompo.OnDie += OnDie;
     }
 
     private void OnDisable()
     {
+        healthCompo.OnKnockBack -= KnockBack;
         healthCompo.OnHit -= OnHit;
         healthCompo.OnDie -= OnDie;
     }
@@ -63,8 +63,15 @@ public class AirBird : Enemy<AirBirdEnum>
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 
+    public override void Stone(float duration)
+    {
+        base.Stone(duration);
+        animatorCompo.speed = 0;
+    }
+
     public override void Dead(Vector2 dir)
     {
+
     }
 
     private void OnHit()
