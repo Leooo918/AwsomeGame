@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AirBirdEnemyStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 100
+    baseValue: 16
     modifiers: []
     percentModifiers: []
   recoveryReceive:

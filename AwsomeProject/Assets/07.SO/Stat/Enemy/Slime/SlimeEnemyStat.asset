@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SlimeEnemyStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 100
+    baseValue: 30
     modifiers: []
     percentModifiers: []
   recoveryReceive:
