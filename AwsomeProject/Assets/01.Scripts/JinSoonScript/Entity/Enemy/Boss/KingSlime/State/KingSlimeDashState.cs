@@ -30,14 +30,10 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
             if (_kingSlime.IsWallDetected(out Collider2D collider)) // 쳐박았따? 왜 뭘 쳐박았는지는 안알려주지? 난 알고싶다!!!!! 즉시 오버로드
             {
                 if(collider.TryGetComponent(out GrowingBush bush))
-                {
                     bush.gameObject.Destroy();
-                }
                 else
-                {
                     _kingSlime.FlipController(-_dashDir.x);
-                }
-                _kingSlime.KnockBack(-_dashDir * 2f);
+                _kingSlime.KnockBack(-_dashDir * 3f);
                 enemyStateMachine.ChangeState(KingSlimeStateEnum.Idle);
             }
         }

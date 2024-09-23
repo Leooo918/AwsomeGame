@@ -23,7 +23,6 @@ public class KingSlimeIdleState : EnemyState<KingSlimeStateEnum>
         base.UpdateState();
         if(Time.time > _idleEndTime)
         {
-            Debug.Log("??");
             enemyStateMachine.ChangeState(GetRandomPatternState());
         }
     }

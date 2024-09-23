@@ -8,7 +8,7 @@ public class PlayerGroundState : PlayerState
 {
     private Skill dashSkill;
     private Skill normalAttackSkill;
-    private CapsuleCollider2D _playerCollider;
+    private BoxCollider2D _playerCollider;
 
     private LayerMask _whatIsVine = LayerMask.GetMask("Vine");
 
@@ -18,7 +18,7 @@ public class PlayerGroundState : PlayerState
     {
         dashSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.Dash).skill;
         normalAttackSkill = player.SkillSO.GetSkillByEnum(PlayerSkillEnum.NormalAttack).skill;
-        _playerCollider = player.colliderCompo as CapsuleCollider2D;
+        _playerCollider = player.colliderCompo as BoxCollider2D;
         _colliders = new Collider2D[1];
     }
 
