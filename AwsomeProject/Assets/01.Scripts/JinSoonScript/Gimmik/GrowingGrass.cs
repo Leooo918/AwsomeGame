@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum VineState
 {
@@ -12,6 +13,7 @@ public enum VineState
 
 public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
+    [SerializeField]
     private Animator _animator;
 
     private readonly int _growStartHash = Animator.StringToHash("GrowStart");
@@ -23,8 +25,15 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
         CurrentState = VineState.Shrunk;
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            ApplyEffect();
+        }
     }
 
     public void ApplyEffect()
@@ -50,7 +59,8 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
     {
         if (collision.TryGetComponent(out Player player))
         {
-            player.StateMachine.ChangeState(PlayerStateEnum.Idle);
+            if (player.StateMachine.CurrentState.GetType() == typeof(PlayerClimbState))
+                player.StateMachine.ChangeState(PlayerStateEnum.Idle);
         }
     }
 
@@ -62,12 +72,12 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
     public bool IsTriggered(AnimationTriggerEnum trigger)
     {
         bool isTriggred = (_animationTriggerBit & (int)trigger) != 0;
-        if(isTriggred)
+        if (isTriggred)
             RemoveTrigger(trigger);
         return isTriggred;
     }
 
-        public void RemoveTrigger(AnimationTriggerEnum trigger)
+    public void RemoveTrigger(AnimationTriggerEnum trigger)
     {
         _animationTriggerBit &= ~(int)trigger;
     }
