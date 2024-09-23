@@ -13,5 +13,6 @@ public class PoorRecoveryEffect : Effect
                 entity.ApplyStatusEffect(StatusDebuffEffectEnum.PoorRecovery, _level, 5f);
             }
         }
+        GameObject.Instantiate(EffectInstantiateManager.Instance.healDamageEffect, _potion.transform.position, Quaternion.identity);
     }
 }

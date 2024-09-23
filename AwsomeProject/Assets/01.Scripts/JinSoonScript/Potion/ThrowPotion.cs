@@ -8,6 +8,7 @@ using UnityEngine;
 public class ThrowPotion : Potion
 {
     private Collider2D[] _colliders;
+    private Rigidbody2D _rigid;
     [SerializeField]
     private int _maxDetactEntity;
     [SerializeField]
@@ -16,8 +17,13 @@ public class ThrowPotion : Potion
 
     private SpriteRenderer _spriteRenderer;
 
-    public override void Init(QuickSlot slot, Entity owner) 
+    public override void Init(QuickSlot slot, Entity owner, Vector2 movement = default, float rotatPow = 0) 
     {
+        _rigid = GetComponent<Rigidbody2D>();
+        _rigid.AddForce(movement, ForceMode2D.Impulse);
+        Debug.Log(rotatPow);
+        _rigid.AddTorque(rotatPow);
+
         ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;
         ThrowPotionInfos potionInfos = throwPotionItemSO.GetPotionInfo(level);
         _maxDetactEntity = potionInfos.maxDetactEntity;
