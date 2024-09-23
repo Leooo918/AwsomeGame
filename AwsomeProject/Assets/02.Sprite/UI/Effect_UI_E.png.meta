@@ -386,10 +386,10 @@ TextureImporter:
       name: Effect_UI_E_13
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 11
-        height: 11
+        x: 1
+        y: 1
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -407,10 +407,10 @@ TextureImporter:
       name: Effect_UI_E_14
       rect:
         serializedVersion: 2
-        x: 16
-        y: 2
-        width: 11
-        height: 11
+        x: 15
+        y: 1
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,10 +428,10 @@ TextureImporter:
       name: Effect_UI_E_15
       rect:
         serializedVersion: 2
-        x: 30
-        y: 2
-        width: 11
-        height: 11
+        x: 29
+        y: 1
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Effect_UI_E_16
       rect:
         serializedVersion: 2
-        x: 44
-        y: 2
-        width: 11
-        height: 11
+        x: 43
+        y: 1
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,10 +470,10 @@ TextureImporter:
       name: Effect_UI_E_17
       rect:
         serializedVersion: 2
-        x: 58
-        y: 2
-        width: 11
-        height: 11
+        x: 57
+        y: 1
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

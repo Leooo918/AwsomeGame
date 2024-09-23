@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlowdownStatusEffect : StatusEffect
 {
-    private float[] _percentWithLevel = { -0.1f, -0.2f, -0.3f };
+    private float[] _percentWithLevel = { -0.2f, -0.3f, -0.5f };
 
     public override void ApplyEffect(Entity target, float cooltime)
     {

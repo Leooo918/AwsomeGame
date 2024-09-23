@@ -8,11 +8,14 @@ public class FloatingStatusEffect : StatusEffect
 
     public override void ApplyEffect(Entity target, float cooltime)
     {
-        base.ApplyEffect(target, cooltime);
+        base.ApplyEffect(target, cooltime + 10f);
 
         Debug.Log("¿¡¾îº»");
-        target.StartCoroutine(AirBornDurationCoroutine(cooltime, damageWithLevel[level]));
-        target.AirBorn(cooltime);
+        _target.AirBorn(cooltime);
+        _target.StartCoroutine(AirBornDurationCoroutine(cooltime, damageWithLevel[level]));
+        _target.animatorCompo.speed = 1;
+        _target.CanKnockback = false;
+        _target.CanStateChangeable = false;
     }
 
     IEnumerator AirBornDurationCoroutine(float duration, int damagePercent)
@@ -50,6 +53,14 @@ public class FloatingStatusEffect : StatusEffect
         {
             return _target.MovementCompo.RigidbodyCompo.velocity.y > fallSpeed;
         });
+        _cooltime = 0;
+        _target.CanKnockback = true;
+        if (_target.IsUnderStatusEffect(StatusDebuffEffectEnum.Petrification) == false)
+        {
+            Debug.Log("Loli");
+            _target.CanStateChangeable = true;
+            _target.SetIdle();
+        }
         _target.healthCompo.TakeDamage(damagePercent, Vector2.zero, owner, true);
         _target.MovementCompo.StopImmediately(true);
 

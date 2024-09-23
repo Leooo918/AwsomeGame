@@ -44,7 +44,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
             if (Input.GetKeyDown(_alphaNums[i]))
             {
                 if (_currentSelectIdx == i)
-                    SelectQuickSlot(-1);
+                    SelectQuickSlot();
                 else
                     SelectQuickSlot(i);
             }
@@ -57,7 +57,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         return _activeLineQuickSlots[_currentSelectIdx];
     }
 
-    private void SelectQuickSlot(int index)
+    private void SelectQuickSlot(int index = -1)
     {
         if (_currentSelectIdx != -1)
             _activeLineQuickSlots[_currentSelectIdx].OnSelect(false);
@@ -79,6 +79,10 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         for (int i = 0; i < 5; i++)
         {
             _activeLineQuickSlots[i].SetPotion(slots[i, 0]);
+            if (_currentSelectIdx == i && _activeLineQuickSlots[i].assignedItem == null)
+            {
+                SelectQuickSlot();
+            }
         }
     }
 }

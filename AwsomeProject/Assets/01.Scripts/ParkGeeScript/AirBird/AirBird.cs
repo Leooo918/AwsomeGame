@@ -60,7 +60,8 @@ public class AirBird : Enemy<AirBirdEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        stunDuration = duration;
+        if (StateMachine.CurrentState is AirBirdStunState)
+            return;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 
@@ -74,11 +75,14 @@ public class AirBird : Enemy<AirBirdEnum>
     public override void AirBorn(float duration)
     {
         if (IsDead) return;
-        animatorCompo.speed = 1;
         MovementCompo.canSetVelocity = true;
         base.AirBorn(duration);
-        airBornDuration = duration;
-        StateMachine.ChangeState(AirBirdEnum.AirBorn);
+        //StateMachine.ChangeState(AirBirdEnum.AirBorn);
+    }
+
+    public override void SetIdle()
+    {
+        StateMachine.ChangeState(AirBirdEnum.Idle);
     }
 
     public override void Dead(Vector2 dir)

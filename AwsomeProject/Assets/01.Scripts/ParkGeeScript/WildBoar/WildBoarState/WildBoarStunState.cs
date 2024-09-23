@@ -8,12 +8,9 @@ public class WildBoarStunState : EnemyState<WildBoarEnum>
     {
     }
 
-    private float _stunStartTime;
-
     public override void Enter()
     {
         base.Enter();
-        _stunStartTime = Time.time;
         enemy.CanStateChangeable = false;
     }
 
@@ -32,7 +29,7 @@ public class WildBoarStunState : EnemyState<WildBoarEnum>
             enemy.MovementCompo.StopImmediately();
         }
 
-        if (Time.time > enemy.stunDuration + _stunStartTime)
+        if (Time.time > enemy.stunEndTime && enemy.IsUnderStatusEffect(StatusDebuffEffectEnum.Floating) == false)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(WildBoarEnum.Idle);

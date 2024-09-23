@@ -6,12 +6,9 @@ public class SlimeStunState : EnemyState<SlimeStateEnum>
 {
     public SlimeStunState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName) { }
 
-    private float _stunStartTime;
-
     public override void Enter()
     {
         base.Enter();
-        _stunStartTime = Time.time;
         enemy.CanStateChangeable = false;
     }
 
@@ -30,7 +27,7 @@ public class SlimeStunState : EnemyState<SlimeStateEnum>
             enemy.MovementCompo.StopImmediately();
         }
 
-        if (Time.time > enemy.stunDuration + _stunStartTime)
+        if (enemy.stunEndTime < Time.time && enemy.IsUnderStatusEffect(StatusDebuffEffectEnum.Floating) == false)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(SlimeStateEnum.Idle);

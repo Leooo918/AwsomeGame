@@ -17,6 +17,6 @@ public class ResistanceStatusEffect : StatusEffect
     {
         base.OnEnd();
 
-        _target.Stat.armor.RemoveModifier(_resistanceWithLevel[level]);
+        _target.Stat.damageReceive.RemoveModifier(_resistanceWithLevel[level]);
     }
 }

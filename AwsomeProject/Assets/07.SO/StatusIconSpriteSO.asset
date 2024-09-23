@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b5007c569dcbd4e95eed8fdeb0b976, type: 3}
+  m_Name: StatusIconSpriteSO
+  m_EditorClassIdentifier: 
+  _buffStatusIconSprite:
+  - sprite: {fileID: 1466171610, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 32
+  - sprite: {fileID: 1162346669, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 128
+  - sprite: {fileID: -1606659967, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 64
+  - sprite: {fileID: 290931863, guid: ea6b0b4be62d26844ae2af19924ca3a4, type: 3}
+    statusEnum: 16
+  - sprite: {fileID: -1842395422, guid: ea6b0b4be62d26844ae2af19924ca3a4, type: 3}
+    statusEnum: 2
+  _debuffStatusIconSprite:
+  - sprite: {fileID: -67747681, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 2
+  - sprite: {fileID: 1340474885, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 8
+  - sprite: {fileID: -1153288455, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 16
+  - sprite: {fileID: -1086532218, guid: ea6b0b4be62d26844ae2af19924ca3a4, type: 3}
+    statusEnum: 512
+  _levelOutlineIconSprite:
+  - {fileID: 1613782572, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+  - {fileID: 1116427145, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+  - {fileID: -1095613998, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}

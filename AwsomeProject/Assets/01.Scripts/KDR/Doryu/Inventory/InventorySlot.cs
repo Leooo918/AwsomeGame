@@ -65,7 +65,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public bool TrySwapSlotData(InventorySlot slot)
     {
-        if ((slot.assignedItem != null && inventory.CanEnterInven(slot.assignedItem.itemSO) == false) ||
+        if (slot == this || (slot.assignedItem != null && inventory.CanEnterInven(slot.assignedItem.itemSO) == false) ||
             slot.inventory.CanEnterInven(assignedItem.itemSO) == false)
             return false;
 

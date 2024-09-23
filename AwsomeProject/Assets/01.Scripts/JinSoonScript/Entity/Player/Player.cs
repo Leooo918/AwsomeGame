@@ -194,7 +194,7 @@ public class Player : Entity
     public override void Stun(float duration)
     {
         base.Stun(duration);
-        stunDuration = duration;
+        stunEndTime = duration;
         StateMachine.ChangeState(PlayerStateEnum.Stun);
     }
 

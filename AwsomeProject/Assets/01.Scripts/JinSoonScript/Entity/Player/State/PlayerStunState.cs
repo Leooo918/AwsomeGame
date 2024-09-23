@@ -18,15 +18,11 @@ public class PlayerStunState : PlayerState
     {
         base.UpdateState();
 
-        if (Time.time - stunTime >= player.stunDuration)
+        if (Time.time > player.stunEndTime)
         {
             player.CanStateChangeable = true;
             stateMachine.ChangeState(PlayerStateEnum.Idle);
         }
-        //if ()
-        //{
-
-        //}
     }
 
     public override void Exit()

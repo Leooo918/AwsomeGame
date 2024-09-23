@@ -7,12 +7,10 @@ public class AirBirdStunState : EnemyState<AirBirdEnum>
     public AirBirdStunState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
     }
-    private float _stunStartTime;
 
     public override void Enter()
     {
         base.Enter();
-        _stunStartTime = Time.time;
         enemy.CanStateChangeable = false;
         enemy.rigidbodyCompo.gravityScale = 3.5f;
     }
@@ -32,7 +30,7 @@ public class AirBirdStunState : EnemyState<AirBirdEnum>
             enemy.MovementCompo.StopImmediately();
         }
 
-        if (Time.time > enemy.stunDuration + _stunStartTime)
+        if (Time.time > enemy.stunEndTime && enemy.IsUnderStatusEffect(StatusDebuffEffectEnum.Floating) == false)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(AirBirdEnum.Idle);

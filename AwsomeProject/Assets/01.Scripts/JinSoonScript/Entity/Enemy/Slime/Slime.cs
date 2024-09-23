@@ -78,7 +78,8 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        stunDuration = duration;
+        if (StateMachine.CurrentState is SlimeStunState)
+            return;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
@@ -92,11 +93,13 @@ public class Slime : Enemy<SlimeStateEnum>
     public override void AirBorn(float duration)
     {
         if (IsDead) return;
-        animatorCompo.speed = 1;
         base.AirBorn(duration);
-        airBornDuration = duration;
-        StateMachine.ChangeState(SlimeStateEnum.AirBorn);
-        CanStateChangeable = false;
+        //StateMachine.ChangeState(SlimeStateEnum.AirBorn);
+    }
+
+    public override void SetIdle()
+    {
+        StateMachine.ChangeState(SlimeStateEnum.Idle);
     }
 
     public override void Dead(Vector2 dir)
