@@ -11,24 +11,10 @@ public class AirBirdAirBornState : EnemyState<AirBirdEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.CanKnockback = false;
-        enemy.CanStateChangeable = false;
-        enemy.StartDelayCallBack(enemy.airBornDuration, () =>
-        {
-            enemy.StartCoroutine(Down());
-        });
-    }
-
-    private IEnumerator Down()
-    {
-        yield return new WaitUntil(() => enemy.rigidbodyCompo.velocity.y > -40);
-        enemy.CanStateChangeable = true;
-        enemyStateMachine.ChangeState(AirBirdEnum.Idle);
     }
 
     public override void Exit()
     {
         base.Exit();
-        enemy.CanKnockback = true;
     }
 }

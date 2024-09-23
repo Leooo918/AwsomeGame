@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum WildBoarEnum
 {
@@ -92,10 +93,14 @@ public class WildBoar : Enemy<WildBoarEnum>
     public override void AirBorn(float duration)
     {
         if (IsDead) return;
-        animatorCompo.speed = 1;
         base.AirBorn(duration);
         airBornDuration = duration;
-        StateMachine.ChangeState(WildBoarEnum.AirBorn);
+        //StateMachine.ChangeState(WildBoarEnum.AirBorn);
+    }
+
+    public override void SetIdle()
+    {
+        StateMachine.ChangeState(WildBoarEnum.Idle);
     }
 
     public void Attack()

@@ -11,18 +11,10 @@ public class WildBoarAirBornState : EnemyState<WildBoarEnum>
     public override void Enter()
     {
         base.Enter();
-        enemy.CanKnockback = false;
-        enemy.CanStateChangeable = false;
-        enemy.StartDelayCallBack(enemy.airBornDuration, () =>
-        {
-            enemy.CanStateChangeable = true;
-            enemyStateMachine.ChangeState(WildBoarEnum.Idle);
-        });
     }
 
     public override void Exit()
     {
         base.Exit();
-        enemy.CanKnockback = true;
     }
 }

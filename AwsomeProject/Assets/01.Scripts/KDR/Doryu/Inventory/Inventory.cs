@@ -32,12 +32,12 @@ public class Inventory : MonoBehaviour
     [ContextMenu("ResetSaveData")]
     public void ResetSaveData()
     {
-        slots = new InventorySlot[_inventorySize.x, _inventorySize.y];
+        //slots = new InventorySlot[_inventorySize.x, _inventorySize.y];
         for (int y = 0; y < _inventorySize.y; y++)
         {
             for (int x = 0; x < _inventorySize.x; x++)
             {
-                slots[x, y] = null;
+                slots[x, y].SetItem(null);
             }
         }
         _inventoryData.Init(_inventorySize.x * 100 + _inventorySize.y);

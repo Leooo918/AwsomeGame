@@ -30,7 +30,7 @@ public class SlimeStunState : EnemyState<SlimeStateEnum>
             enemy.MovementCompo.StopImmediately();
         }
 
-        if (Time.time > enemy.stunDuration + _stunStartTime)
+        if (Time.time > enemy.stunDuration + _stunStartTime && enemy.IsUnderStatusEffect(StatusDebuffEffectEnum.Floating) == false)
         {
             enemy.CanStateChangeable = true;
             enemyStateMachine.ChangeState(SlimeStateEnum.Idle);

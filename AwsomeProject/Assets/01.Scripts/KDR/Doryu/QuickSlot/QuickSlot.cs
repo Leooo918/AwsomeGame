@@ -47,7 +47,7 @@ public class QuickSlot : MonoBehaviour
     public void SetPotion(InventorySlot inventorySlot)
     {
         _invenSlot = inventorySlot;
-        if (_invenSlot.assignedItem == null)
+        if (_invenSlot == null || _invenSlot.assignedItem == null)
         {
             if (assignedItem != null)
             {

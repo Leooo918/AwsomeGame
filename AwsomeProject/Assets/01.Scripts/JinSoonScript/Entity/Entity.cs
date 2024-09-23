@@ -221,7 +221,12 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         effectTrm.localScale = Vector3.one * groundCheckBoxWidth;
     }
 
-    public virtual void AirBorn(float duration) { }
+    public virtual void AirBorn(float duration) 
+    {
+        Stun(duration);
+    }
+
+    public virtual void SetIdle() { }
 
     public virtual void UpArmor(int figure)
     {
