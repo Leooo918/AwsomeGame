@@ -25,7 +25,7 @@ public class PlayerDeadState : PlayerState
         if(IsTriggerCalled(AnimationTriggerEnum.EndTrigger))
         {
             DiePanel diePanel = UIManager.Instance.GetUI(UIType.PlayerDie) as DiePanel;
-            diePanel.Init((int)(Time.time - GameManager.Instance.playStartTime), GameManager.Instance.killCnt, GameManager.Instance.gatherCnt, 0.6f);
+            diePanel.Init((int)(Time.time - GameManager.Instance.playStartTime), GameManager.Instance.killCnt, GameManager.Instance.gatherCnt, GameManager.Instance.GetPlayerProgress());
             diePanel.Open();
         }
     }

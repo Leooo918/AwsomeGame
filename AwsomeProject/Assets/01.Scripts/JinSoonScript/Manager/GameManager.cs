@@ -9,20 +9,28 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private Image _fadeout;
     [SerializeField] private GameObject _gameOverUI;
-    [SerializeField] private GameObject _shopBuyPanel;
-    [SerializeField] private TextMeshProUGUI _coinTxt;
+    //[SerializeField] private GameObject _shopBuyPanel;
+    //[SerializeField] private TextMeshProUGUI _coinTxt;
     private float _fadeOutTime;
     private Sequence _fadeAwaySeq;
     private bool _gameOver = false;
 
-    public float playStartTime = 0;
-    public int killCnt = 0;
-    public int gatherCnt = 0;
-    public int coinCnt = 0;
+    [HideInInspector] public float playStartTime = 0;
+    [HideInInspector] public int killCnt   = 0;
+    [HideInInspector] public int gatherCnt = 0;
+    [HideInInspector] public int coinCnt = 0;
+
+    public Vector2 startToEndPos;
 
     private void Start()
     {
         playStartTime = Time.time;
+    }
+
+    public float GetPlayerProgress()
+    {
+        float playerMaxX = PlayerManager.Instance.playerMaxX;
+        return (playerMaxX - startToEndPos.x) / (startToEndPos.y - startToEndPos.x);
     }
 
     public void Restart()
@@ -66,9 +74,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public void BuyItem()
-    {
-        _shopBuyPanel.SetActive(false);
-
-    }
+    //public void BuyItem()
+    //{
+    //    _shopBuyPanel.SetActive(false);
+    //}
 }

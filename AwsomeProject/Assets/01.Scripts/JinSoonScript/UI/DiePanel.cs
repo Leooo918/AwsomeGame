@@ -67,7 +67,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
             Vector2 playerPosition = new Vector2(posX, _player.anchoredPosition.y);
             _player.anchoredPosition = playerPosition;
 
-            curProgress += 0.005f;
+            curProgress += 0.005f; 
 
             yield return null;
         }

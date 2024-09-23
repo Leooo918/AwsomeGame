@@ -5,6 +5,13 @@ public class PlayerManager : Singleton<PlayerManager>
     private Player player;
     private Transform playerTrm;
 
+    public float playerMaxX;
+
+    private void Update()
+    {
+        playerMaxX = Mathf.Max(playerTrm.position.x, playerMaxX);
+    }
+
     public Player Player 
     {
         get
