@@ -167,6 +167,16 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
             new Vector2(0.05f, wallCheckBoxHeight), 0,
             Vector2.right * FacingDir, distance == -1 ? wallCheckDistance : distance, whatIsGroundAndWall);
 
+    public virtual bool IsWallDetected(out Collider2D detectedCollider, float yOffset = 0, float distance = -1)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(wallChecker.position + Vector3.up * yOffset,
+            new Vector2(0.05f, wallCheckBoxHeight), 0,
+            Vector2.right * FacingDir, distance == -1 ? wallCheckDistance : distance, whatIsGroundAndWall);
+        detectedCollider = hit.collider;
+        return hit.collider != null;
+    }
+        
+
     public virtual void CheckObjectOnFoot()
     {
         RaycastHit2D hit = Physics2D.BoxCast(groundChecker.position,
