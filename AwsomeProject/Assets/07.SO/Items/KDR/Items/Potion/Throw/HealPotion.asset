@@ -24,6 +24,8 @@ MonoBehaviour:
   - infos:
     - effectEnum: 0
       level: 10
+    - effectEnum: 4
+      level: 0
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2
@@ -32,6 +34,8 @@ MonoBehaviour:
   - infos:
     - effectEnum: 0
       level: 15
+    - effectEnum: 4
+      level: 1
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2
@@ -39,7 +43,9 @@ MonoBehaviour:
     range: 3
   - infos:
     - effectEnum: 0
-      level: 30
+      level: 20
+    - effectEnum: 4
+      level: 2
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2

@@ -23,7 +23,7 @@ public abstract class Potion : MonoBehaviour
     public Entity owner;
     public int level;
 
-    public virtual void Init(QuickSlot slot, Entity owner)
+    public virtual void Init(QuickSlot slot, Entity owner, Vector2 movement = default, float rotatPow = 0)
     {
         this.owner = owner;
         potionItemSO = slot.assignedItem.itemSO as PotionItemSO;

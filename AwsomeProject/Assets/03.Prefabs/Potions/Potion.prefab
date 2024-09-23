@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: -779005045
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 569679761, guid: b5cb77f47d103ba49abde37c7f8eae14, type: 3}
+  m_Sprite: {fileID: 483152742, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7e6b7e947289f4187a82be0aa785ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potionInfos: []
-  potionType: 1
+  potionItemSO: {fileID: 0}
+  owner: {fileID: 0}
+  level: 0
   _maxDetactEntity: 1
   _whatIsEnemy:
     serializedVersion: 2
@@ -140,7 +141,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.9796548
 --- !u!50 &3670681863553004977
 Rigidbody2D:
   serializedVersion: 4
@@ -167,4 +168,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0

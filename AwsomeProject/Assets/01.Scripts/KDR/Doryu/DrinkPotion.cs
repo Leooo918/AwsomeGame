@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DrinkPotion : Potion
 {
-    public override void Init(QuickSlot slot, Entity owner)
+    public override void Init(QuickSlot slot, Entity owner, Vector2 movement = default, float rotatPow = 0)
     {
         //DrinkPotionItemSO drinkPotionItemSO = slot.assignedItem.itemSO as DrinkPotionItemSO;
         base.Init(slot, owner);

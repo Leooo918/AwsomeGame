@@ -55,6 +55,8 @@ public class Spike : MonoBehaviour
     {
         if (collision.TryGetComponent(out Health health) && !(health.owner is Player))
         {
+            Instantiate(EffectInstantiateManager.Instance.spikeHitEffect, health.transform.position, Quaternion.identity);
+
             health.TakeDamage(_damage, Vector3.zero, _owner);
             CameraManager.Instance.ShakeCam(4f, 8f, 0.1f);
         }
