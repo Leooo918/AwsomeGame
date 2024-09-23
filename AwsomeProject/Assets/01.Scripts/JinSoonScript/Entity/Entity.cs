@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static Cinemachine.DocumentationSortingAttribute;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
@@ -50,7 +51,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public bool canBeAirBorn { get; protected set; }
     public float upArmorDuration { get; protected set; }
 
-    protected int _statusEffectBit = 0;
+    protected int _buffStatusEffectBit = 0;
+    protected int _debuffStatusEffectBit = 0;
+    public event Action<int, int, bool, bool> OnStatusChanged;
 
     [Space]
     [Header("FeedBack info")]
@@ -280,31 +283,35 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
         if (IsUnderStatusEffect(statusEffect)) return null;
-        _statusEffectBit |= (int)statusEffect;
+        _buffStatusEffectBit |= (int)statusEffect;
+        OnStatusChanged?.Invoke((int)statusEffect, level, true, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
     public StatusEffect ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
         if (IsUnderStatusEffect(statusEffect)) return null;
-        _statusEffectBit |= (int)statusEffect;
+        _debuffStatusEffectBit |= (int)statusEffect;
+        OnStatusChanged?.Invoke((int)statusEffect, level, false, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
     }
 
     public void RemoveStatusEffect(StatusBuffEffectEnum statusEffect)
     {
         if (IsUnderStatusEffect(statusEffect) == false) return;
-        _statusEffectBit &= ~(int)statusEffect;
+        _buffStatusEffectBit &= ~(int)statusEffect;
+        OnStatusChanged?.Invoke((int)statusEffect, 0, true, false);
     }
     public void RemoveStatusEffect(StatusDebuffEffectEnum statusEffect)
     {
         if (IsUnderStatusEffect(statusEffect) == false) return;
-        _statusEffectBit &= ~(int)statusEffect;
+        _debuffStatusEffectBit &= ~(int)statusEffect;
+        OnStatusChanged?.Invoke((int)statusEffect, 0, false, false);
     }
 
     public bool IsUnderStatusEffect(StatusBuffEffectEnum statusEffect)
-        => (_statusEffectBit & (int)statusEffect) != 0;
+        => (_buffStatusEffectBit & (int)statusEffect) != 0;
     public bool IsUnderStatusEffect(StatusDebuffEffectEnum statusEffect)
-        => (_statusEffectBit & (int)statusEffect) != 0;
+        => (_debuffStatusEffectBit & (int)statusEffect) != 0;
 
 #if UNITY_EDITOR
 
