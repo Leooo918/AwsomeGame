@@ -60,7 +60,6 @@ public class AirBird : Enemy<AirBirdEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        stunDuration = duration;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 
@@ -76,7 +75,6 @@ public class AirBird : Enemy<AirBirdEnum>
         if (IsDead) return;
         MovementCompo.canSetVelocity = true;
         base.AirBorn(duration);
-        airBornDuration = duration;
         //StateMachine.ChangeState(AirBirdEnum.AirBorn);
     }
 

@@ -54,9 +54,13 @@ public class FloatingStatusEffect : StatusEffect
             return _target.MovementCompo.RigidbodyCompo.velocity.y > fallSpeed;
         });
         _cooltime = 0;
-        _target.CanStateChangeable = true;
         _target.CanKnockback = true;
-        _target.SetIdle();
+        if (_target.IsUnderStatusEffect(StatusDebuffEffectEnum.Petrification) == false)
+        {
+            Debug.Log("Loli");
+            _target.CanStateChangeable = true;
+            _target.SetIdle();
+        }
         _target.healthCompo.TakeDamage(damagePercent, Vector2.zero, owner, true);
         _target.MovementCompo.StopImmediately(true);
 

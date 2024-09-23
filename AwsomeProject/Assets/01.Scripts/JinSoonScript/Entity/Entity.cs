@@ -199,8 +199,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
             });
     }
 
-    public virtual void Stun(float duration) 
+    public virtual void Stun(float duration)
     {
+        stunDuration = Mathf.Max(duration, stunDuration);
         _stunEffect.SetActive(true);
         StartDelayCallBack(duration, () => _stunEffect.SetActive(false));
     }
@@ -221,8 +222,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         effectTrm.localScale = Vector3.one * groundCheckBoxWidth;
     }
 
-    public virtual void AirBorn(float duration) 
+    public virtual void AirBorn(float duration)
     {
+        airBornDuration = Mathf.Max(airBornDuration, duration);
         Stun(duration);
     }
 

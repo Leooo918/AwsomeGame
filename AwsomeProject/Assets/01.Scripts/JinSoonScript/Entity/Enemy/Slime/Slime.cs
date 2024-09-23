@@ -78,7 +78,6 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        stunDuration = duration;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 
@@ -93,7 +92,6 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         if (IsDead) return;
         base.AirBorn(duration);
-        airBornDuration = duration;
         //StateMachine.ChangeState(SlimeStateEnum.AirBorn);
     }
 

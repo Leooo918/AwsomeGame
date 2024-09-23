@@ -74,7 +74,6 @@ public class WildBoar : Enemy<WildBoarEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        stunDuration = duration;
          
         if (StateMachine.CurrentState is WildBoarRushState)
             CanStateChangeable = true;
@@ -94,7 +93,6 @@ public class WildBoar : Enemy<WildBoarEnum>
     {
         if (IsDead) return;
         base.AirBorn(duration);
-        airBornDuration = duration;
         //StateMachine.ChangeState(WildBoarEnum.AirBorn);
     }
 
