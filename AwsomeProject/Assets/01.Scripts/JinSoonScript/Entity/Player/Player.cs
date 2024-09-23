@@ -12,7 +12,7 @@ public enum PlayerStateEnum
     Stun,
     NormalAttack,
     Climb,
-    Throw, 
+    Throw,
     Dead,
     Push,
 }
@@ -55,7 +55,7 @@ public class Player : Entity
     public PlayerStateMachine StateMachine { get; private set; }
     [SerializeField] private InputReader _inputReader;
     public InputReader PlayerInput => _inputReader;
-    
+
     #endregion
 
     #region CoyoteTime
@@ -333,5 +333,13 @@ public class Player : Entity
     {
         float gravityScale = isActive ? _gravityScale : 0;
         rigidbodyCompo.gravityScale = gravityScale;
+    }
+
+    public void SetActiveInput(bool isActive)
+    {
+        if (isActive)
+            PlayerInput.Controlls.Player.Enable();
+        else
+            PlayerInput.Controlls.Player.Disable();
     }
 }

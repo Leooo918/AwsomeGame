@@ -58,6 +58,12 @@ public abstract class Enemy<T> : Entity where T : Enum
         }
     }
 
+    protected override void Update()
+    {
+        base.Update();
+        StateMachine.CurrentState.UpdateState();
+    }
+
     #region DetectRegion
 
 
