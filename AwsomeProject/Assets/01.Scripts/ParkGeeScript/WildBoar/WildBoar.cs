@@ -38,16 +38,7 @@ public class WildBoar : Enemy<WildBoarEnum>
         base.Awake();
         _playerTrm = PlayerManager.Instance.PlayerTrm;
 
-        //Skills = gameObject.AddComponent<WildBoarSkill>();
-        //Skills.Init(EntitySkillSO);
-
-        //foreach (var item in EntitySkillSO.skills)
-        //{
-        //    item.skill.SetOwner(this);
-        //}
-
         detectingDistance = EnemyStat.detectingDistance.GetValue();
-        //_rushSkill = Skills.GetSkillByEnum(WildBoarSkillEnum.Rush);
     }
 
     private void OnEnable()
@@ -80,14 +71,18 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void Stun(float duration)
     {
-        base.Stun(duration);
         if (IsDead) return;
+        base.Stun(duration);
         stunDuration = duration;
+         
+        if (StateMachine.CurrentState is WildBoarRushState)
+            CanStateChangeable = true;
         StateMachine.ChangeState(WildBoarEnum.Stun);
     }
 
     public override void Stone(float duration)
     {
+        if (IsDead) return;
         base.Stone(duration);
         animatorCompo.speed = 0;
     }
@@ -96,8 +91,9 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     public override void AirBorn(float duration)
     {
-        base.AirBorn(duration);
         if (IsDead) return;
+        animatorCompo.speed = 1;
+        base.AirBorn(duration);
         airBornDuration = duration;
         StateMachine.ChangeState(WildBoarEnum.AirBorn);
     }

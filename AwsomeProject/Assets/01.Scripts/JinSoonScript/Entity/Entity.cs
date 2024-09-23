@@ -102,13 +102,17 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     #region SpikeTrapDamage
     private float _lastSpikeTrapDamageTime;
-    private float _spikeTrapDamageCool = 1f;
+    private float _spikeTrapDamageCool = 0.5f;
     private int _spikeTrapDamage = 1;
+    private Collider2D[] _spikeColl = new Collider2D[1];
     private void CheckSpikeTrap()
     {
-        if (Physics2D.BoxCast(groundChecker.position,
-            new Vector2(groundCheckBoxWidth, 0.05f), 0,
-            Vector2.down, groundCheckDistance, whatIsSpikeTrap) &&
+        BoxCollider2D boxColl = colliderCompo as BoxCollider2D;
+        Vector2 size = boxColl.size;
+        Vector3 offset = boxColl.offset;
+        
+        if (Physics2D.OverlapBoxNonAlloc(transform.position + offset,
+            size + Vector2.one * 0.2f, 0, _spikeColl, whatIsSpikeTrap) != 0 &&
             _lastSpikeTrapDamageTime + _spikeTrapDamageCool < Time.time)
         {
             _lastSpikeTrapDamageTime = Time.time;

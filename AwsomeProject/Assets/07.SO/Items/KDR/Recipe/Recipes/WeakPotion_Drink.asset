@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b0270c11c4c3874fa7a049ae95a49d9, type: 3}
   m_Name: WeakPotion_Drink
   m_EditorClassIdentifier: 
-  needIngredients: 170000001300000017000000
-  potionType: 37
-  needIngredientValue: 1813
+  needIngredients: 170000001700000017000000
+  potionType: 31
+  needIngredientValue: 311581
   potion: {fileID: 11400000, guid: 178bd67bf54bf3d44a406e7453dd019b, type: 2}

@@ -627,7 +627,7 @@ MonoBehaviour:
     m_Bits: 1024
   whatIsSpikeTrap:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1048576
   groundChecker: {fileID: 8921989867047728867}
   groundCheckBoxWidth: 2
   groundCheckDistance: 0.1
@@ -704,6 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e1c2a84106e6324bbfbd6499a9e2cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSetVelocity: 0
 --- !u!1 &6197090011573483309
 GameObject:
   m_ObjectHideFlags: 0

@@ -62,7 +62,7 @@ public abstract class Enemy<T> : Entity where T : Enum
 
 
     /// <summary>
-    /// 플레이어를 바라보고, detectingDistance 만큼 가까이 있으면
+    /// 플레이어를 바라보고, detectingDistance 만큼 가까이 있으면 아항♡
     /// </summary>
     /// <returns></returns>
     public virtual Player IsPlayerDetected()

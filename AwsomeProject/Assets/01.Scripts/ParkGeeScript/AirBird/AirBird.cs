@@ -10,6 +10,7 @@ public enum AirBirdEnum
     Chase,
     Shoot,
     Stun,
+    AirBorn,
     Dead
 }
 
@@ -57,16 +58,27 @@ public class AirBird : Enemy<AirBirdEnum>
 
     public override void Stun(float duration)
     {
-        base.Stun(duration);
         if (IsDead) return;
+        base.Stun(duration);
         stunDuration = duration;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 
     public override void Stone(float duration)
     {
+        if (IsDead) return;
         base.Stone(duration);
         animatorCompo.speed = 0;
+    }
+
+    public override void AirBorn(float duration)
+    {
+        if (IsDead) return;
+        animatorCompo.speed = 1;
+        MovementCompo.canSetVelocity = true;
+        base.AirBorn(duration);
+        airBornDuration = duration;
+        StateMachine.ChangeState(AirBirdEnum.AirBorn);
     }
 
     public override void Dead(Vector2 dir)
