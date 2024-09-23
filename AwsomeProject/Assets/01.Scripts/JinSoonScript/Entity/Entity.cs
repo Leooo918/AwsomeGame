@@ -44,7 +44,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     protected Coroutine knockbackCoroutine;
     public bool isKnockbacked { get; protected set; }
 
-    public float stunDuration { get; protected set; }
+    public float stunEndTime { get; protected set; }
     public bool canBeStun { get; protected set; }
     public float airBornDuration { get; protected set; }
     public bool canBeAirBorn { get; protected set; }
@@ -201,9 +201,11 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     public virtual void Stun(float duration)
     {
-        stunDuration = Mathf.Max(duration, stunDuration);
-        _stunEffect.SetActive(true);
-        StartDelayCallBack(duration, () => _stunEffect.SetActive(false));
+        stunEndTime = Mathf.Max(duration + Time.time, stunEndTime);
+    }
+    public void OnStunEffect(bool active)
+    {
+        _stunEffect.SetActive(active);
     }
     public virtual void Stone(float duration)
     {
@@ -255,9 +257,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         Debug.Log("Entity에서 실행된 Clean");
         CleanDamageManager.Instance.DamageObject();
 
-        if (stunDuration > 0)
+        if (stunEndTime > 0)
         {
-            stunDuration = 0;
+            stunEndTime = 0;
             canBeStun = false;
             Debug.Log("스턴 해제됨");
         }

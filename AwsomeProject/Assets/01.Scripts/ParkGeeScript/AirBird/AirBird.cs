@@ -60,6 +60,8 @@ public class AirBird : Enemy<AirBirdEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
+        if (StateMachine.CurrentState is AirBirdStunState)
+            return;
         StateMachine.ChangeState(AirBirdEnum.Stun);
     }
 

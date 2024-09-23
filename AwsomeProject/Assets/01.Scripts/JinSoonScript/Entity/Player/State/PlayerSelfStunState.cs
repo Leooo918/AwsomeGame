@@ -13,7 +13,7 @@ public class PlayerSelfStunState : PlayerState
         base.Enter();
         Debug.Log("셀프스턴스테이트");
         player.CanStateChangeable = false;
-        player.StartDelayCallBack(player.stunDuration, () =>
+        player.StartDelayCallBack(player.stunEndTime, () =>
         {
             player.CanStateChangeable = true;
             stateMachine.ChangeState(PlayerStateEnum.Idle);

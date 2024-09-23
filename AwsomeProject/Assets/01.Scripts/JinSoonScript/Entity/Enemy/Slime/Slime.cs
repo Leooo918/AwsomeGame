@@ -78,6 +78,8 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
+        if (StateMachine.CurrentState is SlimeStunState)
+            return;
         StateMachine.ChangeState(SlimeStateEnum.Stun);
     }
 

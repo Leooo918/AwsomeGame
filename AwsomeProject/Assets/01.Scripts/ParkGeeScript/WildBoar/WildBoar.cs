@@ -74,9 +74,11 @@ public class WildBoar : Enemy<WildBoarEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-         
+
         if (StateMachine.CurrentState is WildBoarRushState)
             CanStateChangeable = true;
+        else if (StateMachine.CurrentState is WildBoarStunState)
+            return;
         StateMachine.ChangeState(WildBoarEnum.Stun);
     }
 
