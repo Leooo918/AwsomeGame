@@ -117,6 +117,7 @@ public class Player : Entity
     [HideInInspector] public bool isNatureSync = false;
     [HideInInspector] public bool canAttackWithNatureSync;
 
+    [field: SerializeField]
     public Transform CurrentPushTrm { get; set; }
     public GrowingGrass CurrentVine { get; set; }
 
@@ -330,11 +331,7 @@ public class Player : Entity
         return hit.transform;
     }
 
-    public void SetGravityActive(bool isActive)
-    {
-        float gravityScale = isActive ? _gravityScale : 0;
-        rigidbodyCompo.gravityScale = gravityScale;
-    }
+    
 
     public void SetActiveInput(bool isActive)
     {

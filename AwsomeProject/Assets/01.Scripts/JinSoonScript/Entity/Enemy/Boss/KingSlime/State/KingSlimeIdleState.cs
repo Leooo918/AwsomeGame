@@ -29,7 +29,7 @@ public class KingSlimeIdleState : EnemyState<KingSlimeStateEnum>
 
     public KingSlimeStateEnum GetRandomPatternState()
     {
-        int rand = Random.Range(1, 1);
+        int rand = Random.Range(1, 3);
         return (KingSlimeStateEnum)rand;
     }
 }

@@ -40,6 +40,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float wallCheckBoxHeight;
 
+    private float _gravityScale;
     public float moveSpeed => Stat.moveSpeed.GetValue();
     protected float knockbackDuration = 0.1f;
     protected Coroutine knockbackCoroutine;
@@ -94,6 +95,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
 
         _statusEffectManager = new StatusEffectManager(this);
+
+        _gravityScale = rigidbodyCompo.gravityScale;
     }
 
     private void FixedUpdate()
@@ -196,6 +199,12 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     }
 
     #endregion
+
+    public void SetGravityActive(bool isActive)
+    {
+        float gravityScale = isActive ? _gravityScale : 0;
+        rigidbodyCompo.gravityScale = gravityScale;
+    }
 
     public virtual void Dead(Vector2 dir) { }
 
