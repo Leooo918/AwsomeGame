@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PetrificationEffect : Effect
 {
+    private float[] durationWithLevel = { 4f, 6f, 10f };
     public override void ApplyEffect()
     {
         SpawnEffect(2);
@@ -13,7 +14,7 @@ public class PetrificationEffect : Effect
         {
             if (target is Entity entity)
             {
-                entity.ApplyStatusEffect(StatusDebuffEffectEnum.Petrification, _level, 3f);
+                entity.ApplyStatusEffect(StatusDebuffEffectEnum.Petrification, _level, durationWithLevel[_level]);
             }
         }
     }

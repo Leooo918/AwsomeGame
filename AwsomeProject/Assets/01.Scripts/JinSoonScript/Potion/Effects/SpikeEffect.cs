@@ -9,7 +9,6 @@ public class SpikeEffect : Effect
     private int[] _countWithLevel = { 2, 3, 3 };
     public override void ApplyEffect()
     {
-        Debug.Log("Sdsdsds");
         _player = _potion.owner as Player;
         for (int i = 0; i < _countWithLevel[_level]; i++)
         {

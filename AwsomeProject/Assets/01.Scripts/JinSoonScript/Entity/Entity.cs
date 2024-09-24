@@ -301,7 +301,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
+        //여기 수정해야함
         if (IsUnderStatusEffect(statusEffect)) return null;
+
         _buffStatusEffectBit |= (int)statusEffect;
         OnStatusChanged?.Invoke((int)statusEffect, level, true, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
@@ -309,6 +311,17 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public StatusEffect ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
         if (IsUnderStatusEffect(statusEffect)) return null;
+
+        if (EffectInstantiateManager.Instance.statusDebuffEffectColor.ContainsKey(statusEffect))
+        {
+            ParticleSystem ps = Instantiate(EffectInstantiateManager.Instance.statusEffect, transform);
+            ps.transform.transform.localPosition = Vector3.zero;
+            ps.transform.localScale = Vector3.one * groundCheckBoxWidth * 0.7f;
+            var mainModule = ps.main;
+            mainModule.duration = duration;
+            mainModule.startColor = EffectInstantiateManager.Instance.statusDebuffEffectColor[statusEffect];
+        }
+         
         _debuffStatusEffectBit |= (int)statusEffect;
         OnStatusChanged?.Invoke((int)statusEffect, level, false, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
