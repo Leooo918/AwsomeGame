@@ -49,30 +49,53 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
                     SelectQuickSlot(i);
             }
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (_currentSelectIdx == _activeLineQuickSlots.Count)
+                SelectQuickSlot();
+            else
+                SelectQuickSlot(_activeLineQuickSlots.Count);
+        }
     }
 
     public QuickSlot GetSelectedPotionSlot()
     {
         if (_currentSelectIdx == -1) return null;
-        return _activeLineQuickSlots[_currentSelectIdx];
+        if (_currentSelectIdx == _activeLineQuickSlots.Count)
+            return _passiveQuickSlots[0];
+        else
+            return _activeLineQuickSlots[_currentSelectIdx];
     }
 
     private void SelectQuickSlot(int index = -1)
     {
         if (_currentSelectIdx != -1)
-            _activeLineQuickSlots[_currentSelectIdx].OnSelect(false);
+        {
+            if (_currentSelectIdx == _activeLineQuickSlots.Count)
+                _passiveQuickSlots[0].OnSelect(false);
+            else
+                _activeLineQuickSlots[_currentSelectIdx].OnSelect(false);
+        }
+
         _currentSelectIdx = index;
+
         if (_currentSelectIdx != -1)
-            _activeLineQuickSlots[_currentSelectIdx].OnSelect(true);
+        {
+            if (_currentSelectIdx == _activeLineQuickSlots.Count)
+                _passiveQuickSlots[0].OnSelect(true);
+            else
+                _activeLineQuickSlots[_currentSelectIdx].OnSelect(true);
+        }
     }
 
 
     private void HandlePassiveInventoryModified(InventorySlot[,] slots)
     {
-        //for (int i = 0; i < 3; i++)
-        //{
-        //       activeLineQuickSlots[i].SetPotion(slots[i, 0]);
-        //}
+        _passiveQuickSlots[0].SetPotion(slots[0, 0]);
+        if (_currentSelectIdx == _activeLineQuickSlots.Count && _passiveQuickSlots[0].assignedItem == null)
+        {
+            SelectQuickSlot();
+        }
     }
     private void HandleActiveInventoryModified(InventorySlot[,] slots)
     {
