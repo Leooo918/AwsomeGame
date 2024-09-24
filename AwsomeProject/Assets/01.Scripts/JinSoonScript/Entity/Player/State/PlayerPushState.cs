@@ -12,12 +12,13 @@ public class PlayerPushState : PlayerState
     private Rigidbody2D _pushObjectRigid;
     public PlayerPushState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-        _pushObjectPosTrm = player.transform.Find("PushObjectPos");
+        _pushObjectPosTrm = player.transform.Find("Visual/PushObjectPos");
     }
 
     public override void Enter()
     {
         base.Enter();
+        Debug.Log(player.CurrentPushTrm == null);
         _pushObjectRigid = player.CurrentPushTrm.GetComponent<Rigidbody2D>();
         _pushObjectRigid.velocity = Vector3.zero;
         Vector3 offset = new Vector3((player.CurrentPushTrm.GetComponent<BoxCollider2D>().size.x / 2) * player.CurrentPushTrm.localScale.x, 0);
@@ -26,10 +27,19 @@ public class PlayerPushState : PlayerState
         player.CurrentPushTrm.position = new Vector3(player.CurrentPushTrm.position.x, prevY);
 
         player.PlayerInput.InteractPress += HandleInteract;
+        player.PlayerInput.JumpEvent += HandleJump;
+    }
+
+    private void HandleJump()
+    {
+        player.CurrentPushTrm = null;
+        stateMachine.ChangeState(PlayerStateEnum.Jump);
     }
 
     public override void Exit()
     {
+        player.PlayerInput.InteractPress -= HandleInteract;
+        player.PlayerInput.JumpEvent -= HandleJump;
         base.Exit();
     }
 
@@ -41,6 +51,11 @@ public class PlayerPushState : PlayerState
 
     public override void UpdateState()
     {
+        if(Mathf.Abs(player.transform.position.y - player.CurrentPushTrm.position.y) > 1.5f)
+        {
+            stateMachine.ChangeState(PlayerStateEnum.Idle);
+            return;
+        }
         float xInput = player.PlayerInput.XInput;
         _pushObjectRigid.velocity = new Vector2(xInput * 4, _pushObjectRigid.velocity.y);
         player.MovementCompo.SetVelocity(new Vector2(xInput * 4, player.MovementCompo.RigidbodyCompo.velocity.y), true);

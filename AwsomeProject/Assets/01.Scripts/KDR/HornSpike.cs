@@ -48,7 +48,7 @@ public class HornSpike : MonoBehaviour
                     entity.healthCompo.TakeDamage(_damage, Vector2.zero, _owner);
 
                     if (_onFragileEffect)
-                        entity.ApplyStatusEffect(StatusDebuffEffectEnum.Fragile, 5, 5f);
+                        entity.ApplyStatusEffect(StatusDebuffEffectEnum.Fragile, 1, 5f);
                 }
             }
         }

@@ -10,7 +10,7 @@ public class StrengthEffect : Effect
         {
             if (target is Entity entity)
             {
-                entity.ApplyStatusEffect(StatusBuffEffectEnum.Strength, _level, 5);
+                entity.ApplyStatusEffect(StatusBuffEffectEnum.Strength, _level, 10f);
             }
         }
     }

@@ -27,6 +27,13 @@ public class EntityVisual : MonoBehaviour
         }
     }
 
+    public void SetAlpha(float alpha)
+    {
+        Color color = _spriteRenderer.color;
+        color.a = alpha;
+        _spriteRenderer.color = color;
+    }
+
     public void SkillEffect()
     {
         _skillEffect.SetActive(true);

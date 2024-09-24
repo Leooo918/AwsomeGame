@@ -64,7 +64,7 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
                     if (_player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir * 4f, enemy) == false)
                     {
                         dir.x *= -1;
-                        enemy.healthCompo.TakeDamage(_player.parryingLevel == 0 ? 0 : 5, dir * 4f, _player);
+                        enemy.healthCompo.TakeDamage(_player.parryingLevel * 5, dir * 4f, _player);
                         if (_player.parryingLevel == 2)
                         {
                             enemy.Stun(1);

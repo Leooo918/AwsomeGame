@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StrengthStatusEffect : StatusEffect
 {
-    private float[] _damageWithLevel = { 0.1f, 0.5f, 0.6f };
+    private float[] _damageWithLevel = { 0.7f, 1f, 1.5f };
 
     public override void ApplyEffect(Entity target, float cooltime)
     {

@@ -17,9 +17,12 @@ MonoBehaviour:
   quickSlotOutLine: 3
   itemName: "\uD68C\uBCF5\uC800\uD558\uD3EC\uC158"
   itemDescriptions:
-  - "\uB2E8\uC77C \uB300\uC0C1\uC758 Hp \uD68C\uBCF5\uC18D\uB3C4\uAC00 20% \uAC10\uC18C"
-  - "\uB2E8\uC77C \uB300\uC0C1\uC758 Hp \uD68C\uBCF5\uC18D\uB3C4 30% \uAC10\uC18C"
-  - "\uB2E8\uC77C \uB300\uC0C1\uC758 Hp \uD68C\uBCF5\uC18D\uB3C4 50% \uAC10\uC18C"
+  - "\uADFC\uCC98 \uB300\uC0C1\uC5D0\uAC8C 10\uC758 \uB370\uBBF8\uC9C0\uB97C \uC8FC\uBA70
+    \uD68C\uBCF5\uC18D\uB3C4\uB97C 20% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
+  - "\uADFC\uCC98 \uB300\uC0C1\uC5D0\uAC8C 15\uC758 \uB370\uBBF8\uC9C0\uB97C \uC8FC\uBA70
+    \uD68C\uBCF5\uC18D\uB3C4\uB97C 30% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
+  - "\uADFC\uCC98 \uB300\uC0C1\uC5D0\uAC8C 25\uC758 \uB370\uBBF8\uC9C0\uB97C \uC8FC\uBA70
+    \uD68C\uBCF5\uC18D\uB3C4\uB97C 50% \uAC10\uC18C\uC2DC\uD0A8\uB2E4."
   potionInfos:
   - infos:
     - effectEnum: 0
@@ -43,7 +46,7 @@ MonoBehaviour:
     range: 3
   - infos:
     - effectEnum: 0
-      level: 20
+      level: 25
     - effectEnum: 4
       level: 2
     maxDetactEntity: 5

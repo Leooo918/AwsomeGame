@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GrowingBush : MonoBehaviour, IAffectable
 {
@@ -19,9 +20,17 @@ public class GrowingBush : MonoBehaviour, IAffectable
         _collider = GetComponent<BoxCollider2D>();
     }
 
+    private void Update()
+    {
+        if (Keyboard.current.kKey.wasPressedThisFrame)
+        {
+            ApplyEffect();
+        }
+    }
+
     public void ApplyEffect()
     {
-        gameObject.layer = LayerMask.NameToLayer("Object");
+        gameObject.layer = LayerMask.NameToLayer("Ground");
         _spriteRenderer.sprite = _3x3Sprite;
         _collider.size = Vector2.one * 3;
     }

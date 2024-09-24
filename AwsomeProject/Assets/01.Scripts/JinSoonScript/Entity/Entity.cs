@@ -40,6 +40,7 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected float wallCheckBoxHeight;
 
+    private float _gravityScale;
     public float moveSpeed => Stat.moveSpeed.GetValue();
     protected float knockbackDuration = 0.1f;
     protected Coroutine knockbackCoroutine;
@@ -94,6 +95,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
         entitySkillSO = ScriptableObject.Instantiate(entitySkillSO);
 
         _statusEffectManager = new StatusEffectManager(this);
+
+        _gravityScale = rigidbodyCompo.gravityScale;
     }
 
     private void FixedUpdate()
@@ -196,6 +199,12 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     }
 
     #endregion
+
+    public void SetGravityActive(bool isActive)
+    {
+        float gravityScale = isActive ? _gravityScale : 0;
+        rigidbodyCompo.gravityScale = gravityScale;
+    }
 
     public virtual void Dead(Vector2 dir) { }
 
@@ -301,7 +310,9 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
+        //여기 수정해야함
         if (IsUnderStatusEffect(statusEffect)) return null;
+
         _buffStatusEffectBit |= (int)statusEffect;
         OnStatusChanged?.Invoke((int)statusEffect, level, true, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);
@@ -309,6 +320,17 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public StatusEffect ApplyStatusEffect(StatusDebuffEffectEnum statusEffect, int level, float duration)
     {
         if (IsUnderStatusEffect(statusEffect)) return null;
+
+        if (EffectInstantiateManager.Instance.statusDebuffEffectColor.ContainsKey(statusEffect))
+        {
+            ParticleSystem ps = Instantiate(EffectInstantiateManager.Instance.statusEffect, transform);
+            ps.transform.transform.localPosition = Vector3.zero;
+            ps.transform.localScale = Vector3.one * groundCheckBoxWidth * 0.7f;
+            var mainModule = ps.main;
+            mainModule.duration = duration;
+            mainModule.startColor = EffectInstantiateManager.Instance.statusDebuffEffectColor[statusEffect];
+        }
+         
         _debuffStatusEffectBit |= (int)statusEffect;
         OnStatusChanged?.Invoke((int)statusEffect, level, false, true);
         return _statusEffectManager.AddStatusEffect(statusEffect, level, duration);

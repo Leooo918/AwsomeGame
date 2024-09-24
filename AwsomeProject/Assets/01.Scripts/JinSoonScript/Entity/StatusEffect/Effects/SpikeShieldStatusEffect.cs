@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpikeShieldStatusEffect : StatusEffect
 {
-    private int[] _resistanceWithLevel = { -1, -2, -3 };
+    private int[] _resistanceWithLevel = { -1, -2, -4 };
 
 
     public override void ApplyEffect(Entity target, float cooltime)

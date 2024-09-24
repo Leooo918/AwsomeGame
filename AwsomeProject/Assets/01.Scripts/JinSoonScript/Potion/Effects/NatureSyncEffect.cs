@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class NatureSyncEffect : Effect
 {
-    private float[] _durationWithLevel = { 3f, 4f, 3f };
+    private float[] _durationWithLevel = { 8f, 10f, 8f };
+
     public override void ApplyEffect()
     {
         foreach (var target in _affectedTargets)

@@ -15,11 +15,13 @@ MonoBehaviour:
   image: {fileID: -1913118676, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   itemType: 1
   quickSlotOutLine: 3
-  itemName: "\uB300\uC26C\uD3EC\uC158"
+  itemName: "\uC18D\uB3C4\uD3EC\uC158"
   itemDescriptions:
-  - "\uC774\uC18D 10% \uC99D\uAC00"
-  - "\uC774\uC18D 15% \uC99D\uAC00 + \uACF5\uC18D 20% \uC99D\uAC00"
-  - "\uC774\uC18D 10%  \uC99D\uAC00 + \uACF5\uC18D 20% \uC99D\uAC00"
+  - "10\uCD08\uAC04 \uC774\uC18D 50% \uC99D\uAC00"
+  - "7\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4\uC640 \uACF5\uACA9\uB825\uC774 \uAC01\uAC01
+    70%/20% \uC99D\uAC00\uD55C\uB2E4."
+  - "5\uCD08\uAC04 \uC774\uB3D9\uC18D\uB3C4\uC640 \uACF5\uACA9\uB825\uC774 \uAC01\uAC01
+    100%/20% \uC99D\uAC00\uD55C\uB2E4."
   potionInfos:
   - infos:
     - effectEnum: 16
