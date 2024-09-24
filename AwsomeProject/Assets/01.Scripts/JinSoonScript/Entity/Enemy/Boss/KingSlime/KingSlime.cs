@@ -16,6 +16,7 @@ public enum KingSlimeStateEnum
     Idle = 0,
     JumpAndFall = 1,
     Dash = 2,
+    Dead
     //Turret,
     //Stun
 }
@@ -44,8 +45,22 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     {
         base.Awake();
         StateMachine.Initialize(KingSlimeStateEnum.Idle, this);
+
+        healthCompo.OnDie += OnDie;
     }
 
+
+    private void OnDestroy()
+    {
+        healthCompo.OnDie -= OnDie;
+    }
+    private void OnDie(Vector2 dir)
+    {
+        CanStateChangeable = true;
+        StateMachine.ChangeState(KingSlimeStateEnum.Dead);
+        CanStateChangeable = false;
+        IsDead = true;
+    }
 
     protected override void Update()
     {

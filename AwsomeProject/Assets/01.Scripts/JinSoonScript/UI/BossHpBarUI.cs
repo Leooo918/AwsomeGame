@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BossHpBarUI : MonoBehaviour, IManageableUI
 {
     private RectTransform _rect;
+    [SerializeField]
     private Health _bossHealth;
     [SerializeField] private Slider _hpBar;
 
@@ -21,6 +22,7 @@ public class BossHpBarUI : MonoBehaviour, IManageableUI
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
+        _bossHealth.OnHit += SetEnemyHealth;
     }
 
     public void Close()
@@ -38,8 +40,6 @@ public class BossHpBarUI : MonoBehaviour, IManageableUI
         _rect.DOAnchorPosY(_openOffset, _tweenDelay);
     }
 
-    public void SetOwner(Health health) => _bossHealth = health;
-
     public void SetEnemyHealth()
     {
         float hpRatio = _bossHealth.curHp / _bossHealth.maxHp.GetValue();
@@ -49,7 +49,6 @@ public class BossHpBarUI : MonoBehaviour, IManageableUI
 
         _seq = DOTween.Sequence();
 
-        _seq.Append(DOTween.To(() => _hpBar.value, x => _hpBar.value = x, hpRatio, _hpDownDelay))
-            .Join(transform.DOPunchPosition(transform.position, 0.4f, 7));
+        _seq.Append(DOTween.To(() => _hpBar.value, x => _hpBar.value = x, hpRatio, _hpDownDelay));
     }
 }

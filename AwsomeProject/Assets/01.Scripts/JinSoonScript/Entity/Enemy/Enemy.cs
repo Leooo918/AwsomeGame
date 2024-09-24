@@ -56,6 +56,17 @@ public abstract class Enemy<T> : Entity where T : Enum
                 Debug.LogError(e);
             }
         }
+        healthCompo.OnHit += OnHit;
+    }
+
+    private void OnDestroy()
+    {
+        healthCompo.OnHit -= OnHit;
+    }
+
+    private void OnHit()
+    {
+        HitEvent?.Invoke();
     }
 
     protected override void Update()

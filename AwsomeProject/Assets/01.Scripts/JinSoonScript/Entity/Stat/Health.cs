@@ -58,8 +58,8 @@ public class Health : MonoBehaviour, IDamageable
     /// <param name="dealer"></param>
     public virtual bool TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPercent = false)
     {
-        if (owner.IsDead || isInvincible) return true;
-        if (owner.IsConstParrying) return false; 
+        //if (owner.IsDead || isInvincible) return true;
+        //if (owner.IsConstParrying) return false; 
         
 
         if (isPercent)

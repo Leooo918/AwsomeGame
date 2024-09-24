@@ -58,11 +58,11 @@ public class KingSlimeJumpAndFallState : EnemyState<KingSlimeStateEnum>
 
         yield return new WaitForSeconds(_kingSlime.beforeFallDelay);
         _kingSlime.SetGravityActive(true);
+        _kingSlime.MovementCompo.SetVelocity(new Vector2(0, -60), false, true);
+        yield return new WaitUntil(() => _kingSlime.IsGroundDetected(new Vector2(0, -1f)));
         _kingSlime.patternEffects[1].DamageCast(5, Vector3.up * 5f);
         _kingSlime.patternEffects[0].gameObject.SetActive(false);
         _kingSlime.patternEffects[1].gameObject.SetActive(false);
-        _kingSlime.MovementCompo.SetVelocity(new Vector2(0, -60), false, true);
-        yield return new WaitUntil(() => _kingSlime.IsGroundDetected(new Vector2(0, -1f)));
         CameraManager.Instance.ShakeCam(5, 1, 0.5f);
         if (_bush == null)
             SpawnGrowingBush();

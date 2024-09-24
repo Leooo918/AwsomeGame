@@ -12,6 +12,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2263c016c87334d8a80323e5d81538, type: 3}
   m_Name: KingSlimeEnemyStat
   m_EditorClassIdentifier: 
+  maxHp:
+    baseValue: 500
+    modifiers: []
+    percentModifiers: []
+  recoveryReceive:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  armor:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  physicalDamageInflict:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  globalDamageInflict:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  damageReceivPercent:
+    baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  damageReceiv:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  moveSpeed:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  jumpForce:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  weight: 1
+  criticalChance:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
+  criticalDamage:
+    baseValue: 0
+    modifiers: []
+    percentModifiers: []
   patrolTime:
     baseValue: 0
     modifiers: []
@@ -22,6 +67,10 @@ MonoBehaviour:
     percentModifiers: []
   detectingDistance:
     baseValue: 25
+    modifiers: []
+    percentModifiers: []
+  attackDistance:
+    baseValue: 0
     modifiers: []
     percentModifiers: []
   dropItems: []
