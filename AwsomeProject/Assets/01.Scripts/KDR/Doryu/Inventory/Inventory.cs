@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Doryu.JBSave;
 using System;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using static Cinemachine.DocumentationSortingAttribute;
 
 [Serializable]
