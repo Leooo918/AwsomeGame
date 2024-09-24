@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: -1913118676, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
   itemType: 1
-  quickSlotOutLine: 3
+  quickSlotOutLine: 4
   itemName: "\uC18D\uB3C4\uD3EC\uC158"
   itemDescriptions:
   - "10\uCD08\uAC04 \uC774\uC18D 50% \uC99D\uAC00"
