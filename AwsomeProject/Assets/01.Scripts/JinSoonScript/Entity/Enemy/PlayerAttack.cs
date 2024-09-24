@@ -49,10 +49,10 @@ public class EntityAttack : MonoBehaviour
 
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
 
-                ParticleSystem sliceEffect = Instantiate
-                    (EffectInstantiateManager.Instance.sliceEffect, _hits[i].point, Quaternion.Euler(0, 0, angle));
-                var mainModule = sliceEffect.main;
-                mainModule.startRotation = -angle * Mathf.Deg2Rad;
+                //ParticleSystem sliceEffect = Instantiate
+                //    (EffectInstantiateManager.Instance.sliceEffect, _hits[i].point, Quaternion.Euler(0, 0, angle));
+                //var mainModule = sliceEffect.main;
+                //mainModule.startRotation = -angle * Mathf.Deg2Rad;
 
                 if (!isCameraShaked)
                 {
