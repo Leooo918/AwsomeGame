@@ -14,7 +14,7 @@ public class HealEffect : Effect
             if (target is Entity entity)
             {
                 entity.healthCompo.GetHeal(heal[_level]);
-                target.ApplyEffect();
+                //target.ApplyEffect();
             }
         }
     }

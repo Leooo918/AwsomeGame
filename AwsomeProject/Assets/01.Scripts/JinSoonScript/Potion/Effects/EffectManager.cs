@@ -50,6 +50,7 @@ public static class EffectManager
             { EffectTypeEnum.Fragile, () => new FragileEffect() },
             { EffectTypeEnum.Spike, () => new SpikeEffect() },
             { EffectTypeEnum.HornSpike, () => new HornSpikeEffect() },
+            { EffectTypeEnum.SpikeShield, () => new SpikeShieldEffect() },
         };
     }
 

@@ -8,12 +8,12 @@ public class FragileStatusEffect : StatusEffect
     {
         base.ApplyEffect(target, cooltime);
 
-        _target.Stat.damageReceive.AddModifier((float)level / 100);
+        _target.Stat.damageReceivPercent.AddModifier((float)level / 100);
     }
 
     public override void OnEnd()
     {
         base.OnEnd();
-        _target.Stat.damageReceive.RemoveModifier((float)level / 100);
+        _target.Stat.damageReceivPercent.RemoveModifier((float)level / 100);
     }
 }

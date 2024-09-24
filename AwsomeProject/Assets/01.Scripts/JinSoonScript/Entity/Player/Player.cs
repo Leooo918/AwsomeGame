@@ -97,7 +97,7 @@ public class Player : Entity
     public int maxJumpCnt { get; private set; } = 2;
     [HideInInspector] public int curJumpCnt = 0;
 
-    public GameObject StunEffect => _stunEffect;
+    public GameObject StunEffect => _stunSprite;
 
     private bool isInventoryOpen = false;
     public bool canClimb { get; private set; } = false;

@@ -8,7 +8,7 @@ public class PlayerStunState : PlayerState
     {
         base.Enter();
         player.CanStateChangeable = false;
-        player.OnStunEffect(true);
+        player.OnStunSprite(true);
     }
 
     public override void UpdateState()
@@ -25,6 +25,6 @@ public class PlayerStunState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        player.OnStunEffect(false);
+        player.OnStunSprite(false);
     }
 }

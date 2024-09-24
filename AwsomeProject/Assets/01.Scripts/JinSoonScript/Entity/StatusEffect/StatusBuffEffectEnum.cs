@@ -9,6 +9,7 @@ public enum StatusBuffEffectEnum
     Strength = 32, //힘
     Resistance = 64, //받는 데미지 감소
     Speed = 128, //속도 감소
+    SpikeShield = 256, //가시방패
 }
 
 public enum StatusDebuffEffectEnum

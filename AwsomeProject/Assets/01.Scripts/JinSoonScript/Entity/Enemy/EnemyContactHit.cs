@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyContactHit : MonoBehaviour
 {
@@ -20,7 +21,15 @@ public class EnemyContactHit : MonoBehaviour
             Vector2 knockPower = _knockBackPower;
             knockPower.x *= _owner.FacingDir;
 
-            player.healthCompo.TakeDamage(_damage, knockPower, _owner);
+            if (player.healthCompo.TakeDamage(_damage, knockPower, _owner) == false)
+            {
+                knockPower *= -1;
+                _owner.healthCompo.TakeDamage(player.parryingLevel == 0 ? 0 : 5, knockPower, player);
+                if (player.parryingLevel == 2)
+                {
+                    _owner.Stun(1);
+                }
+            }
             CameraManager.Instance.ShakeCam(_cameraShakeData.x, _cameraShakeData.y, _cameraShakeData.z);
         }
     }
