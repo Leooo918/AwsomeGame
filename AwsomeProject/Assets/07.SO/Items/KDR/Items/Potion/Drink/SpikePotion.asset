@@ -34,5 +34,11 @@ MonoBehaviour:
     1\uCD08\uAC04 \uADF8\uB85C\uAE30 \uC0C1\uD0DC\uAC00 \uB41C\uB2E4."
   potionInfos:
   - infos:
-    - effectEnum: 0
+    - effectEnum: 18
+      level: 0
+  - infos:
+    - effectEnum: 18
+      level: 1
+  - infos:
+    - effectEnum: 18
       level: 2
