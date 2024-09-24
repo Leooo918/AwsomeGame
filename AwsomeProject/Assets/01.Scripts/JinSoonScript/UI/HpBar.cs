@@ -43,10 +43,8 @@ public class HpBar : MonoBehaviour
         {
             if (hpBottles[i].IsBottleFull == false)
             {
-                Debug.Log("คว" + i);
                 for (int j = 0; j < _currentHealth - healthTmp; j++)
                 {
-                    Debug.Log("คฬ" + i);
                     hpBottles[i].HpUp();
                     if(hpBottles[i].IsBottleFull) i++;
                 }

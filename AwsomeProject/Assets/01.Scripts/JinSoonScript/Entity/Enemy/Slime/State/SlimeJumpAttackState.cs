@@ -59,8 +59,17 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
                 Vector2 dir = _player.transform.position - enemy.transform.position;
                 if (dir.magnitude < _damageRadius)
                 {
-                    dir.y = 0;
-                    _player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir.normalized * 4f, enemy);
+                    dir.y = 5;
+                    dir.Normalize();
+                    if (_player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir * 4f, enemy) == false)
+                    {
+                        dir.x *= -1;
+                        enemy.healthCompo.TakeDamage(_player.parryingLevel == 0 ? 0 : 5, dir * 4f, _player);
+                        if (_player.parryingLevel == 2)
+                        {
+                            enemy.Stun(1);
+                        }
+                    }
                 }
 
                 enemyStateMachine.ChangeState(SlimeStateEnum.Idle);

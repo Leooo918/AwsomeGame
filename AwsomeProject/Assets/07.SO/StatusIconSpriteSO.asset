@@ -23,6 +23,8 @@ MonoBehaviour:
     statusEnum: 16
   - sprite: {fileID: -1842395422, guid: ea6b0b4be62d26844ae2af19924ca3a4, type: 3}
     statusEnum: 2
+  - sprite: {fileID: -22545741, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
+    statusEnum: 256
   _debuffStatusIconSprite:
   - sprite: {fileID: -67747681, guid: cc822fad04c5774448fbf84cf16def1a, type: 3}
     statusEnum: 2

@@ -56,13 +56,11 @@ public class Health : MonoBehaviour, IDamageable
     /// <param name="damage"></param>
     /// <param name="knockPower"></param>
     /// <param name="dealer"></param>
-    public virtual void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPercent = false)
+    public virtual bool TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPercent = false)
     {
-        if (owner.IsDead || isInvincible) return;
+        if (owner.IsDead || isInvincible) return true;
+        if (owner.IsConstParrying) return false; 
         
-        if (dealer != null)
-            damage = (int)(damage * dealer.Stat.globalDamageInflict.GetValue());
-        damage = (int)(damage * owner.Stat.damageReceive.GetValue());
 
         if (isPercent)
         {
@@ -72,6 +70,8 @@ public class Health : MonoBehaviour, IDamageable
         //크리티컬 계산
         if (dealer != null)
         {
+            damage = (int)(damage * dealer.Stat.globalDamageInflict.GetValue());
+
             float criticalChance = dealer.Stat.criticalChance.GetValue() * 100;
             bool isCrit = Random.Range(0, 10001) <= criticalChance;
 
@@ -82,6 +82,11 @@ public class Health : MonoBehaviour, IDamageable
             }
             hitData.isLastAttackCritical = isCrit;
         }
+
+        damage = (int)((damage + owner.Stat.damageReceiv.GetValue()) * owner.Stat.damageReceivPercent.GetValue());
+
+        if (damage < 0)
+            damage = 0;
 
         //hitData에 맞았다라고 저장
         hitData.lastAttackDamage = damage;
@@ -96,6 +101,8 @@ public class Health : MonoBehaviour, IDamageable
         //무게로 나눠 무게가 1이면 그대로, 2면 1/2로 날라감
         knockPower /= weight;
         AfterHitFeedback(knockPower, dealer, true);
+
+        return true;
     }
 
     private void AfterHitFeedback(Vector2 knockPower, Entity dealer, bool withFeedBack = true)

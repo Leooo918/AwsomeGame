@@ -58,13 +58,16 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     [Space]
     [Header("FeedBack info")]
     public UnityEvent HitEvent;
-    [SerializeField] protected GameObject _stunEffect;
+    protected GameObject _stunSprite;
+    protected GameObject _shieldSprite;
 
     public Action<int> OnFlip;
     public int FacingDir { get; protected set; } = 1;
-    public bool CanStateChangeable { get; set; } = true;
     public bool IsDead { get; protected set; } = false;
-    public bool CanKnockback { get; set; } = true;
+    public bool CanStateChangeable = true;
+    public bool CanKnockback = true;
+    public bool IsConstParrying = false;
+    public int parryingLevel = 0;
 
     private int _animationTriggerBit = 0;
     private StatusEffectManager _statusEffectManager;
@@ -74,6 +77,8 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     protected virtual void Awake()
     {
+        _stunSprite = transform.Find("StunSprite").gameObject;
+        _shieldSprite = transform.Find("ShieldSprite").gameObject;
         visualTrm = transform.Find("Visual");
         visualCompo = visualTrm.GetComponent<EntityVisual>();
         animatorCompo = visualTrm.GetComponent<Animator>();
@@ -216,9 +221,13 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     {
         stunEndTime = Mathf.Max(duration + Time.time, stunEndTime);
     }
-    public void OnStunEffect(bool active)
+    public void OnStunSprite(bool active)
     {
-        _stunEffect.SetActive(active);
+        _stunSprite.SetActive(active);
+    }
+    public void OnShieldEffect(bool active)
+    {
+        _shieldSprite.SetActive(active);
     }
     public virtual void Stone(float duration)
     {
