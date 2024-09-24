@@ -16,6 +16,7 @@ public enum KingSlimeStateEnum
     Idle = 0,
     JumpAndFall = 1,
     Dash = 2,
+    Stun,
     Dead
     //Turret,
     //Stun
@@ -54,6 +55,16 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     {
         healthCompo.OnDie -= OnDie;
     }
+
+    public override void Stun(float duration)
+    {
+        if (IsDead) return;
+        base.Stun(duration);
+        if (StateMachine.CurrentState is not KingSlimeIdleState)
+            return;
+        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
+    }
+
     private void OnDie(Vector2 dir)
     {
         CanStateChangeable = true;
