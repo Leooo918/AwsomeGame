@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/00.Scenes/ParkGeeScene/ParkGeeSceneTitleMenu.unity
-    guid: 99178029b476460489819c07e883d86b
+    path: Assets/00.Scenes/TitleScene.unity
+    guid: d10b13e71336b8f48b0924fb234f03ea
   - enabled: 1
-    path: Assets/00.Scenes/JinSoonScene/JinSoonSceneInventoryTest.unity
-    guid: faef6c65ddc9f7146873239e38c46be3
+    path: Assets/00.Scenes/Lee/Tutorial.unity
+    guid: a6e9073051e8bd7439dab9eca6c7437d
   - enabled: 1
-    path: Assets/00.Scenes/JinSoonScene/JinSoonScene.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
+    path: Assets/00.Scenes/Lee/Stage1.unity
+    guid: ba3cbae8a0f816e4190652cfc33d058d
   m_configObjects: {}

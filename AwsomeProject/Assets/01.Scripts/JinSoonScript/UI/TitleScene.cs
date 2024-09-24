@@ -23,8 +23,10 @@ public class TitleScene : MonoBehaviour
     {
         if (Keyboard.current.anyKey.wasPressedThisFrame)
         {
-            //¿œ¥‹ æ¿ ¿Ãµø§°§°
-            SceneManager.LoadScene(1);
+            if (PlayerPrefs.GetInt("IsTutorialed") == 0)
+                SceneManager.LoadScene("Tutorial");
+            else
+                SceneManager.LoadScene("Stage1");
         }
     }
 }
