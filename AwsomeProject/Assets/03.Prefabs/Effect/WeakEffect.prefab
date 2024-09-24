@@ -4895,7 +4895,7 @@ GameObject:
   - component: {fileID: 1184706039319081118}
   - component: {fileID: 3203842358970084046}
   m_Layer: 0
-  m_Name: WeekEffect
+  m_Name: WeakEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
