@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ public struct DashInfo
 public enum KingSlimeStateEnum
 {
     Idle = 0,
-    //JumpAndFall,
-    Dash,
+    JumpAndFall = 1,
+    Dash = 2,
     //Turret,
     //Stun
 }
@@ -22,7 +23,9 @@ public enum KingSlimeStateEnum
 public class KingSlime : Enemy<KingSlimeStateEnum>
 {
     [Header("Boss Variable")]
+    public EnemyContactHit contactHit;
     public int idleTime;
+    public PatternEffect[] patternEffects;
 
     [Header("Pattern Settings")]
     public DashInfo[] dashInfos;
@@ -30,8 +33,11 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     public float dashSpeed = 20f;
     public LayerMask whatIsWall;
     [Space]
-    public Transform[] onPlatformTrms;
-    public float fireDelay = 1.0f;
+    public float beforeJumpDelay = 0.5f;
+    public float beforeFallDelay = 2f;
+    public float jumpYDistance;
+    public GrowingBush bushPrefab;
+    public Transform centerTrm;
 
 
     protected override void Awake()
