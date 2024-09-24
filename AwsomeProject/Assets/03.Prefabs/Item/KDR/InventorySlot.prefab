@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  maxMergeAmount: 5
   isSelected: 0
 --- !u!1 &6117915632057705141
 GameObject:

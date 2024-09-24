@@ -16,6 +16,7 @@ public enum PotionItemType
     SlapPotion,
     LightPotion,
     WeakPotion,
+    GrowPotion,
 }
 
 public enum QuickSlotOutLine
@@ -23,6 +24,7 @@ public enum QuickSlotOutLine
     Bronze,
     Silver,
     Gold,
+    Diamond,
     Level,
 }
 

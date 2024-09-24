@@ -38,6 +38,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Inventory ingredientInventory;
     [SerializeField] private Inventory throwPotionInventory;
     [SerializeField] private Inventory drinkPotionInventory;
+    [SerializeField] private Inventory gimmickPotionInventory;
 
     private List<Inventory> _inventories;
 
@@ -94,6 +95,10 @@ public class InventoryManager : MonoBehaviour
         {
             TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion]);
         }
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            AddGimmickPotion(ThrowPotionItemSODict[PotionItemType.GrowPotion] as PotionItemSO, true);
+        }
         #endregion
 
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
@@ -107,6 +112,18 @@ public class InventoryManager : MonoBehaviour
         Vector2 mousePos = Input.mousePosition;
         dragItemSlot.assignedItem.transform.localPosition = 
             mousePos - (Vector2)dragItemSlot.inventory.itemStorage.position;
+    }
+
+    public void AddGimmickPotion(PotionItemSO itemSO, bool openPannel = false)
+    {
+        bool succes = gimmickPotionInventory.AddItem(itemSO, int.MaxValue, 0);
+
+        if (openPannel && succes)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(itemSO);
+            gather.Open();
+        }
     }
 
     public bool TryAddItem(Item item, bool openPannel = false)
