@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class PlayerStunState : PlayerState
 {
-    private float stunTime;
-
     public PlayerStunState(Player player, PlayerStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName) { }
 
     public override void Enter()
     {
         base.Enter();
         player.CanStateChangeable = false;
-        player.StunEffect.SetActive(true);
-        stunTime = Time.time;
+        player.OnStunEffect(true);
     }
 
     public override void UpdateState()
@@ -27,8 +24,7 @@ public class PlayerStunState : PlayerState
 
     public override void Exit()
     {
-        player.StunEffect.SetActive(false);
-        player.CanStateChangeable = true;
         base.Exit();
+        player.OnStunEffect(false);
     }
 }

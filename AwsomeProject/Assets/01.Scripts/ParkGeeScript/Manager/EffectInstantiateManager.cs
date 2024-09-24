@@ -8,6 +8,6 @@ public class EffectInstantiateManager : Singleton<EffectInstantiateManager>
     public ParticleSystem spikeHitEffect;
     public ParticleSystem sliceEffect;
     public ParticleSystem healDamageEffect;
-    public ParticleSystem weekEffect;
+    public ParticleSystem weakEffect;
 }
  

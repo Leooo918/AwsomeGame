@@ -13,12 +13,14 @@ public class AirBirdStunState : EnemyState<AirBirdEnum>
         base.Enter();
         enemy.CanStateChangeable = false;
         enemy.rigidbodyCompo.gravityScale = 3.5f;
+        enemy.OnStunEffect(true);
     }
 
     public override void Exit()
     {
         base.Exit();
         enemy.animatorCompo.speed = 1;
+        enemy.OnStunEffect(true);
     }
 
     public override void UpdateState()

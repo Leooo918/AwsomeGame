@@ -26,12 +26,20 @@ MonoBehaviour:
     + \uACF5\uACA9 \uB370\uBBF8\uC9C0\uAC00 1\uCE78 \uAC10\uC18C"
   potionInfos:
   - infos:
-    - effectEnum: 11
-      level: 0
     - effectEnum: 6
       level: 1
     - effectEnum: 7
-      level: 0
+      level: 10
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 6
+      level: 1
+    - effectEnum: 7
+      level: 20
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2
@@ -39,23 +47,11 @@ MonoBehaviour:
     range: 3
   - infos:
     - effectEnum: 11
-      level: 0
-    - effectEnum: 6
-      level: 1
-    - effectEnum: 7
-      level: 1
-    maxDetactEntity: 5
-    whatIsEnemy:
-      serializedVersion: 2
-      m_Bits: 256
-    range: 3
-  - infos:
-    - effectEnum: 11
       level: 1
     - effectEnum: 6
       level: 1
     - effectEnum: 7
-      level: 2
+      level: 30
     maxDetactEntity: 5
     whatIsEnemy:
       serializedVersion: 2
