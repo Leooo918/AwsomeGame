@@ -12,7 +12,8 @@ public class EntityStatSO : ScriptableObject
     public Stat armor;
     public Stat physicalDamageInflict;
     public Stat globalDamageInflict;
-    public Stat damageReceive;
+    public Stat damageReceivPercent;
+    public Stat damageReceiv;
     public Stat moveSpeed;
     public Stat jumpForce;
     public float weight = 1;
@@ -25,7 +26,7 @@ public class EntityStatSO : ScriptableObject
     protected virtual void OnEnable()
     {
         recoveryReceive.SetDefaultValue(1);
-        damageReceive.SetDefaultValue(1);
+        damageReceivPercent.SetDefaultValue(1);
         physicalDamageInflict.SetDefaultValue(1);
         globalDamageInflict.SetDefaultValue(1);
 

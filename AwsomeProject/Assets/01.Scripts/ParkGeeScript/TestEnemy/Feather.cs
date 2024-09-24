@@ -39,9 +39,15 @@ public class Feather : MonoBehaviour, IDamageable
             {
                 if (hit.transform.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(_isReflected ? 10 : 1, Vector2.zero, _isReflected ? _player : null);
+                    if (damageable.TakeDamage(_isReflected ? 10 : 1, Vector2.zero, _isReflected ? _player : null) == false)
+                    {
+                        TakeDamage(1, Vector2.zero, _player);
+                    }
+                    else
+                    {
+                        DestroyFeather();
+                    }
                     CameraManager.Instance.ShakeCam(3f, 8f, 0.1f);
-                    DestroyFeather();
                 }
             }
             else if (hit = Physics2D.Raycast(transform.position + transform.up * _yOffset, transform.up, _speed * Time.fixedDeltaTime, _whatIsObstacle))
@@ -65,14 +71,14 @@ public class Feather : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
+    public bool TakeDamage(int damage, Vector2 knockPower, Entity dealer, bool isPersent = false)
     {
-        if (_isStuck || _isReflected) return;
+        if (_isStuck || _isReflected) return true;
 
         _isReflected = true;
 
         Player player = dealer as Player;
-        if (player == null) return;
+        if (player == null) return true;
 
         Vector2 direction = (transform.position - player.transform.position).normalized;
 
@@ -84,6 +90,7 @@ public class Feather : MonoBehaviour, IDamageable
         transform.DORotateQuaternion(Quaternion.LookRotation(Vector3.back, direction), 0.03f)
             .OnComplete(() => _stop = false);
 
+        return true;
     }
 
     public void Shoot(Vector2 playerDir)

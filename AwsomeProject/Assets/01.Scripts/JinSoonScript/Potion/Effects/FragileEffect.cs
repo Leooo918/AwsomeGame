@@ -13,5 +13,7 @@ public class FragileEffect : Effect
                 entity.ApplyStatusEffect(StatusDebuffEffectEnum.Fragile, _level, 5);
             }
         }
+
+        GameObject.Instantiate(EffectInstantiateManager.Instance.weakEffect, _potion.transform.position, Quaternion.identity);
     }
 }

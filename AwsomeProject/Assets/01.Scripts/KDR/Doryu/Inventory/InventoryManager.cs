@@ -86,7 +86,7 @@ public class InventoryManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
         {
             TryAddItem(DrinkPotionItemSODict[PotionItemType.WindPotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.WeakPotion], level: 2);
+            TryAddItem(DrinkPotionItemSODict[PotionItemType.SpikePotion], level: 2);
             TryAddItem(DrinkPotionItemSODict[PotionItemType.StonePotion], level: 2);
             TryAddItem(DrinkPotionItemSODict[PotionItemType.HealPotion], level: 2);
         }
