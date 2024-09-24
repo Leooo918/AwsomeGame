@@ -12,12 +12,14 @@ public class WildBoarStunState : EnemyState<WildBoarEnum>
     {
         base.Enter();
         enemy.CanStateChangeable = false;
+        enemy.OnStunEffect(true);
     }
 
     public override void Exit()
     {
         base.Exit();
         enemy.animatorCompo.speed = 1;
+        enemy.OnStunEffect(false);
     }
 
     public override void UpdateState()
