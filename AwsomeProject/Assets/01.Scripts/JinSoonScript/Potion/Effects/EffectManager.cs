@@ -23,6 +23,7 @@ public enum EffectTypeEnum
     Resistance, //받는 데미지 감소
     Speed, //이속 증가
     Spike, //가시송이 스폰
+    SpikeShield, //가시방패
     HornSpike, //맵에 가시생성
 }
 
