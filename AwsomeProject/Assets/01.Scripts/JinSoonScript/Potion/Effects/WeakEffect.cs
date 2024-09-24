@@ -14,7 +14,5 @@ public class WeakEffect : Effect
                 entity.ApplyStatusEffect(StatusDebuffEffectEnum.Weak, _level, _durationWithLevel[_level]);
             }
         }
-
-        GameObject.Instantiate(EffectInstantiateManager.Instance.weakEffect, _potion.transform.position, Quaternion.identity);
     }
 }
