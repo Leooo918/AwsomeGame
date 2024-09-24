@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HornSpikeEffect : Effect
 {
-    private int[] _damageWithLevel = { 10, 15, 15 };
+    private int[] _damageWithLevel = { 3, 5, 10 };
     private float[] _sizeWithLevel = { 1f, 1.5f, 2f };
 
     public override void ApplyEffect()
