@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpikeEffect : Effect
 {
     private Player _player;
-    private int[] _damageWithLevel = { 3, 5, 10 };
+    private int[] _damageWithLevel = { 5, 8, 15 };
     private int[] _countWithLevel = { 2, 3, 3 };
     public override void ApplyEffect()
     {

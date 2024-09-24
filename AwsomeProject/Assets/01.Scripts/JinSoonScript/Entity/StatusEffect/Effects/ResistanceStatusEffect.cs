@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResistanceStatusEffect : StatusEffect
 {
-    private int[] _resistanceWithLevel = { -1, -2, -4 };
+    private int[] _resistanceWithLevel = { -2, -4, -6 };
     public override void ApplyEffect(Entity target, float cooltime)
     {
         base.ApplyEffect(target, cooltime);

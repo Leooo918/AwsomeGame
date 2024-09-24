@@ -24,7 +24,7 @@ public class EnemyContactHit : MonoBehaviour
             if (player.healthCompo.TakeDamage(_damage, knockPower, _owner) == false)
             {
                 knockPower *= -1;
-                _owner.healthCompo.TakeDamage(player.parryingLevel == 0 ? 0 : 5, knockPower, player);
+                _owner.healthCompo.TakeDamage(player.parryingLevel * 5, knockPower, player);
                 if (player.parryingLevel == 2)
                 {
                     _owner.Stun(1);

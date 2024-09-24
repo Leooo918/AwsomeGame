@@ -15,6 +15,7 @@ MonoBehaviour:
   image: {fileID: 304369086, guid: 6bb85d3df27e6d747b3fcc18c021c172, type: 3}
   itemType: 7
   itemName: "\uB531\uB531 \uBC84\uC12F"
-  itemDescription: "\uC5C4\uCCAD\uC5C4\uCCAD \uB531\uB531\uD55C \uBC84\uC12F\uC774\uB2E4.\n\uADF8\uB0E5\uC740
-    \uBABB\uBA39\uB2E4."
+  itemDescription: "\uC678\uBD80\uB85C\uBD80\uD130 \uBCF4\uD638\uD558\uAE30 \uC704\uD574
+    \uB531\uB531\uD558\uAC8C \uBCC0\uD55C \uBC84\uC12F\r\n\uC6EC\uB9CC\uD55C \uB3CC\uBCF4\uB2E4
+    \uB2E8\uB2E8\uD558\uB2E4.\r\n"
   gatheringTime: 2
