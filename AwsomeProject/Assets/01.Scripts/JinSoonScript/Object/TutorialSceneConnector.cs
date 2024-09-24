@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneConnector : MonoBehaviour
+public class TutorialSceneConnector : MonoBehaviour
 {
     [SerializeField]
     private string _sceneName;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Player player))
