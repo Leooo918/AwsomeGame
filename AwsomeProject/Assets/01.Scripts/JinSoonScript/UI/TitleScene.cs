@@ -15,6 +15,8 @@ public class TitleScene : MonoBehaviour
 
     private void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
+
         _logo.DOAnchorPosY(300f, 1f).SetEase(Ease.OutBack);
         _pressKeyTxt.DOFade(0, 1f).SetEase(Ease.Linear).SetLoops(999999, LoopType.Yoyo);
     }
