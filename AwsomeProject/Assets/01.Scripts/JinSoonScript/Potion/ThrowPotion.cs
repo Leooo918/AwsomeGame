@@ -9,6 +9,7 @@ public class ThrowPotion : Potion
 {
     private Collider2D[] _colliders;
     private Rigidbody2D _rigid;
+    private CircleCollider2D _collider;
     [SerializeField]
     private int _maxDetactEntity;
     [SerializeField]
@@ -20,6 +21,8 @@ public class ThrowPotion : Potion
     public override void Init(QuickSlot slot, Entity owner, Vector2 movement = default, float rotatPow = 0) 
     {
         _rigid = GetComponent<Rigidbody2D>();
+        _collider = GetComponent<CircleCollider2D>();
+
         _rigid.AddForce(movement, ForceMode2D.Impulse);
         Debug.Log(rotatPow);
         _rigid.AddTorque(rotatPow);
@@ -34,6 +37,15 @@ public class ThrowPotion : Potion
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = throwPotionItemSO.image;
         _colliders = new Collider2D[_maxDetactEntity];
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return _rigid.velocity;
+    }
+    public float GetSize()
+    {
+        return _collider.radius * transform.localScale.x;
     }
 
     public override void UsePotion()

@@ -14,6 +14,6 @@ public class WeakEffect : Effect
             }
         }
 
-        GameObject.Instantiate(EffectInstantiateManager.Instance.weekEffect, _potion.transform.position, Quaternion.identity);
+        GameObject.Instantiate(EffectInstantiateManager.Instance.weakEffect, _potion.transform.position, Quaternion.identity);
     }
 }

@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class FragileStatusEffect : StatusEffect
 {
-    private float[] _percentWithLevel = { 0.1f, 0.2f, 0.3f };
-
     public override void ApplyEffect(Entity target, float cooltime)
     {
         base.ApplyEffect(target, cooltime);
 
-        _target.Stat.damageReceive.AddModifier(_percentWithLevel[level]);
+        _target.Stat.damageReceive.AddModifier((float)level / 100);
     }
 
     public override void OnEnd()
     {
         base.OnEnd();
-        _target.Stat.damageReceive.RemoveModifier(_percentWithLevel[level]);
+        _target.Stat.damageReceive.RemoveModifier((float)level / 100);
     }
 }
