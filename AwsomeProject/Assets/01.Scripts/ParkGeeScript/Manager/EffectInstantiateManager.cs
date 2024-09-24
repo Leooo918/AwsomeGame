@@ -9,6 +9,7 @@ public class EffectInstantiateManager : Singleton<EffectInstantiateManager>
     public ParticleSystem sliceEffect;
     public ParticleSystem healDamageEffect;
     public ParticleSystem weakEffect;
+    public ParticleSystem growEffect;
     [Header("StatusEffect")]
     public ParticleSystem statusEffect;
 

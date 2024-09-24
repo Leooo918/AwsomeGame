@@ -16,7 +16,8 @@ public class Item : MonoBehaviour
         set
         {
             _amount = value;
-            TextUpdate();
+            if (_amount < 100)
+                TextUpdate();
         }
     }
 

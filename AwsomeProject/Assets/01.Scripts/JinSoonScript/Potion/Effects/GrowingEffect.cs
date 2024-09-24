@@ -21,5 +21,7 @@ public class GrowingEffect : Effect
                 target.ApplyEffect();
             }
         }
+
+        GameObject.Instantiate(EffectInstantiateManager.Instance.growEffect, _potion.transform.position, Quaternion.identity);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PetrificationEffect : Effect
 {
-    private float[] durationWithLevel = { 4f, 6f, 10f };
+    private float[] durationWithLevel = { 4f, 5f, 8f };
     public override void ApplyEffect()
     {
         SpawnEffect(2);

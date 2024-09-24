@@ -9,6 +9,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 {
     public Inventory inventory;
 
+    public bool isLocked = false;
+
     public int maxMergeAmount = 5;
     public bool isFull => assignedItem.amount == maxMergeAmount;
 
@@ -211,6 +213,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (isLocked) return;
+
         InventoryManager.Instance.stayMouseSlot = this;
 
         if (isSelected) return;
@@ -219,6 +223,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (isLocked) return;
+
         InventoryManager.Instance.stayMouseSlot = null;
 
         if (isSelected) return;
@@ -227,11 +233,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (isLocked) return;
+
         inventory.SetSelected(this);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (isLocked) return;
+
         if (assignedItem != null)
             assignedItem.transform.SetParent(inventory.itemStorage);
 
@@ -240,6 +250,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (isLocked) return;
+
         if (assignedItem != null)
             assignedItem.transform.SetParent(transform);
 
@@ -263,7 +275,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnDrag(PointerEventData eventData)
     {
-
+        if (isLocked) return;
     }
 }
 
