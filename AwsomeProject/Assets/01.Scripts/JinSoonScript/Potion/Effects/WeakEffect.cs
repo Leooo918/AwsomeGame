@@ -13,5 +13,7 @@ public class WeakEffect : Effect
                 entity.ApplyStatusEffect(StatusDebuffEffectEnum.Weak, _level, 5);
             }
         }
+
+        GameObject.Instantiate(EffectInstantiateManager.Instance.weekEffect, _potion.transform.position, Quaternion.identity);
     }
 }

@@ -61,8 +61,8 @@ public class PlayerThrowState : PlayerState
     {
         Vector3 dir = (player.PlayerInput.MousePosition - (Vector2)player.transform.position).normalized;
         ThrowPotion potion = GameObject.Instantiate(QuickSlotManager.Instance.throwPotion, _throwPosTrm.position, Quaternion.identity);
-        potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot(), player);
-        potion.GetComponent<Rigidbody2D>().AddForce(dir * 30, ForceMode2D.Impulse);
+        potion.transform.localScale = Vector3.one * 0.45f;
+        potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot(), player, dir * 30, UnityEngine.Random.Range(-200f, 200f));
         stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 }
