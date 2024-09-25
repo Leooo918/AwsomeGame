@@ -16,6 +16,8 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
     [SerializeField]
     private Animator _animator;
 
+    private Coroutine _growCoroutine;
+
     private readonly int _growStartHash = Animator.StringToHash("GrowStart");
     private readonly int _growResetHash = Animator.StringToHash("GrowReset");
 
@@ -30,7 +32,8 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     public void ApplyEffect()
     {
-        StartCoroutine(IEGrowing());
+        if (_growCoroutine == null)
+            _growCoroutine = StartCoroutine(IEGrowing());
     }
 
     private IEnumerator IEGrowing()
@@ -45,6 +48,8 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
         yield return new WaitUntil(() => IsTriggered(AnimationTriggerEnum.EndTrigger));
 
         CurrentState = VineState.Shrunk;
+
+        _growCoroutine = null;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

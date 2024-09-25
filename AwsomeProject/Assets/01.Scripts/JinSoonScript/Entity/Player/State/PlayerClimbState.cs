@@ -10,7 +10,7 @@ public class PlayerClimbState : PlayerState
     private Skill dashSkill;
     private Skill normalAttackSkill;
     private float _lastClimbTime = 0;
-    private float _climbDelay = 0.1f;
+    private float _climbDelay = 0.2f;
 
     private readonly int _inputHash = Animator.StringToHash("Input");
 
