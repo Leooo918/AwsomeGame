@@ -19,7 +19,9 @@ public class QuickSlot : MonoBehaviour
 
     public Item assignedItem { get; private set; }
 
-    private void Awake()
+    private bool isAwaked = false;
+
+    private void Init()
     {
         _itemParent = transform.Find("PotionParent");
         _coolTimeImage = transform.Find("CoolTime").GetComponent<Image>();
@@ -46,6 +48,12 @@ public class QuickSlot : MonoBehaviour
 
     public void SetPotion(InventorySlot inventorySlot)
     {
+        if (isAwaked == false)
+        {
+            Init();
+            isAwaked = true;
+        }
+
         _invenSlot = inventorySlot;
         if (_invenSlot == null || _invenSlot.assignedItem == null)
         {

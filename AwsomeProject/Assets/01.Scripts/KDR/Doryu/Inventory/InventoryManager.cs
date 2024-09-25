@@ -46,7 +46,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        QuickSlotManager.Instance.SetHandle();
 
         foreach (IngredientItemSO itemSO in itemListSO.ingredientItemSOList)
         {
@@ -61,11 +60,14 @@ public class InventoryManager : MonoBehaviour
             DrinkPotionItemSODict.Add(itemSO.itemType, itemSO);
         }
 
+        QuickSlotManager.Instance.SetHandle();
+
         _inventories = new List<Inventory>();
         _inventories = FindObjectsByType<Inventory>(FindObjectsSortMode.None).ToList();
 
         _inventories.ForEach(inven =>
         {
+            Debug.Log(inven.name);
             inven.Init();
         });
     }
