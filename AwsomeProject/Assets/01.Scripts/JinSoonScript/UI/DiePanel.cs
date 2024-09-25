@@ -2,6 +2,8 @@ using DG.Tweening;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class DiePanel : MonoBehaviour, IManageableUI
 {
@@ -15,6 +17,8 @@ public class DiePanel : MonoBehaviour, IManageableUI
     [SerializeField] private RectTransform _player;
     [SerializeField] private Transform _gatheredIngredientsContainer;
 
+    private bool _isActive = false;
+
     private float _progress;
     private int _time;
     private int _killCnt;
@@ -27,12 +31,13 @@ public class DiePanel : MonoBehaviour, IManageableUI
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    Debug.Log("นึ");
-        //    Init(189, 25, 32, 1202, 0.5f);
-        //    Open();
-        //}
+        if (_isActive)
+        {
+            if(Keyboard.current.anyKey.wasPressedThisFrame)
+            {
+                SceneManager.LoadScene("TitleScene");
+            }
+        }
     }
 
     public void Init(int timer, int killCnt, int gatherCnt, float progress)
@@ -107,6 +112,7 @@ public class DiePanel : MonoBehaviour, IManageableUI
             yield return null;
         }
         _kill.SetText($"{_gatherCnt}");
+        _isActive = true;
     }
 
     public void Init()
