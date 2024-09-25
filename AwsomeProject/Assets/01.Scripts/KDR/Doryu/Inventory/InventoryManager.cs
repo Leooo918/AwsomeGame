@@ -44,8 +44,10 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public InventorySlot dragItemSlot;
     [HideInInspector] public InventorySlot stayMouseSlot;
 
-    public void Init()
+    private void Awake()
     {
+        QuickSlotManager.Instance.SetHandle();
+
         foreach (IngredientItemSO itemSO in itemListSO.ingredientItemSOList)
         {
             IngredientItemSODict.Add(itemSO.itemType, itemSO);
