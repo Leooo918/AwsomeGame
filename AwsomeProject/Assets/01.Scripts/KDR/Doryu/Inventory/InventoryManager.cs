@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class InventoryManager : MonoBehaviour
@@ -40,6 +41,8 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Inventory gimmickPotionInventory;
 
     private List<Inventory> _inventories;
+
+    public Action<PotionItemSO> OnGetPotion;
 
     [HideInInspector] public InventorySlot dragItemSlot;
     [HideInInspector] public InventorySlot stayMouseSlot;
@@ -112,12 +115,14 @@ public class InventoryManager : MonoBehaviour
         {
             succes = ingredientInventory.AddItem(item);
         }
-        else if (item.itemSO is ThrowPotionItemSO)
+        else if (item.itemSO is ThrowPotionItemSO throwPotionSO)
         {
+            OnGetPotion?.Invoke(throwPotionSO);
             succes = throwPotionInventory.AddItem(item);
         }
-        else if (item.itemSO is DrinkPotionItemSO)
+        else if (item.itemSO is DrinkPotionItemSO drinkPotionSO)
         {
+            OnGetPotion?.Invoke(drinkPotionSO);
             succes = drinkPotionInventory.AddItem(item);
         }
 
@@ -139,10 +144,12 @@ public class InventoryManager : MonoBehaviour
         }
         else if (itemSO is ThrowPotionItemSO throwPotionSO)
         {
+            OnGetPotion?.Invoke(throwPotionSO);
             succes = throwPotionInventory.AddItem(itemSO, amount, level);
         }
         else if (itemSO is DrinkPotionItemSO drinkPotionSO)
         {
+            OnGetPotion?.Invoke(drinkPotionSO);
             succes = drinkPotionInventory.AddItem(itemSO, amount, level);
         }
 

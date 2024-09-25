@@ -23,6 +23,12 @@ public class PotionRecipeListSO : ScriptableObject
         }
     }
 
+    public PotionRecipeSO GetRecipeSO(int idx)
+    {
+        if (potionRecipes.Length <= idx) return null;
+        return potionRecipes[idx];
+    }
+
     public IngredientItemType[] GetPotionRecipe(PotionItemSO potionItemSO)
     {
         return PotionRecipeDict[potionItemSO];
