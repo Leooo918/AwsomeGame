@@ -92,7 +92,7 @@ public class AirBird : Enemy<AirBirdEnum>
 
     private void OnHit()
     {
-        HitEvent?.Invoke();
+        //HitEvent?.Invoke();
         StateMachine.ChangeState(AirBirdEnum.Idle);
     }
 

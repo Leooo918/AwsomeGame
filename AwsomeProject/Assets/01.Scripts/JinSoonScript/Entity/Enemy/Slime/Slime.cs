@@ -109,7 +109,7 @@ public class Slime : Enemy<SlimeStateEnum>
 
     private void OnHit()
     {
-        HitEvent?.Invoke();
+        //HitEvent?.Invoke();
         StateMachine.ChangeState(SlimeStateEnum.Idle);
     }
 
