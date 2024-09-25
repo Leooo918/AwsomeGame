@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00.Scenes/Lee/Tutorial.unity
     guid: a6e9073051e8bd7439dab9eca6c7437d
-  - enabled: 1
+  - enabled: 0
     path: Assets/00.Scenes/Lee/Stage1.unity
     guid: ba3cbae8a0f816e4190652cfc33d058d
   m_configObjects: {}

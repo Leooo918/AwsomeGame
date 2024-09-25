@@ -40,7 +40,6 @@ public class EntityAttack : MonoBehaviour
         {
             if (_hits[i].transform.TryGetComponent(out IDamageable damageable))
             {
-                Debug.Log(damageable);
                 damageable.TakeDamage(_damage, _knockBackPower, _entity);
 
                 Vector3 offset = _knockBackPower.y < 0 ? Vector2.up * 0.2f : Vector2.down * 0.1f;
