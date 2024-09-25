@@ -8,16 +8,24 @@ public class PotionRecipeListSO : ScriptableObject
 {
     public PotionRecipeSO[] potionRecipes;
 
-    private Dictionary<int, PotionItemSO> PotionRecipeDict = 
+    private Dictionary<int, PotionItemSO> PotionResDict = 
         new Dictionary<int, PotionItemSO>();
+    private Dictionary<PotionItemSO, IngredientItemType[]> PotionRecipeDict = 
+        new Dictionary<PotionItemSO, IngredientItemType[]>();
 
     public void OnEnable()
     {
         for (int i = 0; i < potionRecipes.Length; i++)
         {
             potionRecipes[i].Init();
-            PotionRecipeDict.Add(potionRecipes[i].needIngredientValue, potionRecipes[i].potion);
+            PotionResDict.Add(potionRecipes[i].needIngredientValue, potionRecipes[i].potion);
+            PotionRecipeDict.Add(potionRecipes[i].potion, potionRecipes[i].needIngredients);
         }
+    }
+
+    public IngredientItemType[] GetPotionRecipe(PotionItemSO potionItemSO)
+    {
+        return PotionRecipeDict[potionItemSO];
     }
 
     public PotionItemSO GetPotion(PotSlot[] ingredientItems, PotionType potionType)
@@ -42,8 +50,8 @@ public class PotionRecipeListSO : ScriptableObject
         {
             sum = (int)Mathf.Pow(prevSlot.assignedItem.itemSO.GetItemTypeNumber(), 3) * (int)potionType;
         }
-        if (PotionRecipeDict.ContainsKey(sum))
-            return PotionRecipeDict[sum];
+        if (PotionResDict.ContainsKey(sum))
+            return PotionResDict[sum];
         else
             return null;
     }

@@ -88,7 +88,6 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         }
     }
 
-
     private void HandlePassiveInventoryModified(InventorySlot[,] slots)
     {
         _passiveQuickSlots[0].SetPotion(slots[0, 0]);
