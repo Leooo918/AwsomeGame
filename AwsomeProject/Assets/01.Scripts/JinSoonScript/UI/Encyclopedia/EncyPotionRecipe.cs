@@ -20,6 +20,8 @@ public class EncyPotionRecipe : MonoBehaviour
             _potionType.color = new Color(1, 1, 1, 0);
             for (int i = 0; i < 3; i++)
             {
+                Image image = _potionRecipes[i].transform.GetChild(0).GetComponent<Image>();
+                image.color = new Color(1, 1, 1, 0);
                 _potionRecipes[i].color = new Color(1, 1, 1, 0);
             }
             _description.SetText("");
@@ -39,13 +41,14 @@ public class EncyPotionRecipe : MonoBehaviour
             {
                 Image image = _potionRecipes[i].transform.GetChild(0).GetComponent<Image>();
                 _potionRecipes[i].color = Color.white;
+                image.color = Color.white;
                 image.sprite = itemListSO.GetIngredientItemSO(ingredientItemType[i]).image;
                 if (i == 0)
-                    image.color = new Color(0.5f, 0.5f, 0.5f, 1);
-                else
                     image.color = new Color(1, 1, 1, 1);
+                else
+                    image.color = new Color(0.5f, 0.5f, 0.5f, 1);
             }
-            _description.SetText(potionItemSO.GetItemDescription(0));
+            _description.SetText(potionItemSO.GetItemDescription(2));
         }
     }
 }
