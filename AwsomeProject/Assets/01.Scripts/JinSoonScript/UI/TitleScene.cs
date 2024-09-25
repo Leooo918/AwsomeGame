@@ -13,8 +13,16 @@ public class TitleScene : MonoBehaviour
 
     private Sequence seq;
 
+    [ContextMenu("delete")]
+    public void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     private void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
+
         _logo.DOAnchorPosY(300f, 1f).SetEase(Ease.OutBack);
         _pressKeyTxt.DOFade(0, 1f).SetEase(Ease.Linear).SetLoops(999999, LoopType.Yoyo);
     }
@@ -26,7 +34,9 @@ public class TitleScene : MonoBehaviour
             if (PlayerPrefs.GetInt("IsTutorialed") == 0)
                 SceneManager.LoadScene("Tutorial");
             else
-                SceneManager.LoadScene("Stage1");
+            {
+                //SceneManager.LoadScene("Stage1");
+            }
         }
     }
 }

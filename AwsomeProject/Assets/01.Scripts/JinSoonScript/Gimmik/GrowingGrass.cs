@@ -28,14 +28,6 @@ public class GrowingGrass : MonoBehaviour, IAffectable, IAnimationTriggerable
         CurrentState = VineState.Shrunk;
     }
 
-    private void Update()
-    {
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            ApplyEffect();
-        }
-    }
-
     public void ApplyEffect()
     {
         StartCoroutine(IEGrowing());

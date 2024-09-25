@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 
 public class InventoryManager : MonoBehaviour
@@ -71,36 +70,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        #region Debug
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            TryAddItem(IngredientItemSODict[IngredientItemType.RedMushroom]);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.WeakPotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.ShapeHornePotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.StonePotion], level:2);
-            //TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.SpikePotion], level:2);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.WindPotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.SpikePotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.StonePotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.HealPotion], level: 2);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion]);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            AddGimmickPotion(ThrowPotionItemSODict[PotionItemType.GrowPotion] as PotionItemSO, true);
-        }
-        #endregion
-
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
         {
             DragUpdate();
