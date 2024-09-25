@@ -2,6 +2,7 @@ using Doryu.JBSave;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 [System.Serializable]
@@ -9,6 +10,18 @@ public enum SoundEnum
 {
     BGM,
     PlayerAttack,
+    PlayerHit,
+    Throw,
+    SlimeMove,
+    SlimeAttack,
+    BirdAttack,
+    BirdSound,
+    PigRush,
+    EnemyHit,
+    Click,
+    GetItem,
+    SpikeReflect,
+    Stoned,
 }
 [System.Serializable]
 public enum SoundType
@@ -23,6 +36,7 @@ public class Sound
     public SoundEnum nameEnum;
     public SoundType typeEnum;
     public float duration;
+    public bool isDonDestroy;
     public AudioClip clip;
 }
 
@@ -96,15 +110,27 @@ public class AudioManager : Singleton<AudioManager>
     {
         SoundPlayer soundPlayer = Instantiate(_soundPlayerPrefab, parent);
         Sound sound = _soundDict[soundEnum];
+        float volume = volumeSaveData.allVolume;
         if (sound.typeEnum == SoundType.BGM)
-        {
-            float volume = volumeSaveData.allVolume * volumeSaveData.bgmVolume;
-            soundPlayer.Init(sound.clip, volume, sound.duration, true);
-        }
+            volume *= volumeSaveData.bgmVolume;
         else
+            volume *= volumeSaveData.sfxVolume;
+        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy);
+    }
+
+    public void StopSound(SoundEnum soundEnum, Transform target)
+    {
+        SoundPlayer[] soundPlayers = target.GetComponentsInChildren<SoundPlayer>();
+
+        Sound sound = _soundDict[soundEnum];
+
+        for (int i = 0; i < soundPlayers.Length; i++)
         {
-            float volume = volumeSaveData.allVolume * volumeSaveData.sfxVolume;
-            soundPlayer.Init(sound.clip, volume, sound.duration);
+            if (soundPlayers[i].currentAudioClip == sound.clip)
+            {
+                Destroy(soundPlayers[i].gameObject);
+                return;
+            }
         }
     }
 }
