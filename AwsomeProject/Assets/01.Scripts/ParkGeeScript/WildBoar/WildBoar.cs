@@ -110,7 +110,7 @@ public class WildBoar : Enemy<WildBoarEnum>
 
     private void OnHit()
     {
-        HitEvent?.Invoke();
+        //HitEvent?.Invoke();
         StateMachine.ChangeState(WildBoarEnum.Idle);
     } 
 
