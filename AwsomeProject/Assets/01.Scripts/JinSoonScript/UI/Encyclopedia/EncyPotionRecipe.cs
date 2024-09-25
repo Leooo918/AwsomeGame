@@ -11,12 +11,10 @@ public class EncyPotionRecipe : MonoBehaviour
     [SerializeField] private Image[] _potionRecipes;
     [SerializeField] private TextMeshProUGUI _description;
     [SerializeField] private Sprite[] _potionTypeSprite;
-    [SerializeField] private PotionRecipeListSO _potionRecipeListSO;
-    [SerializeField] private ItemListSO _itemListSO;
 
-    public void Init(Potion potionItem = null)
+    public void SetData(PotionRecipeListSO potionRecipeListSO = null, ItemListSO itemListSO = null, PotionItemSO potionItemSO = null)
     {
-        if (potionItem == null)
+        if (potionItemSO == null)
         {
             _potionIcon.color = new Color(1, 1, 1, 0);
             _potionType.color = new Color(1, 1, 1, 0);
@@ -31,18 +29,23 @@ public class EncyPotionRecipe : MonoBehaviour
             _potionIcon.color = Color.white;
             _potionType.color = Color.white;
 
-            _potionIcon.sprite = potionItem.potionItemSO.image;
-            if (potionItem.potionItemSO is ThrowPotionItemSO)
+            _potionIcon.sprite = potionItemSO.image;
+            if (potionItemSO is ThrowPotionItemSO)
                 _potionType.sprite = _potionTypeSprite[0];
             else
                 _potionType.sprite = _potionTypeSprite[1];
-            IngredientItemType[] ingredientItemType = _potionRecipeListSO.GetPotionRecipe(potionItem.potionItemSO);
-            for (int i = 0; i < potionItem.level; i++)
+            IngredientItemType[] ingredientItemType = potionRecipeListSO.GetPotionRecipe(potionItemSO);
+            for (int i = 0; i < 3; i++)
             {
+                Image image = _potionRecipes[i].transform.GetChild(0).GetComponent<Image>();
                 _potionRecipes[i].color = Color.white;
-                _potionRecipes[i].sprite = _itemListSO.GetIngredientItemSO(ingredientItemType[i]).image;
+                image.sprite = itemListSO.GetIngredientItemSO(ingredientItemType[i]).image;
+                if (i == 0)
+                    image.color = new Color(0.5f, 0.5f, 0.5f, 1);
+                else
+                    image.color = new Color(1, 1, 1, 1);
             }
-            _description.SetText(potionItem.potionItemSO.GetItemDescription(potionItem.level));
+            _description.SetText(potionItemSO.GetItemDescription(0));
         }
     }
 }
