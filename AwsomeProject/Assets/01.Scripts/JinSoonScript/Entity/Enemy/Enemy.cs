@@ -66,7 +66,6 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     private void OnHit()
     {
-        Debug.Log("Damage!!!!!");
         HitEvent?.Invoke();
     }
 

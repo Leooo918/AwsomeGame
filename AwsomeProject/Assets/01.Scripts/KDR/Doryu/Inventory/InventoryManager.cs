@@ -67,7 +67,7 @@ public class InventoryManager : MonoBehaviour
 
         _inventories.ForEach(inven =>
         {
-            Debug.Log(inven.name);
+            //Debug.Log(inven.name);
             inven.Init();
         });
     }
