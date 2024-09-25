@@ -28,7 +28,7 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
         KeyCode.Alpha5,
     };
 
-    private void Awake()
+    public void SetHandle()
     {
         _passiveLine.GetComponentsInChildren(_passiveQuickSlots);
         _activeLine.GetComponentsInChildren(_activeLineQuickSlots);
@@ -87,7 +87,6 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
                 _activeLineQuickSlots[_currentSelectIdx].OnSelect(true);
         }
     }
-
 
     private void HandlePassiveInventoryModified(InventorySlot[,] slots)
     {

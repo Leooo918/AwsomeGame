@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 689486021641986660}
   - component: {fileID: 6783578477994862616}
   - component: {fileID: 7423076688141037495}
+  - component: {fileID: 8761580973642624349}
   m_Layer: 5
   m_Name: PotionDataSlot
   m_TagString: Untagged
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8761580973642624349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2965724667530552806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9170ce3519c6f34ab74455c2ddd6e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6117915632057705141
 GameObject:
   m_ObjectHideFlags: 0
