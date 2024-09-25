@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour
     [HideInInspector] public InventorySlot dragItemSlot;
     [HideInInspector] public InventorySlot stayMouseSlot;
 
-    private void Awake()
+    public void Init()
     {
         foreach (IngredientItemSO itemSO in itemListSO.ingredientItemSOList)
         {
@@ -70,6 +70,12 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TryAddItem(ThrowPotionItemSODict[PotionItemType.StonePotion]);
+        }
+#endif
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
         {
             DragUpdate();

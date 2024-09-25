@@ -18,16 +18,19 @@ public class EncyPotionRecipe : MonoBehaviour
     {
         if (potionItem == null)
         {
-            _potionIcon.sprite = null;
-            _potionType.sprite = null;
+            _potionIcon.color = new Color(1, 1, 1, 0);
+            _potionType.color = new Color(1, 1, 1, 0);
             for (int i = 0; i < 3; i++)
             {
-                _potionRecipes[i].sprite = null;
+                _potionRecipes[i].color = new Color(1, 1, 1, 0);
             }
             _description.SetText("");
         }
         else
         {
+            _potionIcon.color = Color.white;
+            _potionType.color = Color.white;
+
             _potionIcon.sprite = potionItem.potionItemSO.image;
             if (potionItem.potionItemSO is ThrowPotionItemSO)
                 _potionType.sprite = _potionTypeSprite[0];
@@ -36,6 +39,7 @@ public class EncyPotionRecipe : MonoBehaviour
             IngredientItemType[] ingredientItemType = _potionRecipeListSO.GetPotionRecipe(potionItem.potionItemSO);
             for (int i = 0; i < potionItem.level; i++)
             {
+                _potionRecipes[i].color = Color.white;
                 _potionRecipes[i].sprite = _itemListSO.GetIngredientItemSO(ingredientItemType[i]).image;
             }
             _description.SetText(potionItem.potionItemSO.GetItemDescription(potionItem.level));

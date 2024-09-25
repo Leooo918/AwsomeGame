@@ -35,6 +35,8 @@ public class QuickSlotManager : Singleton<QuickSlotManager>
 
         _activeSlotInven.OnInventoryModified += HandleActiveInventoryModified;
         _passoveSlotInven.OnInventoryModified += HandlePassiveInventoryModified;
+
+        InventoryManager.Instance.Init();
     }
 
     private void Update()
