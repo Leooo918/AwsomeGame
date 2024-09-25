@@ -17,6 +17,8 @@ public class PlayerNormalAttackState : PlayerState
     {
         base.Enter();
 
+        AudioManager.Instance.PlaySound(SoundEnum.PlayerAttack, player.transform);
+
         if (player.canAttackWithNatureSync == false)
             player.isNatureSync = false;
 
