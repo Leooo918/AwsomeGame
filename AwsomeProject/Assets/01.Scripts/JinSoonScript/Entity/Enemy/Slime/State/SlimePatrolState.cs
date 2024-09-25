@@ -4,19 +4,13 @@ using UnityEngine;
 
 public class SlimePatrolState : EnemyState<SlimeStateEnum>
 {
-    private Slime _slime;
-
-    private float _turningDelay = 2f;
     private float _startTime;
     private float _idleCool;
-    private Player _player;
 
     private Vector2 _moveDir;
 
     public SlimePatrolState(Enemy<SlimeStateEnum> enemy, EnemyStateMachine<SlimeStateEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        _player = PlayerManager.Instance.Player;
-        _slime = enemy as Slime;
     }
 
     public override void Enter()
