@@ -9,8 +9,10 @@ public class GrowingBush : MonoBehaviour, IAffectable
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
 
+    private Coroutine _growingCoroutine;
+
     [SerializeField]
-    private LayerMask _objLayer;
+    private Sprite _1x1Sprite;
     [SerializeField]
     private Sprite _3x3Sprite;
 
@@ -23,8 +25,20 @@ public class GrowingBush : MonoBehaviour, IAffectable
 
     public void ApplyEffect()
     {
+        if (_growingCoroutine == null)
+            _growingCoroutine = StartCoroutine(GrowingCoroutine());
+    }
+
+    private IEnumerator GrowingCoroutine()
+    {
         gameObject.layer = LayerMask.NameToLayer("Ground");
         _spriteRenderer.sprite = _3x3Sprite;
         _collider.size = Vector2.one * 3;
+        yield return new WaitForSeconds(5f);
+        gameObject.layer = LayerMask.NameToLayer("Push");
+        _spriteRenderer.sprite = _1x1Sprite;
+        _collider.size = Vector2.one;
+
+        _growingCoroutine = null;
     }
 }
