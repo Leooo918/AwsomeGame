@@ -3,8 +3,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 {
@@ -354,18 +352,6 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public bool IsUnderStatusEffect(StatusDebuffEffectEnum statusEffect)
         => (_debuffStatusEffectBit & (int)statusEffect) != 0;
 
-#if UNITY_EDITOR
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        Gizmos.DrawWireCube(wallChecker.position,
-            new Vector2(wallCheckDistance, wallCheckBoxHeight));
-        Gizmos.DrawWireCube(groundChecker.position,
-            new Vector2(groundCheckBoxWidth, groundCheckDistance));
-    }
-
     public virtual void ApplyEffect()
     {
     }
@@ -380,6 +366,17 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     public virtual void RemoveTrigger(AnimationTriggerEnum trigger)
     {
         _animationTriggerBit &= ~(int)trigger;
+    }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawWireCube(wallChecker.position,
+            new Vector2(wallCheckDistance, wallCheckBoxHeight));
+        Gizmos.DrawWireCube(groundChecker.position,
+            new Vector2(groundCheckBoxWidth, groundCheckDistance));
     }
 #endif
 }

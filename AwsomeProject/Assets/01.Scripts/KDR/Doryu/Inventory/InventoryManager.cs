@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 
 public class InventoryManager : MonoBehaviour
@@ -38,6 +37,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Inventory ingredientInventory;
     [SerializeField] private Inventory throwPotionInventory;
     [SerializeField] private Inventory drinkPotionInventory;
+    [SerializeField] private Inventory gimmickPotionInventory;
 
     private List<Inventory> _inventories;
 
@@ -70,32 +70,6 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        #region Debug
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            TryAddItem(IngredientItemSODict[IngredientItemType.RedMushroom]);
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.WeakPotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.ShapeHornePotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.StonePotion], level:2);
-            //TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion], level:2);
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.SpikePotion], level:2);
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.WindPotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.SpikePotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.StonePotion], level: 2);
-            TryAddItem(DrinkPotionItemSODict[PotionItemType.HealPotion], level: 2);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TryAddItem(ThrowPotionItemSODict[PotionItemType.HealPotion]);
-        }
-        #endregion
-
         if (dragItemSlot != null && dragItemSlot.assignedItem != null)
         {
             DragUpdate();
@@ -107,6 +81,18 @@ public class InventoryManager : MonoBehaviour
         Vector2 mousePos = Input.mousePosition;
         dragItemSlot.assignedItem.transform.localPosition = 
             mousePos - (Vector2)dragItemSlot.inventory.itemStorage.position;
+    }
+
+    public void AddGimmickPotion(PotionItemSO itemSO, bool openPannel = false)
+    {
+        bool succes = gimmickPotionInventory.AddItem(itemSO, int.MaxValue, 0);
+
+        if (openPannel && succes)
+        {
+            ItemGatherPanel gather = UIManager.Instance.GetUI(UIType.ItemGather) as ItemGatherPanel;
+            gather.Init(itemSO);
+            gather.Open();
+        }
     }
 
     public bool TryAddItem(Item item, bool openPannel = false)

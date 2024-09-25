@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using Doryu.JBSave;
 using System;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using static Cinemachine.DocumentationSortingAttribute;
 
 [Serializable]
@@ -37,6 +36,8 @@ public class Inventory : MonoBehaviour
         {
             for (int x = 0; x < _inventorySize.x; x++)
             {
+                if (slots[x, y].assignedItem != null)
+                    Destroy(slots[x, y].assignedItem.gameObject);
                 slots[x, y].SetItem(null);
             }
         }

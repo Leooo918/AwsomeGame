@@ -12,22 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6d3f3e564bed3c4099a6372e623ddd3, type: 3}
   m_Name: GrowingPotion
   m_EditorClassIdentifier: 
-  maxMergeAmount: 5
-  image: {fileID: 300189368, guid: b7d23546b3b26c647bb9dd3948ce8eaa, type: 3}
-  itemType: 1
-  quickSlotOutLine: 1
-  level: 0
-  itemName: das
+  image: {fileID: 21300000, guid: 408b86cd54ce4a046839712d97e144f8, type: 3}
+  itemType: 10
+  quickSlotOutLine: 3
+  itemName: "\uC131\uC7A5 \uD3EC\uC158"
   itemDescriptions:
-  - 
-  - 
-  - 
+  - "\uC2DD\uBB3C\uC758 \uC131\uC7A5\uC744 \uCD09\uC9C4\uC2DC\uD0A8\uB2E4"
   potionInfos:
   - infos:
-    - effectEnum: 1
+    - effectEnum: 2
       level: 1
-  maxDetactEntity: 2
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 459008
-  range: 8
+    maxDetactEntity: 3
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 458752
+    range: 3

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class EntityVisual : MonoBehaviour
@@ -17,14 +16,6 @@ public class EntityVisual : MonoBehaviour
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _entityMat = _spriteRenderer.material;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            Hit();
-        }
     }
 
     public void SetAlpha(float alpha)

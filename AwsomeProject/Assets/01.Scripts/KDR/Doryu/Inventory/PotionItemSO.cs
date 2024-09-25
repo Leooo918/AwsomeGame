@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public enum PotionItemType
 {
@@ -16,6 +15,7 @@ public enum PotionItemType
     SlapPotion,
     LightPotion,
     WeakPotion,
+    GrowPotion,
 }
 
 public enum QuickSlotOutLine
@@ -23,6 +23,7 @@ public enum QuickSlotOutLine
     Bronze,
     Silver,
     Gold,
+    Diamond,
     Level,
 }
 

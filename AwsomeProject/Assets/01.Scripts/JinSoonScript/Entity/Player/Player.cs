@@ -205,6 +205,8 @@ public class Player : Entity
 
     //}
 
+
+
     public override void Invincibility(float duration)
     {
         base.Invincibility(duration);
@@ -273,10 +275,7 @@ public class Player : Entity
         }
     }
 
-    public override void AnimationTrigger(AnimationTriggerEnum trigger)
-    {
-        StateMachine.CurrentState.AnimationTrigger(trigger);
-    }
+    
 
     public void OnHit() => HitEvent?.Invoke();
 
@@ -339,5 +338,11 @@ public class Player : Entity
             PlayerInput.Controlls.Player.Enable();
         else
             PlayerInput.Controlls.Player.Disable();
+    }
+
+    public override void AnimationTrigger(AnimationTriggerEnum trigger)
+    {
+        base.AnimationTrigger(trigger);
+        StateMachine.CurrentState.AnimationTrigger(trigger);
     }
 }

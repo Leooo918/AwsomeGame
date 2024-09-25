@@ -20,13 +20,6 @@ public class GrowingBush : MonoBehaviour, IAffectable
         _collider = GetComponent<BoxCollider2D>();
     }
 
-    private void Update()
-    {
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-        {
-            ApplyEffect();
-        }
-    }
 
     public void ApplyEffect()
     {
