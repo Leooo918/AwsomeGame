@@ -1,60 +1,110 @@
+using Doryu.JBSave;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+
+[System.Serializable]
+public enum SoundEnum
+{
+    BGM,
+    PlayerAttack,
+}
+[System.Serializable]
+public enum SoundType
+{ 
+    BGM,
+    SFX
+}
 
 [System.Serializable]
 public class Sound
 {
-    public string name;
+    public SoundEnum nameEnum;
+    public SoundType typeEnum;
+    public float duration;
     public AudioClip clip;
+}
+
+public class VolumeSaveData : ISavable<VolumeSaveData>
+{
+    public float allVolume = 1f;
+    public float bgmVolume = 0.5f;
+    public float sfxVolume = 0.5f;
+
+    public void OnLoadData(VolumeSaveData classData)
+    {
+        allVolume = classData.allVolume;
+        bgmVolume = classData.bgmVolume;
+        sfxVolume = classData.sfxVolume;
+    }
+
+    public void OnSaveData(string savedFileName)
+    {
+
+    }
 }
 
 public class AudioManager : Singleton<AudioManager>
 {
-    [SerializeField] private Sound[] sfx = null;
-    [SerializeField] private Sound[] bgm = null;
+    [SerializeField] private Sound[] _sounds;
 
-    [SerializeField] private AudioSource bgmPlayer = null;
-    [SerializeField] private AudioSource[] sfxPlayer = null;
+    [SerializeField] private SoundPlayer _soundPlayerPrefab;
+
+    public VolumeSaveData volumeSaveData { get; private set; } = new VolumeSaveData();
+    private Dictionary<SoundEnum, Sound> _soundDict = new Dictionary<SoundEnum, Sound>();
 
     private void Awake()
     {
-        sfxPlayer = GetComponents<AudioSource>();
+        volumeSaveData.LoadJson("SoundVolume");
+
+        foreach (Sound sound in _sounds)
+        {
+            _soundDict.Add(sound.nameEnum, sound);
+        }
         DontDestroyOnLoad(gameObject);
+
+        PlaySound(SoundEnum.BGM, transform);
     }
 
-    public void PlayBGM(string bgmName)
+    public void SetVolume(float all, float bgm, float sfx)
     {
-        foreach (var t in bgm)
+        bool flag = false;
+        if (volumeSaveData.allVolume != all)
         {
-            if (bgmName != t.name) continue;
-            bgmPlayer.clip = t.clip;
-            bgmPlayer.Play();
+            volumeSaveData.allVolume = all;
+            flag = true;
+        }
+        if (volumeSaveData.bgmVolume != bgm)
+        {
+            volumeSaveData.bgmVolume = bgm;
+            flag = true;
+        }
+        if (volumeSaveData.sfxVolume != sfx)
+        {
+            volumeSaveData.sfxVolume = sfx;
+            flag = true;
+        }
+
+        if (flag)
+        {
+            volumeSaveData.SaveJson("SoundVolume");
         }
     }
 
-    public void StopBGM()
+    public void PlaySound(SoundEnum soundEnum, Transform parent)
     {
-        bgmPlayer.Stop();
-    }
-
-    public void PlaySFX(string sfxName)
-    {
-        foreach (var t in sfx)
+        SoundPlayer soundPlayer = Instantiate(_soundPlayerPrefab, parent);
+        Sound sound = _soundDict[soundEnum];
+        if (sound.typeEnum == SoundType.BGM)
         {
-            if (sfxName != t.name) continue;
-            
-            foreach (var player in sfxPlayer)
-            {
-                // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
-                if (player.isPlaying) continue;
-                player.clip = t.clip;
-                player.Play();
-                return;
-            }
-            Debug.Log("모든 오디오 플레이어가 재생중입니다.");
-            return;
+            float volume = volumeSaveData.allVolume * volumeSaveData.bgmVolume;
+            soundPlayer.Init(sound.clip, volume, sound.duration, true);
         }
-        Debug.Log(sfxName + " 이름의 효과음이 없습니다.");
+        else
+        {
+            float volume = volumeSaveData.allVolume * volumeSaveData.sfxVolume;
+            soundPlayer.Init(sound.clip, volume, sound.duration);
+        }
     }
 }
