@@ -24,7 +24,6 @@ public class ThrowPotion : Potion
         _collider = GetComponent<CircleCollider2D>();
 
         _rigid.AddForce(movement, ForceMode2D.Impulse);
-        Debug.Log(rotatPow);
         _rigid.AddTorque(rotatPow);
 
         ThrowPotionItemSO throwPotionItemSO = slot.assignedItem.itemSO as ThrowPotionItemSO;

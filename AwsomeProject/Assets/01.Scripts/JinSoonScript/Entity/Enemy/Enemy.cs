@@ -29,8 +29,6 @@ public abstract class Enemy<T> : Entity where T : Enum
     public float defaultMoveSpeed { get; protected set; }
     protected int lastAnimationBoolHash;
 
-    private bool playerDetected = false;
-
     protected override void Awake()
     {
         base.Awake();
@@ -51,9 +49,11 @@ public abstract class Enemy<T> : Entity where T : Enum
             }
             catch (Exception e)
             {
+#if UNITY_EDITOR
                 Debug.LogError($"Enemy {scriptName} : no state [ {typeName} ]");
                 Debug.LogError($"{scriptName}{typeName}State");
                 Debug.LogError(e);
+#endif
             }
         }
         healthCompo.OnHit += OnHit;
@@ -137,8 +137,6 @@ public abstract class Enemy<T> : Entity where T : Enum
     /// <returns></returns>
     public bool IsFrontGround() => Physics2D.Raycast(wallChecker.position, Vector2.down, 5f, whatIsGroundAndWall);
     #endregion
-
-    public void MissPlayer() => playerDetected = false;
 
     public void OnCompletelyDie()
     {

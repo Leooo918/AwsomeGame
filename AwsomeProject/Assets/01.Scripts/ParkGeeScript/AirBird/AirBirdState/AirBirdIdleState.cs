@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class AirBirdIdleState : EnemyState<AirBirdEnum>
 {
-    private bool _isGoDown = false;
-
-    private float _originHeight;
-    private float _upDownSpeed = 2f;
-
     public AirBirdIdleState(Enemy<AirBirdEnum> enemy, EnemyStateMachine<AirBirdEnum> enemyStateMachine, string animBoolName) : base(enemy, enemyStateMachine, animBoolName)
     {
-        _originHeight = enemy.transform.position.y;
     }
 
     public override void Enter()

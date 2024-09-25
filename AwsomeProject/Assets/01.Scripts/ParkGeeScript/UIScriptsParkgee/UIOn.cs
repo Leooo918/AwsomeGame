@@ -7,14 +7,12 @@ public class UIOn : MonoBehaviour
 {
     [SerializeField] private GameObject[] ui;
 
-    private RectTransform[] initialPos;
     private RectTransform rectTransform;
 
     private Sequence seq;
 
     [SerializeField] private bool isESC = false;
     [SerializeField] private bool isInven = false;
-    [SerializeField] private bool isSet = false;
     //[SerializeField] private bool isOnOff = false;
 
     Vector3 escPanelPos, invenScale;
@@ -98,7 +96,6 @@ public class UIOn : MonoBehaviour
 
     public void SetPanelOn()
     {
-        isSet = true;
         ui[2].SetActive(true);
         rectTransform = ui[2].GetComponent<RectTransform>();
         if (seq != null && seq.IsActive()) seq.Kill();

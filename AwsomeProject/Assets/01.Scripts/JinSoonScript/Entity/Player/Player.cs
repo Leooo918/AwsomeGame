@@ -86,8 +86,6 @@ public class Player : Entity
 
     #endregion
 
-    private float _gravityScale;
-
     [field: SerializeField]
     public Transform PlayerCenter { get; private set; }
 
@@ -132,7 +130,6 @@ public class Player : Entity
     {
         base.Awake();
         //canDash = true;
-        _gravityScale = rigidbodyCompo.gravityScale;
         _hpDecator?.Init((int)healthCompo.curHp);
 
         MoveSpeed = moveSpeed;
