@@ -11,7 +11,7 @@ public class BlockVine : MonoBehaviour, IAffectable
     private Coroutine _disappearCoroutine;
     public void ApplyEffect()
     {
-        if (_disappearCoroutine == null) return;
+        if (_disappearCoroutine != null) return;
         _disappearCoroutine = StartCoroutine(DisappearCoroutine());
     }
 
