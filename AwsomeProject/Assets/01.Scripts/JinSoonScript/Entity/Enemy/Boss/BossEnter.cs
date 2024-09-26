@@ -9,13 +9,6 @@ public class BossEnter : MonoBehaviour
     public GameObject frontWall;
     public GameObject backWall;
 
-    private BossHpBarUI _hpBar;
-
-    private void Start()
-    {
-        boss.healthCompo.OnDie += HandleDie;
-    }
-
     private void HandleDie(Vector2 vector)
     {
         EndBoss();
@@ -25,6 +18,7 @@ public class BossEnter : MonoBehaviour
     {
         backWall.SetActive(true);
         boss.gameObject.SetActive(true);
+        boss.healthCompo.OnDie += HandleDie;
         UIManager.Instance.GetUI(UIType.BossHp).Open();
     }
 

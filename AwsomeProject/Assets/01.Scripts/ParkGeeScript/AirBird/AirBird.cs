@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public enum AirBirdEnum
 {
@@ -27,6 +28,8 @@ public class AirBird : Enemy<AirBirdEnum>
     protected override void Awake()
     {
         base.Awake();
+
+        AudioManager.Instance.PlaySound(SoundEnum.BirdSound, transform);
     }
 
     private void OnEnable()

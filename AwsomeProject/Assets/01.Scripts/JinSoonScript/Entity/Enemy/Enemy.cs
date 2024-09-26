@@ -66,6 +66,7 @@ public abstract class Enemy<T> : Entity where T : Enum
 
     private void OnHit()
     {
+        AudioManager.Instance.PlaySound(SoundEnum.EnemyHit, transform.position);
         HitEvent?.Invoke();
     }
 

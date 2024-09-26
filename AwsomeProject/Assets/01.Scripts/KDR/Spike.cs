@@ -27,6 +27,7 @@ public class Spike : MonoBehaviour
             _circle.radius, _rigid.velocity,
             _hit, 0.1f, _whatIsObstacle) != 0)
         {
+            AudioManager.Instance.PlaySound(SoundEnum.SpikeReflect, transform);
             Vector2 reflect = Vector2.Reflect(_rigid.velocity, _hit[0].normal) * 0.9f;
             _rigid.velocity = reflect;
         }

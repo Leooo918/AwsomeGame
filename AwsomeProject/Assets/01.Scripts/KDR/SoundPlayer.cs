@@ -10,9 +10,13 @@ public class SoundPlayer : MonoBehaviour
     private float _startTime;
     private bool _isLoop;
 
-    public void Init(AudioClip audioClip, float volume, float lifetime, bool isDonDestroy = false)
+    public AudioClip currentAudioClip { get; private set; }
+
+    public void Init(AudioClip audioClip, float volume, float lifetime, bool isDonDestroy)
     {
         _audioSource = GetComponent<AudioSource>();
+        _audioSource.volume = volume;
+        currentAudioClip = audioClip;
         if (lifetime == -1)
         {
             _audioSource.loop = true;

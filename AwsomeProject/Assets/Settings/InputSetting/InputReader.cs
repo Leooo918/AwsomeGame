@@ -78,7 +78,6 @@ public class InputReader : ScriptableObject, Controlls.IPlayerActions, Controlls
     {
         if (context.performed)
             InteractPress?.Invoke();
-
         if (context.canceled)
             InteractRelease?.Invoke();
     }

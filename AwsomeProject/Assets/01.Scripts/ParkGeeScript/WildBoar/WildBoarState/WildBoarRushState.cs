@@ -35,6 +35,9 @@ public class WildBoarRushState : EnemyState<WildBoarEnum>
     public override void Enter()
     {
         base.Enter();
+
+        AudioManager.Instance.PlaySound(SoundEnum.PigRush, enemy.transform);
+
         _isRushing = false;
         _rushDir = Vector2.right * enemy.FacingDir;
         enemy.MovementCompo.StopImmediately(false);

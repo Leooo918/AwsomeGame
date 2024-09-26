@@ -272,9 +272,14 @@ public class Player : Entity
         }
     }
 
-    
 
-    public void OnHit() => HitEvent?.Invoke();
+
+    public void OnHit()
+    {
+        AudioManager.Instance.PlaySound(SoundEnum.PlayerHit, transform.position);
+
+        HitEvent?.Invoke();
+    }
 
     public void OnDie(Vector2 hitDir)
     {

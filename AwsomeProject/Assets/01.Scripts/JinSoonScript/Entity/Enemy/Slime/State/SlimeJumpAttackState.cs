@@ -53,6 +53,8 @@ public class SlimeJumpAttackState : EnemyState<SlimeStateEnum>
 
             if (enemy.IsGroundDetected())
             {
+                AudioManager.Instance.PlaySound(SoundEnum.SlimeAttack, enemy.transform.position);
+
                 enemy.animatorCompo.SetTrigger(_landAnimHash);
 
                 Vector2 dir = _player.transform.position - enemy.transform.position;
