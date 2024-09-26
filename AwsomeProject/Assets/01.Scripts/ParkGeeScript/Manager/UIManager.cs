@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager>
         panelDictionary = new Dictionary<UIType, IManageableUI>();
         foreach (UIType w in Enum.GetValues(typeof(UIType)))
         {
-            IManageableUI panel = 
+            IManageableUI panel =
                 GameObject.Find($"{w.ToString()}Panel")?.GetComponent<IManageableUI>();
 
             if (panel != null)
