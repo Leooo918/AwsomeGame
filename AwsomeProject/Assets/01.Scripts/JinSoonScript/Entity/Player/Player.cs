@@ -129,6 +129,7 @@ public class Player : Entity
     protected override void Awake()
     {
         base.Awake();
+        _inputReader.Controlls.Player.Enable();
         //canDash = true;
         _hpDecator?.Init((int)healthCompo.curHp);
 
