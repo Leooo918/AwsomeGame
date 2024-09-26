@@ -20,8 +20,8 @@ public class PotSlot : MonoBehaviour
     {
         if (assignedItem != inventorySlot.assignedItem)
         {
-            SlotChanged?.Invoke();
             assignedItem = inventorySlot.assignedItem;
+            SlotChanged?.Invoke();
         }
     }
 
