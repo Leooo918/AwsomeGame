@@ -22,7 +22,14 @@ public class KingSlimeJumpAndFallState : EnemyState<KingSlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
+        _kingSlime.contactHit.enabled = true;
         _kingSlime.StartCoroutine(JumpAndFallCorotuine());
+    }
+
+    public override void Exit()
+    {
+        _kingSlime.contactHit.enabled = false;
+        base.Exit();
     }
 
     private IEnumerator JumpCoroutine()
