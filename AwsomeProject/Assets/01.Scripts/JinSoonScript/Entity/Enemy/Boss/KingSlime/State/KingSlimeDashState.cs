@@ -45,6 +45,7 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
                     _kingSlime.FlipController(-_dashDir.x);
                     enemyStateMachine.ChangeState(KingSlimeStateEnum.Idle);
                 }
+                CameraManager.Instance.ShakeCam(5, 1, 0.5f);
                 _kingSlime.contactHit.enabled = false;
                 _kingSlime.KnockBack(-_dashDir * 3f);
             }

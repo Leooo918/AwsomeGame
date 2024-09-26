@@ -18,7 +18,6 @@ public class PlayerPushState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log(player.CurrentPushTrm == null);
         _pushObjectRigid = player.CurrentPushTrm.GetComponent<Rigidbody2D>();
         _pushObjectRigid.velocity = Vector3.zero;
         Vector3 offset = new Vector3((player.CurrentPushTrm.GetComponent<BoxCollider2D>().size.x / 2) * player.CurrentPushTrm.localScale.x, 0);
@@ -37,8 +36,7 @@ public class PlayerPushState : PlayerState
 
     public override void Exit()
     {
-        Rigidbody2D rigid = player.CurrentPushTrm.GetComponent<Rigidbody2D>();
-        rigid.velocity = new Vector2(0, rigid.velocity.y);
+        _pushObjectRigid.velocity = new Vector2(0, _pushObjectRigid.velocity.y);
         player.CurrentPushTrm = null;
 
         player.PlayerInput.InteractPress -= HandleInteract;
@@ -53,7 +51,7 @@ public class PlayerPushState : PlayerState
 
     public override void UpdateState()
     {
-        if(Mathf.Abs(player.transform.position.y - player.CurrentPushTrm.position.y) > 1.5f)
+        if(Mathf.Abs(player.transform.position.y + 0.5f - player.CurrentPushTrm.position.y) > 1f)
         {
             stateMachine.ChangeState(PlayerStateEnum.Idle);
             return;

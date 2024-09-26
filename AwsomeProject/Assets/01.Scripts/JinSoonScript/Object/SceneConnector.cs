@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TutorialSceneConnector : MonoBehaviour
+public class SceneConnector : MonoBehaviour
 {
     [SerializeField]
     private string _sceneName;
