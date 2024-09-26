@@ -29,6 +29,8 @@ public class AirBirdShootState : EnemyState<AirBirdEnum>
             return;
         }
 
+        AudioManager.Instance.PlaySound(SoundEnum.BirdAttack, enemy.transform);
+
         Vector2 defaultShootMovement = (_playerTrm.position + Vector3.up - enemy.transform.position).normalized * _airBird.featherShootSpeed;
         for (int i = 0; i < 3; i++)
         {

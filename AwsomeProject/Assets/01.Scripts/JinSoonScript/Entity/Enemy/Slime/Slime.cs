@@ -34,6 +34,8 @@ public class Slime : Enemy<SlimeStateEnum>
     {
         base.Awake();
 
+        AudioManager.Instance.PlaySound(SoundEnum.SlimeMove, transform);
+
         Skills = gameObject.AddComponent<SlimeSkill>();
         Skills.Init(EntitySkillSO);
 

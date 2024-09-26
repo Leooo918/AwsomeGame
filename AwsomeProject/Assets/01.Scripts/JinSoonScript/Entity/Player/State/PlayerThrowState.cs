@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerThrowState : PlayerState
@@ -64,5 +63,7 @@ public class PlayerThrowState : PlayerState
         potion.transform.localScale = Vector3.one * 0.45f;
         potion.Init(QuickSlotManager.Instance.GetSelectedPotionSlot(), player, dir * 30, UnityEngine.Random.Range(-200f, 200f));
         stateMachine.ChangeState(PlayerStateEnum.Idle);
+
+        AudioManager.Instance.PlaySound(SoundEnum.Throw, player.transform);
     }
 }

@@ -117,6 +117,18 @@ public class AudioManager : Singleton<AudioManager>
             volume *= volumeSaveData.sfxVolume;
         soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy);
     }
+    public void PlaySound(SoundEnum soundEnum, Vector3 pos)
+    {
+        SoundPlayer soundPlayer = Instantiate(_soundPlayerPrefab);
+        soundPlayer.transform.position = pos;
+        Sound sound = _soundDict[soundEnum];
+        float volume = volumeSaveData.allVolume;
+        if (sound.typeEnum == SoundType.BGM)
+            volume *= volumeSaveData.bgmVolume;
+        else
+            volume *= volumeSaveData.sfxVolume;
+        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy);
+    }
 
     public void StopSound(SoundEnum soundEnum, Transform target)
     {
