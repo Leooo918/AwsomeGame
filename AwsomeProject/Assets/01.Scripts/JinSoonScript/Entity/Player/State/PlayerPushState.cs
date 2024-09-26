@@ -32,12 +32,15 @@ public class PlayerPushState : PlayerState
 
     private void HandleJump()
     {
-        player.CurrentPushTrm = null;
         stateMachine.ChangeState(PlayerStateEnum.Jump);
     }
 
     public override void Exit()
     {
+        Rigidbody2D rigid = player.CurrentPushTrm.GetComponent<Rigidbody2D>();
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
+        player.CurrentPushTrm = null;
+
         player.PlayerInput.InteractPress -= HandleInteract;
         player.PlayerInput.JumpEvent -= HandleJump;
         base.Exit();
