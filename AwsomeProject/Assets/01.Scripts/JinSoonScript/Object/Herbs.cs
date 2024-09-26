@@ -40,6 +40,8 @@ public class Herbs : MonoBehaviour
 
     private void Update()
     {
+        if (herbGathered) return;
+
         if (gatherStart)
         {
             gatherTimeDown += Time.deltaTime;
@@ -77,6 +79,9 @@ public class Herbs : MonoBehaviour
         //Item newitem = Instantiate(itemSO.prefab);
         //newitem.amount = 1;
         bool canAddItem = InventoryManager.Instance.TryAddItem(itemSO);
+
+        player.PlayerInput.InteractPress -= GatherHerb;
+        player.PlayerInput.InteractRelease -= CancleGathering;
 
         if (canAddItem)
         {
