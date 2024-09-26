@@ -4,12 +4,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private PotSlot[] _slots;
     [SerializeField] private PotionRecipeListSO _potionRecipeListSO;
     [SerializeField] private PotionTypeSlider _potionTypeSlider;
+
+    private Image _image;
+
+    private void Awake()
+    {
+        _image = GetComponent<Image>();
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            _slots[i].SlotChanged += UpdateCreatable;
+        }
+    }
+
+    public void UpdateCreatable()
+    {
+        PotionItemSO potionSO = _potionRecipeListSO.GetPotion(_slots, _potionTypeSlider.GetPotionType());
+
+        if (potionSO == null)
+            _image.color = new Color(1f, 1f, 1f, 1f);
+        else
+            _image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+    }
 
     private void Update()
     {

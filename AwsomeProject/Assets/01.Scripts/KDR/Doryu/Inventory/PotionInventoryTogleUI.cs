@@ -27,14 +27,14 @@ public class PotionInventoryTogleUI : MonoBehaviour
             _throwModeImage.sprite = _changeBtnBack[0];
             _drinkModeImage.sprite = _changeBtnBack[1];
             ChangeInvenView(_throwInven);
-            _currentInventoryTypeText.SetText("捧么器记");
+            _currentInventoryTypeText.SetText("捧么 器记");
         });
         _drinkModeBtn.onClick.AddListener(() =>
         {
             _drinkModeImage.sprite = _changeBtnBack[0];
             _throwModeImage.sprite = _changeBtnBack[1];
             ChangeInvenView(_drinkInven);
-            _currentInventoryTypeText.SetText("挤秒器记");
+            _currentInventoryTypeText.SetText("挤秒 器记");
         });
     }
 

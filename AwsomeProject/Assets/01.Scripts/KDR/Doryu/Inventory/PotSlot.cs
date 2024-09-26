@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,22 @@ using UnityEngine.EventSystems;
 public class PotSlot : MonoBehaviour
 {
     public InventorySlot inventorySlot;
+    public Action SlotChanged;
 
-    public Item assignedItem => inventorySlot.assignedItem;
+    public Item assignedItem;
 
     private void Awake()
     {
         inventorySlot = GetComponent<InventorySlot>();
+    }
+
+    private void Update()
+    {
+        if (assignedItem != inventorySlot.assignedItem)
+        {
+            SlotChanged?.Invoke();
+            assignedItem = inventorySlot.assignedItem;
+        }
     }
 
     public void ReturnItem()
