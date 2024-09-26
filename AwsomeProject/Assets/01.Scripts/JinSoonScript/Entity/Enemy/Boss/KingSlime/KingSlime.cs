@@ -25,7 +25,7 @@ public enum KingSlimeStateEnum
 public class KingSlime : Enemy<KingSlimeStateEnum>
 {
     [Header("Boss Variable")]
-    public EnemyContactHit contactHit;
+    public Collider2D contactHit;
     public int idleTime;
     public PatternEffect[] patternEffects;
 
@@ -60,9 +60,23 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
     {
         if (IsDead) return;
         base.Stun(duration);
-        if (StateMachine.CurrentState is not KingSlimeIdleState)
+        if (!canBeStun)
             return;
         StateMachine.ChangeState(KingSlimeStateEnum.Stun);
+    }
+
+    public override void AirBorn(float duration)
+    {
+        if (IsDead) return;
+        base.Stun(duration);
+        if (!canBeStun)
+            return;
+        StateMachine.ChangeState(KingSlimeStateEnum.Stun);
+    }
+
+    public override void Stone(float duration)
+    {
+        base.Stone(duration);
     }
 
     private void OnDie(Vector2 dir)
@@ -71,6 +85,11 @@ public class KingSlime : Enemy<KingSlimeStateEnum>
         StateMachine.ChangeState(KingSlimeStateEnum.Dead);
         CanStateChangeable = false;
         IsDead = true;
+    }
+
+    public void SetCanBeStun(bool canBeStun)
+    {
+        this.canBeStun = canBeStun;
     }
 
     protected override void Update()

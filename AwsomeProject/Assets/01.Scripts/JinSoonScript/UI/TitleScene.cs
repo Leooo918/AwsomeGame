@@ -34,7 +34,7 @@ public class TitleScene : MonoBehaviour
             if (PlayerPrefs.GetInt("IsTutorialed") == 0)
                 SceneManager.LoadScene("Tutorial");
             else
-                SceneManager.LoadScene("Tutorial");
+                SceneManager.LoadScene("Stage1");
         }
     }
 }

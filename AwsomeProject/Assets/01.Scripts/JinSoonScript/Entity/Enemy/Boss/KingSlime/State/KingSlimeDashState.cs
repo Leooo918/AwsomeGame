@@ -34,11 +34,18 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
             if (_kingSlime.IsWallDetected(out Collider2D collider)) // 쳐박았따? 왜 뭘 쳐박았는지는 안알려주지? 난 알고싶다!!!!! 즉시 오버로드
             {
                 if(collider.TryGetComponent(out GrowingBush bush))
+                {
+                    _kingSlime.SetCanBeStun(true);
+                    _kingSlime.Stun(2);
+                    _kingSlime.SetCanBeStun(false);
                     GameObject.Destroy(bush.gameObject);
+                }
                 else
+                {
                     _kingSlime.FlipController(-_dashDir.x);
+                    enemyStateMachine.ChangeState(KingSlimeStateEnum.Idle);
+                }
                 _kingSlime.KnockBack(-_dashDir * 3f);
-                enemyStateMachine.ChangeState(KingSlimeStateEnum.Idle);
             }
         }
     }
@@ -65,7 +72,6 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         _kingSlime.FlipController(_dashDir.x);
         _kingSlime.patternEffects[0].gameObject.SetActive(true);
         Vector2 effectStartPos = (Vector2)_kingSlime.transform.position + -_dashDir * (_kingSlimeCollider.size.x * 0.7f);
-        effectStartPos += new Vector2(0, 0.5f);
         _kingSlime.patternEffects[0].SetPatternVisual(new Vector2(32, _kingSlimeCollider.size.y + 2),
             effectStartPos,
             effectStartPos + _dashDir * 32,

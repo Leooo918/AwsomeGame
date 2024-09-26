@@ -35,6 +35,8 @@ public class CameraControllerTrigger : MonoBehaviour
     public Action<Player> OnAfterSwapCameraToLeft;
     public Action<Player> OnAfterSwapCameraToRight;
 
+    public UnityEvent OnSwapCameraEvent;
+
     //카메라 막 연속으로 움직일 때도 얘 사용하면 됨
     public UnityEvent OnAfterPanDirection;
 
@@ -82,6 +84,7 @@ public class CameraControllerTrigger : MonoBehaviour
 
                     OnAfterSwapCameraToLeft?.Invoke(player);
                 }
+                OnSwapCameraEvent?.Invoke();
             }
         }
 
