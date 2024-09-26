@@ -15,6 +15,7 @@ public class KingSlimeIdleState : EnemyState<KingSlimeStateEnum>
     public override void Enter()
     {
         base.Enter();
+        _kingSlime.SetCanBeStun(true);
         _idleEndTime = Time.time + _kingSlime.idleTime;
     }
 
@@ -25,6 +26,12 @@ public class KingSlimeIdleState : EnemyState<KingSlimeStateEnum>
         {
             enemyStateMachine.ChangeState(GetRandomPatternState());
         }
+    }
+
+    public override void Exit()
+    {
+        _kingSlime.SetCanBeStun(false);
+        base.Exit();
     }
 
     public KingSlimeStateEnum GetRandomPatternState()

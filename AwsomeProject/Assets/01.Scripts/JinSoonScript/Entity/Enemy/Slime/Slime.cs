@@ -10,7 +10,6 @@ public enum SlimeStateEnum
     Idle,
     Patrol,
     Chase,
-    Return,
     JumpAttack,
     Stun,
     AirBorn,
