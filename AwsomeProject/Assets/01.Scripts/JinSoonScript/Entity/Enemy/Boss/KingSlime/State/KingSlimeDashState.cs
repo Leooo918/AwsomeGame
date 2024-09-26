@@ -45,6 +45,7 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
                     _kingSlime.FlipController(-_dashDir.x);
                     enemyStateMachine.ChangeState(KingSlimeStateEnum.Idle);
                 }
+                _kingSlime.contactHit.enabled = false;
                 _kingSlime.KnockBack(-_dashDir * 3f);
             }
         }
@@ -65,7 +66,6 @@ public class KingSlimeDashState : EnemyState<KingSlimeStateEnum>
         _dashDir = info.direction;
         _kingSlime.FlipController(-_dashDir.x);
         _kingSlime.transform.DOJump(info.dashStartPos.position, 5, 1, 0.5f);
-        _kingSlime.contactHit.enabled = false;
         yield return new WaitForSeconds(0.5f);
         _kingSlime.contactHit.enabled = true;
         _kingSlime.animatorCompo.SetTrigger(_dashReadyTrigger);
