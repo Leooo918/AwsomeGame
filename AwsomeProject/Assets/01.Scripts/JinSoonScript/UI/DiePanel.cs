@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -27,13 +28,20 @@ public class DiePanel : MonoBehaviour, IManageableUI
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
+
+        SceneManager.sceneLoaded += HandleSceneLoaded;
+    }
+
+    private void HandleSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        UIManager.Instance?.Close(UIType.PlayerDie);
     }
 
     private void Update()
     {
         if (_isActive)
         {
-            if(Keyboard.current.anyKey.wasPressedThisFrame)
+            if (Keyboard.current.anyKey.wasPressedThisFrame)
             {
                 SceneManager.LoadScene("TitleScene");
             }
@@ -56,7 +64,11 @@ public class DiePanel : MonoBehaviour, IManageableUI
     public void Open()
     {
         _rect.DOAnchorPosY(0f, 0.5f)
-            .OnComplete(() => StartCoroutine(ProgressRoutine()));
+            .OnComplete(() =>
+            {
+                StartCoroutine(ProgressRoutine());
+                _isActive = true;
+            });
     }
 
     private IEnumerator ProgressRoutine()
@@ -72,14 +84,14 @@ public class DiePanel : MonoBehaviour, IManageableUI
             Vector2 playerPosition = new Vector2(posX, _player.anchoredPosition.y);
             _player.anchoredPosition = playerPosition;
 
-            curProgress += 0.005f; 
+            curProgress += 0.005f;
 
             yield return null;
         }
 
         int time = 0;
         curProgress = 0;
-        while(curProgress <= 1)
+        while (curProgress <= 1)
         {
             time = (int)Mathf.Lerp(0, _time, curProgress);
             int minute = time / 60;
@@ -112,7 +124,6 @@ public class DiePanel : MonoBehaviour, IManageableUI
             yield return null;
         }
         _kill.SetText($"{_gatherCnt}");
-        _isActive = true;
     }
 
     public void Init()
