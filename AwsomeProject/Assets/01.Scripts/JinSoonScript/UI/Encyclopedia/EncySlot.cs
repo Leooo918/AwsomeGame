@@ -1,3 +1,4 @@
+using Doryu.JBSave;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ public class EncySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Image _potionSprite;
     private Encyclopedia _owner;
     private PotionItemSO _potionItemSO;
+    private int _idx;
 
     public void Init(int idx, PotionRecipeListSO potionRecipeListSO, Encyclopedia owner)
     {
+        _idx = idx;
         _owner = owner;
         _select = transform.GetChild(0).gameObject;
         PotionRecipeSO potionRecipeSO = potionRecipeListSO.GetRecipeSO(idx);
@@ -39,6 +42,8 @@ public class EncySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (potionSO == _potionItemSO)
         {
             Unlock();
+            _owner.slotSaveData.slotLockeds[_idx] = false;
+            _owner.slotSaveData.SaveJson("EncySlotData");
         }
     }
 
