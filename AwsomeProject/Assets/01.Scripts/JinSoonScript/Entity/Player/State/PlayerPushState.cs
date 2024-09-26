@@ -48,7 +48,6 @@ public class PlayerPushState : PlayerState
 
     private void HandleInteract()
     {
-        player.CurrentPushTrm = null;
         stateMachine.ChangeState(PlayerStateEnum.Idle);
     }
 
