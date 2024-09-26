@@ -71,7 +71,11 @@ public class AudioManager : Singleton<AudioManager>
 
     private void Awake()
     {
+        if (Instance != this) Destroy(gameObject);
+
+
         volumeSaveData.LoadJson("SoundVolume");
+
 
         foreach (Sound sound in _sounds)
         {
