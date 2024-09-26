@@ -10,7 +10,7 @@ public class FloatingStatusEffect : StatusEffect
     {
         base.ApplyEffect(target, cooltime + 10f);
 
-        Debug.Log("¿¡¾îº»");
+        Debug.Log("ï¿½ï¿½ï¿½îº»");
         _target.AirBorn(cooltime);
         _target.StartCoroutine(AirBornDurationCoroutine(cooltime, damageWithLevel[level]));
         _target.animatorCompo.speed = 1;
@@ -57,13 +57,12 @@ public class FloatingStatusEffect : StatusEffect
         _target.CanKnockback = true;
         if (_target.IsUnderStatusEffect(StatusDebuffEffectEnum.Petrification) == false)
         {
-            Debug.Log("Loli");
             _target.CanStateChangeable = true;
             _target.SetIdle();
         }
         _target.healthCompo.TakeDamage(damagePercent, Vector2.zero, owner, true);
         _target.MovementCompo.StopImmediately(true);
 
-        Debug.Log("¿¡¾îº» Á¾·á");
+        Debug.Log("ï¿½ï¿½ï¿½îº» ï¿½ï¿½ï¿½ï¿½");
     }
 }
