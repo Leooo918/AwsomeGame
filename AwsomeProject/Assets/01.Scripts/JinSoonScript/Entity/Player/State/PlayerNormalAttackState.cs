@@ -50,7 +50,11 @@ public class PlayerNormalAttackState : PlayerState
         }
         if (IsTriggerCalled(AnimationTriggerEnum.EndTrigger))
         {
-            stateMachine.ChangeState(PlayerStateEnum.Idle);
+
+            if (player.IsGroundDetected())
+                stateMachine.ChangeState(PlayerStateEnum.Idle);
+            else
+                stateMachine.ChangeState(PlayerStateEnum.Fall);
         }
     }
 }
