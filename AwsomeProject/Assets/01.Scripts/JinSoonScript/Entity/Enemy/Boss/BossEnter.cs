@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,17 @@ public class BossEnter : MonoBehaviour
     public GameObject frontWall;
     public GameObject backWall;
 
-    public BossHpBarUI hpBar;
+    private BossHpBarUI _hpBar;
+
+    private void Start()
+    {
+        boss.healthCompo.OnDie += HandleDie;
+    }
+
+    private void HandleDie(Vector2 vector)
+    {
+        EndBoss();
+    }
 
     public void StartBoss()
     {
