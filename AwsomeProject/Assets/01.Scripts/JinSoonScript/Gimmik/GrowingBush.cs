@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class GrowingBush : MonoBehaviour, IAffectable
 {
+    private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _collider;
 
@@ -20,6 +21,8 @@ public class GrowingBush : MonoBehaviour, IAffectable
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _collider = GetComponent<BoxCollider2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody.mass = 3000;
     }
 
 
