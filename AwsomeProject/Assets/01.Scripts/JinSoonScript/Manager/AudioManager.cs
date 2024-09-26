@@ -36,6 +36,7 @@ public class Sound
     public SoundEnum nameEnum;
     public SoundType typeEnum;
     public float duration;
+    public bool is3D = true;
     public bool isDonDestroy;
     public AudioClip clip;
 }
@@ -115,7 +116,7 @@ public class AudioManager : Singleton<AudioManager>
             volume *= volumeSaveData.bgmVolume;
         else
             volume *= volumeSaveData.sfxVolume;
-        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy);
+        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy, sound.is3D);
     }
     public void PlaySound(SoundEnum soundEnum, Vector3 pos)
     {
@@ -127,7 +128,7 @@ public class AudioManager : Singleton<AudioManager>
             volume *= volumeSaveData.bgmVolume;
         else
             volume *= volumeSaveData.sfxVolume;
-        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy);
+        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy, sound.is3D);
     }
 
     public void StopSound(SoundEnum soundEnum, Transform target)

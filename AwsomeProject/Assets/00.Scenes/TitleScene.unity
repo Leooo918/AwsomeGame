@@ -658,71 +658,85 @@ MonoBehaviour:
   - nameEnum: 0
     typeEnum: 0
     duration: -1
+    is3D: 0
     isDonDestroy: 1
     clip: {fileID: 8300000, guid: a243cf66ab2be274dbc843ff5346f1fb, type: 3}
   - nameEnum: 1
     typeEnum: 1
     duration: 1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 37967273fffe0e9478c4062e2d70bceb, type: 3}
   - nameEnum: 8
     typeEnum: 1
     duration: 2.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 572228454a8e54d4bb040bf53a66bbad, type: 3}
   - nameEnum: 12
     typeEnum: 1
     duration: -1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: d5efa3e4fd2738441be9697f36e3fbe2, type: 3}
   - nameEnum: 6
     typeEnum: 1
     duration: 1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 4d5fc078b90414f459bcb7dd16d80049, type: 3}
   - nameEnum: 7
     typeEnum: 1
     duration: 1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 90003c80c66e2914d9f7601063b4d8f2, type: 3}
   - nameEnum: 13
     typeEnum: 1
     duration: 5.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: b1275dd9cf48ca54aa8d068ba92a24c9, type: 3}
   - nameEnum: 5
     typeEnum: 1
     duration: 0.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: f59161f41d7dc0a42a08dfcd81e9d17f, type: 3}
   - nameEnum: 4
     typeEnum: 1
     duration: -1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: abfca9279169c584a848ead593099f03, type: 3}
   - nameEnum: 11
     typeEnum: 1
     duration: 2.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 79d1549ccdefd5e429f34811223efe6a, type: 3}
   - nameEnum: 9
     typeEnum: 1
     duration: 1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 490a8295e0b331e439a43cb74ae91e42, type: 3}
   - nameEnum: 10
     typeEnum: 1
     duration: 1
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 590cbc3332972724db8d2e7a209365cb, type: 3}
   - nameEnum: 3
     typeEnum: 1
     duration: 0.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: d0418b73e33f45d4abca00d93d3370c2, type: 3}
   - nameEnum: 2
     typeEnum: 1
     duration: 0.5
+    is3D: 1
     isDonDestroy: 0
     clip: {fileID: 8300000, guid: 0145c999f6491194287ff07600cc7598, type: 3}
   _soundPlayerPrefab: {fileID: 6384577800299482398, guid: c29d2d125745b2447aea7602ac1be40d, type: 3}

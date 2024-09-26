@@ -12,10 +12,12 @@ public class SoundPlayer : MonoBehaviour
 
     public AudioClip currentAudioClip { get; private set; }
 
-    public void Init(AudioClip audioClip, float volume, float lifetime, bool isDonDestroy)
+    public void Init(AudioClip audioClip, float volume, float lifetime, bool isDonDestroy, bool is3D)
     {
         _audioSource = GetComponent<AudioSource>();
         _audioSource.volume = volume;
+        float _3dValue = is3D ? 1.0f : 0.0f;
+        _audioSource.spatialBlend = _3dValue;
         currentAudioClip = audioClip;
         if (lifetime == -1)
         {
