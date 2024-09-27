@@ -1,4 +1,5 @@
 using Doryu.JBSave;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +37,8 @@ public class Sound
     public SoundEnum nameEnum;
     public SoundType typeEnum;
     public float duration;
+    [Range(0f, 1f)]
+    public float volume;
     public bool is3D = true;
     public bool isDonDestroy;
     public AudioClip clip;
@@ -68,6 +71,8 @@ public class AudioManager : Singleton<AudioManager>
 
     public VolumeSaveData volumeSaveData { get; private set; } = new VolumeSaveData();
     private Dictionary<SoundEnum, Sound> _soundDict = new Dictionary<SoundEnum, Sound>();
+
+    public event Action<VolumeSaveData> OnVolumeChanged;
 
     private void Awake()
     {
@@ -107,6 +112,7 @@ public class AudioManager : Singleton<AudioManager>
 
         if (flag)
         {
+            OnVolumeChanged?.Invoke(volumeSaveData);
             volumeSaveData.SaveJson("SoundVolume");
         }
     }
@@ -114,25 +120,14 @@ public class AudioManager : Singleton<AudioManager>
     public void PlaySound(SoundEnum soundEnum, Transform parent)
     {
         SoundPlayer soundPlayer = Instantiate(_soundPlayerPrefab, parent);
-        Sound sound = _soundDict[soundEnum];
-        float volume = volumeSaveData.allVolume;
-        if (sound.typeEnum == SoundType.BGM)
-            volume *= volumeSaveData.bgmVolume;
-        else
-            volume *= volumeSaveData.sfxVolume;
-        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy, sound.is3D);
+        soundPlayer.transform.localPosition = Vector3.zero;
+        soundPlayer.Init(_soundDict[soundEnum]);
     }
     public void PlaySound(SoundEnum soundEnum, Vector3 pos)
     {
         SoundPlayer soundPlayer = Instantiate(_soundPlayerPrefab);
         soundPlayer.transform.position = pos;
-        Sound sound = _soundDict[soundEnum];
-        float volume = volumeSaveData.allVolume;
-        if (sound.typeEnum == SoundType.BGM)
-            volume *= volumeSaveData.bgmVolume;
-        else
-            volume *= volumeSaveData.sfxVolume;
-        soundPlayer.Init(sound.clip, volume, sound.duration, sound.isDonDestroy, sound.is3D);
+        soundPlayer.Init(_soundDict[soundEnum]);
     }
 
     public void StopSound(SoundEnum soundEnum, Transform target)
@@ -145,7 +140,7 @@ public class AudioManager : Singleton<AudioManager>
         {
             if (soundPlayers[i].currentAudioClip == sound.clip)
             {
-                Destroy(soundPlayers[i].gameObject);
+                soundPlayers[i].Die();
                 return;
             }
         }

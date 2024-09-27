@@ -20,10 +20,14 @@ public class Option : MonoBehaviour, IManageableUI
 
     public bool isOpened = false;
 
+    private OptionPanel _optionPanel;
+
     public void Open()
     {
         if (tween != null && tween.active)
             tween.Kill();
+
+        _optionPanel.SettingActive(true);
 
         tween = _optionRect.DOAnchorPos(_openOffset, _easeingDelay)
             .OnComplete(() => Time.timeScale = 0f);
@@ -35,12 +39,15 @@ public class Option : MonoBehaviour, IManageableUI
         if (tween != null && tween.active)
             tween.Kill();
 
+        _optionPanel.SettingActive(false);
+
         tween = _optionRect.DOAnchorPos(_closeOffset, _easeingDelay);
         isOpened = false;
     }
 
     public void Init()
     {
+        _optionPanel = _optionRect.GetComponent<OptionPanel>();
         _optionRect.anchoredPosition = _closeOffset;
     }
 }

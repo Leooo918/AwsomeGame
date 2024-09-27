@@ -1,50 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundPlayer : MonoBehaviour
 {
-    private AudioSource _audioSource;
-    private float _lifeTime;
+    [SerializeField] private AudioSource _audioSource;
     private float _startTime;
-    private bool _isLoop;
+    private Sound _sound;
 
     public AudioClip currentAudioClip { get; private set; }
 
-    public void Init(AudioClip audioClip, float volume, float lifetime, bool isDonDestroy, bool is3D)
+    public void Init(Sound sound)
     {
-        transform.localPosition = Vector3.zero;
         _audioSource = GetComponent<AudioSource>();
-        _audioSource.volume = volume;
-        float _3dValue = is3D ? 1.0f : 0.0f;
-        _audioSource.spatialBlend = _3dValue;
-        currentAudioClip = audioClip;
-        if (lifetime == -1)
-        {
-            _audioSource.loop = true;
-            _isLoop = true;
-        }
-        else
-        {
-            _lifeTime = lifetime;
-            _startTime = Time.time;
-        }
 
-        _audioSource.clip = audioClip;
+        _sound = sound;
+        AudioManager.Instance.OnVolumeChanged += HandleVolumeChanged;
+        HandleVolumeChanged(AudioManager.Instance.volumeSaveData);
+
+        float _3dValue = _sound.is3D ? 1.0f : 0.0f;
+        _audioSource.spatialBlend = _3dValue;
+        currentAudioClip = _sound.clip;
+
+        if (_sound.duration == -1)
+            _audioSource.loop = true;
+        else
+            _startTime = Time.time;
+
+        _audioSource.clip = _sound.clip;
         _audioSource.Play();
 
-        if (isDonDestroy)
+        if (_sound.isDonDestroy)
             DontDestroyOnLoad(gameObject);
+    }
+
+    private void HandleVolumeChanged(VolumeSaveData data)
+    {
+        float volume = data.allVolume * _sound.volume;
+
+        volume *= _sound.typeEnum == SoundType.BGM ?
+            data.bgmVolume : data.sfxVolume;
+
+        _audioSource.volume = volume;
     }
 
     private void Update()
     {
-        if (_isLoop) return;
+        if (_audioSource.loop) return;
 
-        if (_startTime + _lifeTime < Time.time)
+        if (_startTime + _sound.duration < Time.time)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        AudioManager.Instance.OnVolumeChanged -= HandleVolumeChanged;
     }
 }
