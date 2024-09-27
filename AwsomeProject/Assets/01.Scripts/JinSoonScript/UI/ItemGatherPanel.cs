@@ -48,7 +48,7 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
 
     public void Open()
     {
-        AudioManager.Instance.PlaySound(SoundEnum.GetItem, transform);
+        AudioManager.Instance.PlaySound(SoundEnum.GetItem, PlayerManager.Instance.PlayerTrm);
 
         if (_seq != null && _seq.active)
             _seq.Kill();
