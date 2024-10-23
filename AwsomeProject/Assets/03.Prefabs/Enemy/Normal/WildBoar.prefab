@@ -773,6 +773,7 @@ MonoBehaviour:
   CanStateChangeable: 1
   CanKnockback: 1
   IsConstParrying: 0
+  parryingLevel: 0
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
