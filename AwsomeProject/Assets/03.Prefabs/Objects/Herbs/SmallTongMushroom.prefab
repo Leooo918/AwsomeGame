@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interact: {fileID: 7324440636643910042}
-  itemSO: {fileID: 11400000, guid: e0cf324af6c49a64c97f19a71b0da900, type: 2}
+  itemSO: {fileID: 11400000, guid: f61859caf97cc4f4396158281ac22c76, type: 2}
   gatheredImage: {fileID: 0}
   OnGatheringHerb:
     m_PersistentCalls:

@@ -107,6 +107,7 @@ public class Herbs : MonoBehaviour
 
     }
 
+    //중도취소
     private void CancelGathering()
     {
         if (isTriggered == false)
@@ -126,6 +127,7 @@ public class Herbs : MonoBehaviour
         gatherEnd = false;
     }
 
+    //끝
     private void CancleGathering()
     {
         player.StateMachine.ChangeState(PlayerStateEnum.Idle);

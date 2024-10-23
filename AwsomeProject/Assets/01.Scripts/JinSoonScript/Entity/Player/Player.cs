@@ -316,10 +316,8 @@ public class Player : Entity
 
     //}
 
-    public void Climb(bool b)
-    {
-        canClimb = b;
-    }
+    public void Climb(bool b) 
+        => canClimb = b;
 
     public void CheckOneWayPlatform()
     {

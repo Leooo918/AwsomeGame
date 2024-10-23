@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d3f3e564bed3c4099a6372e623ddd3, type: 3}
+  m_Name: BoomPotion
+  m_EditorClassIdentifier: 
+  image: {fileID: 140493558, guid: f411f5b162f1a654badc3e0caf11fe5c, type: 3}
+  itemType: 3
+  quickSlotOutLine: 4
+  itemName: "\uD3ED\uBC1C\uD3EC\uC158"
+  itemDescriptions:
+  - "\uBBF8\uC815"
+  - "\uBBF8\uC815"
+  - "\uBBF8\uC815"
+  potionInfos:
+  - infos:
+    - effectEnum: 0
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 0
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
+  - infos:
+    - effectEnum: 0
+      level: 0
+    maxDetactEntity: 5
+    whatIsEnemy:
+      serializedVersion: 2
+      m_Bits: 256
+    range: 3
