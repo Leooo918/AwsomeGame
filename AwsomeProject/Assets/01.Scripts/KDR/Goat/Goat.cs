@@ -17,9 +17,6 @@ public enum GoatEnum
 
 public class Goat : Enemy<GoatEnum>
 {
-    [HideInInspector] public bool moveAnim = false;
-
-
     protected override void Awake()
     {
         base.Awake();

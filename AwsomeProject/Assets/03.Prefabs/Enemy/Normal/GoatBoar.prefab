@@ -217,7 +217,7 @@ Animator:
   m_GameObject: {fileID: 1276738442685619472}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b33d159bdb462e849af5f7c79c3b7627, type: 2}
+  m_Controller: {fileID: 9100000, guid: d81e357d3de733143bdcce92aa1dd288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -548,10 +548,9 @@ MonoBehaviour:
   whatIsObstacle:
     serializedVersion: 2
     m_Bits: 64
-  runAwayDistance: 0
-  attackCool: 0
+  runAwayDistance: 30
+  attackCool: 5
   lastAttackTime: 0
-  moveAnim: 0
 --- !u!114 &3315452949548677443
 MonoBehaviour:
   m_ObjectHideFlags: 0

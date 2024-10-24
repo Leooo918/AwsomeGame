@@ -72,8 +72,6 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
     private StatusEffectManager _statusEffectManager;
     public StatusEffectManager StatusEffectManager => _statusEffectManager;
 
-    private float _xMovement;
-
     protected virtual void Awake()
     {
         _stunSprite = transform.Find("StunSprite").gameObject;
@@ -308,7 +306,6 @@ public abstract class Entity : MonoBehaviour, IAffectable, IAnimationTriggerable
 
     public StatusEffect ApplyStatusEffect(StatusBuffEffectEnum statusEffect, int level, float duration)
     {
-        //여기 수정해야함
         if (IsUnderStatusEffect(statusEffect)) return null;
 
         _buffStatusEffectBit |= (int)statusEffect;
