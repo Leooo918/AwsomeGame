@@ -17,6 +17,10 @@ public enum GoatEnum
 
 public class Goat : Enemy<GoatEnum>
 {
+    private readonly int _YVelocityAnimHash = Animator.StringToHash("YVelocity");
+    private readonly int _IsGroundAnimHash = Animator.StringToHash("IsGround");
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -56,6 +60,9 @@ public class Goat : Enemy<GoatEnum>
     {
         base.Update();
         StateMachine.CurrentState.UpdateState();
+
+        animatorCompo.SetFloat(_YVelocityAnimHash, MovementCompo.RigidbodyCompo.velocity.y);
+        animatorCompo.SetBool(_IsGroundAnimHash, IsGroundDetected());
     }
 
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();

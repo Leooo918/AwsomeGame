@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GoatEnemyStat
   m_EditorClassIdentifier: 
   maxHp:
-    baseValue: 30
+    baseValue: 50
     modifiers: []
     percentModifiers: []
   recoveryReceive:
@@ -32,8 +32,12 @@ MonoBehaviour:
     baseValue: 1
     modifiers: []
     percentModifiers: []
-  damageReceive:
+  damageReceivPercent:
     baseValue: 1
+    modifiers: []
+    percentModifiers: []
+  damageReceiv:
+    baseValue: 0
     modifiers: []
     percentModifiers: []
   moveSpeed:
@@ -41,7 +45,7 @@ MonoBehaviour:
     modifiers: []
     percentModifiers: []
   jumpForce:
-    baseValue: 10
+    baseValue: 20
     modifiers: []
     percentModifiers: []
   weight: 2

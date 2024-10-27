@@ -13,9 +13,6 @@ public class GoatAttackState : EnemyState<GoatEnum>
     private Player _player;
     private bool _isFall = false;
 
-    private int _jumpDownAnimHash = Animator.StringToHash("JumpDown");
-    private int _landAnimHash = Animator.StringToHash("Land");
-
     public override void AnimationFinishTrigger()
     {
         base.AnimationFinishTrigger();
@@ -42,37 +39,28 @@ public class GoatAttackState : EnemyState<GoatEnum>
     {
         base.UpdateState();
 
-        if (enemy.MovementCompo.RigidbodyCompo.velocity.y < 0)
+        if (enemy.MovementCompo.RigidbodyCompo.velocity.y < 0 && enemy.IsGroundDetected())
         {
-            if (_isFall == false)
-            {
-                enemy.animatorCompo.SetTrigger(_jumpDownAnimHash);
-                _isFall = true;
-            }
+            //사운드 교체 필요
+            AudioManager.Instance.PlaySound(SoundEnum.SlimeAttack, enemy.transform.position);
 
-            if (enemy.IsGroundDetected())
+            Vector2 dir = _player.transform.position - enemy.transform.position;
+            if (dir.magnitude < _damageRadius)
             {
-                AudioManager.Instance.PlaySound(SoundEnum.SlimeAttack, enemy.transform.position);
-                enemy.animatorCompo.SetTrigger(_landAnimHash);
-
-                Vector2 dir = _player.transform.position - enemy.transform.position;
-                if (dir.magnitude < _damageRadius)
+                dir.y = 5;
+                dir.Normalize();
+                if (_player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir * 4f, enemy) == false)
                 {
-                    dir.y = 5;
-                    dir.Normalize();
-                    if (_player.healthCompo.TakeDamage((int)enemy.Stat.globalDamageInflict.GetValue(), dir * 4f, enemy) == false)
+                    dir.x *= -1;
+                    enemy.healthCompo.TakeDamage(_player.parryingLevel * 5, dir * 4f, _player);
+                    if (_player.parryingLevel == 2)
                     {
-                        dir.x *= -1;
-                        enemy.healthCompo.TakeDamage(_player.parryingLevel * 5, dir * 4f, _player);
-                        if (_player.parryingLevel == 2)
-                        {
-                            enemy.Stun(1);
-                        }
+                        enemy.Stun(1);
                     }
                 }
-
-                enemyStateMachine.ChangeState(GoatEnum.Idle);
             }
+
+            enemyStateMachine.ChangeState(GoatEnum.Idle);
         }
     }
 }
