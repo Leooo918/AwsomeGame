@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needIngredients: 0b0000000b0000000b000000
   potionType: 37
-  needIngredientValue: 1813
+  needIngredientValue: 49247
   potion: {fileID: 11400000, guid: a7ca08a3e823baf448e178252dd91e4e, type: 2}

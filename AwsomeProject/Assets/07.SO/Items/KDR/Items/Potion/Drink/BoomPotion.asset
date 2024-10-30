@@ -20,4 +20,7 @@ MonoBehaviour:
   - "\uBBF8\uC815"
   - "\uBBF8\uC815"
   - "\uBBF8\uC815"
-  potionInfos: []
+  potionInfos:
+  - infos: []
+  - infos: []
+  - infos: []

@@ -15,6 +15,7 @@ public enum IngredientItemType
     ShinyFruit = 19,
     SlimeCore = 23,
     YoungBirldWing = 29,
+    GoatHorn = 31,
 }
 
 [CreateAssetMenu(menuName = "SO/Doryu/Item/IngredientItem")]
