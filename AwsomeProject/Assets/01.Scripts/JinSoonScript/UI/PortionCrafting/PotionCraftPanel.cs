@@ -10,8 +10,11 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
     [SerializeField] private InventoryPanel _inventory;
     [SerializeField] private Pot _pot;
 
+    public bool isOpen = false;
+
     public void Close() 
     {
+        isOpen = false;
         _rectTrm.anchoredPosition = Vector2.right * 3000;
         _inventoryRectTrm.anchoredPosition = Vector2.down * 1500;
         _inventory.OnPotUI(false);
@@ -23,6 +26,7 @@ public class PotionCraftPanel : MonoBehaviour, IManageableUI
 
     public void Open()
     {
+        isOpen = true;
         //뭔가 dotween으로 맛있는 거 만드는거는 나중에
         _rectTrm.anchoredPosition = Vector2.zero;
         _inventoryRectTrm.anchoredPosition = Vector2.right * 960;

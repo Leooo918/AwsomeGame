@@ -2,14 +2,39 @@ using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private PotSlot[] _slots;
     [SerializeField] private PotionRecipeListSO _potionRecipeListSO;
     [SerializeField] private PotionTypeSlider _potionTypeSlider;
+    [SerializeField] private TextMeshProUGUI _creatModeText;
+
+    private Image _image;
+
+    private void Awake()
+    {
+        _image = GetComponent<Image>();
+        _image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        for (int i = 0; i < _slots.Length; i++)
+        {
+            _slots[i].SlotChanged += UpdateCreatable;
+        }
+    }
+
+    public void UpdateCreatable()
+    {
+        PotionItemSO potionSO = _potionRecipeListSO.GetPotion(_slots, _potionTypeSlider.GetPotionType());
+
+        if (potionSO == null)
+            _image.color = new Color(0.5f, 0.5f, 0.5f, 1f);
+        else
+            _image.color = new Color(1f, 1f, 1f, 1f);
+    }
 
     private void Update()
     {
@@ -23,6 +48,11 @@ public class Pot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPo
             _slots[2].ReturnItem();
             _slots[2].gameObject.SetActive(false);
         }
+
+        if (_potionTypeSlider.isThrowMode)
+            _creatModeText.SetText("ÅõÃ´ Æ÷¼Ç");
+        else
+            _creatModeText.SetText("¼·Ãë Æ÷¼Ç");
     }
 
     public void OnPointerClick(PointerEventData eventData)

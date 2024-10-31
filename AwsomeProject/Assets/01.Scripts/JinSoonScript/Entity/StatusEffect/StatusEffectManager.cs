@@ -49,6 +49,7 @@ public class StatusEffectManager
             catch (Exception ex)
             {
 #if UNITY_EDITOR
+                Debug.LogError($"{enumName}StatusEffect");
                 Debug.LogError(ex);
 #endif
             }

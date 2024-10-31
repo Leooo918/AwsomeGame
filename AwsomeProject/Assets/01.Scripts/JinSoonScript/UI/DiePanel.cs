@@ -28,13 +28,6 @@ public class DiePanel : MonoBehaviour, IManageableUI
     private void Awake()
     {
         _rect = GetComponent<RectTransform>();
-
-        SceneManager.sceneLoaded += HandleSceneLoaded;
-    }
-
-    private void HandleSceneLoaded(Scene arg0, LoadSceneMode arg1)
-    {
-        UIManager.Instance?.Close(UIType.PlayerDie);
     }
 
     private void Update()

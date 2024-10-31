@@ -38,14 +38,17 @@ public class ItemGatherPanel : MonoBehaviour, IManageableUI
         _seq.Join(_bgGroup.DOFade(0f, 0.5f))
             .Join(_bgRect.DOAnchorPosY(-100f, 0.5f));
 
-        PlayerManager.Instance.EnablePlayerMovementInput();
-        PlayerManager.Instance.EnablePlayerInventoryInput();
+        if ((UIManager.Instance.GetUI(UIType.PotionCraft) as PotionCraftPanel).isOpen == false)
+        {
+            PlayerManager.Instance.EnablePlayerMovementInput();
+            PlayerManager.Instance.EnablePlayerInventoryInput();
+        }
         _bgGroup.blocksRaycasts = false;
     }
 
     public void Open()
     {
-        AudioManager.Instance.PlaySound(SoundEnum.GetItem, transform);
+        AudioManager.Instance.PlaySound(SoundEnum.GetItem, PlayerManager.Instance.PlayerTrm);
 
         if (_seq != null && _seq.active)
             _seq.Kill();

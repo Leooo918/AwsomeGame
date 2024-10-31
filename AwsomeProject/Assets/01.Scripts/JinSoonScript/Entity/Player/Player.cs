@@ -128,7 +128,9 @@ public class Player : Entity
 
     protected override void Awake()
     {
+        Debug.Log("===========PlayerAwake");
         base.Awake();
+        Debug.Log(animatorCompo);
         _inputReader.Controlls.Player.Enable();
         //canDash = true;
         _hpDecator?.Init((int)healthCompo.curHp);
@@ -177,6 +179,7 @@ public class Player : Entity
         healthCompo.OnKnockBack -= KnockBack;
         healthCompo.OnDie -= OnDie;
         healthCompo.OnHit -= OnHit;
+        StateMachine.CurrentState.Exit();
     }
 
     protected void Start()
@@ -187,6 +190,12 @@ public class Player : Entity
     protected override void Update()
     {
         base.Update();
+
+        if (_inputReader.Controlls.Player.enabled == false && Input.GetMouseButtonDown(0))
+        {
+            AudioManager.Instance.PlaySound(SoundEnum.Click, transform);
+        }
+
         StateMachine.CurrentState.UpdateState();
         CheckObjectOnFoot();
     }

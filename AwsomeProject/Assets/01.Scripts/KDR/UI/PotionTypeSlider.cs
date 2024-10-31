@@ -12,7 +12,7 @@ public class PotionTypeSlider : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     [SerializeField] private float _selectMagnetPower = 5;
 
     private bool isClicked = false;
-    private bool isThrowMode => _sliderTrm.anchoredPosition.x > -50;
+    public bool isThrowMode => _sliderTrm.anchoredPosition.x > -50;
 
 
     private void Update()
