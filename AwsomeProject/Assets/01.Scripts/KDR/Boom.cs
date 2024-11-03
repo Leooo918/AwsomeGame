@@ -13,7 +13,6 @@ public class Boom : MonoBehaviour
     private Entity _owner;
     private Collider2D[] _colliders = new Collider2D[5];
     private List<Collider2D> _hitedColls;
-    private LayerMask _whatIsEnemy;
 
     public void Init(float radius, int damage, float delay, int repeat, Entity owner)
     {
@@ -50,28 +49,24 @@ public class Boom : MonoBehaviour
 
     private void ApplyBoom()
     {
-        int count = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, _colliders, _whatIsEnemy);
+        int count = Physics2D.OverlapCircleNonAlloc(transform.position, _radius, _colliders, 1 << LayerMask.NameToLayer("Enemy"));
 
-        if (_hitedColls.Count < 0)
+        if (_hitedColls.Count <= 0)
             _hitedColls = _colliders.ToList();
         else
         {
-            List<Collider2D> hitedColls = new List<Collider2D>();
-            foreach (Collider2D coll in _colliders)
-            {
-                if (_hitedColls.Contains(coll)) 
-                    hitedColls.Add(coll);
-            }
-            _hitedColls = hitedColls;
+            Debug.Log(_hitedColls.Count());
+            Debug.Log(_colliders.Count());
+            _hitedColls = _hitedColls.Intersect(_colliders.ToList()).ToList();
         }
+
 
         for (int i = 0; i < count; i++)
         {
-            Debug.Log("sdsdsdsdsd");
             if (_colliders[i].TryGetComponent(out Health health))
             {
                 Vector2 dir = (transform.position - health.transform.position).normalized;
-                health.TakeDamage(_damage, dir * 4.5f, _owner);
+                health.TakeDamage(_damage, dir * -4.5f, _owner);
             }
         }
         ParticleSystem effect = Instantiate(EffectInstantiateManager.Instance.boomEffect, transform.position, Quaternion.identity);
@@ -79,10 +74,12 @@ public class Boom : MonoBehaviour
 
         if (_repeatCnt == 3)
         {
+            if (_hitedColls.Count == 0) return;
             _hitedColls.ForEach(coll =>
             {
                 if (coll.TryGetComponent<Entity>(out Entity entity))
                 {
+                    Debug.Log("Stun");
                     entity.Stun(1);
                 }
             });
