@@ -124,6 +124,7 @@ public class Player : Entity
     public GameObject testObject;
     public Spike spike;
     public HornSpike hornSpike;
+    public Boom boom;
 
 
     protected override void Awake()

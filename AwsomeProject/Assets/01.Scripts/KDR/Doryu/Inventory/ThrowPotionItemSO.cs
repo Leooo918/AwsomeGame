@@ -9,7 +9,7 @@ public struct ThrowPotionInfos
     public PotionInfo[] infos;
     public int maxDetactEntity;
     public LayerMask whatIsEnemy;
-    public int range;
+    public float range;
 }
 
 [CreateAssetMenu(menuName = "SO/Doryu/Item/ThrowPotionItem")]

@@ -14,7 +14,7 @@ public class ThrowPotion : Potion
     private int _maxDetactEntity;
     [SerializeField]
     private LayerMask _whatIsEnemy;
-    public int range;
+    public float range;
 
     private SpriteRenderer _spriteRenderer;
 

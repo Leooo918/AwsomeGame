@@ -25,6 +25,7 @@ public enum EffectTypeEnum
     Spike, //가시송이 스폰
     SpikeShield, //가시방패
     HornSpike, //맵에 가시생성
+    Boom, //폭발
 }
 
 public static class EffectManager
@@ -51,6 +52,7 @@ public static class EffectManager
             { EffectTypeEnum.Spike, () => new SpikeEffect() },
             { EffectTypeEnum.HornSpike, () => new HornSpikeEffect() },
             { EffectTypeEnum.SpikeShield, () => new SpikeShieldEffect() },
+            { EffectTypeEnum.Boom, () => new BoomEffect() },
         };
     }
 
